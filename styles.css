@@ -34,7 +34,8 @@ nav {
     top: 0;
     left: 0;
     right: 0;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: var(--bg-white);
+    opacity: 0.95;
     backdrop-filter: blur(10px);
     z-index: 1000;
     transition: all 0.3s ease;
@@ -116,7 +117,7 @@ nav.scrolled {
 
 .github-link {
     background-color: var(--primary-color);
-    color: white !important;
+    color: var(--bg-white) !important;
     padding: 0.5rem 1.5rem;
     border-radius: 0.5rem;
     transition: all 0.3s ease;
@@ -127,7 +128,6 @@ nav.scrolled {
 
 .github-link:hover {
     background-color: var(--primary-dark);
-    /* transform: translateY(-2px); */
 }
 
 .github-link::after {
@@ -140,22 +140,12 @@ nav.scrolled {
     padding: 12rem 2rem;
     text-align: center;
     background: linear-gradient(135deg, var(--hero-light) 0%, var(--hero-dark) 100%), url('imgs/hero.png');
-    /* background-size: cover; */
+    
     background-position: center;
     background-repeat: no-repeat;
     color: var(--text-dark);
     position: relative;
     overflow: hidden;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0.5;
 }
 
 .hero-content {
@@ -170,14 +160,7 @@ nav.scrolled {
     font-weight: 800;
     margin-bottom: 5rem;
     animation: fadeInUp 0.8s ease;
-    text-shadow: #e2e8f0 1px 1px 2px;
-}
-
-.hero p {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-    opacity: 0.95;
-    animation: fadeInUp 0.8s ease 0.2s backwards;
+    text-shadow: var(--border-color) 1px 1px 2px;
 }
 
 .cta-buttons {
@@ -197,25 +180,21 @@ nav.scrolled {
 }
 
 .btn-primary {
-    background-color: white;
-    border: 2px solid white;
+    background-color: var(--bg-white);
+    border: 2px solid var(--bg-white);
     color: var(--primary-color);
 }
 
-/* .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-} */
-
 .btn-secondary {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: var(--bg-white);
     color: var(--primary-color);
-    border: 2px solid white;
+    border: 2px solid var(--border-color);
 }
 
 .btn-secondary:hover {
-    background-color: white;
+    background-color: var(--bg-white);
     color: var(--primary-color);
+    border: 2px solid var(--secondary-color);
 }
 
 /* Features Section */
@@ -254,17 +233,11 @@ nav.scrolled {
 }
 
 .feature-card:hover {
-    /* transform: translateY(-5px); */
-    /* box-shadow: var(--shadow-lg); */
     border-radius: 2rem;
     border-color: var(--secondary-color);
     cursor: pointer;
 }
 
-.feature-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
 
 .feature-card h3 {
     font-size: 1.5rem;
@@ -291,9 +264,7 @@ nav.scrolled {
 
 .example-card {
     background-color: var(--bg-light);
-    border-radius: 1rem;
     overflow: hidden;
-    /* box-shadow: var(--shadow); */
     border-radius: 1rem;
     border: 2px solid;
     border-color: var(--border-color);
@@ -305,19 +276,15 @@ nav.scrolled {
 .example-card:hover {
     border-radius: 2rem;
     border-color: var(--secondary-color);
-
-    /* transform: translateY(-5px);
-    box-shadow: var(--shadow-lg); */
 }
 
 .example-image {
     width: 100%;
     height: 250px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--bg-white);
     font-size: 3rem;
     overflow: hidden;
 }
@@ -347,22 +314,11 @@ nav.scrolled {
     color: var(--text-light);
 }
 
-.empty-state {
-    text-align: center;
-    padding: 4rem 2rem;
-    color: var(--text-light);
-}
-
-.empty-state-icon {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    opacity: 0.3;
-}
 
 /* Footer */
 footer {
     background-color: var(--text-dark);
-    color: white;
+    color: var(--bg-white);
     padding: 3rem 2rem;
     text-align: center;
 }
@@ -397,10 +353,6 @@ footer a:hover {
 
     .hero h1 {
         font-size: 2.5rem;
-    }
-
-    .hero p {
-        font-size: 1.1rem;
     }
 
     .cta-buttons {
