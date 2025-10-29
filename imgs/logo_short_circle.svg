@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="3507.87px" height="2480.32px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 350758 350758"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str2 {stroke:#666666;stroke-width:4098;stroke-miterlimit:22.9256}
+    .str0 {stroke:#4D4D4D;stroke-width:6831;stroke-linejoin:round;stroke-miterlimit:22.9256}
+    .str1 {stroke:#8DA0CB;stroke-width:6831;stroke-linejoin:round;stroke-miterlimit:22.9256}
+    .fil0 {fill:none}
+    .fil2 {fill:#4D4D4D}
+    .fil1 {fill:#8DA0CB}
+   ]]>
+  </style>
+ </defs>
+ <g id="Camada_x0020_3">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_372344016">
+   <g>
+    <g>
+     <polyline class="fil0 str0" points="72562,254851 72562,102020 126307,102261 159351,102261 159351,135365 "/>
+     <polyline class="fil0 str0" points="138728,95196 138728,45861 219326,45434 219326,194953 "/>
+     <polyline class="fil0 str0" points="226101,155816 281684,155816 281684,301782 234940,301782 "/>
+     <polyline class="fil0 str1" points="82951,114100 146696,114100 146696,127459 "/>
+     <polyline class="fil0 str1" points="147155,55980 208987,55980 208987,195066 "/>
+     <polyline class="fil0 str1" points="226415,167492 269919,167727 269919,293012 "/>
+    </g>
+    <g>
+     <polygon class="fil1" points="69074,254912 74711,272850 158967,151137 243705,272604 249856,254845 159427,125396 "/>
+     <polygon class="fil2" points="78980,283757 84486,301522 158967,195389 235244,305324 240592,284968 159193,168867 "/>
+     <polygon class="fil1" points="142219,233033 132028,246966 185983,246966 175560,232919 "/>
+     <polygon class="fil2" points="127254,254853 117396,269170 200207,269170 190883,254853 "/>
+    </g>
+   </g>
+   <rect class="fil0 str2" x="2049" y="2049" width="346660" height="346660" rx="173330" ry="173330"/>
+  </g>
+ </g>
+</svg>

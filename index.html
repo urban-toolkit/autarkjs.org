@@ -3,11 +3,170 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Autark</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Autark - Modern JavaScript Library</title>
+    <meta name="description" content="Autark - A powerful and elegant JavaScript library for modern web development" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body>
-  <h1>Under development...</h1>  
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="logo_short.svg" alt="Autark Logo" class="logo-icon">
+                Autark
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#docs">Docs</a></li>
+                <li><a href="https://github.com/urban-toolkit/autark/" target="_blank" class="github-link">
+                    <i class="fab fa-github"></i>
+                    GitHub
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>A modular urban visualization framework for the web</h1>
+            <div class="cta-buttons">
+                <a href="#docs" class="btn btn-primary">Get started</a>
+                <a href="#gallery" class="btn btn-secondary">Gallery</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Serverless Architecture</h3>
+                    <p>Built with a serverless architecture in mind, enabling easy deployment and scalability.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Open Data</h3>
+                    <p>Seamless integration with OpenStreetMap data, GeoJSON, and GeoTIFF formats.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>3D Maps</h3>
+                    <p>Powerful 3D mapping capabilities, enabling complex urban visual analytics.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Powered by DuckDB</h3>
+                    <p>Efficient data management and querying capabilities using DuckDB.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Powered by WebGPU</h3>
+                    <p>Efficient rendering and general purpose computations using WebGPU.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Powered by D3.js</h3>
+                    <p>Dynamic and interactive data visualizations built using D3.js.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Examples Gallery Section -->
+    <section class="examples" id="examples">
+        <div class="container">
+            <h2 class="section-title">Gallery</h2>
+            
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-image">
+                        <img src="imgs/ex1.png" alt="Example 1">
+                    </div>
+                    <div class="example-content">
+                        <h3>Urban Visualization Example 1</h3>
+                        <p>Interactive 3D urban data visualization showcasing city infrastructure and spatial analysis.</p>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-image">
+                        <img src="imgs/ex2.png" alt="Example 2">
+                    </div>
+                    <div class="example-content">
+                        <h3>Urban Visualization Example 2</h3>
+                        <p>Dynamic mapping demonstration with OpenStreetMap integration and real-time data rendering.</p>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-image">
+                        <img src="imgs/ex3.png" alt="Example 3">
+                    </div>
+                    <div class="example-content">
+                        <h3>Urban Visualization Example 3</h3>
+                        <p>Advanced geospatial analytics with DuckDB-powered queries and WebGPU rendering.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section class="features" id="docs">
+        <div class="container">
+            <h2 class="section-title">Documentation</h2>
+            <div style="text-align: center; padding: 2rem; background: white; border-radius: 1rem; box-shadow: var(--shadow);">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">📖</div>
+                <h3 style="margin-bottom: 1rem;">Comprehensive Documentation</h3>
+                <p style="color: var(--text-light); margin-bottom: 2rem;">Learn how to use Autark with our detailed guides, API references, and tutorials.</p>
+                <a href="#" class="btn btn-primary">View Documentation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Autark. Open source under MIT License.</p>
+            <p style="margin-top: 1rem;">
+                <a href="https://github.com/urban-toolkit/autark/" target="_blank">GitHub</a> · 
+                <a href="#docs">Documentation</a> · 
+                <a href="#gallery">Examples</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href !== '') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        const offsetTop = target.offsetTop - 80;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
