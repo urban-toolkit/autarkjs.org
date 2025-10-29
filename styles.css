@@ -198,6 +198,7 @@ nav.scrolled {
 
 .btn-primary {
     background-color: white;
+    border: 2px solid white;
     color: var(--primary-color);
 }
 
