@@ -140,7 +140,7 @@ nav.scrolled {
     padding: 12rem 2rem;
     text-align: center;
     background: linear-gradient(135deg, var(--hero-light) 0%, var(--hero-dark) 100%), url('imgs/hero.png');
-    
+
     background-position: center;
     background-repeat: no-repeat;
     color: var(--text-dark);
@@ -184,6 +184,7 @@ nav.scrolled {
     font-weight: 600;
     transition: all 0.3s ease;
     display: inline-block;
+    cursor: pointer;
 }
 
 .btn-primary {
@@ -234,6 +235,23 @@ nav.scrolled {
     padding: 2rem;
     border-radius: 1rem;
     border: 2px solid;
+
+    .page-actions {
+        margin: 1rem 0 2rem;
+    }
+
+    .btn-sm {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .code-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.75rem;
+    }
+
     border-color: var(--border-color);
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
@@ -242,7 +260,6 @@ nav.scrolled {
 .feature-card:hover {
     border-radius: 2rem;
     border-color: var(--secondary-color);
-    cursor: pointer;
 }
 
 
@@ -269,6 +286,53 @@ nav.scrolled {
     margin-top: 3rem;
 }
 
+/* Example detail pages */
+.example-page {
+    padding: 8rem 2rem 4rem;
+    /* account for fixed navbar */
+    background-color: var(--bg-light);
+}
+
+.example-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.panel {
+    background-color: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+}
+
+.code-panel pre {
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 1rem;
+    overflow: auto;
+    max-height: 800px;
+    font-size: 0.75rem !important;
+    line-height: 1.5;
+}
+
+.result-panel svg,
+.result-panel canvas {
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    padding: 1rem;
+    max-height: 800px;
+}
+
+@media (max-width: 992px) {
+    .example-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
 .example-card {
     background-color: var(--bg-light);
     overflow: hidden;
@@ -278,11 +342,17 @@ nav.scrolled {
     transition: all 0.3s ease;
     cursor: pointer;
     box-shadow: var(--shadow);
+    text-decoration: none;
 }
 
 .example-card:hover {
     border-radius: 2rem;
     border-color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.example-card:visited {
+    text-decoration: none;
 }
 
 .example-image {
