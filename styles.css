@@ -155,6 +155,13 @@ nav.scrolled {
     z-index: 1;
 }
 
+.hero-logo {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 1rem;
+    animation: fadeInUp 0.8s ease;
+}
+
 .hero h1 {
     font-size: 3rem;
     font-weight: 800;
@@ -349,6 +356,11 @@ footer a:hover {
 @media (max-width: 768px) {
     .nav-links {
         gap: 1rem;
+    }
+
+    .hero-logo {
+        width: 96px;
+        height: 96px;
     }
 
     .hero h1 {
