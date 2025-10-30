@@ -351,25 +351,20 @@ body.no-scroll {
     box-sizing: border-box;
 }
 
-svg {
-    margin-top: 6px;
-}
-
 .result-panel {
     overflow: auto;
 }
 
-.result-panel svg,
 .result-panel canvas {
     background: var(--bg-white);
     border: 1px solid var(--border-color);
     border-radius: 0.25rem;
-    padding: 1rem;
     max-width: 100%;
     width: 100%;
     height: auto;
     display: block;
     box-sizing: border-box;
+    margin-top: 6px;
 }
 
 .example-card {
@@ -403,6 +398,7 @@ svg {
     color: var(--bg-white);
     font-size: 3rem;
     overflow: hidden;
+    position: relative;
 }
 
 .example-image img {
@@ -410,6 +406,36 @@ svg {
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
+}
+
+/* Example tags */
+.example-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Overlay variant for gallery images */
+.example-image .example-tags {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    z-index: 2;
+}
+
+.tag {
+    --tag-bg: var(--secondary-color);
+    background: var(--tag-bg);
+    color: #fff;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    line-height: 1;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    white-space: nowrap;
 }
 
 .example-card:hover .example-image img {

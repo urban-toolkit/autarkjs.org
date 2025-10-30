@@ -27,6 +27,6 @@
   },
   "dependencies": {
     "autk-db": "^1.0.2",
-    "autk-map": "^0.0.3"
+    "autk-map": "^0.0.4"
   }
 }

@@ -11,6 +11,7 @@ export default defineConfig({
       entry: resolve(__dirname, `examples/${exampleStr}.ts`),
       name: `autkark-${exampleStr}`,
       fileName: `${exampleStr}`,
+      minify: true
     },
     outDir: 'examples/dist',
     copyPublicDir: false,
