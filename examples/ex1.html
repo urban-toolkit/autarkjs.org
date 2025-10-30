@@ -27,7 +27,13 @@
                 <img src="../imgs/logo_small.svg" alt="Autark Logo" class="logo-icon">
                 Autark
             </a>
-            <ul class="nav-links">
+            <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul class="nav-links" id="primary-navigation">
+                <li><a href="../index.html">&#8592; Back to Home</a></li>
                 <li><a href="https://github.com/urban-toolkit/autark/" target="_blank" class="github-link"><i
                     class="fab fa-github"></i> GitHub</a></li>
             </ul>
@@ -36,9 +42,6 @@
 
     <section class="example-page">
         <div class="container">
-            <div class="page-actions">
-                <a href="../index.html" class="btn btn-secondary btn-sm">&#8592; Back to Home</a>
-            </div>
             <h1 class="section-title">Standalone GeoJSON</h1>
             <div class="example-layout">
 
@@ -134,6 +137,25 @@ main();
             if (window.scrollY > 50) navbar.classList.add('scrolled');
             else navbar.classList.remove('scrolled');
         });
+
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const primaryNav = document.getElementById('primary-navigation');
+        if (menuToggle && primaryNav) {
+            menuToggle.addEventListener('click', () => {
+                const isOpen = primaryNav.classList.toggle('open');
+                menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                document.body.classList.toggle('no-scroll', isOpen);
+            });
+
+            primaryNav.querySelectorAll('a').forEach(a => {
+                a.addEventListener('click', () => {
+                    primaryNav.classList.remove('open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    document.body.classList.remove('no-scroll');
+                });
+            });
+        }
    </script>
 </body>
 

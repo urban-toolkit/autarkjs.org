@@ -18,7 +18,12 @@
                 <img src="imgs/logo_small.svg" alt="Autark Logo" class="logo-icon">
                 Autark
             </a>
-            <ul class="nav-links">
+            <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul class="nav-links" id="primary-navigation">
                 <li><a href="#features">Features</a></li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#docs">Docs</a></li>
@@ -166,6 +171,26 @@
                 }
             });
         });
+
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const primaryNav = document.getElementById('primary-navigation');
+        if (menuToggle && primaryNav) {
+            menuToggle.addEventListener('click', () => {
+                const isOpen = primaryNav.classList.toggle('open');
+                menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                document.body.classList.toggle('no-scroll', isOpen);
+            });
+
+            // Close menu when a link is clicked
+            primaryNav.querySelectorAll('a').forEach(a => {
+                a.addEventListener('click', () => {
+                    primaryNav.classList.remove('open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    document.body.classList.remove('no-scroll');
+                });
+            });
+        }
     </script>
 </body>
 

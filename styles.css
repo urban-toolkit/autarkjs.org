@@ -134,6 +134,33 @@ nav.scrolled {
     display: none;
 }
 
+/* Mobile menu toggle button */
+.menu-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    background: var(--bg-white);
+    cursor: pointer;
+}
+
+.menu-toggle .bar {
+    display: block;
+    width: 22px;
+    height: 3px;
+    background: var(--secondary-color);
+    margin: 3px 0;
+    border-radius: 1rem;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
 /* Hero Section */
 .hero {
     margin-top: 80px;
@@ -197,6 +224,7 @@ nav.scrolled {
     background-color: var(--bg-white);
     color: var(--primary-color);
     border: 2px solid var(--border-color);
+    width: 200px;
 }
 
 .btn-secondary:hover {
@@ -297,6 +325,8 @@ nav.scrolled {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .panel {
@@ -305,6 +335,7 @@ nav.scrolled {
     border-radius: 1rem;
     box-shadow: var(--shadow);
     padding: 1.5rem;
+    overflow: hidden;
 }
 
 .code-panel pre {
@@ -313,9 +344,19 @@ nav.scrolled {
     border-radius: 1rem;
     padding: 1rem;
     overflow: auto;
-    max-height: 800px;
     font-size: 0.75rem !important;
     line-height: 1.5;
+    max-height: 500px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+svg {
+    margin-top: 6px;
+}
+
+.result-panel {
+    overflow: auto;
 }
 
 .result-panel svg,
@@ -324,13 +365,11 @@ nav.scrolled {
     border: 1px solid var(--border-color);
     border-radius: 0.25rem;
     padding: 1rem;
-    max-height: 800px;
-}
-
-@media (max-width: 992px) {
-    .example-layout {
-        grid-template-columns: 1fr;
-    }
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    display: block;
+    box-sizing: border-box;
 }
 
 .example-card {
@@ -424,8 +463,28 @@ footer a:hover {
 
 /* Responsive */
 @media (max-width: 768px) {
+    .menu-toggle { display: inline-flex; }
+
     .nav-links {
-        gap: 1rem;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg-white);
+        box-shadow: var(--shadow-lg);
+        flex-direction: column;
+        gap: 0;
+        padding: 0.5rem 1rem;
+        display: none;
+    }
+
+    .nav-links.open { display: flex; }
+
+    .nav-links li { width: 100%; }
+
+    .nav-links a {
+        padding: 0.75rem 0.5rem;
+        width: 100%;
     }
 
     .hero-logo {
@@ -449,6 +508,20 @@ footer a:hover {
     .examples-grid {
         grid-template-columns: 1fr;
     }
+
+    /* Compact the example page padding on small screens */
+    .example-page {
+        padding: 6rem 1rem 3rem;
+    }
+
+    .panel {
+        padding: 1rem;
+    }
+
+    .code-panel pre {
+        max-height: 400px;
+        font-size: 0.7rem !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -463,5 +536,14 @@ footer a:hover {
 
     .github-link {
         padding: 0.4rem 1rem;
+    }
+
+    .example-page {
+        padding: 5rem 0.5rem 2rem;
+    }
+
+    .code-panel pre {
+        max-height: 300px;
+        font-size: 0.65rem !important;
     }
 }
