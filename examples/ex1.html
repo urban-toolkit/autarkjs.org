@@ -130,95 +130,7 @@ main();
         </div>
         </footer>
 
-    <script type="module">
-
-        import { SpatialDb } from 'https://unpkg.com/autk-db@latest/dist/autk-db.js';
-        import { AutkMap, LayerType } from 'https://unpkg.com/autk-map@latest/dist/autk-map.js';
-
-        export class GeojsonVis {
-            constructor() {
-                this.map = null;
-                this.db = null;
-            }
-
-            async run(canvas) {
-                console.log('Starting GeojsonVis...');
-
-                // Now proceed with database and map initialization
-                this.db = new SpatialDb();
-                await this.db.init();
-
-                // Fetch and log the GeoJSON file first
-                const geojsonUrl = 'http://localhost:8000/data/mnt_neighs.geojson';
-                console.log('Fetching GeoJSON from:', geojsonUrl);
-                
-                try {
-                    const response = await fetch(geojsonUrl);
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    const geojsonData = await response.json();
-                    console.log(geojsonData);
-
-                    await this.db.loadCustomLayer({
-                        geojsonFileUrl: 'https://raw.githubusercontent.com/urban-toolkit/autarkjs.org/refs/heads/main/data/mnt_neighs.geojson',
-                        outputTableName: 'neighborhoods',
-                        coordinateFormat: 'EPSG:3395'
-                    });
-
-
-                    console.log('GeoJSON content:', geojsonData);
-                    console.log('Number of features:', geojsonData.features?.length || 0);
-
-                    this.map = new AutkMap(canvas);
-                    
-                    await this.map.init();
-                    await this.loadLayers();
-
-                    this.map.draw();
-
-                } catch (error) {
-                    console.error('Error fetching GeoJSON:', error);
-                    throw error;
-                }
-
-            }
-
-            async loadLayers() {
-                for (const layerData of this.db.getLayerTables()) {
-                    console.log('Getting layer:', layerData.name);
-                    const geojson = await this.db.getLayer(layerData.name);
-                    this.map.loadGeoJsonLayer(layerData.name, geojson, layerData.type);
-                    console.log(`Loading layer: ${layerData.name} of type ${layerData.type}`);
-                }
-            }
-        }
-
-        async function main() {
-            const canvas = document.querySelector('#map-canvas');
-            console.log(canvas.offsetWidth, canvas.offsetHeight);
-            if (!canvas) {
-                throw new Error('No canvas found');
-            }
-
-            try {
-                const example = new GeojsonVis();
-                await example.run(canvas);
-            } catch (error) {
-                console.error('Error running example:', error);
-            }
-        }
-
-        // Run when the page loads
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', main);
-        } else {
-            console.log('Document already loaded, running main()');
-            main();
-        }
-    </script>
-
-    <script>
+   <script>
         // Navbar scroll shadow
         window.addEventListener('scroll', function () {
             const navbar = document.getElementById('navbar');
@@ -245,6 +157,7 @@ main();
             });
         }
    </script>
-</body>
 
+   <script type="module" src="dist/ex1.js" defer></script>
+</body>
 </html>

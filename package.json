@@ -1,0 +1,32 @@
+{
+  "name": "autarkjs.org",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ex1.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "build": "tsc && vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/urban-toolkit/autarkjs.org.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/urban-toolkit/autarkjs.org/issues"
+  },
+  "homepage": "https://github.com/urban-toolkit/autarkjs.org#readme",
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^7.1.12"
+  },
+  "dependencies": {
+    "autk-db": "^1.0.2",
+    "autk-map": "^0.0.3"
+  }
+}
