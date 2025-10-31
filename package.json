@@ -26,7 +26,7 @@
     "vite": "^7.1.12"
   },
   "dependencies": {
-    "autk-db": "^1.0.2",
-    "autk-map": "^0.0.4"
+    "autk-db": "latest",
+    "autk-map": "latest"
   }
 }
