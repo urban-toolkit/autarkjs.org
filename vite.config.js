@@ -3,7 +3,7 @@
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
-const exampleStr = 'ex1';
+const exampleStr = 'ex3';
 
 export default defineConfig({
   build: {

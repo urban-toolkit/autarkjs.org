@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="en" data-base="./"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>autk-map</title><meta name="description" content="Documentation for autk-map"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href="https://cdn.jsdelivr.net/gh/rust-lang/rust@1.86.0/src/librustdoc/html/static/fonts/SourceSerif4-Regular.ttf.woff2"/><link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href="https://cdn.jsdelivr.net/gh/rust-lang/rust@1.86.0/src/librustdoc/html/static/fonts/FiraSans-Regular.woff2"/><link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href="https://cdn.jsdelivr.net/gh/rust-lang/rust@1.86.0/src/librustdoc/html/static/fonts/FiraSans-Medium.woff2"/><link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href="https://cdn.jsdelivr.net/gh/rust-lang/rust@1.86.0/src/librustdoc/html/static/fonts/SourceCodePro-Regular.ttf.woff2"/><link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href="https://cdn.jsdelivr.net/gh/rust-lang/rust@1.86.0/src/librustdoc/html/static/fonts/SourceSerif4-Bold.ttf.woff2"/><link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href="https://cdn.jsdelivr.net/gh/rust-lang/rust@1.86.0/src/librustdoc/html/static/fonts/SourceCodePro-Semibold.ttf.woff2"/><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/rust-lang/rust@1.86.0/src/librustdoc/html/static/css/normalize.min.css"/><link rel="stylesheet" type="text/css" href="assets/oxide/rustdoc/rustdoc.css"/><meta name="rustdoc-vars" data-root-path="" data-static-root-path="assets/oxide/rustdoc/" data-current-crate="autk-map" data-themes="" data-resource-suffix="" data-rustdoc-version="1.86.0" data-channel="1.86.0" data-search-js="search.js" data-settings-js="settings.js"/><script src="https://cdn.jsdelivr.net/gh/rust-lang/rust@1.86.0/src/librustdoc/html/static/js/storage.min.js"></script><script defer src="assets/oxide/rustdoc/main.js"></script><noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rust-lang/rust@1.86.0/src/librustdoc/html/static/css/noscript.min.css"/></noscript><link rel="stylesheet" href="assets/highlight.css"/><link rel="stylesheet" href="assets/oxide/index.css"/><script src="assets/oxide/index.js"></script></head><body class="rustdoc"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button><h2 class="location"><a href="#">autk-map</a></h2></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="index.html">autk-map</a><span class="version"></span></h2></div><div class="sidebar-elems"><ul class="block"><li><a href="modules.html">Exports</a></li></ul><h3><a href="#section.type-aliases">Type Aliases</a></h3><ul class="block"><li class=""><a href="modules.html#type-alias.colorhex">ColorHEX</a></li><li class=""><a href="modules.html#type-alias.colorrgb">ColorRGB</a></li><li class=""><a href="modules.html#type-alias.colortex">ColorTEX</a></li><li class=""><a href="modules.html#type-alias.mapeventlistener">MapEventListener</a></li></ul><h3><a href="#section.enumerations">Enumerations</a></h3><ul class="block"><li class=""><a href="enums/ColorMapInterpolator.html">ColorMapInterpolator</a></li><li class=""><a href="enums/LayerType.html">LayerType</a></li><li class=""><a href="enums/MapEvent.html">MapEvent</a></li><li class=""><a href="enums/MouseStatus.html">MouseStatus</a></li><li class=""><a href="enums/ThematicAggregationLevel.html">ThematicAggregationLevel</a></li></ul><h3><a href="#section.classes">Classes</a></h3><ul class="block"><li class=""><a href="classes/AutkMap.html">AutkMap</a></li><li class=""><a href="classes/AutkMapUi.html">AutkMapUi</a></li><li class=""><a href="classes/Camera.html">Camera</a></li><li class=""><a href="classes/ColorMap.html">ColorMap</a></li><li class=""><a href="classes/KeyEvents.html">KeyEvents</a></li><li class=""><a href="classes/Layer.html">Layer</a></li><li class=""><a href="classes/LayerBbox.html">LayerBbox</a></li><li class=""><a href="classes/LayerManager.html">LayerManager</a></li><li class=""><a href="classes/MapEvents.html">MapEvents</a></li><li class=""><a href="classes/MapStyle.html">MapStyle</a></li><li class=""><a href="classes/MouseEvents.html">MouseEvents</a></li><li class=""><a href="classes/Pipeline.html">Pipeline</a></li><li class=""><a href="classes/PipelineBuildingSSAO.html">PipelineBuildingSSAO</a></li><li class=""><a href="classes/PipelineTriangleBorder.html">PipelineTriangleBorder</a></li><li class=""><a href="classes/PipelineTriangleFlat.html">PipelineTriangleFlat</a></li><li class=""><a href="classes/PipelineTrianglePicking.html">PipelineTrianglePicking</a></li><li class=""><a href="classes/PipelineTriangleRaster.html">PipelineTriangleRaster</a></li><li class=""><a href="classes/RasterLayer.html">RasterLayer</a></li><li class=""><a href="classes/Renderer.html">Renderer</a></li><li class=""><a href="classes/Triangles2DLayer.html">Triangles2DLayer</a></li><li class=""><a href="classes/Triangles3DLayer.html">Triangles3DLayer</a></li><li class=""><a href="classes/TriangulatorBuildings.html">TriangulatorBuildings</a></li><li class=""><a href="classes/TriangulatorPoints.html">TriangulatorPoints</a></li><li class=""><a href="classes/TriangulatorPolygons.html">TriangulatorPolygons</a></li><li class=""><a href="classes/TriangulatorPolylines.html">TriangulatorPolylines</a></li><li class=""><a href="classes/TriangulatorRaster.html">TriangulatorRaster</a></li><li class=""><a href="classes/VectorLayer.html">VectorLayer</a></li></ul><h3><a href="#section.interfaces">Interfaces</a></h3><ul class="block"><li class=""><a href="interfaces/ICameraData.html">ICameraData</a></li><li class=""><a href="interfaces/ILayerBorder.html">ILayerBorder</a></li><li class=""><a href="interfaces/ILayerBorderComponent.html">ILayerBorderComponent</a></li><li class=""><a href="interfaces/ILayerComponent.html">ILayerComponent</a></li><li class=""><a href="interfaces/ILayerData.html">ILayerData</a></li><li class=""><a href="interfaces/ILayerGeometry.html">ILayerGeometry</a></li><li class=""><a href="interfaces/ILayerInfo.html">ILayerInfo</a></li><li class=""><a href="interfaces/ILayerRenderInfo.html">ILayerRenderInfo</a></li><li class=""><a href="interfaces/ILayerThematic.html">ILayerThematic</a></li><li class=""><a href="interfaces/IMapStyle.html">IMapStyle</a></li><li class=""><a href="interfaces/IRasterData.html">IRasterData</a></li></ul></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1>Project <span>autk-map</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2>Autark: A portable UTK-based visualization framework<a href="#autark-a-portable-utk-based-visualization-framework" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><div align="center">
+  <img src="media/logo.png" alt="Autark Logo" height="200"><br>
+</div>
+<br>
+<p>Autark is implemented in TypeScript for lightweight client-side execution with built-in access to OpenStreetMap geometry data for exploring spatial features directly in the browser. It consists of the following sub-projects:</p>
+<ul>
+<li><code>autk-db</code>: A spatial database that handles physical and thematic urban datasets.</li>
+<li><code>autk-map</code>: A 3D map visualization library.</li>
+<li><code>autk-plot</code>: A D3.js/Vega-lite wrapper to build abstract visualizations.</li>
+</ul>
+<p>The <code>example/</code> directory is included with example codes that can be used for testing or demonstration purposes.</p>
+<h2 id="requirements" class="tsd-anchor-link">Requirements<a href="#requirements" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>You’ll need Node.js installed to build and run this project. You can install it via <a href="https://anaconda.org/conda-forge/nodejs">Conda Forge</a> (Windows), <a href="https://brew.sh/">Homebrew</a> (macOS), <a href="https://documentation.ubuntu.com/server/how-to/software/package-management/">apt-get</a> (Debian/Ubuntu) or the <a href="https://nodejs.org/">official site</a>.</p>
+<p>To install Node.js:</p>
+<pre><code class="bash"><span class="hl-0"># Windows</span><br><span class="hl-1">conda</span><span class="hl-2"> </span><span class="hl-3">install</span><span class="hl-2"> </span><span class="hl-4">-c</span><span class="hl-2"> </span><span class="hl-3">conda-forge</span><span class="hl-2"> </span><span class="hl-3">nodejs</span><br><br><span class="hl-0"># macOS</span><br><span class="hl-1">brew</span><span class="hl-2"> </span><span class="hl-3">install</span><span class="hl-2"> </span><span class="hl-3">node</span><br><br><span class="hl-0"># Debian/Ubuntu</span><br><span class="hl-1">sudo</span><span class="hl-2"> </span><span class="hl-3">apt-get</span><span class="hl-2"> </span><span class="hl-3">install</span><span class="hl-2"> </span><span class="hl-3">nodejs</span>
+</code><button type="button">Copy</button></pre>
+
+<h2 id="installing-running-and-building-with-make" class="tsd-anchor-link">Installing, Running, and Building with Make<a href="#installing-running-and-building-with-make" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><h3 id="installation" class="tsd-anchor-link">Installation<a href="#installation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><p>Install Make (for running predefined build and dev commands):</p>
+<pre><code class="bash"><span class="hl-0"># Windows</span><br><span class="hl-1">conda</span><span class="hl-2"> </span><span class="hl-3">install</span><span class="hl-2"> </span><span class="hl-3">anaconda::make</span><br><br><span class="hl-0"># macOS</span><br><span class="hl-1">xcode-select</span><span class="hl-2"> </span><span class="hl-4">--install</span><br><br><span class="hl-0"># Debian/Ubuntu</span><br><span class="hl-1">sudo</span><span class="hl-2"> </span><span class="hl-3">apt-get</span><span class="hl-2"> </span><span class="hl-3">install</span><span class="hl-2"> </span><span class="hl-3">build-essential</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="building-and-running" class="tsd-anchor-link">Building and Running<a href="#building-and-running" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><p>To install required packages:</p>
+<pre><code class="bash"><span class="hl-1">make</span><span class="hl-2"> </span><span class="hl-3">install</span>
+</code><button type="button">Copy</button></pre>
+
+<p>To run the development server:</p>
+<pre><code class="bash"><span class="hl-1">make</span><span class="hl-2"> </span><span class="hl-3">dev</span>
+</code><button type="button">Copy</button></pre>
+
+<p>To clean build artifacts:</p>
+<pre><code class="bash"><span class="hl-1">make</span><span class="hl-2"> </span><span class="hl-3">clean</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="publishing-packages" class="tsd-anchor-link">Publishing packages<a href="#publishing-packages" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><p>Autark is available through <strong>npm</strong> packages. Publishing recently-made changes to <strong>npm</strong> can be done running the commands below.</p>
+<p>First, ensure you are logged into your npm account:</p>
+<pre><code class="bash"><span class="hl-1">npm</span><span class="hl-2"> </span><span class="hl-3">login</span><span class="hl-2"> </span>
+</code><button type="button">Copy</button></pre>
+
+<p>then, publish the desired module:</p>
+<pre><code class="bash"><span class="hl-1">make</span><span class="hl-2"> </span><span class="hl-3">publish</span><span class="hl-2"> </span><span class="hl-3">LIB=autk-module</span><span class="hl-2"> </span>
+</code><button type="button">Copy</button></pre>
+
+<p><em><strong>autk-module</strong></em> can assume three values: <em>autk-map</em>, <em>autk-db</em>, <em>autk-plot</em>.</p>
+<hr>
+<h2 id="interaction-controls" class="tsd-anchor-link">Interaction Controls<a href="#interaction-controls" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><p>You can explore and modify the map using both keyboard and mouse:</p>
+<h3 id="keyboard-shortcuts" class="tsd-anchor-link">Keyboard Shortcuts<a href="#keyboard-shortcuts" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td>Cycle through map styles (<code>default</code>, <code>light</code>, <code>dark</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mouse-actions" class="tsd-anchor-link">Mouse Actions<a href="#mouse-actions" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3><table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Double Click</td>
+<td>Select object in the currently active layer (if selectable)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="notes" class="tsd-anchor-link">Notes<a href="#notes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2><ul>
+<li>
+<p>WebGPU is required to run this project. In Chrome or Edge (v113+), it's enabled by default. In Firefox, WebGPU is only available in Nightly builds and must be explicitly enabled::</p>
+<ol>
+<li>Download and install <a href="https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly">Firefox Nightly</a>.</li>
+<li>Visit <code>about:config</code>.</li>
+<li>Set <code>dom.webgpu.enabled</code> to <code>true</code>.</li>
+<li>(Optional) You may also need to enable <code>gfx.webgpu.enabled</code> and <code>gfx.webgpu.force-enabled</code>.</li>
+<li>Restart Firefox.</li>
+</ol>
+</li>
+</ul>
+</div></details><h2 id="section.type-aliases" class="section-header">Type Aliases<a href="#section.type-aliases" class="anchor">§</a></h2><div class="impl-items"><details class="toggle method-toggle" open><summary><section id="type-alias.colorhex" class="method trait-impl"><span class="rightside"><a class="src" href="https://github.com/mlage/utk-v2/blob/4091621919ddb526e67d6c61fabde7e10b7b0840/autk-map/src/constants.ts#L71">Source</a></span><a href="#type-alias.colorhex" class="anchor">§</a><h4 class="code-header"><span class="struct">type </span>Color<wbr/>HEX = <span class="tsd-signature-symbol">`</span><span class="tsd-signature-type associatedtype">#</span><span class="tsd-signature-symbol">${</span><span class="tsd-signature-type primitive">string</span><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">`</span></h4></section></summary><div class="docblock"><div class="tsd-comment tsd-typography"><p>Represents a color in hexadecimal format.</p>
+</div><div class="item-table comment-tags"><dt><span class="stab">example</span></dt><dd><pre><code class="ts"><span class="hl-3">"#FF5733"</span>
+</code><button type="button">Copy</button></pre>
+
+</dd></div></div></details><details class="toggle method-toggle" open><summary><section id="type-alias.colorrgb" class="method trait-impl"><span class="rightside"><a class="src" href="https://github.com/mlage/utk-v2/blob/4091621919ddb526e67d6c61fabde7e10b7b0840/autk-map/src/constants.ts#L81">Source</a></span><a href="#type-alias.colorrgb" class="anchor">§</a><h4 class="code-header"><span class="struct">type </span>Color<wbr/>RGB = <a href="types/ColorRGB.html">ColorRGB</a></h4></section></summary><div class="docblock"><div class="tsd-comment tsd-typography"><p>Represents a color in RGB format, with red, green, blue components and an opacity.</p>
+</div><div class="item-table comment-tags"><dt><span class="stab">example</span></dt><dd><pre><code class="ts"><span class="hl-2">{ </span><span class="hl-5">r</span><span class="hl-2">: </span><span class="hl-6">255</span><span class="hl-2">, </span><span class="hl-5">g</span><span class="hl-2">: </span><span class="hl-6">87</span><span class="hl-2">, </span><span class="hl-5">b</span><span class="hl-2">: </span><span class="hl-6">51</span><span class="hl-2">, </span><span class="hl-5">opacity</span><span class="hl-2">: </span><span class="hl-6">1</span><span class="hl-2"> }</span>
+</code><button type="button">Copy</button></pre>
+
+</dd></div></div></details><details class="toggle method-toggle" open><summary><section id="type-alias.colortex" class="method trait-impl"><span class="rightside"><a class="src" href="https://github.com/mlage/utk-v2/blob/4091621919ddb526e67d6c61fabde7e10b7b0840/autk-map/src/constants.ts#L93">Source</a></span><a href="#type-alias.colortex" class="anchor">§</a><h4 class="code-header"><span class="struct">type </span>Color<wbr/>TEX = <span class="tsd-signature-type primitive">number</span><span class="tsd-signature-symbol">[]</span></h4></section></summary><div class="docblock"><div class="tsd-comment tsd-typography"><p>Represents a texture of colors as an array of numbers.
+Each group of four numbers represents a color in RGBA format.</p>
+</div><div class="item-table comment-tags"><dt><span class="stab">example</span></dt><dd><pre><code class="ts"><span class="hl-2">[</span><span class="hl-6">255</span><span class="hl-2">, </span><span class="hl-6">87</span><span class="hl-2">, </span><span class="hl-6">51</span><span class="hl-2">, </span><span class="hl-6">1</span><span class="hl-2">, </span><span class="hl-6">236</span><span class="hl-2">, </span><span class="hl-6">12</span><span class="hl-2">, </span><span class="hl-6">34</span><span class="hl-2">, </span><span class="hl-6">0.8</span><span class="hl-2">, ...]</span>
+</code><button type="button">Copy</button></pre>
+
+</dd></div></div></details><details class="toggle method-toggle" open><summary><section id="type-alias.mapeventlistener" class="method trait-impl"><span class="rightside"><a class="src" href="https://github.com/mlage/utk-v2/blob/4091621919ddb526e67d6c61fabde7e10b7b0840/autk-map/src/constants.ts#L100">Source</a></span><a href="#type-alias.mapeventlistener" class="anchor">§</a><h4 class="code-header"><span class="struct">type </span>Map<wbr/>Event<wbr/>Listener = <span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">selection</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type primitive">number</span><span class="tsd-signature-symbol">[]</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type primitive">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">layerId</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type primitive">string</span><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type primitive">void</span></h4></section></summary><div class="docblock"><div class="tsd-comment tsd-typography"><p>Map event listener type.</p>
+</div><div class="item-table comment-tags"></div></div></details></div><h2 id="section.enumerations" class="section-header">Enumerations<a href="#section.enumerations" class="anchor">§</a></h2><dl class="item-table"><dt><a class="enum" href="enums/ColorMapInterpolator.html" title="ColorMapInterpolator">ColorMapInterpolator</a></dt><dd><p>Color map interpolators for thematic data visualization.</p>
+</dd><dt><a class="enum" href="enums/LayerType.html" title="LayerType">LayerType</a></dt><dd><p>The types of layer supported in autk-map.</p>
+</dd><dt><a class="enum" href="enums/MapEvent.html" title="MapEvent">MapEvent</a></dt><dd><p>Map events for interaction.</p>
+</dd><dt><a class="enum" href="enums/MouseStatus.html" title="MouseStatus">MouseStatus</a></dt><dd><p>Mouse status for interaction state.</p>
+</dd><dt><a class="enum" href="enums/ThematicAggregationLevel.html" title="ThematicAggregationLevel">ThematicAggregationLevel</a></dt><dd><p>Thematic aggregation levels for thematic data.</p>
+</dd></dl><h2 id="section.classes" class="section-header">Classes<a href="#section.classes" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="classes/AutkMap.html" title="AutkMap">AutkMap</a></dt><dd><p>The main autark map class.</p>
+</dd><dt><a class="struct" href="classes/AutkMapUi.html" title="AutkMapUi">AutkMapUi</a></dt><dd><p>Map UI class for managing the user interface elements of the map.</p>
+</dd><dt><a class="struct" href="classes/Camera.html" title="Camera">Camera</a></dt><dd><p>Camera class for managing the view parameters and transformations in a 3D space.
+It provides methods to manipulate the camera position, orientation, and projection.</p>
+</dd><dt><a class="struct" href="classes/ColorMap.html" title="ColorMap">ColorMap</a></dt><dd><p>ColorMap class provides methods to handle color mapping and interpolation.
+It allows retrieval of colors based on values and color map interpolators,
+as well as conversion between RGB and HEX color formats.</p>
+</dd><dt><a class="struct" href="classes/KeyEvents.html" title="KeyEvents">KeyEvents</a></dt><dd><p>KeyEvents class handles keyboard interactions with the map.
+It allows toggling layer properties and changing map styles using keyboard shortcuts.</p>
+</dd><dt><a class="struct" href="classes/Layer.html" title="Layer">Layer</a></dt><dd><p>Base class for map layers.
+This class provides the basic structure and functionality for all map layers.</p>
+</dd><dt><a class="struct" href="classes/LayerBbox.html" title="LayerBbox">LayerBbox</a></dt><dd></dd><dt><a class="struct" href="classes/LayerManager.html" title="LayerManager">LayerManager</a></dt><dd><p>Manages the layers of the map.</p>
+</dd><dt><a class="struct" href="classes/MapEvents.html" title="MapEvents">MapEvents</a></dt><dd><p>Class to handle map events.
+It allows adding, removing, and emitting events for map interactions.</p>
+</dd><dt><a class="struct" href="classes/MapStyle.html" title="MapStyle">MapStyle</a></dt><dd></dd><dt><a class="struct" href="classes/MouseEvents.html" title="MouseEvents">MouseEvents</a></dt><dd><p>MouseEvents class handles mouse interactions with the map.
+It allows for panning, zooming, and picking features on the map.</p>
+</dd><dt><a class="struct" href="classes/Pipeline.html" title="Pipeline">Pipeline</a></dt><dd><p>Abstract class representing a rendering pipeline.
+It provides methods for creating camera and color uniform bind groups,
+updating camera and color uniforms, and defining the structure for building
+and rendering the pipeline.</p>
+</dd><dt><a class="struct" href="classes/PipelineBuildingSSAO.html" title="PipelineBuildingSSAO">PipelineBuildingSSAO</a></dt><dd><p>PipelineBuildingSSAO is a rendering pipeline for drawing 3D buildings with SSAO (Screen Space Ambient Occlusion).
+It uses WebGPU to render the buildings in two passes: one for normal and color maps, and another for SSAO computation.</p>
+</dd><dt><a class="struct" href="classes/PipelineTriangleBorder.html" title="PipelineTriangleBorder">PipelineTriangleBorder</a></dt><dd><p>PipelineBorderFlat is a rendering pipeline for drawing flat borders of triangles in 2D space.
+It uses WebGPU to render lines based on the provided border data.</p>
+</dd><dt><a class="struct" href="classes/PipelineTriangleFlat.html" title="PipelineTriangleFlat">PipelineTriangleFlat</a></dt><dd><p>PipelineTriangleFlat is a rendering pipeline for drawing flat triangles in 2D space.
+It uses WebGPU to render triangles based on the provided mesh data.</p>
+</dd><dt><a class="struct" href="classes/PipelineTrianglePicking.html" title="PipelineTrianglePicking">PipelineTrianglePicking</a></dt><dd><p>PipelineTrianglePicking is a rendering pipeline for picking triangles in 2D space.
+It uses WebGPU to render triangles and allows for picking by encoding object IDs in vertex colors.</p>
+</dd><dt><a class="struct" href="classes/PipelineTriangleRaster.html" title="PipelineTriangleRaster">PipelineTriangleRaster</a></dt><dd><p>PipelineTriangleRaster is a rendering pipeline for drawing rasterized triangles.
+It uses WebGPU to render triangles based on the provided mesh data.</p>
+</dd><dt><a class="struct" href="classes/RasterLayer.html" title="RasterLayer">RasterLayer</a></dt><dd><p>Base class for map layers.
+This class provides the basic structure and functionality for all map layers.</p>
+</dd><dt><a class="struct" href="classes/Renderer.html" title="Renderer">Renderer</a></dt><dd></dd><dt><a class="struct" href="classes/Triangles2DLayer.html" title="Triangles2DLayer">Triangles2DLayer</a></dt><dd><p>Triangles2DBorder class extends Triangles2DLayer to handle rendering of borders in 2D triangles layers.
+It manages the border positions and indices, and creates a specific rendering pipeline for borders.</p>
+</dd><dt><a class="struct" href="classes/Triangles3DLayer.html" title="Triangles3DLayer">Triangles3DLayer</a></dt><dd><p>Triangles3DLayer class extends Triangles2DLayer to handle rendering of 3D triangles layers.
+It manages the normals and creates a specific rendering pipeline for 3D triangles.</p>
+</dd><dt><a class="struct" href="classes/TriangulatorBuildings.html" title="TriangulatorBuildings">TriangulatorBuildings</a></dt><dd><p>Class for triangulating buildings from GeoJSON features.
+It provides methods to convert different geometry types into building meshes.</p>
+</dd><dt><a class="struct" href="classes/TriangulatorPoints.html" title="TriangulatorPoints">TriangulatorPoints</a></dt><dd><p>Class for triangulating points from GeoJSON features.
+It provides methods to convert different geometry types into point meshes.</p>
+</dd><dt><a class="struct" href="classes/TriangulatorPolygons.html" title="TriangulatorPolygons">TriangulatorPolygons</a></dt><dd><p>Class for triangulating polygons from GeoJSON features.
+It provides methods to convert different geometry types into polygon meshes.</p>
+</dd><dt><a class="struct" href="classes/TriangulatorPolylines.html" title="TriangulatorPolylines">TriangulatorPolylines</a></dt><dd><p>Class for triangulating polylines from GeoJSON features.
+It provides methods to convert different geometry types into polyline meshes.</p>
+</dd><dt><a class="struct" href="classes/TriangulatorRaster.html" title="TriangulatorRaster">TriangulatorRaster</a></dt><dd><p>Class for triangulating polylines from GeoJSON features.
+It provides methods to convert different geometry types into polyline meshes.</p>
+</dd><dt><a class="struct" href="classes/VectorLayer.html" title="VectorLayer">VectorLayer</a></dt><dd><p>Vector layer class extends Layer to handle vector data.
+It manages the positions, thematic data, indices, and components of the layer, as well as the rendering pipelines.</p>
+</dd></dl><h2 id="section.interfaces" class="section-header">Interfaces<a href="#section.interfaces" class="anchor">§</a></h2><dl class="item-table"><dt><a class="trait" href="interfaces/ICameraData.html" title="ICameraData">ICameraData</a></dt><dd><p>Interface for camera data.</p>
+</dd><dt><a class="trait" href="interfaces/ILayerBorder.html" title="ILayerBorder">ILayerBorder</a></dt><dd><p>Interface for layer border information.</p>
+</dd><dt><a class="trait" href="interfaces/ILayerBorderComponent.html" title="ILayerBorderComponent">ILayerBorderComponent</a></dt><dd><p>Interface for layer border components.</p>
+</dd><dt><a class="trait" href="interfaces/ILayerComponent.html" title="ILayerComponent">ILayerComponent</a></dt><dd><p>Interface for layer components.</p>
+</dd><dt><a class="trait" href="interfaces/ILayerData.html" title="ILayerData">ILayerData</a></dt><dd><p>Interface for layer border information.</p>
+</dd><dt><a class="trait" href="interfaces/ILayerGeometry.html" title="ILayerGeometry">ILayerGeometry</a></dt><dd><p>Interface for layer geometry information.</p>
+</dd><dt><a class="trait" href="interfaces/ILayerInfo.html" title="ILayerInfo">ILayerInfo</a></dt><dd><p>Interface for layer information.</p>
+</dd><dt><a class="trait" href="interfaces/ILayerRenderInfo.html" title="ILayerRenderInfo">ILayerRenderInfo</a></dt><dd><p>Interface for layer render information.</p>
+</dd><dt><a class="trait" href="interfaces/ILayerThematic.html" title="ILayerThematic">ILayerThematic</a></dt><dd><p>Interface for layer thematic data.</p>
+</dd><dt><a class="trait" href="interfaces/IMapStyle.html" title="IMapStyle">IMapStyle</a></dt><dd><p>Interface for map styles.</p>
+</dd><dt><a class="trait" href="interfaces/IRasterData.html" title="IRasterData">IRasterData</a></dt><dd><p>Interface for raster data.</p>
+</dd></dl></section><section id="alternative-display" class="content hidden"><oxide-search-results id="search"></oxide-search-results></section></div></main></body></html>

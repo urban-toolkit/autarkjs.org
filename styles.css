@@ -341,14 +341,16 @@ body.no-scroll {
 .code-panel pre {
     background: var(--bg-white);
     border: 1px solid var(--border-color);
-    border-radius: 1rem;
-    padding: 1rem;
+    border-radius: 0.25rem;
+    padding: 12px;
     overflow: auto;
     font-size: 0.75rem !important;
     line-height: 1.5;
-    max-height: 500px;
+    max-height: 600px;
     width: 100%;
     box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 6px;
 }
 
 .result-panel {

@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="../styles.css" />
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-one-light.min.css"
@@ -34,7 +34,7 @@
             <ul class="nav-links" id="primary-navigation">
                 <li><a href="../index.html">&#8592; Back to Home</a></li>
                 <li><a href="https://github.com/urban-toolkit/autark/" target="_blank" class="github-link"><i
-                    class="fab fa-github"></i> GitHub</a></li>
+                            class="fab fa-github"></i> GitHub</a></li>
             </ul>
         </div>
     </nav>
@@ -42,11 +42,9 @@
     <section class="example-page">
         <div class="container">
             <div class="example-tags">
-                <span class="tag" style="--tag-bg:#0ea5e9">GeoJSON</span>
-                <span class="tag" style="--tag-bg:#10b981">Vector</span>
-                <span class="tag" style="--tag-bg:#a855f7">Beginner</span>
+                <span class="tag" style="--tag-bg:#0ea5e9">autk-map</span>
             </div>
-            <h1 class="section-title">Standalone GeoJSON</h1>
+            <h1 class="section-title">Standalone Map</h1>
             <div class="example-layout">
 
                 <div class="panel result-panel">
@@ -58,62 +56,31 @@
                 <div class="panel code-panel">
                     <h2>Source Code</h2>
                     <pre><code id="code" class="language-typescript">
-import { SpatialDb } from 'autk-db';
-import { AutkMap, ColorMapInterpolator, LayerType } from 'autk-map';
-import { Feature, GeoJsonProperties } from 'geojson';
+import { AutkMap } from 'autk-map';
 
-export class ColormapDiv {
+export class StandaloneGeojsonMap {
     protected map!: AutkMap;
-    protected db!: SpatialDb;
 
     public async run(canvas: HTMLCanvasElement): Promise<void> {
-        this.db = new SpatialDb();
-        await this.db.init();
-
-        await this.db.loadCustomLayer({
-            geojsonFileUrl: 'http://localhost:5173/data/mnt_neighs.geojson',
-            outputTableName: 'neighborhoods',
-            coordinateFormat: 'EPSG:3395'
-        });
-
         this.map = new AutkMap(canvas);
-
         await this.map.init();
-        await this.loadLayers();
-        await this.updateThematicData();
+
+        const geojson = await fetch('http://localhost:5173/data/mnt_neighs_proj.geojson').then(res => res.json());
+        this.map.loadGeoJsonLayer('neighborhoods', geojson);
 
         this.map.draw();
     }
-
-    protected async loadLayers(): Promise<void> {
-        for (const layerData of this.db.getLayerTables()) {
-            const geojson = await this.db.getLayer(layerData.name);
-            this.map.loadGeoJsonLayer(layerData.name, geojson, layerData.type as LayerType);
-            console.log(`Loading layer: ${layerData.name} of type ${layerData.type}`);
-        }
-    }
-
-    protected async updateThematicData(layer: string = 'neighborhoods', groupById: boolean = false): Promise<void> {
-        const geojson = await this.db.getLayer(layer);
-
-        const getFnv = (feature: Feature): number => {
-            const properties = feature.properties as GeoJsonProperties;
-            return +properties?.shape_area || 0;
-        };
-
-        this.map.updateRenderInfoProperty(layer, 'colorMapInterpolator', ColorMapInterpolator.DIVERGING_RED_BLUE);
-        this.map.updateGeoJsonLayerThematic(layer, geojson, getFnv, groupById);
-    }
-
 }
 
 async function main() {
+    const example = new StandaloneGeojsonMap();
+
     const canvas = document.querySelector('canvas');
     if (!canvas) {
-        throw new Error('No canvas found');
+        console.error('Canvas element not found');
+        return;
     }
 
-    const example = new ColormapDiv();
     await example.run(canvas);
 }
 main();
@@ -132,9 +99,9 @@ main();
                 <a href="../index.html#gallery">Gallery</a>
             </p>
         </div>
-        </footer>
+    </footer>
 
-   <script>
+    <script>
         // Navbar scroll shadow
         window.addEventListener('scroll', function () {
             const navbar = document.getElementById('navbar');
@@ -160,8 +127,9 @@ main();
                 });
             });
         }
-   </script>
+    </script>
 
-   <script type="module" src="dist/ex1.js" defer></script>
+    <script type="module" src="dist/ex1.js" defer></script>
 </body>
+
 </html>
