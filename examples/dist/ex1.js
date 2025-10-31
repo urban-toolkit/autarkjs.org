@@ -9519,4 +9519,3 @@ gh();
 export {
   yh as StandaloneGeojsonVis
 };
-//# sourceMappingURL=ex1.js.map

@@ -11,11 +11,12 @@ export default defineConfig({
       entry: resolve(__dirname, `examples/${exampleStr}.ts`),
       name: `autkark-${exampleStr}`,
       fileName: `${exampleStr}`,
+      formats: ['es'],
       minify: true
     },
     outDir: 'examples/dist',
     copyPublicDir: false,
     emptyOutDir: false,
-    sourcemap: true
+    sourcemap: false
   },
 });
