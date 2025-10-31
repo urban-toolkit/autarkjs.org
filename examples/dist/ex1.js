@@ -8772,7 +8772,7 @@ class hh {
   handleResize() {
     if (this._menuIcon && (this._menuIcon.style.top = this.map.canvas.offsetTop + this._uiMargin + "px", this._menuIcon.style.left = this.map.canvas.offsetLeft + this._uiMargin + "px"), this._subMenu && (this._subMenu.style.top = this.map.canvas.offsetTop + 30 + 2 * this._uiMargin + "px", this._subMenu.style.left = this.map.canvas.offsetLeft + this._uiMargin + "px"), this._legend) {
       const n = parseInt(this._legend.style.width || "0", 10) || 0, r = parseInt(this._legend.style.height || "0", 10) || 0;
-      this._legend.style.left = this.map.canvas.offsetLeft + this.map.canvas.clientWidth - 2 - n - 3 * this._uiMargin + "px", this._legend.style.top = this.map.canvas.offsetTop + this.map.canvas.clientHeight - 2 - r - 3 * this._uiMargin + "px";
+      this._legend.style.left = this.map.canvas.offsetLeft + this.map.canvas.clientWidth - 2 - n - this._uiMargin + "px", this._legend.style.top = this.map.canvas.offsetTop + this.map.canvas.clientHeight - 2 - r - this._uiMargin + "px";
     }
   }
   /**
