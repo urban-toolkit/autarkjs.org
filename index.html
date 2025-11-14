@@ -7,8 +7,10 @@
     <title>Autark: A modular urban toolkit for data visualization on the web</title>
     <meta name="description" content="Autark: A modular urban toolkit for data visualization on the web" />
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg"></head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
 
 <body>
     <!-- Navigation -->
@@ -28,9 +30,9 @@
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#docs">Docs</a></li>
                 <li><a href="https://github.com/urban-toolkit/autark/" target="_blank" class="github-link">
-                    <i class="fab fa-github"></i>
-                    GitHub
-                </a></li>
+                        <i class="fab fa-github"></i>
+                        GitHub
+                    </a></li>
             </ul>
         </div>
     </nav>
@@ -83,7 +85,7 @@
     <section class="examples" id="gallery">
         <div class="container">
             <h2 class="section-title">Gallery</h2>
-            
+
             <div class="examples-grid">
                 <a class="example-card" href="examples/ex1.html">
                     <div class="example-image">
@@ -103,7 +105,7 @@
                         <div class="example-tags">
                             <span class="tag" style="--tag-bg:#0ea5e9">autk-map</span>
                             <span class="tag" style="--tag-bg:#f59e0b">autk-db</span>
-                        <!--<span class="tag" style="--tag-bg:#ef4444">Joins</span>
+                            <!--<span class="tag" style="--tag-bg:#ef4444">Joins</span>
                             <span class="tag" style="--tag-bg:#22c55e">OSM</span>
                             <span class="tag" style="--tag-bg:#64748b">Analysis</span> -->
 
@@ -137,10 +139,12 @@
     <section class="features" id="docs">
         <div class="container">
             <h2 class="section-title">Docs</h2>
-            <div style="text-align: center; padding: 2rem; background: white; border-radius: 1rem; box-shadow: var(--shadow);">
+            <div
+                style="text-align: center; padding: 2rem; background: white; border-radius: 1rem; box-shadow: var(--shadow);">
                 <div style="font-size: 3rem; margin-bottom: 1rem;">📖</div>
                 <h3 style="margin-bottom: 1rem;">Autark Documentation</h3>
-                <p style="color: var(--text-light); margin-bottom: 2rem;">Learn how to use Autark with our guides, API references, and tutorials.</p>
+                <p style="color: var(--text-light); margin-bottom: 2rem;">Learn how to use Autark with our guides, API
+                    references, and tutorials.</p>
                 <a href="#" class="btn btn-primary">Get Started</a>
                 <a href="#" class="btn btn-primary">Tutorials</a>
                 <a href="docs/autark-map.html" class="btn btn-primary">Autark-map</a>
@@ -154,16 +158,16 @@
         <div class="container">
             <p>&copy; 2025 Autark. Open source under MIT License.</p>
             <p style="margin-top: 1rem;">
-                <a href="https://github.com/urban-toolkit/autark/" target="_blank">GitHub</a> · 
-                <a href="#docs">Docs</a> · 
+                <a href="https://github.com/urban-toolkit/autark/" target="_blank">GitHub</a> ·
+                <a href="#docs">Docs</a> ·
                 <a href="#gallery">Gallery</a>
             </p>
         </div>
     </footer>
-    
+
     <script>
         // Add scroll effect to navbar
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
@@ -209,6 +213,17 @@
                 });
             });
         }
+    </script>
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P6EVSF42L8"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-P6EVSF42L8');
     </script>
 </body>
 
