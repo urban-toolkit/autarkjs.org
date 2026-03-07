@@ -1,22 +1,23 @@
-/* eslint-disable no-undef */
-
-import { resolve } from 'path';
-import { defineConfig } from 'vite';
-
-const exampleStr = 'ex3';
+import { resolve } from 'path'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   build: {
-    lib: {
-      entry: resolve(__dirname, `examples/${exampleStr}.ts`),
-      name: `autkark-${exampleStr}`,
-      fileName: `${exampleStr}`,
-      formats: ['es'],
-      minify: true
+    rollupOptions: {
+      input: {
+        ex1: resolve(__dirname, 'examples/ex1.ts'),
+        ex2: resolve(__dirname, 'examples/ex2.ts'),
+        ex3: resolve(__dirname, 'examples/ex3.ts'),
+      },
+      output: {
+        dir: 'examples/dist',
+        entryFileNames: '[name].js',
+        format: 'es',
+      }
     },
     outDir: 'examples/dist',
     copyPublicDir: false,
-    emptyOutDir: false,
-    sourcemap: false
+    emptyOutDir: true,
+    sourcemap: false,
   },
-});
+})
