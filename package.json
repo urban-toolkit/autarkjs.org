@@ -7,7 +7,11 @@
     "example": "examples"
   },
   "scripts": {
-    "build": "tsc && vite build"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "docs:dev": "vitepress dev guide",
+    "docs:build": "vitepress build guide",
+    "docs:preview": "vitepress preview guide"
   },
   "repository": {
     "type": "git",
@@ -23,10 +27,11 @@
   "homepage": "https://github.com/urban-toolkit/autarkjs.org#readme",
   "devDependencies": {
     "typescript": "^5.9.3",
-    "vite": "^7.1.12"
+    "vite": "^7.1.12",
+    "vitepress": "^1.6.3"
   },
   "dependencies": {
-    "autk-db": "latest",
+    "autk-db": "^1.0.4",
     "autk-map": "latest"
   }
 }

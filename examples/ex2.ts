@@ -7,23 +7,50 @@ export class MapAndDb {
     protected db!: SpatialDb;
 
     public async run(canvas: HTMLCanvasElement): Promise<void> {
-        this.db = new SpatialDb();
-        await this.db.init();
+        const statusEl = document.getElementById('loading-status');
+        const loadingText = document.getElementById('loading-text');
 
-        await this.db.loadCustomLayer({
-            geojsonFileUrl: '../data/mnt_roads.geojson',
-            outputTableName: 'roads',
-            coordinateFormat: 'EPSG:3395'
-        });
+        const showLoading = (msg: string) => {
+            if (loadingText) loadingText.textContent = msg;
+            if (statusEl) statusEl.style.display = 'flex';
+        };
+        const hideLoading = () => {
+            if (statusEl) statusEl.style.display = 'none';
+        };
+        const showError = (err: unknown) => {
+            const msg = err instanceof Error ? err.message : 'An unexpected error occurred';
+            if (loadingText) loadingText.textContent = `Error: ${msg}`;
+            if (statusEl) {
+                statusEl.style.background = 'rgba(254,242,242,0.95)';
+                const spinner = statusEl.querySelector<HTMLElement>('.autk-spinner');
+                if (spinner) spinner.style.display = 'none';
+            }
+            console.error(err);
+        };
 
-        this.map = new AutkMap(canvas);
-        MapStyle.setPredefinedStyle('light');
+        try {
+            this.db = new SpatialDb();
+            await this.db.init();
 
-        await this.map.init();
-        await this.loadLayers();
-        await this.updateThematicData('roads');
+            showLoading('Loading layer data...');
+            await this.db.loadCustomLayer({
+                geojsonFileUrl: '../data/mnt_roads.geojson',
+                outputTableName: 'roads',
+                coordinateFormat: 'EPSG:3395'
+            });
 
-        this.map.draw();
+            this.map = new AutkMap(canvas);
+            MapStyle.setPredefinedStyle('light');
+
+            await this.map.init();
+            await this.loadLayers();
+            await this.updateThematicData('roads');
+
+            this.map.draw();
+            hideLoading();
+        } catch (err) {
+            showError(err);
+        }
     }
 
     protected async loadLayers(): Promise<void> {
@@ -48,7 +75,7 @@ export class MapAndDb {
 
 }
 
-async function main() {   
+async function main() {
     const canvas = document.querySelector('canvas');
     if (!canvas) {
         throw new Error('No canvas found');
