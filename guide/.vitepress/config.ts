@@ -11,8 +11,9 @@ export default defineConfig({
     nav: [
       { text: 'Guide', link: '/introduction' },
       { text: 'API Reference', items: [
-        { text: 'autk-map', link: '/docs/autark-map.html' },
-        { text: 'autk-db', link: '/docs/autark-db.html' },
+        { text: 'autk-map', link: '/docs/autark-map.html', target: '_blank' },
+        { text: 'autk-db', link: '/docs/autark-db.html', target: '_blank' },
+        { text: 'autk-compute', link: '/docs/autark-compute.html', target: '_blank' },
       ]},
       { text: 'Gallery', link: '/#gallery' },
       { text: 'GitHub', link: 'https://github.com/urban-toolkit/autark/' },

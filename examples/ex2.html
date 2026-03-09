@@ -75,63 +75,43 @@
                     <pre><code id="code" class="language-typescript">
 import { SpatialDb } from 'autk-db';
 import { AutkMap, ColorMapInterpolator, LayerType, MapStyle } from 'autk-map';
-import { Feature, GeoJsonProperties } from 'geojson';
-
-export class MapAndDb {
-    protected map!: AutkMap;
-    protected db!: SpatialDb;
-
-    public async run(canvas: HTMLCanvasElement): Promise<void> {
-        this.db = new SpatialDb();
-        await this.db.init();
-
-        await this.db.loadCustomLayer({
-            geojsonFileUrl: '../data/mnt_roads.geojson',
-            outputTableName: 'roads',
-            coordinateFormat: 'EPSG:3395'
-        });
-
-        this.map = new AutkMap(canvas);
-        MapStyle.setPredefinedStyle('light');
-
-        await this.map.init();
-        await this.loadLayers();
-        await this.updateThematicData('roads');
-
-        this.map.draw();
-    }
-
-    protected async loadLayers(): Promise<void> {
-        for (const layerData of this.db.getLayerTables()) {
-            const geojson = await this.db.getLayer(layerData.name);
-            this.map.loadGeoJsonLayer(layerData.name, geojson, layerData.type as LayerType);
-            console.log(`Loading layer: ${layerData.name} of type ${layerData.type}`);
-        }
-    }
-
-    protected async updateThematicData(layer: string = 'neighborhoods'): Promise<void> {
-        const geojson = await this.db.getLayer(layer);
-
-        const getFnv = (feature: Feature): string => {
-            const properties = feature.properties as GeoJsonProperties;
-            return ['primary', 'secondary'].includes(properties?.highway) ? properties?.highway : 'other';
-        };
-
-        this.map.updateRenderInfoProperty(layer, 'colorMapInterpolator', ColorMapInterpolator.OBSERVABLE10);
-        this.map.updateGeoJsonLayerThematic(layer, geojson, getFnv);
-    }
-
-}
 
 async function main() {
-    const canvas = document.querySelector('canvas');
-    if (!canvas) {
-        throw new Error('No canvas found');
+    const canvas = document.querySelector('canvas')!;
+
+    // Initialize database
+    const db = new SpatialDb();
+    await db.init();
+
+    // Load road data from GeoJSON into the database
+    await db.loadCustomLayer({
+        geojsonFileUrl: '/data/mnt_roads.geojson',
+        outputTableName: 'roads',
+        coordinateFormat: 'EPSG:3395',
+    });
+
+    // Initialize map with light style
+    const map = new AutkMap(canvas);
+    MapStyle.setPredefinedStyle('light');
+    await map.init();
+
+    // Add all layers from the database to the map
+    for (const layer of db.getLayerTables()) {
+        const geojson = await db.getLayer(layer.name);
+        map.loadGeoJsonLayer(layer.name, geojson, layer.type as LayerType);
     }
 
-    const example = new MapAndDb();
-    await example.run(canvas);
+    // Apply thematic coloring by road type
+    const roadsGeojson = await db.getLayer('roads');
+    map.updateRenderInfoProperty('roads', 'colorMapInterpolator', ColorMapInterpolator.OBSERVABLE10);
+    map.updateGeoJsonLayerThematic('roads', roadsGeojson, (feature) => {
+        const highway = feature.properties?.highway;
+        return ['primary', 'secondary'].includes(highway) ? highway : 'other';
+    });
+
+    map.draw();
 }
+
 main();
                     </code></pre>
                 </div>

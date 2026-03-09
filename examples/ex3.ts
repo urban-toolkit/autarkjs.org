@@ -1,5 +1,5 @@
-import { AutkMap, LayerType } from 'autk-map';
 import { SpatialDb } from 'autk-db';
+import { AutkMap, LayerType } from 'autk-map';
 import type { LoadingPhase } from 'autk-db';
 
 const phaseLabels: Record<LoadingPhase, string> = {
@@ -11,83 +11,62 @@ const phaseLabels: Record<LoadingPhase, string> = {
     'processing-boundaries': 'Processing boundaries...',
 };
 
-export class Map3D {
-    protected map!: AutkMap;
-    protected db!: SpatialDb;
-
-    public async run(canvas: HTMLCanvasElement): Promise<void> {
-        const statusEl = document.getElementById('loading-status');
-        const loadingText = document.getElementById('loading-text');
-
-        const showLoading = (msg: string) => {
-            if (loadingText) loadingText.textContent = msg;
-            if (statusEl) statusEl.style.display = 'flex';
-        };
-        const hideLoading = () => {
-            if (statusEl) statusEl.style.display = 'none';
-        };
-        const showError = (err: unknown) => {
-            const msg = err instanceof Error ? err.message : 'An unexpected error occurred';
-            if (loadingText) loadingText.textContent = `Error: ${msg}`;
-            if (statusEl) {
-                statusEl.style.background = 'rgba(254,242,242,0.95)';
-                const spinner = statusEl.querySelector<HTMLElement>('.autk-spinner');
-                if (spinner) spinner.style.display = 'none';
-            }
-            console.error(err);
-        };
-
-        try {
-            this.db = new SpatialDb();
-            await this.db.init();
-
-            showLoading('Starting OSM data load...');
-            await this.db.loadOsmFromOverpassApi({
-                queryArea: {
-                    geocodeArea: 'New York',
-                    areas: ['Battery Park City', 'Financial District'],
-                },
-                outputTableName: 'table_osm',
-                autoLoadLayers: {
-                    coordinateFormat: 'EPSG:3395',
-                    layers: ['surface', 'parks', 'water', 'roads', 'buildings'] as Array<
-                        'surface' | 'parks' | 'water' | 'roads' | 'buildings'
-                    >,
-                    dropOsmTable: true,
-                },
-                onProgress: (phase) => {
-                    showLoading(phaseLabels[phase] ?? phase);
-                },
-            });
-
-            this.map = new AutkMap(canvas);
-
-            await this.map.init();
-            await this.loadLayers();
-
-            this.map.draw();
-            hideLoading();
-        } catch (err) {
-            showError(err);
-        }
-    }
-
-    protected async loadLayers(): Promise<void> {
-        for (const layerData of this.db.getLayerTables()) {
-            const geojson = await this.db.getLayer(layerData.name);
-            this.map.loadGeoJsonLayer(layerData.name, geojson, layerData.type as LayerType);
-            console.log(`Loading layer: ${layerData.name} of type ${layerData.type}`);
-        }
-    }
-}
-
 async function main() {
-    const canvas = document.querySelector('canvas');
-    if (!canvas) {
-        throw new Error('No canvas found');
-    }
+    const canvas = document.querySelector('canvas')!;
+    const statusEl = document.getElementById('loading-status');
+    const loadingText = document.getElementById('loading-text');
 
-    const example = new Map3D();
-    await example.run(canvas);
+    const setStatus = (msg: string) => {
+        if (loadingText) loadingText.textContent = msg;
+        if (statusEl) statusEl.style.display = 'flex';
+    };
+    const hideStatus = () => {
+        if (statusEl) statusEl.style.display = 'none';
+    };
+
+    try {
+        // Initialize database
+        const db = new SpatialDb();
+        await db.init();
+
+        // Load OSM data for a specific area via Overpass API
+        setStatus('Starting OSM data load...');
+        await db.loadOsmFromOverpassApi({
+            queryArea: {
+                geocodeArea: 'New York',
+                areas: ['Battery Park City', 'Financial District'],
+            },
+            outputTableName: 'table_osm',
+            autoLoadLayers: {
+                coordinateFormat: 'EPSG:3395',
+                layers: ['surface', 'parks', 'water', 'roads', 'buildings'],
+                dropOsmTable: true,
+            },
+            onProgress: (phase) => setStatus(phaseLabels[phase] ?? phase),
+        });
+
+        // Initialize map
+        const map = new AutkMap(canvas);
+        await map.init();
+
+        // Add all layers from the database to the map
+        for (const layer of db.getLayerTables()) {
+            const geojson = await db.getLayer(layer.name);
+            map.loadGeoJsonLayer(layer.name, geojson, layer.type as LayerType);
+        }
+
+        map.draw();
+        hideStatus();
+    } catch (err) {
+        const msg = err instanceof Error ? err.message : 'An unexpected error occurred';
+        if (loadingText) loadingText.textContent = `Error: ${msg}`;
+        if (statusEl) {
+            statusEl.style.background = 'rgba(254,242,242,0.95)';
+            const spinner = statusEl.querySelector<HTMLElement>('.autk-spinner');
+            if (spinner) spinner.style.display = 'none';
+        }
+        console.error(err);
+    }
 }
+
 main();

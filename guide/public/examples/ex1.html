@@ -73,31 +73,21 @@
                     <pre><code id="code" class="language-typescript">
 import { AutkMap } from 'autk-map';
 
-export class StandaloneGeojsonMap {
-    protected map!: AutkMap;
-
-    public async run(canvas: HTMLCanvasElement): Promise<void> {
-        this.map = new AutkMap(canvas);
-        await this.map.init();
-
-        const geojson = await fetch('http://localhost:5173/data/mnt_neighs_proj.geojson').then(res => res.json());
-        this.map.loadGeoJsonLayer('neighborhoods', geojson);
-
-        this.map.draw();
-    }
-}
-
 async function main() {
-    const example = new StandaloneGeojsonMap();
+    const canvas = document.querySelector('canvas')!;
 
-    const canvas = document.querySelector('canvas');
-    if (!canvas) {
-        console.error('Canvas element not found');
-        return;
-    }
+    // Initialize map
+    const map = new AutkMap(canvas);
+    await map.init();
 
-    await example.run(canvas);
+    // Load GeoJSON data
+    const geojson = await fetch('/data/mnt_neighs_proj.geojson').then(r => r.json());
+
+    // Add layer and render
+    map.loadGeoJsonLayer('neighborhoods', geojson);
+    map.draw();
 }
+
 main();
                     </code></pre>
                 </div>

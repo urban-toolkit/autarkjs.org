@@ -73,61 +73,43 @@
                 <div class="panel code-panel">
                     <h2>Source Code</h2>
                     <pre><code id="code" class="language-typescript">
-import { AutkMap, LayerType } from 'autk-map';
 import { SpatialDb } from 'autk-db';
-
-export class Map3D {
-    protected map!: AutkMap;
-    protected db!: SpatialDb;
-
-    public async run(canvas: HTMLCanvasElement): Promise<void> {
-        this.db = new SpatialDb();
-        await this.db.init();
-
-        await this.db.loadOsmFromOverpassApi({
-            queryArea: {
-                geocodeArea: 'New York',
-                areas: ['Battery Park City', 'Financial District'],
-            },
-            outputTableName: 'table_osm',
-            autoLoadLayers: {
-                coordinateFormat: 'EPSG:3395',
-                layers: ['surface', 'parks', 'water', 'roads', 'buildings'] as Array<
-                    'surface' | 'parks' | 'water' | 'roads' | 'buildings'
-                >,
-                dropOsmTable: true,
-            },
-            onProgress: (phase) => {
-                // your loading progress logic
-            },
-        });
-
-        this.map = new AutkMap(canvas);
-
-        await this.map.init();
-        await this.loadLayers();
-
-        this.map.draw();
-    }
-
-    protected async loadLayers(): Promise<void> {
-        for (const layerData of this.db.getLayerTables()) {
-            const geojson = await this.db.getLayer(layerData.name);
-            this.map.loadGeoJsonLayer(layerData.name, geojson, layerData.type as LayerType);
-            console.log(`Loading layer: ${layerData.name} of type ${layerData.type}`);
-        }
-    }
-}
+import { AutkMap, LayerType } from 'autk-map';
 
 async function main() {
-    const canvas = document.querySelector('canvas');
-    if (!canvas) {
-        throw new Error('No canvas found');
+    const canvas = document.querySelector('canvas')!;
+
+    // Initialize database
+    const db = new SpatialDb();
+    await db.init();
+
+    // Load OSM data for a specific area via Overpass API
+    await db.loadOsmFromOverpassApi({
+        queryArea: {
+            geocodeArea: 'New York',
+            areas: ['Battery Park City', 'Financial District'],
+        },
+        outputTableName: 'table_osm',
+        autoLoadLayers: {
+            coordinateFormat: 'EPSG:3395',
+            layers: ['surface', 'parks', 'water', 'roads', 'buildings'],
+            dropOsmTable: true,
+        },
+    });
+
+    // Initialize map
+    const map = new AutkMap(canvas);
+    await map.init();
+
+    // Add all layers from the database to the map
+    for (const layer of db.getLayerTables()) {
+        const geojson = await db.getLayer(layer.name);
+        map.loadGeoJsonLayer(layer.name, geojson, layer.type as LayerType);
     }
 
-    const example = new Map3D();
-    await example.run(canvas);
+    map.draw();
 }
+
 main();
                     </code></pre>
                 </div>
