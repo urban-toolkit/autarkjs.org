@@ -15,7 +15,7 @@ npm install autk-db
 Before using any method, call `init()` to set up the DuckDB instance and load the spatial extension:
 
 ```typescript
-import { SpatialDb } from 'autk-db';
+import { SpatialDb } from "autk-db";
 
 const db = new SpatialDb();
 await db.init();
@@ -32,7 +32,10 @@ Understanding how data flows through `autk-db` is the key to using it correctly.
 Every `load*` call creates one or more **named tables** inside DuckDB-WASM. A table is identified by a string name and exists in-browser for the duration of the session. You can inspect registered tables via `db.tables`, which returns metadata (name, type, columns) — not the actual row data.
 
 ```typescript
-await db.loadCsv({ fileUrl: '/data/incidents.csv', outputTableName: 'incidents' });
+await db.loadCsv({
+  fileUrl: "/data/incidents.csv",
+  outputTableName: "incidents",
+});
 
 console.log(db.tables);
 // [{ name: 'incidents', source: 'csv', columns: [...] }]
@@ -43,8 +46,6 @@ console.log(db.tables);
 Layers are tables that have a **geometry column**. They are created by OSM and GeoJSON load methods. What distinguishes layers from plain tables is that they can be rendered by `autk-map` and exported as GeoJSON.
 
 Each layer has a **type** (`'buildings'`, `'roads'`, `'polygons'`, etc.) that maps directly to `LayerType` in `autk-map`. Use `getLayerTables()` to filter the table list to geometry-bearing tables only.
-
-**Naming convention for OSM layers:** `{outputTableName}_{layer}`. For example, loading with `outputTableName: 'osm'` and `layers: ['buildings', 'roads']` creates `osm_buildings` and `osm_roads`.
 
 ### Load Operations
 
@@ -65,13 +66,13 @@ Think of them as `INSERT INTO` / `CREATE TABLE` statements: after they complete,
 
 Getters are the only way to move data from DuckDB into JavaScript memory:
 
-| Method | Returns | Use for |
-|--------|---------|---------|
-| `getLayer(name)` | `FeatureCollection` | Passing geometry to `autk-map` or `autk-plot` |
-| `getTableData({ tableName })` | `{ data: object[] }` | Inspecting rows, feeding charts |
-| `getLayerTables()` | Layer table metadata array | Iterating all geometry layers |
-| `getOsmBoundingBox()` | `[minLon, minLat, maxLon, maxLat]` \| `null` | Camera framing |
-| `getBoundingBoxFromLayer(name)` | Bounding box object | Bounds of any geometry layer |
+| Method                          | Returns                                      | Use for                                       |
+| ------------------------------- | -------------------------------------------- | --------------------------------------------- |
+| `getLayer(name)`                | `FeatureCollection`                          | Passing geometry to `autk-map` or `autk-plot` |
+| `getTableData({ tableName })`   | `{ data: object[] }`                         | Inspecting rows, feeding charts               |
+| `getLayerTables()`              | Layer table metadata array                   | Iterating all geometry layers                 |
+| `getOsmBoundingBox()`           | `[minLon, minLat, maxLon, maxLat]` \| `null` | Camera framing                                |
+| `getBoundingBoxFromLayer(name)` | Bounding box object                          | Bounds of any geometry layer                  |
 
 The typical flow looks like this:
 

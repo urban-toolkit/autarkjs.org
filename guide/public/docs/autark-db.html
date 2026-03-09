@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Autark Database Documentation</title>
+    <meta name="description" content="Autark Database documentation embedded." />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    `
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">
+                <img src="../imgs/logo_small.svg" alt="Autark Logo" class="logo-icon">
+                Autark
+            </a>
+            <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul class="nav-links" id="primary-navigation">
+                <li><a href="../index.html">&#8592; Back to Home</a></li>
+                <li><a href="https://github.com/urban-toolkit/autark/" target="_blank" class="github-link"><i
+                            class="fab fa-github"></i> GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="example-page" style="padding-top: 6rem; padding-bottom: 0; background: var(--bg-light);">
+        <div class="container" style="max-width: 1400px;">
+            <h1 class="section-title" style="margin-bottom: 1rem;">Autark Database Documentation</h1>
+            <!-- <p style="color: var(--text-light); margin-bottom: 1rem; text-align: center;">Embedded from <code>docs/autk-db/</code></p> -->
+        </div>
+        <div style="width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 1rem 1rem; box-sizing: border-box;">
+            <div
+                style="height: calc(100vh - 160px); background: var(--bg-white); border: 1px solid var(--border-color); border-radius: 0.75rem; box-shadow: var(--shadow); overflow: hidden;">
+                <iframe src="./autk-db/index.html" title="Autark Database Docs"
+                    style="width: 100%; height: 100%; border: 0;" loading="lazy"></iframe>
+            </div>
+            <noscript>
+                <p style="margin-top: 1rem; text-align: center;">Your browser has JavaScript disabled. Open the docs
+                    directly: <a href="./autk-db/index.html">docs/autk-db/index.html</a></p>
+            </noscript>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Autark. Open source under MIT License.</p>
+            <p style="margin-top: 1rem;">
+                <a href="https://github.com/urban-toolkit/autark/" target="_blank">GitHub</a> ·
+                <a href="../index.html#docs">Docs</a> ·
+                <a href="../index.html#gallery">Gallery</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll shadow
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const primaryNav = document.getElementById('primary-navigation');
+        if (menuToggle && primaryNav) {
+            menuToggle.addEventListener('click', () => {
+                const isOpen = primaryNav.classList.toggle('open');
+                menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                document.body.classList.toggle('no-scroll', isOpen);
+            });
+
+            primaryNav.querySelectorAll('a').forEach(a => {
+                a.addEventListener('click', () => {
+                    primaryNav.classList.remove('open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    document.body.classList.remove('no-scroll');
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>

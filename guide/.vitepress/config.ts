@@ -3,20 +3,10 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'Autark',
   description: 'A modular urban toolkit for data visualization on the web',
-  base: '/guide/',
-
-  // In dev mode, proxy /examples and /data to the main Vite dev server (npm run dev)
-  vite: {
-    server: {
-      proxy: {
-        '/examples': 'http://localhost:5173',
-        '/data': 'http://localhost:5173',
-      },
-    },
-  },
+  base: '/',
 
   themeConfig: {
-    logo: '/logo_small.svg',
+    logo: '/imgs/logo_small.svg',
 
     nav: [
       { text: 'Guide', link: '/introduction' },

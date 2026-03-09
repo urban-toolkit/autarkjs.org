@@ -27,3 +27,5 @@ features:
     details: Build interactive D3 charts that link directly to map selections for coordinated views.
     link: /autk-plot/
 ---
+
+<HomeGallery />

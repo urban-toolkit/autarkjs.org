@@ -7,11 +7,10 @@
     "example": "examples"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "docs:dev": "vitepress dev guide",
-    "docs:build": "vitepress build guide",
-    "docs:preview": "vitepress preview guide"
+    "dev": "vitepress dev guide",
+    "build": "vitepress build guide",
+    "preview": "vitepress preview guide",
+    "examples:build": "tsc && vite build && cp -r examples/dist guide/public/examples/dist"
   },
   "repository": {
     "type": "git",

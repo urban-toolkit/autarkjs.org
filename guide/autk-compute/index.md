@@ -34,4 +34,4 @@ import { geojsonCompute } from 'autk-compute';
 
 ---
 
-[API Reference →](/docs/autark-map.html)
+[API Reference →](/docs/autark-compute.html)

@@ -4,12 +4,12 @@ Autark is a modular toolkit for building urban data visualization applications t
 
 ## Packages
 
-| Package | Purpose |
-|---------|---------|
-| **autk-db** | Load and query geospatial data using DuckDB-WASM |
-| **autk-map** | Render 2D/3D maps on a `<canvas>` using WebGPU |
+| Package          | Purpose                                                        |
+| ---------------- | -------------------------------------------------------------- |
+| **autk-db**      | Load and query geospatial data using DuckDB-WASM               |
+| **autk-map**     | Render 2D/3D maps on a `<canvas>` using WebGPU                 |
 | **autk-compute** | Run GPU-accelerated computations on GeoJSON feature properties |
-| **autk-plot** | Build linked D3 charts that react to map interactions |
+| **autk-plot**    | Build linked D3 charts that react to map interactions          |
 
 A typical pipeline looks like this:
 
@@ -20,7 +20,7 @@ autk-plot  ◀──────────────────────
 ```
 
 1. **autk-db** loads and joins data (OSM, GeoJSON, CSV)
-2. **autk-compute** enriches feature properties with GPU computations (optional)
+2. **autk-compute** enriches feature properties with GPU computations
 3. **autk-map** renders the result as a map layer
 4. **autk-plot** provides linked charts that share selection state with the map
 
@@ -45,36 +45,55 @@ All packages run in the browser without a backend. Data is fetched directly from
 
 ## Minimal End-to-End Example
 
-The following loads OpenStreetMap data for a neighborhood and renders it as a 3D city map. The live result is shown below.
+The following loads OpenStreetMap data for the Financial District in New York and renders it as a full 3D city map — with surface, parks, water, roads, and buildings. Loading progress is reported via `onProgress` so the UI can display meaningful status messages while data is fetched and processed.
 
 ```typescript
-import { SpatialDb } from 'autk-db';
-import { AutkMap, LayerType } from 'autk-map';
+import { SpatialDb } from "autk-db";
+import { AutkMap, LayerType } from "autk-map";
 
-const db = new SpatialDb();
-await db.init();
+async function main() {
+  const canvas = document.querySelector("canvas")!;
+  const loadingEl = document.getElementById("loading-text")!;
 
-// Load OSM data — creates tables osm_surface, osm_roads, osm_buildings in DuckDB
-await db.loadOsmFromOverpassApi({
-  queryArea: { geocodeArea: 'New York', areas: ['Financial District'] },
-  outputTableName: 'osm',
-  autoLoadLayers: {
-    coordinateFormat: 'EPSG:3395',
-    layers: ['surface', 'roads', 'buildings'],
-    dropOsmTable: true,
-  },
-});
+  const db = new SpatialDb();
+  await db.init();
 
-// Render — getLayer() retrieves data from DuckDB into JS memory as GeoJSON
-const map = new AutkMap(document.querySelector('canvas'));
-await map.init();
+  // Load OSM data — creates tables for surface, parks, water, roads, and buildings
+  await db.loadOsmFromOverpassApi({
+    queryArea: { geocodeArea: "New York", areas: ["Battery Park City", "Financial District"] },
+    outputTableName: "osm",
+    autoLoadLayers: {
+      coordinateFormat: "EPSG:3395",
+      layers: ["surface", "parks", "water", "roads", "buildings"],
+      dropOsmTable: true,
+    },
+    onProgress: (phase) => {
+      const labels: Record<string, string> = {
+        "querying-osm-server":     "Querying OSM server…",
+        "downloading-osm-data":    "Downloading OSM data…",
+        "querying-osm-boundaries": "Querying boundaries…",
+        "downloading-boundaries":  "Downloading boundaries…",
+        "processing-osm-data":     "Processing data…",
+        "processing-boundaries":   "Processing boundaries…",
+      };
+      loadingEl.textContent = labels[phase] ?? "Loading…";
+    },
+  });
 
-for (const layer of db.getLayerTables()) {
-  const geojson = await db.getLayer(layer.name);
-  map.loadGeoJsonLayer(layer.name, geojson, layer.type as LayerType);
+  // Render — getLayer() retrieves each layer from DuckDB as GeoJSON
+  const map = new AutkMap(canvas);
+  await map.init();
+
+  for (const layer of db.getLayerTables()) {
+    const geojson = await db.getLayer(layer.name);
+    map.loadGeoJsonLayer(layer.name, geojson, layer.type as LayerType);
+  }
+
+  map.draw();
+  document.getElementById("loading-status")!.style.display = "none";
 }
 
-map.draw();
+main();
 ```
 
 **Live result:**

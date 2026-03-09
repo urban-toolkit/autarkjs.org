@@ -104,6 +104,10 @@ out
 # vitepress cache directory
 **/.vitepress/cache
 
+# compiled examples (rebuilt by CI and examples:build)
+examples/dist/
+guide/public/examples/dist/
+
 # Docusaurus cache and generated files
 .docusaurus
 
