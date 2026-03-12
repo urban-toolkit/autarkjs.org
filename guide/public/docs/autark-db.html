@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Autark Database Documentation</title>
     <meta name="description" content="Autark Database documentation embedded." />
+    <script src="../theme-sync.js"></script>
     <link rel="stylesheet" href="../styles.css" />
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-    `
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -16,8 +17,8 @@
 <body>
     <nav id="navbar">
         <div class="nav-container">
-            <a href="../index.html" class="logo">
-                <img src="../imgs/logo_small.svg" alt="Autark Logo" class="logo-icon">
+            <a href="/" class="logo">
+                <img src="/imgs/logo_small.svg" alt="Autark Logo" class="logo-icon">
                 Autark
             </a>
             <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-navigation">
@@ -26,9 +27,17 @@
                 <span class="bar"></span>
             </button>
             <ul class="nav-links" id="primary-navigation">
-                <li><a href="../index.html">&#8592; Back to Home</a></li>
-                <li><a href="https://github.com/urban-toolkit/autark/" target="_blank" class="github-link"><i
-                            class="fab fa-github"></i> GitHub</a></li>
+                <li><a href="/introduction">Guide</a></li>
+                <li class="nav-dropdown">
+                    <a href="#" class="dropdown-toggle">API Reference <span class="dropdown-arrow">▾</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/docs/autark-map.html">autk-map</a></li>
+                        <li><a href="/docs/autark-db.html">autk-db</a></li>
+                        <li><a href="/docs/autark-compute.html">autk-compute</a></li>
+                    </ul>
+                </li>
+                <li><a href="/#gallery">Gallery</a></li>
+                <li><a href="https://github.com/urban-toolkit/autark/" target="_blank" class="github-link"><i class="fab fa-github"></i> GitHub</a></li>
             </ul>
         </div>
     </nav>
@@ -54,12 +63,16 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 Autark. Open source under MIT License.</p>
-            <p style="margin-top: 1rem;">
-                <a href="https://github.com/urban-toolkit/autark/" target="_blank">GitHub</a> ·
-                <a href="../index.html#docs">Docs</a> ·
-                <a href="../index.html#gallery">Gallery</a>
-            </p>
+            <p>Released under the MIT License.</p>
+            <p>&copy; 2025 Autark</p>
+            <div class="footer-institutions">
+                <span class="footer-institutions-label">Developed at</span>
+                <div class="footer-institutions-logos">
+                    <img src="../imgs/uff-icon.png" alt="UFF" class="footer-institution-logo" />
+                    <img src="../imgs/nyu-icon.png" alt="NYU" class="footer-institution-logo" />
+                    <img src="../imgs/chicago_icon.png" alt="University of Chicago" class="footer-institution-logo" />
+                </div>
+            </div>
         </div>
     </footer>
 

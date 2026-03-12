@@ -6,7 +6,10 @@ export default defineConfig({
   base: '/',
 
   themeConfig: {
-    logo: '/imgs/logo_small.svg',
+    logo: {
+      light: '/imgs/logo_small.svg',
+      dark: '/imgs/logo_small_dark.svg',
+    },
 
     nav: [
       { text: 'Guide', link: '/introduction' },

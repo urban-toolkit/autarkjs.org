@@ -45,7 +45,7 @@ All packages run in the browser without a backend. Data is fetched directly from
 
 ## Minimal End-to-End Example
 
-The following loads OpenStreetMap data for the Financial District in New York and renders it as a full 3D city map — with surface, parks, water, roads, and buildings. Loading progress is reported via `onProgress` so the UI can display meaningful status messages while data is fetched and processed.
+The following loads OpenStreetMap data for the Financial District in New York and renders it as a full 3D city map — with surface, parks, water, roads, and buildings. Loading progress is reported via `onProgress` as named phase strings while data is fetched and processed.
 
 ```typescript
 import { SpatialDb } from "autk-db";
@@ -53,7 +53,6 @@ import { AutkMap, LayerType } from "autk-map";
 
 async function main() {
   const canvas = document.querySelector("canvas")!;
-  const loadingEl = document.getElementById("loading-text")!;
 
   const db = new SpatialDb();
   await db.init();
@@ -67,17 +66,7 @@ async function main() {
       layers: ["surface", "parks", "water", "roads", "buildings"],
       dropOsmTable: true,
     },
-    onProgress: (phase) => {
-      const labels: Record<string, string> = {
-        "querying-osm-server":     "Querying OSM server…",
-        "downloading-osm-data":    "Downloading OSM data…",
-        "querying-osm-boundaries": "Querying boundaries…",
-        "downloading-boundaries":  "Downloading boundaries…",
-        "processing-osm-data":     "Processing data…",
-        "processing-boundaries":   "Processing boundaries…",
-      };
-      loadingEl.textContent = labels[phase] ?? "Loading…";
-    },
+    onProgress: (phase) => console.log(phase),
   });
 
   // Render — getLayer() retrieves each layer from DuckDB as GeoJSON
@@ -90,7 +79,6 @@ async function main() {
   }
 
   map.draw();
-  document.getElementById("loading-status")!.style.display = "none";
 }
 
 main();
