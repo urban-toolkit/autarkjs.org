@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "autk-db": "^1.0.4",
-    "autk-map": "latest"
+    "autk-map": "latest",
+    "autk-plot": "^0.0.0"
   }
 }
