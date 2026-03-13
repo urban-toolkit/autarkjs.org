@@ -10,6 +10,7 @@ export default defineConfig({
         ex1: 'examples/ex1.ts',
         ex2: 'examples/ex2.ts',
         ex3: 'examples/ex3.ts',
+        ex5: 'examples/ex5.ts',
       },
       output: {
         format: 'es',

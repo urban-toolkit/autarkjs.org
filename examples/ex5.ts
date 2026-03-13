@@ -1,11 +1,4 @@
----
-title: Linked Views for Urban Analysis
-aside: false
-outline: false
----
-
-<script setup>
-const ex5Code = `import type { FeatureCollection, GeoJsonProperties } from 'geojson';
+import type { FeatureCollection, GeoJsonProperties } from 'geojson';
 
 import * as PlotPkg from 'autk-plot';
 import { AutkMap, MapEvent, VectorLayer } from 'autk-map';
@@ -41,7 +34,7 @@ function buildNeighborhoodBarChart(
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('width', String(width));
     svg.setAttribute('height', String(height));
-    svg.setAttribute('viewBox', \`0 0 \${width} \${height}\`);
+    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
     svg.style.display = 'block';
     svg.style.width = '100%';
     svg.style.height = 'auto';
@@ -124,11 +117,11 @@ function buildNeighborhoodBarChart(
         const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         label.setAttribute('x', String(x + widthRect / 2));
         label.setAttribute('y', String(margin.top + innerHeight + 14));
-        label.setAttribute('transform', \`rotate(50 \${x + widthRect / 2} \${margin.top + innerHeight + 14})\`);
+        label.setAttribute('transform', `rotate(50 ${x + widthRect / 2} ${margin.top + innerHeight + 14})`);
         label.setAttribute('text-anchor', 'start');
         label.setAttribute('fill', textColor);
         label.setAttribute('font-size', '10');
-        label.textContent = String(item.ntaname ?? \`Item \${index + 1}\`);
+        label.textContent = String(item.ntaname ?? `Item ${index + 1}`);
         svg.appendChild(label);
     });
 
@@ -243,7 +236,7 @@ async function main() {
         hideStatus();
     } catch (err) {
         const msg = err instanceof Error ? err.message : 'An unexpected error occurred';
-        if (loadingText) loadingText.textContent = \`Error: \${msg}\`;
+        if (loadingText) loadingText.textContent = `Error: ${msg}`;
         if (statusEl) {
             statusEl.style.background = 'rgba(254,242,242,0.95)';
             const spinner = statusEl.querySelector('.autk-spinner') as HTMLElement | null;
@@ -253,15 +246,4 @@ async function main() {
     }
 }
 
-main();`
-</script>
-
-<ExamplePage
-  title="Linked Views for Urban Analysis"
-  description="Link maps and charts to build coordinated urban visual analytics workflows. This example synchronizes a bar chart with a geographic layer so that interactions in one view immediately affect the other."
-  objective="Select elements in the chart and highlight them on the map, or click map features and reflect the interaction in the chart. This is the clearest example of Autark’s visual analytics vision: multiple linked representations working together in the browser."
-  iframe-src="/examples/raw/ex5.html"
-  iframe-height="900"
-  :tags="['autk-plot', 'autk-map', 'autk-db']"
-  :code="ex5Code"
-/>
+main();
