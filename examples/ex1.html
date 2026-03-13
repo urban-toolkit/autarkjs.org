@@ -53,7 +53,7 @@
             <div class="example-tags">
                 <span class="tag" style="--tag-bg:#0ea5e9">autk-map</span>
             </div>
-            <h1 class="section-title">Standalone Map</h1>
+            <h1 class="section-title">Standalone GeoJSON Viewer</h1>
             <div class="example-layout">
 
                 <div class="panel result-panel">
@@ -76,14 +76,14 @@ import { AutkMap } from 'autk-map';
 async function main() {
     const canvas = document.querySelector('canvas')!;
 
-    // Initialize map
+    // Create and initialize the map
     const map = new AutkMap(canvas);
     await map.init();
 
-    // Load GeoJSON data
+    // Load a GeoJSON dataset directly in the browser
     const geojson = await fetch('/data/mnt_neighs_proj.geojson').then(r => r.json());
 
-    // Add layer and render
+    // Add the layer and render it
     map.loadGeoJsonLayer('neighborhoods', geojson);
     map.draw();
 }

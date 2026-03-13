@@ -19,7 +19,16 @@ export default defineConfig({
         { text: 'autk-compute', link: '/docs/autark-compute.html', target: '_blank' },
         { text: 'autk-plot', link: '/docs/autark-plot.html', target: '_blank' },
       ]},
-      { text: 'Gallery', link: '/#gallery' },
+      {
+        text: 'Gallery',
+        items: [
+          { text: 'Standalone GeoJSON Viewer', link: '/examples/ex1' },
+          { text: 'Spatial Join in the Browser', link: '/examples/ex2' },
+          { text: '3D OSM City Explorer', link: '/examples/ex3' },
+          { text: 'GPU Property Compute', link: '/examples/ex4' },
+          { text: 'Linked Views for Urban Analysis', link: '/examples/ex5' },
+        ],
+      },
       { text: 'GitHub', link: 'https://github.com/urban-toolkit/autark/' },
     ],
 
@@ -72,6 +81,17 @@ export default defineConfig({
           { text: 'Interactivity', link: '/autk-plot/interactivity' },
           { text: 'Linked Views', link: '/autk-plot/linked-views' },
         ],
+      },
+      {
+        text: 'Examples',
+        collapsed: false,
+        items: [
+          { text: 'Standalone GeoJSON Viewer', link: '/examples/ex1' },
+          { text: 'Spatial Join in the Browser', link: '/examples/ex2' },
+          { text: '3D OSM City Explorer', link: '/examples/ex3' },
+          { text: 'GPU Property Compute', link: '/examples/ex4' },
+          { text: 'Linked Views for Urban Analysis', link: '/examples/ex5' },
+        ]
       },
       {
         text: 'Recipes',

@@ -1,7 +1,14 @@
 <template>
   <section class="home-gallery vp-raw">
     <div class="container">
-      <h2 class="section-title">Gallery</h2>
+      <div class="gallery-header">
+        <h2 class="section-title">Gallery</h2>
+        <p class="section-description">
+          Interactive examples showcasing the core capabilities of Autark.
+          Each example runs entirely in the browser.
+        </p>
+      </div>
+
       <div class="gallery-grid">
         <a
           v-for="example in examples"
@@ -16,13 +23,17 @@
                 :key="tag.label"
                 class="gallery-tag"
                 :style="{ background: tag.color }"
-              >{{ tag.label }}</span>
+              >
+                {{ tag.label.toUpperCase() }}
+              </span>
             </div>
             <img :src="example.img" :alt="example.title" />
           </div>
+
           <div class="gallery-content">
-            <h3>{{ example.title }}</h3>
-            <p>{{ example.description }}</p>
+            <h3 class="gallery-title">{{ example.title }}</h3>
+            <p class="gallery-description">{{ example.description }}</p>
+            <span class="gallery-open">Open Example →</span>
           </div>
         </a>
       </div>
@@ -33,28 +44,49 @@
 <script setup lang="ts">
 const examples = [
   {
-    href: '/examples/ex1.html',
+    href: '/examples/ex1',
     img: '/imgs/ex1.png',
-    title: 'Standalone Map',
-    description: 'Load and visualize pre-processed GeoJSON data using autk-map.',
+    title: 'Standalone GeoJSON Viewer',
+    description: 'Render GeoJSON layers directly in the browser with a minimal setup.',
     tags: [{ label: 'autk-map', color: '#0ea5e9' }],
   },
   {
-    href: '/examples/ex2.html',
+    href: '/examples/ex2',
     img: '/imgs/ex2.png',
-    title: 'Map and Database Integration',
-    description: 'Combine autk-db and autk-map to build complex geospatial applications.',
+    title: 'Spatial Join in the Browser',
+    description: 'Combine spatial datasets in the browser and visualize the results instantly.',
     tags: [
-      { label: 'autk-map', color: '#0ea5e9' },
       { label: 'autk-db', color: '#f59e0b' },
+      { label: 'autk-map', color: '#0ea5e9' },
     ],
   },
   {
-    href: '/examples/ex3.html',
+    href: '/examples/ex3',
     img: '/imgs/ex3.png',
-    title: 'Three-dimensional Maps',
-    description: 'Load and visualize OpenStreetMap data from any city in 3D.',
+    title: '3D OSM City Explorer',
+    description: 'Load urban layers from OpenStreetMap and explore city scenes in 3D.',
     tags: [
+      { label: 'autk-db', color: '#f59e0b' },
+      { label: 'autk-map', color: '#0ea5e9' },
+    ],
+  },
+  {
+    href: '/examples/ex4',
+    img: '/imgs/ex4.png',
+    title: 'GPU Property Compute',
+    description: 'Run GPU-accelerated computations on feature properties and map the results in real time.',
+    tags: [
+      { label: 'autk-compute', color: '#10b981' },
+      { label: 'autk-map', color: '#0ea5e9' },
+    ],
+  },
+  {
+    href: '/examples/ex5',
+    img: '/imgs/ex5.png',
+    title: 'Linked Views for Urban Analysis',
+    description: 'Link maps and charts to build coordinated urban visual analytics workflows.',
+    tags: [
+      { label: 'autk-plot', color: '#8b5cf6' },
       { label: 'autk-map', color: '#0ea5e9' },
       { label: 'autk-db', color: '#f59e0b' },
     ],
@@ -64,22 +96,35 @@ const examples = [
 
 <style scoped>
 .home-gallery {
-  padding: 64px 24px;
   max-width: 1152px;
   margin: 0 auto;
+  padding: 44px 24px 40px;
+}
+
+.gallery-header {
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 .section-title {
-  font-size: 2rem;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 48px;
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0;
   color: var(--vp-c-text-1);
+}
+
+.section-description {
+  margin: 16px auto 0;
+  max-width: 720px;
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: var(--vp-c-text-2);
 }
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 24px;
 }
 
@@ -87,17 +132,26 @@ const examples = [
   display: flex;
   flex-direction: column;
   border: 1px solid var(--vp-c-divider);
-  border-radius: 12px;
+  border-radius: 20px;
   overflow: hidden;
   text-decoration: none;
   color: inherit;
-  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  background: color-mix(in srgb, var(--vp-c-bg-soft) 92%, transparent);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.05),
+    0 1px 4px rgba(0, 0, 0, 0.08);
 }
 
 .gallery-card:hover {
-  border-color: var(--vp-c-brand-1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+  transform: translateY(-6px);
+  border-color: rgba(59, 130, 246, 0.35);
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.12),
+    0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
 .gallery-image {
@@ -111,47 +165,76 @@ const examples = [
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s;
+  transition: transform 0.3s ease;
 }
 
 .gallery-card:hover .gallery-image img {
-  transform: scale(1.03);
+  transform: scale(1.035);
 }
 
 .gallery-tags {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 14px;
+  left: 14px;
   display: flex;
-  gap: 6px;
+  gap: 8px;
+  flex-wrap: wrap;
   z-index: 1;
 }
 
 .gallery-tag {
-  font-size: 0.7rem;
-  font-weight: 600;
+  font-size: 0.72rem;
+  font-weight: 700;
   color: #fff;
-  padding: 2px 8px;
+  padding: 6px 12px;
   border-radius: 999px;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.16);
 }
 
 .gallery-content {
-  padding: 16px 20px 20px;
+  padding: 18px 20px 20px;
 }
 
-.gallery-content h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0 0 6px;
+.gallery-title {
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 8px;
   color: var(--vp-c-text-1);
 }
 
-.gallery-content p {
-  font-size: 0.875rem;
+.gallery-description {
+  font-size: 0.93rem;
   color: var(--vp-c-text-2);
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.6;
+}
+
+.gallery-open {
+  margin-top: 14px;
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #3b82f6;
+}
+
+.gallery-card:hover .gallery-open {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .home-gallery {
+    padding: 32px 20px 56px;
+  }
+
+  .gallery-header {
+    margin-bottom: 32px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

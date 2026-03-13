@@ -1,4 +1,11 @@
-import { SpatialDb } from 'autk-db';
+---
+title: Spatial Join in the Browser
+aside: false
+outline: false
+---
+
+<script setup>
+const ex2Code = `import { SpatialDb } from 'autk-db';
 import { AutkMap, LayerType } from 'autk-map';
 import { Feature, FeatureCollection, GeoJsonProperties } from 'geojson';
 
@@ -23,8 +30,8 @@ async function main() {
 
     try {
         const baseUrl = window.location.origin;
-        const neighborhoodsUrl = `${baseUrl}/data/mnt_neighs.geojson`;
-        const noiseUrl = `${baseUrl}/data/noise.geojson`;
+        const neighborhoodsUrl = \`\${baseUrl}/data/mnt_neighs.geojson\`;
+        const noiseUrl = \`\${baseUrl}/data/noise.geojson\`;
 
         setStatus('Initializing spatial database...');
         const db = new SpatialDb();
@@ -46,7 +53,7 @@ async function main() {
 
         setStatus('Running spatial join in the browser...');
         const counts = await db.rawQuery({
-            query: `
+            query: \`
                 SELECT
                     struct_extract(neighborhoods.properties, 'nta2020') AS neighborhood_id,
                     COUNT(noise.geometry) AS noise_count
@@ -54,7 +61,7 @@ async function main() {
                 LEFT JOIN noise
                     ON ST_Intersects(neighborhoods.geometry, noise.geometry)
                 GROUP BY 1
-            `,
+            \`,
             output: {
                 type: 'RETURN_OBJECT',
             },
@@ -120,7 +127,7 @@ async function main() {
         hideStatus();
     } catch (err) {
         const msg = err instanceof Error ? err.message : 'An unexpected error occurred';
-        if (loadingText) loadingText.textContent = `Error: ${msg}`;
+        if (loadingText) loadingText.textContent = \`Error: \${msg}\`;
         if (statusEl) {
             statusEl.style.background = 'rgba(254,242,242,0.95)';
             const spinner = statusEl.querySelector('.autk-spinner') as HTMLElement | null;
@@ -130,4 +137,14 @@ async function main() {
     }
 }
 
-main();
+main();`
+</script>
+
+<ExamplePage
+  title="Spatial Join in the Browser"
+  description="Combine spatial datasets in the browser and visualize the results instantly. This example loads neighborhood polygons and point data, performs a spatial join with autk-db, and renders the aggregated result with autk-map."
+  objective="Load two spatial layers, perform a spatial join, and theme the result on the map. This example highlights a key transition in Autark: it is not just rendering, but real in-browser spatial analysis, without PostGIS, GIS servers, or backend infrastructure."
+  iframe-src="/examples/raw/ex2.html"
+  :tags="['autk-db', 'autk-map']"
+  :code="ex2Code"
+/>

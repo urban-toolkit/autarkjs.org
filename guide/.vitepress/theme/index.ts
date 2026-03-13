@@ -3,6 +3,7 @@ import { h } from 'vue'
 import AutkMapExample from './components/AutkMapExample.vue'
 import HomeGallery from './components/HomeGallery.vue'
 import InstitutionsFooter from './components/InstitutionsFooter.vue'
+import ExamplePage from './components/ExamplePage.vue'
 import type { Theme } from 'vitepress'
 
 export default {
@@ -15,5 +16,6 @@ export default {
   enhanceApp({ app }) {
     app.component('AutkMapExample', AutkMapExample)
     app.component('HomeGallery', HomeGallery)
+    app.component('ExamplePage', ExamplePage)
   },
 } satisfies Theme

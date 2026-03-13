@@ -1,4 +1,11 @@
-import { AutkMap, LayerType } from 'autk-map';
+---
+title: 3D OSM City Explorer
+aside: false
+outline: false
+---
+
+<script setup>
+const ex3Code = `import { AutkMap, LayerType } from 'autk-map';
 import { SpatialDb } from 'autk-db';
 
 async function main() {
@@ -53,7 +60,7 @@ async function main() {
         hideStatus();
     } catch (err) {
         const msg = err instanceof Error ? err.message : 'An unexpected error occurred';
-        if (loadingText) loadingText.textContent = `Error: ${msg}`;
+        if (loadingText) loadingText.textContent = \`Error: \${msg}\`;
         if (statusEl) {
             statusEl.style.background = 'rgba(254,242,242,0.95)';
             const spinner = statusEl.querySelector('.autk-spinner') as HTMLElement | null;
@@ -63,4 +70,14 @@ async function main() {
     }
 }
 
-main();
+main();`
+</script>
+
+<ExamplePage
+  title="3D OSM City Explorer"
+  description="Load urban layers from OpenStreetMap and explore city scenes in 3D. This example fetches OSM data for Manhattan with autk-db and renders buildings, roads, water, parks, and surface layers with autk-map."
+  objective="Fetch OpenStreetMap data for Manhattan and render buildings, roads, water, parks, and urban surfaces in 3D. This is a visually strong example that showcases the urban exploration capabilities of Autark."
+  iframe-src="/examples/raw/ex3.html"
+  :tags="['autk-db', 'autk-map']"
+  :code="ex3Code"
+/>
