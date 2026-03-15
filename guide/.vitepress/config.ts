@@ -22,11 +22,15 @@ export default defineConfig({
       {
         text: 'Gallery',
         items: [
+          { text: 'All Examples', link: '/examples/' },
           { text: 'Standalone GeoJSON Viewer', link: '/examples/ex1' },
           { text: 'Spatial Join in the Browser', link: '/examples/ex2' },
           { text: '3D OSM City Explorer', link: '/examples/ex3' },
           { text: 'GPU Property Compute', link: '/examples/ex4' },
           { text: 'Linked Views for Urban Analysis', link: '/examples/ex5' },
+          { text: 'Network Accessibility Explorer', link: '/examples/ex6' },
+          { text: 'Temporal Change Viewer', link: '/examples/ex7' },
+          { text: 'Scenario Comparison Dashboard', link: '/examples/ex8' },
         ],
       },
       { text: 'GitHub', link: 'https://github.com/urban-toolkit/autark/' },
@@ -86,11 +90,15 @@ export default defineConfig({
         text: 'Examples',
         collapsed: false,
         items: [
+          { text: 'All Examples', link: '/examples/' },
           { text: 'Standalone GeoJSON Viewer', link: '/examples/ex1' },
           { text: 'Spatial Join in the Browser', link: '/examples/ex2' },
           { text: '3D OSM City Explorer', link: '/examples/ex3' },
           { text: 'GPU Property Compute', link: '/examples/ex4' },
           { text: 'Linked Views for Urban Analysis', link: '/examples/ex5' },
+          { text: 'Network Accessibility Explorer', link: '/examples/ex6' },
+          { text: 'Temporal Change Viewer', link: '/examples/ex7' },
+          { text: 'Scenario Comparison Dashboard', link: '/examples/ex8' },
         ]
       },
       {
