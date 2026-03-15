@@ -30,6 +30,7 @@
     "vitepress": "^1.6.3"
   },
   "dependencies": {
+    "autk-compute": "^1.0.0",
     "autk-db": "^1.0.4",
     "autk-map": "latest",
     "autk-plot": "^0.0.0"
