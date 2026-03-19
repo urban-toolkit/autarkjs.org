@@ -34,7 +34,9 @@
           <div class="gallery-content">
             <h3 class="gallery-title">{{ example.title }}</h3>
             <p class="gallery-description">{{ example.description }}</p>
-            <span class="gallery-open">Open Example →</span>
+            <span class="gallery-open">
+              {{ example.title === 'Under Construction' ? 'Coming Soon' : 'Open Example →' }}
+            </span>
           </div>
         </a>
       </div>
@@ -47,89 +49,58 @@
 </template>
 
 <script setup lang="ts">
+
 const examples = [
   {
     href: '/examples/ex1',
     img: '/imgs/ex1.png',
-    title: 'Standalone GeoJSON Viewer',
-    description: 'Render GeoJSON layers directly in the browser with a minimal setup.',
-    tags: [{ label: 'autk-map', color: '#0ea5e9' }],
+    title: 'Boston Streets and EV Charging Stations',
+    description:
+      'Explore the Boston street network and electric vehicle charging stations in an interactive map.',
+    tags: [
+      { label: 'autk-db', color: '#f59e0b' },
+      { label: 'autk-map', color: '#0ea5e9' },
+    ],
   },
   {
     href: '/examples/ex2',
-    img: '/imgs/ex2.png',
-    title: 'Spatial Join in the Browser',
-    description: 'Combine spatial datasets in the browser and visualize the results instantly.',
-    tags: [
-      { label: 'autk-db', color: '#f59e0b' },
-      { label: 'autk-map', color: '#0ea5e9' },
-    ],
+    img: '/imgs/exTest.png',
+    title: 'Under Construction',
+    description: 'This example is currently under development.',
+    tags: [{ label: 'coming soon', color: '#6b7280' }],
   },
   {
     href: '/examples/ex3',
-    img: '/imgs/ex3.png',
-    title: '3D OSM City Explorer',
-    description: 'Load urban layers from OpenStreetMap and explore city scenes in 3D.',
-    tags: [
-      { label: 'autk-db', color: '#f59e0b' },
-      { label: 'autk-map', color: '#0ea5e9' },
-    ],
+    img: '/imgs/exTest.png',
+    title: 'Under Construction',
+    description: 'This example is currently under development.',
+    tags: [{ label: 'coming soon', color: '#6b7280' }],
   },
   {
     href: '/examples/ex4',
-    img: '/imgs/ex4.png',
-    title: 'GPU Property Compute',
-    description: 'Run GPU-accelerated computations on feature properties and map the results in real time.',
-    tags: [
-      { label: 'autk-compute', color: '#10b981' },
-      { label: 'autk-map', color: '#0ea5e9' },
-    ],
+    img: '/imgs/exTest.png',
+    title: 'Under Construction',
+    description: 'This example is currently under development.',
+    tags: [{ label: 'coming soon', color: '#6b7280' }],
   },
   {
     href: '/examples/ex5',
-    img: '/imgs/ex5.png',
-    title: 'Linked Views for Urban Analysis',
-    description: 'Link maps and charts to build coordinated urban visual analytics workflows.',
-    tags: [
-      { label: 'autk-plot', color: '#8b5cf6' },
-      { label: 'autk-map', color: '#0ea5e9' },
-      { label: 'autk-db', color: '#f59e0b' },
-    ],
+    img: '/imgs/exTest.png',
+    title: 'Under Construction',
+    description: 'This example is currently under development.',
+    tags: [{ label: 'coming soon', color: '#6b7280' }],
   },
   {
     href: '/examples/ex6',
-    img: '/imgs/ex5.png',
-    title: 'Network Accessibility Explorer',
-    description: 'Prototype example page reserved for future multi-layer urban accessibility analysis.',
-    tags: [
-      { label: 'autk-db', color: '#f59e0b' },
-      { label: 'autk-map', color: '#0ea5e9' },
-    ],
-  },
-  {
-    href: '/examples/ex7',
-    img: '/imgs/ex5.png',
-    title: 'Temporal Change Viewer',
-    description: 'Placeholder example for future time-aware urban comparison workflows.',
-    tags: [
-      { label: 'autk-map', color: '#0ea5e9' },
-      { label: 'autk-plot', color: '#8b5cf6' },
-    ],
-  },
-  {
-    href: '/examples/ex8',
-    img: '/imgs/ex5.png',
-    title: 'Scenario Comparison Dashboard',
-    description: 'Placeholder example for side-by-side scenario analysis and coordinated views.',
-    tags: [
-      { label: 'autk-db', color: '#f59e0b' },
-      { label: 'autk-compute', color: '#10b981' },
-      { label: 'autk-plot', color: '#8b5cf6' },
-    ],
+    img: '/imgs/exTest.png',
+    title: 'Under Construction',
+    description: 'This example is currently under development.',
+    tags: [{ label: 'coming soon', color: '#6b7280' }],
   },
 ]
 
 const featuredExamples = examples.slice(0, 6)
+
 </script>
 
 <style scoped>

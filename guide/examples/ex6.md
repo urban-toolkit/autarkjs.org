@@ -1,20 +1,25 @@
 ---
-title: Network Accessibility Explorer
+title: Under Construction
 aside: false
 outline: false
 ---
 
 <script setup>
-const ex6Code = `// Placeholder example
-// This page is reserved for a future Autark gallery example.`
+const codePreview = `function main() {
+  console.log('Example under construction');
+}
+
+main();`
 </script>
 
 <ExamplePage
-  title="Network Accessibility Explorer"
-  description="Prototype example page reserved for future multi-layer urban accessibility analysis."
-  objective="Reserve a structured slot in the gallery for a future example combining layered data access and map-based urban accessibility analysis."
+  title="Under Construction"
+  description="This example page is currently under development."
+  iframe-src="/examples/raw/ex6.html"
+  :tags="['coming soon']"
+  :code-preview="codePreview"
+  :code-full="codePreview"
   coming-soon
-  coming-soon-message="This example is currently a placeholder used to validate the gallery structure and navigation."
-  :tags="['autk-db', 'autk-map']"
-  :code="ex6Code"
+  coming-soon-message="This example is currently under development and will be published in a future update."
+  objective="Reserve a stable page in the gallery while this example is being designed and implemented."
 />

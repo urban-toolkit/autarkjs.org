@@ -1,56 +1,64 @@
 ---
-title: Standalone GeoJSON Viewer
+title: Boston Streets and EV Charging Stations
 aside: false
 outline: false
 ---
 
 <script setup>
-const ex1Code = `import { AutkMap } from 'autk-map';
+import codeFull from '../../examples/ex1.ts?raw'
 
+const codePreview = `
 async function main() {
-    const canvas = document.querySelector('canvas')!;
-    const statusEl = document.getElementById('loading-status');
-    const loadingText = document.getElementById('loading-text');
+  const db = new SpatialDb()
+  await db.init()
 
-    const setStatus = (msg: string) => {
-        if (loadingText) loadingText.textContent = msg;
-        if (statusEl) statusEl.style.display = 'flex';
-    };
+  await db.loadCustomLayer({
+    geojsonFileUrl: '/data/boston_streets.geojson',
+    outputTableName: 'boston_streets',
+    coordinateFormat: 'EPSG:3395',
+  })
 
-    const hideStatus = () => {
-        if (statusEl) statusEl.style.display = 'none';
-    };
+  await db.loadCustomLayer({
+    geojsonFileUrl: '/data/boston_charging_stations.geojson',
+    outputTableName: 'boston_charging_stations',
+    coordinateFormat: 'EPSG:3395',
+  })
 
-    try {
-        const map = new AutkMap(canvas);
-        await map.init();
+  const streets = await db.getLayer('boston_streets')
+  const stations = await db.getLayer('boston_charging_stations')
 
-        setStatus('Loading GeoJSON data...');
-        const geojson = await fetch('/data/mnt_neighs_proj.geojson').then(r => r.json());
+  const map = new AutkMap(canvas)
+  await map.init()
 
-        map.loadGeoJsonLayer('neighborhoods', geojson);
-        map.draw();
-        hideStatus();
-    } catch (err) {
-        const msg = err instanceof Error ? err.message : 'An unexpected error occurred';
-        if (loadingText) loadingText.textContent = \`Error: \${msg}\`;
-        if (statusEl) {
-            statusEl.style.background = 'rgba(254,242,242,0.95)';
-            const spinner = statusEl.querySelector('.autk-spinner');
-            if (spinner) spinner.style.display = 'none';
-        }
-        console.error(err);
-    }
+  map.loadGeoJsonLayer('boston_streets', streets, LayerType.AUTK_GEO_POLYLINES)
+  map.loadGeoJsonLayer('boston_charging_stations', stations, LayerType.AUTK_GEO_POINTS)
+
+  map.draw()
 }
 
-main();`
+main()
+`.trim()
+
+const objective = `
+This first version of the Boston example focuses on a stable visual baseline: loading and displaying two real datasets in the same live map.
+
+Datasets:
+- OpenStreetMap street network for Boston
+- Electric vehicle charging stations from Boston open data
+
+How to explore:
+- Use the built-in layer controls inside the map
+- Inspect how both datasets are rendered together
+- Use this example as the foundation for the next iteration, where spatial filtering and analysis will be added
+`.trim()
 </script>
 
 <ExamplePage
-  title="Standalone GeoJSON Viewer"
-  description="Render GeoJSON layers directly in the browser with a minimal setup. This example shows how to initialize autk-map, load a GeoJSON dataset, and render it directly on a canvas-based map."
-  objective="Show the simplest possible Autark workflow: open a preprocessed GeoJSON file and visualize it on the map. This is the hello world example of Autark."
+  title="Boston Streets and EV Charging Stations"
+  description="A stable baseline example that visualizes the Boston street network together with electric vehicle charging stations in the same live map."
+  :tags="['autk-db', 'autk-map']"
   iframe-src="/examples/raw/ex1.html"
-  :tags="['autk-map']"
-  :code="ex1Code"
+  :code-preview="codePreview"
+  :code-full="codeFull"
+  :objective="objective"
 />
