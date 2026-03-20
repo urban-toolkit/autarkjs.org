@@ -52,7 +52,7 @@ await db.loadOsmFromOverpassApi({
 });
 ```
 
-Possible phases: `querying-osm-server`, `downloading-osm-data`, `processing-osm-data`, and more.
+Possible phases: `querying-osm-server`, `downloading-osm-data`, `querying-osm-boundaries`, `downloading-boundaries`, `processing-osm-data`, `processing-boundaries`.
 
 ### Manual Layer Extraction
 
@@ -77,11 +77,21 @@ await db.loadLayer({
 
 ## External GeoJSON
 
-`loadCustomLayer` loads a GeoJSON file from a URL and stores it as a layer table:
+`loadCustomLayer` loads a GeoJSON `FeatureCollection` from a URL (or in-memory object) and stores it as a layer table:
 
 ```typescript
 await db.loadCustomLayer({
   geojsonFileUrl: '/data/neighborhoods.geojson',
+  outputTableName: 'neighborhoods',
+  coordinateFormat: 'EPSG:3395',
+});
+```
+
+You can also pass an in-memory `FeatureCollection` directly:
+
+```typescript
+await db.loadCustomLayer({
+  geojsonObject: myFeatureCollection,
   outputTableName: 'neighborhoods',
   coordinateFormat: 'EPSG:3395',
 });
@@ -98,7 +108,46 @@ await db.loadCsv({
 });
 ```
 
-The CSV is loaded as a plain table (no geometry). You can join it with a layer table afterwards using [spatialJoin](./querying#spatial-join) or [rawQuery](./querying#raw-sql).
+The CSV is loaded as a plain table (no geometry) by default. You can join it with a layer table afterwards using [spatialJoin](./querying#spatial-join) or [rawQuery](./querying#raw-sql).
+
+### Options
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `fileUrl` | `string` | — | URL of the CSV file to load. Mutually exclusive with `csvObject`. |
+| `csvObject` | `unknown[][]` | — | In-memory 2D array to load instead of a file. |
+| `outputTableName` | `string` | — | Name for the resulting table. |
+| `delimiter` | `string` | `','` | Column delimiter character. Use `'\t'` for TSV files. |
+| `geometryColumns` | `object` | — | See below. |
+
+### Geospatial columns
+
+If your CSV has latitude and longitude columns, pass `geometryColumns` to create a spatial geometry column:
+
+```typescript
+await db.loadCsv({
+  fileUrl: '/data/incidents.csv',
+  outputTableName: 'incidents',
+  geometryColumns: {
+    latColumnName: 'lat',
+    longColumnName: 'lon',
+    coordinateFormat: 'EPSG:3395', // defaults to EPSG:4326
+  },
+});
+```
+
+This creates a `geoPoint` geometry column (via `ST_Transform`) and a spatial RTREE index automatically. The table can then be used directly in `spatialJoin` and `buildHeatmap`.
+
+### In-memory loading
+
+```typescript
+const rows = [['id', 'name'], ['1', 'Alice'], ['2', 'Bob']];
+
+await db.loadCsv({
+  csvObject: rows,
+  outputTableName: 'people',
+});
+```
 
 ## JSON
 
@@ -109,6 +158,26 @@ await db.loadJson({
 });
 ```
 
+### Options
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `fileUrl` | `string` | — | URL of the JSON file to load. Mutually exclusive with `jsonObject`. |
+| `jsonObject` | `unknown[]` | — | In-memory array of objects to load instead of a file. |
+| `outputTableName` | `string` | — | Name for the resulting table. |
+| `geometryColumns` | `object` | — | Same as CSV — see [Geospatial columns](#geospatial-columns) above. |
+
+### In-memory loading
+
+```typescript
+const records = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];
+
+await db.loadJson({
+  jsonObject: records,
+  outputTableName: 'people',
+});
+```
+
 ## Grid Layer
 
 A grid layer creates a regular rectangular grid over a bounding box. Useful as the base for heatmaps or spatial aggregations.
@@ -116,7 +185,8 @@ A grid layer creates a regular rectangular grid over a bounding box. Useful as t
 ```typescript
 await db.loadGridLayer({
   outputTableName: 'grid',
-  cellSize: 500, // cell size in the coordinate format's units
+  rows: 20,
+  columns: 20,
 });
 ```
 
