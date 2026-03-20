@@ -10,7 +10,8 @@
     "dev": "vitepress dev guide",
     "build": "vitepress build guide",
     "preview": "vitepress preview guide",
-    "examples:build": "tsc && vite build && cp -r examples/dist guide/public/examples/dist"
+    "examples:build": "tsc && vite build && mkdir -p guide/public/examples/dist && mkdir -p guide/public/examples/assets && cp -R dist-temp/examples/* guide/public/examples/dist/ && cp -R dist-temp/assets/* guide/public/examples/assets/",
+    "casestudies:build": "tsc && vite build && mkdir -p guide/public/casestudies/urbane && mkdir -p guide/public/casestudies/boston && mkdir -p guide/public/casestudies && rm -rf guide/public/assets && cp dist-temp/casestudies/urbane/main.html guide/public/casestudies/urbane/main.html && cp dist-temp/casestudies/boston/main.html guide/public/casestudies/boston/main.html && cp dist-temp/casestudies/urbane.js guide/public/casestudies/urbane.js && cp dist-temp/casestudies/boston.js guide/public/casestudies/boston.js && cp -R dist-temp/assets guide/public/assets"
   },
   "repository": {
     "type": "git",

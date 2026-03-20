@@ -142,6 +142,22 @@ guide/public/examples/dist/
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
+# temporary vite build output for examples/case studies
+dist-temp/
+
+# temporary vite build output
+dist-temp/
+
+# compiled case studies (rebuilt by build scripts)
+guide/public/casestudies/
+guide/public/casestudies/*.js
+
+# optional generated assets for case studies if rebuilt locally
+guide/public/assets/urbane-*.css
+guide/public/assets/boston-*.css
+guide/public/assets/autk-*.js
+guide/public/assets/modulepreload-polyfill-*.js
+
 # MacOS files
 .DS_Store
 .AppleDouble

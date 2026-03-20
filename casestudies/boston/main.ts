@@ -1,5 +1,5 @@
-import { AutkMap, LayerType } from 'autk-map'
 import { SpatialDb } from 'autk-db'
+import { AutkMap, LayerType } from 'autk-map'
 
 async function main() {
   const canvas = document.querySelector('canvas') as HTMLCanvasElement | null
@@ -24,30 +24,38 @@ async function main() {
     const db = new SpatialDb()
     await db.init()
 
-    setStatus('Loading OpenStreetMap layers...')
-    await db.loadOsmFromOverpassApi({
-      queryArea: {
-        geocodeArea: 'New York',
-        areas: ['Manhattan Island'],
-      },
-      outputTableName: 'table_osm',
-      autoLoadLayers: {
-        coordinateFormat: 'EPSG:3395',
-        layers: ['surface', 'parks', 'water', 'roads', 'buildings'] as Array<
-          'surface' | 'parks' | 'water' | 'roads' | 'buildings'
-        >,
-        dropOsmTable: true,
-      },
+    setStatus('Loading Boston street network...')
+    await db.loadCustomLayer({
+      geojsonFileUrl: '/casestudies/data/boston_streets.geojson',
+      outputTableName: 'boston_streets',
+      coordinateFormat: 'EPSG:3395',
     })
 
-    setStatus('Rendering 3D city layers...')
+    setStatus('Loading Boston charging stations...')
+    await db.loadCustomLayer({
+      geojsonFileUrl: '/casestudies/data/boston_charging_stations.geojson',
+      outputTableName: 'boston_charging_stations',
+      coordinateFormat: 'EPSG:3395',
+    })
+
+    setStatus('Preparing map...')
+    const streets = await db.getLayer('boston_streets')
+    const stations = await db.getLayer('boston_charging_stations')
+
     const map = new AutkMap(canvas)
     await map.init()
 
-    for (const layerData of db.getLayerTables()) {
-      const geojson = await db.getLayer(layerData.name)
-      map.loadGeoJsonLayer(layerData.name, geojson, layerData.type as LayerType)
-    }
+    map.loadGeoJsonLayer(
+      'boston_streets',
+      streets,
+      LayerType.AUTK_GEO_POLYLINES
+    )
+
+    map.loadGeoJsonLayer(
+      'boston_charging_stations',
+      stations,
+      LayerType.AUTK_GEO_POINTS
+    )
 
     map.draw()
     hideStatus()

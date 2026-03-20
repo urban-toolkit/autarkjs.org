@@ -20,15 +20,22 @@ export default defineConfig({
         { text: 'autk-plot', link: '/docs/autark-plot.html', target: '_blank' },
       ]},
       {
+        text: 'Case Studies',
+        items: [
+          { text: 'All Case Studies', link: '/casestudies/' },
+          { text: 'Urbane - 3D NYC Neighborhood Explorer', link: '/casestudies/case1' },
+          { text: 'Boston - Streets and EV Charging Stations', link: '/casestudies/case2' },
+        ],
+      },
+      {
         text: 'Gallery',
         items: [
           { text: 'All Examples', link: '/examples/' },
-          { text: 'Boston Streets and EV Charging Stations', link: '/examples/ex1' },
-          { text: 'Under Construction', link: '/examples/ex2' },
-          { text: 'Under Construction', link: '/examples/ex3' },
+          { text: 'Manhattan Neighborhood GeoJSON Viewer', link: '/examples/ex1' },
+          { text: 'USpatial Join in the Browser', link: '/examples/ex2' },
+          { text: '3D Manhattan from OpenStreetMap', link: '/examples/ex3' },
           { text: 'Under Construction', link: '/examples/ex4' },
-          { text: 'Under Construction', link: '/examples/ex5' },
-          { text: 'Under Construction', link: '/examples/ex6' },
+          { text: 'Linked Views: Map + Chart', link: '/examples/ex5' },
         ],
       },
       { text: 'GitHub', link: 'https://github.com/urban-toolkit/autark/' },
@@ -85,16 +92,24 @@ export default defineConfig({
         ],
       },
       {
+        text: 'Case Studies',
+        collapsed: false,
+        items: [
+          { text: 'All Case Studies', link: '/casestudies/' },
+          { text: 'Urbane - 3D NYC Neighborhood Explorer', link: '/casestudies/case1' },
+          { text: 'Boston - Streets and EV Charging Stations', link: '/casestudies/case2' },
+        ]
+      },
+      {
         text: 'Examples',
         collapsed: false,
         items: [
           { text: 'All Examples', link: '/examples/' },
-          { text: 'Boston Streets and EV Charging Stations', link: '/examples/ex1' },
-          { text: 'Under Construction', link: '/examples/ex2' },
-          { text: 'Under Construction', link: '/examples/ex3' },
+          { text: 'Manhattan Neighborhood GeoJSON Viewer', link: '/examples/ex1' },
+          { text: 'Spatial Join in the Browser', link: '/examples/ex2' },
+          { text: '3D Manhattan from OpenStreetMap', link: '/examples/ex3' },
           { text: 'Under Construction', link: '/examples/ex4' },
-          { text: 'Under Construction', link: '/examples/ex5' },
-          { text: 'Under Construction', link: '/examples/ex6' },
+          { text: 'Linked Views: Map + Chart', link: '/examples/ex5' },
         ]
       },
       {
