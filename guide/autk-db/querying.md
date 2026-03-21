@@ -33,7 +33,9 @@ await db.spatialJoin({
 | `spatialPredicate` | `'INTERSECT'`, `'NEAR'` | How features are matched |
 | `joinType` | `'INNER'`, `'LEFT'`, `'RIGHT'`, `'FULL'` | SQL join type |
 | `output.type` | `'MODIFY_ROOT'`, `'CREATE_NEW'` | Modify the root table in-place or create a new table |
+| `output.tableName` | string | Required when `output.type` is `'CREATE_NEW'`. Name for the new table |
 | `nearDistance` | number | Distance threshold when using `'NEAR'`, in **meters** (assumes `EPSG:3395` projection) |
+| `nearUseCentroid` | `true` / `false` | When using `'NEAR'`, measures centroid-to-centroid distance instead of geometry-to-geometry. Automatically set to `true` when the root table contains polygons |
 
 For proximity-based joins, use `'NEAR'` with a `nearDistance` in meters:
 
@@ -51,6 +53,99 @@ await db.spatialJoin({
 :::warning Units depend on projection
 `nearDistance` uses `ST_Distance` internally, which operates in the native units of your geometries. When using `EPSG:3395` (the standard for `autk-db`), the unit is **meters**. If you use a different projection, units will differ.
 :::
+
+### groupBy columns
+
+When using `groupBy`, each entry in `selectColumns` supports the following fields:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `tableName` | `string` | Which table to select the column from |
+| `column` | `string` | Column name to aggregate |
+| `aggregateFn` | `'sum'` \| `'avg'` \| `'count'` \| `'min'` \| `'max'` \| `'weighted'` | Aggregate function to apply |
+| `aggregateFnResultColumnName` | `string` (optional) | Custom key name in the output JSON. Defaults to the table name (for `count`/`weighted`) or `tableName.column` (for others) |
+| `normalize` | `boolean` (optional) | If `true`, adds a min-max normalized version of the column (0–1 range) as `<resultColumnName>_norm` |
+
+The `weighted` aggregate computes an **inverse-distance weighted score**: `SUM(1.0 / distance)`. Features that are closer to the root feature contribute more to the score. It is most useful in combination with `'NEAR'`:
+
+```typescript
+await db.spatialJoin({
+  tableRootName: 'buildings',
+  tableJoinName: 'bus_stops',
+  output: { type: 'MODIFY_ROOT' },
+  spatialPredicate: 'NEAR',
+  nearDistance: 500,
+  joinType: 'LEFT',
+  groupBy: {
+    selectColumns: [
+      {
+        tableName: 'bus_stops',
+        column: 'id',
+        aggregateFn: 'weighted',
+        aggregateFnResultColumnName: 'bus_accessibility',
+        normalize: true, // also adds bus_accessibility_norm (0–1)
+      },
+    ],
+  },
+});
+```
+
+### Output structure
+
+All `spatialJoin` results are written into the **`properties`** column of the root table, nested under a `sjoin` key.
+
+**Without `groupBy`** (simple join — no aggregation):
+
+The join table's properties are merged flat into `properties.sjoin`. Note that this produces **multiple rows per root feature** — one for each matched join feature.
+
+```json
+{
+  "properties": {
+    "sjoin": { "name": "Bus Stop A", "line": "42" }
+  }
+}
+```
+
+**With `groupBy`** (aggregated join):
+
+Results are nested by aggregate function name. Root features are **deduplicated** — one row per feature.
+
+```json
+{
+  "properties": {
+    "sjoin": {
+      "count": { "incident_count": 7 },
+      "sum":   { "incidents.severity": 23.5 },
+      "weighted": { "bus_accessibility": 0.034 }
+    }
+  }
+}
+```
+
+When `normalize: true` is set on a column, an additional key is added with a `_norm` suffix:
+
+```json
+{
+  "properties": {
+    "sjoin": {
+      "count": {
+        "incident_count": 7,
+        "incident_count_norm": 0.63
+      }
+    }
+  }
+}
+```
+
+To access these values after retrieving a layer, use standard property access:
+
+```typescript
+const geojson = await db.getLayer('buildings');
+geojson.features.forEach((f) => {
+  const count = f.properties?.sjoin?.count?.incident_count;
+  const norm  = f.properties?.sjoin?.count?.incident_count_norm;
+});
+```
 
 ## Build Heatmap
 
