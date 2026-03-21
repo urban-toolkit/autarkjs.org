@@ -22,7 +22,8 @@ The main documentation site built with [VitePress](https://vitepress.dev/). Cont
 Key locations:
 - `guide/index.md` — Home page (includes the gallery via `<HomeGallery />` Vue component)
 - `guide/introduction.md` — Getting started
-- `guide/autk-db/`, `guide/autk-map/`, `guide/autk-compute/`, `guide/autk-plot/` — Per-package docs
+- `guide/autk-db/`, `guide/autk-map/`, `guide/autk-compute/`, `guide/autk-plot/` — Per-package narrative docs
+- `guide/api/autk-db/`, `guide/api/autk-map/`, `guide/api/autk-compute/`, `guide/api/autk-plot/` — API Reference (TypeDoc-generated markdown)
 - `guide/.vitepress/config.ts` — VitePress config (nav, sidebar, theme)
 - `guide/.vitepress/theme/` — Custom theme with Vue components
 
@@ -33,7 +34,6 @@ Standalone pages **not processed by VitePress** — served as static files. Thes
 - `guide/public/examples/` — Gallery example pages (`ex1.html`, `ex2.html`, `ex3.html`, ...)
   - Each example has a two-panel layout: interactive canvas on the left, source code on the right
   - JS is loaded via `<script type="module" src="dist/exN.js">` (compiled by Vite separately)
-- `guide/public/docs/` — Generated API reference HTML (TypeDoc/Rust docs for each package)
 - `guide/public/imgs/` — Gallery screenshots and logos
 - `guide/public/styles.css` — Shared CSS used by all example pages
 

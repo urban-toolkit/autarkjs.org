@@ -94,4 +94,4 @@ map.loadGeoJsonLayer('buildings', geojson);         // JS memory → GPU
 
 ---
 
-[API Reference →](/docs/autark-db.html)
+[API Reference →](/api/autk-db/globals)

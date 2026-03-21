@@ -46,4 +46,4 @@ map.draw(); // starts continuous rendering at 60fps
 
 ---
 
-[API Reference →](/docs/autark-map.html)
+[API Reference →](/api/autk-map/globals)

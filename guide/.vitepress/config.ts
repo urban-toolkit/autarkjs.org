@@ -16,10 +16,10 @@ export default defineConfig({
       {
         text: 'API Reference',
         items: [
-          { text: 'autk-map', link: '/docs/autark-map.html', target: '_blank' },
-          { text: 'autk-db', link: '/docs/autark-db.html', target: '_blank' },
-          { text: 'autk-compute', link: '/docs/autark-compute.html', target: '_blank' },
-          { text: 'autk-plot', link: '/docs/autark-plot.html', target: '_blank' },
+          { text: 'autk-map', link: '/api/autk-map/globals' },
+          { text: 'autk-db', link: '/api/autk-db/globals' },
+          { text: 'autk-compute', link: '/api/autk-compute/globals' },
+          { text: 'autk-plot', link: '/api/autk-plot/globals' },
         ],
       },
       {
@@ -47,6 +47,107 @@ export default defineConfig({
     sidebar: {
       // remove sidebar apenas nos live case studies
       '/casestudies/live/': [],
+
+      '/api/autk-db/': [{
+        text: 'autk-db API Reference',
+        items: [
+          { text: 'All Exports', link: '/api/autk-db/globals' },
+          { text: 'Classes', items: [
+            { text: 'SpatialDb', link: '/api/autk-db/classes/SpatialDb' },
+          ]},
+          { text: 'Interfaces', collapsed: true, items: [
+            { text: 'Layer', link: '/api/autk-db/interfaces/Layer' },
+            { text: 'GetTableDataParams', link: '/api/autk-db/interfaces/GetTableDataParams' },
+          ]},
+          { text: 'Type Aliases', collapsed: true, items: [
+            { text: 'GetTableDataOutput', link: '/api/autk-db/type-aliases/GetTableDataOutput' },
+            { text: 'LoadingPhase', link: '/api/autk-db/type-aliases/LoadingPhase' },
+            { text: 'OnLoadingProgress', link: '/api/autk-db/type-aliases/OnLoadingProgress' },
+          ]},
+        ],
+      }],
+
+      '/api/autk-map/': [{
+        text: 'autk-map API Reference',
+        items: [
+          { text: 'All Exports', link: '/api/autk-map/globals' },
+          { text: 'Classes', collapsed: false, items: [
+            { text: 'AutkMap', link: '/api/autk-map/classes/AutkMap' },
+            { text: 'AutkMapUi', link: '/api/autk-map/classes/AutkMapUi' },
+            { text: 'Camera', link: '/api/autk-map/classes/Camera' },
+            { text: 'ColorMap', link: '/api/autk-map/classes/ColorMap' },
+            { text: 'KeyEvents', link: '/api/autk-map/classes/KeyEvents' },
+            { text: 'Layer', link: '/api/autk-map/classes/Layer' },
+            { text: 'LayerBbox', link: '/api/autk-map/classes/LayerBbox' },
+            { text: 'LayerManager', link: '/api/autk-map/classes/LayerManager' },
+            { text: 'MapEvents', link: '/api/autk-map/classes/MapEvents' },
+            { text: 'MapStyle', link: '/api/autk-map/classes/MapStyle' },
+            { text: 'MouseEvents', link: '/api/autk-map/classes/MouseEvents' },
+            { text: 'Pipeline', link: '/api/autk-map/classes/Pipeline' },
+            { text: 'PipelineBuildingSSAO', link: '/api/autk-map/classes/PipelineBuildingSSAO' },
+            { text: 'PipelineTriangleBorder', link: '/api/autk-map/classes/PipelineTriangleBorder' },
+            { text: 'PipelineTriangleFlat', link: '/api/autk-map/classes/PipelineTriangleFlat' },
+            { text: 'PipelineTrianglePicking', link: '/api/autk-map/classes/PipelineTrianglePicking' },
+            { text: 'PipelineTriangleRaster', link: '/api/autk-map/classes/PipelineTriangleRaster' },
+            { text: 'RasterLayer', link: '/api/autk-map/classes/RasterLayer' },
+            { text: 'Renderer', link: '/api/autk-map/classes/Renderer' },
+            { text: 'Triangles2DLayer', link: '/api/autk-map/classes/Triangles2DLayer' },
+            { text: 'Triangles3DLayer', link: '/api/autk-map/classes/Triangles3DLayer' },
+            { text: 'TriangulatorBuildings', link: '/api/autk-map/classes/TriangulatorBuildings' },
+            { text: 'TriangulatorPoints', link: '/api/autk-map/classes/TriangulatorPoints' },
+            { text: 'TriangulatorPolygons', link: '/api/autk-map/classes/TriangulatorPolygons' },
+            { text: 'TriangulatorPolylines', link: '/api/autk-map/classes/TriangulatorPolylines' },
+            { text: 'TriangulatorRaster', link: '/api/autk-map/classes/TriangulatorRaster' },
+            { text: 'VectorLayer', link: '/api/autk-map/classes/VectorLayer' },
+          ]},
+          { text: 'Enumerations', collapsed: true, items: [
+            { text: 'ColorMapInterpolator', link: '/api/autk-map/enumerations/ColorMapInterpolator' },
+            { text: 'LayerType', link: '/api/autk-map/enumerations/LayerType' },
+            { text: 'MapEvent', link: '/api/autk-map/enumerations/MapEvent' },
+            { text: 'MouseStatus', link: '/api/autk-map/enumerations/MouseStatus' },
+            { text: 'ThematicAggregationLevel', link: '/api/autk-map/enumerations/ThematicAggregationLevel' },
+          ]},
+          { text: 'Interfaces', collapsed: true, items: [
+            { text: 'ICameraData', link: '/api/autk-map/interfaces/ICameraData' },
+            { text: 'ILayerBorder', link: '/api/autk-map/interfaces/ILayerBorder' },
+            { text: 'ILayerBorderComponent', link: '/api/autk-map/interfaces/ILayerBorderComponent' },
+            { text: 'ILayerComponent', link: '/api/autk-map/interfaces/ILayerComponent' },
+            { text: 'ILayerData', link: '/api/autk-map/interfaces/ILayerData' },
+            { text: 'ILayerGeometry', link: '/api/autk-map/interfaces/ILayerGeometry' },
+            { text: 'ILayerInfo', link: '/api/autk-map/interfaces/ILayerInfo' },
+            { text: 'ILayerRenderInfo', link: '/api/autk-map/interfaces/ILayerRenderInfo' },
+            { text: 'ILayerThematic', link: '/api/autk-map/interfaces/ILayerThematic' },
+            { text: 'IMapStyle', link: '/api/autk-map/interfaces/IMapStyle' },
+            { text: 'IRasterData', link: '/api/autk-map/interfaces/IRasterData' },
+          ]},
+          { text: 'Type Aliases', collapsed: true, items: [
+            { text: 'ColorHEX', link: '/api/autk-map/type-aliases/ColorHEX' },
+            { text: 'ColorRGB', link: '/api/autk-map/type-aliases/ColorRGB' },
+            { text: 'ColorTEX', link: '/api/autk-map/type-aliases/ColorTEX' },
+            { text: 'MapEventListener', link: '/api/autk-map/type-aliases/MapEventListener' },
+          ]},
+        ],
+      }],
+
+      '/api/autk-plot/': [{
+        text: 'autk-plot API Reference',
+        items: [
+          { text: 'All Exports', link: '/api/autk-plot/globals' },
+          { text: 'Classes', items: [
+            { text: 'AutkPlot', link: '/api/autk-plot/classes/AutkPlot' },
+          ]},
+        ],
+      }],
+
+      '/api/autk-compute/': [{
+        text: 'autk-compute API Reference',
+        items: [
+          { text: 'All Exports', link: '/api/autk-compute/globals' },
+          { text: 'Classes', items: [
+            { text: 'GeojsonCompute', link: '/api/autk-compute/classes/GeojsonCompute' },
+          ]},
+        ],
+      }],
 
       // resto continua normal
       '/': [
