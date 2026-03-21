@@ -1,4 +1,4 @@
-[**autk-db**](../README.md)
+[**autk-db**](../globals.md)
 
 ***
 

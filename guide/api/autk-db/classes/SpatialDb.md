@@ -1,4 +1,4 @@
-[**autk-db**](../README.md)
+[**autk-db**](../globals.md)
 
 ***
 
@@ -563,7 +563,7 @@ For non-layer tables (CSV, JSON), the input data should be an array of objects.
 
 Parameters for updating the table:
   - tableName: The name of the table to update
-  - data: The new data (FeatureCollection for layers, Record<string, unknown>[] for CSV/JSON)
+  - data: The new data (FeatureCollection for layers, `Record<string, unknown>[]` for CSV/JSON)
   - strategy: 'replace' (drop and recreate) or 'update' (update existing records by ID)
   - idColumn: Required for 'update' strategy. Supports 'id' or 'properties.attribute_name' format
 

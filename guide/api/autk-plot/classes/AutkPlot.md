@@ -1,4 +1,4 @@
-[**autk-plot**](../README.md)
+[**autk-plot**](../globals.md)
 
 ***
 

@@ -1,4 +1,4 @@
-[**autk-map**](../README.md)
+[**autk-map**](../globals.md)
 
 ***
 

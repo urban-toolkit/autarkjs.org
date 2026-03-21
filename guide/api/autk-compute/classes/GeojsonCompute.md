@@ -1,4 +1,4 @@
-[**autk-compute**](../README.md)
+[**autk-compute**](../globals.md)
 
 ***
 
@@ -42,4 +42,4 @@ Parameters for the computation
 
 `Promise`\<`FeatureCollection`\<`Geometry`, `GeoJsonProperties`\>\>
 
-Promise<FeatureCollection> - New FeatureCollection with computed values
+`Promise<FeatureCollection>` - New FeatureCollection with computed values
