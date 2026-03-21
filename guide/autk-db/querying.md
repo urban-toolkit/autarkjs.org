@@ -149,18 +149,39 @@ geojson.features.forEach((f) => {
 
 ## Build Heatmap
 
-`buildHeatmap` aggregates point data into a grid and returns a raster-compatible table:
+`buildHeatmap` creates a grid over the bounding box and aggregates values from a source table into each grid cell using a proximity-based spatial join (`NEAR`). The result is a grid layer table suitable for raster rendering.
 
 ```typescript
 await db.buildHeatmap({
-  sourceTableName: 'incidents',
+  tableJoinName: 'incidents',
   outputTableName: 'heatmap',
-  cellSize: 300,
-  aggregation: { column: 'severity', fn: 'sum' },
+  nearDistance: 300,
+  grid: { rows: 20, columns: 20 },
+  groupBy: {
+    selectColumns: [
+      {
+        tableName: 'incidents',
+        column: 'severity',
+        aggregateFn: 'sum',
+        aggregateFnResultColumnName: 'total_severity',
+      },
+    ],
+  },
 });
 ```
 
-The resulting table can be passed to `autk-map` as a raster layer.
+**Key parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `tableJoinName` | `string` | Source table to aggregate (must have geometry). |
+| `outputTableName` | `string` | Name for the resulting grid table. |
+| `nearDistance` | `number` | Distance threshold in **meters** (assumes `EPSG:3395`). Each grid cell captures features within this radius. |
+| `grid.rows` | `number` | Number of rows in the grid. |
+| `grid.columns` | `number` | Number of columns in the grid. |
+| `groupBy` | `object` | Optional. Aggregation config — same `selectColumns` format as [spatialJoin](#groupby-columns). Supports `'sum'`, `'avg'`, `'count'`, `'min'`, `'max'`. |
+
+If OSM data is loaded, the grid extent defaults to the OSM bounding box. The resulting table can be passed to `autk-map` as a raster layer.
 
 ## Raw SQL {#raw-sql}
 
@@ -170,7 +191,7 @@ The resulting table can be passed to `autk-map` as a raster layer.
 // Return data as plain objects
 const result = await db.rawQuery({
   query: `SELECT name, area FROM neighborhoods WHERE area > 1000`,
-  output: { type: 'RETURN_DATA' },
+  output: { type: 'RETURN_OBJECT' },
 });
 
 // Or create a new table from the query result
@@ -180,9 +201,23 @@ await db.rawQuery({
     SELECT building_id, COUNT(*) AS floor_count
     FROM buildings GROUP BY building_id
   `,
-  output: { type: 'CREATE_TABLE', tableName: 'summary' },
+  output: {
+    type: 'CREATE_TABLE',
+    tableName: 'summary',
+    source: 'user',            // metadata: table source
+    tableType: 'pointset',     // metadata: table type
+  },
 });
 ```
+
+**Output options:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `type` | `'CREATE_TABLE'` \| `'RETURN_OBJECT'` | `CREATE_TABLE` registers the result as a named table; `RETURN_OBJECT` returns rows as plain objects. |
+| `tableName` | `string` | Required when `type` is `'CREATE_TABLE'`. Name for the new table. |
+| `source` | `'csv'` \| `'osm'` \| `'geojson'` \| `'user'` | Optional. Sets the table's source metadata when creating a table. |
+| `tableType` | `LayerType` \| `'pointset'` | Optional. Sets the table's type metadata (e.g. `'polygons'`, `'pointset'`). |
 
 :::tip DuckDB spatial functions
 DuckDB's spatial extension is loaded automatically. You can use functions like `ST_Intersects`, `ST_Area`, `ST_Distance` directly in raw queries.

@@ -18,8 +18,8 @@ The returned `FeatureCollection` includes a `bbox` property. If OSM data is load
 `getTableData` returns the rows of any table as plain JavaScript objects. It works with layer tables, CSV tables, and JSON tables alike:
 
 ```typescript
-const result = await db.getTableData({ tableName: 'incidents' });
-// result.data: Array<Record<string, unknown>>
+const rows = await db.getTableData({ tableName: 'incidents' });
+// rows: Array<Record<string, unknown>>
 ```
 
 Use pagination for large tables:
@@ -61,3 +61,13 @@ for (const layer of layers) {
   map.loadGeoJsonLayer(layer.name, geojson, layer.type as LayerType);
 }
 ```
+
+## Remove a Table
+
+`removeLayer` drops a table from DuckDB and removes it from the current workspace:
+
+```typescript
+await db.removeLayer('incidents');
+```
+
+After removal, the table will no longer appear in `db.tables` or `db.getLayerTables()`.

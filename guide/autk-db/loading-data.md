@@ -54,6 +54,19 @@ await db.loadOsmFromOverpassApi({
 
 Possible phases: `querying-osm-server`, `downloading-osm-data`, `querying-osm-boundaries`, `downloading-boundaries`, `processing-osm-data`, `processing-boundaries`.
 
+### Options
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `outputTableName` | `string` | — | Base name for the resulting tables. |
+| `queryArea.geocodeArea` | `string` | — | City or region name for the Overpass geocode query. |
+| `queryArea.areas` | `string[]` | — | Sub-areas (neighborhoods, districts) within the geocoded area. |
+| `autoLoadLayers` | `object` | — | If set, automatically extracts layers from the raw OSM data. See below. |
+| `autoLoadLayers.coordinateFormat` | `string` | — | Target projection for the extracted layers (e.g. `'EPSG:3395'`). |
+| `autoLoadLayers.layers` | `LayerType[]` | — | Layers to extract: `'surface'`, `'water'`, `'parks'`, `'roads'`, `'buildings'`. |
+| `autoLoadLayers.dropOsmTable` | `boolean` | — | If `true`, removes the raw OSM table after layer extraction. |
+| `onProgress` | `(phase: LoadingPhase) => void` | — | Callback fired at each loading phase. |
+
 ### Manual Layer Extraction
 
 If you loaded OSM data without `autoLoadLayers`, call `loadLayer` to extract individual layers. You can also provide a custom `outputTableName` to override the default naming:
@@ -74,6 +87,25 @@ await db.loadLayer({
   outputTableName: 'my_buildings',
 });
 ```
+
+You can also pass a `boundingBox` to crop the extracted layer to a specific area:
+
+```typescript
+await db.loadLayer({
+  osmInputTableName: 'osm',
+  layer: 'roads',
+  coordinateFormat: 'EPSG:3395',
+  boundingBox: { minLon: -74.01, minLat: 40.70, maxLon: -74.00, maxLat: 40.71 },
+});
+```
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `osmInputTableName` | `string` | — | Name of the OSM table to extract from. |
+| `layer` | `LayerType` | — | Layer to extract: `'surface'`, `'water'`, `'parks'`, `'roads'`, `'buildings'`, `'points'`, `'polygons'`, `'polylines'`, or `'raster'`. |
+| `coordinateFormat` | `string` | — | Target projection (e.g. `'EPSG:3395'`). |
+| `outputTableName` | `string` | `{osmInputTableName}_{layer}` | Custom name for the resulting table. |
+| `boundingBox` | `BoundingBox` | — | Optional bounding box to crop the layer. |
 
 ## External GeoJSON
 
@@ -99,11 +131,20 @@ await db.loadCustomLayer({
 
 If OSM data was previously loaded in the same workspace, the bounding box of that OSM area is **automatically applied to crop the GeoJSON** — so only features within the OSM region are kept. This happens without any extra configuration.
 
+### Options
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `geojsonFileUrl` | `string` | — | URL of the GeoJSON file to load. Mutually exclusive with `geojsonObject`. |
+| `geojsonObject` | `FeatureCollection` | — | In-memory GeoJSON FeatureCollection. Mutually exclusive with `geojsonFileUrl`. |
+| `outputTableName` | `string` | — | Name for the resulting table. |
+| `coordinateFormat` | `string` | — | Target projection (e.g. `'EPSG:3395'`). Optional — omit to keep the original coordinates. |
+
 ## CSV
 
 ```typescript
 await db.loadCsv({
-  fileUrl: '/data/incidents.csv',
+  csvFileUrl: '/data/incidents.csv',
   outputTableName: 'incidents',
 });
 ```
@@ -114,7 +155,7 @@ The CSV is loaded as a plain table (no geometry) by default. You can join it wit
 
 | Option | Type | Default | Description |
 |---|---|---|---|
-| `fileUrl` | `string` | — | URL of the CSV file to load. Mutually exclusive with `csvObject`. |
+| `csvFileUrl` | `string` | — | URL of the CSV file to load. Mutually exclusive with `csvObject`. |
 | `csvObject` | `unknown[][]` | — | In-memory 2D array to load instead of a file. |
 | `outputTableName` | `string` | — | Name for the resulting table. |
 | `delimiter` | `string` | `','` | Column delimiter character. Use `'\t'` for TSV files. |
@@ -126,7 +167,7 @@ If your CSV has latitude and longitude columns, pass `geometryColumns` to create
 
 ```typescript
 await db.loadCsv({
-  fileUrl: '/data/incidents.csv',
+  csvFileUrl: '/data/incidents.csv',
   outputTableName: 'incidents',
   geometryColumns: {
     latColumnName: 'lat',
@@ -153,7 +194,7 @@ await db.loadCsv({
 
 ```typescript
 await db.loadJson({
-  fileUrl: '/data/metadata.json',
+  jsonFileUrl: '/data/metadata.json',
   outputTableName: 'metadata',
 });
 ```
@@ -162,7 +203,7 @@ await db.loadJson({
 
 | Option | Type | Default | Description |
 |---|---|---|---|
-| `fileUrl` | `string` | — | URL of the JSON file to load. Mutually exclusive with `jsonObject`. |
+| `jsonFileUrl` | `string` | — | URL of the JSON file to load. Mutually exclusive with `jsonObject`. |
 | `jsonObject` | `unknown[]` | — | In-memory array of objects to load instead of a file. |
 | `outputTableName` | `string` | — | Name for the resulting table. |
 | `geometryColumns` | `object` | — | Same as CSV — see [Geospatial columns](#geospatial-columns) above. |
@@ -190,4 +231,22 @@ await db.loadGridLayer({
 });
 ```
 
-If `boundingBox` is omitted and OSM data is loaded, the OSM bounding box is used automatically.
+If `boundingBox` is omitted and OSM data is loaded, the OSM bounding box is used automatically. You can also provide an explicit bounding box:
+
+```typescript
+await db.loadGridLayer({
+  outputTableName: 'grid',
+  rows: 20,
+  columns: 20,
+  boundingBox: { minLon: -74.01, minLat: 40.70, maxLon: -74.00, maxLat: 40.71 },
+});
+```
+
+### Options
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `outputTableName` | `string` | — | Name for the resulting table. |
+| `rows` | `number` | — | Number of rows in the grid. |
+| `columns` | `number` | — | Number of columns in the grid. |
+| `boundingBox` | `BoundingBox` | OSM bbox | Bounding box for the grid extent. Falls back to the OSM bounding box if omitted. |

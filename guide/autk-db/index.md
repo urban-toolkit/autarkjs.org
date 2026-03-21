@@ -33,7 +33,7 @@ Every `load*` call creates one or more **named tables** inside DuckDB-WASM. A ta
 
 ```typescript
 await db.loadCsv({
-  fileUrl: "/data/incidents.csv",
+  csvFileUrl: "/data/incidents.csv",
   outputTableName: "incidents",
 });
 
@@ -60,7 +60,7 @@ Think of them as `INSERT INTO` / `CREATE TABLE` statements: after they complete,
 
 ### Query & Analysis Operations
 
-`spatialJoin`, `buildHeatmap`, and `rawQuery` transform data that is already in DuckDB. Their outputs are saved as new or updated DuckDB tables — they also keep data inside the database (except `rawQuery` with `output: { type: 'RETURN_DATA' }`).
+`spatialJoin`, `buildHeatmap`, and `rawQuery` transform data that is already in DuckDB. Their outputs are saved as new or updated DuckDB tables — they also keep data inside the database (except `rawQuery` with `output: { type: 'RETURN_OBJECT' }`).
 
 ### Getters
 
@@ -69,7 +69,7 @@ Getters are the only way to move data from DuckDB into JavaScript memory:
 | Method                          | Returns                                      | Use for                                       |
 | ------------------------------- | -------------------------------------------- | --------------------------------------------- |
 | `getLayer(name)`                | `FeatureCollection`                          | Passing geometry to `autk-map` or `autk-plot` |
-| `getTableData({ tableName })`   | `{ data: object[] }`                         | Inspecting rows, feeding charts               |
+| `getTableData({ tableName })`   | `Record<string, unknown>[]`                  | Inspecting rows, feeding charts               |
 | `getLayerTables()`              | Layer table metadata array                   | Iterating all geometry layers                 |
 | `getOsmBoundingBox()`           | `[minLon, minLat, maxLon, maxLat]` \| `null` | Camera framing                                |
 | `getBoundingBoxFromLayer(name)` | Bounding box object                          | Bounds of any geometry layer                  |
