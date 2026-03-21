@@ -26,14 +26,14 @@ async function main() {
 
     setStatus('Loading Boston street network...')
     await db.loadCustomLayer({
-      geojsonFileUrl: '/casestudies/data/boston_streets.geojson',
+      geojsonFileUrl: '/data/boston_streets.geojson',
       outputTableName: 'boston_streets',
       coordinateFormat: 'EPSG:3395',
     })
 
     setStatus('Loading Boston charging stations...')
     await db.loadCustomLayer({
-      geojsonFileUrl: '/casestudies/data/boston_charging_stations.geojson',
+      geojsonFileUrl: '/data/boston_charging_stations.geojson',
       outputTableName: 'boston_charging_stations',
       coordinateFormat: 'EPSG:3395',
     })

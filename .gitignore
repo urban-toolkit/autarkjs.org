@@ -145,9 +145,6 @@ vite.config.ts.timestamp-*
 # temporary vite build output for examples/case studies
 dist-temp/
 
-# temporary vite build output
-dist-temp/
-
 # compiled case studies (rebuilt by build scripts)
 guide/public/casestudies/
 guide/public/casestudies/*.js
