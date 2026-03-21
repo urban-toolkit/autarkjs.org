@@ -1,5 +1,5 @@
 ---
-title: Boston Streets and EV Charging Stations
+title: Manhattan Neighborhood GeoJSON Viewer
 aside: false
 outline: false
 ---
@@ -9,30 +9,12 @@ import codeFull from '../../examples/ex1.ts?raw'
 
 const codePreview = `
 async function main() {
-  const db = new SpatialDb()
-  await db.init()
-
-  await db.loadCustomLayer({
-    geojsonFileUrl: '/data/boston_streets.geojson',
-    outputTableName: 'boston_streets',
-    coordinateFormat: 'EPSG:3395',
-  })
-
-  await db.loadCustomLayer({
-    geojsonFileUrl: '/data/boston_charging_stations.geojson',
-    outputTableName: 'boston_charging_stations',
-    coordinateFormat: 'EPSG:3395',
-  })
-
-  const streets = await db.getLayer('boston_streets')
-  const stations = await db.getLayer('boston_charging_stations')
-
   const map = new AutkMap(canvas)
   await map.init()
 
-  map.loadGeoJsonLayer('boston_streets', streets, LayerType.AUTK_GEO_POLYLINES)
-  map.loadGeoJsonLayer('boston_charging_stations', stations, LayerType.AUTK_GEO_POINTS)
+  const geojson = await fetch('/data/mnt_neighs_proj.geojson').then(r => r.json())
 
+  map.loadGeoJsonLayer('neighborhoods', geojson, LayerType.AUTK_GEO_POLYGONS)
   map.draw()
 }
 
@@ -40,23 +22,22 @@ main()
 `.trim()
 
 const objective = `
-This first version of the Boston example focuses on a stable visual baseline: loading and displaying two real datasets in the same live map.
+This example shows the simplest possible GeoJSON workflow in Autark: loading a projected neighborhood dataset directly in the browser and rendering it as a polygon layer.
 
-Datasets:
-- OpenStreetMap street network for Boston
-- Electric vehicle charging stations from Boston open data
+Dataset:
+- Manhattan neighborhoods (projected GeoJSON)
 
 How to explore:
-- Use the built-in layer controls inside the map
-- Inspect how both datasets are rendered together
-- Use this example as the foundation for the next iteration, where spatial filtering and analysis will be added
+- Use the default map navigation controls
+- Inspect the neighborhood boundaries in the live view
+- Use this example as a baseline before combining multiple datasets or spatial operations
 `.trim()
 </script>
 
 <ExamplePage
-  title="Boston Streets and EV Charging Stations"
-  description="A stable baseline example that visualizes the Boston street network together with electric vehicle charging stations in the same live map."
-  :tags="['autk-db', 'autk-map']"
+  title="Manhattan Neighborhood GeoJSON Viewer"
+  description="A minimal example that loads a projected GeoJSON file of Manhattan neighborhoods and renders it directly in Autark."
+  :tags="['autk-map']"
   iframe-src="/examples/raw/ex1.html"
   :code-preview="codePreview"
   :code-full="codeFull"

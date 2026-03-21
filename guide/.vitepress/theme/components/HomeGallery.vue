@@ -51,52 +51,55 @@
 <script setup lang="ts">
 
 const examples = [
-  {
+    {
     href: '/examples/ex1',
     img: '/imgs/ex1.png',
-    title: 'Boston Streets and EV Charging Stations',
+    title: 'Manhattan Neighborhood GeoJSON Viewer',
     description:
-      'Explore the Boston street network and electric vehicle charging stations in an interactive map.',
+      'A minimal example that loads a projected GeoJSON file of Manhattan neighborhoods and renders it directly in Autark.',
+    tags: [
+      { label: 'autk-map', color: '#0ea5e9' },
+    ],
+  },
+  {
+    href: '/examples/ex2',
+    img: '/imgs/ex2.png',
+    title: 'Spatial Join in the Browser',
+    description:
+      'A browser-side spatial join example that counts noise points inside Manhattan neighborhoods and visualizes the result as a thematic map.',
     tags: [
       { label: 'autk-db', color: '#f59e0b' },
       { label: 'autk-map', color: '#0ea5e9' },
     ],
   },
   {
-    href: '/examples/ex2',
-    img: '/imgs/exTest.png',
-    title: 'Under Construction',
-    description: 'This example is currently under development.',
-    tags: [{ label: 'coming soon', color: '#6b7280' }],
-  },
-  {
     href: '/examples/ex3',
-    img: '/imgs/exTest.png',
-    title: 'Under Construction',
-    description: 'This example is currently under development.',
-    tags: [{ label: 'coming soon', color: '#6b7280' }],
+    img: '/imgs/ex3.png',
+    title: '3D Manhattan from OpenStreetMap',
+    description:
+      'A live example that queries OpenStreetMap through Overpass API and renders a multi-layer 3D scene of Manhattan directly in the browser.',
+    tags: [
+      { label: 'autk-db', color: '#f59e0b' },
+      { label: 'autk-map', color: '#0ea5e9' },
+    ],
   },
   {
     href: '/examples/ex4',
-    img: '/imgs/exTest.png',
+    img: '/imgs/ex4.png',
     title: 'Under Construction',
     description: 'This example is currently under development.',
     tags: [{ label: 'coming soon', color: '#6b7280' }],
   },
   {
     href: '/examples/ex5',
-    img: '/imgs/exTest.png',
-    title: 'Under Construction',
-    description: 'This example is currently under development.',
-    tags: [{ label: 'coming soon', color: '#6b7280' }],
-  },
-  {
-    href: '/examples/ex6',
-    img: '/imgs/exTest.png',
-    title: 'Under Construction',
-    description: 'This example is currently under development.',
-    tags: [{ label: 'coming soon', color: '#6b7280' }],
-  },
+    img: '/imgs/ex5.png',
+    title: 'Linked Views: Map + Chart',
+    description: 'A coordinated multiple views example linking an interactive map with a custom bar chart. Selecting elements in one view highlights them in the other.',
+    tags: [
+      { label: 'autk-map', color: '#0ea5e9' },
+      { label: 'autk-plot', color: '#10b981' },
+    ],
+  }
 ]
 
 const featuredExamples = examples.slice(0, 6)
