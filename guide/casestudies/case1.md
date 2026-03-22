@@ -21,8 +21,8 @@ This case study explores **New York City neighborhoods** through an integrated i
 
 ## Open the live application
 
-<a class="vp-button vp-button-brand" href="/casestudies/live/case1">Live Case Study</a>
+<a class="vp-button vp-button-brand" href="/casestudies/live/case1">Live Use Case</a>
 
 ## Back
 
-[← Back to Case Studies](/casestudies/)
+[← Back to Use Cases](/casestudies/)

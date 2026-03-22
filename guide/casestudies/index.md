@@ -1,14 +1,14 @@
 ---
-title: Case Studies
+title: Use Cases
 aside: true
 outline: false
 ---
 
-# Case Studies
+# Use Cases
 
 Explore complete urban visual analytics applications built with Autark.
 
-These case studies combine multiple modules — including **autk-db**, **autk-map**, **autk-plot**, and **autk-compute** — into integrated browser-based systems.
+These use cases combine multiple modules — including **autk-db**, **autk-map**, **autk-plot**, and **autk-compute** — into integrated browser-based systems.
 
 ## Available
 

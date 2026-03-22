@@ -1,79 +1,207 @@
-html,
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
 body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #f3f4f6;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 #app {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.urbane-shell {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  background: #f3f4f6;
+canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
-.urbane-stage {
-  position: relative;
-  flex: 1;
-  min-height: 0;
+/* ── Top-right controls ────────────────────────────────────────────────────── */
+
+#controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    z-index: 11;
 }
 
-.urbane-placeholder {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  background:
-    radial-gradient(circle at top left, rgba(59, 130, 246, 0.12), transparent 30%),
-    radial-gradient(circle at bottom right, rgba(16, 185, 129, 0.12), transparent 30%),
-    #f8fafc;
+#levelBtn,
+#plotToggle {
+    width: 40px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
 }
 
-.urbane-placeholder-card {
-  width: min(680px, calc(100% - 32px));
-  padding: 28px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.94);
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+#levelBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
-.urbane-placeholder-card h1 {
-  margin: 0 0 12px;
-  font-size: 28px;
-  line-height: 1.1;
-  color: #0f172a;
+#thematicSelect {
+    width: 144px;
+    height: 42px;
+    padding: 0 28px 0 12px;
+    font-size: 14px;
+    font-family: sans-serif;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
-.urbane-placeholder-card p {
-  margin: 0 0 12px;
-  font-size: 15px;
-  line-height: 1.7;
-  color: #334155;
+/* ── Weights panel ─────────────────────────────────────────────────────────── */
+
+#weightsPanel {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 402px;
+    height: 270px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 16px 14px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.13);
+    z-index: 12;
+    box-sizing: border-box;
 }
 
-.urbane-placeholder-card code {
-  padding: 2px 6px;
-  border-radius: 8px;
-  background: #eef2ff;
-  color: #3730a3;
-  font-size: 0.92em;
+#weightsPanelTitle {
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    text-align: center;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
 }
 
-.urbane-checklist {
-  margin: 18px 0 0;
-  padding-left: 18px;
-  color: #475569;
-  font-size: 14px;
-  line-height: 1.8;
+#weightsSliders {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.weight-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    width: 44px;
+}
+
+.weight-value {
+    font-size: 11px;
+    color: #666;
+    font-family: monospace;
+}
+
+.weight-slider {
+    writing-mode: vertical-lr;
+    direction: rtl;
+    width: 28px;
+    height: 100px;
+    cursor: pointer;
+    accent-color: #555;
+}
+
+.weight-label {
+    font-size: 10px;
+    color: #555;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    white-space: nowrap;
+    text-align: left;
+}
+
+#weightsCompute {
+    margin-top: 4px;
+    width: 100%;
+    padding: 6px 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    background: #555;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+}
+
+#weightsCompute:hover { background: #333; }
+
+/* ── Floating plot panel ───────────────────────────────────────────────────── */
+
+#plot {
+    position: fixed;
+    z-index: 10;
+    background: #fff;
+    opacity: 0.85;
+    border: 1px solid #bfbfbf;
+    border-radius: 10px 10px 0 0;
+}
+
+.hidden-plot,
+.hidden-plot * {
+    visibility: hidden !important;
+}
+
+#plotBar {
+    width: 100%;
+    height: 30px;
+    cursor: move;
+    background: #bfbfbf;
+    border-radius: 10px 10px 0 0;
+    border-bottom: 1px solid #bbb;
+    box-shadow: 0 1px 3px #666;
+}
+
+#plotBodyParallel,
+#plotBodyTable {
+    margin: 5px;
+    width: 800px;
+    height: 500px;
+}
+
+/* ── D3 overrides ──────────────────────────────────────────────────────────── */
+
+svg {
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    border: none !important;
+}
+
+.tick line {
+    stroke-width: 1px;
+    stroke: #dfdfdf;
+}
+
+.title {
+    font-size: 12px;
+    fill: #333;
 }

@@ -23,22 +23,22 @@ export default defineConfig({
         ],
       },
       {
-        text: 'Case Studies',
-        items: [
-          { text: 'All Case Studies', link: '/casestudies/' },
-          { text: 'Urbane - 3D NYC Neighborhood Explorer', link: '/casestudies/case1' },
-          { text: 'Boston - Streets and EV Charging Stations', link: '/casestudies/case2' },
-        ],
-      },
-      {
         text: 'Gallery',
         items: [
           { text: 'All Examples', link: '/examples/' },
-          { text: 'Manhattan Neighborhood GeoJSON Viewer', link: '/examples/ex1' },
+          { text: 'Standalone GeoJSON Viewer', link: '/examples/ex1' },
           { text: 'USpatial Join in the Browser', link: '/examples/ex2' },
           { text: '3D Manhattan from OpenStreetMap', link: '/examples/ex3' },
           { text: 'Under Construction', link: '/examples/ex4' },
           { text: 'Linked Views: Map + Chart', link: '/examples/ex5' },
+        ],
+      },
+      {
+        text: 'Use Cases',
+        items: [
+          { text: 'All Use Cases', link: '/casestudies/' },
+          { text: 'Urbane - 3D NYC Neighborhood Explorer', link: '/casestudies/case1' },
+          { text: 'Boston - Streets and EV Charging Stations', link: '/casestudies/case2' },
         ],
       },
       { text: 'GitHub', link: 'https://github.com/urban-toolkit/autark/' },
@@ -199,24 +199,24 @@ export default defineConfig({
           ],
         },
         {
-          text: 'Case Studies',
-          collapsed: false,
-          items: [
-            { text: 'All Case Studies', link: '/casestudies/' },
-            { text: 'Urbane - 3D NYC Neighborhood Explorer', link: '/casestudies/case1' },
-            { text: 'Boston - Streets and EV Charging Stations', link: '/casestudies/case2' },
-          ],
-        },
-        {
           text: 'Examples',
           collapsed: false,
           items: [
             { text: 'All Examples', link: '/examples/' },
-            { text: 'Manhattan Neighborhood GeoJSON Viewer', link: '/examples/ex1' },
+            { text: 'Standalone GeoJSON Viewer', link: '/examples/ex1' },
             { text: 'Spatial Join in the Browser', link: '/examples/ex2' },
             { text: '3D Manhattan from OpenStreetMap', link: '/examples/ex3' },
             { text: 'Under Construction', link: '/examples/ex4' },
             { text: 'Linked Views: Map + Chart', link: '/examples/ex5' },
+          ],
+        },
+        {
+          text: 'Use Cases',
+          collapsed: false,
+          items: [
+            { text: 'All Use Cases', link: '/casestudies/' },
+            { text: 'Urbane - 3D NYC Neighborhood Explorer', link: '/casestudies/case1' },
+            { text: 'Boston - Streets and EV Charging Stations', link: '/casestudies/case2' },
           ],
         },
         {

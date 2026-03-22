@@ -2,7 +2,6 @@
   <section class="home-gallery vp-raw">
     <div class="gallery-shell">
       <div class="gallery-header">
-        <span class="gallery-eyebrow">Examples</span>
         <h2 class="section-title">Gallery</h2>
         <p class="section-description">
           Interactive examples showcasing the core capabilities of Autark.
@@ -54,9 +53,9 @@ const examples = [
     {
     href: '/examples/ex1',
     img: '/imgs/ex1.png',
-    title: 'Manhattan Neighborhood GeoJSON Viewer',
+    title: 'Standalone GeoJSON Viewer',
     description:
-      'A minimal example that loads a projected GeoJSON file of Manhattan neighborhoods and renders it directly in Autark.',
+      'This example demonstrates the simplest possible Autark workflow for loading and rendering a projected GeoJSON dataset directly in the browser.',
     tags: [
       { label: 'autk-map', color: '#0ea5e9' },
     ],
@@ -120,16 +119,6 @@ const featuredExamples = examples.slice(0, 6)
 .gallery-header {
   text-align: center;
   margin-bottom: 36px;
-}
-
-.gallery-eyebrow {
-  display: inline-block;
-  margin-bottom: 10px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--vp-c-text-3);
 }
 
 .section-title {

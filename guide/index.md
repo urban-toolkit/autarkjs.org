@@ -28,6 +28,6 @@ features:
     link: /autk-plot/
 ---
 
-<HomeCaseStudies />
-
 <HomeGallery />
+
+<HomeCaseStudies />

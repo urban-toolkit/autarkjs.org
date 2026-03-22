@@ -18,8 +18,8 @@ export default {
   },
   enhanceApp({ app }) {
     app.component('AutkMapExample', AutkMapExample)
-    app.component('HomeCaseStudies', HomeCaseStudies)
     app.component('HomeGallery', HomeGallery)
+    app.component('HomeCaseStudies', HomeCaseStudies)
     app.component('ExamplePage', ExamplePage)
     app.component('ExamplesIndex', ExamplesIndex)
     app.component('LiveCasePage', LiveCasePage)

@@ -2,8 +2,7 @@
   <section class="home-case-studies vp-raw">
     <div class="case-shell">
       <div class="case-header">
-        <span class="case-eyebrow">Case Studies</span>
-        <h2 class="section-title">Case Studies</h2>
+        <h2 class="section-title">Use Cases</h2>
         <p class="section-description">
           End-to-end urban visual analytics applications built with Autark.
           These cases combine multiple modules into full interactive experiences.
@@ -35,14 +34,14 @@
             <h3 class="case-title">{{ item.title }}</h3>
             <p class="case-description">{{ item.description }}</p>
             <span class="case-open">
-              {{ item.title === 'Under Construction' ? 'Coming Soon' : 'Open Case Study →' }}
+              {{ item.title === 'Under Construction' ? 'Coming Soon' : 'Open Use Case →' }}
             </span>
           </div>
         </a>
       </div>
 
       <div class="case-actions">
-        <a href="/casestudies/" class="case-button">View All Case Studies</a>
+        <a href="/casestudies/" class="case-button">View All Use Cases</a>
       </div>
     </div>
   </section>
@@ -93,16 +92,6 @@ const featuredCaseStudies = caseStudies.slice(0, 6)
 .case-header {
   text-align: center;
   margin-bottom: 36px;
-}
-
-.case-eyebrow {
-  display: inline-block;
-  margin-bottom: 10px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--vp-c-text-3);
 }
 
 .section-title {

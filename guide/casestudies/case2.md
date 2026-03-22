@@ -6,7 +6,7 @@ outline: deep
 
 # Boston Streets and EV Charging Stations
 
-This case study presents a stable visual baseline built with **Autark** for exploring two real Boston datasets in the same live map.
+This use case presents a stable visual baseline built with **Autark** for exploring two real Boston datasets in the same live map.
 
 ## Overview
 
@@ -20,8 +20,8 @@ The application combines:
 
 ## Open the live application
 
-<a class="vp-button vp-button-brand" href="/casestudies/live/case2">Live Case Study</a>
+<a class="vp-button vp-button-brand" href="/casestudies/live/case2">Live Use Case</a>
 
 ## Back
 
-[← Back to Case Studies](/casestudies/)
+[← Back to Use Cases](/casestudies/)
