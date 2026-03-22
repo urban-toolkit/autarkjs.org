@@ -1,9 +1,14 @@
+* {
+    box-sizing: border-box;
+}
+
 html, body {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
+    background: #0b0f17;
 }
 
 body {
@@ -11,6 +16,7 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 #app {
@@ -204,4 +210,74 @@ svg {
 .title {
     font-size: 12px;
     fill: #333;
+}
+
+/* ── Loading ──────────────────────────────────────────────────────────── */
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(11, 15, 23, 0.56);
+  backdrop-filter: blur(6px);
+}
+
+.loading-overlay.hidden {
+  display: none;
+}
+
+.loading-overlay.error .loading-card {
+  border-color: rgba(220, 38, 38, 0.28);
+}
+
+.loading-card {
+  width: min(560px, 92vw);
+  padding: 28px 26px;
+  border-radius: 20px;
+  background: #3e63dd;
+  /*border: 1px solid #a8b1ff;*/
+  /*box-shadow: 0 20px 60px #a8b1ff;*/
+  text-align: center;
+  color: #e5e7eb;
+}
+
+.loading-card h2 {
+  margin: 0 0 10px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.loading-card p {
+  margin: 0 0 10px;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: #f8fafc;
+}
+
+.loading-card small {
+  display: block;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: #f8fafc;
+}
+
+.loading-spinner {
+  width: 34px;
+  height: 34px;
+  margin: 0 auto 16px;
+  border-radius: 999px;
+  border: 3px solid rgba(255, 255, 255, 0.14);
+  border-top-color: #f8fafc;
+  animation: urbane-spin 0.9s linear infinite;
+}
+
+@keyframes urbane-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

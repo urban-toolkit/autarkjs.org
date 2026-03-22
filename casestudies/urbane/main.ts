@@ -1,6 +1,5 @@
-
+import './main.css';
 import { Feature, FeatureCollection, GeoJsonProperties } from 'geojson';
-
 import { SpatialDb } from 'autk-db';
 import { AutkMap, LayerType, MapEvent, VectorLayer } from 'autk-map';
 import { ParallelCoordinates, TableVis, PlotEvent } from 'autk-plot';
@@ -39,6 +38,147 @@ export class Urbane {
         this.updatePlotListeners();
     }
 
+    // Troquei loadCsv por GeoJSON (loadCustomLayer), o que mudou o modelo de dados; por isso criei uma tabela auxiliar com point_id para manter o mesmo spatialJoin + count, sem alterar a lógica do Autark.
+    // ── Adicionado em 22-03-2026 ──────────────────────────────────────────────────────────────
+
+    protected parseCsv(text: string): Record<string, string>[] {
+        const rows: string[][] = [];
+        let current = '';
+        let row: string[] = [];
+        let inQuotes = false;
+
+        for (let i = 0; i < text.length; i++) {
+            const char = text[i];
+            const next = text[i + 1];
+
+            if (char === '"') {
+                if (inQuotes && next === '"') {
+                    current += '"';
+                    i++;
+                } else {
+                    inQuotes = !inQuotes;
+                }
+                continue;
+            }
+
+            if (char === ',' && !inQuotes) {
+                row.push(current);
+                current = '';
+                continue;
+            }
+
+            if ((char === '\n' || char === '\r') && !inQuotes) {
+                if (char === '\r' && next === '\n') i++;
+                row.push(current);
+                current = '';
+
+                if (row.some((cell) => cell.trim() !== '')) {
+                    rows.push(row);
+                }
+                row = [];
+                continue;
+            }
+
+            current += char;
+        }
+
+        if (current.length > 0 || row.length > 0) {
+            row.push(current);
+            if (row.some((cell) => cell.trim() !== '')) {
+                rows.push(row);
+            }
+        }
+
+        if (rows.length === 0) return [];
+
+        const headers = rows[0].map((h) => h.trim());
+        return rows.slice(1).map((values) => {
+            const obj: Record<string, string> = {};
+            headers.forEach((header, idx) => {
+                obj[header] = (values[idx] ?? '').trim();
+            });
+            return obj;
+        });
+    }
+
+    protected async loadCsvAsPointLayer(dataset: string): Promise<void> {
+        const response = await fetch(`/data/${dataset}_manhattan_clean.csv`);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch dataset: ${dataset}`);
+        }
+
+        const text = await response.text();
+        const rows = this.parseCsv(text);
+
+        const geojson: FeatureCollection = {
+            type: 'FeatureCollection',
+            features: rows
+                .map((row) => {
+                    const longitude = Number(row.longitude);
+                    const latitude = Number(row.latitude);
+
+                    if (!Number.isFinite(longitude) || !Number.isFinite(latitude)) {
+                        return null;
+                    }
+
+                    return {
+                        type: 'Feature',
+                        geometry: {
+                            type: 'Point',
+                            coordinates: [longitude, latitude],
+                        },
+                        properties: {
+                            ...row,
+                        },
+                    } as Feature;
+                })
+                .filter((feature): feature is Feature => feature !== null),
+        };
+
+        const blob = new Blob(
+            [JSON.stringify(geojson)],
+            { type: 'application/geo+json' }
+        );
+        const blobUrl = URL.createObjectURL(blob);
+
+        try {
+            await this.db.loadCustomLayer({
+                geojsonFileUrl: blobUrl,
+                outputTableName: dataset,
+                coordinateFormat: 'EPSG:3395',
+            });
+        } finally {
+            URL.revokeObjectURL(blobUrl);
+        }
+    }
+
+    // ── Fim 22-03-2026 ──────────────────────────────────────────────────────────────
+
+    // ── Adicionado em 22-03-2026 ──────────────────────────────────────────────────────────────
+
+    protected async materializePointDataset(dataset: string): Promise<string> {
+        const tableName = `${dataset}_pts`;
+
+        await this.db.rawQuery({
+            query: `
+                SELECT
+                    geometry,
+                    properties,
+                    (ROW_NUMBER() OVER ()) AS point_id
+                FROM ${dataset}
+            `,
+            output: {
+                type: 'CREATE_TABLE',
+                tableName,
+                source: 'user',
+            },
+        });
+
+        return tableName;
+    }
+
+    // ── Fim 22-03-2026 ──────────────────────────────────────────────────────────────
+    
     // ── Database ──────────────────────────────────────────────────────────────
 
     protected async loadDb(): Promise<void> {
@@ -72,25 +212,23 @@ export class Urbane {
         });
 
         for (const dataset of this.datasets) {
-            await this.db.loadCsv({
-                csvFileUrl: `/data/${dataset}_manhattan_clean.csv`,
-                outputTableName: dataset,
-                geometryColumns: {
-                    latColumnName: 'latitude',
-                    longColumnName: 'longitude',
-                    coordinateFormat: 'EPSG:3395',
-                },
-            });
+            await this.loadCsvAsPointLayer(dataset);
+            
+            const pointTable = await this.materializePointDataset(dataset);
+            
             await this.db.spatialJoin({
                 tableRootName: 'neighborhoods',
-                tableJoinName: dataset,
+                //tableJoinName: dataset, alterado em 22/03/2026
+                tableJoinName: pointTable,
                 spatialPredicate: 'INTERSECT',
                 output: { type: 'MODIFY_ROOT' },
                 joinType: 'LEFT',
                 groupBy: {
                     selectColumns: [{
-                        tableName: dataset,
-                        column: 'key',
+                        //tableName: dataset, alterado em 22/03/2026
+                        tableName: pointTable,
+                        // column: 'key', alterado em 22/03/2026
+                        column: 'point_id',
                         aggregateFn: 'count',
                         normalize: true,
                     }],
@@ -192,12 +330,17 @@ export class Urbane {
     // ── Event Listeners ───────────────────────────────────────────────────────
 
     protected updateMapListeners(): void {
-        this.map.mapEvents.addEventListener(MapEvent.PICK, (selection: number[]) => {
-            if (this.currentLevel === 'neighborhoods')
-                this.selectedNeighIds = selection;
+        this.map.mapEvents.addEventListener(MapEvent.PICK, (selection: string[] | number[]) => {
+        const normalizedSelection = selection.map((id) =>
+            typeof id === 'string' ? Number(id) : id
+        );
 
-            this.table.setHighlightedIds(selection);
-            this.parallel.setHighlightedIds(selection);
+        if (this.currentLevel === 'neighborhoods') {
+            this.selectedNeighIds = normalizedSelection;
+        }
+
+        this.table.setHighlightedIds(normalizedSelection);
+        this.parallel.setHighlightedIds(normalizedSelection);
         });
     }
 
@@ -276,7 +419,8 @@ export class Urbane {
                 groupBy: {
                     selectColumns: [{
                         tableName: dataset,
-                        column: 'key',
+                        //column: 'key', alterado em 23/03/2026
+                        column: 'properties',
                         aggregateFn: 'count',
                         normalize: true,
                     }],
@@ -318,7 +462,14 @@ export class Urbane {
             this.selectedNeighIds = [];
 
             await this.db.removeLayer('active_buildings');
-            this.map.layerManager.removeLayerById('active_buildings');
+            
+            const activeBuildingsLayer = this.map.layerManager.searchByLayerId('active_buildings');
+
+            if (activeBuildingsLayer) {
+                this.map.updateRenderInfoProperty('active_buildings', 'isSkip', true);
+                this.map.updateRenderInfoProperty('active_buildings', 'isPick', false);
+            }
+            
             this.map.updateRenderInfoProperty('neighborhoods', 'isSkip', false);
             this.map.updateRenderInfoProperty('neighborhoods', 'isPick', true);
 

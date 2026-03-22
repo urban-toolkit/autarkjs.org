@@ -56,10 +56,10 @@ const caseStudies = [
     description:
       'Explore Manhattan in 3D with neighborhoods, thematic layers, parallel coordinates, and linked tables powered by Autark.',
     tags: [
-      { label: 'autk-db', color: '#f59e0b' },
-      { label: 'autk-map', color: '#0ea5e9' },
-      { label: 'autk-plot', color: '#8b5cf6' },
-      { label: 'autk-compute', color: '#10b981' },
+      { label: 'autk-db', color: '#3e63dd' },
+      { label: 'autk-map', color: '#3e63dd' },
+      { label: 'autk-plot', color: '#3e63dd' },
+      { label: 'autk-compute', color: '#3e63dd' },
     ],
   },
   {
@@ -69,8 +69,8 @@ const caseStudies = [
     description:
       'Explore the Boston street network and electric vehicle charging stations in an interactive map.',
     tags: [
-      { label: 'autk-db', color: '#f59e0b' },
-      { label: 'autk-map', color: '#0ea5e9' },
+      { label: 'autk-db', color: '#3e63dd' },
+      { label: 'autk-map', color: '#3e63dd' },
     ],
   },
 ]

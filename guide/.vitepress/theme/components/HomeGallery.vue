@@ -57,7 +57,7 @@ const examples = [
     description:
       'This example demonstrates the simplest possible Autark workflow for loading and rendering a projected GeoJSON dataset directly in the browser.',
     tags: [
-      { label: 'autk-map', color: '#0ea5e9' },
+      { label: 'autk-map', color: '#3e63dd' },
     ],
   },
   {
@@ -67,8 +67,8 @@ const examples = [
     description:
       'A browser-side spatial join example that counts noise points inside Manhattan neighborhoods and visualizes the result as a thematic map.',
     tags: [
-      { label: 'autk-db', color: '#f59e0b' },
-      { label: 'autk-map', color: '#0ea5e9' },
+      { label: 'autk-db', color: '#3e63dd' },
+      { label: 'autk-map', color: '#3e63dd' },
     ],
   },
   {
@@ -78,8 +78,8 @@ const examples = [
     description:
       'A live example that queries OpenStreetMap through Overpass API and renders a multi-layer 3D scene of Manhattan directly in the browser.',
     tags: [
-      { label: 'autk-db', color: '#f59e0b' },
-      { label: 'autk-map', color: '#0ea5e9' },
+      { label: 'autk-db', color: '#3e63dd' },
+      { label: 'autk-map', color: '#3e63dd' },
     ],
   },
   {
@@ -87,7 +87,7 @@ const examples = [
     img: '/imgs/ex4.png',
     title: 'Under Construction',
     description: 'This example is currently under development.',
-    tags: [{ label: 'coming soon', color: '#6b7280' }],
+    tags: [{ label: 'coming soon', color: '#3e63dd' }],
   },
   {
     href: '/examples/ex5',
@@ -95,8 +95,8 @@ const examples = [
     title: 'Linked Views: Map + Chart',
     description: 'A coordinated multiple views example linking an interactive map with a custom bar chart. Selecting elements in one view highlights them in the other.',
     tags: [
-      { label: 'autk-map', color: '#0ea5e9' },
-      { label: 'autk-plot', color: '#10b981' },
+      { label: 'autk-map', color: '#3e63dd' },
+      { label: 'autk-plot', color: '#3e63dd' },
     ],
   }
 ]
