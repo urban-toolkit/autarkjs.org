@@ -1,62 +1,76 @@
 ---
-title: Spatial Join in the Browser
-aside: false
-outline: false
+title: Map and Database Integration
+aside: true
+outline: deep
 ---
 
-<script setup>
-import codeFull from '../../examples/ex2.ts?raw'
+<div class="case-tags">
+  <a class="case-tag case-tag--db" href="/autk-db/">autk-db</a>
+  <a class="case-tag case-tag--map" href="/autk-map/">autk-map</a>
+</div>
 
-const codePreview = `
-const db = new SpatialDb()
-await db.init()
+# Map and Database Integration
 
-await db.loadCustomLayer({
-  geojsonFileUrl: '/data/mnt_neighs.geojson',
-  outputTableName: 'neighborhoods',
-  coordinateFormat: 'EPSG:3395',
-})
+This example demonstrates how **Autark Database** and **Autark Map** work together in the browser. A GeoJSON roads dataset is first loaded into the in-browser spatial database, then automatically retrieved and rendered on the map with thematic styling based on road type.
 
-await db.loadCustomLayer({
-  geojsonFileUrl: '/data/noise.geojson',
-  outputTableName: 'noise',
-  coordinateFormat: 'EPSG:3395',
-})
+## Result
 
-const counts = await db.rawQuery({
-  query: \`
-    SELECT
-      struct_extract(neighborhoods.properties, 'nta2020') AS neighborhood_id,
-      COUNT(noise.geometry) AS noise_count
-    FROM neighborhoods
-    LEFT JOIN noise
-      ON ST_Intersects(neighborhoods.geometry, noise.geometry)
-    GROUP BY 1
-  \`,
-  output: { type: 'RETURN_OBJECT' },
-})
-`.trim()
-
-const objective = `
-This example demonstrates how to execute a spatial join directly in the browser with Autark, combining neighborhood polygons and a point dataset.
-
-Datasets:
-- Manhattan neighborhoods
-- Noise complaint points
-
-How to explore:
-- Inspect the thematic coloring of neighborhood polygons
-- Compare polygon counts with the raw point layer
-- Use this example as a starting point for client-side spatial aggregation workflows
-`.trim()
-</script>
-
-<ExamplePage
-  title="Spatial Join in the Browser"
-  description="A browser-side spatial join example that counts noise points inside Manhattan neighborhoods and visualizes the result as a thematic map."
-  :tags="['autk-db', 'autk-map']"
-  iframe-src="/examples/raw/ex2.html"
-  :code-preview="codePreview"
-  :code-full="codeFull"
-  :objective="objective"
+<LiveExampleFrame
+  id="ex2-live-frame"
+  src="/examples/raw/ex2.html"
+  height="540px"
 />
+
+## Objective
+
+- initialize an in-browser spatial database;
+- load a GeoJSON file as a custom layer;
+- retrieve layers from the database;
+- render them with `AutkMap`;
+- apply thematic coloring based on feature properties.
+
+## Source Code
+
+```ts
+import { SpatialDb } from 'autk-db';
+import { AutkMap, ColorMapInterpolator, LayerType, MapStyle } from 'autk-map';
+
+async function main() {
+    const canvas = document.querySelector('canvas')!;
+
+    const db = new SpatialDb();
+    await db.init();
+
+    await db.loadCustomLayer({
+        geojsonFileUrl: '/data/mnt_roads.geojson',
+        outputTableName: 'roads',
+        coordinateFormat: 'EPSG:3395',
+    });
+
+    const map = new AutkMap(canvas);
+    MapStyle.setPredefinedStyle('light');
+    await map.init();
+
+    for (const layer of db.getLayerTables()) {
+        const geojson = await db.getLayer(layer.name);
+        map.loadGeoJsonLayer(layer.name, geojson, layer.type as LayerType);
+    }
+
+    const roadsGeojson = await db.getLayer('roads');
+    map.updateRenderInfoProperty('roads', 'colorMapInterpolator', ColorMapInterpolator.OBSERVABLE10);
+    map.updateGeoJsonLayerThematic('roads', roadsGeojson, (feature) => {
+        const highway = feature.properties?.highway;
+        return ['primary', 'secondary'].includes(highway) ? highway : 'other';
+    });
+
+    map.draw();
+}
+
+main();
+```
+
+## Full Code
+
+You can access the complete source file here:
+
+- [View full code](https://raw.githubusercontent.com/urban-toolkit/autarkjs.org/main/examples/ex2.ts)

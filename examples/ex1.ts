@@ -1,43 +1,76 @@
 import { AutkMap } from 'autk-map';
 
+function setLoadingState(message: string, note?: string) {
+  const text = document.getElementById('loading-text');
+  const noteEl = document.getElementById('loading-note');
+  if (text) text.textContent = message;
+  if (noteEl && note) noteEl.textContent = note;
+}
+
+function hideLoading() {
+  const overlay = document.getElementById('loading-overlay');
+  overlay?.classList.add('hidden');
+  overlay?.classList.remove('error');
+}
+
+function showError(message: string, note?: string) {
+  const overlay = document.getElementById('loading-overlay');
+  const title = document.getElementById('loading-title');
+  const text = document.getElementById('loading-text');
+  const noteEl = document.getElementById('loading-note');
+
+  overlay?.classList.remove('hidden');
+  overlay?.classList.add('error');
+
+  if (title) title.textContent = 'Loading Error';
+  if (text) text.textContent = message;
+  if (noteEl) {
+    noteEl.textContent = note ?? 'Please reload the page and try again.';
+  }
+}
+
 async function main() {
-  const canvas = document.querySelector('canvas') as HTMLCanvasElement | null;
-  const statusEl = document.getElementById('loading-status');
-  const loadingText = document.getElementById('loading-text');
-
-  const setStatus = (msg: string) => {
-    if (loadingText) loadingText.textContent = msg;
-    if (statusEl) statusEl.style.display = 'flex';
-  };
-
-  const hideStatus = () => {
-    if (statusEl) statusEl.style.display = 'none';
-  };
-
   try {
-    if (!canvas) {
+    const canvas = document.querySelector('canvas');
+    if (!(canvas instanceof HTMLCanvasElement)) {
       throw new Error('Canvas element not found.');
     }
 
-    setStatus('Initializing map...');
+    setLoadingState(
+      'Initializing map...',
+      'Preparing the browser rendering context.'
+    );
+
     const map = new AutkMap(canvas);
     await map.init();
 
-    setStatus('Loading Manhattan neighborhoods...');
-    const geojson = await fetch('/data/mnt_neighs_proj.geojson').then(r => r.json());
+    setLoadingState(
+      'Loading Manhattan neighborhoods...',
+      'Fetching projected GeoJSON data from the local dataset.'
+    );
 
-    setStatus('Rendering neighborhood layer...');
+    const response = await fetch('/data/mnt_neighs_proj.geojson');
+    if (!response.ok) {
+      throw new Error(`Failed to fetch dataset: ${response.status} ${response.statusText}`);
+    }
+    const geojson = await response.json();
+
+    setLoadingState(
+      'Rendering neighborhood layer...',
+      'Drawing the standalone GeoJSON layer on the map.'
+    );
+
     map.loadGeoJsonLayer('neighborhoods', geojson);
     map.draw();
 
-    hideStatus();
-  } catch (err) {
-    const msg = err instanceof Error ? err.message : 'An unexpected error occurred';
-    if (loadingText) loadingText.textContent = `Error: ${msg}`;
-    if (statusEl) {
-      statusEl.style.background = 'rgba(127, 29, 29, 0.92)';
-    }
-    console.error(err);
+    hideLoading();
+  } catch (error) {
+    console.error(error);
+
+    showError(
+      'Failed to load the GeoJSON example.',
+      'Please check the dataset path and reload the page.'
+    );
   }
 }
 

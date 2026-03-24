@@ -1,63 +1,74 @@
 ---
 title: 3D Manhattan from OpenStreetMap
-aside: false
-outline: false
+aside: true
+outline: deep
 ---
 
-<script setup>
-import codeFull from '../../examples/ex3.ts?raw'
+<div class="case-tags">
+  <a class="case-tag case-tag--db" href="/autk-db/">autk-db</a>
+  <a class="case-tag case-tag--map" href="/autk-map/">autk-map</a>
+</div>
 
-const codePreview = `
-const db = new SpatialDb()
-await db.init()
+# T3D Manhattan from OpenStreetMap
 
-await db.loadOsmFromOverpassApi({
-  queryArea: {
-    geocodeArea: 'New York',
-    areas: ['Manhattan Island'],
-  },
-  outputTableName: 'table_osm',
-  autoLoadLayers: {
-    coordinateFormat: 'EPSG:3395',
-    layers: ['surface', 'parks', 'water', 'roads', 'buildings'],
-    dropOsmTable: true,
-  },
-})
+This example demonstrates how **Autark Database** and **Autark Map** can be combined to query OpenStreetMap data through the Overpass API and render a layered 3D urban scene directly in the browser.
 
-const map = new AutkMap(canvas)
-await map.init()
+## Live Example
 
-for (const layerData of db.getLayerTables()) {
-  const geojson = await db.getLayer(layerData.name)
-  map.loadGeoJsonLayer(layerData.name, geojson, layerData.type)
+<LiveExampleFrame
+  id="ex3-live-frame"
+  src="/examples/raw/ex3.html"
+  height="540px"
+/>
+
+## Objective
+
+- initialize an in-browser spatial database;
+- query OSM data directly from Overpass API;
+- auto-load urban layers such as roads, water, parks, surface, and buildings;
+- render all returned layers in the browser with `AutkMap`.
+
+## Source Code
+
+```ts
+import { SpatialDb } from 'autk-db';
+import { AutkMap, LayerType } from 'autk-map';
+
+async function main() {
+    const canvas = document.querySelector('canvas')!;
+
+    const db = new SpatialDb();
+    await db.init();
+
+    await db.loadOsmFromOverpassApi({
+        queryArea: {
+            geocodeArea: 'New York',
+            areas: ['Battery Park City', 'Financial District'],
+        },
+        outputTableName: 'table_osm',
+        autoLoadLayers: {
+            coordinateFormat: 'EPSG:3395',
+            layers: ['surface', 'parks', 'water', 'roads', 'buildings'],
+            dropOsmTable: true,
+        },
+    });
+
+    const map = new AutkMap(canvas);
+    await map.init();
+
+    for (const layer of db.getLayerTables()) {
+        const geojson = await db.getLayer(layer.name);
+        map.loadGeoJsonLayer(layer.name, geojson, layer.type as LayerType);
+    }
+
+    map.draw();
 }
 
-map.draw()
-`.trim()
+main();
+```
 
-const objective = `
-This example shows how Autark can query OpenStreetMap data directly from Overpass API and render a multi-layer 3D scene in the browser.
+## Full Code
 
-Datasets:
-- OSM surface
-- OSM parks
-- OSM water
-- OSM roads
-- OSM buildings
+You can access the complete source file here:
 
-How to explore:
-- Navigate the 3D scene of Manhattan
-- Inspect multiple OSM-derived layers rendered together
-- Use this example as a baseline for richer OSM-driven urban analytics workflows
-`.trim()
-</script>
-
-<ExamplePage
-  title="3D Manhattan from OpenStreetMap"
-  description="A live example that queries OpenStreetMap through Overpass API and renders a multi-layer 3D scene of Manhattan directly in the browser."
-  :tags="['autk-db', 'autk-map']"
-  iframe-src="/examples/raw/ex3.html"
-  :code-preview="codePreview"
-  :code-full="codeFull"
-  :objective="objective"
-/>
+- [View full code](https://raw.githubusercontent.com/urban-toolkit/autarkjs.org/main/examples/ex3.ts)

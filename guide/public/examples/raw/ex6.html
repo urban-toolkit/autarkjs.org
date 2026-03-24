@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Standalone GeoJSON Viewer</title>
+  <title>Polygons and Points Viewer</title>
 
   <style>
     * {
@@ -36,8 +36,6 @@
       height: 100%;
       display: block;
     }
-
-    /* ── Loading ──────────────────────────────────────────────────────────── */
 
     .loading-overlay {
       position: absolute;
@@ -114,14 +112,14 @@
       <div class="loading-card">
         <div class="loading-spinner"></div>
         <h2 id="loading-title">Loading Example</h2>
-        <p id="loading-text">Loading Manhattan neighborhoods...</p>
+        <p id="loading-text">Initializing standalone GeoJSON visualization...</p>
         <small id="loading-note">
-          Preparing the standalone GeoJSON layer in the browser.
+          Loading projected polygon and point layers directly in the browser.
         </small>
       </div>
     </div>
   </div>
 
-  <script type="module" src="/examples/dist/ex1.js"></script>
+  <script type="module" src="/examples/dist/ex6.js"></script>
 </body>
 </html>

@@ -12,6 +12,7 @@ export default defineConfig({
         ex3: 'examples/ex3.ts',
         ex4: 'examples/ex4.ts',
         ex5: 'examples/ex5.ts',
+        ex6: 'examples/ex6.ts',
         urbane: 'casestudies/urbane/main.html',
         boston: 'casestudies/boston/main.html',
       },

@@ -27,10 +27,11 @@ export default defineConfig({
         items: [
           { text: 'All Examples', link: '/examples/' },
           { text: 'Standalone GeoJSON Viewer', link: '/examples/ex1' },
-          { text: 'USpatial Join in the Browser', link: '/examples/ex2' },
+          { text: 'Map and Database Integration', link: '/examples/ex2' },
           { text: '3D Manhattan from OpenStreetMap', link: '/examples/ex3' },
-          { text: 'Under Construction', link: '/examples/ex4' },
-          { text: 'Linked Views: Map + Chart', link: '/examples/ex5' },
+          { text: 'Linked Views: Map + Bar Chart', link: '/examples/ex4' },
+          { text: 'Compute Function on GeoJSON Properties', link: '/examples/ex5' },
+          { text: 'Polygons and Points Viewer', link: '/examples/ex6' },
         ],
       },
       {
@@ -204,10 +205,11 @@ export default defineConfig({
           items: [
             { text: 'All Examples', link: '/examples/' },
             { text: 'Standalone GeoJSON Viewer', link: '/examples/ex1' },
-            { text: 'Spatial Join in the Browser', link: '/examples/ex2' },
+            { text: 'Map and Database Integration', link: '/examples/ex2' },
             { text: '3D Manhattan from OpenStreetMap', link: '/examples/ex3' },
-            { text: 'Under Construction', link: '/examples/ex4' },
-            { text: 'Linked Views: Map + Chart', link: '/examples/ex5' },
+            { text: 'Linked Views: Map + Bar Chart', link: '/examples/ex4' },
+            { text: 'Compute Function on GeoJSON Properties', link: '/examples/ex5' },
+            { text: 'Polygons and Points Viewer', link: '/examples/ex6' },
           ],
         },
         {

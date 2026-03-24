@@ -1,12 +1,13 @@
 import DefaultTheme from 'vitepress/theme'
 import { h } from 'vue'
+import './custom.css'
 import AutkMapExample from './components/AutkMapExample.vue'
 import HomeCaseStudies from './components/HomeCaseStudies.vue'
 import HomeGallery from './components/HomeGallery.vue'
 import InstitutionsFooter from './components/InstitutionsFooter.vue'
 import ExamplePage from './components/ExamplePage.vue'
-import ExamplesIndex from './components/ExamplesIndex.vue'
 import LiveCasePage from './components/LiveCasePage.vue'
+import LiveExampleFrame from './components/LiveExampleFrame.vue'
 import type { Theme } from 'vitepress'
 
 export default {
@@ -21,7 +22,7 @@ export default {
     app.component('HomeGallery', HomeGallery)
     app.component('HomeCaseStudies', HomeCaseStudies)
     app.component('ExamplePage', ExamplePage)
-    app.component('ExamplesIndex', ExamplesIndex)
     app.component('LiveCasePage', LiveCasePage)
+    app.component('LiveExampleFrame', LiveExampleFrame)
   },
 } satisfies Theme

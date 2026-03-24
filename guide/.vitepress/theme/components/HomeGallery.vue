@@ -17,25 +17,24 @@
           class="gallery-card"
         >
           <div class="gallery-image">
-            <div class="gallery-tags">
+            <!-- ✅ agora usando padrão global -->
+            <div class="case-tags case-tags--overlay">
               <span
                 v-for="tag in example.tags"
                 :key="tag.label"
-                class="gallery-tag"
-                :style="{ background: tag.color }"
+                :class="['case-tag', tag.className]"
               >
-                {{ tag.label.toUpperCase() }}
+                {{ tag.label }}
               </span>
             </div>
+
             <img :src="example.img" :alt="example.title" />
           </div>
 
           <div class="gallery-content">
             <h3 class="gallery-title">{{ example.title }}</h3>
             <p class="gallery-description">{{ example.description }}</p>
-            <span class="gallery-open">
-              {{ example.title === 'Under Construction' ? 'Coming Soon' : 'Open Example →' }}
-            </span>
+            <span class="gallery-open">Open Example →</span>
           </div>
         </a>
       </div>
@@ -49,59 +48,69 @@
 
 <script setup lang="ts">
 
-const examples = [
+  const examples = [
     {
-    href: '/examples/ex1',
-    img: '/imgs/ex1.png',
-    title: 'Standalone GeoJSON Viewer',
-    description:
-      'This example demonstrates the simplest possible Autark workflow for loading and rendering a projected GeoJSON dataset directly in the browser.',
-    tags: [
-      { label: 'autk-map', color: '#3e63dd' },
-    ],
-  },
-  {
-    href: '/examples/ex2',
-    img: '/imgs/ex2.png',
-    title: 'Spatial Join in the Browser',
-    description:
-      'A browser-side spatial join example that counts noise points inside Manhattan neighborhoods and visualizes the result as a thematic map.',
-    tags: [
-      { label: 'autk-db', color: '#3e63dd' },
-      { label: 'autk-map', color: '#3e63dd' },
-    ],
-  },
-  {
-    href: '/examples/ex3',
-    img: '/imgs/ex3.png',
-    title: '3D Manhattan from OpenStreetMap',
-    description:
-      'A live example that queries OpenStreetMap through Overpass API and renders a multi-layer 3D scene of Manhattan directly in the browser.',
-    tags: [
-      { label: 'autk-db', color: '#3e63dd' },
-      { label: 'autk-map', color: '#3e63dd' },
-    ],
-  },
-  {
-    href: '/examples/ex4',
-    img: '/imgs/ex4.png',
-    title: 'Under Construction',
-    description: 'This example is currently under development.',
-    tags: [{ label: 'coming soon', color: '#3e63dd' }],
-  },
-  {
-    href: '/examples/ex5',
-    img: '/imgs/ex5.png',
-    title: 'Linked Views: Map + Chart',
-    description: 'A coordinated multiple views example linking an interactive map with a custom bar chart. Selecting elements in one view highlights them in the other.',
-    tags: [
-      { label: 'autk-map', color: '#3e63dd' },
-      { label: 'autk-plot', color: '#3e63dd' },
-    ],
-  }
-]
+      href: '/examples/ex1',
+      img: '/imgs/ex1.png',
+      title: 'Standalone GeoJSON Viewer',
+      description: 'Render a projected GeoJSON dataset directly in the browser.',
+      tags: [
+        { label: 'autk-map', className: 'case-tag--map' },
+      ],
+    },
+    {
+      href: '/examples/ex2',
+      img: '/imgs/ex2.png',
+      title: 'Map and Database Integration',
+      description: 'Load spatial data into an in-browser database and visualize it on a map.',
+      tags: [
+        { label: 'autk-db', className: 'case-tag--db' },
+        { label: 'autk-map', className: 'case-tag--map' },
+      ],
+    },
+    {
+      href: '/examples/ex3',
+      img: '/imgs/ex3.png',
+      title: '3D Manhattan from OpenStreetMap',
+      description: 'Query OpenStreetMap data and render a layered 3D urban scene.',
+      tags: [
+        { label: 'autk-db', className: 'case-tag--db' },
+        { label: 'autk-map', className: 'case-tag--map' },
+      ],
+    },
+    {
+      href: '/examples/ex4',
+      img: '/imgs/ex4.png',
+      title: 'Linked Views: Map + Bar Chart',
+      description: 'Link map and chart views for coordinated visual analysis.',
+      tags: [
+        { label: 'autk-map', className: 'case-tag--map' },
+        { label: 'autk-plot', className: 'case-tag--plot' },
+      ],
+    },
+    {
+      href: '/examples/ex5',
+      img: '/imgs/ex5.png',
+      title: 'Compute Function on GeoJSON Properties',
+      description: 'Compute derived attributes and render them as a thematic map.',
+      tags: [
+        { label: 'autk-db', className: 'case-tag--db' },
+        { label: 'autk-map', className: 'case-tag--map' },
+        { label: 'autk-compute', className: 'case-tag--compute' },
+      ],
+    },
+    {
+      href: '/examples/ex6',
+      img: '/imgs/ex6.png',
+      title: 'Polygons and Points Viewer',
+      description: 'Render polygons and point layers together in a single map view.',
+      tags: [
+        { label: 'autk-map', className: 'case-tag--map' },
+      ],
+    }
+  ]
 
-const featuredExamples = examples.slice(0, 6)
+  const featuredExamples = examples.slice(0, 6)
 
 </script>
 
@@ -189,24 +198,11 @@ const featuredExamples = examples.slice(0, 6)
   transform: scale(1.025);
 }
 
-.gallery-tags {
+.case-tags--overlay {
   position: absolute;
   top: 14px;
   left: 14px;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
   z-index: 1;
-}
-
-.gallery-tag {
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: #fff;
-  padding: 6px 10px;
-  border-radius: 999px;
-  letter-spacing: 0.04em;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.14);
 }
 
 .gallery-content {
@@ -268,23 +264,5 @@ const featuredExamples = examples.slice(0, 6)
   border-color: var(--vp-c-brand-1);
   color: var(--vp-c-brand-1);
   transform: translateY(-1px);
-}
-
-@media (max-width: 640px) {
-  .home-gallery {
-    padding: 48px 20px 56px;
-  }
-
-  .gallery-shell {
-    padding-top: 40px;
-  }
-
-  .gallery-header {
-    margin-bottom: 28px;
-  }
-
-  .gallery-grid {
-    grid-template-columns: 1fr;
-  }
 }
 </style>
