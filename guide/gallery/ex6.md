@@ -1,5 +1,5 @@
 ---
-title: Spatial Join
+title: Polygons and Points
 aside: true
 outline: deep
 ---
@@ -8,9 +8,9 @@ outline: deep
   <a class="case-tag case-tag--map" href="/autk-map/">autk-map</a>
 </div>
 
-# Spatial Join
+# Polygons and Points
 
-This example demonstrates how **Autark Map** can render multiple GeoJSON layers directly in the browser, combining projected neighborhood polygons and projected point features in a single standalone view.
+This example demonstrates how **Autark Map** can render two GeoJSON layer types: neighborhood polygons amd point set features.
 
 ## Live Example
 

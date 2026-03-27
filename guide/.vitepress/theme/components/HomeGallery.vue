@@ -52,7 +52,7 @@
     {
       href: '/gallery/ex1',
       img: '/imgs/ex1.png',
-      title: 'Standalone GeoJSON Viewer',
+      title: 'Standalone GeoJSON',
       description: 'Render a projected GeoJSON dataset directly in the browser.',
       tags: [
         { label: 'autk-map', className: 'case-tag--map' },
@@ -61,7 +61,7 @@
     {
       href: '/gallery/ex2',
       img: '/imgs/ex2.png',
-      title: 'Map and Database Integration',
+      title: 'Map and Database',
       description: 'Load spatial data into an in-browser database and visualize it on a map.',
       tags: [
         { label: 'autk-db', className: 'case-tag--db' },
@@ -71,7 +71,7 @@
     {
       href: '/gallery/ex3',
       img: '/imgs/ex3.png',
-      title: '3D Manhattan from OpenStreetMap',
+      title: '3D OSM Map',
       description: 'Query OpenStreetMap data and render a layered 3D urban scene.',
       tags: [
         { label: 'autk-db', className: 'case-tag--db' },
@@ -81,7 +81,7 @@
     {
       href: '/gallery/ex4',
       img: '/imgs/ex4.png',
-      title: 'Linked Views: Map + Bar Chart',
+      title: 'Linked Views',
       description: 'Link map and chart views for coordinated visual analysis.',
       tags: [
         { label: 'autk-map', className: 'case-tag--map' },
@@ -91,7 +91,7 @@
     {
       href: '/gallery/ex5',
       img: '/imgs/ex5.png',
-      title: 'Compute Function on GeoJSON Properties',
+      title: 'Compute Engine',
       description: 'Compute derived attributes and render them as a thematic map.',
       tags: [
         { label: 'autk-db', className: 'case-tag--db' },
@@ -102,7 +102,7 @@
     {
       href: '/gallery/ex6',
       img: '/imgs/ex6.png',
-      title: 'Polygons and Points Viewer',
+      title: 'Polygons and Points',
       description: 'Render polygons and point layers together in a single map view.',
       tags: [
         { label: 'autk-map', className: 'case-tag--map' },

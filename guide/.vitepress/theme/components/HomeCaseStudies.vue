@@ -49,10 +49,10 @@
 const caseStudies = [
   {
     href: '/usecases/urbane',
-    img: '/imgs/case1.png',
-    title: 'Urbane - 3D NYC Neighborhood Explorer',
+    img: '/imgs/urbane.png',
+    title: 'Urbane Recreation',
     description:
-      'Explore Manhattan in 3D with neighborhoods, thematic layers, parallel coordinates, and linked tables powered by Autark.',
+      'Multi-resolution exploration of Manhattan combining OSM data, thematic datasets, choropleth maps, and linked views.',
     tags: [
       { label: 'autk-db', className: 'case-tag--db' },
       { label: 'autk-map', className: 'case-tag--map' },
@@ -62,10 +62,10 @@ const caseStudies = [
   },
   {
     href: '/usecases/heat',
-    img: '/imgs/case3.png',
-    title: 'Niterói - Land Surface Temperature and Heat Islands',
+    img: '/imgs/heat.png',
+    title: 'Land Surface Heat Analysis',
     description:
-      'Explore urban heat island effects in Niterói through 24 years of land surface temperature data linked to road networks.',
+      'Maps land surface temperature trends across Niterói road segments using GPU-computed regressions and linked scatter plots.',
     tags: [
       { label: 'autk-db', className: 'case-tag--db' },
       { label: 'autk-map', className: 'case-tag--map' },
@@ -75,13 +75,14 @@ const caseStudies = [
   },
   {
     href: '/usecases/shadows',
-    img: '/imgs/case4.png',
-    title: 'Chicago - Urban Shadow Analysis',
+    img: '/imgs/shadows.png',
+    title: 'Urban Shadow Analysis',
     description:
-      'Visualize accumulated building shadows across the Chicago Loop by season, linked to 3D building footprints.',
+      'Visualizes accumulated building shadows across the Chicago Loop for three seasonal markers, with a linked histogram.',
     tags: [
       { label: 'autk-db', className: 'case-tag--db' },
       { label: 'autk-map', className: 'case-tag--map' },
+      { label: 'autk-plot', className: 'case-tag--plot' },
       { label: 'autk-compute', className: 'case-tag--compute' },
     ],
   },

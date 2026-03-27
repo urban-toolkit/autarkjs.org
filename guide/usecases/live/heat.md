@@ -1,5 +1,5 @@
 ---
-title: Surface Heat Live Case Study
+title: Land Surface Heat Analysis Live Case Study
 aside: false
 outline: false
 pageClass: live-case-page

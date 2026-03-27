@@ -18,4 +18,4 @@ Each example demonstrates how modules like **autk-db**, **autk-map**, **autk-plo
 - [3D Map from OpenStreetMap](/gallery/ex3)
 - [Linked Views](/gallery/ex4)
 - [Compute Engine](/gallery/ex5)
-- [Polygons and Points Viewer](/gallery/ex6)
+- [Polygons and Points](/gallery/ex6)

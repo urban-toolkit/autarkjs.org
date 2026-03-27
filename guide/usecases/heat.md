@@ -1,5 +1,5 @@
 ---
-title: Land Surface Heat
+title: Land Surface Heat Analysis
 aside: true
 outline: deep
 ---
@@ -11,7 +11,7 @@ outline: deep
   <a class="case-tag case-tag--compute" href="/autk-compute/">autk-compute</a>
 </div>
 
-# Land Surface Heat
+# Land Surface Heat Analysis
 
 This case study explores **urban heat island effects** in Niterói, Brazil, combining land surface temperature raster data with OpenStreetMap road networks.
 

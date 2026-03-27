@@ -12,6 +12,6 @@ These use cases combine multiple modules — including **autk-db**, **autk-map**
 
 ## Available
 
-- [Urbane - 3D NYC Neighborhood Explorer](/usecases/urbane)
-- [Niterói - Land Surface Temperature and Heat Islands](/usecases/heat)
-- [Chicago - Urban Shadow Analysis](/usecases/shadows)
+- [Urbane Recreation](/usecases/urbane)
+- [Land Surface Heat Analysis](/usecases/heat)
+- [Urban Shadow Analysis](/usecases/shadows)
