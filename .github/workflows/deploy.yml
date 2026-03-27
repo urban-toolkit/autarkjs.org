@@ -29,9 +29,9 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run examples:build
+      - run: npm run gallery:build
 
-      - run: npm run casestudies:build
+      - run: npm run usecases:build
 
       - run: npm run build
 

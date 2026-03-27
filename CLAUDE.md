@@ -31,7 +31,7 @@ Key locations:
 
 Standalone pages **not processed by VitePress** — served as static files. These include:
 
-- `guide/public/examples/` — Gallery example pages (`ex1.html`, `ex2.html`, `ex3.html`, ...)
+- `guide/public/gallery/` — Gallery example pages (`ex1.html`, `ex2.html`, `ex3.html`, ...)
   - Each example has a two-panel layout: interactive canvas on the left, source code on the right
   - JS is loaded via `<script type="module" src="dist/exN.js">` (compiled by Vite separately)
 - `guide/public/imgs/` — Gallery screenshots and logos
@@ -53,8 +53,8 @@ For editing examples, you also need to compile the TypeScript:
 
 ```bash
 npm run examples:build
-# runs: tsc && vite build && cp -r examples/dist guide/public/examples/dist
-# compiles examples/exN.ts → examples/dist/exN.js → guide/public/examples/dist/
+# runs: tsc && vite build && cp -r gallery/dist guide/public/gallery/dist
+# compiles gallery/exN.ts → gallery/dist/exN.js → guide/public/gallery/dist/
 ```
 
 Other scripts:
@@ -68,9 +68,9 @@ npm run preview  # preview the built site locally
 
 ## Examples build pipeline
 
-TypeScript example sources live in `examples/`. Vite compiles each one as a separate ES module entry point (configured in `vite.config.js`). The compiled output is copied to `guide/public/examples/dist/` so the HTML pages can load them.
+TypeScript example sources live in `gallery/`. Vite compiles each one as a separate ES module entry point (configured in `vite.config.js`). The compiled output is copied to `guide/public/gallery/dist/` so the HTML pages can load them.
 
-`examples/dist/` is gitignored — CI runs `examples:build` automatically on deploy.
+`gallery/dist/` is gitignored — CI runs `examples:build` automatically on deploy.
 
 ---
 
@@ -94,5 +94,5 @@ See [.claude/tasks/add-new-example.md](.claude/tasks/add-new-example.md) for a c
 | `guide/.vitepress/config.ts` | VitePress site config (nav, sidebar) |
 | `guide/.vitepress/theme/components/HomeGallery.vue` | Gallery grid component |
 | `guide/public/styles.css` | Shared CSS for all example HTML pages |
-| `examples/exN.ts` | TypeScript source for each example |
-| `guide/public/examples/exN.html` | Deployed HTML wrapper for each example |
+| `gallery/exN.ts` | TypeScript source for each example |
+| `guide/public/gallery/exN.html` | Deployed HTML wrapper for each example |

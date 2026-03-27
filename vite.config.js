@@ -1,27 +1,32 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
+  optimizeDeps: {
+    exclude: ['autk-db', '@duckdb/duckdb-wasm'],
+  },
   build: {
     outDir: 'dist-temp',
     emptyOutDir: true,
     sourcemap: false,
     rollupOptions: {
       input: {
-        ex1: 'examples/ex1.ts',
-        ex2: 'examples/ex2.ts',
-        ex3: 'examples/ex3.ts',
-        ex4: 'examples/ex4.ts',
-        ex5: 'examples/ex5.ts',
-        urbane: 'casestudies/urbane/main.html',
-        boston: 'casestudies/boston/main.html',
+        ex1: 'gallery/ex1.ts',
+        ex2: 'gallery/ex2.ts',
+        ex3: 'gallery/ex3.ts',
+        ex4: 'gallery/ex4.ts',
+        ex5: 'gallery/ex5.ts',
+        ex6: 'gallery/ex6.ts',
+        urbane: 'usecases/urbane/main.html',
+        heat: 'usecases/heat/main.html',
+        shadows: 'usecases/shadows/main.html',
       },
       output: {
         format: 'es',
         entryFileNames: (chunkInfo) => {
-          if (chunkInfo.name === 'urbane' || chunkInfo.name === 'boston') {
-            return 'casestudies/[name].js'
+          if (['urbane', 'heat', 'shadows'].includes(chunkInfo.name)) {
+            return 'usecases/[name].js'
           }
-          return 'examples/[name].js'
+          return 'gallery/[name].js'
         },
         assetFileNames: (assetInfo) => {
           const name = assetInfo.name ?? ''

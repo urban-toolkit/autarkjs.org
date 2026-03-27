@@ -1,0 +1,109 @@
+.VPHero .text {
+  max-width: 100% !important;
+}
+
+.case-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+/* ── Base ───────────────────────────────────────── */
+.VPDoc .case-tag,
+.vp-doc .case-tag,
+.case-tag {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  color: #ffffff !important;
+  text-decoration: none !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    filter 0.18s ease;
+}
+
+/* ── Estados de link ───────────────────────────────────────── */
+.VPDoc .case-tag:link,
+.VPDoc .case-tag:visited,
+.VPDoc .case-tag:hover,
+.VPDoc .case-tag:active,
+.vp-doc .case-tag:link,
+.vp-doc .case-tag:visited,
+.vp-doc .case-tag:hover,
+.vp-doc .case-tag:active,
+.case-tag:link,
+.case-tag:visited,
+.case-tag:hover,
+.case-tag:active {
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+/* ── hover ───────────────────────────────────────── */
+.VPDoc .case-tag:hover,
+.vp-doc .case-tag:hover,
+.case-tag:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 22px rgba(15, 23, 42, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  filter: brightness(1.05);
+}
+
+/* ── click ───────────────────────────────────────── */
+.VPDoc .case-tag:active,
+.vp-doc .case-tag:active,
+.case-tag:active {
+  transform: translateY(0);
+  box-shadow:
+    0 4px 10px rgba(15, 23, 42, 0.18),
+    inset 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* ── focus ───────────────────────────────────────── */
+.VPDoc .case-tag:focus,
+.vp-doc .case-tag:focus,
+.case-tag:focus {
+  outline: none;
+}
+
+.VPDoc .case-tag:focus-visible,
+.vp-doc .case-tag:focus-visible,
+.case-tag:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline-offset: 2px;
+}
+
+/* ── cores ───────────────────────────────────────── */
+.case-tag--db {
+  background: #f59e0b;
+}
+
+.case-tag--map {
+  background: #22c55e;
+}
+
+.case-tag--plot {
+  background: #a855f7;
+}
+
+.case-tag--compute {
+  background: #0ea5e9;
+}

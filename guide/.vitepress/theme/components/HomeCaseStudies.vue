@@ -17,31 +17,29 @@
           class="case-card"
         >
           <div class="case-image">
-            <div class="case-tags">
+            <div class="case-tags case-tags--overlay">
               <span
                 v-for="tag in item.tags"
                 :key="tag.label"
-                class="case-tag"
-                :style="{ background: tag.color }"
+                :class="['case-tag', tag.className]"
               >
-                {{ tag.label.toUpperCase() }}
+                {{ tag.label }}
               </span>
             </div>
+
             <img :src="item.img" :alt="item.title" />
           </div>
 
           <div class="case-content">
             <h3 class="case-title">{{ item.title }}</h3>
             <p class="case-description">{{ item.description }}</p>
-            <span class="case-open">
-              {{ item.title === 'Under Construction' ? 'Coming Soon' : 'Open Use Case →' }}
-            </span>
+            <span class="case-open">Open Use Case →</span>
           </div>
         </a>
       </div>
 
       <div class="case-actions">
-        <a href="/casestudies/" class="case-button">View All Use Cases</a>
+        <a href="/usecases/" class="case-button">View All Use Cases</a>
       </div>
     </div>
   </section>
@@ -50,27 +48,42 @@
 <script setup lang="ts">
 const caseStudies = [
   {
-    href: '/casestudies/case1',
-    img: '/imgs/case1.png',
-    title: 'Urbane - 3D NYC Neighborhood Explorer',
+    href: '/usecases/urbane',
+    img: '/imgs/urbane.png',
+    title: 'Urbane Remake',
     description:
-      'Explore Manhattan in 3D with neighborhoods, thematic layers, parallel coordinates, and linked tables powered by Autark.',
+      'Multi-resolution exploration of Manhattan combining OSM data, thematic datasets, choropleth maps, and linked views.',
     tags: [
-      { label: 'autk-db', color: '#3e63dd' },
-      { label: 'autk-map', color: '#3e63dd' },
-      { label: 'autk-plot', color: '#3e63dd' },
-      { label: 'autk-compute', color: '#3e63dd' },
+      { label: 'autk-db', className: 'case-tag--db' },
+      { label: 'autk-map', className: 'case-tag--map' },
+      { label: 'autk-plot', className: 'case-tag--plot' },
+      { label: 'autk-compute', className: 'case-tag--compute' },
     ],
   },
   {
-    href: '/casestudies/case2',
-    img: '/imgs/case2.png',
-    title: 'Boston - Streets and EV Charging Stations',
+    href: '/usecases/heat',
+    img: '/imgs/heat.png',
+    title: 'Land Surface Heat Analysis',
     description:
-      'Explore the Boston street network and electric vehicle charging stations in an interactive map.',
+      'Maps land surface temperature trends across Niterói road segments using GPU-computed regressions and linked scatter plots.',
     tags: [
-      { label: 'autk-db', color: '#3e63dd' },
-      { label: 'autk-map', color: '#3e63dd' },
+      { label: 'autk-db', className: 'case-tag--db' },
+      { label: 'autk-map', className: 'case-tag--map' },
+      { label: 'autk-plot', className: 'case-tag--plot' },
+      { label: 'autk-compute', className: 'case-tag--compute' },
+    ],
+  },
+  {
+    href: '/usecases/shadows',
+    img: '/imgs/shadows.png',
+    title: 'Urban Shadow Analysis',
+    description:
+      'Visualizes accumulated building shadows across the Chicago Loop for three seasonal markers, with a linked histogram.',
+    tags: [
+      { label: 'autk-db', className: 'case-tag--db' },
+      { label: 'autk-map', className: 'case-tag--map' },
+      { label: 'autk-plot', className: 'case-tag--plot' },
+      { label: 'autk-compute', className: 'case-tag--compute' },
     ],
   },
 ]
@@ -162,24 +175,11 @@ const featuredCaseStudies = caseStudies.slice(0, 6)
   transform: scale(1.025);
 }
 
-.case-tags {
+.case-tags--overlay {
   position: absolute;
   top: 14px;
   left: 14px;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
   z-index: 1;
-}
-
-.case-tag {
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: #fff;
-  padding: 6px 10px;
-  border-radius: 999px;
-  letter-spacing: 0.04em;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.14);
 }
 
 .case-content {

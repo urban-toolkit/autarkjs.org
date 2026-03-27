@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linked Views: Map + Bar Chart</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .example-shell {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-rows: 420px minmax(520px, 1fr);
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    .map-panel {
+      position: relative;
+      min-height: 0;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+      background: #0f172a;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .plot-panel {
+      min-height: 0;
+      padding: 14px;
+      background: #ffffff;
+    }
+
+    .plot-card {
+      width: 100%;
+      height: 100%;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.96);
+      overflow: hidden;
+    }
+
+    #plotBody {
+      width: 100%;
+      height: 100%;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      border: none !important;
+    }
+
+    .tick line {
+      stroke-width: 1px;
+      stroke: #e2e8f0;
+    }
+
+    .title {
+      font-size: 12px;
+      fill: #334155;
+    }</style>
+  <link rel="stylesheet" href="/loading.css">
+</head>
+<body>
+  <div class="example-shell">
+    <div class="map-panel">
+      <canvas></canvas>
+    </div>
+
+    <div class="plot-panel">
+      <div class="plot-card">
+        <div id="plotBody"></div>
+      </div>
+    </div>
+
+    <div id="loading-overlay">
+      <div id="loading-box">
+        <div id="loading-spinner"></div>
+        <h2 id="loading-title">Loading Example</h2>
+        <p id="loading-text">Initializing linked views...</p>
+        <p id="loading-note">
+          Preparing the map and the interactive bar chart in the browser.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/gallery/dist/ex4.js"></script>
+</body>
+</html>

@@ -4,14 +4,14 @@
   "description": "",
   "main": "ex1.js",
   "directories": {
-    "example": "examples"
+    "example": "gallery"
   },
   "scripts": {
     "dev": "vitepress dev guide",
     "build": "vitepress build guide",
     "preview": "vitepress preview guide",
-    "examples:build": "tsc && vite build && mkdir -p guide/public/examples/dist && mkdir -p guide/public/examples/assets && cp -R dist-temp/examples/* guide/public/examples/dist/ && cp -R dist-temp/assets/* guide/public/examples/assets/",
-    "casestudies:build": "tsc && vite build && mkdir -p guide/public/casestudies/urbane && mkdir -p guide/public/casestudies/boston && mkdir -p guide/public/casestudies && rm -rf guide/public/assets && cp dist-temp/casestudies/urbane/main.html guide/public/casestudies/urbane/main.html && cp dist-temp/casestudies/boston/main.html guide/public/casestudies/boston/main.html && cp dist-temp/casestudies/urbane.js guide/public/casestudies/urbane.js && cp dist-temp/casestudies/boston.js guide/public/casestudies/boston.js && cp -R dist-temp/assets guide/public/assets"
+    "gallery:build": "tsc && vite build && mkdir -p guide/public/gallery/dist && mkdir -p guide/public/gallery/assets && cp -R dist-temp/gallery/* guide/public/gallery/dist/ && cp -R dist-temp/assets/* guide/public/gallery/assets/ && cp node_modules/autk-db/dist/duckdb-browser-eh.worker.js guide/public/gallery/assets/ && cp node_modules/autk-db/dist/duckdb-browser-mvp.worker.js guide/public/gallery/assets/ && cp node_modules/autk-db/dist/duckdb-eh.wasm guide/public/gallery/assets/ && cp node_modules/autk-db/dist/duckdb-mvp.wasm guide/public/gallery/assets/",
+    "usecases:build": "tsc && vite build && mkdir -p guide/public/usecases/urbane && mkdir -p guide/public/usecases/heat && mkdir -p guide/public/usecases/shadows && rm -rf guide/public/assets && cp dist-temp/usecases/urbane/main.html guide/public/usecases/urbane/main.html && cp dist-temp/usecases/heat/main.html guide/public/usecases/heat/main.html && cp dist-temp/usecases/shadows/main.html guide/public/usecases/shadows/main.html && cp dist-temp/usecases/urbane.js guide/public/usecases/urbane.js && cp dist-temp/usecases/heat.js guide/public/usecases/heat.js && cp dist-temp/usecases/shadows.js guide/public/usecases/shadows.js && cp -R dist-temp/assets guide/public/assets && cp node_modules/autk-db/dist/duckdb-browser-eh.worker.js guide/public/assets/ && cp node_modules/autk-db/dist/duckdb-browser-mvp.worker.js guide/public/assets/ && cp node_modules/autk-db/dist/duckdb-eh.wasm guide/public/assets/ && cp node_modules/autk-db/dist/duckdb-mvp.wasm guide/public/assets/"
   },
   "repository": {
     "type": "git",
