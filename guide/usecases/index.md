@@ -12,6 +12,6 @@ These use cases combine multiple modules — including **autk-db**, **autk-map**
 
 ## Available
 
-- [Urbane Recreation](/usecases/urbane)
+- [Urbane Remake](/usecases/urbane)
 - [Land Surface Heat Analysis](/usecases/heat)
 - [Urban Shadow Analysis](/usecases/shadows)

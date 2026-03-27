@@ -50,7 +50,7 @@ const caseStudies = [
   {
     href: '/usecases/urbane',
     img: '/imgs/urbane.png',
-    title: 'Urbane Recreation',
+    title: 'Urbane Remake',
     description:
       'Multi-resolution exploration of Manhattan combining OSM data, thematic datasets, choropleth maps, and linked views.',
     tags: [

@@ -1,5 +1,5 @@
 ---
-title: Urbane Recreation
+title: Urbane Remake
 aside: true
 outline: deep
 ---
@@ -11,7 +11,7 @@ outline: deep
   <a class="case-tag case-tag--compute" href="/autk-compute/">autk-compute</a>
 </div>
 
-# Urbane Recreation
+# Urbane Remake
 
 Urbane is a browser-based urban visual analytics case study built with **Autark**. It combines spatial data management, 3D map visualization, linked plots, and on-demand computation into a single interactive experience.
 
