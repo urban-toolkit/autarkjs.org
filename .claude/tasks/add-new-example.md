@@ -6,8 +6,8 @@ Each example consists of three parts:
 
 | File | Description |
 |---|---|
-| `examples/exN.ts` | TypeScript logic (autk-db, autk-map, etc.) |
-| `examples/exN.html` | HTML page that loads the compiled JS via `<script type="module" src="dist/exN.js">` |
+| `gallery/exN.ts` | TypeScript logic (autk-db, autk-map, etc.) |
+| `gallery/exN.html` | HTML page that loads the compiled JS via `<script type="module" src="dist/exN.js">` |
 | `guide/public/imgs/exN.png` | Screenshot to appear in the gallery |
 
 ---
@@ -16,14 +16,14 @@ Each example consists of three parts:
 
 ### 1. Create the TypeScript
 
-Create `examples/exN.ts` with the example logic. See `examples/ex1.ts` as a reference.
+Create `gallery/exN.ts` with the example logic. See `gallery/ex1.ts` as a reference.
 
 ### 2. Create the HTML
 
 Copy an existing example as a base:
 
 ```bash
-cp examples/ex2.html examples/ex4.html
+cp gallery/ex2.html gallery/ex4.html
 ```
 
 Edit the HTML and adjust:
@@ -38,10 +38,10 @@ Add the new entry in `vite.config.js`:
 ```js
 rollupOptions: {
   input: {
-    ex1: 'examples/ex1.ts',
-    ex2: 'examples/ex2.ts',
-    ex3: 'examples/ex3.ts',
-    ex4: 'examples/ex4.ts', // add here
+    ex1: 'gallery/ex1.ts',
+    ex2: 'gallery/ex2.ts',
+    ex3: 'gallery/ex3.ts',
+    ex4: 'gallery/ex4.ts', // add here
   },
   ...
 }
@@ -53,14 +53,14 @@ rollupOptions: {
 npm run examples:build
 ```
 
-This compiles all `.ts` files to `examples/dist/` and automatically copies the output to `guide/public/examples/dist/`. The build clears the directory first, so all examples are recompiled together.
+This compiles all `.ts` files to `gallery/dist/` and automatically copies the output to `guide/public/gallery/dist/`. The build clears the directory first, so all examples are recompiled together.
 
-> `examples/dist/` is in `.gitignore` — compiled files are not committed. CI compiles automatically on deploy.
+> `gallery/dist/` is in `.gitignore` — compiled files are not committed. CI compiles automatically on deploy.
 
 ### 5. Copy the HTML to guide/public
 
 ```bash
-cp examples/ex4.html guide/public/examples/
+cp gallery/ex4.html guide/public/gallery/
 ```
 
 ### 6. Add Screenshot
@@ -81,7 +81,7 @@ Edit `guide/.vitepress/theme/components/HomeGallery.vue` and add the new example
 const examples = [
   // ... existing examples ...
   {
-    href: '/examples/ex4.html',
+    href: '/gallery/ex4.html',
     img: '/imgs/ex4.png',
     title: 'Example Title',
     description: 'Short description of what the example does.',
@@ -110,7 +110,7 @@ const examples = [
 
 ```bash
 npm run dev
-# visit localhost:5173/examples/ex4.html to test the example in isolation
+# visit localhost:5173/gallery/ex4.html to test the example in isolation
 # visit localhost:5173 to see the updated gallery
 ```
 

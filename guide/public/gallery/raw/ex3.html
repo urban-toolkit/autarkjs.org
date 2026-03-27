@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Manhattan from OpenStreetMap</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #0b0f17;
+    }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .map-shell {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #0f172a;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }</style>
+  <link rel="stylesheet" href="/loading.css">
+</head>
+<body>
+  <div class="map-shell">
+    <canvas></canvas>
+
+    <div id="loading-overlay">
+      <div id="loading-box">
+        <div id="loading-spinner"></div>
+        <h2 id="loading-title">Loading Example</h2>
+        <p id="loading-text">Fetching OSM data from Overpass API...</p>
+        <p id="loading-note">
+          This example depends on the Overpass API and may take a little longer to respond.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/gallery/dist/ex3.js"></script>
+</body>
+</html>

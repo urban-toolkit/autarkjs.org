@@ -105,8 +105,8 @@ out
 **/.vitepress/cache
 
 # compiled examples (rebuilt by CI and examples:build)
-examples/dist/
-guide/public/examples/dist/
+gallery/dist/
+guide/public/gallery/dist/
 
 # Docusaurus cache and generated files
 .docusaurus
@@ -146,8 +146,8 @@ vite.config.ts.timestamp-*
 dist-temp/
 
 # compiled case studies (rebuilt by build scripts)
-guide/public/casestudies/
-guide/public/casestudies/*.js
+guide/public/usecases/
+guide/public/usecases/*.js
 
 # optional generated assets for case studies if rebuilt locally
 guide/public/assets/urbane-*.css

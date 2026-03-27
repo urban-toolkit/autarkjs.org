@@ -1,3 +1,7 @@
+.VPHero .text {
+  max-width: 100% !important;
+}
+
 .case-tags {
   display: flex;
   gap: 8px;

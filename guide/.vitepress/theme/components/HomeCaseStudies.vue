@@ -39,7 +39,7 @@
       </div>
 
       <div class="case-actions">
-        <a href="/casestudies/" class="case-button">View All Use Cases</a>
+        <a href="/usecases/" class="case-button">View All Use Cases</a>
       </div>
     </div>
   </section>
@@ -48,7 +48,7 @@
 <script setup lang="ts">
 const caseStudies = [
   {
-    href: '/casestudies/case1',
+    href: '/usecases/urbane',
     img: '/imgs/case1.png',
     title: 'Urbane - 3D NYC Neighborhood Explorer',
     description:
@@ -61,14 +61,28 @@ const caseStudies = [
     ],
   },
   {
-    href: '/casestudies/case2',
-    img: '/imgs/case2.png',
-    title: 'Boston - Streets and EV Charging Stations',
+    href: '/usecases/heat',
+    img: '/imgs/case3.png',
+    title: 'Niterói - Land Surface Temperature and Heat Islands',
     description:
-      'Explore the Boston street network and electric vehicle charging stations in an interactive map.',
+      'Explore urban heat island effects in Niterói through 24 years of land surface temperature data linked to road networks.',
     tags: [
       { label: 'autk-db', className: 'case-tag--db' },
       { label: 'autk-map', className: 'case-tag--map' },
+      { label: 'autk-plot', className: 'case-tag--plot' },
+      { label: 'autk-compute', className: 'case-tag--compute' },
+    ],
+  },
+  {
+    href: '/usecases/shadows',
+    img: '/imgs/case4.png',
+    title: 'Chicago - Urban Shadow Analysis',
+    description:
+      'Visualize accumulated building shadows across the Chicago Loop by season, linked to 3D building footprints.',
+    tags: [
+      { label: 'autk-db', className: 'case-tag--db' },
+      { label: 'autk-map', className: 'case-tag--map' },
+      { label: 'autk-compute', className: 'case-tag--compute' },
     ],
   },
 ]

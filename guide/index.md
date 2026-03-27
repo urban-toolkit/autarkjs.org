@@ -3,8 +3,8 @@ layout: home
 
 hero:
   name: Autark
-  text: A modular urban toolkit for data visualization on the web
-  tagline: Load, analyze, and render geospatial data entirely in the browser — no server required.
+  text: A Serverless Toolkit for Prototyping Urban Visual Analytics Systems
+  tagline: Load, analyze, and render geospatial data entirely in the browser.
   actions:
     - theme: brand
       text: Get Started
@@ -15,16 +15,16 @@ hero:
 
 features:
   - title: autk-db
-    details: Load and query geospatial data in the browser using DuckDB-WASM. Supports OpenStreetMap, GeoJSON, CSV, and more.
+    details: Run geospatial queries in the browser. Compatible with OpenStreetMap, GeoJSON, GeoTIFF, and CSV.
     link: /autk-db/
   - title: autk-map
-    details: Render 2D and 3D maps on a canvas using WebGPU. Handles large datasets without a tile server.
+    details: Render 2D and 3D maps using WebGPU. Handle map layers directly on the canvas without a tile server.
     link: /autk-map/
   - title: autk-compute
-    details: Run custom computations across GeoJSON features in parallel on the GPU using WGSL shaders.
+    details: Run custom analytical tasks on GeoJSON datasets. Efficiently process feature sets without a backend.
     link: /autk-compute/
   - title: autk-plot
-    details: Build interactive D3 charts that link directly to map selections for coordinated views.
+    details: Render interactive D3.js charts for urban datasets. Directly link charts to map for coordinated views. 
     link: /autk-plot/
 ---
 

@@ -40,7 +40,7 @@
       </div>
 
       <div class="gallery-actions">
-        <a href="/examples/" class="gallery-button">View All Examples</a>
+        <a href="/gallery/" class="gallery-button">View All Examples</a>
       </div>
     </div>
   </section>
@@ -50,7 +50,7 @@
 
   const examples = [
     {
-      href: '/examples/ex1',
+      href: '/gallery/ex1',
       img: '/imgs/ex1.png',
       title: 'Standalone GeoJSON Viewer',
       description: 'Render a projected GeoJSON dataset directly in the browser.',
@@ -59,7 +59,7 @@
       ],
     },
     {
-      href: '/examples/ex2',
+      href: '/gallery/ex2',
       img: '/imgs/ex2.png',
       title: 'Map and Database Integration',
       description: 'Load spatial data into an in-browser database and visualize it on a map.',
@@ -69,7 +69,7 @@
       ],
     },
     {
-      href: '/examples/ex3',
+      href: '/gallery/ex3',
       img: '/imgs/ex3.png',
       title: '3D Manhattan from OpenStreetMap',
       description: 'Query OpenStreetMap data and render a layered 3D urban scene.',
@@ -79,7 +79,7 @@
       ],
     },
     {
-      href: '/examples/ex4',
+      href: '/gallery/ex4',
       img: '/imgs/ex4.png',
       title: 'Linked Views: Map + Bar Chart',
       description: 'Link map and chart views for coordinated visual analysis.',
@@ -89,7 +89,7 @@
       ],
     },
     {
-      href: '/examples/ex5',
+      href: '/gallery/ex5',
       img: '/imgs/ex5.png',
       title: 'Compute Function on GeoJSON Properties',
       description: 'Compute derived attributes and render them as a thematic map.',
@@ -100,7 +100,7 @@
       ],
     },
     {
-      href: '/examples/ex6',
+      href: '/gallery/ex6',
       img: '/imgs/ex6.png',
       title: 'Polygons and Points Viewer',
       description: 'Render polygons and point layers together in a single map view.',
