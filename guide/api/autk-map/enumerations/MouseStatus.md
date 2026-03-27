@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Enumeration: MouseStatus
 
-Defined in: [constants.ts:62](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/constants.ts#L62)
+Defined in: [constants.ts:62](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L62)
 
 Mouse status for interaction state.
 
@@ -16,7 +16,7 @@ Mouse status for interaction state.
 
 > **MOUSE\_DRAG**: `"mouseDrag"`
 
-Defined in: [constants.ts:64](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/constants.ts#L64)
+Defined in: [constants.ts:64](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L64)
 
 Mouse is dragging.
 
@@ -26,6 +26,6 @@ Mouse is dragging.
 
 > **MOUSE\_IDLE**: `"mouseIdle"`
 
-Defined in: [constants.ts:63](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/constants.ts#L63)
+Defined in: [constants.ts:63](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L63)
 
 Mouse is idle.

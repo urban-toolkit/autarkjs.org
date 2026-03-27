@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: Renderer
 
-Defined in: [renderer.ts:5](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L5)
+Defined in: [renderer.ts:5](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L5)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [renderer.ts:5](https://github.com/urban-toolkit/autark/blob/9b743c4
 
 > **new Renderer**(`canvas`): `Renderer`
 
-Defined in: [renderer.ts:36](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L36)
+Defined in: [renderer.ts:36](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L36)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [renderer.ts:36](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > `protected` **\_canvas**: `HTMLCanvasElement`
 
-Defined in: [renderer.ts:7](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L7)
+Defined in: [renderer.ts:7](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L7)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [renderer.ts:7](https://github.com/urban-toolkit/autark/blob/9b743c4
 
 > `protected` **\_colorTexture**: `GPUTexture`
 
-Defined in: [renderer.ts:17](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L17)
+Defined in: [renderer.ts:17](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L17)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [renderer.ts:17](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > `protected` **\_commandEncoder**: `GPUCommandEncoder`
 
-Defined in: [renderer.ts:30](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L30)
+Defined in: [renderer.ts:30](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L30)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [renderer.ts:30](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > `protected` **\_context**: `GPUCanvasContext` \| `null`
 
-Defined in: [renderer.ts:13](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L13)
+Defined in: [renderer.ts:13](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L13)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [renderer.ts:13](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > `protected` **\_depthBuffer**: `GPURenderPassDepthStencilAttachment`
 
-Defined in: [renderer.ts:21](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L21)
+Defined in: [renderer.ts:21](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L21)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [renderer.ts:21](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > `protected` **\_depthTexture**: `GPUTexture`
 
-Defined in: [renderer.ts:20](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L20)
+Defined in: [renderer.ts:20](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L20)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [renderer.ts:20](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > `protected` **\_device**: `GPUDevice`
 
-Defined in: [renderer.ts:10](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L10)
+Defined in: [renderer.ts:10](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L10)
 
 ***
 
@@ -88,7 +88,7 @@ Defined in: [renderer.ts:10](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > `protected` **\_frameBuffer**: `GPURenderPassColorAttachment`
 
-Defined in: [renderer.ts:18](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L18)
+Defined in: [renderer.ts:18](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L18)
 
 ***
 
@@ -96,7 +96,7 @@ Defined in: [renderer.ts:18](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > `protected` **\_multisampleTexture**: `GPUTexture`
 
-Defined in: [renderer.ts:16](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L16)
+Defined in: [renderer.ts:16](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L16)
 
 ***
 
@@ -104,7 +104,7 @@ Defined in: [renderer.ts:16](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > `protected` **\_pickingBuffer**: `GPURenderPassColorAttachment`
 
-Defined in: [renderer.ts:24](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L24)
+Defined in: [renderer.ts:24](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L24)
 
 ***
 
@@ -112,7 +112,7 @@ Defined in: [renderer.ts:24](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > `protected` **\_pickingDepthBuffer**: `GPURenderPassDepthStencilAttachment`
 
-Defined in: [renderer.ts:26](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L26)
+Defined in: [renderer.ts:26](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L26)
 
 ***
 
@@ -120,7 +120,7 @@ Defined in: [renderer.ts:26](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > `protected` **\_pickingDepthTexture**: `GPUTexture`
 
-Defined in: [renderer.ts:27](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L27)
+Defined in: [renderer.ts:27](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L27)
 
 ***
 
@@ -128,7 +128,7 @@ Defined in: [renderer.ts:27](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > `protected` **\_pickingSampleCount**: `number` = `1`
 
-Defined in: [renderer.ts:34](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L34)
+Defined in: [renderer.ts:34](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L34)
 
 ***
 
@@ -136,7 +136,7 @@ Defined in: [renderer.ts:34](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > `protected` **\_pickingTexture**: `GPUTexture`
 
-Defined in: [renderer.ts:25](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L25)
+Defined in: [renderer.ts:25](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L25)
 
 ***
 
@@ -144,7 +144,7 @@ Defined in: [renderer.ts:25](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > `protected` **\_sampleCount**: `number` = `4`
 
-Defined in: [renderer.ts:33](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L33)
+Defined in: [renderer.ts:33](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L33)
 
 ## Accessors
 
@@ -154,7 +154,7 @@ Defined in: [renderer.ts:33](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > **get** **canvas**(): `HTMLCanvasElement`
 
-Defined in: [renderer.ts:40](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L40)
+Defined in: [renderer.ts:40](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L40)
 
 ##### Returns
 
@@ -168,7 +168,7 @@ Defined in: [renderer.ts:40](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > **get** **commandEncoder**(): `GPUCommandEncoder`
 
-Defined in: [renderer.ts:60](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L60)
+Defined in: [renderer.ts:60](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L60)
 
 ##### Returns
 
@@ -182,7 +182,7 @@ Defined in: [renderer.ts:60](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > **get** **context**(): `GPUCanvasContext` \| `null`
 
-Defined in: [renderer.ts:44](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L44)
+Defined in: [renderer.ts:44](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L44)
 
 ##### Returns
 
@@ -196,7 +196,7 @@ Defined in: [renderer.ts:44](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > **get** **depthBuffer**(): `GPURenderPassDepthStencilAttachment`
 
-Defined in: [renderer.ts:56](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L56)
+Defined in: [renderer.ts:56](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L56)
 
 ##### Returns
 
@@ -210,7 +210,7 @@ Defined in: [renderer.ts:56](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > **get** **device**(): `GPUDevice`
 
-Defined in: [renderer.ts:48](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L48)
+Defined in: [renderer.ts:48](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L48)
 
 ##### Returns
 
@@ -224,7 +224,7 @@ Defined in: [renderer.ts:48](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > **get** **frameBuffer**(): `GPURenderPassColorAttachment`
 
-Defined in: [renderer.ts:52](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L52)
+Defined in: [renderer.ts:52](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L52)
 
 ##### Returns
 
@@ -238,7 +238,7 @@ Defined in: [renderer.ts:52](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > **get** **pickingBuffer**(): `GPURenderPassColorAttachment`
 
-Defined in: [renderer.ts:72](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L72)
+Defined in: [renderer.ts:72](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L72)
 
 ##### Returns
 
@@ -252,7 +252,7 @@ Defined in: [renderer.ts:72](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > **get** **pickingDepthBuffer**(): `GPURenderPassDepthStencilAttachment`
 
-Defined in: [renderer.ts:76](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L76)
+Defined in: [renderer.ts:76](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L76)
 
 ##### Returns
 
@@ -266,7 +266,7 @@ Defined in: [renderer.ts:76](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > **get** **pickingTexture**(): `GPUTexture`
 
-Defined in: [renderer.ts:68](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L68)
+Defined in: [renderer.ts:68](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L68)
 
 ##### Returns
 
@@ -280,7 +280,7 @@ Defined in: [renderer.ts:68](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > **get** **sampleCount**(): `number`
 
-Defined in: [renderer.ts:64](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L64)
+Defined in: [renderer.ts:64](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L64)
 
 ##### Returns
 
@@ -292,7 +292,7 @@ Defined in: [renderer.ts:64](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > **configureContext**(): `void`
 
-Defined in: [renderer.ts:128](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L128)
+Defined in: [renderer.ts:128](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L128)
 
 #### Returns
 
@@ -304,7 +304,7 @@ Defined in: [renderer.ts:128](https://github.com/urban-toolkit/autark/blob/9b743
 
 > **configureDepthBuffer**(): `void`
 
-Defined in: [renderer.ts:211](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L211)
+Defined in: [renderer.ts:211](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L211)
 
 #### Returns
 
@@ -316,7 +316,7 @@ Defined in: [renderer.ts:211](https://github.com/urban-toolkit/autark/blob/9b743
 
 > **configureFrameBuffer**(): `void`
 
-Defined in: [renderer.ts:179](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L179)
+Defined in: [renderer.ts:179](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L179)
 
 #### Returns
 
@@ -328,7 +328,7 @@ Defined in: [renderer.ts:179](https://github.com/urban-toolkit/autark/blob/9b743
 
 > **configurePickingBuffer**(): `void`
 
-Defined in: [renderer.ts:144](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L144)
+Defined in: [renderer.ts:144](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L144)
 
 #### Returns
 
@@ -340,7 +340,7 @@ Defined in: [renderer.ts:144](https://github.com/urban-toolkit/autark/blob/9b743
 
 > **finish**(): `void`
 
-Defined in: [renderer.ts:257](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L257)
+Defined in: [renderer.ts:257](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L257)
 
 #### Returns
 
@@ -352,7 +352,7 @@ Defined in: [renderer.ts:257](https://github.com/urban-toolkit/autark/blob/9b743
 
 > **init**(): `Promise`\<`void`\>
 
-Defined in: [renderer.ts:81](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L81)
+Defined in: [renderer.ts:81](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L81)
 
 #### Returns
 
@@ -364,7 +364,7 @@ Defined in: [renderer.ts:81](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > **initWebGPU**(): `Promise`\<`boolean`\>
 
-Defined in: [renderer.ts:93](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L93)
+Defined in: [renderer.ts:93](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L93)
 
 #### Returns
 
@@ -376,7 +376,7 @@ Defined in: [renderer.ts:93](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > **resize**(`width`, `height`): `void`
 
-Defined in: [renderer.ts:117](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L117)
+Defined in: [renderer.ts:117](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L117)
 
 #### Parameters
 
@@ -398,7 +398,7 @@ Defined in: [renderer.ts:117](https://github.com/urban-toolkit/autark/blob/9b743
 
 > **start**(): `void`
 
-Defined in: [renderer.ts:233](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L233)
+Defined in: [renderer.ts:233](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L233)
 
 #### Returns
 
@@ -410,7 +410,7 @@ Defined in: [renderer.ts:233](https://github.com/urban-toolkit/autark/blob/9b743
 
 > **startPickingRenderPass**(): `void`
 
-Defined in: [renderer.ts:261](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/renderer.ts#L261)
+Defined in: [renderer.ts:261](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/renderer.ts#L261)
 
 #### Returns
 

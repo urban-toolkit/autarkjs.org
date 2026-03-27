@@ -1,3 +1,7 @@
+[**autk-compute**](index.md)
+
+***
+
 # autk-compute
 
 ## Classes

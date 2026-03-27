@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ILayerData
 
-Defined in: [interfaces.ts:74](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/interfaces.ts#L74)
+Defined in: [interfaces.ts:74](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/interfaces.ts#L74)
 
 Interface for layer border information.
 
@@ -16,7 +16,7 @@ Interface for layer border information.
 
 > `optional` **border?**: [`ILayerBorder`](ILayerBorder.md)[]
 
-Defined in: [interfaces.ts:77](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/interfaces.ts#L77)
+Defined in: [interfaces.ts:77](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/interfaces.ts#L77)
 
 Array of borders for the layer.
 
@@ -26,7 +26,7 @@ Array of borders for the layer.
 
 > `optional` **borderComponents?**: [`ILayerBorderComponent`](ILayerBorderComponent.md)[]
 
-Defined in: [interfaces.ts:78](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/interfaces.ts#L78)
+Defined in: [interfaces.ts:78](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/interfaces.ts#L78)
 
 Array of border components for the layer.
 
@@ -36,7 +36,7 @@ Array of border components for the layer.
 
 > **components**: [`ILayerComponent`](ILayerComponent.md)[]
 
-Defined in: [interfaces.ts:76](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/interfaces.ts#L76)
+Defined in: [interfaces.ts:76](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/interfaces.ts#L76)
 
 Array of components for the layer.
 
@@ -46,7 +46,7 @@ Array of components for the layer.
 
 > **geometry**: [`ILayerGeometry`](ILayerGeometry.md)[]
 
-Defined in: [interfaces.ts:75](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/interfaces.ts#L75)
+Defined in: [interfaces.ts:75](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/interfaces.ts#L75)
 
 Array of geometries for the layer.
 
@@ -56,7 +56,7 @@ Array of geometries for the layer.
 
 > `optional` **highlighted?**: `number`[]
 
-Defined in: [interfaces.ts:81](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/interfaces.ts#L81)
+Defined in: [interfaces.ts:81](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/interfaces.ts#L81)
 
 Indices of highlighted components in the layer.
 
@@ -66,7 +66,7 @@ Indices of highlighted components in the layer.
 
 > `optional` **raster?**: [`IRasterData`](IRasterData.md)[]
 
-Defined in: [interfaces.ts:79](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/interfaces.ts#L79)
+Defined in: [interfaces.ts:79](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/interfaces.ts#L79)
 
 Raster data for the layer.
 
@@ -76,6 +76,6 @@ Raster data for the layer.
 
 > `optional` **thematic?**: [`ILayerThematic`](ILayerThematic.md)[]
 
-Defined in: [interfaces.ts:80](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/interfaces.ts#L80)
+Defined in: [interfaces.ts:80](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/interfaces.ts#L80)
 
 Thematic data for the layer.

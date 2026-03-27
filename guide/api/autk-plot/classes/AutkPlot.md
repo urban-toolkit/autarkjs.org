@@ -1,4 +1,4 @@
-[**autk-plot**](../globals.md)
+[**autk-plot**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Abstract Class: AutkPlot
 
-Defined in: [main.ts:6](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-plot/src/main.ts#L6)
+Defined in: [main.ts:6](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-plot/src/main.ts#L6)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [main.ts:6](https://github.com/urban-toolkit/autark/blob/9b743c4ad31
 
 > **new AutkPlot**(`config`): `AutkPlot`
 
-Defined in: [main.ts:26](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-plot/src/main.ts#L26)
+Defined in: [main.ts:26](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-plot/src/main.ts#L26)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [main.ts:26](https://github.com/urban-toolkit/autark/blob/9b743c4ad3
 
 > `protected` **\_attributes**: `string`[]
 
-Defined in: [main.ts:13](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-plot/src/main.ts#L13)
+Defined in: [main.ts:13](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-plot/src/main.ts#L13)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [main.ts:13](https://github.com/urban-toolkit/autark/blob/9b743c4ad3
 
 > `protected` **\_axis**: `string`[]
 
-Defined in: [main.ts:12](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-plot/src/main.ts#L12)
+Defined in: [main.ts:12](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-plot/src/main.ts#L12)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [main.ts:12](https://github.com/urban-toolkit/autark/blob/9b743c4ad3
 
 > `protected` **\_data**: `GeoJsonProperties`[]
 
-Defined in: [main.ts:10](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-plot/src/main.ts#L10)
+Defined in: [main.ts:10](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-plot/src/main.ts#L10)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [main.ts:10](https://github.com/urban-toolkit/autark/blob/9b743c4ad3
 
 > `protected` **\_div**: `HTMLElement`
 
-Defined in: [main.ts:8](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-plot/src/main.ts#L8)
+Defined in: [main.ts:8](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-plot/src/main.ts#L8)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [main.ts:8](https://github.com/urban-toolkit/autark/blob/9b743c4ad31
 
 > `protected` **\_height**: `number` = `500`
 
-Defined in: [main.ts:17](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-plot/src/main.ts#L17)
+Defined in: [main.ts:17](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-plot/src/main.ts#L17)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [main.ts:17](https://github.com/urban-toolkit/autark/blob/9b743c4ad3
 
 > `protected` **\_margins**: `PlotMargins`
 
-Defined in: [main.ts:19](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-plot/src/main.ts#L19)
+Defined in: [main.ts:19](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-plot/src/main.ts#L19)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [main.ts:19](https://github.com/urban-toolkit/autark/blob/9b743c4ad3
 
 > `protected` **\_plotEvents**: `PlotEvents`
 
-Defined in: [main.ts:23](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-plot/src/main.ts#L23)
+Defined in: [main.ts:23](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-plot/src/main.ts#L23)
 
 ***
 
@@ -88,7 +88,7 @@ Defined in: [main.ts:23](https://github.com/urban-toolkit/autark/blob/9b743c4ad3
 
 > `protected` **\_selection**: `number`[] = `[]`
 
-Defined in: [main.ts:21](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-plot/src/main.ts#L21)
+Defined in: [main.ts:21](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-plot/src/main.ts#L21)
 
 ***
 
@@ -96,7 +96,7 @@ Defined in: [main.ts:21](https://github.com/urban-toolkit/autark/blob/9b743c4ad3
 
 > `protected` **\_title**: `string`
 
-Defined in: [main.ts:14](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-plot/src/main.ts#L14)
+Defined in: [main.ts:14](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-plot/src/main.ts#L14)
 
 ***
 
@@ -104,7 +104,7 @@ Defined in: [main.ts:14](https://github.com/urban-toolkit/autark/blob/9b743c4ad3
 
 > `protected` **\_width**: `number` = `800`
 
-Defined in: [main.ts:16](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-plot/src/main.ts#L16)
+Defined in: [main.ts:16](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-plot/src/main.ts#L16)
 
 ## Accessors
 
@@ -114,7 +114,7 @@ Defined in: [main.ts:16](https://github.com/urban-toolkit/autark/blob/9b743c4ad3
 
 > **get** **data**(): `GeoJsonProperties`[]
 
-Defined in: [main.ts:43](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-plot/src/main.ts#L43)
+Defined in: [main.ts:43](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-plot/src/main.ts#L43)
 
 ##### Returns
 
@@ -124,7 +124,7 @@ Defined in: [main.ts:43](https://github.com/urban-toolkit/autark/blob/9b743c4ad3
 
 > **set** **data**(`data`): `void`
 
-Defined in: [main.ts:47](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-plot/src/main.ts#L47)
+Defined in: [main.ts:47](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-plot/src/main.ts#L47)
 
 ##### Parameters
 
@@ -144,7 +144,7 @@ Defined in: [main.ts:47](https://github.com/urban-toolkit/autark/blob/9b743c4ad3
 
 > **get** **plotEvents**(): `PlotEvents`
 
-Defined in: [main.ts:60](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-plot/src/main.ts#L60)
+Defined in: [main.ts:60](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-plot/src/main.ts#L60)
 
 ##### Returns
 
@@ -158,7 +158,7 @@ Defined in: [main.ts:60](https://github.com/urban-toolkit/autark/blob/9b743c4ad3
 
 > **get** **selection**(): `number`[]
 
-Defined in: [main.ts:52](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-plot/src/main.ts#L52)
+Defined in: [main.ts:52](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-plot/src/main.ts#L52)
 
 ##### Returns
 
@@ -168,7 +168,7 @@ Defined in: [main.ts:52](https://github.com/urban-toolkit/autark/blob/9b743c4ad3
 
 > **set** **selection**(`selection`): `void`
 
-Defined in: [main.ts:56](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-plot/src/main.ts#L56)
+Defined in: [main.ts:56](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-plot/src/main.ts#L56)
 
 ##### Parameters
 
@@ -186,7 +186,7 @@ Defined in: [main.ts:56](https://github.com/urban-toolkit/autark/blob/9b743c4ad3
 
 > `abstract` **draw**(): `void`
 
-Defined in: [main.ts:70](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-plot/src/main.ts#L70)
+Defined in: [main.ts:70](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-plot/src/main.ts#L70)
 
 #### Returns
 
@@ -198,7 +198,7 @@ Defined in: [main.ts:70](https://github.com/urban-toolkit/autark/blob/9b743c4ad3
 
 > **setHighlightedIds**(`selection`): `void`
 
-Defined in: [main.ts:64](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-plot/src/main.ts#L64)
+Defined in: [main.ts:64](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-plot/src/main.ts#L64)
 
 #### Parameters
 
@@ -216,7 +216,7 @@ Defined in: [main.ts:64](https://github.com/urban-toolkit/autark/blob/9b743c4ad3
 
 > `abstract` **updatePlotSelection**(): `void`
 
-Defined in: [main.ts:72](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-plot/src/main.ts#L72)
+Defined in: [main.ts:72](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-plot/src/main.ts#L72)
 
 #### Returns
 

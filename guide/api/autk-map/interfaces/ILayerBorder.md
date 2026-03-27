@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ILayerBorder
 
-Defined in: [interfaces.ts:135](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/interfaces.ts#L135)
+Defined in: [interfaces.ts:135](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/interfaces.ts#L135)
 
 Interface for layer border information.
 
@@ -16,7 +16,7 @@ Interface for layer border information.
 
 > **indices**: `number`[]
 
-Defined in: [interfaces.ts:137](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/interfaces.ts#L137)
+Defined in: [interfaces.ts:137](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/interfaces.ts#L137)
 
 Indices of the border.
 
@@ -26,6 +26,6 @@ Indices of the border.
 
 > **position**: `number`[]
 
-Defined in: [interfaces.ts:136](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/interfaces.ts#L136)
+Defined in: [interfaces.ts:136](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/interfaces.ts#L136)
 
 Position of the border.

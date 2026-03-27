@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: MapEvents
 
-Defined in: [map-events.ts:7](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-events.ts#L7)
+Defined in: [map-events.ts:7](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-events.ts#L7)
 
 Class to handle map events.
 It allows adding, removing, and emitting events for map interactions.
@@ -17,7 +17,7 @@ It allows adding, removing, and emitting events for map interactions.
 
 > **new MapEvents**(`events`): `MapEvents`
 
-Defined in: [map-events.ts:18](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-events.ts#L18)
+Defined in: [map-events.ts:18](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-events.ts#L18)
 
 Constructor for MapEvents
 
@@ -39,7 +39,7 @@ The list of map events to initialize.
 
 > **addEventListener**(`event`, `listener`): `void`
 
-Defined in: [map-events.ts:29](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-events.ts#L29)
+Defined in: [map-events.ts:29](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-events.ts#L29)
 
 Adds an event listener for a specific map event.
 
@@ -67,7 +67,7 @@ The listener function to call when the event is emitted.
 
 > **emit**(`event`, `selection`, `layerId`): `void`
 
-Defined in: [map-events.ts:52](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-events.ts#L52)
+Defined in: [map-events.ts:52](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-events.ts#L52)
 
 Emits an event with the provided selection and layer ID.
 
@@ -101,7 +101,7 @@ The ID of the layer associated with the event.
 
 > **removeEventListener**(`event`, `listener`): `void`
 
-Defined in: [map-events.ts:40](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-events.ts#L40)
+Defined in: [map-events.ts:40](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-events.ts#L40)
 
 Removes an event listener for a specific map event.
 

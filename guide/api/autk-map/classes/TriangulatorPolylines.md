@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: TriangulatorPolylines
 
-Defined in: [triangulator-polylines.ts:13](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/triangulator-polylines.ts#L13)
+Defined in: [triangulator-polylines.ts:13](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polylines.ts#L13)
 
 Class for triangulating polylines from GeoJSON features.
 It provides methods to convert different geometry types into polyline meshes.
@@ -27,7 +27,7 @@ It provides methods to convert different geometry types into polyline meshes.
 
 > `static` **offset**: `number` = `300`
 
-Defined in: [triangulator-polylines.ts:18](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/triangulator-polylines.ts#L18)
+Defined in: [triangulator-polylines.ts:18](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polylines.ts#L18)
 
 The offset distance for the polyline extrusion.
 
@@ -37,7 +37,7 @@ The offset distance for the polyline extrusion.
 
 > `static` **buildMesh**(`geojson`, `origin`): \[[`ILayerGeometry`](../interfaces/ILayerGeometry.md)[], [`ILayerComponent`](../interfaces/ILayerComponent.md)[]\]
 
-Defined in: [triangulator-polylines.ts:26](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/triangulator-polylines.ts#L26)
+Defined in: [triangulator-polylines.ts:26](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polylines.ts#L26)
 
 Builds a mesh from GeoJSON features representing polylines.
 
@@ -67,7 +67,7 @@ An array of geometries and components
 
 > `static` **lineStringToPolyline**(`feature`, `origin`, `offset`): `object`[]
 
-Defined in: [triangulator-polylines.ts:74](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/triangulator-polylines.ts#L74)
+Defined in: [triangulator-polylines.ts:74](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polylines.ts#L74)
 
 Converts a LineString feature to a polyline mesh representation.
 
@@ -103,7 +103,7 @@ An array of geometries
 
 > `static` **multiLineStringToPolyline**(`feature`, `origin`, `offset`): `object`[]
 
-Defined in: [triangulator-polylines.ts:97](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/triangulator-polylines.ts#L97)
+Defined in: [triangulator-polylines.ts:97](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polylines.ts#L97)
 
 Converts a MultiLineString feature to a polyline mesh representation.
 

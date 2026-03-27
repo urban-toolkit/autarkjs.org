@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: MouseEvents
 
-Defined in: [mouse-events.ts:8](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/mouse-events.ts#L8)
+Defined in: [mouse-events.ts:8](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/mouse-events.ts#L8)
 
 MouseEvents class handles mouse interactions with the map.
 It allows for panning, zooming, and picking features on the map.
@@ -17,7 +17,7 @@ It allows for panning, zooming, and picking features on the map.
 
 > **new MouseEvents**(`map`): `MouseEvents`
 
-Defined in: [mouse-events.ts:33](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/mouse-events.ts#L33)
+Defined in: [mouse-events.ts:33](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/mouse-events.ts#L33)
 
 Constructor for MouseEvents
 
@@ -39,7 +39,7 @@ The map instance
 
 > **bindEvents**(): `void`
 
-Defined in: [mouse-events.ts:43](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/mouse-events.ts#L43)
+Defined in: [mouse-events.ts:43](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/mouse-events.ts#L43)
 
 Mouse events binding function
 
@@ -53,7 +53,7 @@ Mouse events binding function
 
 > **contextMenu**(`event`): `void`
 
-Defined in: [mouse-events.ts:58](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/mouse-events.ts#L58)
+Defined in: [mouse-events.ts:58](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/mouse-events.ts#L58)
 
 Handles mouse right click event
 
@@ -75,7 +75,7 @@ The fired event
 
 > **mouseDoubleClick**(`event`): `void`
 
-Defined in: [mouse-events.ts:145](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/mouse-events.ts#L145)
+Defined in: [mouse-events.ts:145](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/mouse-events.ts#L145)
 
 Handles mouse double click event
 
@@ -97,7 +97,7 @@ The fired event
 
 > **mouseDown**(`event`): `void`
 
-Defined in: [mouse-events.ts:67](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/mouse-events.ts#L67)
+Defined in: [mouse-events.ts:67](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/mouse-events.ts#L67)
 
 Handles mouse down event
 
@@ -119,7 +119,7 @@ The fired event
 
 > **mouseMove**(`event`): `void`
 
-Defined in: [mouse-events.ts:83](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/mouse-events.ts#L83)
+Defined in: [mouse-events.ts:83](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/mouse-events.ts#L83)
 
 Handles mouse move event
 
@@ -141,7 +141,7 @@ The fired event
 
 > **mouseUp**(`event`): `void`
 
-Defined in: [mouse-events.ts:112](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/mouse-events.ts#L112)
+Defined in: [mouse-events.ts:112](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/mouse-events.ts#L112)
 
 Handles mouse up event
 
@@ -163,7 +163,7 @@ The fired event
 
 > **mouseWheel**(`event`): `void`
 
-Defined in: [mouse-events.ts:125](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/mouse-events.ts#L125)
+Defined in: [mouse-events.ts:125](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/mouse-events.ts#L125)
 
 Handles mouse down event
 

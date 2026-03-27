@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: KeyEvents
 
-Defined in: [key-events.ts:8](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/key-events.ts#L8)
+Defined in: [key-events.ts:8](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/key-events.ts#L8)
 
 KeyEvents class handles keyboard interactions with the map.
 It allows toggling layer properties and changing map styles using keyboard shortcuts.
@@ -17,7 +17,7 @@ It allows toggling layer properties and changing map styles using keyboard short
 
 > **new KeyEvents**(`map`): `KeyEvents`
 
-Defined in: [key-events.ts:19](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/key-events.ts#L19)
+Defined in: [key-events.ts:19](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/key-events.ts#L19)
 
 Constructor for KeyEvents
 
@@ -39,7 +39,7 @@ The map instance
 
 > **bindEvents**(): `void`
 
-Defined in: [key-events.ts:26](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/key-events.ts#L26)
+Defined in: [key-events.ts:26](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/key-events.ts#L26)
 
 Key events binding function
 
@@ -53,7 +53,7 @@ Key events binding function
 
 > **keyUp**(`event`): `Promise`\<`void`\>
 
-Defined in: [key-events.ts:35](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/key-events.ts#L35)
+Defined in: [key-events.ts:35](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/key-events.ts#L35)
 
 Handles key up event
 

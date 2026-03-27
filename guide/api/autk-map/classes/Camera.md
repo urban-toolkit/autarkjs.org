@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: Camera
 
-Defined in: [camera.ts:8](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L8)
+Defined in: [camera.ts:8](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L8)
 
 Camera class for managing the view parameters and transformations in a 3D space.
 It provides methods to manipulate the camera position, orientation, and projection.
@@ -17,7 +17,7 @@ It provides methods to manipulate the camera position, orientation, and projecti
 
 > **new Camera**(`params?`): `Camera`
 
-Defined in: [camera.ts:81](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L81)
+Defined in: [camera.ts:81](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L81)
 
 Constructs a Camera instance with the specified parameters.
 If no parameters are provided, it uses the default camera parameters.
@@ -40,7 +40,7 @@ The initial camera parameters.
 
 > `protected` **fovy**: `number`
 
-Defined in: [camera.ts:39](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L39)
+Defined in: [camera.ts:39](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L39)
 
 The field of view angle in the y direction.
 
@@ -50,7 +50,7 @@ The field of view angle in the y direction.
 
 > `protected` **mModelMatrix**: `mat4`
 
-Defined in: [camera.ts:54](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L54)
+Defined in: [camera.ts:54](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L54)
 
 The model matrix for the camera.
 
@@ -60,7 +60,7 @@ The model matrix for the camera.
 
 > `protected` **mProjectionMatrix**: `mat4`
 
-Defined in: [camera.ts:44](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L44)
+Defined in: [camera.ts:44](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L44)
 
 The projection matrix for the camera.
 
@@ -70,7 +70,7 @@ The projection matrix for the camera.
 
 > `protected` **mViewMatrix**: `mat4`
 
-Defined in: [camera.ts:49](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L49)
+Defined in: [camera.ts:49](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L49)
 
 The view matrix for the camera.
 
@@ -80,7 +80,7 @@ The view matrix for the camera.
 
 > `protected` **wEye**: `vec3`
 
-Defined in: [camera.ts:12](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L12)
+Defined in: [camera.ts:12](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L12)
 
 The world eye position of the camera.
 
@@ -90,7 +90,7 @@ The world eye position of the camera.
 
 > `protected` **wEyeDir**: `vec3`
 
-Defined in: [camera.ts:21](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L21)
+Defined in: [camera.ts:21](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L21)
 
 The world eye direction vector of the camera.
 
@@ -100,7 +100,7 @@ The world eye direction vector of the camera.
 
 > `protected` **wFar**: `number` = `0`
 
-Defined in: [camera.ts:34](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L34)
+Defined in: [camera.ts:34](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L34)
 
 The far clipping plane distance.
 
@@ -110,7 +110,7 @@ The far clipping plane distance.
 
 > `protected` **wLookAt**: `vec3`
 
-Defined in: [camera.ts:16](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L16)
+Defined in: [camera.ts:16](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L16)
 
 The world look-at position of the camera.
 
@@ -120,7 +120,7 @@ The world look-at position of the camera.
 
 > `protected` **wNear**: `number` = `0`
 
-Defined in: [camera.ts:30](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L30)
+Defined in: [camera.ts:30](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L30)
 
 The near clipping plane distance.
 
@@ -130,7 +130,7 @@ The near clipping plane distance.
 
 > `protected` **wUp**: `vec3`
 
-Defined in: [camera.ts:25](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L25)
+Defined in: [camera.ts:25](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L25)
 
 The world up vector of the camera.
 
@@ -140,7 +140,7 @@ The world up vector of the camera.
 
 > **getModelViewMatrix**(): `number`[] \| `Float32Array`\<`ArrayBufferLike`\>
 
-Defined in: [camera.ts:120](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L120)
+Defined in: [camera.ts:120](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L120)
 
 Gets the model-view matrix for the camera.
 
@@ -156,7 +156,7 @@ The model-view matrix
 
 > **getProjectionMatrix**(): `number`[] \| `Float32Array`\<`ArrayBufferLike`\>
 
-Defined in: [camera.ts:112](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L112)
+Defined in: [camera.ts:112](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L112)
 
 Gets the projection matrix for the camera.
 
@@ -172,7 +172,7 @@ The projection matrix
 
 > **pitch**(`delta`): `void`
 
-Defined in: [camera.ts:189](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L189)
+Defined in: [camera.ts:189](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L189)
 
 Pitches the camera around the x-axis.
 
@@ -194,7 +194,7 @@ The amount to pitch the camera (in radians).
 
 > **resetCamera**(`wUp`, `wLookAt`, `wEye`): `void`
 
-Defined in: [camera.ts:92](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L92)
+Defined in: [camera.ts:92](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L92)
 
 Resets the camera to the initial position and orientation.
 
@@ -228,7 +228,7 @@ The eye position of the camera in world coordinates.
 
 > **resize**(`width`, `height`): `void`
 
-Defined in: [camera.ts:130](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L130)
+Defined in: [camera.ts:130](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L130)
 
 Resizes the viewport for the camera.
 
@@ -256,7 +256,7 @@ The new height of the viewport.
 
 > `protected` **screenCoordToWorldDir**(`x`, `y`): `vec3`
 
-Defined in: [camera.ts:224](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L224)
+Defined in: [camera.ts:224](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L224)
 
 Converts screen coordinates to world direction vector.
 
@@ -286,7 +286,7 @@ The direction vector in world coordinates.
 
 > **translate**(`dx`, `dy`): `void`
 
-Defined in: [camera.ts:159](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L159)
+Defined in: [camera.ts:159](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L159)
 
 Translates the camera position by the specified delta values in the x and y directions.
 The translation is scaled by the current eye distance to maintain consistent movement speed.
@@ -315,7 +315,7 @@ The translation distance in the y direction.
 
 > **update**(): `void`
 
-Defined in: [camera.ts:207](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L207)
+Defined in: [camera.ts:207](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L207)
 
 Updates the camera's view and projection matrices.
 
@@ -329,7 +329,7 @@ Updates the camera's view and projection matrices.
 
 > `protected` **updateEyeDirAndLen**(): `void`
 
-Defined in: [camera.ts:241](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L241)
+Defined in: [camera.ts:241](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L241)
 
 Updates the eye direction and length based on the current eye and look-at positions.
 
@@ -343,7 +343,7 @@ Updates the eye direction and length based on the current eye and look-at positi
 
 > **yaw**(`delta`): `void`
 
-Defined in: [camera.ts:178](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L178)
+Defined in: [camera.ts:178](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L178)
 
 Yaws the camera around the z-axis.
 
@@ -365,7 +365,7 @@ The amount to yaw the camera (in radians).
 
 > **zoom**(`delta`, `x`, `y`): `void`
 
-Defined in: [camera.ts:143](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/camera.ts#L143)
+Defined in: [camera.ts:143](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/camera.ts#L143)
 
 Zooms the camera in or out based on the specified delta and screen coordinates.
 

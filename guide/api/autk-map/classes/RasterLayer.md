@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: RasterLayer
 
-Defined in: [layer-raster.ts:19](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L19)
+Defined in: [layer-raster.ts:19](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L19)
 
 Base class for map layers.
 This class provides the basic structure and functionality for all map layers.
@@ -24,7 +24,7 @@ as well as rendering and picking operations.
 
 > **new RasterLayer**(`layerInfo`, `layerRenderInfo`, `layerData`): `RasterLayer`
 
-Defined in: [layer-raster.ts:80](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L80)
+Defined in: [layer-raster.ts:80](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L80)
 
 Constructor for Raster
 
@@ -62,7 +62,7 @@ The layer data.
 
 > `protected` **\_components**: [`ILayerComponent`](../interfaces/ILayerComponent.md)[] = `[]`
 
-Defined in: [layer-raster.ts:42](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L42)
+Defined in: [layer-raster.ts:42](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L42)
 
 Components of the layer.
 
@@ -72,7 +72,7 @@ Components of the layer.
 
 > `protected` **\_dataIsDirty**: `boolean` = `false`
 
-Defined in: [layer.ts:38](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer.ts#L38)
+Defined in: [layer.ts:38](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer.ts#L38)
 
 Indicates if the layer's data is dirty.
 This is used to determine if VOBs need to be reconstructed.
@@ -87,7 +87,7 @@ This is used to determine if VOBs need to be reconstructed.
 
 > `protected` **\_indices**: `number`[]
 
-Defined in: [layer-raster.ts:30](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L30)
+Defined in: [layer-raster.ts:30](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L30)
 
 Indices of the triangles.
 
@@ -97,7 +97,7 @@ Indices of the triangles.
 
 > `protected` **\_layerInfo**: [`ILayerInfo`](../interfaces/ILayerInfo.md)
 
-Defined in: [layer.ts:18](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer.ts#L18)
+Defined in: [layer.ts:18](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer.ts#L18)
 
 Layer information.
 
@@ -111,7 +111,7 @@ Layer information.
 
 > `protected` **\_layerRenderInfo**: [`ILayerRenderInfo`](../interfaces/ILayerRenderInfo.md)
 
-Defined in: [layer.ts:24](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer.ts#L24)
+Defined in: [layer.ts:24](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer.ts#L24)
 
 Layer rendering information.
 
@@ -125,7 +125,7 @@ Layer rendering information.
 
 > `protected` **\_pipeline**: [`Pipeline`](Pipeline.md)
 
-Defined in: [layer-raster.ts:70](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L70)
+Defined in: [layer-raster.ts:70](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L70)
 
 Pipeline for rendering borders.
 
@@ -135,7 +135,7 @@ Pipeline for rendering borders.
 
 > `protected` **\_position**: `number`[]
 
-Defined in: [layer-raster.ts:24](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L24)
+Defined in: [layer-raster.ts:24](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L24)
 
 Positions of the triangles.
 
@@ -145,7 +145,7 @@ Positions of the triangles.
 
 > `protected` **\_rasterData**: `number`[]
 
-Defined in: [layer-raster.ts:62](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L62)
+Defined in: [layer-raster.ts:62](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L62)
 
 The raster data for the layer.
 
@@ -155,7 +155,7 @@ The raster data for the layer.
 
 > `protected` **\_rasterResX**: `number`
 
-Defined in: [layer-raster.ts:50](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L50)
+Defined in: [layer-raster.ts:50](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L50)
 
 The raster resolution in X direction.
 
@@ -165,7 +165,7 @@ The raster resolution in X direction.
 
 > `protected` **\_rasterResY**: `number`
 
-Defined in: [layer-raster.ts:56](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L56)
+Defined in: [layer-raster.ts:56](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L56)
 
 The raster resolution in Y direction.
 
@@ -175,7 +175,7 @@ The raster resolution in Y direction.
 
 > `protected` **\_renderInfoIsDirty**: `boolean` = `false`
 
-Defined in: [layer.ts:31](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer.ts#L31)
+Defined in: [layer.ts:31](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer.ts#L31)
 
 Indicates if the layer's rendering information is dirty.
 This is used to determine if uniforms need to be reloaded.
@@ -190,7 +190,7 @@ This is used to determine if uniforms need to be reloaded.
 
 > `protected` **\_texCoord**: `number`[]
 
-Defined in: [layer-raster.ts:36](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L36)
+Defined in: [layer-raster.ts:36](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L36)
 
 The texture coordinates for the layer.
 
@@ -202,7 +202,7 @@ The texture coordinates for the layer.
 
 > **get** **components**(): [`ILayerComponent`](../interfaces/ILayerComponent.md)[]
 
-Defined in: [layer-raster.ts:116](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L116)
+Defined in: [layer-raster.ts:116](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L116)
 
 Get the components of the layer.
 
@@ -220,7 +220,7 @@ Get the components of the layer.
 
 > **get** **indices**(): `number`[]
 
-Defined in: [layer-raster.ts:100](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L100)
+Defined in: [layer-raster.ts:100](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L100)
 
 Get the indices of the triangles.
 
@@ -238,7 +238,7 @@ Get the indices of the triangles.
 
 > **get** **layerInfo**(): [`ILayerInfo`](../interfaces/ILayerInfo.md)
 
-Defined in: [layer.ts:54](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer.ts#L54)
+Defined in: [layer.ts:54](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer.ts#L54)
 
 Gets the information of the layer.
 
@@ -252,7 +252,7 @@ The information of the layer.
 
 > **set** **layerInfo**(`layerInfo`): `void`
 
-Defined in: [layer.ts:62](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer.ts#L62)
+Defined in: [layer.ts:62](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer.ts#L62)
 
 Sets the information of the layer.
 
@@ -280,7 +280,7 @@ The info to set for the layer.
 
 > **get** **layerRenderInfo**(): [`ILayerRenderInfo`](../interfaces/ILayerRenderInfo.md)
 
-Defined in: [layer.ts:70](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer.ts#L70)
+Defined in: [layer.ts:70](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer.ts#L70)
 
 Gets the rendering information of the layer.
 
@@ -294,7 +294,7 @@ The rendering information of the layer.
 
 > **set** **layerRenderInfo**(`layerRenderInfo`): `void`
 
-Defined in: [layer.ts:78](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer.ts#L78)
+Defined in: [layer.ts:78](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer.ts#L78)
 
 Sets the rendering information of the layer.
 
@@ -322,7 +322,7 @@ The rendering info to set for the layer.
 
 > **get** **position**(): `number`[]
 
-Defined in: [layer-raster.ts:92](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L92)
+Defined in: [layer-raster.ts:92](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L92)
 
 Get the positions of the triangles.
 
@@ -340,7 +340,7 @@ Get the positions of the triangles.
 
 > **get** **rasterData**(): `number`[]
 
-Defined in: [layer-raster.ts:142](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L142)
+Defined in: [layer-raster.ts:142](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L142)
 
 Get the raster data.
 
@@ -358,7 +358,7 @@ Get the raster data.
 
 > **get** **rasterResX**(): `number`
 
-Defined in: [layer-raster.ts:126](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L126)
+Defined in: [layer-raster.ts:126](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L126)
 
 Get the raster resolution in X direction.
 
@@ -376,7 +376,7 @@ Get the raster resolution in X direction.
 
 > **get** **rasterResY**(): `number`
 
-Defined in: [layer-raster.ts:134](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L134)
+Defined in: [layer-raster.ts:134](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L134)
 
 Get the raster resolution in Y direction.
 
@@ -394,7 +394,7 @@ Get the raster resolution in Y direction.
 
 > **get** **texCoord**(): `number`[]
 
-Defined in: [layer-raster.ts:108](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L108)
+Defined in: [layer-raster.ts:108](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L108)
 
 Get the texture coordinates.
 
@@ -410,7 +410,7 @@ Get the texture coordinates.
 
 > **createPipeline**(`renderer`): `void`
 
-Defined in: [layer-raster.ts:273](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L273)
+Defined in: [layer-raster.ts:275](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L275)
 
 Create the rendering pipeline for the layer.
 
@@ -432,7 +432,7 @@ The renderer instance.
 
 > **loadComponent**(`layerComponents`): `void`
 
-Defined in: [layer-raster.ts:202](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L202)
+Defined in: [layer-raster.ts:202](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L202)
 
 Load the components of the layer.
 
@@ -454,7 +454,7 @@ The components to load.
 
 > **loadGeometry**(`layerGeometry`): `void`
 
-Defined in: [layer-raster.ts:165](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L165)
+Defined in: [layer-raster.ts:165](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L165)
 
 Load the texture coordinates from the layer data.
 
@@ -476,7 +476,7 @@ The layer data.
 
 > **loadLayerData**(`layerData`): `void`
 
-Defined in: [layer-raster.ts:152](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L152)
+Defined in: [layer-raster.ts:152](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L152)
 
 Load the layer data.
 
@@ -498,7 +498,7 @@ The layer data.
 
 > **loadRaster**(`layerRaster`): `void`
 
-Defined in: [layer-raster.ts:223](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L223)
+Defined in: [layer-raster.ts:223](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L223)
 
 Load the raster data from the layer data.
 
@@ -520,7 +520,7 @@ The layer data.
 
 > **makeLayerDataDirty**(): `void`
 
-Defined in: [layer.ts:85](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer.ts#L85)
+Defined in: [layer.ts:85](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer.ts#L85)
 
 Marks the layer's data as dirty, indicating that VOBs need to be reconstructed.
 
@@ -538,7 +538,7 @@ Marks the layer's data as dirty, indicating that VOBs need to be reconstructed.
 
 > **makeLayerRenderInfoDirty**(): `void`
 
-Defined in: [layer.ts:92](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer.ts#L92)
+Defined in: [layer.ts:92](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer.ts#L92)
 
 Marks the layer's rendering information as dirty, indicating uniforms need to be reloaded.
 
@@ -556,7 +556,7 @@ Marks the layer's rendering information as dirty, indicating uniforms need to be
 
 > **renderPass**(`camera`): `void`
 
-Defined in: [layer-raster.ts:282](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-raster.ts#L282)
+Defined in: [layer-raster.ts:284](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-raster.ts#L284)
 
 Render the layer for the current pass.
 

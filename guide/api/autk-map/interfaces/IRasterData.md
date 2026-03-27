@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: IRasterData
 
-Defined in: [interfaces.ts:114](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/interfaces.ts#L114)
+Defined in: [interfaces.ts:114](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/interfaces.ts#L114)
 
 Interface for raster data.
 
@@ -16,7 +16,7 @@ Interface for raster data.
 
 > **rasterResX**: `number`
 
-Defined in: [interfaces.ts:115](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/interfaces.ts#L115)
+Defined in: [interfaces.ts:115](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/interfaces.ts#L115)
 
 Width of the raster.
 
@@ -26,7 +26,7 @@ Width of the raster.
 
 > **rasterResY**: `number`
 
-Defined in: [interfaces.ts:116](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/interfaces.ts#L116)
+Defined in: [interfaces.ts:116](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/interfaces.ts#L116)
 
 Height of the raster.
 
@@ -36,4 +36,4 @@ Height of the raster.
 
 > **rasterValues**: `number`[]
 
-Defined in: [interfaces.ts:117](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/interfaces.ts#L117)
+Defined in: [interfaces.ts:117](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/interfaces.ts#L117)

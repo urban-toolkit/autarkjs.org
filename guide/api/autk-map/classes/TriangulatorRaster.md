@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: TriangulatorRaster
 
-Defined in: [triangulator-raster.ts:13](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/triangulator-raster.ts#L13)
+Defined in: [triangulator-raster.ts:13](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-raster.ts#L13)
 
 Class for triangulating polylines from GeoJSON features.
 It provides methods to convert different geometry types into polyline meshes.
@@ -27,7 +27,7 @@ It provides methods to convert different geometry types into polyline meshes.
 
 > `static` **buildMesh**(`geotiff`, `origin`): \[[`ILayerGeometry`](../interfaces/ILayerGeometry.md)[], [`ILayerComponent`](../interfaces/ILayerComponent.md)[]\]
 
-Defined in: [triangulator-raster.ts:21](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/triangulator-raster.ts#L21)
+Defined in: [triangulator-raster.ts:21](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-raster.ts#L21)
 
 Builds a mesh from GeoJSON features representing polylines.
 
@@ -57,7 +57,7 @@ An array of geometries and components
 
 > `static` **lineStringToPolyline**(`feature`, `origin`, `offset`): `object`[]
 
-Defined in: [triangulator-raster.ts:64](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/triangulator-raster.ts#L64)
+Defined in: [triangulator-raster.ts:64](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-raster.ts#L64)
 
 Converts a LineString feature to a polyline mesh representation.
 
@@ -93,7 +93,7 @@ An array of geometries
 
 > `static` **multiLineStringToPolyline**(`feature`, `origin`, `offset`): `object`[]
 
-Defined in: [triangulator-raster.ts:87](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/triangulator-raster.ts#L87)
+Defined in: [triangulator-raster.ts:87](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-raster.ts#L87)
 
 Converts a MultiLineString feature to a polyline mesh representation.
 

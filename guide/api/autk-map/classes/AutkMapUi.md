@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: AutkMapUi
 
-Defined in: [map-ui.ts:8](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L8)
+Defined in: [map-ui.ts:8](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L8)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [map-ui.ts:8](https://github.com/urban-toolkit/autark/blob/9b743c4ad
 
 > **new AutkMapUi**(`map`): `AutkMapUi`
 
-Defined in: [map-ui.ts:17](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L17)
+Defined in: [map-ui.ts:17](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L17)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [map-ui.ts:17](https://github.com/urban-toolkit/autark/blob/9b743c4a
 
 > `protected` **\_activeLayer**: [`Layer`](Layer.md) \| `null` = `null`
 
-Defined in: [map-ui.ts:11](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L11)
+Defined in: [map-ui.ts:11](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L11)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [map-ui.ts:11](https://github.com/urban-toolkit/autark/blob/9b743c4a
 
 > `protected` **\_legend**: `HTMLDivElement` \| `null` = `null`
 
-Defined in: [map-ui.ts:14](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L14)
+Defined in: [map-ui.ts:14](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L14)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [map-ui.ts:14](https://github.com/urban-toolkit/autark/blob/9b743c4a
 
 > `protected` **\_map**: [`AutkMap`](AutkMap.md)
 
-Defined in: [map-ui.ts:9](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L9)
+Defined in: [map-ui.ts:9](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L9)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [map-ui.ts:9](https://github.com/urban-toolkit/autark/blob/9b743c4ad
 
 > `protected` **\_menuIcon**: `HTMLDivElement` \| `null` = `null`
 
-Defined in: [map-ui.ts:12](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L12)
+Defined in: [map-ui.ts:12](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L12)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [map-ui.ts:12](https://github.com/urban-toolkit/autark/blob/9b743c4a
 
 > `protected` **\_subMenu**: `HTMLDivElement` \| `null` = `null`
 
-Defined in: [map-ui.ts:13](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L13)
+Defined in: [map-ui.ts:13](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L13)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [map-ui.ts:13](https://github.com/urban-toolkit/autark/blob/9b743c4a
 
 > `protected` **\_uiMargin**: `number` = `10`
 
-Defined in: [map-ui.ts:10](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L10)
+Defined in: [map-ui.ts:10](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L10)
 
 ## Accessors
 
@@ -82,7 +82,7 @@ Defined in: [map-ui.ts:10](https://github.com/urban-toolkit/autark/blob/9b743c4a
 
 > **get** **activeLayer**(): [`Layer`](Layer.md) \| `null`
 
-Defined in: [map-ui.ts:23](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L23)
+Defined in: [map-ui.ts:23](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L23)
 
 ##### Returns
 
@@ -92,7 +92,7 @@ Defined in: [map-ui.ts:23](https://github.com/urban-toolkit/autark/blob/9b743c4a
 
 > **set** **activeLayer**(`layer`): `void`
 
-Defined in: [map-ui.ts:24](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L24)
+Defined in: [map-ui.ts:24](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L24)
 
 ##### Parameters
 
@@ -112,7 +112,7 @@ Defined in: [map-ui.ts:24](https://github.com/urban-toolkit/autark/blob/9b743c4a
 
 > **get** **map**(): [`AutkMap`](AutkMap.md)
 
-Defined in: [map-ui.ts:21](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L21)
+Defined in: [map-ui.ts:21](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L21)
 
 ##### Returns
 
@@ -122,7 +122,7 @@ Defined in: [map-ui.ts:21](https://github.com/urban-toolkit/autark/blob/9b743c4a
 
 > **set** **map**(`map`): `void`
 
-Defined in: [map-ui.ts:22](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L22)
+Defined in: [map-ui.ts:22](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L22)
 
 ##### Parameters
 
@@ -140,7 +140,7 @@ Defined in: [map-ui.ts:22](https://github.com/urban-toolkit/autark/blob/9b743c4a
 
 > `protected` **buildActiveLayerDropdown**(): `void`
 
-Defined in: [map-ui.ts:185](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L185)
+Defined in: [map-ui.ts:185](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L185)
 
 #### Returns
 
@@ -152,7 +152,7 @@ Defined in: [map-ui.ts:185](https://github.com/urban-toolkit/autark/blob/9b743c4
 
 > `protected` **buildLegend**(`width?`, `height?`): `void`
 
-Defined in: [map-ui.ts:223](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L223)
+Defined in: [map-ui.ts:223](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L223)
 
 #### Parameters
 
@@ -174,7 +174,7 @@ Defined in: [map-ui.ts:223](https://github.com/urban-toolkit/autark/blob/9b743c4
 
 > `protected` **buildLegendCheckbox**(): `void`
 
-Defined in: [map-ui.ts:199](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L199)
+Defined in: [map-ui.ts:199](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L199)
 
 #### Returns
 
@@ -186,7 +186,7 @@ Defined in: [map-ui.ts:199](https://github.com/urban-toolkit/autark/blob/9b743c4
 
 > `protected` **buildMenuIcon**(): `void`
 
-Defined in: [map-ui.ts:121](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L121)
+Defined in: [map-ui.ts:121](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L121)
 
 #### Returns
 
@@ -198,7 +198,7 @@ Defined in: [map-ui.ts:121](https://github.com/urban-toolkit/autark/blob/9b743c4
 
 > `protected` **buildSubMenu**(): `void`
 
-Defined in: [map-ui.ts:155](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L155)
+Defined in: [map-ui.ts:155](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L155)
 
 #### Returns
 
@@ -210,7 +210,7 @@ Defined in: [map-ui.ts:155](https://github.com/urban-toolkit/autark/blob/9b743c4
 
 > **buildUi**(): `void`
 
-Defined in: [map-ui.ts:75](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L75)
+Defined in: [map-ui.ts:75](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L75)
 
 Build all UI elements once. Called from AutkMap.init().
 
@@ -224,7 +224,7 @@ Build all UI elements once. Called from AutkMap.init().
 
 > `protected` **buildVisibleLayersDropdown**(): `void`
 
-Defined in: [map-ui.ts:171](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L171)
+Defined in: [map-ui.ts:171](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L171)
 
 #### Returns
 
@@ -236,7 +236,7 @@ Defined in: [map-ui.ts:171](https://github.com/urban-toolkit/autark/blob/9b743c4
 
 > **changeActiveLayer**(`layer`): `void`
 
-Defined in: [map-ui.ts:47](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L47)
+Defined in: [map-ui.ts:47](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L47)
 
 #### Parameters
 
@@ -254,7 +254,7 @@ Defined in: [map-ui.ts:47](https://github.com/urban-toolkit/autark/blob/9b743c4a
 
 > **handleResize**(): `void`
 
-Defined in: [map-ui.ts:28](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L28)
+Defined in: [map-ui.ts:28](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L28)
 
 #### Returns
 
@@ -266,7 +266,7 @@ Defined in: [map-ui.ts:28](https://github.com/urban-toolkit/autark/blob/9b743c4a
 
 > `protected` **populateActiveLayersList**(): `void`
 
-Defined in: [map-ui.ts:257](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L257)
+Defined in: [map-ui.ts:257](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L257)
 
 #### Returns
 
@@ -278,7 +278,7 @@ Defined in: [map-ui.ts:257](https://github.com/urban-toolkit/autark/blob/9b743c4
 
 > `protected` **populateVisibleLayersList**(): `void`
 
-Defined in: [map-ui.ts:242](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L242)
+Defined in: [map-ui.ts:242](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L242)
 
 #### Returns
 
@@ -290,7 +290,7 @@ Defined in: [map-ui.ts:242](https://github.com/urban-toolkit/autark/blob/9b743c4
 
 > **refreshLegend**(`layer`): `void`
 
-Defined in: [map-ui.ts:89](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L89)
+Defined in: [map-ui.ts:89](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L89)
 
 Called externally (e.g. from updateRenderInfoProperty) when isColorMap changes.
 Updates the legend and checkbox to reflect the new state.
@@ -311,7 +311,7 @@ Updates the legend and checkbox to reflect the new state.
 
 > `protected` **syncCheckbox**(): `void`
 
-Defined in: [map-ui.ts:100](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L100)
+Defined in: [map-ui.ts:100](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L100)
 
 #### Returns
 
@@ -323,7 +323,7 @@ Defined in: [map-ui.ts:100](https://github.com/urban-toolkit/autark/blob/9b743c4
 
 > `protected` **syncLayerLists**(): `void`
 
-Defined in: [map-ui.ts:114](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L114)
+Defined in: [map-ui.ts:114](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L114)
 
 #### Returns
 
@@ -335,7 +335,7 @@ Defined in: [map-ui.ts:114](https://github.com/urban-toolkit/autark/blob/9b743c4
 
 > `protected` **syncLegendVisibility**(): `void`
 
-Defined in: [map-ui.ts:107](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L107)
+Defined in: [map-ui.ts:107](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L107)
 
 #### Returns
 
@@ -347,7 +347,7 @@ Defined in: [map-ui.ts:107](https://github.com/urban-toolkit/autark/blob/9b743c4
 
 > `protected` **updateLegendContent**(`width?`, `height?`): `void`
 
-Defined in: [map-ui.ts:295](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-ui.ts#L295)
+Defined in: [map-ui.ts:295](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-ui.ts#L295)
 
 #### Parameters
 

@@ -1,4 +1,4 @@
-[**autk-compute**](../globals.md)
+[**autk-compute**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: GeojsonCompute
 
-Defined in: [geojson-compute.ts:5](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-compute/src/geojson/geojson-compute.ts#L5)
+Defined in: [geojson-compute.ts:5](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-compute/src/geojson/geojson-compute.ts#L5)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [geojson-compute.ts:5](https://github.com/urban-toolkit/autark/blob/
 
 > **new GeojsonCompute**(): `GeojsonCompute`
 
-Defined in: [geojson-compute.ts:8](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-compute/src/geojson/geojson-compute.ts#L8)
+Defined in: [geojson-compute.ts:8](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-compute/src/geojson/geojson-compute.ts#L8)
 
 #### Returns
 
@@ -26,7 +26,7 @@ Defined in: [geojson-compute.ts:8](https://github.com/urban-toolkit/autark/blob/
 
 > **computeFunctionIntoProperties**(`params`): `Promise`\<`FeatureCollection`\<`Geometry`, `GeoJsonProperties`\>\>
 
-Defined in: [geojson-compute.ts:18](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-compute/src/geojson/geojson-compute.ts#L18)
+Defined in: [geojson-compute.ts:18](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-compute/src/geojson/geojson-compute.ts#L18)
 
 Executes a WGSL function on feature properties and adds the result to properties.compute[outputColumnName]
 

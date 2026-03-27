@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Enumeration: MapEvent
 
-Defined in: [constants.ts:29](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/constants.ts#L29)
+Defined in: [constants.ts:29](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L29)
 
 Map events for interaction.
 
@@ -16,6 +16,6 @@ Map events for interaction.
 
 > **PICK**: `"pick"`
 
-Defined in: [constants.ts:30](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/constants.ts#L30)
+Defined in: [constants.ts:30](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L30)
 
 Event triggered when a feature is picked.

@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: PipelineTriangleRaster
 
-Defined in: [pipeline-triangle-raster.ts:17](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline-triangle-raster.ts#L17)
+Defined in: [pipeline-triangle-raster.ts:17](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline-triangle-raster.ts#L17)
 
 PipelineTriangleRaster is a rendering pipeline for drawing rasterized triangles.
 It uses WebGPU to render triangles based on the provided mesh data.
@@ -21,7 +21,7 @@ It uses WebGPU to render triangles based on the provided mesh data.
 
 > **new PipelineTriangleRaster**(`renderer`): `PipelineTriangleRaster`
 
-Defined in: [pipeline-triangle-raster.ts:72](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline-triangle-raster.ts#L72)
+Defined in: [pipeline-triangle-raster.ts:72](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline-triangle-raster.ts#L72)
 
 Constructor for PipelineTriangleFlat
 
@@ -47,7 +47,7 @@ The renderer instance
 
 > `protected` **\_cameraBindGroup**: `GPUBindGroup`
 
-Defined in: [pipeline.ts:39](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L39)
+Defined in: [pipeline.ts:39](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L39)
 
 Camera bind group
 
@@ -61,7 +61,7 @@ Camera bind group
 
 > `protected` **\_cameraBindGroupLayout**: `GPUBindGroupLayout`
 
-Defined in: [pipeline.ts:44](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L44)
+Defined in: [pipeline.ts:44](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L44)
 
 Camera bind group layout
 
@@ -75,7 +75,7 @@ Camera bind group layout
 
 > `protected` **\_cMapTexture**: `GPUTexture`
 
-Defined in: [pipeline.ts:61](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L61)
+Defined in: [pipeline.ts:61](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L61)
 
 Color map texture
 
@@ -89,7 +89,7 @@ Color map texture
 
 > `protected` **\_colorBuffer**: `GPUBuffer`
 
-Defined in: [pipeline.ts:51](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L51)
+Defined in: [pipeline.ts:51](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L51)
 
 Color uniform buffer
 
@@ -103,7 +103,7 @@ Color uniform buffer
 
 > `protected` **\_fragModule**: `GPUShaderModule`
 
-Defined in: [pipeline-triangle-raster.ts:46](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline-triangle-raster.ts#L46)
+Defined in: [pipeline-triangle-raster.ts:46](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline-triangle-raster.ts#L46)
 
 Fragment shader module.
 
@@ -113,7 +113,7 @@ Fragment shader module.
 
 > `protected` **\_highlightColorBuffer**: `GPUBuffer`
 
-Defined in: [pipeline.ts:56](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L56)
+Defined in: [pipeline.ts:56](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L56)
 
 Highlight color uniform buffer
 
@@ -127,7 +127,7 @@ Highlight color uniform buffer
 
 > `protected` **\_indicesBuffer**: `GPUBuffer`
 
-Defined in: [pipeline-triangle-raster.ts:34](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline-triangle-raster.ts#L34)
+Defined in: [pipeline-triangle-raster.ts:34](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline-triangle-raster.ts#L34)
 
 Buffer for primitive indices.
 
@@ -137,7 +137,7 @@ Buffer for primitive indices.
 
 > `protected` **\_mviewBuffer**: `GPUBuffer`
 
-Defined in: [pipeline.ts:27](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L27)
+Defined in: [pipeline.ts:27](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L27)
 
 ModelView matrix uniform buffer
 
@@ -151,7 +151,7 @@ ModelView matrix uniform buffer
 
 > `protected` **\_opacity**: `GPUBuffer`
 
-Defined in: [pipeline.ts:79](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L79)
+Defined in: [pipeline.ts:79](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L79)
 
 Opacity uniform buffer
 
@@ -165,7 +165,7 @@ Opacity uniform buffer
 
 > `protected` **\_pipeline**: `GPURenderPipeline`
 
-Defined in: [pipeline-triangle-raster.ts:52](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline-triangle-raster.ts#L52)
+Defined in: [pipeline-triangle-raster.ts:52](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline-triangle-raster.ts#L52)
 
 Render pipeline for drawing triangles.
 
@@ -175,7 +175,7 @@ Render pipeline for drawing triangles.
 
 > `protected` **\_positionBuffer**: `GPUBuffer`
 
-Defined in: [pipeline-triangle-raster.ts:22](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline-triangle-raster.ts#L22)
+Defined in: [pipeline-triangle-raster.ts:22](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline-triangle-raster.ts#L22)
 
 Position buffer for vertex data.
 
@@ -185,7 +185,7 @@ Position buffer for vertex data.
 
 > `protected` **\_projcBuffer**: `GPUBuffer`
 
-Defined in: [pipeline.ts:32](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L32)
+Defined in: [pipeline.ts:32](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L32)
 
 Projection matrix uniform buffer
 
@@ -199,7 +199,7 @@ Projection matrix uniform buffer
 
 > `protected` **\_rasterBindGroup**: `GPUBindGroup`
 
-Defined in: [pipeline-triangle-raster.ts:61](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline-triangle-raster.ts#L61)
+Defined in: [pipeline-triangle-raster.ts:61](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline-triangle-raster.ts#L61)
 
 Raster bind group
 
@@ -209,7 +209,7 @@ Raster bind group
 
 > `protected` **\_rasterBindGroupLayout**: `GPUBindGroupLayout`
 
-Defined in: [pipeline-triangle-raster.ts:66](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline-triangle-raster.ts#L66)
+Defined in: [pipeline-triangle-raster.ts:66](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline-triangle-raster.ts#L66)
 
 Raster bind group layout
 
@@ -219,7 +219,7 @@ Raster bind group layout
 
 > `protected` **\_rasterBuffer**: `GPUTexture`
 
-Defined in: [pipeline-triangle-raster.ts:57](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline-triangle-raster.ts#L57)
+Defined in: [pipeline-triangle-raster.ts:57](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline-triangle-raster.ts#L57)
 
 Raster uniform buffer
 
@@ -229,7 +229,7 @@ Raster uniform buffer
 
 > `protected` **\_renderer**: [`Renderer`](Renderer.md)
 
-Defined in: [pipeline.ts:21](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L21)
+Defined in: [pipeline.ts:21](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L21)
 
 Renderer reference
 
@@ -243,7 +243,7 @@ Renderer reference
 
 > `protected` **\_renderInfoBindGroup**: `GPUBindGroup`
 
-Defined in: [pipeline.ts:87](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L87)
+Defined in: [pipeline.ts:87](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L87)
 
 Render information bind group
 
@@ -257,7 +257,7 @@ Render information bind group
 
 > `protected` **\_renderInfoBindGroupLayout**: `GPUBindGroupLayout`
 
-Defined in: [pipeline.ts:92](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L92)
+Defined in: [pipeline.ts:92](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L92)
 
 Render information bind group layout
 
@@ -271,7 +271,7 @@ Render information bind group layout
 
 > `protected` **\_texCoordBuffer**: `GPUBuffer`
 
-Defined in: [pipeline-triangle-raster.ts:28](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline-triangle-raster.ts#L28)
+Defined in: [pipeline-triangle-raster.ts:28](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline-triangle-raster.ts#L28)
 
 Buffer for primitive indices.
 
@@ -281,7 +281,7 @@ Buffer for primitive indices.
 
 > `protected` **\_useColorMap**: `GPUBuffer`
 
-Defined in: [pipeline.ts:69](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L69)
+Defined in: [pipeline.ts:69](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L69)
 
 Use color map uniform buffer
 
@@ -295,7 +295,7 @@ Use color map uniform buffer
 
 > `protected` **\_useHighlight**: `GPUBuffer`
 
-Defined in: [pipeline.ts:74](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L74)
+Defined in: [pipeline.ts:74](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L74)
 
 Use highlight uniform buffer
 
@@ -309,7 +309,7 @@ Use highlight uniform buffer
 
 > `protected` **\_vertModule**: `GPUShaderModule`
 
-Defined in: [pipeline-triangle-raster.ts:40](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline-triangle-raster.ts#L40)
+Defined in: [pipeline-triangle-raster.ts:40](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline-triangle-raster.ts#L40)
 
 Vertex shader module.
 
@@ -319,7 +319,7 @@ Vertex shader module.
 
 > **build**(`mesh`): `void`
 
-Defined in: [pipeline-triangle-raster.ts:80](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline-triangle-raster.ts#L80)
+Defined in: [pipeline-triangle-raster.ts:80](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline-triangle-raster.ts#L80)
 
 Builds the pipeline with the provided mesh data.
 
@@ -345,7 +345,7 @@ The mesh data containing positions, thematic, and indices
 
 > **createCameraUniformBindGroup**(): `void`
 
-Defined in: [pipeline.ts:110](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L110)
+Defined in: [pipeline.ts:110](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L110)
 
 Creates the camera uniform bind group.
 
@@ -363,7 +363,7 @@ Creates the camera uniform bind group.
 
 > **createColorUniformBindGroup**(): `void`
 
-Defined in: [pipeline.ts:170](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L170)
+Defined in: [pipeline.ts:170](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L170)
 
 Creates the color uniform bind group.
 
@@ -381,7 +381,7 @@ Creates the color uniform bind group.
 
 > **createPipeline**(): `void`
 
-Defined in: [pipeline-triangle-raster.ts:224](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline-triangle-raster.ts#L224)
+Defined in: [pipeline-triangle-raster.ts:224](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline-triangle-raster.ts#L224)
 
 Creates the render pipeline for drawing triangles.
 
@@ -395,7 +395,7 @@ Creates the render pipeline for drawing triangles.
 
 > **createRasterUniformBindGroup**(`raster`): `void`
 
-Defined in: [pipeline-triangle-raster.ts:153](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline-triangle-raster.ts#L153)
+Defined in: [pipeline-triangle-raster.ts:153](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline-triangle-raster.ts#L153)
 
 Creates the raster uniform bind group.
 
@@ -415,7 +415,7 @@ Creates the raster uniform bind group.
 
 > **createShaders**(): `void`
 
-Defined in: [pipeline-triangle-raster.ts:99](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline-triangle-raster.ts#L99)
+Defined in: [pipeline-triangle-raster.ts:99](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline-triangle-raster.ts#L99)
 
 Creates the vertex and fragment shaders for the pipeline.
 
@@ -429,7 +429,7 @@ Creates the vertex and fragment shaders for the pipeline.
 
 > **createVertexBuffers**(`raster`): `void`
 
-Defined in: [pipeline-triangle-raster.ts:117](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline-triangle-raster.ts#L117)
+Defined in: [pipeline-triangle-raster.ts:117](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline-triangle-raster.ts#L117)
 
 Creates the vertex buffers for the pipeline.
 
@@ -455,7 +455,7 @@ The mesh data containing positions, thematic, and indices
 
 > **renderPass**(`camera`): `void`
 
-Defined in: [pipeline-triangle-raster.ts:321](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline-triangle-raster.ts#L321)
+Defined in: [pipeline-triangle-raster.ts:321](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline-triangle-raster.ts#L321)
 
 Renders the triangle flat pipeline.
 
@@ -481,7 +481,7 @@ The camera instance
 
 > **updateCameraUniforms**(`camera`): `void`
 
-Defined in: [pipeline.ts:157](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L157)
+Defined in: [pipeline.ts:157](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L157)
 
 Updates the camera uniform buffers with the current camera state.
 
@@ -507,7 +507,7 @@ The camera instance
 
 > **updateColorUniforms**(`layer`): `void`
 
-Defined in: [pipeline.ts:295](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L295)
+Defined in: [pipeline.ts:295](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L295)
 
 Updates the color uniform buffers with the current layer state.
 
@@ -533,7 +533,7 @@ The layer instance
 
 > **updateRasterUniforms**(`raster`): `void`
 
-Defined in: [pipeline-triangle-raster.ts:207](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline-triangle-raster.ts#L207)
+Defined in: [pipeline-triangle-raster.ts:207](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline-triangle-raster.ts#L207)
 
 Updates the raster uniform buffer with the provided raster data.
 
@@ -555,7 +555,7 @@ The raster layer containing raster data
 
 > **updateVertexBuffers**(`mesh`): `void`
 
-Defined in: [pipeline-triangle-raster.ts:144](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline-triangle-raster.ts#L144)
+Defined in: [pipeline-triangle-raster.ts:144](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline-triangle-raster.ts#L144)
 
 Updates the vertex buffers with the provided mesh data.
 

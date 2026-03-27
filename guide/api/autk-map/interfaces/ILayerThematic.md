@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ILayerThematic
 
-Defined in: [interfaces.ts:103](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/interfaces.ts#L103)
+Defined in: [interfaces.ts:103](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/interfaces.ts#L103)
 
 Interface for layer thematic data.
 
@@ -16,7 +16,7 @@ Interface for layer thematic data.
 
 > **level**: [`ThematicAggregationLevel`](../enumerations/ThematicAggregationLevel.md)
 
-Defined in: [interfaces.ts:104](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/interfaces.ts#L104)
+Defined in: [interfaces.ts:104](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/interfaces.ts#L104)
 
 Thematic aggregation level.
 
@@ -26,6 +26,6 @@ Thematic aggregation level.
 
 > **values**: `number`[]
 
-Defined in: [interfaces.ts:105](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/interfaces.ts#L105)
+Defined in: [interfaces.ts:105](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/interfaces.ts#L105)
 
 Array of values for the thematic layer.

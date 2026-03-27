@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **ColorHEX** = `` `#${string}` ``
 
-Defined in: [constants.ts:71](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/constants.ts#L71)
+Defined in: [constants.ts:71](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L71)
 
 Represents a color in hexadecimal format.
 

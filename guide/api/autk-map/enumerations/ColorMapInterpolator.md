@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Enumeration: ColorMapInterpolator
 
-Defined in: [constants.ts:50](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/constants.ts#L50)
+Defined in: [constants.ts:50](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L50)
 
 Color map interpolators for thematic data visualization.
 
@@ -16,7 +16,7 @@ Color map interpolators for thematic data visualization.
 
 > **DIVERGING\_RED\_BLUE**: `"interpolateRdBu"`
 
-Defined in: [constants.ts:53](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/constants.ts#L53)
+Defined in: [constants.ts:53](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L53)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [constants.ts:53](https://github.com/urban-toolkit/autark/blob/9b743
 
 > **OBSERVABLE10**: `"schemeObservable10"`
 
-Defined in: [constants.ts:54](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/constants.ts#L54)
+Defined in: [constants.ts:54](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L54)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [constants.ts:54](https://github.com/urban-toolkit/autark/blob/9b743
 
 > **SEQUENTIAL\_BLUES**: `"interpolateBlues"`
 
-Defined in: [constants.ts:52](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/constants.ts#L52)
+Defined in: [constants.ts:52](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L52)
 
 Blue color interpolation.
 
@@ -42,6 +42,6 @@ Blue color interpolation.
 
 > **SEQUENTIAL\_REDS**: `"interpolateReds"`
 
-Defined in: [constants.ts:51](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/constants.ts#L51)
+Defined in: [constants.ts:51](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L51)
 
 Red color interpolation.

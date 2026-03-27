@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: LayerBbox
 
-Defined in: [layer-bbox.ts:3](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-bbox.ts#L3)
+Defined in: [layer-bbox.ts:3](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-bbox.ts#L3)
 
 ## Constructors
 
@@ -24,7 +24,7 @@ Defined in: [layer-bbox.ts:3](https://github.com/urban-toolkit/autark/blob/9b743
 
 > `static` **build**(`features`): `BBox`
 
-Defined in: [layer-bbox.ts:5](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-bbox.ts#L5)
+Defined in: [layer-bbox.ts:5](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-bbox.ts#L5)
 
 #### Parameters
 
@@ -42,7 +42,7 @@ Defined in: [layer-bbox.ts:5](https://github.com/urban-toolkit/autark/blob/9b743
 
 > `static` **buildFromLines**(`lines`): `BBox`
 
-Defined in: [layer-bbox.ts:51](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-bbox.ts#L51)
+Defined in: [layer-bbox.ts:51](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-bbox.ts#L51)
 
 #### Parameters
 
@@ -60,7 +60,7 @@ Defined in: [layer-bbox.ts:51](https://github.com/urban-toolkit/autark/blob/9b74
 
 > `static` **buildFromMultiLines**(`multiLines`): `BBox`
 
-Defined in: [layer-bbox.ts:76](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-bbox.ts#L76)
+Defined in: [layer-bbox.ts:76](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-bbox.ts#L76)
 
 #### Parameters
 
@@ -78,7 +78,7 @@ Defined in: [layer-bbox.ts:76](https://github.com/urban-toolkit/autark/blob/9b74
 
 > `static` **buildFromMultiPolygons**(`multiPolygons`): `BBox`
 
-Defined in: [layer-bbox.ts:130](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-bbox.ts#L130)
+Defined in: [layer-bbox.ts:130](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-bbox.ts#L130)
 
 #### Parameters
 
@@ -96,7 +96,7 @@ Defined in: [layer-bbox.ts:130](https://github.com/urban-toolkit/autark/blob/9b7
 
 > `static` **buildFromPoints**(`points`): `BBox`
 
-Defined in: [layer-bbox.ts:28](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-bbox.ts#L28)
+Defined in: [layer-bbox.ts:28](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-bbox.ts#L28)
 
 #### Parameters
 
@@ -114,7 +114,7 @@ Defined in: [layer-bbox.ts:28](https://github.com/urban-toolkit/autark/blob/9b74
 
 > `static` **buildFromPolygons**(`polygons`): `BBox`
 
-Defined in: [layer-bbox.ts:103](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-bbox.ts#L103)
+Defined in: [layer-bbox.ts:103](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-bbox.ts#L103)
 
 #### Parameters
 

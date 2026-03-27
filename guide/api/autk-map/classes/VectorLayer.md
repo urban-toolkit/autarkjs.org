@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Abstract Class: VectorLayer
 
-Defined in: [layer-vector.ts:25](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L25)
+Defined in: [layer-vector.ts:25](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L25)
 
 Vector layer class extends Layer to handle vector data.
 It manages the positions, thematic data, indices, and components of the layer, as well as the rendering pipelines.
@@ -26,7 +26,7 @@ It manages the positions, thematic data, indices, and components of the layer, a
 
 > **new VectorLayer**(`layerInfo`, `layerRenderInfo`, `layerData`, `dimension?`): `VectorLayer`
 
-Defined in: [layer-vector.ts:110](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L110)
+Defined in: [layer-vector.ts:110](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L110)
 
 Constructor for Triangles2DLayer
 
@@ -70,7 +70,7 @@ The dimension of the layer (2 or 3).
 
 > `protected` **\_components**: [`ILayerComponent`](../interfaces/ILayerComponent.md)[] = `[]`
 
-Defined in: [layer-vector.ts:56](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L56)
+Defined in: [layer-vector.ts:56](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L56)
 
 Components of the layer.
 
@@ -80,7 +80,7 @@ Components of the layer.
 
 > `protected` **\_dataIsDirty**: `boolean` = `false`
 
-Defined in: [layer.ts:38](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer.ts#L38)
+Defined in: [layer.ts:38](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer.ts#L38)
 
 Indicates if the layer's data is dirty.
 This is used to determine if VOBs need to be reconstructed.
@@ -95,7 +95,7 @@ This is used to determine if VOBs need to be reconstructed.
 
 > `protected` **\_dimension**: `number`
 
-Defined in: [layer-vector.ts:30](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L30)
+Defined in: [layer-vector.ts:30](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L30)
 
 Dimension of the layer.
 
@@ -105,7 +105,7 @@ Dimension of the layer.
 
 > `protected` **\_highlightedIds**: `Set`\<`number`\>
 
-Defined in: [layer-vector.ts:65](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L65)
+Defined in: [layer-vector.ts:65](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L65)
 
 Highlighted IDs of the layer.
 This is a set to ensure uniqueness of highlighted IDs.
@@ -116,7 +116,7 @@ This is a set to ensure uniqueness of highlighted IDs.
 
 > `protected` **\_highlightedVertices**: `number`[]
 
-Defined in: [layer-vector.ts:71](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L71)
+Defined in: [layer-vector.ts:71](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L71)
 
 Highlighted vertices of the layer.
 
@@ -126,7 +126,7 @@ Highlighted vertices of the layer.
 
 > `protected` **\_indices**: `number`[]
 
-Defined in: [layer-vector.ts:50](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L50)
+Defined in: [layer-vector.ts:50](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L50)
 
 Indices of the triangles.
 
@@ -136,7 +136,7 @@ Indices of the triangles.
 
 > `protected` **\_layerInfo**: [`ILayerInfo`](../interfaces/ILayerInfo.md)
 
-Defined in: [layer.ts:18](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer.ts#L18)
+Defined in: [layer.ts:18](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer.ts#L18)
 
 Layer information.
 
@@ -150,7 +150,7 @@ Layer information.
 
 > `protected` **\_layerRenderInfo**: [`ILayerRenderInfo`](../interfaces/ILayerRenderInfo.md)
 
-Defined in: [layer.ts:24](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer.ts#L24)
+Defined in: [layer.ts:24](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer.ts#L24)
 
 Layer rendering information.
 
@@ -164,7 +164,7 @@ Layer rendering information.
 
 > `protected` **\_pipeline**: [`Pipeline`](Pipeline.md)
 
-Defined in: [layer-vector.ts:92](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L92)
+Defined in: [layer-vector.ts:92](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L92)
 
 Rendering pipeline for the layer.
 
@@ -174,7 +174,7 @@ Rendering pipeline for the layer.
 
 > `protected` **\_pipelinePicking**: [`PipelineTrianglePicking`](PipelineTrianglePicking.md)
 
-Defined in: [layer-vector.ts:98](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L98)
+Defined in: [layer-vector.ts:98](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L98)
 
 Pipeline for picking triangles.
 
@@ -184,7 +184,7 @@ Pipeline for picking triangles.
 
 > `protected` **\_position**: `number`[]
 
-Defined in: [layer-vector.ts:38](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L38)
+Defined in: [layer-vector.ts:38](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L38)
 
 Positions of the triangles.
 
@@ -194,7 +194,7 @@ Positions of the triangles.
 
 > `protected` **\_renderInfoIsDirty**: `boolean` = `false`
 
-Defined in: [layer.ts:31](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer.ts#L31)
+Defined in: [layer.ts:31](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer.ts#L31)
 
 Indicates if the layer's rendering information is dirty.
 This is used to determine if uniforms need to be reloaded.
@@ -209,7 +209,7 @@ This is used to determine if uniforms need to be reloaded.
 
 > `protected` **\_skippedIds**: `Set`\<`number`\>
 
-Defined in: [layer-vector.ts:78](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L78)
+Defined in: [layer-vector.ts:78](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L78)
 
 Skipped IDs of the layer.
 This is a set to ensure uniqueness of skipped IDs.
@@ -220,7 +220,7 @@ This is a set to ensure uniqueness of skipped IDs.
 
 > `protected` **\_skippedVertices**: `number`[]
 
-Defined in: [layer-vector.ts:84](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L84)
+Defined in: [layer-vector.ts:84](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L84)
 
 Skipped vertices of the layer.
 
@@ -230,7 +230,7 @@ Skipped vertices of the layer.
 
 > `protected` **\_thematic**: `number`[]
 
-Defined in: [layer-vector.ts:44](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L44)
+Defined in: [layer-vector.ts:44](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L44)
 
 Thematic data for the layer.
 
@@ -242,7 +242,7 @@ Thematic data for the layer.
 
 > **get** **components**(): [`ILayerComponent`](../interfaces/ILayerComponent.md)[]
 
-Defined in: [layer-vector.ts:148](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L148)
+Defined in: [layer-vector.ts:148](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L148)
 
 Get the components of the layer.
 
@@ -260,7 +260,7 @@ Get the components of the layer.
 
 > **get** **highlightedIds**(): `number`[]
 
-Defined in: [layer-vector.ts:156](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L156)
+Defined in: [layer-vector.ts:156](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L156)
 
 Gets the IDs of the highlighted components in the layer.
 
@@ -278,7 +278,7 @@ The highlighted IDs.
 
 > **get** **highlightedVertices**(): `number`[]
 
-Defined in: [layer-vector.ts:164](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L164)
+Defined in: [layer-vector.ts:164](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L164)
 
 Gets the highlighted vertices of the layer.
 
@@ -296,7 +296,7 @@ The highlighted vertices.
 
 > **get** **indices**(): `number`[]
 
-Defined in: [layer-vector.ts:140](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L140)
+Defined in: [layer-vector.ts:140](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L140)
 
 Get the indices of the triangles.
 
@@ -314,7 +314,7 @@ Get the indices of the triangles.
 
 > **get** **layerInfo**(): [`ILayerInfo`](../interfaces/ILayerInfo.md)
 
-Defined in: [layer.ts:54](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer.ts#L54)
+Defined in: [layer.ts:54](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer.ts#L54)
 
 Gets the information of the layer.
 
@@ -328,7 +328,7 @@ The information of the layer.
 
 > **set** **layerInfo**(`layerInfo`): `void`
 
-Defined in: [layer.ts:62](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer.ts#L62)
+Defined in: [layer.ts:62](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer.ts#L62)
 
 Sets the information of the layer.
 
@@ -356,7 +356,7 @@ The info to set for the layer.
 
 > **get** **layerRenderInfo**(): [`ILayerRenderInfo`](../interfaces/ILayerRenderInfo.md)
 
-Defined in: [layer.ts:70](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer.ts#L70)
+Defined in: [layer.ts:70](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer.ts#L70)
 
 Gets the rendering information of the layer.
 
@@ -370,7 +370,7 @@ The rendering information of the layer.
 
 > **set** **layerRenderInfo**(`layerRenderInfo`): `void`
 
-Defined in: [layer.ts:78](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer.ts#L78)
+Defined in: [layer.ts:78](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer.ts#L78)
 
 Sets the rendering information of the layer.
 
@@ -398,7 +398,7 @@ The rendering info to set for the layer.
 
 > **get** **position**(): `number`[]
 
-Defined in: [layer-vector.ts:124](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L124)
+Defined in: [layer-vector.ts:124](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L124)
 
 Get the positions of the triangles.
 
@@ -416,7 +416,7 @@ Get the positions of the triangles.
 
 > **get** **skippedIds**(): `number`[]
 
-Defined in: [layer-vector.ts:172](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L172)
+Defined in: [layer-vector.ts:172](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L172)
 
 Gets the IDs of the skipped components in the layer.
 
@@ -434,7 +434,7 @@ The skipped IDs.
 
 > **get** **skippedVertices**(): `number`[]
 
-Defined in: [layer-vector.ts:180](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L180)
+Defined in: [layer-vector.ts:180](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L180)
 
 Gets the skipped vertices of the layer.
 
@@ -452,7 +452,7 @@ The skipped vertices.
 
 > **get** **thematic**(): `number`[]
 
-Defined in: [layer-vector.ts:132](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L132)
+Defined in: [layer-vector.ts:132](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L132)
 
 Get the thematic data of the layer.
 
@@ -468,7 +468,7 @@ Get the thematic data of the layer.
 
 > **clearHighlightedIds**(): `void`
 
-Defined in: [layer-vector.ts:458](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L458)
+Defined in: [layer-vector.ts:458](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L458)
 
 Clears the highlighted components of the layer.
 
@@ -482,7 +482,7 @@ Clears the highlighted components of the layer.
 
 > **clearSkippedIds**(): `void`
 
-Defined in: [layer-vector.ts:469](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L469)
+Defined in: [layer-vector.ts:469](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L469)
 
 Clears the skipped components of the layer.
 
@@ -496,7 +496,7 @@ Clears the skipped components of the layer.
 
 > **createPipeline**(`renderer`): `void`
 
-Defined in: [layer-vector.ts:308](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L308)
+Defined in: [layer-vector.ts:308](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L308)
 
 Create the rendering pipeline for the layer.
 
@@ -518,7 +518,7 @@ The renderer instance.
 
 > **getPickedId**(`x`, `y`): `Promise`\<`number`\>
 
-Defined in: [layer-vector.ts:351](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L351)
+Defined in: [layer-vector.ts:351](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L351)
 
 Get the picked ID at the specified screen coordinates.
 
@@ -548,7 +548,7 @@ The y-coordinate of the screen position.
 
 > **loadComponent**(`layerComponents`): `void`
 
-Defined in: [layer-vector.ts:250](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L250)
+Defined in: [layer-vector.ts:250](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L250)
 
 Load the components of the layer.
 
@@ -570,7 +570,7 @@ The components to load.
 
 > **loadGeometry**(`layerGeometry`): `void`
 
-Defined in: [layer-vector.ts:210](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L210)
+Defined in: [layer-vector.ts:210](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L210)
 
 Load the geometry data for the layer.
 
@@ -592,7 +592,7 @@ The geometry data to load.
 
 > **loadLayerData**(`layerData`): `void`
 
-Defined in: [layer-vector.ts:191](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L191)
+Defined in: [layer-vector.ts:191](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L191)
 
 Load the layer data, including geometry and components.
 
@@ -614,7 +614,7 @@ The data associated with the layer.
 
 > **loadThematic**(`layerThematic`): `void`
 
-Defined in: [layer-vector.ts:271](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L271)
+Defined in: [layer-vector.ts:271](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L271)
 
 Load the thematic data for the layer.
 
@@ -636,7 +636,7 @@ The thematic data to load.
 
 > **makeLayerDataDirty**(): `void`
 
-Defined in: [layer.ts:85](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer.ts#L85)
+Defined in: [layer.ts:85](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer.ts#L85)
 
 Marks the layer's data as dirty, indicating that VOBs need to be reconstructed.
 
@@ -654,7 +654,7 @@ Marks the layer's data as dirty, indicating that VOBs need to be reconstructed.
 
 > **makeLayerRenderInfoDirty**(): `void`
 
-Defined in: [layer.ts:92](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer.ts#L92)
+Defined in: [layer.ts:92](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer.ts#L92)
 
 Marks the layer's rendering information as dirty, indicating uniforms need to be reloaded.
 
@@ -672,7 +672,7 @@ Marks the layer's rendering information as dirty, indicating uniforms need to be
 
 > **renderPass**(`camera`): `void`
 
-Defined in: [layer-vector.ts:320](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L320)
+Defined in: [layer-vector.ts:320](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L320)
 
 Render the layer for the current pass.
 
@@ -694,7 +694,7 @@ The camera instance.
 
 > **renderPickingPass**(`camera`): `void`
 
-Defined in: [layer-vector.ts:338](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L338)
+Defined in: [layer-vector.ts:338](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L338)
 
 Render the picking pass for the layer.
 
@@ -716,7 +716,7 @@ The camera instance.
 
 > **setHighlightedIds**(`ids`): `void`
 
-Defined in: [layer-vector.ts:395](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L395)
+Defined in: [layer-vector.ts:395](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L395)
 
 Set highlighted IDs for the layer.
 
@@ -738,7 +738,7 @@ The IDs to highlight.
 
 > **setSkippedIds**(`ids`): `void`
 
-Defined in: [layer-vector.ts:421](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L421)
+Defined in: [layer-vector.ts:421](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L421)
 
 Set skipped IDs for the layer.
 
@@ -760,7 +760,7 @@ The IDs to skip.
 
 > **toggleHighlightedIds**(`ids`): `void`
 
-Defined in: [layer-vector.ts:359](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/layer-vector.ts#L359)
+Defined in: [layer-vector.ts:359](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-vector.ts#L359)
 
 Toggle highlighted IDs for the layer.
 

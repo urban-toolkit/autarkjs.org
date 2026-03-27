@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Abstract Class: Pipeline
 
-Defined in: [pipeline.ts:17](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L17)
+Defined in: [pipeline.ts:17](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L17)
 
 Abstract class representing a rendering pipeline.
 It provides methods for creating camera and color uniform bind groups,
@@ -27,7 +27,7 @@ and rendering the pipeline.
 
 > **new Pipeline**(`renderer`): `Pipeline`
 
-Defined in: [pipeline.ts:101](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L101)
+Defined in: [pipeline.ts:101](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L101)
 
 Pipeline constructor
 
@@ -49,7 +49,7 @@ The renderer instance
 
 > `protected` **\_cameraBindGroup**: `GPUBindGroup`
 
-Defined in: [pipeline.ts:39](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L39)
+Defined in: [pipeline.ts:39](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L39)
 
 Camera bind group
 
@@ -59,7 +59,7 @@ Camera bind group
 
 > `protected` **\_cameraBindGroupLayout**: `GPUBindGroupLayout`
 
-Defined in: [pipeline.ts:44](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L44)
+Defined in: [pipeline.ts:44](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L44)
 
 Camera bind group layout
 
@@ -69,7 +69,7 @@ Camera bind group layout
 
 > `protected` **\_cMapTexture**: `GPUTexture`
 
-Defined in: [pipeline.ts:61](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L61)
+Defined in: [pipeline.ts:61](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L61)
 
 Color map texture
 
@@ -79,7 +79,7 @@ Color map texture
 
 > `protected` **\_colorBuffer**: `GPUBuffer`
 
-Defined in: [pipeline.ts:51](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L51)
+Defined in: [pipeline.ts:51](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L51)
 
 Color uniform buffer
 
@@ -89,7 +89,7 @@ Color uniform buffer
 
 > `protected` **\_highlightColorBuffer**: `GPUBuffer`
 
-Defined in: [pipeline.ts:56](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L56)
+Defined in: [pipeline.ts:56](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L56)
 
 Highlight color uniform buffer
 
@@ -99,7 +99,7 @@ Highlight color uniform buffer
 
 > `protected` **\_mviewBuffer**: `GPUBuffer`
 
-Defined in: [pipeline.ts:27](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L27)
+Defined in: [pipeline.ts:27](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L27)
 
 ModelView matrix uniform buffer
 
@@ -109,7 +109,7 @@ ModelView matrix uniform buffer
 
 > `protected` **\_opacity**: `GPUBuffer`
 
-Defined in: [pipeline.ts:79](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L79)
+Defined in: [pipeline.ts:79](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L79)
 
 Opacity uniform buffer
 
@@ -119,7 +119,7 @@ Opacity uniform buffer
 
 > `protected` **\_projcBuffer**: `GPUBuffer`
 
-Defined in: [pipeline.ts:32](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L32)
+Defined in: [pipeline.ts:32](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L32)
 
 Projection matrix uniform buffer
 
@@ -129,7 +129,7 @@ Projection matrix uniform buffer
 
 > `protected` **\_renderer**: [`Renderer`](Renderer.md)
 
-Defined in: [pipeline.ts:21](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L21)
+Defined in: [pipeline.ts:21](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L21)
 
 Renderer reference
 
@@ -139,7 +139,7 @@ Renderer reference
 
 > `protected` **\_renderInfoBindGroup**: `GPUBindGroup`
 
-Defined in: [pipeline.ts:87](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L87)
+Defined in: [pipeline.ts:87](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L87)
 
 Render information bind group
 
@@ -149,7 +149,7 @@ Render information bind group
 
 > `protected` **\_renderInfoBindGroupLayout**: `GPUBindGroupLayout`
 
-Defined in: [pipeline.ts:92](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L92)
+Defined in: [pipeline.ts:92](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L92)
 
 Render information bind group layout
 
@@ -159,7 +159,7 @@ Render information bind group layout
 
 > `protected` **\_useColorMap**: `GPUBuffer`
 
-Defined in: [pipeline.ts:69](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L69)
+Defined in: [pipeline.ts:69](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L69)
 
 Use color map uniform buffer
 
@@ -169,7 +169,7 @@ Use color map uniform buffer
 
 > `protected` **\_useHighlight**: `GPUBuffer`
 
-Defined in: [pipeline.ts:74](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L74)
+Defined in: [pipeline.ts:74](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L74)
 
 Use highlight uniform buffer
 
@@ -179,7 +179,7 @@ Use highlight uniform buffer
 
 > `abstract` **build**(`data`): `void`
 
-Defined in: [pipeline.ts:331](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L331)
+Defined in: [pipeline.ts:331](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L331)
 
 Builds the pipeline.
 
@@ -201,7 +201,7 @@ The layer instance
 
 > **createCameraUniformBindGroup**(): `void`
 
-Defined in: [pipeline.ts:110](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L110)
+Defined in: [pipeline.ts:110](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L110)
 
 Creates the camera uniform bind group.
 
@@ -215,7 +215,7 @@ Creates the camera uniform bind group.
 
 > **createColorUniformBindGroup**(): `void`
 
-Defined in: [pipeline.ts:170](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L170)
+Defined in: [pipeline.ts:170](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L170)
 
 Creates the color uniform bind group.
 
@@ -229,7 +229,7 @@ Creates the color uniform bind group.
 
 > `abstract` **createVertexBuffers**(`data`): `void`
 
-Defined in: [pipeline.ts:337](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L337)
+Defined in: [pipeline.ts:337](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L337)
 
 Creates the vertex buffers.
 
@@ -251,7 +251,7 @@ The layer instance
 
 > `abstract` **renderPass**(`camera`): `void`
 
-Defined in: [pipeline.ts:348](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L348)
+Defined in: [pipeline.ts:348](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L348)
 
 Creates the shaders for the pipeline.
 
@@ -271,7 +271,7 @@ Creates the shaders for the pipeline.
 
 > **updateCameraUniforms**(`camera`): `void`
 
-Defined in: [pipeline.ts:157](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L157)
+Defined in: [pipeline.ts:157](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L157)
 
 Updates the camera uniform buffers with the current camera state.
 
@@ -293,7 +293,7 @@ The camera instance
 
 > **updateColorUniforms**(`layer`): `void`
 
-Defined in: [pipeline.ts:295](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L295)
+Defined in: [pipeline.ts:295](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L295)
 
 Updates the color uniform buffers with the current layer state.
 
@@ -315,7 +315,7 @@ The layer instance
 
 > `abstract` **updateVertexBuffers**(`data`): `void`
 
-Defined in: [pipeline.ts:343](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/pipeline.ts#L343)
+Defined in: [pipeline.ts:343](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/pipeline.ts#L343)
 
 Updates the vertex buffers with the provided data.
 

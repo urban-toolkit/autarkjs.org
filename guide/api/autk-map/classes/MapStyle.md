@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: MapStyle
 
-Defined in: [map-style.ts:9](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-style.ts#L9)
+Defined in: [map-style.ts:9](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-style.ts#L9)
 
 ## Constructors
 
@@ -24,7 +24,7 @@ Defined in: [map-style.ts:9](https://github.com/urban-toolkit/autark/blob/9b743c
 
 > `protected` `static` **\_current**: [`IMapStyle`](../interfaces/IMapStyle.md) = `MapStyle._default`
 
-Defined in: [map-style.ts:37](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-style.ts#L37)
+Defined in: [map-style.ts:37](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-style.ts#L37)
 
 Current map style
 
@@ -34,7 +34,7 @@ Current map style
 
 > `protected` `static` **\_currentStyle**: `string` = `'default'`
 
-Defined in: [map-style.ts:41](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-style.ts#L41)
+Defined in: [map-style.ts:41](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-style.ts#L41)
 
 Current map style id
 
@@ -44,7 +44,7 @@ Current map style id
 
 > `protected` `static` **\_default**: [`IMapStyle`](../interfaces/IMapStyle.md)
 
-Defined in: [map-style.ts:13](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-style.ts#L13)
+Defined in: [map-style.ts:13](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-style.ts#L13)
 
 Default map style
 
@@ -54,7 +54,7 @@ Default map style
 
 > `protected` `static` **\_highlight**: `` `#${string}` `` = `'#5dade2'`
 
-Defined in: [map-style.ts:32](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-style.ts#L32)
+Defined in: [map-style.ts:32](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-style.ts#L32)
 
 Highlight color
 
@@ -64,7 +64,7 @@ Highlight color
 
 > `protected` `static` **\_notFound**: `` `#${string}` `` = `'#FFFFFF'`
 
-Defined in: [map-style.ts:28](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-style.ts#L28)
+Defined in: [map-style.ts:28](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-style.ts#L28)
 
 Not found color
 
@@ -76,7 +76,7 @@ Not found color
 
 > **get** `static` **currentStyle**(): `string`
 
-Defined in: [map-style.ts:47](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-style.ts#L47)
+Defined in: [map-style.ts:47](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-style.ts#L47)
 
 Get the current map style id
 
@@ -92,7 +92,7 @@ The current map style id
 
 > `static` **getColor**(`type`): [`ColorRGB`](../type-aliases/ColorRGB.md)
 
-Defined in: [map-style.ts:55](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-style.ts#L55)
+Defined in: [map-style.ts:55](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-style.ts#L55)
 
 Get the feature color
 
@@ -114,7 +114,7 @@ Feature type
 
 > `static` **getHighlightColor**(): [`ColorRGB`](../type-aliases/ColorRGB.md)
 
-Defined in: [map-style.ts:95](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-style.ts#L95)
+Defined in: [map-style.ts:95](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-style.ts#L95)
 
 Get the highlight color
 
@@ -130,7 +130,7 @@ The highlight color
 
 > `static` **setCustomStyle**(`style`): `void`
 
-Defined in: [map-style.ts:87](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-style.ts#L87)
+Defined in: [map-style.ts:87](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-style.ts#L87)
 
 Set the feature color
 
@@ -152,7 +152,7 @@ new map style json
 
 > `static` **setPredefinedStyle**(`style`): `void`
 
-Defined in: [map-style.ts:67](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/map-style.ts#L67)
+Defined in: [map-style.ts:67](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/map-style.ts#L67)
 
 Set the feature color
 

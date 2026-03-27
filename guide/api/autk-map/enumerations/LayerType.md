@@ -1,4 +1,4 @@
-[**autk-map**](../globals.md)
+[**autk-map**](../index.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Enumeration: LayerType
 
-Defined in: [constants.ts:13](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/constants.ts#L13)
+Defined in: [constants.ts:13](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L13)
 
 The types of layer supported in autk-map.
 
@@ -16,7 +16,7 @@ The types of layer supported in autk-map.
 
 > **AUTK\_GEO\_POINTS**: `"points"`
 
-Defined in: [constants.ts:19](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/constants.ts#L19)
+Defined in: [constants.ts:19](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L19)
 
 Represents a layer with points or multipoints.
 
@@ -26,7 +26,7 @@ Represents a layer with points or multipoints.
 
 > **AUTK\_GEO\_POLYGONS**: `"polygons"`
 
-Defined in: [constants.ts:21](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/constants.ts#L21)
+Defined in: [constants.ts:21](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L21)
 
 Represents a layer of polygons or multipolygons.
 
@@ -36,7 +36,7 @@ Represents a layer of polygons or multipolygons.
 
 > **AUTK\_GEO\_POLYLINES**: `"polylines"`
 
-Defined in: [constants.ts:20](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/constants.ts#L20)
+Defined in: [constants.ts:20](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L20)
 
 Represents a layer of linestrings or multilinestrings.
 
@@ -46,7 +46,7 @@ Represents a layer of linestrings or multilinestrings.
 
 > **AUTK\_OSM\_BUILDINGS**: `"buildings"`
 
-Defined in: [constants.ts:18](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/constants.ts#L18)
+Defined in: [constants.ts:18](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L18)
 
 Represents the OpenStreetMap buildings layer (it must be a feature collection of polygons).
 
@@ -56,7 +56,7 @@ Represents the OpenStreetMap buildings layer (it must be a feature collection of
 
 > **AUTK\_OSM\_PARKS**: `"parks"`
 
-Defined in: [constants.ts:15](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/constants.ts#L15)
+Defined in: [constants.ts:15](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L15)
 
 Represents the OpenStreetMap parks layer (it must be a feature collection of polygons).
 
@@ -66,7 +66,7 @@ Represents the OpenStreetMap parks layer (it must be a feature collection of pol
 
 > **AUTK\_OSM\_ROADS**: `"roads"`
 
-Defined in: [constants.ts:17](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/constants.ts#L17)
+Defined in: [constants.ts:17](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L17)
 
 Represents the OpenStreetMap roads layer (it must be a feature collection of polylines).
 
@@ -76,7 +76,7 @@ Represents the OpenStreetMap roads layer (it must be a feature collection of pol
 
 > **AUTK\_OSM\_SURFACE**: `"surface"`
 
-Defined in: [constants.ts:14](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/constants.ts#L14)
+Defined in: [constants.ts:14](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L14)
 
 Represents the OpenStreetMap surface layer (it must be a feature collection of polygons).
 
@@ -86,7 +86,7 @@ Represents the OpenStreetMap surface layer (it must be a feature collection of p
 
 > **AUTK\_OSM\_WATER**: `"water"`
 
-Defined in: [constants.ts:16](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/constants.ts#L16)
+Defined in: [constants.ts:16](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L16)
 
 Represents the OpenStreetMap water layer (it must be a feature collection of polygons).
 
@@ -96,6 +96,6 @@ Represents the OpenStreetMap water layer (it must be a feature collection of pol
 
 > **AUTK\_RASTER**: `"raster"`
 
-Defined in: [constants.ts:22](https://github.com/urban-toolkit/autark/blob/9b743c4ad315b9f743bbe271a9624ee47c4fee9a/autk-map/src/constants.ts#L22)
+Defined in: [constants.ts:22](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L22)
 
 Represents a raster layer.

@@ -1,3 +1,7 @@
+[**autk-plot**](index.md)
+
+***
+
 # autk-plot
 
 ## Classes
