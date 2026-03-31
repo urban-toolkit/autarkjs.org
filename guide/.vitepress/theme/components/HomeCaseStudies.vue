@@ -5,7 +5,6 @@
         <h2 class="section-title">Use Cases</h2>
         <p class="section-description">
           End-to-end urban visual analytics applications built with Autark.
-          These cases combine multiple modules into full interactive experiences.
         </p>
       </div>
 

@@ -11,19 +11,6 @@ Autark is a modular toolkit for building urban data visualization applications t
 | **autk-compute** | Run GPU-accelerated computations on GeoJSON feature properties |
 | **autk-plot**    | Build linked D3 charts that react to map interactions          |
 
-A typical pipeline looks like this:
-
-```
-autk-db  ──▶  autk-compute  ──▶  autk-map
-                                     ▲
-autk-plot  ◀──────────────────────────
-```
-
-1. **autk-db** loads and joins data (OSM, GeoJSON, CSV)
-2. **autk-compute** enriches feature properties with GPU computations
-3. **autk-map** renders the result as a map layer
-4. **autk-plot** provides linked charts that share selection state with the map
-
 ## Installation
 
 Install only the packages you need:

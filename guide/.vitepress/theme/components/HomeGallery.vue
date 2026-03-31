@@ -5,7 +5,6 @@
         <h2 class="section-title">Gallery</h2>
         <p class="section-description">
           Interactive examples showcasing the core capabilities of Autark.
-          Each example runs entirely in the browser.
         </p>
       </div>
 
