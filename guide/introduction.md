@@ -24,7 +24,7 @@ npm install autk-plot
 
 ## Serverless by Design
 
-All packages run in the browser without a backend. Data is fetched directly from public APIs (like the OpenStreetMap Overpass API) or from static file servers. Queries run inside a DuckDB-WASM instance in the browser. Rendering uses WebGPU.
+All packages run in the browser without a backend. Data is fetched directly from public APIs (like the OpenStreetMap Overpass API) or from static file servers. Queries run inside a DuckDB instance in the browser. Rendering uses WebGPU.
 
 :::tip Browser requirements
 `autk-map` and `autk-compute` require a browser with **WebGPU** support (Chrome 113+, Edge 113+). `autk-db` and `autk-plot` work in any modern browser.
