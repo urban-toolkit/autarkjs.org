@@ -1,11 +1,11 @@
 # Styling
 
-Layer appearance is controlled through `updateRenderInfoProperty`. All properties are applied immediately and take effect on the next render frame.
+Layer appearance is controlled through `updateRenderInfo`. All properties are applied immediately and take effect on the next render frame.
 
 ## Opacity
 
 ```typescript
-map.updateRenderInfoProperty('buildings', 'opacity', 0.7);
+map.updateRenderInfo('buildings', { opacity: 0.7 });
 ```
 
 Value is a `number` between `0.0` (transparent) and `1.0` (opaque).
@@ -17,7 +17,7 @@ Controls the color scale used when [thematic mapping](./thematic-mapping) is act
 ```typescript
 import { ColorMapInterpolator } from 'autk-map';
 
-map.updateRenderInfoProperty('buildings', 'colorMapInterpolator', ColorMapInterpolator.SEQUENTIAL_BLUES);
+map.updateColorMap('buildings', { colorMap: { interpolator: ColorMapInterpolator.SEQUENTIAL_BLUES } });
 ```
 
 Available options:
@@ -31,21 +31,11 @@ Available options:
 
 Use `OBSERVABLE10` for categorical attributes (string values). Use the sequential/diverging options for numeric attributes.
 
-## Color Map Labels
-
-Set the legend labels shown at the min and max of the color scale:
-
-```typescript
-map.updateRenderInfoProperty('buildings', 'colorMapLabels', ['0 m', '50 m']);
-```
-
-Labels are automatically set by `updateGeoJsonLayerThematic`, but you can override them here.
-
 ## Enable / Disable Color Map
 
 Toggle thematic coloring on or off without removing the data:
 
 ```typescript
-map.updateRenderInfoProperty('buildings', 'isColorMap', true);  // show thematic colors
-map.updateRenderInfoProperty('buildings', 'isColorMap', false); // back to default color
+map.updateRenderInfo('buildings', { isColorMap: true });  // show thematic colors
+map.updateRenderInfo('buildings', { isColorMap: false }); // back to default color
 ```

@@ -8,12 +8,6 @@
 
 > **ColorHEX** = `` `#${string}` ``
 
-Defined in: [constants.ts:71](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L71)
+Defined in: [autk-core/src/types-colormap.ts:170](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-colormap.ts#L170)
 
-Represents a color in hexadecimal format.
-
-## Example
-
-```ts
-"#FF5733"
-```
+Hexadecimal color string used by styling APIs.

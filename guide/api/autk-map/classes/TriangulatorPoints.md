@@ -6,10 +6,21 @@
 
 # Class: TriangulatorPoints
 
-Defined in: [triangulator-points.ts:9](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-points.ts#L9)
+Defined in: [autk-core/src/triangulator-points.ts:33](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-points.ts#L33)
 
-Class for triangulating points from GeoJSON features.
-It provides methods to convert different geometry types into point meshes.
+Converts point-based GeoJSON features into triangulated marker meshes.
+
+The class walks a feature collection in order and emits one or more
+triangle-fan meshes per supported feature. `Point` and `MultiPoint`
+geometries are converted directly; `GeometryCollection` features are
+flattened to supported point children, while unsupported geometries are
+skipped with a warning.
+
+## Example
+
+```ts
+const [meshes, components] = TriangulatorPoints.buildMesh(collection, origin);
+```
 
 ## Constructors
 
@@ -25,11 +36,11 @@ It provides methods to convert different geometry types into point meshes.
 
 ### buildMesh()
 
-> `static` **buildMesh**(`geojson`, `origin`): \[[`ILayerGeometry`](../interfaces/ILayerGeometry.md)[], [`ILayerComponent`](../interfaces/ILayerComponent.md)[]\]
+> `static` **buildMesh**(`geojson`, `origin`): \[[`LayerGeometry`](../interfaces/LayerGeometry.md)[], [`LayerComponent`](../interfaces/LayerComponent.md)[]\]
 
-Defined in: [triangulator-points.ts:16](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-points.ts#L16)
+Defined in: [autk-core/src/triangulator-points.ts:44](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-points.ts#L44)
 
-Builds a mesh from GeoJSON features representing points.
+Builds triangulated point-marker geometry for a feature collection.
 
 #### Parameters
 
@@ -37,19 +48,75 @@ Builds a mesh from GeoJSON features representing points.
 
 `FeatureCollection`
 
-The GeoJSON feature collection
+Source feature collection containing point geometries.
 
 ##### origin
 
 `number`[]
 
-The origin point for translation
+World-space origin used to convert coordinates into local XY space.
 
 #### Returns
 
-\[[`ILayerGeometry`](../interfaces/ILayerGeometry.md)[], [`ILayerComponent`](../interfaces/ILayerComponent.md)[]\]
+\[[`LayerGeometry`](../interfaces/LayerGeometry.md)[], [`LayerComponent`](../interfaces/LayerComponent.md)[]\]
 
-An array of geometries and components
+A tuple of mesh chunks and per-feature component metadata.
+
+#### Throws
+
+Never throws. Unsupported features are skipped with a console warning.
+
+#### Example
+
+```ts
+const [meshes, comps] = TriangulatorPoints.buildMesh(pointFC, origin);
+```
+
+***
+
+### geometryCollectionToMesh()
+
+> `static` **geometryCollectionToMesh**(`feature`, `origin`, `featureIndex`): `object`[]
+
+Defined in: [autk-core/src/triangulator-points.ts:144](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-points.ts#L144)
+
+Flattens supported children of a `GeometryCollection` into marker meshes.
+
+#### Parameters
+
+##### feature
+
+`Feature`
+
+Source feature with `GeometryCollection` geometry.
+
+##### origin
+
+`number`[]
+
+World-space origin used to convert coordinates into local XY space.
+
+##### featureIndex
+
+`number`
+
+Index of the parent feature in the source collection.
+
+#### Returns
+
+`object`[]
+
+Mesh chunks for all supported child geometries.
+
+#### Throws
+
+Never throws. Unsupported children are skipped with a console warning.
+
+#### Example
+
+```ts
+const meshes = TriangulatorPoints.geometryCollectionToMesh(gcFeature, origin, 0);
+```
 
 ***
 
@@ -57,9 +124,9 @@ An array of geometries and components
 
 > `static` **multiPointToMesh**(`feature`, `origin`): `object`[]
 
-Defined in: [triangulator-points.ts:89](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-points.ts#L89)
+Defined in: [autk-core/src/triangulator-points.ts:118](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-points.ts#L118)
 
-Converts a MultiPoint feature to a mesh representation.
+Converts a `MultiPoint` feature into triangle-fan marker meshes.
 
 #### Parameters
 
@@ -67,19 +134,29 @@ Converts a MultiPoint feature to a mesh representation.
 
 `Feature`
 
-The GeoJSON feature representing a MultiPoint
+Source feature with `MultiPoint` geometry.
 
 ##### origin
 
 `number`[]
 
-The origin point for translation
+World-space origin used to convert coordinates into local XY space.
 
 #### Returns
 
 `object`[]
 
-An array containing the flat coordinates and indices
+One mesh chunk per point in the collection.
+
+#### Throws
+
+Never throws.
+
+#### Example
+
+```ts
+const meshes = TriangulatorPoints.multiPointToMesh(multiPtFeature, origin);
+```
 
 ***
 
@@ -87,9 +164,9 @@ An array containing the flat coordinates and indices
 
 > `static` **pointToMesh**(`feature`, `origin`): `object`[]
 
-Defined in: [triangulator-points.ts:63](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-points.ts#L63)
+Defined in: [autk-core/src/triangulator-points.ts:97](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-points.ts#L97)
 
-Converts a Point feature to a mesh representation.
+Converts a single `Point` feature into a triangle-fan marker mesh.
 
 #### Parameters
 
@@ -97,19 +174,29 @@ Converts a Point feature to a mesh representation.
 
 `Feature`
 
-The GeoJSON feature representing a Point
+Source feature with `Point` geometry.
 
 ##### origin
 
 `number`[]
 
-The origin point for translation
+World-space origin used to convert coordinates into local XY space.
 
 #### Returns
 
 `object`[]
 
-An array containing the flat coordinates and indices
+A single mesh chunk for the point marker.
+
+#### Throws
+
+Never throws.
+
+#### Example
+
+```ts
+const [mesh] = TriangulatorPoints.pointToMesh(pointFeature, origin);
+```
 
 ***
 
@@ -117,9 +204,9 @@ An array containing the flat coordinates and indices
 
 > `static` **sampleCircle**(`centerX`, `centerY`, `radius`, `numPoints`): \[`number`, `number`\][]
 
-Defined in: [triangulator-points.ts:122](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-points.ts#L122)
+Defined in: [autk-core/src/triangulator-points.ts:195](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-points.ts#L195)
 
-Samples points on a circle.
+Samples a circle as a center point plus evenly spaced perimeter vertices.
 
 #### Parameters
 
@@ -127,28 +214,39 @@ Samples points on a circle.
 
 `number`
 
-The x-coordinate of the circle's center
+Circle center X coordinate.
 
 ##### centerY
 
 `number`
 
-The y-coordinate of the circle's center
+Circle center Y coordinate.
 
 ##### radius
 
 `number`
 
-The radius of the circle
+Circle radius in local planar units.
 
 ##### numPoints
 
 `number`
 
-The number of points to sample on the circle
+Number of perimeter sample points.
 
 #### Returns
 
 \[`number`, `number`\][]
 
-An array of sampled points as [x, y] tuples
+Ordered `[center, ...perimeter]` vertices for triangle-fan indexing.
+
+#### Throws
+
+Never throws.
+
+#### Example
+
+```ts
+const circle = TriangulatorPoints.sampleCircle(0, 0, 100, 8);
+// circle.length → 9 (1 center + 8 perimeter)
+```

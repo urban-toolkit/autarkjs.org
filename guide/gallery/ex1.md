@@ -44,7 +44,7 @@ async function main() {
 
     const geojson = await fetch('/data/mnt_neighs_proj.geojson').then(r => r.json());
 
-    map.loadGeoJsonLayer('neighborhoods', geojson);
+    map.loadCollection('neighborhoods', { collection: geojson });
     map.draw();
 }
 

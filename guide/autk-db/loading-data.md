@@ -4,10 +4,10 @@
 
 ## OpenStreetMap via Overpass API
 
-`loadOsmFromOverpassApi` fetches OSM data from the public [Overpass API](https://overpass-api.de/) and stores it in DuckDB.
+`loadOsm` fetches OSM data from the public [Overpass API](https://overpass-api.de/) and stores it in DuckDB.
 
 ```typescript
-await db.loadOsmFromOverpassApi({
+await db.loadOsm({
   queryArea: {
     geocodeArea: 'New York',      // city or region name
     areas: ['Financial District'], // sub-areas within the city
@@ -21,7 +21,7 @@ await db.loadOsmFromOverpassApi({
 The `autoLoadLayers` option extracts ready-to-render layers (buildings, roads, surface, parks, water) from the raw OSM data automatically:
 
 ```typescript
-await db.loadOsmFromOverpassApi({
+await db.loadOsm({
   queryArea: { geocodeArea: 'New York', areas: ['Financial District'] },
   outputTableName: 'osm',
   autoLoadLayers: {
@@ -45,7 +45,7 @@ Use `'EPSG:3395'` (World Mercator) for most city-scale visualizations. This is t
 Use `onProgress` to update a UI indicator during the (potentially slow) OSM download:
 
 ```typescript
-await db.loadOsmFromOverpassApi({
+await db.loadOsm({
   queryArea: { geocodeArea: 'Chicago', areas: ['The Loop'] },
   outputTableName: 'osm',
   onProgress: (phase) => console.log('Loading:', phase),

@@ -31,9 +31,9 @@
     "vitepress": "^1.6.3"
   },
   "dependencies": {
-    "autk-compute": "latest",
-    "autk-db": "latest",
-    "autk-map": "latest",
-    "autk-plot": "latest"
+    "autk-compute": "1.3.1-beta.1",
+    "autk-db": "1.3.1-beta.1",
+    "autk-map": "1.3.1-beta.0",
+    "autk-plot": "1.3.1-beta.0"
   }
 }

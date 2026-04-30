@@ -22,10 +22,10 @@ npm install autk-compute
 ## Entry Point
 
 ```typescript
-import { geojsonCompute } from 'autk-compute';
-```
+import { AutkComputeEngine } from 'autk-compute';
 
-`geojsonCompute` is a singleton instance of `GeojsonCompute`. You don't need to instantiate it.
+const compute = new AutkComputeEngine();
+```
 
 ## What's Next
 

@@ -1,17 +1,20 @@
 # Chart Types
 
+All chart types are created through the unified `AutkChart` constructor with a `type` discriminator.
+
 ## Bar Chart
 
 Displays one categorical axis (X) and one numeric axis (Y). Supports click selection.
 
 ```typescript
-import { Barchart } from 'autk-plot';
+import { AutkChart } from 'autk-plot';
 
-const chart = new Barchart({
-  div: document.querySelector('#chart') as HTMLElement,
-  data: geojson,
+const chart = new AutkChart(document.querySelector('#chart') as HTMLElement, {
+  type: 'barchart',
+  collection: geojson,
+  attributes: { axis: ['neighborhood', 'population'] },
   labels: {
-    axis: ['neighborhood', 'population'],
+    axis: ['Neighborhood', 'Population'],
     title: 'Population by Neighborhood',
   },
   width: 600,
@@ -26,13 +29,14 @@ const chart = new Barchart({
 Displays two numeric axes. Supports brush selection.
 
 ```typescript
-import { Scatterplot } from 'autk-plot';
+import { AutkChart } from 'autk-plot';
 
-const chart = new Scatterplot({
-  div: document.querySelector('#chart') as HTMLElement,
-  data: geojson,
+const chart = new AutkChart(document.querySelector('#chart') as HTMLElement, {
+  type: 'scatterplot',
+  collection: geojson,
+  attributes: { axis: ['area', 'height'] },
   labels: {
-    axis: ['area', 'height'],
+    axis: ['Area', 'Height'],
     title: 'Building Area vs Height',
   },
   width: 600,
@@ -45,13 +49,14 @@ const chart = new Scatterplot({
 Displays multiple numeric axes as parallel vertical lines. Features are drawn as polylines connecting their values across axes. Supports brush selection on individual axes.
 
 ```typescript
-import { ParallelCoordinates } from 'autk-plot';
+import { AutkChart } from 'autk-plot';
 
-const chart = new ParallelCoordinates({
-  div: document.querySelector('#chart') as HTMLElement,
-  data: geojson,
+const chart = new AutkChart(document.querySelector('#chart') as HTMLElement, {
+  type: 'parallel-coordinates',
+  collection: geojson,
+  attributes: { axis: ['area', 'height', 'floors', 'year_built'] },
   labels: {
-    axis: ['area', 'height', 'floors', 'year_built'],
+    axis: ['Area', 'Height', 'Floors', 'Year Built'],
     title: 'Building Attributes',
   },
   width: 800,
@@ -60,3 +65,53 @@ const chart = new ParallelCoordinates({
 ```
 
 `axis` lists all the property keys to display as parallel axes. Each key must be numeric.
+
+## Line Chart
+
+Displays a time series or sequential data.
+
+```typescript
+import { AutkChart } from 'autk-plot';
+
+const chart = new AutkChart(document.querySelector('#chart') as HTMLElement, {
+  type: 'linechart',
+  collection: geojson,
+  attributes: { axis: ['year', 'temperature'] },
+  labels: {
+    axis: ['Year', 'Temperature (°C)'],
+    title: 'Temperature Over Time',
+  },
+  width: 600,
+  height: 300,
+});
+```
+
+## Table
+
+Displays data as a scrollable table.
+
+```typescript
+const chart = new AutkChart(div, {
+  type: 'table',
+  collection: geojson,
+  attributes: { axis: ['name', 'area', 'population'] },
+  labels: { axis: ['Name', 'Area', 'Population'], title: 'Neighborhoods' },
+  width: 800,
+});
+```
+
+## Heat Matrix
+
+Displays a 2D binning heatmap.
+
+```typescript
+const chart = new AutkChart(div, {
+  type: 'heatmatrix',
+  collection: geojson,
+  attributes: { axis: ['x', 'y'], color: '@transform' },
+  transform: { preset: 'binning-2d' },
+  labels: { axis: ['X', 'Y'], title: 'Density' },
+  width: 600,
+  height: 400,
+});
+```

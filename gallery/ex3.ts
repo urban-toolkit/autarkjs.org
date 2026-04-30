@@ -1,5 +1,5 @@
-import { SpatialDb } from 'autk-db';
-import { AutkMap, LayerType } from 'autk-map';
+import { AutkSpatialDb } from 'autk-db';
+import { AutkMap } from 'autk-map';
 
 function setLoadingState(message: string, note?: string) {
   const text = document.getElementById('loading-text');
@@ -42,7 +42,7 @@ async function main() {
       'Preparing the in-browser environment.'
     );
 
-    const db = new SpatialDb();
+    const db = new AutkSpatialDb();
     await db.init();
 
     setLoadingState(
@@ -50,7 +50,7 @@ async function main() {
       'This remote request may take longer depending on server load.'
     );
 
-    await db.loadOsmFromOverpassApi({
+    await db.loadOsm({
       queryArea: {
         geocodeArea: 'New York',
         areas: ['Battery Park City','Financial District'],
@@ -78,7 +78,7 @@ async function main() {
 
     for (const layer of db.getLayerTables()) {
       const geojson = await db.getLayer(layer.name);
-      map.loadGeoJsonLayer(layer.name, geojson, layer.type as LayerType);
+      map.loadCollection(layer.name, { collection: geojson, type: layer.type });
     }
 
     map.draw();

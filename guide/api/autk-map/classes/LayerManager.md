@@ -6,12 +6,15 @@
 
 # Class: LayerManager
 
-Defined in: [layer-manager.ts:23](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-manager.ts#L23)
+Defined in: [autk-map/src/layer-manager.ts:37](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/layer-manager.ts#L37)
 
-Manages the layers of the map.
+Manages all map layers as a single ordered list.
 
-This class provides methods to add, remove, and search for layers,
-as well as to manage the bounding box of the map.
+`LayerManager` stores every registered layer in render order, computes the
+shared local origin from the first loaded collection, and assigns z-indices
+according to the map's layering rules. Base OSM layers occupy fixed slots,
+dynamic layers are ordered by insertion, and buildings are always rendered
+last.
 
 ## Constructors
 
@@ -19,91 +22,41 @@ as well as to manage the bounding box of the map.
 
 > **new LayerManager**(): `LayerManager`
 
-Defined in: [layer-manager.ts:51](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-manager.ts#L51)
-
-Constructor for LayerManager
-
 #### Returns
 
 `LayerManager`
 
-## Properties
-
-### \_bbox
-
-> `protected` **\_bbox**: `BBox`
-
-Defined in: [layer-manager.ts:40](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-manager.ts#L40)
-
-Bounding box of the map.
-
-***
-
-### \_origin
-
-> `protected` **\_origin**: `number`[]
-
-Defined in: [layer-manager.ts:46](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-manager.ts#L46)
-
-Origin of the map.
-
-***
-
-### \_rasterLayers
-
-> `protected` **\_rasterLayers**: [`RasterLayer`](RasterLayer.md)[] = `[]`
-
-Defined in: [layer-manager.ts:34](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-manager.ts#L34)
-
-List of raster layers in the map.
-
-***
-
-### \_vectorLayers
-
-> `protected` **\_vectorLayers**: [`VectorLayer`](VectorLayer.md)[] = `[]`
-
-Defined in: [layer-manager.ts:28](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-manager.ts#L28)
-
-List of vector layers in the map.
-
 ## Accessors
 
-### bboxAndOrigin
+### hasOrigin
 
 #### Get Signature
 
-> **get** **bboxAndOrigin**(): `BBox`
+> **get** **hasOrigin**(): `boolean`
 
-Defined in: [layer-manager.ts:84](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-manager.ts#L84)
+Defined in: [autk-map/src/layer-manager.ts:58](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/layer-manager.ts#L58)
 
-Get the bounding box of the map.
-
-##### Returns
-
-`BBox`
-
-- The bounding box as a GeoJSON polygon.
-
-#### Set Signature
-
-> **set** **bboxAndOrigin**(`bbox`): `void`
-
-Defined in: [layer-manager.ts:92](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-manager.ts#L92)
-
-Set the origin and the bounding box of the map.
-
-##### Parameters
-
-###### bbox
-
-`BBox`
-
-The bounding box to set.
+Indicates whether the shared scene origin has been initialized.
 
 ##### Returns
 
-`void`
+`boolean`
+
+***
+
+### layers
+
+#### Get Signature
+
+> **get** **layers**(): [`Layer`](Layer.md)[]
+
+Defined in: [autk-map/src/layer-manager.ts:47](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/layer-manager.ts#L47)
+
+Registered layers sorted by render z-index.
+
+##### Returns
+
+[`Layer`](Layer.md)[]
 
 ***
 
@@ -113,123 +66,53 @@ The bounding box to set.
 
 > **get** **origin**(): `number`[]
 
-Defined in: [layer-manager.ts:76](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-manager.ts#L76)
+Defined in: [autk-map/src/layer-manager.ts:50](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/layer-manager.ts#L50)
 
-Get the origin of the map.
+World-space origin derived from the current bounding box center.
 
 ##### Returns
 
 `number`[]
 
-- The origin coordinates in meters.
-
-***
-
-### rasterLayers
-
-#### Get Signature
-
-> **get** **rasterLayers**(): [`RasterLayer`](RasterLayer.md)[]
-
-Defined in: [layer-manager.ts:68](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-manager.ts#L68)
-
-Get the raster layers of the map.
-
-##### Returns
-
-[`RasterLayer`](RasterLayer.md)[]
-
-- The list of layers.
-
-***
-
-### vectorLayers
-
-#### Get Signature
-
-> **get** **vectorLayers**(): [`VectorLayer`](VectorLayer.md)[]
-
-Defined in: [layer-manager.ts:60](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-manager.ts#L60)
-
-Get the vetor layers of the map.
-
-##### Returns
-
-[`VectorLayer`](VectorLayer.md)[]
-
-- The list of layers.
-
 ## Methods
 
-### addRasterLayer()
+### addLayer()
 
-> **addRasterLayer**(`layerInfo`, `layerRender`, `layerData`): [`RasterLayer`](RasterLayer.md) \| `null`
+> **addLayer**(`layerInfo`, `layerRender`, `layerData`): [`Layer`](Layer.md) \| `null`
 
-Defined in: [layer-manager.ts:135](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-manager.ts#L135)
+Defined in: [autk-map/src/layer-manager.ts:80](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/layer-manager.ts#L80)
 
-Adds a raster layer to the map.
-
-#### Parameters
-
-##### layerInfo
-
-[`ILayerInfo`](../interfaces/ILayerInfo.md)
-
-The information about the layer.
-
-##### layerRender
-
-[`ILayerRenderInfo`](../interfaces/ILayerRenderInfo.md)
-
-The rendering information for the layer.
-
-##### layerData
-
-[`ILayerData`](../interfaces/ILayerData.md)
-
-The data associated with the layer.
-
-#### Returns
-
-[`RasterLayer`](RasterLayer.md) \| `null`
-
-- The created layer or null if the type is unknown.
-
-***
-
-### addVectorLayer()
-
-> **addVectorLayer**(`layerInfo`, `layerRender`, `layerData`): [`VectorLayer`](VectorLayer.md) \| `null`
-
-Defined in: [layer-manager.ts:107](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-manager.ts#L107)
-
-Adds a layer to the map.
+Creates, registers, and reorders a layer based on `layerInfo.typeLayer`.
 
 #### Parameters
 
 ##### layerInfo
 
-[`ILayerInfo`](../interfaces/ILayerInfo.md)
+[`LayerInfo`](../interfaces/LayerInfo.md)
 
-The information about the layer.
+Layer identity and type metadata.
 
 ##### layerRender
 
-[`ILayerRenderInfo`](../interfaces/ILayerRenderInfo.md)
+[`LayerRenderInfo`](../interfaces/LayerRenderInfo.md)
 
-The rendering information for the layer.
+Initial render configuration.
 
 ##### layerData
 
-[`ILayerData`](../interfaces/ILayerData.md)
+[`LayerData`](../interfaces/LayerData.md)
 
-The data associated with the layer.
+Geometry and auxiliary layer payload.
 
 #### Returns
 
-[`VectorLayer`](VectorLayer.md) \| `null`
+[`Layer`](Layer.md) \| `null`
 
-- The created layer or null if the type is unknown.
+The created layer, or `null` if a layer with the same id is already registered.
+
+#### Throws
+
+Never throws. Duplicate ids log an error and return `null`.
 
 ***
 
@@ -237,45 +120,55 @@ The data associated with the layer.
 
 > **computeZindex**(`layerType`): `number`
 
-Defined in: [layer-manager.ts:217](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-manager.ts#L217)
+Defined in: [autk-map/src/layer-manager.ts:139](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/layer-manager.ts#L139)
 
-Computes the Z-index for a given layer type.
+Returns a preliminary z-index placeholder for a layer type.
 
 #### Parameters
 
 ##### layerType
 
-[`LayerType`](../enumerations/LayerType.md)
+[`LayerType`](../type-aliases/LayerType.md)
 
-The type of the layer.
+Layer type to place in the render stack.
 
 #### Returns
 
 `number`
 
-- The computed Z-index.
+The fixed OSM base-slot index, or `0` as a placeholder.
+
+#### Throws
+
+Never throws.
 
 ***
 
-### delLayer()
+### initializeOrigin()
 
-> **delLayer**(`layerId`): `void`
+> **initializeOrigin**(`collection`): `void`
 
-Defined in: [layer-manager.ts:157](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-manager.ts#L157)
+Defined in: [autk-map/src/layer-manager.ts:67](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/layer-manager.ts#L67)
 
-Removes a layer from the map.
+Computes the shared scene origin from the provided collection.
 
 #### Parameters
 
-##### layerId
+##### collection
 
-`string`
+`FeatureCollection`\<`Geometry` \| `null`\>
 
-The ID of the layer to remove.
+Source feature collection.
 
 #### Returns
 
 `void`
+
+Nothing. Updates the manager's shared origin in place.
+
+#### Throws
+
+Never throws.
 
 ***
 
@@ -283,9 +176,9 @@ The ID of the layer to remove.
 
 > **removeLayerById**(`layerId`): `void`
 
-Defined in: [layer-manager.ts:181](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-manager.ts#L181)
+Defined in: [autk-map/src/layer-manager.ts:109](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/layer-manager.ts#L109)
 
-Removes a layer by its ID.
+Removes the layer matching `layerId` and recomputes dynamic z-order.
 
 #### Parameters
 
@@ -293,21 +186,27 @@ Removes a layer by its ID.
 
 `string`
 
-The ID of the layer to remove.
+Layer identifier to remove.
 
 #### Returns
 
 `void`
 
+Nothing. Unknown ids are silently ignored.
+
+#### Throws
+
+Never throws.
+
 ***
 
 ### searchByLayerId()
 
-> **searchByLayerId**(`layerId`): [`VectorLayer`](VectorLayer.md) \| [`RasterLayer`](RasterLayer.md) \| `null`
+> **searchByLayerId**(`layerId`): [`Layer`](Layer.md) \| `null`
 
-Defined in: [layer-manager.ts:191](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/layer-manager.ts#L191)
+Defined in: [autk-map/src/layer-manager.ts:128](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/layer-manager.ts#L128)
 
-Searches for a layer by its ID.
+Returns the layer with the given `layerId`, or `null` if not found.
 
 #### Parameters
 
@@ -315,10 +214,14 @@ Searches for a layer by its ID.
 
 `string`
 
-The ID of the layer to search for.
+Layer identifier to search for.
 
 #### Returns
 
-[`VectorLayer`](VectorLayer.md) \| [`RasterLayer`](RasterLayer.md) \| `null`
+[`Layer`](Layer.md) \| `null`
 
-- The found layer or null if not found.
+The matching layer instance, or `null`.
+
+#### Throws
+
+Never throws.

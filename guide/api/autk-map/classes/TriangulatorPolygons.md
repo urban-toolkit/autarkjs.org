@@ -6,10 +6,17 @@
 
 # Class: TriangulatorPolygons
 
-Defined in: [triangulator-polygons.ts:11](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polygons.ts#L11)
+Defined in: [autk-core/src/triangulator-polygons.ts:43](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polygons.ts#L43)
 
-Class for triangulating polygons from GeoJSON features.
-It provides methods to convert different geometry types into polygon meshes.
+Triangulates polygonal GeoJSON features into fill and border mesh chunks.
+
+`TriangulatorPolygons` accepts `LineString`, `MultiLineString`, `Polygon`,
+`MultiPolygon`, and `GeometryCollection` features containing those geometry
+types. Fill meshes are triangulated with `earcut` after translating vertices
+into local coordinates relative to the supplied origin. Border meshes are
+generated as line-index pairs, with open borders for line strings and closed
+rings for polygon outlines and holes. Unsupported or missing geometries are
+skipped with a warning.
 
 ## Constructors
 
@@ -25,11 +32,11 @@ It provides methods to convert different geometry types into polygon meshes.
 
 ### buildBorder()
 
-> `static` **buildBorder**(`geojson`, `origin`): \[[`ILayerBorder`](../interfaces/ILayerBorder.md)[], [`ILayerBorderComponent`](../interfaces/ILayerBorderComponent.md)[]\]
+> `static` **buildBorder**(`geojson`, `origin`): \[[`LayerBorder`](../interfaces/LayerBorder.md)[], [`LayerBorderComponent`](../interfaces/LayerBorderComponent.md)[]\]
 
-Defined in: [triangulator-polygons.ts:70](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polygons.ts#L70)
+Defined in: [autk-core/src/triangulator-polygons.ts:112](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polygons.ts#L112)
 
-Converts GeoJSON features into a collection of borders.
+Builds border line geometry for a feature collection.
 
 #### Parameters
 
@@ -37,29 +44,39 @@ Converts GeoJSON features into a collection of borders.
 
 `FeatureCollection`
 
-The GeoJSON feature collection
+Source feature collection.
 
 ##### origin
 
 `number`[]
 
-The origin point for translation
+World-space origin used to derive local XY coordinates.
 
 #### Returns
 
-\[[`ILayerBorder`](../interfaces/ILayerBorder.md)[], [`ILayerBorderComponent`](../interfaces/ILayerBorderComponent.md)[]\]
+\[[`LayerBorder`](../interfaces/LayerBorder.md)[], [`LayerBorderComponent`](../interfaces/LayerBorderComponent.md)[]\]
 
-An array of borders
+A tuple of border chunks and per-feature border counts.
+
+#### Throws
+
+Never throws. Unsupported features are skipped with a console warning.
+
+#### Example
+
+```ts
+const [borders, borderComps] = TriangulatorPolygons.buildBorder(polyFC, origin);
+```
 
 ***
 
 ### buildMesh()
 
-> `static` **buildMesh**(`geojson`, `origin`): \[[`ILayerGeometry`](../interfaces/ILayerGeometry.md)[], [`ILayerComponent`](../interfaces/ILayerComponent.md)[]\]
+> `static` **buildMesh**(`geojson`, `origin`): \[[`LayerGeometry`](../interfaces/LayerGeometry.md)[], [`LayerComponent`](../interfaces/LayerComponent.md)[]\]
 
-Defined in: [triangulator-polygons.ts:18](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polygons.ts#L18)
+Defined in: [autk-core/src/triangulator-polygons.ts:54](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polygons.ts#L54)
 
-Builds a mesh from GeoJSON features representing polygons.
+Builds triangulated fill geometry for a feature collection.
 
 #### Parameters
 
@@ -67,43 +84,121 @@ Builds a mesh from GeoJSON features representing polygons.
 
 `FeatureCollection`
 
-The GeoJSON feature collection
+Source feature collection.
 
 ##### origin
 
 `number`[]
 
-The origin point for translation
+World-space origin used to derive local XY coordinates.
 
 #### Returns
 
-\[[`ILayerGeometry`](../interfaces/ILayerGeometry.md)[], [`ILayerComponent`](../interfaces/ILayerComponent.md)[]\]
+\[[`LayerGeometry`](../interfaces/LayerGeometry.md)[], [`LayerComponent`](../interfaces/LayerComponent.md)[]\]
 
-An array of geometries and components
+A tuple of mesh chunks and per-feature component counts.
+
+#### Throws
+
+Never throws. Unsupported features are skipped with a console warning.
+
+#### Example
+
+```ts
+const [meshes, comps] = TriangulatorPolygons.buildMesh(polyFC, origin);
+```
 
 ***
 
-### generateBorderIds()
+### geometryCollectionToBorderMesh()
 
-> `protected` `static` **generateBorderIds**(`nCoords`): `number`[]
+> `static` **geometryCollectionToBorderMesh**(`feature`, `origin`, `featureIndex`): `object`[]
 
-Defined in: [triangulator-polygons.ts:302](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polygons.ts#L302)
+Defined in: [autk-core/src/triangulator-polygons.ts:366](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polygons.ts#L366)
 
-Generates border indices for a given number of coordinates.
+Flattens supported children of a `GeometryCollection` into border meshes.
 
 #### Parameters
 
-##### nCoords
+##### feature
 
-`number`
+`Feature`
 
-The number of coordinates
+Source feature with `GeometryCollection` geometry.
 
-#### Returns
+##### origin
 
 `number`[]
 
-An array of border indices
+World-space origin used to derive local XY coordinates.
+
+##### featureIndex
+
+`number`
+
+Index of the parent feature in the source collection.
+
+#### Returns
+
+`object`[]
+
+Border line meshes for all supported child geometries.
+
+#### Throws
+
+Never throws. Unsupported children are skipped with a console warning.
+
+#### Example
+
+```ts
+const borders = TriangulatorPolygons.geometryCollectionToBorderMesh(gcFeature, origin, 0);
+```
+
+***
+
+### geometryCollectionToMesh()
+
+> `static` **geometryCollectionToMesh**(`feature`, `origin`, `featureIndex`): `object`[]
+
+Defined in: [autk-core/src/triangulator-polygons.ts:341](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polygons.ts#L341)
+
+Flattens supported children of a `GeometryCollection` into fill meshes.
+
+#### Parameters
+
+##### feature
+
+`Feature`
+
+Source feature with `GeometryCollection` geometry.
+
+##### origin
+
+`number`[]
+
+World-space origin used to derive local XY coordinates.
+
+##### featureIndex
+
+`number`
+
+Index of the parent feature in the source collection.
+
+#### Returns
+
+`object`[]
+
+Triangulated fill meshes for all supported child geometries.
+
+#### Throws
+
+Never throws. Unsupported children are skipped with a console warning.
+
+#### Example
+
+```ts
+const meshes = TriangulatorPolygons.geometryCollectionToMesh(gcFeature, origin, 0);
+```
 
 ***
 
@@ -111,9 +206,9 @@ An array of border indices
 
 > `static` **lineStringToBorderMesh**(`feature`, `origin`): `object`[]
 
-Defined in: [triangulator-polygons.ts:141](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polygons.ts#L141)
+Defined in: [autk-core/src/triangulator-polygons.ts:187](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polygons.ts#L187)
 
-Converts a LineString feature to a border representation.
+Converts a `LineString` feature into open border line geometry.
 
 #### Parameters
 
@@ -121,19 +216,29 @@ Converts a LineString feature to a border representation.
 
 `Feature`
 
-The GeoJSON feature representing a LineString
+Source feature with `LineString` geometry.
 
 ##### origin
 
 `number`[]
 
-The origin point for translation
+World-space origin used to derive local XY coordinates.
 
 #### Returns
 
 `object`[]
 
-An array of borders
+Border line meshes for the feature.
+
+#### Throws
+
+Never throws.
+
+#### Example
+
+```ts
+const [border] = TriangulatorPolygons.lineStringToBorderMesh(lineFeature, origin);
+```
 
 ***
 
@@ -141,9 +246,9 @@ An array of borders
 
 > `static` **lineStringToMesh**(`feature`, `origin`): `object`[]
 
-Defined in: [triangulator-polygons.ts:126](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polygons.ts#L126)
+Defined in: [autk-core/src/triangulator-polygons.ts:170](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polygons.ts#L170)
 
-Converts a LineString feature to a border representation.
+Converts a `LineString` feature into triangulated fill geometry.
 
 #### Parameters
 
@@ -151,19 +256,29 @@ Converts a LineString feature to a border representation.
 
 `Feature`
 
-The GeoJSON feature representing a LineString
+Source feature with `LineString` geometry.
 
 ##### origin
 
 `number`[]
 
-The origin point for translation
+World-space origin used to derive local XY coordinates.
 
 #### Returns
 
 `object`[]
 
-An array of borders
+Triangulated fill meshes for the feature.
+
+#### Throws
+
+Never throws.
+
+#### Example
+
+```ts
+const [mesh] = TriangulatorPolygons.lineStringToMesh(lineFeature, origin);
+```
 
 ***
 
@@ -171,9 +286,9 @@ An array of borders
 
 > `static` **multiLineStringToBorderMesh**(`feature`, `origin`): `object`[]
 
-Defined in: [triangulator-polygons.ts:177](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polygons.ts#L177)
+Defined in: [autk-core/src/triangulator-polygons.ts:225](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polygons.ts#L225)
 
-Converts a MultiLineString feature to a border representation.
+Converts a `MultiLineString` feature into border line geometry.
 
 #### Parameters
 
@@ -181,19 +296,29 @@ Converts a MultiLineString feature to a border representation.
 
 `Feature`
 
-The GeoJSON feature representing a MultiLineString
+Source feature with `MultiLineString` geometry.
 
 ##### origin
 
 `number`[]
 
-The origin point for translation
+World-space origin used to derive local XY coordinates.
 
 #### Returns
 
 `object`[]
 
-An array of borders
+Border line meshes for each constituent line string.
+
+#### Throws
+
+Never throws.
+
+#### Example
+
+```ts
+const borders = TriangulatorPolygons.multiLineStringToBorderMesh(mlsFeature, origin);
+```
 
 ***
 
@@ -201,9 +326,9 @@ An array of borders
 
 > `static` **multiLineStringToMesh**(`feature`, `origin`): `object`[]
 
-Defined in: [triangulator-polygons.ts:156](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polygons.ts#L156)
+Defined in: [autk-core/src/triangulator-polygons.ts:204](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polygons.ts#L204)
 
-Converts a MultiLineString feature to a mesh representation.
+Converts a `MultiLineString` feature into triangulated fill geometry.
 
 #### Parameters
 
@@ -211,19 +336,29 @@ Converts a MultiLineString feature to a mesh representation.
 
 `Feature`
 
-The GeoJSON feature representing a MultiLineString
+Source feature with `MultiLineString` geometry.
 
 ##### origin
 
 `number`[]
 
-The origin point for translation
+World-space origin used to derive local XY coordinates.
 
 #### Returns
 
 `object`[]
 
-An array of geometries
+Triangulated fill meshes for each constituent line string.
+
+#### Throws
+
+Never throws.
+
+#### Example
+
+```ts
+const meshes = TriangulatorPolygons.multiLineStringToMesh(mlsFeature, origin);
+```
 
 ***
 
@@ -231,9 +366,9 @@ An array of geometries
 
 > `static` **multiPolygonToBorderMesh**(`feature`, `origin`): `object`[]
 
-Defined in: [triangulator-polygons.ts:274](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polygons.ts#L274)
+Defined in: [autk-core/src/triangulator-polygons.ts:317](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polygons.ts#L317)
 
-Converts a MultiPolygon feature to a border representation.
+Converts a `MultiPolygon` feature into border line geometry.
 
 #### Parameters
 
@@ -241,19 +376,29 @@ Converts a MultiPolygon feature to a border representation.
 
 `Feature`
 
-The GeoJSON feature representing a MultiPolygon
+Source feature with `MultiPolygon` geometry.
 
 ##### origin
 
 `number`[]
 
-The origin point for translation
+World-space origin used to derive local XY coordinates.
 
 #### Returns
 
 `object`[]
 
-An array of borders
+Border line meshes for all rings in all polygons.
+
+#### Throws
+
+Never throws.
+
+#### Example
+
+```ts
+const borders = TriangulatorPolygons.multiPolygonToBorderMesh(mpFeature, origin);
+```
 
 ***
 
@@ -261,9 +406,9 @@ An array of borders
 
 > `static` **multiPolygonToMesh**(`feature`, `origin`): `object`[]
 
-Defined in: [triangulator-polygons.ts:245](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polygons.ts#L245)
+Defined in: [autk-core/src/triangulator-polygons.ts:289](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polygons.ts#L289)
 
-Converts a MultiPolygon feature to a mesh representation.
+Converts a `MultiPolygon` feature into triangulated fill geometry.
 
 #### Parameters
 
@@ -271,19 +416,29 @@ Converts a MultiPolygon feature to a mesh representation.
 
 `Feature`
 
-The GeoJSON feature representing a MultiPolygon
+Source feature with `MultiPolygon` geometry.
 
 ##### origin
 
 `number`[]
 
-The origin point for translation
+World-space origin used to derive local XY coordinates.
 
 #### Returns
 
 `object`[]
 
-An array of geometries
+Triangulated fill meshes for each polygon in the collection.
+
+#### Throws
+
+Never throws.
+
+#### Example
+
+```ts
+const meshes = TriangulatorPolygons.multiPolygonToMesh(mpFeature, origin);
+```
 
 ***
 
@@ -291,9 +446,9 @@ An array of geometries
 
 > `static` **polygonToBorderMesh**(`feature`, `origin`): `object`[]
 
-Defined in: [triangulator-polygons.ts:221](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polygons.ts#L221)
+Defined in: [autk-core/src/triangulator-polygons.ts:270](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polygons.ts#L270)
 
-Converts a Polygon feature to a border representation.
+Converts a `Polygon` feature into closed border line geometry.
 
 #### Parameters
 
@@ -301,19 +456,29 @@ Converts a Polygon feature to a border representation.
 
 `Feature`
 
-The GeoJSON feature representing a Polygon
+Source feature with `Polygon` geometry.
 
 ##### origin
 
 `number`[]
 
-The origin point for translation
+World-space origin used to derive local XY coordinates.
 
 #### Returns
 
 `object`[]
 
-An array of borders
+Border line meshes for all polygon rings.
+
+#### Throws
+
+Never throws.
+
+#### Example
+
+```ts
+const borders = TriangulatorPolygons.polygonToBorderMesh(polyFeature, origin);
+```
 
 ***
 
@@ -321,9 +486,9 @@ An array of borders
 
 > `static` **polygonToMesh**(`feature`, `origin`): `object`[]
 
-Defined in: [triangulator-polygons.ts:198](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polygons.ts#L198)
+Defined in: [autk-core/src/triangulator-polygons.ts:246](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polygons.ts#L246)
 
-Converts a Polygon feature to a mesh representation.
+Converts a `Polygon` feature into triangulated fill geometry with hole support.
 
 #### Parameters
 
@@ -331,16 +496,26 @@ Converts a Polygon feature to a mesh representation.
 
 `Feature`
 
-The GeoJSON feature representing a Polygon
+Source feature with `Polygon` geometry.
 
 ##### origin
 
 `number`[]
 
-The origin point for translation
+World-space origin used to derive local XY coordinates.
 
 #### Returns
 
 `object`[]
 
-An array of geometries
+Triangulated fill meshes for the polygon, including holes.
+
+#### Throws
+
+Never throws.
+
+#### Example
+
+```ts
+const [mesh] = TriangulatorPolygons.polygonToMesh(polyFeature, origin);
+```

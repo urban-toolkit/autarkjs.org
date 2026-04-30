@@ -35,18 +35,21 @@ All packages run in the browser without a backend. Data is fetched directly from
 The following loads OpenStreetMap data for the Financial District in New York and renders it as a full 3D city map — with surface, parks, water, roads, and buildings. Loading progress is reported via `onProgress` as named phase strings while data is fetched and processed.
 
 ```typescript
-import { SpatialDb } from "autk-db";
-import { AutkMap, LayerType } from "autk-map";
+import { AutkSpatialDb } from "autk-db";
+import { AutkMap } from "autk-map";
 
 async function main() {
   const canvas = document.querySelector("canvas")!;
 
-  const db = new SpatialDb();
+  const db = new AutkSpatialDb();
   await db.init();
 
   // Load OSM data — creates tables for surface, parks, water, roads, and buildings
-  await db.loadOsmFromOverpassApi({
-    queryArea: { geocodeArea: "New York", areas: ["Battery Park City", "Financial District"] },
+  await db.loadOsm({
+    queryArea: { 
+        geocodeArea: "New York", 
+        areas: ["Battery Park City", "Financial District"] 
+    },
     outputTableName: "osm",
     autoLoadLayers: {
       coordinateFormat: "EPSG:3395",
@@ -62,7 +65,7 @@ async function main() {
 
   for (const layer of db.getLayerTables()) {
     const geojson = await db.getLayer(layer.name);
-    map.loadGeoJsonLayer(layer.name, geojson, layer.type as LayerType);
+    map.loadCollection(layer.name, { collection: geojson, type: layer.type });
   }
 
   map.draw();

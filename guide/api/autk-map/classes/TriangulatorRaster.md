@@ -6,10 +6,14 @@
 
 # Class: TriangulatorRaster
 
-Defined in: [triangulator-raster.ts:13](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-raster.ts#L13)
+Defined in: [autk-core/src/triangulator-raster.ts:24](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-raster.ts#L24)
 
-Class for triangulating polylines from GeoJSON features.
-It provides methods to convert different geometry types into polyline meshes.
+Builds textured mesh geometry for GeoTIFF raster layers.
+
+`TriangulatorRaster` turns the source collection `bbox` into a single quad in
+local XY space. The four corners are shifted by the supplied origin so the
+raster aligns with the rest of the layer stack, and the quad is emitted with
+UVs spanning `[0, 1]` to match normalized texture coordinates.
 
 ## Constructors
 
@@ -25,100 +29,38 @@ It provides methods to convert different geometry types into polyline meshes.
 
 ### buildMesh()
 
-> `static` **buildMesh**(`geotiff`, `origin`): \[[`ILayerGeometry`](../interfaces/ILayerGeometry.md)[], [`ILayerComponent`](../interfaces/ILayerComponent.md)[]\]
+> `static` **buildMesh**(`geotiff`, `origin`): \[[`LayerGeometry`](../interfaces/LayerGeometry.md)[], [`LayerComponent`](../interfaces/LayerComponent.md)[]\]
 
-Defined in: [triangulator-raster.ts:21](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-raster.ts#L21)
+Defined in: [autk-core/src/triangulator-raster.ts:35](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-raster.ts#L35)
 
-Builds a mesh from GeoJSON features representing polylines.
+Builds a single textured quad covering the raster bounding box.
 
 #### Parameters
 
 ##### geotiff
 
-`FeatureCollection`
+`FeatureCollection`\<`Geometry` \| `null`\>
 
-The GeoJSON feature collection
-
-##### origin
-
-`number`[]
-
-The origin point for translation
-
-#### Returns
-
-\[[`ILayerGeometry`](../interfaces/ILayerGeometry.md)[], [`ILayerComponent`](../interfaces/ILayerComponent.md)[]\]
-
-An array of geometries and components
-
-***
-
-### lineStringToPolyline()
-
-> `static` **lineStringToPolyline**(`feature`, `origin`, `offset`): `object`[]
-
-Defined in: [triangulator-raster.ts:64](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-raster.ts#L64)
-
-Converts a LineString feature to a polyline mesh representation.
-
-#### Parameters
-
-##### feature
-
-`Feature`
-
-The GeoJSON feature representing a LineString
+Raster feature collection whose `bbox` defines the quad extent.
 
 ##### origin
 
 `number`[]
 
-The origin point for translation
-
-##### offset
-
-`number`
-
-The offset distance for the polyline extrusion
+World-space origin subtracted from each corner to form local coordinates.
 
 #### Returns
 
-`object`[]
+\[[`LayerGeometry`](../interfaces/LayerGeometry.md)[], [`LayerComponent`](../interfaces/LayerComponent.md)[]\]
 
-An array of geometries
+A tuple of quad geometry and matching component metadata.
 
-***
+#### Throws
 
-### multiLineStringToPolyline()
+Never throws. When `bbox` is missing, returns empty arrays with a console warning.
 
-> `static` **multiLineStringToPolyline**(`feature`, `origin`, `offset`): `object`[]
+#### Example
 
-Defined in: [triangulator-raster.ts:87](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-raster.ts#L87)
-
-Converts a MultiLineString feature to a polyline mesh representation.
-
-#### Parameters
-
-##### feature
-
-`Feature`
-
-The GeoJSON feature representing a MultiLineString
-
-##### origin
-
-`number`[]
-
-The origin point for translation
-
-##### offset
-
-`number`
-
-The offset distance for the polyline extrusion
-
-#### Returns
-
-`object`[]
-
-An array of geometries
+```ts
+const [meshes, comps] = TriangulatorRaster.buildMesh(rasterFC, origin);
+```

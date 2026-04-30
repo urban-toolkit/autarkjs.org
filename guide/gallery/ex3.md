@@ -24,23 +24,23 @@ This example demonstrates how **Autark Database** and **Autark Map** can be comb
 ## Objective
 
 - initialize an in-browser spatial database;
-- query OSM data directly from Overpass API;
+- query OSM data directly from Overpass API via `loadOsm`;
 - auto-load urban layers such as roads, water, parks, surface, and buildings;
-- render all returned layers in the browser with `AutkMap`.
+- render all returned layers in the browser with `loadCollection`.
 
 ## Source Code
 
 ```ts
-import { SpatialDb } from 'autk-db';
-import { AutkMap, LayerType } from 'autk-map';
+import { AutkSpatialDb } from 'autk-db';
+import { AutkMap } from 'autk-map';
 
 async function main() {
     const canvas = document.querySelector('canvas')!;
 
-    const db = new SpatialDb();
+    const db = new AutkSpatialDb();
     await db.init();
 
-    await db.loadOsmFromOverpassApi({
+    await db.loadOsm({
         queryArea: {
             geocodeArea: 'New York',
             areas: ['Battery Park City', 'Financial District'],
@@ -58,7 +58,7 @@ async function main() {
 
     for (const layer of db.getLayerTables()) {
         const geojson = await db.getLayer(layer.name);
-        map.loadGeoJsonLayer(layer.name, geojson, layer.type as LayerType);
+        map.loadCollection(layer.name, { collection: geojson, type: layer.type });
     }
 
     map.draw();

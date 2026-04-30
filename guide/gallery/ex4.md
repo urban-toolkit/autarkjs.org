@@ -24,7 +24,7 @@ This example demonstrates coordinated interaction between **Autark Map** and **A
 ## Objective
 
 - render a GeoJSON neighborhood layer with `AutkMap`;
-- create an interactive bar chart with `Barchart`;
+- create an interactive bar chart with `AutkChart`;
 - connect map selection to chart highlighting;
 - connect chart selection back to the map layer;
 - demonstrate linked views entirely in the browser.
@@ -32,8 +32,8 @@ This example demonstrates coordinated interaction between **Autark Map** and **A
 ## Source Code
 
 ```ts
-import { AutkMap, MapEvent, VectorLayer } from 'autk-map';
-import { Barchart, PlotEvent } from 'autk-plot';
+import { AutkMap, MapEvent } from 'autk-map';
+import { AutkChart, ChartEvent } from 'autk-plot';
 
 async function main() {
     const canvas = document.querySelector('canvas')!;
@@ -44,32 +44,28 @@ async function main() {
 
     const geojson = await fetch('/data/mnt_neighs_proj.geojson').then(r => r.json());
 
-    map.loadGeoJsonLayer('neighborhoods', geojson);
-    map.updateRenderInfoProperty('neighborhoods', 'isPick', true);
+    map.loadCollection('neighborhoods', { collection: geojson });
+    map.updateRenderInfo('neighborhoods', { isPick: true });
     map.draw();
 
-    const plot = new Barchart({
-        div: plotDiv,
-        data: geojson,
-        attributes: ['ntaname', 'shape_area'],
+    const plot = new AutkChart(plotDiv, {
+        type: 'barchart',
+        collection: geojson,
+        attributes: { axis: ['ntaname', 'shape_area'] },
         labels: {
             axis: ['Neighborhood', 'Area'],
             title: 'Neighborhood area',
         },
         width: plotDiv.clientWidth || 900,
-        events: [PlotEvent.CLICK],
+        events: [ChartEvent.CLICK],
     });
 
-    map.mapEvents.addEventListener(MapEvent.PICK, (selection) => {
-        const normalizedSelection = selection.map((id) =>
-            typeof id === 'string' ? Number(id) : id
-        );
-        plot.setHighlightedIds(normalizedSelection);
+    map.events.addEventListener(MapEvent.PICKING, (selection) => {
+        plot.setSelection(selection);
     });
 
-    plot.plotEvents.addEventListener(PlotEvent.CLICK, (selection) => {
-        const layer = map.layerManager.searchByLayerId('neighborhoods') as VectorLayer | null;
-        layer?.setHighlightedIds(selection);
+    plot.events.on(ChartEvent.CLICK, ({ selection }) => {
+        map.setHighlightedIds('neighborhoods', selection);
     });
 }
 

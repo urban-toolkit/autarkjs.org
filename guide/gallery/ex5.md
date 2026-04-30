@@ -25,20 +25,20 @@ This example demonstrates how **Autark Database**, **Autark Compute**, and **Aut
 ## Objective
 
 - load a GeoJSON layer into the in-browser spatial database;
-- compute a new property using `GeojsonCompute`;
-- map existing attributes into a compute function;
-- store the result in `compute.result`;
+- compute a new property using `AutkComputeEngine`;
+- map existing attributes into a WGSL function;
+- store the result in `feature.properties.compute.result`;
 - render the computed values as a thematic layer with `AutkMap`.
 
 ## Source Code
 
 ```ts
-import { SpatialDb } from 'autk-db';
-import { GeojsonCompute } from 'autk-compute';
+import { AutkSpatialDb } from 'autk-db';
+import { AutkComputeEngine } from 'autk-compute';
 import { AutkMap } from 'autk-map';
 
 async function main() {
-    const db = new SpatialDb();
+    const db = new AutkSpatialDb();
     await db.init();
 
     await db.loadCustomLayer({
@@ -49,25 +49,24 @@ async function main() {
 
     let geojson = await db.getLayer('neighborhoods');
 
-    const geojsonCompute = new GeojsonCompute();
-    geojson = await geojsonCompute.computeFunctionIntoProperties({
-        geojson,
+    const compute = new AutkComputeEngine();
+    geojson = await compute.gpgpuPipeline({
+        collection: geojson,
         variableMapping: {
             x: 'shape_area',
             y: 'shape_leng',
         },
-        outputColumnName: 'result',
-        wglsFunction: 'return x / y;',
+        resultField: 'result',
+        wgslBody: 'return x / y;',
     });
 
     const canvas = document.querySelector('canvas')!;
     const map = new AutkMap(canvas);
     await map.init();
 
-    map.loadGeoJsonLayer('neighborhoods', geojson);
-    map.updateGeoJsonLayerThematic('neighborhoods', geojson, (feature) => {
-        return feature.properties?.compute?.result || 0;
-    });
+    map.loadCollection('neighborhoods', { collection: geojson });
+    map.updateThematic('neighborhoods', { collection: geojson, property: 'properties.compute.result' });
+    map.updateRenderInfo('neighborhoods', { isColorMap: true });
 
     map.draw();
 }

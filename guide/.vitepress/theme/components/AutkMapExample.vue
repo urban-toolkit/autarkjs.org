@@ -18,14 +18,14 @@ onMounted(async () => {
 
   try {
     // Dynamic imports avoid SSR issues (WebGPU / DuckDB are browser-only)
-    const { AutkMap, LayerType } = await import('autk-map')
-    const { SpatialDb } = await import('autk-db')
+    const { AutkMap } = await import('autk-map')
+    const { AutkSpatialDb } = await import('autk-db')
 
-    const db = new SpatialDb()
+    const db = new AutkSpatialDb()
     status.value = 'Initializing database…'
     await db.init()
 
-    await db.loadOsmFromOverpassApi({
+    await db.loadOsm({
       queryArea: {
         geocodeArea: 'New York',
         areas: ['Battery Park City', 'Financial District'],
@@ -46,7 +46,7 @@ onMounted(async () => {
 
     for (const layer of db.getLayerTables()) {
       const geojson = await db.getLayer(layer.name)
-      map.loadGeoJsonLayer(layer.name, geojson, layer.type as typeof LayerType[keyof typeof LayerType])
+      map.loadCollection(layer.name, { collection: geojson, type: layer.type })
     }
 
     map.draw()

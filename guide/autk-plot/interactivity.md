@@ -1,33 +1,33 @@
 # Interactivity
 
-`autk-plot` emits events when the user interacts with a chart. Listen to them via `chart.plotEvents.on(event, handler)`.
+`autk-plot` emits events when the user interacts with a chart. Listen to them via `chart.events.on(event, handler)`.
 
 ## Events
 
-| `PlotEvent` | Trigger | Available on |
+| `ChartEvent` | Trigger | Available on |
 |-------------|---------|-------------|
-| `CLICK` | User clicks a mark | Bar chart |
+| `CLICK` | User clicks a mark | Bar chart, Table |
 | `BRUSH` | User drags a 2D brush | Scatter plot |
-| `BRUSH_X` | User drags a brush on the X axis | Parallel coordinates |
+| `BRUSH_X` | User drags a brush on the X axis | Bar chart (binned mode), Parallel coordinates |
 | `BRUSH_Y` | User drags a brush on the Y axis | Parallel coordinates |
 
 ## Click
 
 ```typescript
-import { PlotEvent } from 'autk-plot';
+import { ChartEvent } from 'autk-plot';
 
-chart.plotEvents.on(PlotEvent.CLICK, (selectedIds) => {
-  console.log('Clicked feature indices:', selectedIds);
+chart.events.on(ChartEvent.CLICK, ({ selection }) => {
+  console.log('Clicked feature indices:', selection);
 });
 ```
 
-`selectedIds` is an array of row indices (by position in `data.features`).
+`selection` is an array of row indices (by position in `collection.features`).
 
 ## Brush
 
 ```typescript
-chart.plotEvents.on(PlotEvent.BRUSH, (selectedIds) => {
-  console.log('Brushed features:', selectedIds);
+chart.events.on(ChartEvent.BRUSH, ({ selection }) => {
+  console.log('Brushed features:', selection);
 });
 ```
 
@@ -36,10 +36,17 @@ A 2D brush lets users drag a rectangle over the scatter plot to select a subset 
 ## Axis Brushes (Parallel Coordinates)
 
 ```typescript
-chart.plotEvents.on(PlotEvent.BRUSH_Y, (selectedIds) => {
+chart.events.on(ChartEvent.BRUSH_Y, ({ selection }) => {
   // User brushed on one of the Y axes
-  console.log('Filtered features:', selectedIds);
+  console.log('Filtered features:', selection);
 });
 ```
 
-Each axis in a parallel coordinates chart can have an independent brush. The intersection of all axis brushes determines `selectedIds`.
+Each axis in a parallel coordinates chart can have an independent brush. The intersection of all axis brushes determines `selection`.
+
+## Programmatic Selection
+
+```typescript
+// Highlight features by their index in the source collection
+chart.setSelection([0, 3, 7]);
+```

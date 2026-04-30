@@ -1,0 +1,56 @@
+[**autk-plot**](../index.md)
+
+***
+
+[autk-plot](../globals.md) / ReduceSeriesBucketRow
+
+# Type Alias: ReduceSeriesBucketRow
+
+> **ReduceSeriesBucketRow** = `object`
+
+Defined in: [autk-plot/src/transforms/presets/reduce-series.ts:41](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/transforms/presets/reduce-series.ts#L41)
+
+A single reduce-series bucket row ready for chart rendering.
+
+`bucket` is either the array index (plain-number series) or the normalised
+timestamp string for object-based series.
+
+## Properties
+
+### autkIds
+
+> **autkIds**: `number`[]
+
+Defined in: [autk-plot/src/transforms/presets/reduce-series.ts:49](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/transforms/presets/reduce-series.ts#L49)
+
+Merged source feature ids represented by the bucket.
+
+***
+
+### bucket
+
+> **bucket**: `string`
+
+Defined in: [autk-plot/src/transforms/presets/reduce-series.ts:43](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/transforms/presets/reduce-series.ts#L43)
+
+Timestamp or index key identifying the reduced bucket.
+
+***
+
+### count
+
+> **count**: `number`
+
+Defined in: [autk-plot/src/transforms/presets/reduce-series.ts:47](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/transforms/presets/reduce-series.ts#L47)
+
+Number of source points collapsed into the bucket.
+
+***
+
+### value
+
+> **value**: `number`
+
+Defined in: [autk-plot/src/transforms/presets/reduce-series.ts:45](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/transforms/presets/reduce-series.ts#L45)
+
+Reduced numeric result for the bucket.

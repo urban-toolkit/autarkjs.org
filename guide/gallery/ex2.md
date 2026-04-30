@@ -32,13 +32,13 @@ This example demonstrates how **Autark Database** and **Autark Map** work togeth
 ## Source Code
 
 ```ts
-import { SpatialDb } from 'autk-db';
-import { AutkMap, ColorMapInterpolator, LayerType, MapStyle } from 'autk-map';
+import { AutkSpatialDb } from 'autk-db';
+import { AutkMap, ColorMapInterpolator, MapStyle } from 'autk-map';
 
 async function main() {
     const canvas = document.querySelector('canvas')!;
 
-    const db = new SpatialDb();
+    const db = new AutkSpatialDb();
     await db.init();
 
     await db.loadCustomLayer({
@@ -53,15 +53,17 @@ async function main() {
 
     for (const layer of db.getLayerTables()) {
         const geojson = await db.getLayer(layer.name);
-        map.loadGeoJsonLayer(layer.name, geojson, layer.type as LayerType);
+        map.loadCollection(layer.name, { collection: geojson, type: layer.type });
     }
 
     const roadsGeojson = await db.getLayer('roads');
-    map.updateRenderInfoProperty('roads', 'colorMapInterpolator', ColorMapInterpolator.OBSERVABLE10);
-    map.updateGeoJsonLayerThematic('roads', roadsGeojson, (feature) => {
+    for (const feature of roadsGeojson.features) {
         const highway = feature.properties?.highway;
-        return ['primary', 'secondary'].includes(highway) ? highway : 'other';
-    });
+        feature.properties!.highway_class = ['primary', 'secondary'].includes(highway) ? highway : 'other';
+    }
+    map.updateColorMap('roads', { colorMap: { interpolator: ColorMapInterpolator.OBSERVABLE10 } });
+    map.updateThematic('roads', { collection: roadsGeojson, property: 'properties.highway_class' });
+    map.updateRenderInfo('roads', { isColorMap: true });
 
     map.draw();
 }

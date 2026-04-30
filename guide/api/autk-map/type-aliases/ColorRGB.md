@@ -8,25 +8,29 @@
 
 > **ColorRGB** = `object`
 
-Defined in: [constants.ts:81](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L81)
+Defined in: [autk-core/src/types-colormap.ts:175](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-colormap.ts#L175)
 
-Represents a color in RGB format, with red, green, blue components and an opacity.
-
-## Example
-
-```ts
-{ r: 255, g: 87, b: 51, opacity: 1 }
-```
+RGBA color representation used by sampling and map styling APIs.
 
 ## Properties
+
+### alpha
+
+> **alpha**: `number`
+
+Defined in: [autk-core/src/types-colormap.ts:183](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-colormap.ts#L183)
+
+Alpha channel value, typically normalized to the 0-1 range.
+
+***
 
 ### b
 
 > **b**: `number`
 
-Defined in: [constants.ts:84](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L84)
+Defined in: [autk-core/src/types-colormap.ts:181](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-colormap.ts#L181)
 
-Blue component. Value must be between 0 and 255.
+Blue channel value.
 
 ***
 
@@ -34,19 +38,9 @@ Blue component. Value must be between 0 and 255.
 
 > **g**: `number`
 
-Defined in: [constants.ts:83](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L83)
+Defined in: [autk-core/src/types-colormap.ts:179](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-colormap.ts#L179)
 
-Green component. Value must be between 0 and 255.
-
-***
-
-### opacity
-
-> **opacity**: `number`
-
-Defined in: [constants.ts:85](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L85)
-
-Opacity. Value must be between
+Green channel value.
 
 ***
 
@@ -54,6 +48,6 @@ Opacity. Value must be between
 
 > **r**: `number`
 
-Defined in: [constants.ts:82](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/constants.ts#L82)
+Defined in: [autk-core/src/types-colormap.ts:177](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-colormap.ts#L177)
 
-Red component. Value must be between 0 and 255.
+Red channel value.

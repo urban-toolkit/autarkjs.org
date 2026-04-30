@@ -8,7 +8,7 @@ After loading and analyzing data, you can export it back as GeoJSON for renderin
 
 ```typescript
 const geojson = await db.getLayer('buildings');
-map.loadGeoJsonLayer('buildings', geojson, LayerType.AUTK_OSM_BUILDINGS);
+map.loadCollection('buildings', { collection: geojson, type: 'buildings' });
 ```
 
 The returned `FeatureCollection` includes a `bbox` property. If OSM data is loaded, the OSM bounding box is used; otherwise, the layer's own bounding box is computed.
@@ -58,7 +58,7 @@ const layers = db.getLayerTables();
 
 for (const layer of layers) {
   const geojson = await db.getLayer(layer.name);
-  map.loadGeoJsonLayer(layer.name, geojson, layer.type as LayerType);
+  map.loadCollection(layer.name, { collection: geojson, type: layer.type });
 }
 ```
 

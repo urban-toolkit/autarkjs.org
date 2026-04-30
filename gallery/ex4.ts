@@ -1,5 +1,5 @@
-import { AutkMap, MapEvent, VectorLayer } from 'autk-map';
-import { Barchart, PlotEvent } from 'autk-plot';
+import { AutkMap, MapEvent } from 'autk-map';
+import { AutkChart, ChartEvent } from 'autk-plot';
 
 function setLoadingState(message: string, note?: string) {
   const text = document.getElementById('loading-text');
@@ -68,8 +68,8 @@ async function main() {
       'Adding the GeoJSON layer to the map and enabling picking.'
     );
 
-    map.loadGeoJsonLayer('neighborhoods', geojson);
-    map.updateRenderInfoProperty('neighborhoods', 'isPick', true);
+    map.loadCollection('neighborhoods', { collection: geojson });
+    map.updateRenderInfo('neighborhoods', { isPick: true });
     map.draw();
 
     setLoadingState(
@@ -77,29 +77,25 @@ async function main() {
       'Creating a coordinated chart view for neighborhood attributes.'
     );
 
-    const plot = new Barchart({
-      div: plotDiv,
-      data: geojson,
-      attributes: ['ntaname', 'shape_area'],
+    const plot = new AutkChart(plotDiv, {
+      type: 'barchart',
+      collection: geojson,
+      attributes: { axis: ['ntaname', 'shape_area'] },
       labels: {
         axis: ['Neighborhood', 'Area'],
         title: 'Neighborhood area',
       },
-      margins: { left: 60, right: 20, top: 50, bottom: 280},
+      margins: { left: 60, right: 20, top: 50, bottom: 280 },
       width: plotDiv.clientWidth || 900,
-      events: [PlotEvent.CLICK],
+      events: [ChartEvent.CLICK],
     });
 
-    map.mapEvents.addEventListener(MapEvent.PICK, (selection: string[] | number[]) => {
-      const normalizedSelection = selection.map((id) =>
-        typeof id === 'string' ? Number(id) : id
-      );
-      plot.setHighlightedIds(normalizedSelection);
+    map.events.addEventListener(MapEvent.PICKING, (selection: number[]) => {
+      plot.setSelection(selection);
     });
 
-    plot.plotEvents.addEventListener(PlotEvent.CLICK, (selection: number[]) => {
-      const layer = map.layerManager.searchByLayerId('neighborhoods') as VectorLayer | null;
-      layer?.setHighlightedIds(selection);
+    plot.events.on(ChartEvent.CLICK, ({ selection }: { selection: number[] }) => {
+      map.setHighlightedIds('neighborhoods', selection);
     });
 
     hideLoading();

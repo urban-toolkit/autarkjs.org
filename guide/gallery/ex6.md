@@ -43,8 +43,8 @@ export class StandaloneGeojsonLayersVis {
         const neighs = await fetch('/data/mnt_neighs_proj.geojson').then(res => res.json());
         const points = await fetch('/data/mnt_points_test_proj.geojson').then(res => res.json());
 
-        this.map.loadGeoJsonLayer('neighborhoods', neighs);
-        this.map.loadGeoJsonLayer('points', points);
+        this.map.loadCollection('neighborhoods', { collection: neighs });
+        this.map.loadCollection('points', { collection: points });
 
         this.map.draw();
     }

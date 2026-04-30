@@ -10,31 +10,37 @@ npm install autk-plot
 
 ## Configuration
 
-All plot types share the same `PlotConfig` structure:
+All chart types are instantiated through the unified `AutkChart` constructor. Pass the host element as the first argument and a `UnifiedChartConfig` as the second:
 
 ```typescript
-import { Barchart } from 'autk-plot';
+import { AutkChart } from 'autk-plot';
 
-const chart = new Barchart({
-  div: document.querySelector('#chart-container') as HTMLElement,
-  data: geojson,           // FeatureCollection — properties are used as data rows
-  labels: {
-    axis: ['neighborhood', 'population'], // [x-axis key, y-axis key]
-    title: 'Population by Neighborhood',
-  },
-  width: 600,
-  height: 400,
-});
+const chart = new AutkChart(
+  document.querySelector('#chart-container') as HTMLElement,
+  {
+    type: 'barchart',
+    collection: geojson,    // FeatureCollection — properties are used as data rows
+    attributes: { axis: ['neighborhood', 'population'] },
+    labels: {
+      axis: ['Neighborhood', 'Population'],
+      title: 'Population by Neighborhood',
+    },
+    width: 600,
+    height: 400,
+  }
+);
 ```
 
-`data` is a GeoJSON `FeatureCollection`. The chart extracts `feature.properties` from each feature as its data rows. This makes it easy to pass data directly from `autk-db.getLayer()`.
+`collection` is a GeoJSON `FeatureCollection`. The chart extracts `feature.properties` from each feature as its data rows. This makes it easy to pass data directly from `autk-db.getLayer()`.
 
 ## Margins
 
 Override default margins if needed:
 
 ```typescript
-const chart = new Barchart({
+new AutkChart(div, {
+  type: 'barchart',
+  collection: geojson,
   ...
   margins: { left: 80, right: 20, top: 40, bottom: 60 },
 });

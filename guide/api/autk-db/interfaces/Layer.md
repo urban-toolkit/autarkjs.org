@@ -6,7 +6,7 @@
 
 # Interface: Layer
 
-Defined in: [use-cases/load-layer/interfaces.ts:54](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-db/src/spatial/use-cases/load-layer/interfaces.ts#L54)
+Defined in: [autk-db/src/spatial/use-cases/load-layer/interfaces.ts:14](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/load-layer/interfaces.ts#L14)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [use-cases/load-layer/interfaces.ts:54](https://github.com/urban-too
 
 > **linestring**: `object`
 
-Defined in: [use-cases/load-layer/interfaces.ts:56](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-db/src/spatial/use-cases/load-layer/interfaces.ts#L56)
+Defined in: [autk-db/src/spatial/use-cases/load-layer/interfaces.ts:16](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/load-layer/interfaces.ts#L16)
 
 #### coordinates
 
@@ -30,7 +30,7 @@ Defined in: [use-cases/load-layer/interfaces.ts:56](https://github.com/urban-too
 
 > **metadata**: `object`
 
-Defined in: [use-cases/load-layer/interfaces.ts:55](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-db/src/spatial/use-cases/load-layer/interfaces.ts#L55)
+Defined in: [autk-db/src/spatial/use-cases/load-layer/interfaces.ts:15](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/load-layer/interfaces.ts#L15)
 
 #### Index Signature
 

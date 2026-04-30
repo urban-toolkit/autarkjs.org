@@ -6,10 +6,9 @@
 
 # Class: TriangulatorPolylines
 
-Defined in: [triangulator-polylines.ts:13](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polylines.ts#L13)
+Defined in: [autk-core/src/triangulator-polylines.ts:17](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polylines.ts#L17)
 
-Class for triangulating polylines from GeoJSON features.
-It provides methods to convert different geometry types into polyline meshes.
+Triangulators for converting supported data sources into renderable meshes.
 
 ## Constructors
 
@@ -23,23 +22,43 @@ It provides methods to convert different geometry types into polyline meshes.
 
 ## Properties
 
+### DEFAULT\_ROAD\_HALF\_WIDTH
+
+> `readonly` `static` **DEFAULT\_ROAD\_HALF\_WIDTH**: `number` = `3.5`
+
+Defined in: [autk-core/src/triangulator-polylines.ts:43](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polylines.ts#L43)
+
+Default road half-width used when no known `highway` tag value is available.
+
+***
+
 ### offset
 
-> `static` **offset**: `number` = `300`
+> `static` **offset**: `number` = `5`
 
-Defined in: [triangulator-polylines.ts:18](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polylines.ts#L18)
+Defined in: [autk-core/src/triangulator-polylines.ts:19](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polylines.ts#L19)
 
-The offset distance for the polyline extrusion.
+Default half-width, in local planar units, used when buffering source polylines.
+
+***
+
+### ROAD\_HALF\_WIDTH\_BY\_HIGHWAY
+
+> `readonly` `static` **ROAD\_HALF\_WIDTH\_BY\_HIGHWAY**: `Record`\<`string`, `number`\>
+
+Defined in: [autk-core/src/triangulator-polylines.ts:22](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polylines.ts#L22)
+
+OSM road half-widths, in local planar units, keyed by normalized `highway` tag value.
 
 ## Methods
 
 ### buildMesh()
 
-> `static` **buildMesh**(`geojson`, `origin`): \[[`ILayerGeometry`](../interfaces/ILayerGeometry.md)[], [`ILayerComponent`](../interfaces/ILayerComponent.md)[]\]
+> `static` **buildMesh**(`geojson`, `origin`, `resolveOffset?`): \[[`LayerGeometry`](../interfaces/LayerGeometry.md)[], [`LayerComponent`](../interfaces/LayerComponent.md)[]\]
 
-Defined in: [triangulator-polylines.ts:26](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polylines.ts#L26)
+Defined in: [autk-core/src/triangulator-polylines.ts:59](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polylines.ts#L59)
 
-Builds a mesh from GeoJSON features representing polylines.
+Builds triangulated polyline geometry for a GeoJSON feature collection.
 
 #### Parameters
 
@@ -47,19 +66,111 @@ Builds a mesh from GeoJSON features representing polylines.
 
 `FeatureCollection`
 
-The GeoJSON feature collection
+Source feature collection containing polyline geometries.
 
 ##### origin
 
 `number`[]
 
-The origin point for translation
+World-space origin subtracted before converting to local planar space.
+
+##### resolveOffset?
+
+(`feature`, `featureIndex`) => `number`
+
+Optional per-feature half-width resolver.
 
 #### Returns
 
-\[[`ILayerGeometry`](../interfaces/ILayerGeometry.md)[], [`ILayerComponent`](../interfaces/ILayerComponent.md)[]\]
+\[[`LayerGeometry`](../interfaces/LayerGeometry.md)[], [`LayerComponent`](../interfaces/LayerComponent.md)[]\]
 
-An array of geometries and components
+A tuple of triangulated geometry chunks and per-feature component metadata.
+
+#### Throws
+
+Never throws. Unsupported or degenerate features are skipped.
+
+#### Example
+
+```ts
+const [meshes, comps] = TriangulatorPolylines.buildMesh(lineFC, origin);
+```
+
+***
+
+### defaultOffsetResolver()
+
+> `readonly` `static` **defaultOffsetResolver**(`_feature`, `_featureIndex`): `number`
+
+Defined in: [autk-core/src/triangulator-polylines.ts:46](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polylines.ts#L46)
+
+Optional callback used to resolve a per-feature polyline half-width.
+
+#### Parameters
+
+##### \_feature
+
+`Feature`
+
+##### \_featureIndex
+
+`number`
+
+#### Returns
+
+`number`
+
+***
+
+### geometryCollectionToPolyline()
+
+> `static` **geometryCollectionToPolyline**(`feature`, `origin`, `offset`, `featureIndex`): `object`[]
+
+Defined in: [autk-core/src/triangulator-polylines.ts:178](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polylines.ts#L178)
+
+Flattens supported children of a `GeometryCollection` into polyline meshes.
+
+#### Parameters
+
+##### feature
+
+`Feature`
+
+Source feature with `GeometryCollection` geometry.
+
+##### origin
+
+`number`[]
+
+World-space origin subtracted before buffering.
+
+##### offset
+
+`number`
+
+Polyline half-width used for planar buffering.
+
+##### featureIndex
+
+`number`
+
+Index of the parent feature in the source collection.
+
+#### Returns
+
+`object`[]
+
+Triangulated meshes for all supported child geometries.
+
+#### Throws
+
+Never throws. Unsupported children are skipped with a console warning.
+
+#### Example
+
+```ts
+const meshes = TriangulatorPolylines.geometryCollectionToPolyline(feature, origin, 5, 0);
+```
 
 ***
 
@@ -67,9 +178,9 @@ An array of geometries and components
 
 > `static` **lineStringToPolyline**(`feature`, `origin`, `offset`): `object`[]
 
-Defined in: [triangulator-polylines.ts:74](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polylines.ts#L74)
+Defined in: [autk-core/src/triangulator-polylines.ts:121](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polylines.ts#L121)
 
-Converts a LineString feature to a polyline mesh representation.
+Converts a single `LineString` feature into triangulated polyline mesh data.
 
 #### Parameters
 
@@ -77,25 +188,35 @@ Converts a LineString feature to a polyline mesh representation.
 
 `Feature`
 
-The GeoJSON feature representing a LineString
+Source feature with `LineString` geometry.
 
 ##### origin
 
 `number`[]
 
-The origin point for translation
+World-space origin subtracted before buffering.
 
 ##### offset
 
 `number`
 
-The offset distance for the polyline extrusion
+Polyline half-width used for planar buffering.
 
 #### Returns
 
 `object`[]
 
-An array of geometries
+One triangulated polygon mesh, or an empty array when buffering fails.
+
+#### Throws
+
+Never throws. Degenerate buffers return an empty array.
+
+#### Example
+
+```ts
+const [mesh] = TriangulatorPolylines.lineStringToPolyline(feature, origin, 5);
+```
 
 ***
 
@@ -103,9 +224,9 @@ An array of geometries
 
 > `static` **multiLineStringToPolyline**(`feature`, `origin`, `offset`): `object`[]
 
-Defined in: [triangulator-polylines.ts:97](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-polylines.ts#L97)
+Defined in: [autk-core/src/triangulator-polylines.ts:146](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polylines.ts#L146)
 
-Converts a MultiLineString feature to a polyline mesh representation.
+Converts a `MultiLineString` feature into triangulated polyline meshes.
 
 #### Parameters
 
@@ -113,22 +234,102 @@ Converts a MultiLineString feature to a polyline mesh representation.
 
 `Feature`
 
-The GeoJSON feature representing a MultiLineString
+Source feature with `MultiLineString` geometry.
 
 ##### origin
 
 `number`[]
 
-The origin point for translation
+World-space origin subtracted before buffering.
 
 ##### offset
 
 `number`
 
-The offset distance for the polyline extrusion
+Polyline half-width used for planar buffering.
 
 #### Returns
 
 `object`[]
 
-An array of geometries
+Triangulated meshes for each valid buffered line string.
+
+#### Throws
+
+Never throws. Invalid buffered lines are silently ignored.
+
+#### Example
+
+```ts
+const meshes = TriangulatorPolylines.multiLineStringToPolyline(feature, origin, 5);
+```
+
+***
+
+### normalizeRoadHighwayValue()
+
+> `static` **normalizeRoadHighwayValue**(`highway`): `string` \| `null`
+
+Defined in: [autk-core/src/triangulator-polylines.ts:221](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polylines.ts#L221)
+
+Normalizes an OSM `highway` tag value for road-width lookup.
+
+#### Parameters
+
+##### highway
+
+`unknown`
+
+Raw `highway` property value (string, semicolon-delimited, or array).
+
+#### Returns
+
+`string` \| `null`
+
+Normalized highway token, or `null` when unavailable.
+
+#### Throws
+
+Never throws.
+
+#### Example
+
+```ts
+TriangulatorPolylines.normalizeRoadHighwayValue('motorway');  // 'motorway'
+TriangulatorPolylines.normalizeRoadHighwayValue('primary;secondary');  // 'primary'
+```
+
+***
+
+### resolveRoadHalfWidth()
+
+> `static` **resolveRoadHalfWidth**(`feature`): `number`
+
+Defined in: [autk-core/src/triangulator-polylines.ts:204](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-polylines.ts#L204)
+
+Resolves a road polyline half-width from OSM `highway` tag semantics.
+
+#### Parameters
+
+##### feature
+
+`Feature`
+
+Source road feature with `highway` property.
+
+#### Returns
+
+`number`
+
+Polyline half-width in local planar units.
+
+#### Throws
+
+Never throws. Falls back to `DEFAULT_ROAD_HALF_WIDTH`.
+
+#### Example
+
+```ts
+const hw = TriangulatorPolylines.resolveRoadHalfWidth(roadFeature);
+// hw → 10 for motorway, 6 for primary, 3.5 for unknown
+```

@@ -1,59 +1,48 @@
 # Thematic Mapping
 
-Thematic mapping colors each feature in a layer based on a data attribute. Use `updateGeoJsonLayerThematic` to apply it.
+Thematic mapping colors each feature in a layer based on a data attribute. Use `updateThematic` to apply it, passing the feature collection and a dot-path property accessor.
 
 ## Coloring by a Numeric Attribute
 
-Pass a function that returns a `number` from a feature's properties. Values are automatically normalized to `[0, 1]` and mapped through the color scale:
+Pass the GeoJSON and a dot-path to the numeric property. Values are automatically normalized to `[0, 1]` and mapped through the color scale:
 
 ```typescript
 import { ColorMapInterpolator } from 'autk-map';
 
 const geojson = await db.getLayer('buildings');
 
-map.updateRenderInfoProperty('buildings', 'colorMapInterpolator', ColorMapInterpolator.SEQUENTIAL_REDS);
-map.updateRenderInfoProperty('buildings', 'isColorMap', true);
-
-map.updateGeoJsonLayerThematic(
-  'buildings',
-  geojson,
-  (feature) => feature.properties?.height ?? 0
-);
+map.updateColorMap('buildings', { colorMap: { interpolator: ColorMapInterpolator.SEQUENTIAL_REDS } });
+map.updateThematic('buildings', { collection: geojson, property: 'properties.height' });
+map.updateRenderInfo('buildings', { isColorMap: true });
 ```
 
 The min and max labels in the legend are set automatically from the data range.
 
 ## Coloring by a Categorical Attribute
 
-Return a `string` instead of a number. Each unique category gets a color from the active palette. Use `OBSERVABLE10` for categorical data:
+Use a dot-path to a string property. Each unique category gets a color from the active palette. Use `OBSERVABLE10` for categorical data:
 
 ```typescript
 import { ColorMapInterpolator } from 'autk-map';
 
-map.updateRenderInfoProperty('roads', 'colorMapInterpolator', ColorMapInterpolator.OBSERVABLE10);
-map.updateRenderInfoProperty('roads', 'isColorMap', true);
+map.updateColorMap('roads', { colorMap: { interpolator: ColorMapInterpolator.OBSERVABLE10 } });
 
 const geojson = await db.getLayer('roads');
 
-map.updateGeoJsonLayerThematic(
-  'roads',
-  geojson,
-  (feature) => {
-    const hw = feature.properties?.highway;
-    return ['primary', 'secondary'].includes(hw) ? hw : 'other';
-  }
-);
+// Pre-classify values into a new property if needed
+for (const feature of geojson.features) {
+  const hw = feature.properties?.highway;
+  feature.properties!.highway_class = ['primary', 'secondary'].includes(hw) ? hw : 'other';
+}
+
+map.updateThematic('roads', { collection: geojson, property: 'properties.highway_class' });
+map.updateRenderInfo('roads', { isColorMap: true });
 ```
 
-## Grouping Buildings by ID
+## Updating Thematic Values
 
-Buildings in `autk-map` are split into individual faces (walls + roof) internally. If you color by a per-building attribute, pass `groupById: true` so each building uses its own single value instead of coloring face-by-face:
+To change the active property or data source, call `updateThematic` again with the new collection and property:
 
 ```typescript
-map.updateGeoJsonLayerThematic(
-  'buildings',
-  geojson,
-  (feature) => feature.properties?.floor_count ?? 0,
-  true // groupById
-);
+map.updateThematic('buildings', { collection: newGeojson, property: 'properties.compute.score' });
 ```

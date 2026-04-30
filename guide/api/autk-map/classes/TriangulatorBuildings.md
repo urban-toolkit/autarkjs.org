@@ -6,10 +6,21 @@
 
 # Class: TriangulatorBuildings
 
-Defined in: [triangulator-buildings.ts:11](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-buildings.ts#L11)
+Defined in: [autk-core/src/triangulator-buildings.ts:39](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-buildings.ts#L39)
 
-Class for triangulating buildings from GeoJSON features.
-It provides methods to convert different geometry types into building meshes.
+Builds extruded mesh geometry for OSM-style buildings.
+
+Each feature is expected to contain a `GeometryCollection` whose entries are
+matched by index against `feature.properties.parts`. For every supported part
+geometry, the triangulator converts world coordinates into local XY space,
+resolves wall heights from part metadata, and emits mesh chunks with feature
+component counts. Roof geometry is delegated to `triangulator-roofs`.
+
+## Example
+
+```ts
+const [mesh, components] = TriangulatorBuildings.buildMesh(buildings, origin);
+```
 
 ## Constructors
 
@@ -25,11 +36,11 @@ It provides methods to convert different geometry types into building meshes.
 
 ### buildMesh()
 
-> `static` **buildMesh**(`geojson`, `origin`): \[[`ILayerGeometry`](../interfaces/ILayerGeometry.md)[], [`ILayerComponent`](../interfaces/ILayerComponent.md)[]\]
+> `static` **buildMesh**(`geojson`, `origin`, `allowZeroHeightBuildings?`): \[[`LayerGeometry`](../interfaces/LayerGeometry.md)[], [`LayerComponent`](../interfaces/LayerComponent.md)[]\]
 
-Defined in: [triangulator-buildings.ts:18](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-buildings.ts#L18)
+Defined in: [autk-core/src/triangulator-buildings.ts:51](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-buildings.ts#L51)
 
-Builds a mesh from GeoJSON features representing buildings.
+Builds extruded building geometry for an OSM-style building collection.
 
 #### Parameters
 
@@ -37,152 +48,32 @@ Builds a mesh from GeoJSON features representing buildings.
 
 `FeatureCollection`
 
-The GeoJSON feature collection
+Source building feature collection.
 
 ##### origin
 
 `number`[]
 
-The origin point for translation
+World-space origin used to convert coordinates into local XY space.
+
+##### allowZeroHeightBuildings?
+
+`boolean` = `false`
+
+When `true`, parts with no height metadata get a random fallback height.
 
 #### Returns
 
-\[[`ILayerGeometry`](../interfaces/ILayerGeometry.md)[], [`ILayerComponent`](../interfaces/ILayerComponent.md)[]\]
+\[[`LayerGeometry`](../interfaces/LayerGeometry.md)[], [`LayerComponent`](../interfaces/LayerComponent.md)[]\]
 
-An array of geometries and components
+A tuple of mesh chunks and per-feature component metadata.
 
-***
+#### Throws
 
-### lineStringToBuildingMesh()
+Never throws. Parts without height metadata are skipped (or given fallback height).
 
-> `static` **lineStringToBuildingMesh**(`feature`, `heightInfo`, `origin`): `object`[]
+#### Example
 
-Defined in: [triangulator-buildings.ts:149](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-buildings.ts#L149)
-
-Converts a LineString feature to a border representation.
-
-#### Parameters
-
-##### feature
-
-`Feature`
-
-The GeoJSON feature representing a LineString
-
-##### heightInfo
-
-`number`[]
-
-##### origin
-
-`number`[]
-
-The origin point for translation
-
-#### Returns
-
-`object`[]
-
-An array of borders
-
-***
-
-### multiLineStringToBuilding()
-
-> `static` **multiLineStringToBuilding**(`feature`, `heightInfo`, `origin`): `object`[]
-
-Defined in: [triangulator-buildings.ts:170](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-buildings.ts#L170)
-
-Converts a LineString feature to a border representation.
-
-#### Parameters
-
-##### feature
-
-`Feature`
-
-The GeoJSON feature representing a LineString
-
-##### heightInfo
-
-`number`[]
-
-##### origin
-
-`number`[]
-
-The origin point for translation
-
-#### Returns
-
-`object`[]
-
-An array of borders
-
-***
-
-### multiPolygonToBuilding()
-
-> `static` **multiPolygonToBuilding**(`feature`, `heightInfo`, `origin`): `object`[]
-
-Defined in: [triangulator-buildings.ts:222](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-buildings.ts#L222)
-
-Converts a LineString feature to a border representation.
-
-#### Parameters
-
-##### feature
-
-`Feature`
-
-The GeoJSON feature representing a LineString
-
-##### heightInfo
-
-`number`[]
-
-##### origin
-
-`number`[]
-
-The origin point for translation
-
-#### Returns
-
-`object`[]
-
-An array of borders
-
-***
-
-### polygonToBuilding()
-
-> `static` **polygonToBuilding**(`feature`, `heightInfo`, `origin`): `object`[]
-
-Defined in: [triangulator-buildings.ts:196](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-map/src/triangulator-buildings.ts#L196)
-
-Converts a LineString feature to a border representation.
-
-#### Parameters
-
-##### feature
-
-`Feature`
-
-The GeoJSON feature representing a LineString
-
-##### heightInfo
-
-`number`[]
-
-##### origin
-
-`number`[]
-
-The origin point for translation
-
-#### Returns
-
-`object`[]
-
-An array of borders
+```ts
+const [meshes, comps] = TriangulatorBuildings.buildMesh(buildingsFC, origin);
+```

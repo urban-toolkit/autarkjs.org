@@ -2,7 +2,7 @@
 
 `autk-db` is a browser-native spatial database powered by [DuckDB-WASM](https://duckdb.org/). It lets you load, query, and transform geospatial data without a server — all processing runs in the browser.
 
-The main entry point is the `SpatialDb` class.
+The main entry point is the `AutkSpatialDb` class.
 
 ## Installation
 
@@ -15,9 +15,9 @@ npm install autk-db
 Before using any method, call `init()` to set up the DuckDB instance and load the spatial extension:
 
 ```typescript
-import { SpatialDb } from "autk-db";
+import { AutkSpatialDb } from "autk-db";
 
-const db = new SpatialDb();
+const db = new AutkSpatialDb();
 await db.init();
 ```
 
@@ -49,7 +49,7 @@ Each layer has a **type** (`'buildings'`, `'roads'`, `'polygons'`, etc.) that ma
 
 ### Load Operations
 
-`loadOsmFromOverpassApi`, `loadCsv`, `loadCustomLayer`, `loadGridLayer`, and the others are **write-only**. They:
+`loadOsm`, `loadCsv`, `loadCustomLayer`, `loadGridLayer`, and the others are **write-only**. They:
 
 - Are all `async` and must be awaited
 - Register data as a named DuckDB table
@@ -77,11 +77,11 @@ Getters are the only way to move data from DuckDB into JavaScript memory:
 The typical flow looks like this:
 
 ```typescript
-await db.loadOsmFromOverpassApi({ ... });      // data → DuckDB
+await db.loadOsm({ ... });                      // data → DuckDB
 await db.spatialJoin({ ... });                 // transform inside DuckDB
 
 const geojson = await db.getLayer('osm_buildings'); // DuckDB → JS memory
-map.loadGeoJsonLayer('buildings', geojson);         // JS memory → GPU
+map.loadCollection('buildings', { collection: geojson });  // JS memory → GPU
 ```
 
 ## What's Next

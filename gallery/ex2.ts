@@ -1,5 +1,5 @@
-import { SpatialDb } from 'autk-db';
-import { AutkMap, ColorMapInterpolator, LayerType, MapStyle } from 'autk-map';
+import { AutkSpatialDb } from 'autk-db';
+import { AutkMap, ColorMapInterpolator, MapStyle } from 'autk-map';
 
 function setLoadingState(message: string, note?: string) {
   const text = document.getElementById('loading-text');
@@ -42,7 +42,7 @@ async function main() {
       'Preparing the in-browser spatial engine.'
     );
 
-    const db = new SpatialDb();
+    const db = new AutkSpatialDb();
     await db.init();
 
     setLoadingState(
@@ -72,7 +72,7 @@ async function main() {
 
     for (const layer of db.getLayerTables()) {
       const geojson = await db.getLayer(layer.name);
-      map.loadGeoJsonLayer(layer.name, geojson, layer.type as LayerType);
+      map.loadCollection(layer.name, { collection: geojson, type: layer.type });
     }
 
     setLoadingState(
@@ -81,12 +81,14 @@ async function main() {
     );
 
     const roadsGeojson = await db.getLayer('roads');
-    map.updateRenderInfoProperty('roads', 'colorMapInterpolator', ColorMapInterpolator.OBSERVABLE10);
-    map.updateGeoJsonLayerThematic('roads', roadsGeojson, (feature) => {
+    // Pre-compute highway classification into a GeoJSON property
+    for (const feature of roadsGeojson.features) {
       const highway = feature.properties?.highway;
-      return ['primary', 'secondary'].includes(highway) ? highway : 'other';
-    });
-    map.updateRenderInfoProperty('roads', 'isColorMap', true);
+      feature.properties!.highway_class = ['primary', 'secondary'].includes(highway) ? highway : 'other';
+    }
+    map.updateColorMap('roads', { colorMap: { interpolator: ColorMapInterpolator.OBSERVABLE10 } });
+    map.updateThematic('roads', { collection: roadsGeojson, property: 'properties.highway_class' });
+    map.updateRenderInfo('roads', { isColorMap: true });
 
     map.draw();
     hideLoading();

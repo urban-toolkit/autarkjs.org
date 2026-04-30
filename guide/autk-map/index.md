@@ -31,7 +31,7 @@ map.draw(); // starts continuous rendering at 60fps
 
 ## Core Concepts
 
-- **Layers** — each call to `loadGeoJsonLayer` adds one layer identified by a string name.
+- **Layers** — each call to `loadCollection` adds one layer identified by a string name.
 - **Layer types** — control how geometry is triangulated and rendered (flat polygon, polyline, 3D building extrusion, etc.). See [Layer Types](./layer-types).
 - **Thematic data** — color each feature by a numeric or categorical attribute. See [Thematic Mapping](./thematic-mapping).
 - **Bounding box** — set automatically from the first loaded layer; controls the camera's initial framing.
@@ -39,7 +39,7 @@ map.draw(); // starts continuous rendering at 60fps
 ## What's Next
 
 - [Layer Types](./layer-types) — OSM layers, custom geometry, raster
-- [Loading Layers](./loading-layers) — `loadGeoJsonLayer`, `loadGeoTiffLayer`
+- [Loading Layers](./loading-layers) — `loadCollection`
 - [Styling](./styling) — opacity and color maps
 - [Thematic Mapping](./thematic-mapping) — color features by attribute
 - [Interactions](./interactions) — picking, show/hide

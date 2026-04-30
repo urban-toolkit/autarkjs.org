@@ -6,6 +6,6 @@
 
 # Type Alias: LoadingPhase
 
-> **LoadingPhase** = `"querying-osm-server"` \| `"downloading-osm-data"` \| `"querying-osm-boundaries"` \| `"downloading-boundaries"` \| `"processing-osm-data"` \| `"processing-boundaries"`
+> **LoadingPhase** = `"querying-osm-server"` \| `"downloading-osm-data"` \| `"processing-osm-data"` \| `"processing-boundaries"`
 
-Defined in: [use-cases/load-osm-from-overpass-api/interfaces.ts:17](https://github.com/urban-toolkit/autark/blob/5468c9f1ec2214c4620bc007aaa7457c8a34ad4c/autk-db/src/spatial/use-cases/load-osm-from-overpass-api/interfaces.ts#L17)
+Defined in: [autk-db/src/spatial/use-cases/load-osm-from-overpass-api/interfaces.ts:19](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/load-osm-from-overpass-api/interfaces.ts#L19)

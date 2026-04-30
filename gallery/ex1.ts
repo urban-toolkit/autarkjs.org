@@ -60,7 +60,7 @@ async function main() {
       'Drawing the standalone GeoJSON layer on the map.'
     );
 
-    map.loadGeoJsonLayer('neighborhoods', geojson);
+    map.loadCollection('neighborhoods', { collection: geojson });
     map.draw();
 
     hideLoading();

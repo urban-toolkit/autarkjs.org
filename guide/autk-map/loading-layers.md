@@ -1,18 +1,19 @@
 # Loading Layers
 
-## loadGeoJsonLayer
+## loadCollection
 
-The primary method for adding data to the map. Accepts any GeoJSON `FeatureCollection`:
+The primary method for adding data to the map. Accepts any GeoJSON `FeatureCollection` via a params object:
 
 ```typescript
-import { LayerType } from 'autk-map';
+// Auto-detect geometry type (Point → 'points', LineString → 'polylines', Polygon → 'polygons')
+map.loadCollection('neighborhoods', { collection: geojson });
 
-// Auto-detect geometry type
-map.loadGeoJsonLayer('neighborhoods', geojson);
+// Explicit layer type (required for OSM semantic types)
+map.loadCollection('buildings', { collection: geojson, type: 'buildings' });
+map.loadCollection('roads', { collection: geojson, type: 'roads' });
 
-// Explicit layer type (required for OSM types)
-map.loadGeoJsonLayer('buildings', geojson, LayerType.AUTK_OSM_BUILDINGS);
-map.loadGeoJsonLayer('roads', geojson, LayerType.AUTK_OSM_ROADS);
+// Raster layer with property for value extraction
+map.loadCollection('elevation', { collection: geotiffFC, type: 'raster', property: 'properties.band_1' });
 ```
 
 ### Bounding Box
@@ -30,20 +31,33 @@ map.boundingBox = [minLon, minLat, maxLon, maxLat];
 ```typescript
 for (const layer of db.getLayerTables()) {
   const geojson = await db.getLayer(layer.name);
-  map.loadGeoJsonLayer(layer.name, geojson, layer.type as LayerType);
+  map.loadCollection(layer.name, { collection: geojson, type: layer.type });
 }
 ```
 
-The `layer.type` property from `autk-db` matches the string values of `LayerType`, so a cast is safe.
+The `layer.type` property from `autk-db` already carries the correct `LayerType` string, so no cast is needed.
 
-## loadGeoTiffLayer
+## Raster Layers
 
-Loads a raster layer from GeoTIFF-derived data (represented as a `FeatureCollection` with raster metadata in feature properties):
+Load raster data by passing `type: 'raster'` and a `property` accessor to `loadCollection`:
 
 ```typescript
-map.loadGeoTiffLayer('elevation', geotiffFeatureCollection, LayerType.AUTK_RASTER);
+map.loadCollection('elevation', {
+  collection: geotiffFeatureCollection,
+  type: 'raster',
+  property: 'properties.band_1',
+});
+```
+
+Use `updateRaster` to change the active band or data source:
+
+```typescript
+map.updateRaster('elevation', {
+  collection: geotiffFeatureCollection,
+  property: 'properties.band_3',
+});
 ```
 
 :::tip Heatmaps
-`autk-db`'s `buildHeatmap` returns data in the format expected by `loadGeoTiffLayer`. Pass the result directly.
+`autk-db`'s `buildHeatmap` returns data in the format expected by raster layers. Pass the result directly.
 :::

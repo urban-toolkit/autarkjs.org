@@ -72,8 +72,8 @@ export class StandaloneGeojsonLayersVis {
       'Drawing polygons and points in the same map view.'
     );
 
-    this.map.loadGeoJsonLayer('neighborhoods', neighs);
-    this.map.loadGeoJsonLayer('points', points);
+    this.map.loadCollection('neighborhoods', { collection: neighs });
+    this.map.loadCollection('points', { collection: points });
 
     this.map.draw();
     hideLoading();

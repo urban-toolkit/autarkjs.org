@@ -1,8 +1,8 @@
-import { SpatialDb } from 'autk-db';
-import { GeojsonCompute } from 'autk-compute';
+import { AutkSpatialDb } from 'autk-db';
+import { AutkComputeEngine } from 'autk-compute';
 import { AutkMap } from 'autk-map';
 
-import { Feature, FeatureCollection, GeoJsonProperties, Geometry } from 'geojson';
+import { FeatureCollection, Geometry, GeoJsonProperties } from 'geojson';
 
 function setLoadingState(message: string, note?: string) {
     const text = document.getElementById('loading-text');
@@ -35,7 +35,7 @@ function showError(message: string, note?: string) {
 
 export class ComputeFunction {
     protected map!: AutkMap;
-    protected db!: SpatialDb;
+    protected db!: AutkSpatialDb;
 
     public async run(canvas: HTMLCanvasElement): Promise<void> {
         setLoadingState(
@@ -43,7 +43,7 @@ export class ComputeFunction {
             'Preparing the in-browser data environment.'
         );
 
-        this.db = new SpatialDb();
+        this.db = new AutkSpatialDb();
         await this.db.init();
 
         setLoadingState(
@@ -64,15 +64,15 @@ export class ComputeFunction {
 
         let geojson = await this.db.getLayer('neighborhoods');
 
-        const geojsonCompute = new GeojsonCompute();
-        geojson = await geojsonCompute.computeFunctionIntoProperties({
-            geojson,
-            attributes: {
+        const compute = new AutkComputeEngine();
+        geojson = await compute.gpgpuPipeline({
+            collection: geojson,
+            variableMapping: {
                 x: 'shape_area',
                 y: 'shape_leng',
             },
-            outputColumnName: 'result',
-            wglsFunction: 'return x / y;',
+            resultField: 'result',
+            wgslBody: 'return x / y;',
         });
 
         setLoadingState(
@@ -88,23 +88,19 @@ export class ComputeFunction {
             'Coloring neighborhoods by the computed result attribute.'
         );
 
-        this.map.loadGeoJsonLayer('neighborhoods', geojson);
+        this.map.loadCollection('neighborhoods', { collection: geojson });
         await this.updateThematicData(geojson);
         this.map.draw();
 
         hideLoading();
     }
 
-    protected async updateThematicData(
-        geojson: FeatureCollection<Geometry, GeoJsonProperties>
-    ) {
-        const getFnv = (feature: Feature) => {
-            const properties = feature.properties as GeoJsonProperties;
-            return properties?.compute?.result || 0;
-        };
-
-        this.map.updateGeoJsonLayerThematic('neighborhoods', geojson, getFnv);
-        this.map.updateRenderInfoProperty('neighborhoods', 'isColorMap', true);
+    protected async updateThematicData(geojson: FeatureCollection<Geometry, GeoJsonProperties>) {
+        this.map.updateThematic('neighborhoods', {
+            collection: geojson,
+            property: 'properties.compute.result',
+        });
+        this.map.updateRenderInfo('neighborhoods', { isColorMap: true });
     }
 }
 
