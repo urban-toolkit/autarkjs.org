@@ -1,4 +1,5 @@
-.VPHero .text {
+.VPHero .text,
+.VPHero .tagline {
   max-width: 100% !important;
 }
 
