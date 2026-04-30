@@ -1,52 +1,5 @@
-/* ── Hero ───────────────────────────────────────── */
-.VPHero {
-  position: relative;
-}
-
 .VPHero .text {
   max-width: 100% !important;
-}
-
-/* Hero image blend */
-.VPHero .image-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.VPHero .image-container img {
-  mix-blend-mode: multiply;
-  opacity: 0.82;
-  filter: saturate(0.7) contrast(1.1);
-}
-
-html.dark .VPHero .image-container img {
-  mix-blend-mode: screen;
-  opacity: 0.65;
-  filter: saturate(0.5) contrast(1.15) brightness(1.25);
-}
-
-/* Subtle hero background texture */
-.VPHero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url('/imgs/nit.png');
-  background-size: 50%;
-  background-position: 120% 40%;
-  background-repeat: no-repeat;
-  opacity: 0.045;
-  pointer-events: none;
-  z-index: 0;
-}
-
-html.dark .VPHero::before {
-  opacity: 0.065;
-}
-
-.VPHero .container {
-  position: relative;
-  z-index: 1;
 }
 
 .case-tags {
