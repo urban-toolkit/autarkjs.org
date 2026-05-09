@@ -2,6 +2,11 @@
 .introduction-page :is(p, li, td, th, .custom-block p, .custom-block li, h1, h2, h3, h4, h5, h6) {
   text-align: justify;
 }
+
+.introduction-page table th:first-child,
+.introduction-page table td:first-child {
+  width: 32%;
+}
 </style>
 
 <div class="introduction-page">
@@ -14,13 +19,13 @@ Autark provides a client-side platform for implementing urban visual analytics s
 
 Autark is available as a single package or as individual modules:
 
-| Package                       | Purpose |
-| ----------------------------- | ------- |
-| **@urban-toolkit/autk**       | Complete package that re-exports the toolkit modules |
-| **@urban-toolkit/autk-db**    | A spatial database that handles physical and thematic urban datasets |
-| **@urban-toolkit/autk-compute** | A WebGPU-based computation engine for implementing general-purpose algorithms using physical and thematic data |
-| **@urban-toolkit/autk-map**   | A WebGPU-based vector map visualization library for exploring 2D and 3D physical and thematic layers |
-| **@urban-toolkit/autk-plot**  | A D3.js-based plot library designed to consume urban data in standard formats and facilitate linked views |
+| Package                           | Purpose |
+| ----------------------------------| ------- |
+| **@urban-toolkit/autk**           | Complete package that re-exports the toolkit modules |
+| **@urban-toolkit/autk-db**        | A spatial database that handles physical and thematic urban datasets |
+| **@urban-toolkit/autk-compute**   | A WebGPU-based computation engine for implementing general-purpose algorithms using physical and thematic data |
+| **@urban-toolkit/autk-map**       | A WebGPU-based vector map visualization library for exploring 2D and 3D physical and thematic layers |
+| **@urban-toolkit/autk-plot**      | A D3.js-based plot library designed to consume urban data in standard formats and facilitate linked views |
 
 For demonstration and documentation purposes, we provide a large collection of examples illustrating the core functionality of each module in the examples and usecases sections of this site.
 
