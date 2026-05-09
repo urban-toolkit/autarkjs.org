@@ -11,7 +11,7 @@ gtag('config', 'G-P6EVSF42L8');`],
 
     vite: {
         optimizeDeps: {
-            exclude: ['autk-db', '@duckdb/duckdb-wasm'],
+            exclude: ['@urban-toolkit/autk-db', '@duckdb/duckdb-wasm'],
         },
     },
 

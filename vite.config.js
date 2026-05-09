@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   optimizeDeps: {
-    exclude: ['autk-db', '@duckdb/duckdb-wasm'],
+    exclude: ['@urban-toolkit/autk-db', '@duckdb/duckdb-wasm'],
   },
   build: {
     outDir: 'dist-temp',
