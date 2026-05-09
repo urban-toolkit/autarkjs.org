@@ -24,10 +24,10 @@ function showError(message: string, note?: string): void {
     if (noteEl) noteEl.textContent = note ?? 'Please reload the page and try again.';
 }
 
-import { AutkSpatialDb } from 'autk-db';
-import { AutkComputeEngine } from 'autk-compute';
-import { AutkMap, MapEvent } from 'autk-map';
-import { AutkChart, ChartEvent } from 'autk-plot';
+import { AutkSpatialDb } from '@urban-toolkit/autk-db';
+import { AutkComputeEngine } from '@urban-toolkit/autk-compute';
+import { AutkMap, MapEvent } from '@urban-toolkit/autk-map';
+import { AutkPlot, PlotEvent } from '@urban-toolkit/autk-plot';
 
 import splitRoadsQuery from './split-roads.sql?raw';
 import shadowShader from './shadow-shader.wgsl?raw';
@@ -35,7 +35,7 @@ import shadowShader from './shadow-shader.wgsl?raw';
 export class Shadows {
     protected map!: AutkMap;
     protected db!: AutkSpatialDb;
-    protected histogram!: AutkChart;
+    protected histogram!: AutkPlot;
 
     protected readonly ROADS_LAYER = 'table_roads_20m';
 
@@ -115,7 +115,7 @@ export class Shadows {
 
         setLoadingState('Computing shadow joins...', 'Linking shadow measurements to road segments for each season.');
         for (const month of ['jun', 'sep', 'dez']) {
-            await this.db.spatialJoin({
+            await this.db.spatialQuery({
                 tableRootName: this.ROADS_LAYER,
                 tableJoinName: 'shadows',
                 spatialPredicate: 'NEAR',
@@ -333,14 +333,14 @@ export class Shadows {
     protected reloadHistogram(): void {
         this.histogramDiv.innerHTML = '';
 
-        this.histogram = new AutkChart(this.histogramDiv, {
+        this.histogram = new AutkPlot(this.histogramDiv, {
             type: 'barchart',
             collection: this.roads,
             attributes: { axis: [`sjoin.avg.${this.currentMonth}`, '@transform'] },
             labels: { axis: ['Hours of shadow', '#Road segments'], title: 'Shadow distribution' },
             width: 600,
             height: 380,
-            events: [ChartEvent.BRUSH_X],
+            events: [PlotEvent.BRUSH_X],
             transform: {
                 preset: 'binning-1d',
                 options: { bins: 13 },
@@ -349,7 +349,7 @@ export class Shadows {
     }
 
     protected updateHistogramListeners(): void {
-        this.histogram.events.on(ChartEvent.BRUSH_X, ({ selection }: { selection: number[] }) => {
+        this.histogram.events.on(PlotEvent.BRUSH_X, ({ selection }: { selection: number[] }) => {
             this.map.setHighlightedIds(this.ROADS_LAYER, selection);
             this.map.draw();
         });

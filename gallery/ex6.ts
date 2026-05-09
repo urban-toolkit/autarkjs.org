@@ -1,4 +1,4 @@
-import { AutkMap } from 'autk-map';
+import { AutkMap } from '@urban-toolkit/autk-map';
 
 function setLoadingState(message: string, note?: string) {
   const text = document.getElementById('loading-text');

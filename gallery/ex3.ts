@@ -1,5 +1,5 @@
-import { AutkSpatialDb } from 'autk-db';
-import { AutkMap } from 'autk-map';
+import { AutkSpatialDb } from '@urban-toolkit/autk-db';
+import { AutkMap } from '@urban-toolkit/autk-map';
 
 function setLoadingState(message: string, note?: string) {
   const text = document.getElementById('loading-text');

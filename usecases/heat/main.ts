@@ -1,7 +1,7 @@
-import { AutkMap, ColorMapInterpolator, MapEvent, MapStyle } from 'autk-map';
-import { AutkSpatialDb } from 'autk-db';
-import { AutkComputeEngine } from 'autk-compute';
-import { AutkChart, ChartEvent, ChartStyle } from 'autk-plot';
+import { AutkMap, ColorMapInterpolator, MapEvent, MapStyle } from '@urban-toolkit/autk-map';
+import { AutkSpatialDb } from '@urban-toolkit/autk-db';
+import { AutkComputeEngine } from '@urban-toolkit/autk-compute';
+import { AutkPlot, PlotEvent, PlotStyle } from '@urban-toolkit/autk-plot';
 import { lstRegressionShader } from './lst-regression-shader';
 
 function setLoadingState(message: string, note?: string): void {
@@ -34,8 +34,8 @@ const HIGHLIGHT_COLOR = '#1a7a2e';
 export class OsmLayersApi {
     protected map!: AutkMap;
     protected db!: AutkSpatialDb;
-    protected plot!: AutkChart;
-    protected linechart!: AutkChart;
+    protected plot!: AutkPlot;
+    protected linechart!: AutkPlot;
     protected geotiffData: any;
     protected roadsGeojson: any;
     protected computedRoadsGeojson: any;
@@ -71,7 +71,7 @@ export class OsmLayersApi {
         });
 
         setLoadingState('Joining LST to road segments...', 'Averaging temperature bands within 1 km of each road.');
-        await this.db.spatialJoin({
+        await this.db.spatialQuery({
             tableRootName: 'table_osm_roads',
             tableJoinName: 'lst',
             spatialPredicate: 'NEAR',
@@ -95,7 +95,7 @@ export class OsmLayersApi {
         await this.map.init();
 
         MapStyle.setHighlightColor(HIGHLIGHT_COLOR);
-        ChartStyle.setHighlightColor(HIGHLIGHT_COLOR);
+        PlotStyle.setHighlightColor(HIGHLIGHT_COLOR);
 
         setLoadingState('Rendering layers...', 'Uploading geometry to the GPU.');
         await this.loadLayers();
@@ -211,7 +211,7 @@ export class OsmLayersApi {
     }
 
     protected setupPlot(): void {
-        this.plot = new AutkChart(document.getElementById('plotBody') as HTMLElement, {
+        this.plot = new AutkPlot(document.getElementById('plotBody') as HTMLElement, {
             type: 'scatterplot',
             collection: this.computedRoadsGeojson,
             attributes: { axis: ['compute.intercept', 'compute.angle'] },
@@ -219,15 +219,15 @@ export class OsmLayersApi {
             tickFormats: ['.1~f', '.3~f'],
             width: 600,
             height: 380,
-            events: [ChartEvent.BRUSH],
+            events: [PlotEvent.BRUSH],
         });
 
-        this.plot.events.on(ChartEvent.BRUSH, ({ selection }: { selection: number[] }) => {
+        this.plot.events.on(PlotEvent.BRUSH, ({ selection }: { selection: number[] }) => {
             this.map.setHighlightedIds('table_osm_roads', selection);
             this.map.draw();
         });
 
-        this.linechart = new AutkChart(document.getElementById('lineChartBody') as HTMLElement, {
+        this.linechart = new AutkPlot(document.getElementById('lineChartBody') as HTMLElement, {
             type: 'linechart',
             collection: this.computedRoadsGeojson,
             attributes: { axis: ['lst_timeseries', 'compute.angle', 'compute.intercept'] },

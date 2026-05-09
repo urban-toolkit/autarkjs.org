@@ -1,6 +1,6 @@
-import { AutkSpatialDb } from 'autk-db';
-import { AutkComputeEngine } from 'autk-compute';
-import { AutkMap } from 'autk-map';
+import { AutkSpatialDb } from '@urban-toolkit/autk-db';
+import { AutkComputeEngine } from '@urban-toolkit/autk-compute';
+import { AutkMap } from '@urban-toolkit/autk-map';
 
 import { FeatureCollection, Geometry, GeoJsonProperties } from 'geojson';
 

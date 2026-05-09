@@ -1,5 +1,5 @@
-import { AutkMap, MapEvent } from 'autk-map';
-import { AutkChart, ChartEvent } from 'autk-plot';
+import { AutkMap, MapEvent } from '@urban-toolkit/autk-map';
+import { AutkPlot, PlotEvent } from '@urban-toolkit/autk-plot';
 
 function setLoadingState(message: string, note?: string) {
   const text = document.getElementById('loading-text');
@@ -77,7 +77,7 @@ async function main() {
       'Creating a coordinated chart view for neighborhood attributes.'
     );
 
-    const plot = new AutkChart(plotDiv, {
+    const plot = new AutkPlot(plotDiv, {
       type: 'barchart',
       collection: geojson,
       attributes: { axis: ['ntaname', 'shape_area'] },
@@ -87,14 +87,14 @@ async function main() {
       },
       margins: { left: 60, right: 20, top: 50, bottom: 280 },
       width: plotDiv.clientWidth || 900,
-      events: [ChartEvent.CLICK],
+      events: [PlotEvent.CLICK],
     });
 
     map.events.addEventListener(MapEvent.PICKING, (selection: number[]) => {
       plot.setSelection(selection);
     });
 
-    plot.events.on(ChartEvent.CLICK, ({ selection }: { selection: number[] }) => {
+    plot.events.on(PlotEvent.CLICK, ({ selection }: { selection: number[] }) => {
       map.setHighlightedIds('neighborhoods', selection);
     });
 
