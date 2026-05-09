@@ -1,3 +1,11 @@
+<style scoped>
+.introduction-page :is(p, li, td, th, .custom-block p, .custom-block li, h1, h2, h3, h4, h5, h6) {
+  text-align: justify;
+}
+</style>
+
+<div class="introduction-page">
+
 # Introduction
 
 Autark provides a client-side platform for implementing urban visual analytics software. It supports loading, storing, querying, joining, and exporting physical and thematic urban data using standard formats such as OpenStreetMap, GeoJSON, and GeoTIFF. By using GPU acceleration, Autark enables the implementation of algorithms for sophisticated urban analyses, such as shadow and visibility analysis, as well as classic machine learning algorithms such as regression and clustering. Finally, it provides a collection of interactive plots and a 3D map for visualizing urban data.
@@ -92,3 +100,5 @@ main();
 </ClientOnly>
 
 Continue to the [autk-db overview](/autk-db/) to learn more about loading and querying data.
+
+</div>
