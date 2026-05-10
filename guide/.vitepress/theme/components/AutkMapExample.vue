@@ -17,9 +17,8 @@ onMounted(async () => {
   if (!canvas.value) return
 
   try {
-    // Dynamic imports avoid SSR issues (WebGPU / DuckDB are browser-only)
-    const { AutkMap } = await import('autk-map')
-    const { AutkSpatialDb } = await import('autk-db')
+    const { AutkMap } = await import('@urban-toolkit/autk-map')
+    const { AutkSpatialDb } = await import('@urban-toolkit/autk-db')
 
     const db = new AutkSpatialDb()
     status.value = 'Initializing database…'
@@ -28,7 +27,7 @@ onMounted(async () => {
     await db.loadOsm({
       queryArea: {
         geocodeArea: 'New York',
-        areas: ['Battery Park City', 'Financial District'],
+        areas: ['Financial District'],
       },
       outputTableName: 'osm',
       autoLoadLayers: {

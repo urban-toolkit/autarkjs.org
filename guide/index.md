@@ -4,7 +4,7 @@ layout: home
 hero:
   name: Autark
   text: A Serverless Toolkit for Prototyping Urban Visual Analytics Systems
-  tagline: Load, analyze, and render geospatial data entirely in the browser.
+  tagline: Load, process, and visualize geospatial data entirely in the browser.
   actions:
     - theme: brand
       text: Get Started
