@@ -4,15 +4,17 @@
 
 The main entry point is the `AutkSpatialDb` class.
 
-## Installation
+## Package Installation
+To install autk-db, run:
 
 ```bash
-npm install autk-db
+npm install @urban-toolkit/autk-db
 ```
+You can also use `autk-db` installing the complete `@urban-toolkit/autk` package.
 
 ## Initialization
 
-Before using any method, call `init()` to set up the DuckDB instance and load the spatial extension:
+Before calling any `autk-db` method, it is necessary to call the `init()` method to set up the DuckDB instance and load the spatial extension. `init()` is async and must be awaited.
 
 ```typescript
 import { AutkSpatialDb } from "autk-db";
@@ -20,8 +22,6 @@ import { AutkSpatialDb } from "autk-db";
 const db = new AutkSpatialDb();
 await db.init();
 ```
-
-`init()` is async and must be awaited. All subsequent method calls require it to have completed first.
 
 ## Core Concepts
 
