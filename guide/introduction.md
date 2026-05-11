@@ -21,17 +21,17 @@ Autark is available as a single package or as individual modules:
 
 | Package                           | Purpose |
 | ----------------------------------| ------- |
-| **@urban-toolkit/autk**           | Complete package that re-exports the toolkit modules |
-| **@urban-toolkit/autk-db**        | A spatial database that handles physical and thematic urban datasets |
-| **@urban-toolkit/autk-compute**   | A WebGPU-based computation engine for implementing general-purpose algorithms using physical and thematic data |
-| **@urban-toolkit/autk-map**       | A WebGPU-based vector map visualization library for exploring 2D and 3D physical and thematic layers |
-| **@urban-toolkit/autk-plot**      | A D3.js-based plot library designed to consume urban data in standard formats and facilitate linked views |
+| **[@urban-toolkit/autk](/autk-db/)**           | Complete package that re-exports the toolkit modules |
+| **[@urban-toolkit/autk-db](/autk-db/)**        | A spatial database that handles physical and thematic urban datasets |
+| **[@urban-toolkit/autk-compute](/autk-compute/)**   | A WebGPU-based computation engine for implementing general-purpose algorithms using physical and thematic data |
+| **[@urban-toolkit/autk-map](/autk-map/)**       | A WebGPU-based vector map visualization library for exploring 2D and 3D physical and thematic layers |
+| **[@urban-toolkit/autk-plot](/autk-plot/)**      | A D3.js-based plot library designed to consume urban data in standard formats and facilitate linked views |
 
 For demonstration and documentation purposes, we provide a large collection of examples illustrating the core functionality of each module in the examples and usecases sections.
 
 ## Installation
 
-Autark packages are available on npm. To install the complete package run:
+Autark packages are available on [npm](https://www.npmjs.com/package/@urban-toolkit/autk). To install the complete package run:
 
 ```bash
 npm install @urban-toolkit/autk
@@ -48,59 +48,66 @@ npm install @urban-toolkit/autk-map
 
 ## Serverless by Design
 
-All Autark packages run in the browser without a backend. Data is fetched directly from public APIs such as the OpenStreetMap Overpass API or from static file servers. Queries run inside a DuckDB instance in the browser. Map visualization and analytical compute workloads use WebGPU. Interactive plots are built using D3.js.
+All Autark packages run in the browser without a backend. Data is fetched directly from public APIs such as the [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API) or from static file servers. Queries run inside a [DuckDB](https://duckdb.org/docs/current/clients/wasm/overview) instance in the browser. Map visualization and analytical compute workloads use WebGPU. Interactive plots are built using [D3.js](https://d3js.org/).
 
 :::tip Browser requirements
-`autk-map` and `autk-compute` require a browser with **WebGPU** support (Chrome 113+, Edge 113+). `autk-db` and `autk-plot` work in any modern browser.
+`autk-map` and `autk-compute` require a browser with **WebGPU** support.
+
+| Browser | Support Status | Minimum Version |
+|---|---|---|
+| Chrome | Full | 113+  |
+| Edge | Full | 113+ |
+| Safari | Full | 26+  |
+| Firefox | Full | 141+ |
+| Opera | Full | 99+ |
+
+ `autk-db` and `autk-plot` work in any modern browser.
 :::
+
 
 ## Minimal Example
 
-The following loads OpenStreetMap data for the Financial District in New York and renders it as a full 3D city map — with surface, parks, water, roads, and buildings. Loading progress is reported via `onProgress` as named phase strings while data is fetched and processed.
+The playground below loads OpenStreetMap data for the Financial District in New York and renders it as a full 3D city map — with surface, parks, water and roads. 
 
-```typescript
+Try to add `"buildings"` to the `layers` list and click **Run** to test changes.
+
+<script setup>
+const introCode = `
 import { AutkMap } from "@urban-toolkit/autk-map";
 import { AutkSpatialDb } from "@urban-toolkit/autk-db";
 
-async function main() {
-  const canvas = document.querySelector("canvas")!;
+const db = new AutkSpatialDb();
+await db.init();
 
-  const db = new AutkSpatialDb();
-  await db.init();
+await db.loadOsm({
+  queryArea: {
+    geocodeArea: "New York",
+    areas: ["Financial District"]
+  },
+  outputTableName: "osm",
+  autoLoadLayers: {
+    coordinateFormat: "EPSG:3395",
+    layers: ["surface", "parks", "water", "roads"],
+  },
+  onProgress: (phase) => console.log(phase),
+});
 
-  await db.loadOsm({
-    queryArea: { 
-        geocodeArea: "New York", 
-        areas: ["Financial District"] 
-    },
-    outputTableName: "osm",
-    autoLoadLayers: {
-      coordinateFormat: "EPSG:3395",
-      layers: ["surface", "parks", "water", "roads", "buildings"],
-    },
-    onProgress: (phase) => console.log(phase),
-  });
+const map = new AutkMap(canvas);
+await map.init();
 
-  const map = new AutkMap(canvas);
-  await map.init();
-
-  for (const layer of db.getLayerTables()) {
-    const geojson = await db.getLayer(layer.name);
-    map.loadCollection(layer.name, { collection: geojson, type: layer.type });
-  }
-
-  map.draw();
+for (const layer of db.getLayerTables()) {
+  const geojson = await db.getLayer(layer.name);
+  map.loadCollection(layer.name, { collection: geojson, type: layer.type });
 }
 
-main();
-```
-
-**Live result:**
+map.draw();
+`
+</script>
 
 <ClientOnly>
-  <AutkMapExample />
+  <CodePlayground :code="introCode" out="dom" />
 </ClientOnly>
 
-Continue to the [autk-db overview](/autk-db/) to learn more about loading and querying data.
+The `canvas` argument used in the autk-map constructor must be a reference to a DOM node containing a HTML canvas.
 
 </div>

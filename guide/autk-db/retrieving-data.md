@@ -1,21 +1,10 @@
 # Retrieving Data
 
-After loading and analyzing data, you can export it back as GeoJSON for rendering or as plain arrays for charts and tables.
+After loading and analyzing data, use getter methods to move results from DuckDB back into JavaScript. Retrieve only what you need: large tables can be expensive to transfer into JS memory.
 
-## Get a Layer as GeoJSON
+## Get Table Data
 
-`getLayer` returns a `FeatureCollection` ready to pass to `autk-map`:
-
-```typescript
-const geojson = await db.getLayer('buildings');
-map.loadCollection('buildings', { collection: geojson, type: 'buildings' });
-```
-
-The returned `FeatureCollection` includes a `bbox` property. If OSM data is loaded, the OSM bounding box is used; otherwise, the layer's own bounding box is computed.
-
-## Get Raw Table Data
-
-`getTableData` returns the rows of any table as plain JavaScript objects. It works with layer tables, CSV tables, and JSON tables alike:
+`getTableData` returns rows from any registered table as plain JavaScript objects. Use it for charts, UI tables, summaries, or custom processing.
 
 ```typescript
 const rows = await db.getTableData({ tableName: 'incidents' });
@@ -32,6 +21,32 @@ const page = await db.getTableData({
 });
 ```
 
+## Get a Renderable Table as GeoJSON
+
+`getLayer` exports a renderable table as a GeoJSON `FeatureCollection`. This is the typical way to pass data from `autk-db` to `autk-map` or `autk-plot`.
+
+```typescript
+const geojson = await db.getLayer('buildings');
+map.loadCollection('buildings', { collection: geojson, type: 'buildings' });
+```
+
+The returned `FeatureCollection` includes a `bbox` property. If OSM data is loaded, the OSM bounding box is used; otherwise, the table's own bounding box is computed.
+
+## List Renderable Tables
+
+`getLayerTables()` returns the subset of `db.tables` that can be exported with `getLayer()`:
+
+```typescript
+const renderableTables = db.getLayerTables();
+
+for (const table of renderableTables) {
+  const geojson = await db.getLayer(table.name);
+  map.loadCollection(table.name, { collection: geojson, type: table.type });
+}
+```
+
+Use this when you want to load all available renderable tables into a map.
+
 ## Get Bounding Boxes
 
 **OSM bounding box** — the geographic extent of the loaded OSM area:
@@ -41,33 +56,21 @@ const bbox = db.getOsmBoundingBox();
 // [minLon, minLat, maxLon, maxLat] or null
 ```
 
-**Layer bounding box** — computed from the geometry of any layer:
+**Table bounding box** — computed from the geometry of a renderable table:
 
 ```typescript
 const bbox = await db.getBoundingBoxFromLayer('neighborhoods');
 // { minLon, minLat, maxLon, maxLat }
 ```
 
-## List All Layer Tables
+Bounding boxes are useful for camera framing, clipping, and setting grid extents.
 
-`getLayerTables` returns only the tables that contain geometry (OSM layers, GeoJSON layers):
+## Choosing a Getter
 
-```typescript
-const layers = db.getLayerTables();
-// Useful for iterating and passing each layer to autk-map
-
-for (const layer of layers) {
-  const geojson = await db.getLayer(layer.name);
-  map.loadCollection(layer.name, { collection: geojson, type: layer.type });
-}
-```
-
-## Remove a Table
-
-`removeLayer` drops a table from DuckDB and removes it from the current workspace:
-
-```typescript
-await db.removeLayer('incidents');
-```
-
-After removal, the table will no longer appear in `db.tables` or `db.getLayerTables()`.
+| Method | Returns | Use for |
+|---|---|---|
+| `getTableData({ tableName })` | `Record<string, unknown>[]` | Plain rows for charts, tables, or custom JS logic |
+| `getLayer(name)` | `FeatureCollection` | Renderable tables for `autk-map` or `autk-plot` |
+| `getLayerTables()` | Table metadata array | Listing renderable tables |
+| `getOsmBoundingBox()` | `[minLon, minLat, maxLon, maxLat] \| null` | Framing the loaded OSM area |
+| `getBoundingBoxFromLayer(name)` | Bounding box object | Bounds of one renderable table |

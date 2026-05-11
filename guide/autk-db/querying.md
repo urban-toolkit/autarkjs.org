@@ -1,4 +1,4 @@
-# Querying & Analyzing
+# Querying and Analysis
 
 Once data is loaded, `autk-db` provides methods for spatial analysis directly in the browser.
 

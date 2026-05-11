@@ -8,6 +8,9 @@ import InstitutionsFooter from './components/InstitutionsFooter.vue'
 import ExamplePage from './components/ExamplePage.vue'
 import LiveCasePage from './components/LiveCasePage.vue'
 import LiveExampleFrame from './components/LiveExampleFrame.vue'
+import TablesConsoleExample from './components/TablesConsoleExample.vue'
+import CodePlayground from './components/CodePlayground.vue'
+import JsonTree from './components/JsonTree.vue'
 import type { Theme } from 'vitepress'
 
 export default {
@@ -24,5 +27,8 @@ export default {
     app.component('ExamplePage', ExamplePage)
     app.component('LiveCasePage', LiveCasePage)
     app.component('LiveExampleFrame', LiveExampleFrame)
+    app.component('TablesConsoleExample', TablesConsoleExample)
+    app.component('CodePlayground', CodePlayground)
+    app.component('JsonTree', JsonTree)
   },
 } satisfies Theme

@@ -1,6 +1,8 @@
 # Loading Data
 
-`autk-db` can load data from multiple sources. Each method registers the result as a named table in DuckDB — **load methods do not return data into JavaScript memory**. To read data back into JS, use [`getLayer()`](./retrieving-data#get-a-layer-as-geojson) or [`getTableData()`](./retrieving-data#get-raw-table-data) after loading.
+`autk-db` can load data from multiple sources. Each load method registers data as one or more named tables in DuckDB. Load methods return table metadata; they do **not** return all rows into JavaScript memory.
+
+To inspect loaded tables, use [`db.tables`](./tables#table-metadata). To retrieve data later, use [`getTableData()`](./retrieving-data#get-table-data) or [`getLayer()`](./retrieving-data#get-a-renderable-table-as-geojson).
 
 ## OpenStreetMap via Overpass API
 
@@ -9,32 +11,32 @@
 ```typescript
 await db.loadOsm({
   queryArea: {
-    geocodeArea: 'New York',      // city or region name
-    areas: ['Financial District'], // sub-areas within the city
+    geocodeArea: 'New York',
+    areas: ['Financial District'],
   },
   outputTableName: 'osm',
 });
 ```
 
-### Auto-loading Layers
+### Auto-loading Renderable Tables
 
-The `autoLoadLayers` option extracts ready-to-render layers (buildings, roads, surface, parks, water) from the raw OSM data automatically:
+The `autoLoadLayers` option extracts ready-to-render tables such as buildings, roads, surface, parks, and water from the raw OSM data:
 
 ```typescript
 await db.loadOsm({
   queryArea: { geocodeArea: 'New York', areas: ['Financial District'] },
   outputTableName: 'osm',
   autoLoadLayers: {
-    coordinateFormat: 'EPSG:3395', // projection for the output geometries
+    coordinateFormat: 'EPSG:3395',
     layers: ['surface', 'parks', 'water', 'roads', 'buildings'],
-    dropOsmTable: true,            // remove the raw OSM table after extraction
+    dropOsmTable: true,
   },
 });
 ```
 
-After this call, `db.getLayerTables()` returns one table per extracted layer. Each table is typed and ready to pass to `autk-map`.
+After this call, `db.getLayerTables()` returns one table per extracted renderable table. Each table is typed and ready to export with `getLayer()` and pass to `autk-map`.
 
-**Table naming:** each layer is stored as `{outputTableName}_{layer}`. With `outputTableName: 'osm'` and `layers: ['surface', 'roads', 'buildings']`, the resulting tables are `osm_surface`, `osm_roads`, and `osm_buildings`.
+**Table naming:** each extracted OSM table is stored as `{outputTableName}_{layer}`. With `outputTableName: 'osm'` and `layers: ['surface', 'roads', 'buildings']`, the resulting tables are `osm_surface`, `osm_roads`, and `osm_buildings`.
 
 :::tip Coordinate format
 Use `'EPSG:3395'` (World Mercator) for most city-scale visualizations. This is the format expected by `autk-map`.
@@ -42,7 +44,7 @@ Use `'EPSG:3395'` (World Mercator) for most city-scale visualizations. This is t
 
 ### Tracking Progress
 
-Use `onProgress` to update a UI indicator during the (potentially slow) OSM download:
+Use `onProgress` to update a UI indicator during the OSM request and processing steps:
 
 ```typescript
 await db.loadOsm({
@@ -60,16 +62,16 @@ Possible phases: `querying-osm-server`, `downloading-osm-data`, `querying-osm-bo
 |---|---|---|---|
 | `outputTableName` | `string` | — | Base name for the resulting tables. |
 | `queryArea.geocodeArea` | `string` | — | City or region name for the Overpass geocode query. |
-| `queryArea.areas` | `string[]` | — | Sub-areas (neighborhoods, districts) within the geocoded area. |
-| `autoLoadLayers` | `object` | — | If set, automatically extracts layers from the raw OSM data. See below. |
-| `autoLoadLayers.coordinateFormat` | `string` | — | Target projection for the extracted layers (e.g. `'EPSG:3395'`). |
-| `autoLoadLayers.layers` | `LayerType[]` | — | Layers to extract: `'surface'`, `'water'`, `'parks'`, `'roads'`, `'buildings'`. |
-| `autoLoadLayers.dropOsmTable` | `boolean` | — | If `true`, removes the raw OSM table after layer extraction. |
+| `queryArea.areas` | `string[]` | — | Sub-areas within the geocoded area. |
+| `autoLoadLayers` | `object` | — | Automatically extracts renderable OSM tables. |
+| `autoLoadLayers.coordinateFormat` | `string` | — | Target projection for extracted tables. |
+| `autoLoadLayers.layers` | `LayerType[]` | — | Tables to extract: `'surface'`, `'water'`, `'parks'`, `'roads'`, `'buildings'`. |
+| `autoLoadLayers.dropOsmTable` | `boolean` | — | If `true`, removes the raw OSM table after extraction. |
 | `onProgress` | `(phase: LoadingPhase) => void` | — | Callback fired at each loading phase. |
 
-### Manual Layer Extraction
+### Manual OSM Table Extraction
 
-If you loaded OSM data without `autoLoadLayers`, call `loadLayer` to extract individual layers. You can also provide a custom `outputTableName` to override the default naming:
+If you loaded OSM data without `autoLoadLayers`, call `loadLayer` to extract individual renderable tables. You can provide a custom `outputTableName` to override the default naming.
 
 ```typescript
 // Default: creates table named 'osm_buildings'
@@ -88,7 +90,7 @@ await db.loadLayer({
 });
 ```
 
-You can also pass a `boundingBox` to crop the extracted layer to a specific area:
+You can also pass a `boundingBox` to crop the extracted table to a specific area:
 
 ```typescript
 await db.loadLayer({
@@ -102,14 +104,14 @@ await db.loadLayer({
 | Option | Type | Default | Description |
 |---|---|---|---|
 | `osmInputTableName` | `string` | — | Name of the OSM table to extract from. |
-| `layer` | `LayerType` | — | Layer to extract: `'surface'`, `'water'`, `'parks'`, `'roads'`, `'buildings'`, `'points'`, `'polygons'`, `'polylines'`, or `'raster'`. |
-| `coordinateFormat` | `string` | — | Target projection (e.g. `'EPSG:3395'`). |
+| `layer` | `LayerType` | — | Table to extract: `'surface'`, `'water'`, `'parks'`, `'roads'`, `'buildings'`, `'points'`, `'polygons'`, `'polylines'`, or `'raster'`. |
+| `coordinateFormat` | `string` | — | Target projection. |
 | `outputTableName` | `string` | `{osmInputTableName}_{layer}` | Custom name for the resulting table. |
-| `boundingBox` | `BoundingBox` | — | Optional bounding box to crop the layer. |
+| `boundingBox` | `BoundingBox` | — | Optional bounding box to crop the result. |
 
-## External GeoJSON
+## GeoJSON
 
-`loadCustomLayer` loads a GeoJSON `FeatureCollection` from a URL (or in-memory object) and stores it as a layer table:
+`loadCustomLayer` loads a GeoJSON `FeatureCollection` from a URL or in-memory object and stores it as a renderable table:
 
 ```typescript
 await db.loadCustomLayer({
@@ -129,7 +131,7 @@ await db.loadCustomLayer({
 });
 ```
 
-If OSM data was previously loaded in the same workspace, the bounding box of that OSM area is **automatically applied to crop the GeoJSON** — so only features within the OSM region are kept. This happens without any extra configuration.
+If OSM data was previously loaded in the same workspace, the OSM bounding box is automatically applied to crop the GeoJSON.
 
 ### Options
 
@@ -138,7 +140,7 @@ If OSM data was previously loaded in the same workspace, the bounding box of tha
 | `geojsonFileUrl` | `string` | — | URL of the GeoJSON file to load. Mutually exclusive with `geojsonObject`. |
 | `geojsonObject` | `FeatureCollection` | — | In-memory GeoJSON FeatureCollection. Mutually exclusive with `geojsonFileUrl`. |
 | `outputTableName` | `string` | — | Name for the resulting table. |
-| `coordinateFormat` | `string` | — | Target projection (e.g. `'EPSG:3395'`). Optional — omit to keep the original coordinates. |
+| `coordinateFormat` | `string` | — | Target projection. Omit to keep the original coordinates. |
 
 ## CSV
 
@@ -149,21 +151,9 @@ await db.loadCsv({
 });
 ```
 
-The CSV is loaded as a plain table (no geometry) by default. You can join it with a layer table afterwards using [spatialJoin](./querying#spatial-join) or [rawQuery](./querying#raw-sql).
+By default, a CSV is loaded as a named table for tabular analysis. If the CSV has latitude and longitude columns, pass `geometryColumns` to create geometry during loading.
 
-### Options
-
-| Option | Type | Default | Description |
-|---|---|---|---|
-| `csvFileUrl` | `string` | — | URL of the CSV file to load. Mutually exclusive with `csvObject`. |
-| `csvObject` | `unknown[][]` | — | In-memory 2D array to load instead of a file. |
-| `outputTableName` | `string` | — | Name for the resulting table. |
-| `delimiter` | `string` | `','` | Column delimiter character. Use `'\t'` for TSV files. |
-| `geometryColumns` | `object` | — | See below. |
-
-### Geospatial columns
-
-If your CSV has latitude and longitude columns, pass `geometryColumns` to create a spatial geometry column:
+### Geospatial Columns
 
 ```typescript
 await db.loadCsv({
@@ -172,14 +162,14 @@ await db.loadCsv({
   geometryColumns: {
     latColumnName: 'lat',
     longColumnName: 'lon',
-    coordinateFormat: 'EPSG:3395', // defaults to EPSG:4326
+    coordinateFormat: 'EPSG:3395',
   },
 });
 ```
 
-This creates a `geoPoint` geometry column (via `ST_Transform`) and a spatial RTREE index automatically. The table can then be used directly in `spatialJoin` and `buildHeatmap`.
+This creates a `geoPoint` geometry column and a spatial RTREE index automatically. The table can then participate in spatial operations such as `spatialJoin` and `buildHeatmap`.
 
-### In-memory loading
+### In-memory Loading
 
 ```typescript
 const rows = [['id', 'name'], ['1', 'Alice'], ['2', 'Bob']];
@@ -190,6 +180,16 @@ await db.loadCsv({
 });
 ```
 
+### Options
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `csvFileUrl` | `string` | — | URL of the CSV file to load. Mutually exclusive with `csvObject`. |
+| `csvObject` | `unknown[][]` | — | In-memory 2D array to load instead of a file. |
+| `outputTableName` | `string` | — | Name for the resulting table. |
+| `delimiter` | `string` | `','` | Column delimiter character. Use `'\t'` for TSV files. |
+| `geometryColumns` | `object` | — | Latitude/longitude columns used to create geometry. |
+
 ## JSON
 
 ```typescript
@@ -199,16 +199,7 @@ await db.loadJson({
 });
 ```
 
-### Options
-
-| Option | Type | Default | Description |
-|---|---|---|---|
-| `jsonFileUrl` | `string` | — | URL of the JSON file to load. Mutually exclusive with `jsonObject`. |
-| `jsonObject` | `unknown[]` | — | In-memory array of objects to load instead of a file. |
-| `outputTableName` | `string` | — | Name for the resulting table. |
-| `geometryColumns` | `object` | — | Same as CSV — see [Geospatial columns](#geospatial-columns) above. |
-
-### In-memory loading
+JSON data can also include latitude and longitude fields through the same `geometryColumns` option used by CSV.
 
 ```typescript
 const records = [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }];
@@ -219,9 +210,18 @@ await db.loadJson({
 });
 ```
 
-## Grid Layer
+### Options
 
-A grid layer creates a regular rectangular grid over a bounding box. Useful as the base for heatmaps or spatial aggregations.
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `jsonFileUrl` | `string` | — | URL of the JSON file to load. Mutually exclusive with `jsonObject`. |
+| `jsonObject` | `unknown[]` | — | In-memory array of objects to load instead of a file. |
+| `outputTableName` | `string` | — | Name for the resulting table. |
+| `geometryColumns` | `object` | — | Same as CSV — see [Geospatial Columns](#geospatial-columns). |
+
+## Grid
+
+A grid table creates a regular rectangular grid over a bounding box. This is useful as the base for heatmaps or spatial aggregations.
 
 ```typescript
 await db.loadGridLayer({
@@ -250,3 +250,29 @@ await db.loadGridLayer({
 | `rows` | `number` | — | Number of rows in the grid. |
 | `columns` | `number` | — | Number of columns in the grid. |
 | `boundingBox` | `BoundingBox` | OSM bbox | Bounding box for the grid extent. Falls back to the OSM bounding box if omitted. |
+
+## GeoTIFF
+
+`loadGeoTiff` loads raster data from a URL or an `ArrayBuffer` and registers it as a raster table.
+
+```typescript
+await db.loadGeoTiff({
+  geotiffFileUrl: '/data/surface-temperature.tif',
+  outputTableName: 'temperature',
+  coordinateFormat: 'EPSG:3395',
+});
+```
+
+For large rasters, pass a `boundingBox` or reduce `maxPixels` to avoid loading too many pixels into browser memory.
+
+### Options
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `geotiffFileUrl` | `string` | — | URL of the GeoTIFF file. Mutually exclusive with `geotiffArrayBuffer`. |
+| `geotiffArrayBuffer` | `ArrayBuffer` | — | Already-fetched GeoTIFF data. Mutually exclusive with `geotiffFileUrl`. |
+| `outputTableName` | `string` | — | Name for the resulting table. |
+| `coordinateFormat` | `string` | `'EPSG:4326'` | Target coordinate format. |
+| `sourceCrs` | `string` | — | CRS of the input GeoTIFF, required when transforming coordinates. |
+| `boundingBox` | `BoundingBox` | — | Optional clip area in the source CRS. Strongly recommended for large rasters. |
+| `maxPixels` | `number` | `500000` | Maximum decoded pixels before throwing an error. |

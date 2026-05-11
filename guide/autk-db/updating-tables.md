@@ -1,10 +1,12 @@
 # Updating Tables
 
-`updateTable` modifies an existing table without reloading the source data. This is useful when you have already rendered a map layer and want to update its attributes (for example, after a computation or a user-driven filter).
+`updateTable` modifies an existing table without reloading the original source data. This is useful when you compute new attributes, apply user edits, or replace a dataset that is already registered in `autk-db`.
 
 ## Replace Strategy
 
-Drops and recreates the table with new data. Use this when the entire dataset changes:
+The `replace` strategy drops and recreates the table with new data. Use this when the entire dataset changes.
+
+For a renderable table, pass a GeoJSON `FeatureCollection`:
 
 ```typescript
 const updatedGeojson = /* new FeatureCollection */;
@@ -16,42 +18,60 @@ await db.updateTable({
 });
 ```
 
-For non-layer tables (CSV, JSON), pass an array of plain objects instead of a `FeatureCollection`:
+For tabular data, pass an array of plain objects:
 
 ```typescript
 await db.updateTable({
   tableName: 'incidents',
-  data: [{ id: 1, severity: 3 }, { id: 2, severity: 5 }],
+  data: [
+    { id: 1, severity: 3 },
+    { id: 2, severity: 5 },
+  ],
   strategy: 'replace',
 });
 ```
 
 ## Update by ID Strategy
 
-Updates only the rows that match on a given ID column, leaving unmatched rows untouched:
+The `update` strategy updates rows that match an ID column and leaves unmatched rows untouched.
 
 ```typescript
 await db.updateTable({
   tableName: 'buildings',
   data: updatedGeojson,
   strategy: 'update',
-  idColumn: 'properties.building_id', // dot notation for nested properties
+  idColumn: 'properties.building_id',
 });
 ```
 
 `idColumn` supports:
+
 - `'id'` — matches on the top-level `id` field of each GeoJSON feature
 - `'properties.some_attribute'` — matches on a nested property
 
 :::tip Combine with autk-compute
-A common pattern is to compute new values with `autk-compute`, then call `updateTable` to write the results back before re-rendering the map layer with updated thematic data.
+A common pattern is to compute new values with `autk-compute`, then call `updateTable` to write the results back before re-rendering a map layer with updated thematic data.
 :::
 
 ## Return Value
 
-`updateTable` returns the updated `Table` object with refreshed column metadata, which you can inspect to confirm the schema:
+`updateTable` returns the updated `Table` object with refreshed column metadata:
 
 ```typescript
 const table = await db.updateTable({ ... });
 console.log(table.columns);
 ```
+
+## Remove a Table
+
+`removeLayer` drops a table from DuckDB and removes it from the current workspace metadata:
+
+```typescript
+await db.removeLayer('incidents');
+```
+
+After removal, the table no longer appears in `db.tables` or `db.getLayerTables()`.
+
+## Updating vs Reloading
+
+Use `updateTable` when you want to preserve the table name and keep downstream code pointing to the same table. Reload data when the source itself should be fetched or parsed again.

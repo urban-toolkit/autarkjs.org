@@ -1,97 +1,109 @@
+<style scoped>
+.introduction-page :is(p, li, td, th, .custom-block p, .custom-block li, h1, h2, h3, h4, h5, h6) {
+  text-align: justify;
+}
+
+.introduction-page table th:first-child,
+.introduction-page table td:first-child {
+  width: 35%;
+}
+</style>
+
+<div class="introduction-page">
+
 # autk-db
 
-`autk-db` is a browser-native spatial database powered by [DuckDB-WASM](https://duckdb.org/). It lets you load, query, and transform geospatial data without a server — all processing runs in the browser.
+`autk-db` is a browser-native spatial database powered by [DuckDB](https://duckdb.org/docs/current/clients/wasm/overview). It lets you load, query, and transform geospatial data entirely on the client — no server required.
 
-The main entry point is the `AutkSpatialDb` class.
+**Key capabilities:**
+
+- Load data from **OpenStreetMap** (using Overpass API or static `.pbf` files), **CSV**, **JSON**, **GeoJSON**, and **GeoTIFF**.
+- Run **spatial joins** and **custom SQL** queries inside the browser.
+- Isolate multiple datasets in independent **workspaces**.
+- Export tables as **GeoJSON** for `autk-map`, `autk-compute`, `autk-plot` or any software.
 
 ## Package Installation
-To install autk-db, run:
+
+To install `autk-db`, you must install its npm pakage. 
 
 ```bash
 npm install @urban-toolkit/autk-db
 ```
-You can also use `autk-db` installing the complete `@urban-toolkit/autk` package.
+
+You can also have access to the library functionalities by installing the complete `@urban-toolkit/autk` package.
+
+```bash
+npm install @urban-toolkit/autk
+```
 
 ## Initialization
 
-Before calling any `autk-db` method, it is necessary to call the `init()` method to set up the DuckDB instance and load the spatial extension. `init()` is async and must be awaited.
+The main entry point is the `AutkSpatialDb` class. Before calling any `autk-db` method, create a database instance and await `init()`. This command sets up DuckDB and loads its official spatial extension.
 
-```typescript
-import { AutkSpatialDb } from "autk-db";
+<script setup>
+const introCode = `
+import { AutkSpatialDb } from "@urban-toolkit/autk-db";
 
 const db = new AutkSpatialDb();
 await db.init();
-```
 
-## Core Concepts
+console.log(db.tables)
+`
 
-Understanding how data flows through `autk-db` is the key to using it correctly.
+const workflowCode = `
+import { AutkSpatialDb } from "@urban-toolkit/autk-db";
 
-### Tables
+const db = new AutkSpatialDb();
+await db.init();
 
-Every `load*` call creates one or more **named tables** inside DuckDB-WASM. A table is identified by a string name and exists in-browser for the duration of the session. You can inspect registered tables via `db.tables`, which returns metadata (name, type, columns) — not the actual row data.
-
-```typescript
-await db.loadCsv({
-  csvFileUrl: "/data/incidents.csv",
-  outputTableName: "incidents",
+await db.loadCustomLayer({
+    geojsonFileUrl: '/data/mnt_neighs.geojson',
+    outputTableName: 'neighborhoods',
+    coordinateFormat: 'EPSG:3395'
 });
 
-console.log(db.tables);
-// [{ name: 'incidents', source: 'csv', columns: [...] }]
-```
+await db.rawQuery({
+  query: "SELECT * FROM neighborhoods LIMIT 10",
+  output: {
+    type: "CREATE_TABLE",
+    tableName: "first10Neigs",
+    tableType: "polygons"
+  },
+});
 
-### Layers
+const geojson = await db.getLayer('first10Neigs');
+console.log(geojson)
+`
+</script>
 
-Layers are tables that have a **geometry column**. They are created by OSM and GeoJSON load methods. What distinguishes layers from plain tables is that they can be rendered by `autk-map` and exported as GeoJSON.
+<ClientOnly>
+  <CodePlayground :code="introCode" out="console" />
+</ClientOnly>
 
-Each layer has a **type** (`'buildings'`, `'roads'`, `'polygons'`, etc.) that maps directly to `LayerType` in `autk-map`. Use `getLayerTables()` to filter the table list to geometry-bearing tables only.
 
-### Load Operations
+## Basic Workflow
 
-`loadOsm`, `loadCsv`, `loadCustomLayer`, `loadGridLayer`, and the others are **write-only**. They:
+Most `autk-db` workflows follow a simple three-step pattern. First, you load one or more datasets into DuckDB tables. Then you use `autk-db` methods to inspect, filter, join, or transform those tables. Finally, you bring the result back into JavaScript as GeoJSON, so use it in `autk-map`, `autk-plot`, `autk-compute` or any other software:
 
-- Are all `async` and must be awaited
-- Register data as a named DuckDB table
-- **Do not return row data into JavaScript memory** — they return table metadata
-- Data stays inside DuckDB until you call a getter
+1. **Load data** into named DuckDB tables.
+2. **Query, analyze, or transform** those tables inside DuckDB.
+3. **Retrieve the result** back into JavaScript when needed.
 
-Think of them as `INSERT INTO` / `CREATE TABLE` statements: after they complete, the data is in the database, not in a JS variable.
+<ClientOnly>
+  <CodePlayground :code="workflowCode" out="console" />
+</ClientOnly>
 
-### Query & Analysis Operations
+## Next Steps
 
-`spatialJoin`, `buildHeatmap`, and `rawQuery` transform data that is already in DuckDB. Their outputs are saved as new or updated DuckDB tables — they also keep data inside the database (except `rawQuery` with `output: { type: 'RETURN_OBJECT' }`).
-
-### Getters
-
-Getters are the only way to move data from DuckDB into JavaScript memory:
-
-| Method                          | Returns                                      | Use for                                       |
-| ------------------------------- | -------------------------------------------- | --------------------------------------------- |
-| `getLayer(name)`                | `FeatureCollection`                          | Passing geometry to `autk-map` or `autk-plot` |
-| `getTableData({ tableName })`   | `Record<string, unknown>[]`                  | Inspecting rows, feeding charts               |
-| `getLayerTables()`              | Layer table metadata array                   | Iterating all geometry layers                 |
-| `getOsmBoundingBox()`           | `[minLon, minLat, maxLon, maxLat]` \| `null` | Camera framing                                |
-| `getBoundingBoxFromLayer(name)` | Bounding box object                          | Bounds of any geometry layer                  |
-
-The typical flow looks like this:
-
-```typescript
-await db.loadOsm({ ... });                      // data → DuckDB
-await db.spatialJoin({ ... });                 // transform inside DuckDB
-
-const geojson = await db.getLayer('osm_buildings'); // DuckDB → JS memory
-map.loadCollection('buildings', { collection: geojson });  // JS memory → GPU
-```
-
-## What's Next
-
-- [Loading Data](./loading-data) — load OSM, GeoJSON, CSV, and JSON into the database
-- [Querying & Analyzing](./querying) — spatial joins, heatmaps, and raw SQL
-- [Retrieving Data](./retrieving-data) — export tables back as GeoJSON or plain arrays
+- [Loading Data](./loading-data) — load OSM, GeoJSON, CSV, JSON, grids, and rasters
+- [Tables](./tables) — understand named tables, metadata, and renderable tables
+- [Querying and Analysis](./querying) — spatial joins, heatmaps, and raw SQL
+- [Retrieving Data](./retrieving-data) — get rows, GeoJSON, and bounding boxes back into JavaScript
 - [Updating Tables](./updating-tables) — modify existing tables in place
-- [Workspaces](./workspaces) — isolate multiple OSM datasets or independent analyses
+- [Workspaces](./workspaces) — isolate multiple datasets or scenarios
 
 ---
 
 [API Reference →](/api/autk-db/globals)
+
+</div>
