@@ -93,17 +93,4 @@ Most `autk-db` workflows follow a simple three-step pattern. First, you load one
   <CodePlayground :code="workflowCode" out="console" />
 </ClientOnly>
 
-## Next Steps
-
-- [Loading Data](./loading-data) — load OSM, GeoJSON, CSV, JSON, grids, and rasters
-- [Tables](./tables) — understand named tables, metadata, and renderable tables
-- [Querying and Analysis](./querying) — spatial joins, heatmaps, and raw SQL
-- [Retrieving Data](./retrieving-data) — get rows, GeoJSON, and bounding boxes back into JavaScript
-- [Updating Tables](./updating-tables) — modify existing tables in place
-- [Workspaces](./workspaces) — isolate multiple datasets or scenarios
-
----
-
-[API Reference →](/api/autk-db/globals)
-
 </div>

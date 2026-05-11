@@ -2,6 +2,23 @@
 
 After loading and analyzing data, use getter methods to move results from DuckDB back into JavaScript. Retrieve only what you need: large tables can be expensive to transfer into JS memory.
 
+## Inspect Registered Tables
+
+Use `db.tables` to inspect the tables registered in the current workspace:
+
+```typescript
+console.log(db.tables);
+```
+
+Each entry is table metadata, not the table rows themselves. A typical entry includes:
+
+- `name` — the table name used by `autk-db` methods
+- `source` — where the table came from, such as `'csv'`, `'json'`, `'osm'`, `'geojson'`, `'geotiff'`, or `'user'`
+- `type` — the table kind, such as `'pointset'`, `'polygons'`, `'roads'`, `'buildings'`, or `'raster'`
+- `columns` — the DuckDB column names and types
+
+Use this when you want to see what is available before calling `getTableData()`, `getLayer()`, or `getLayerTables()`.
+
 ## Get Table Data
 
 `getTableData` returns rows from any registered table as plain JavaScript objects. Use it for charts, UI tables, summaries, or custom processing.
@@ -34,7 +51,7 @@ The returned `FeatureCollection` includes a `bbox` property. If OSM data is load
 
 ## List Renderable Tables
 
-`getLayerTables()` returns the subset of `db.tables` that can be exported with `getLayer()`:
+Not every table can be exported as GeoJSON. `getLayerTables()` returns the subset of `db.tables` that can be exported with `getLayer()`: 
 
 ```typescript
 const renderableTables = db.getLayerTables();

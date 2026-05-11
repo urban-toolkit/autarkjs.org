@@ -27,11 +27,16 @@ db.getCurrentWorkspace(); // 'scenario-b'
 
 ## Table Scope
 
+Each workspace has its own table namespace. That means a table created in one workspace does not appear in another, even if the table names are the same.
+
 `db.tables` always returns tables from the **current workspace** only:
 
 ```typescript
 await db.setWorkspace('scenario-a');
 console.log(db.tables); // only tables in "scenario-a"
+
+await db.setWorkspace('scenario-b');
+console.log(db.tables); // only tables in "scenario-b"
 ```
 
 :::tip When to use workspaces

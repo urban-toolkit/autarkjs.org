@@ -1,8 +1,8 @@
 # Loading Data
 
-`autk-db` can load data from multiple sources. Each load method registers data as one or more named tables in DuckDB. Load methods return table metadata; they do **not** return all rows into JavaScript memory.
+`autk-db` can load data from multiple sources. Each load method registers data as one or more named tables in DuckDB. Those table names are what you use later in queries, joins, updates, and retrieval methods. Load methods return table metadata; they do **not** return all rows into JavaScript memory.
 
-To inspect loaded tables, use [`db.tables`](./tables#table-metadata). To retrieve data later, use [`getTableData()`](./retrieving-data#get-table-data) or [`getLayer()`](./retrieving-data#get-a-renderable-table-as-geojson).
+To inspect loaded table metadata, use [`db.tables`](./retrieving-data#inspect-registered-tables). To retrieve data later, use [`getTableData()`](./retrieving-data#get-table-data) or [`getLayer()`](./retrieving-data#get-a-renderable-table-as-geojson).
 
 ## OpenStreetMap via Overpass API
 
