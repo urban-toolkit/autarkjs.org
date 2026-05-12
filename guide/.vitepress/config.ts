@@ -311,7 +311,7 @@ gtag('config', 'G-P6EVSF42L8');`],
                     items: [
                         { text: 'Overview', link: '/autk-db/' },
                         { text: 'Loading Data', link: '/autk-db/loading-data' },
-                        { text: 'Querying and Analysis', link: '/autk-db/querying' },
+                        { text: 'Analyzing Data', link: '/autk-db/analyzing-data' },
                         { text: 'Retrieving Data', link: '/autk-db/retrieving-data' },
                         { text: 'Updating Tables', link: '/autk-db/updating-tables' },
                         { text: 'Workspaces', link: '/autk-db/workspaces' },
