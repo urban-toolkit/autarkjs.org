@@ -259,6 +259,23 @@ While `spatialQuery` and `buildHeatmap` cover the most common spatial analysis p
   <CodePlayground :code="rawQueryCode" out="console" />
 </ClientOnly>
 
+You can also create a new table from a query result:
+
+```typescript
+await db.rawQuery({
+  query: `
+    CREATE TABLE summary AS
+    SELECT building_id, COUNT(*) AS floor_count
+    FROM buildings GROUP BY building_id
+  `,
+  output: {
+    type: 'CREATE_TABLE',
+    tableName: 'summary',
+    source: 'user',
+    tableType: 'pointset',
+  },
+});
+```
 
 #### `rawQuery` Parameters
 
