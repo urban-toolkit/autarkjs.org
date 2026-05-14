@@ -253,29 +253,12 @@ If OSM data is loaded, the grid extent defaults to the OSM bounding box. When no
 
 While `spatialQuery` and `buildHeatmap` cover the most common spatial analysis patterns, complex or ad-hoc queries often require the flexibility of raw SQL. `rawQuery` gives you direct access to DuckDB's full SQL engine — window functions, CTEs, custom aggregations, or cross-table joins that don't fit the structured API. It's the escape hatch when the higher-level methods aren't expressive enough.
 
-`rawQuery` executes arbitrary DuckDB SQL against your loaded tables. The workspace schema prefix is applied automatically.
+`rawQuery` executes arbitrary DuckDB SQL against your loaded tables. The [workspace](workspaces.md) schema prefix is applied automatically.
 
 <ClientOnly>
   <CodePlayground :code="rawQueryCode" out="console" />
 </ClientOnly>
 
-You can also create a new table from a query result:
-
-```typescript
-await db.rawQuery({
-  query: `
-    CREATE TABLE summary AS
-    SELECT building_id, COUNT(*) AS floor_count
-    FROM buildings GROUP BY building_id
-  `,
-  output: {
-    type: 'CREATE_TABLE',
-    tableName: 'summary',
-    source: 'user',
-    tableType: 'pointset',
-  },
-});
-```
 
 #### `rawQuery` Parameters
 
@@ -288,11 +271,9 @@ await db.rawQuery({
 | `output.tableType` | `LayerType` \| `'pointset'` | Optional. Sets the table's type metadata (e.g. `'polygons'`, `'pointset'`). |
 
 :::warning Raw Query Limitations
-- `rawQuery` accepts **any valid DuckDB SQL** — there is no input validation or sanitization. Invalid queries will throw errors.
+- `rawQuery` **only allows `SELECT` and `WITH` (CTE)** queries. Statements like `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, and `REPLACE` are rejected with a `NonSelectQueryError`.
 - The result rows are returned as plain JavaScript objects (keyed by column name) — no geometry helpers, GeoJSON conversion, or spatial column inference is applied.
-- When using `output.type: 'CREATE_TABLE'`, you must provide `tableName`; `source` and `tableType` are optional but recommended so the table can be discovered by workspace and rendering APIs.
 - Queries run against the **current workspace** only — tables from other workspaces are not visible.
-- No autk-db-specific spatial extensions (e.g., `ST_*` functions) are guaranteed to be available beyond what DuckDB's spatial extension provides.
 :::
 
 </div>
