@@ -47,6 +47,40 @@ const res = await db.spatialQuery({
 
 console.log(res)
 `
+
+const groupQueryCode = `
+import { AutkSpatialDb } from "@urban-toolkit/autk-db";
+
+const db = new AutkSpatialDb();
+await db.init();
+
+await db.loadCustomLayer({
+    geojsonFileUrl: '/data/mnt_neighs.geojson',
+    outputTableName: 'neighborhoods',
+    coordinateFormat: 'EPSG:3395',
+});
+
+await db.loadCsv({
+    csvFileUrl: '/data/mnt_noise.csv',
+    outputTableName: 'noise',
+    geometryColumns: {
+        latColumnName: 'Latitude',
+        longColumnName: 'Longitude',
+        coordinateFormat: 'EPSG:3395',
+    },
+});
+
+const res = await db.spatialQuery({
+    tableRootName: 'neighborhoods',
+    tableJoinName: 'noise',
+    spatialPredicate: 'INTERSECT',
+    output: { type: 'MODIFY_ROOT' }
+});
+
+console.log(res)
+`
+
+
 const heatmapCode = `
 import { AutkSpatialDb } from "@urban-toolkit/autk-db";
 
@@ -138,8 +172,13 @@ console.log(result)
 
 ### `groupBy` columns
 
-When `groupBy` is provided, `spatialQuery` aggregates matched features instead of producing one row per match. Each entry in `selectColumns` defines one aggregated column and supports the following fields:
+Grouping is one of the most important operations in spatial analysis because it turns many individual feature matches into summaries that can be mapped, compared, and reused. Instead of inspecting every joined point, line, or polygon separately, `groupBy` lets you compute counts, totals, averages, ranges, and normalized values for each root feature.
 
+<ClientOnly>
+  <CodePlayground :code="groupQueryCode" out="console" />
+</ClientOnly>
+
+When `groupBy` is provided, `spatialQuery` aggregates matched features instead of producing one row per match. Each entry in `selectColumns` defines a resulting summary column, including which source column to aggregate, which aggregate function to apply, and whether to normalize the result.
 
 | Option | Type | Description |
 |---|---|---|
@@ -153,7 +192,7 @@ When `groupBy` is provided, `spatialQuery` aggregates matched features instead o
 
 All `spatialQuery` results are written into the **`properties`** column of the root table, nested under a `sjoin` key.
 
-**Without `groupBy`** (i.e. without aggregation) — The join table's properties are merged flat into `properties.sjoin`. This produces **multiple rows per root feature**, one for each matched join feature.
+1. **Without `groupBy`** the join table's properties are merged flat into `properties.sjoin`. This produces **multiple rows per root feature**, one for each matched join feature.
 
 ```json
 {
@@ -163,7 +202,7 @@ All `spatialQuery` results are written into the **`properties`** column of the r
 }
 ```
 
-**With `groupBy`** (i.e. aggregated join) — Results are nested by aggregate function name into `properties.sjoin`. Root features are **deduplicated**, only one row per feature is produced.
+2. **With `groupBy`** results are nested by aggregate function name into `properties.sjoin`. Root features are **deduplicated**, only one row per feature is produced.
 
 ```json
 {
