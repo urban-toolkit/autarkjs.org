@@ -137,9 +137,16 @@ import { AutkSpatialDb } from "@urban-toolkit/autk-db";
 const db = new AutkSpatialDb();
 await db.init();
 
-// Return data as plain objects
+await db.loadCustomLayer({
+    geojsonFileUrl: '/data/mnt_neighs.geojson',
+    outputTableName: 'neighborhoods',
+    coordinateFormat: 'EPSG:3395',
+});
+
 const result = await db.rawQuery({
-    query: "SELECT name, area FROM neighborhoods WHERE area > 1000",
+    query: \`SELECT properties.ntaname, CAST(properties.shape_area AS DOUBLE) AS shape_area 
+             FROM neighborhoods 
+             WHERE CAST(properties.shape_area AS DOUBLE) > 1000\`,
     output: { type: 'RETURN_OBJECT' },
 });
 
@@ -259,24 +266,6 @@ While `spatialQuery` and `buildHeatmap` cover the most common spatial analysis p
   <CodePlayground :code="rawQueryCode" out="console" />
 </ClientOnly>
 
-You can also create a new table from a query result:
-
-```typescript
-await db.rawQuery({
-  query: `
-    CREATE TABLE summary AS
-    SELECT building_id, COUNT(*) AS floor_count
-    FROM buildings GROUP BY building_id
-  `,
-  output: {
-    type: 'CREATE_TABLE',
-    tableName: 'summary',
-    source: 'user',
-    tableType: 'pointset',
-  },
-});
-```
-
 #### `rawQuery` Parameters
 
 | Option | Type | Description |
@@ -288,9 +277,8 @@ await db.rawQuery({
 | `output.tableType` | `LayerType` \| `'pointset'` | Optional. Sets the table's type metadata (e.g. `'polygons'`, `'pointset'`). |
 
 :::warning Raw Query Limitations
-- `rawQuery` **only allows `SELECT` and `WITH` (CTE)** queries. Statements like `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, and `REPLACE` are rejected with a `NonSelectQueryError`.
-- The result rows are returned as plain JavaScript objects (keyed by column name) — no geometry helpers, GeoJSON conversion, or spatial column inference is applied.
-- Queries run against the **current workspace** only — tables from other workspaces are not visible.
+- Queries run against the **current workspace** only. Tables from other workspaces are not visible.
+- `rawQuery` **only allows** `SELECT` and `WITH` queries. Statements like `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, and `REPLACE` are rejected with a `NonSelectQueryError`.
 :::
 
 </div>
