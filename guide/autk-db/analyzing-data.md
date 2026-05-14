@@ -74,7 +74,16 @@ const res = await db.spatialQuery({
     tableRootName: 'neighborhoods',
     tableJoinName: 'noise',
     spatialPredicate: 'INTERSECT',
-    output: { type: 'MODIFY_ROOT' }
+    output: { type: 'MODIFY_ROOT' },
+    groupBy: {
+        selectColumns: [
+            {
+                tableName: 'noise',
+                column: 'key',
+                aggregateFn: 'count',
+            },
+        ],
+    },
 });
 
 console.log(res)
@@ -242,6 +251,8 @@ If OSM data is loaded, the grid extent defaults to the OSM bounding box. When no
 
 ## Raw SQL {#raw-sql}
 
+While `spatialQuery` and `buildHeatmap` cover the most common spatial analysis patterns, complex or ad-hoc queries often require the flexibility of raw SQL. `rawQuery` gives you direct access to DuckDB's full SQL engine — window functions, CTEs, custom aggregations, or cross-table joins that don't fit the structured API. It's the escape hatch when the higher-level methods aren't expressive enough.
+
 `rawQuery` executes arbitrary DuckDB SQL against your loaded tables. The workspace schema prefix is applied automatically.
 
 <ClientOnly>
@@ -276,8 +287,12 @@ await db.rawQuery({
 | `output.source` | `'csv'` \| `'osm'` \| `'geojson'` \| `'user'` | Optional. Sets the table's source metadata when creating a table. |
 | `output.tableType` | `LayerType` \| `'pointset'` | Optional. Sets the table's type metadata (e.g. `'polygons'`, `'pointset'`). |
 
-:::tip DuckDB spatial functions
-DuckDB's spatial extension is loaded automatically. You can use functions like `ST_Intersects`, `ST_Area`, `ST_Distance` directly in raw queries.
+:::warning Raw Query Limitations
+- `rawQuery` accepts **any valid DuckDB SQL** — there is no input validation or sanitization. Invalid queries will throw errors.
+- The result rows are returned as plain JavaScript objects (keyed by column name) — no geometry helpers, GeoJSON conversion, or spatial column inference is applied.
+- When using `output.type: 'CREATE_TABLE'`, you must provide `tableName`; `source` and `tableType` are optional but recommended so the table can be discovered by workspace and rendering APIs.
+- Queries run against the **current workspace** only — tables from other workspaces are not visible.
+- No autk-db-specific spatial extensions (e.g., `ST_*` functions) are guaranteed to be available beyond what DuckDB's spatial extension provides.
 :::
 
 </div>
