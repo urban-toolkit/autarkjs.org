@@ -167,15 +167,15 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
         <div style="display:flex; align-items:stretch;">
           <div style="width:120px; display:flex; align-items:center;"><a href="/api/autk-db/type-aliases/LoadOsmParams#queryarea"><code>queryArea</code></a></div>
           <div style="width:140px; border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
-            <code>geocodeArea</code>
-            <code>areas</code>
+            <code style="display:inline-block; line-height:1;">geocodeArea</code>
+            <code style="display:inline-block; line-height:1;">areas</code>
           </div>
         </div>
       </td>
       <td>
         <div style="display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
-          <code>string</code>
-          <code>string[]</code>
+          <code style="display:inline-block; line-height:1;">string</code>
+          <code style="display:inline-block; line-height:1;">string[]</code>
         </div>
       </td>
       <td>
@@ -190,15 +190,15 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
         <div style="display:flex; align-items:stretch;">
           <div style="width:120px; display:flex; align-items:center;"><a href="/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers"><code>autoLoadLayers</code></a></div>
           <div style="width:140px; border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
-            <code>coordinateFormat</code>
-            <code>layers</code>
+            <code style="display:inline-block; line-height:1;">coordinateFormat</code>
+            <code style="display:inline-block; line-height:1;">layers</code>
           </div>
         </div>
       </td>
       <td>
         <div style="display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
-          <code>string</code>
-          <code>LayerType[]</code>
+          <code style="display:inline-block; line-height:1;">string</code>
+          <code style="display:inline-block; line-height:1;">LayerType[]</code>
         </div>
       </td>
       <td>
