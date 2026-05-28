@@ -166,9 +166,9 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
       <td>
         <div style="display:flex; align-items:stretch;">
           <div style="width:120px; display:flex; align-items:center;"><a href="/api/autk-db/type-aliases/LoadOsmParams#queryarea"><code>queryArea</code></a></div>
-          <div style="width:140px; border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; gap:6px; color:var(--vp-c-text-1);">
-            <code style="color:inherit;">geocodeArea</code>
-            <code style="color:inherit;">areas</code>
+          <div style="width:140px; border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; gap:6px; color:var(--vp-c-text-1); background:transparent;">
+            <code style="color:inherit; background:transparent;">geocodeArea</code>
+            <code style="color:inherit; background:transparent;">areas</code>
           </div>
         </div>
       </td>
@@ -189,9 +189,9 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
       <td>
         <div style="display:flex; align-items:stretch;">
           <div style="width:120px; display:flex; align-items:center;"><a href="/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers"><code>autoLoadLayers</code></a></div>
-          <div style="width:140px; border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; gap:6px; color:var(--vp-c-text-1);">
-            <code style="color:inherit;">coordinateFormat</code>
-            <code style="color:inherit;">layers</code>
+          <div style="width:140px; border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; gap:6px; color:var(--vp-c-text-1); background:transparent;">
+            <code style="color:inherit; background:transparent;">coordinateFormat</code>
+            <code style="color:inherit; background:transparent;">layers</code>
           </div>
         </div>
       </td>
