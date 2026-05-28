@@ -63,7 +63,7 @@ await db.loadGeojson({
 const renderableTables = db.getLayerTables();
 
 for (const table of renderableTables) {
-    console.log(table.name, table.type);
+    console.log(table);
 }
 `
 
@@ -148,10 +148,12 @@ When a table comes from OSM auto-loading, its `type` usually reflects one of the
   <CodePlayground :code="getLayerTablesCode" out="console" />
 </ClientOnly>
 
-This is useful when a workspace contains many tables and you want to know which ones can be sent directly to visualization tools. Instead of checking each table manually, [`getLayerTables()`](/api/autk-db/classes/AutkDb#getlayertables) gives you the subset that is ready to be exported as vector or raster layers for use with tools such as [`autk-map`](../autk-map/index.md).
+[`getLayerTables()`](/api/autk-db/classes/AutkDb#getlayertables)  is useful when a workspace contains many tables and you want to know which ones can be sent directly to visualization tools. Instead of checking each table manually, [`getLayerTables()`](/api/autk-db/classes/AutkDb#getlayertables) gives you the subset that is ready to be exported as vector or raster layers for use with tools such as [`autk-map`](../autk-map/index.md).
 
-:::tip Return type
-Returns an array of table metadata objects with `name`, `source`, `type`, and `columns` properties.
+:::tip Layer and table names
+The entries returned by [`getLayerTables()`](/api/autk-db/classes/AutkDb#getlayertables) are still DuckDB tables. In other words, a “layer” in this context is a table whose contents can be exported for rendering. The `name` property is therefore the table name you should pass to [`getLayer`](#get-table-as-geojson), [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson), or [`getBoundingBoxFromLayer`](#table-bounding-box).
+
+For OSM data loaded with [`loadOsm`](./loading-data.md#openstreetmap), the names usually follow the `{outputTableName}_{layer}` pattern, such as `table_osm_roads` or `table_osm_buildings`.
 :::
 
 ## Get table data
