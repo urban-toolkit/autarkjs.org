@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
+import { useData } from 'vitepress'
 import { createHighlighter } from 'shiki'
 import { createJavaScriptRegexEngine } from '@shikijs/engine-javascript'
 import JsonTree from './JsonTree.vue'
@@ -15,6 +16,7 @@ const props = defineProps<{
 }>()
 
 const out = computed(() => props.out ?? 'both')
+const { isDark } = useData()
 
 const defaultCode = ref('')
 const editableCode = ref('')
@@ -67,7 +69,10 @@ function escapeHtml(s: string): string {
 
 function highlight(src: string): string {
   if (!shiki) return escapeHtml(src)
-  const tokens = shiki.codeToTokens(src, { lang: 'typescript', theme: 'github-dark' })
+  const tokens = shiki.codeToTokens(src, {
+    lang: 'typescript',
+    theme: isDark.value ? 'github-dark' : 'github-light',
+  })
   return tokens.tokens
     .map((line) => {
       const spans = line
@@ -176,7 +181,7 @@ onMounted(async () => {
   if (!shikiSingletonPromise) {
     const jsEngine = createJavaScriptRegexEngine()
     shikiSingletonPromise = createHighlighter({
-      themes: ['github-dark'],
+      themes: ['github-dark', 'github-light'],
       langs: ['typescript'],
       engine: jsEngine,
     })
@@ -184,6 +189,10 @@ onMounted(async () => {
 
   shikiSingleton = await shikiSingletonPromise
   shiki = shikiSingleton
+  updateHighlight()
+})
+
+watch(isDark, () => {
   updateHighlight()
 })
 </script>
@@ -387,7 +396,7 @@ onMounted(async () => {
   position: relative;
   width: 100%;
   height: 500px;
-  background: #1a1a2e;
+  background: var(--vp-c-bg-soft);
 }
 
 /* Output header label */
