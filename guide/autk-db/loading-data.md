@@ -246,14 +246,52 @@ If you plan to load OSM and additional layers in the same workspace, load OSM fi
 
 #### List of `loadGeojson` Parameters
 
-| Option | Type | Description |
-|---|---|---|
-| [`geojsonFileUrl`](/api/autk-db/interfaces/LoadGeojsonParams#geojsonfileurl) | `string` | GeoJSON file URL. |
-| [`geojsonObject`](/api/autk-db/interfaces/LoadGeojsonParams#geojsonobject) | `FeatureCollection` | In-memory GeoJSON. |
-| [`outputTableName`](/api/autk-db/interfaces/LoadGeojsonParams#outputtablename) | `string` | Output table name. |
-| [`coordinateFormat`](/api/autk-db/interfaces/LoadGeojsonParams#coordinateformat) | `string` | Source CRS. |
-| [`layerType`](/api/autk-db/interfaces/LoadGeojsonParams#layertype) | `LayerType` | Override inferred layer type. |
-| [`boundingBox`](/api/autk-db/interfaces/LoadGeojsonParams#boundingbox) | `BoundingBox` | Optional clipping bounds. |
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/LoadGeojsonParams#geojsonfileurl"><code>geojsonFileUrl</code></a></td>
+      <td><code>string</code></td>
+      <td>GeoJSON file URL.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/LoadGeojsonParams#geojsonobject"><code>geojsonObject</code></a></td>
+      <td><code>FeatureCollection</code></td>
+      <td>In-memory GeoJSON.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/LoadGeojsonParams#outputtablename"><code>outputTableName</code></a></td>
+      <td><code>string</code></td>
+      <td>Output table name.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/LoadGeojsonParams#coordinateformat"><code>coordinateFormat</code></a></td>
+      <td><code>string</code></td>
+      <td>Source CRS.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/LoadGeojsonParams#layertype"><code>layerType</code></a></td>
+      <td><code>LayerType</code></td>
+      <td>Override inferred layer type.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/LoadGeojsonParams#boundingbox"><code>boundingBox</code></a></td>
+      <td><code>BoundingBox</code></td>
+      <td>Optional clipping bounds.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/LoadGeojsonParams#workspace"><code>workspace</code></a></td>
+      <td><code>string</code></td>
+      <td>Workspace name.</td>
+    </tr>
+  </tbody>
+</table>
 
 :::info Layers Cropping
 `autk-db` applies workspace-aware filtering and clipping when new layers are loaded.
@@ -276,13 +314,47 @@ Modify the previous code sample to explore more of `autk-db`. For example, try s
 
 #### List of `loadGeoTiff` Parameters
 
-| Option | Type | Description |
-|---|---|---|
-| [`geotiffFileUrl`](/api/autk-db/interfaces/LoadGeoTiffParams#geotifffileurl) | `string` | GeoTIFF file URL. |
-| [`geotiffArrayBuffer`](/api/autk-db/interfaces/LoadGeoTiffParams#geotiffarraybuffer) | `ArrayBuffer` | In-memory GeoTIFF data. |
-| [`outputTableName`](/api/autk-db/interfaces/LoadGeoTiffParams#outputtablename) | `string` | Output table name. |
-| [`coordinateFormat`](/api/autk-db/interfaces/LoadGeoTiffParams#coordinateformat) | `string` | Source CRS. |
-| [`maxPixels`](/api/autk-db/interfaces/LoadGeoTiffParams#maxpixels) | `number` | Pixel limit. |
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/LoadGeoTiffParams#geotifffileurl"><code>geotiffFileUrl</code></a></td>
+      <td><code>string</code></td>
+      <td>GeoTIFF file URL.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/LoadGeoTiffParams#geotiffarraybuffer"><code>geotiffArrayBuffer</code></a></td>
+      <td><code>ArrayBuffer</code></td>
+      <td>In-memory GeoTIFF data.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/LoadGeoTiffParams#outputtablename"><code>outputTableName</code></a></td>
+      <td><code>string</code></td>
+      <td>Output table name.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/LoadGeoTiffParams#coordinateformat"><code>coordinateFormat</code></a></td>
+      <td><code>string</code></td>
+      <td>Source CRS.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/LoadGeoTiffParams#maxpixels"><code>maxPixels</code></a></td>
+      <td><code>number</code></td>
+      <td>Pixel limit.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/LoadGeoTiffParams#workspace"><code>workspace</code></a></td>
+      <td><code>string</code></td>
+      <td>Workspace name.</td>
+    </tr>
+  </tbody>
+</table>
 
 
 ## CSV
@@ -295,19 +367,76 @@ Modify the previous code sample to explore more of `autk-db`. For example, try s
 
 By default, `geometryColumns: true` expects `Latitude` and `Longitude` columns in `EPSG:4326`. For custom latitude/longitude columns or [`WKT`](https://libgeos.org/specifications/wkt/) geometry, provide an explicit `geometryColumns` object. For tab-separated files, set `delimiter: '\t'`.
 
-:::tip Try changing the previous example
-Modify the previous code sample to explore more of `autk-db`. For example, try loading a TSV file with `delimiter`, use a different `outputTableName`, or replace `geometryColumns: true` with explicit latitude/longitude or WKT geometry settings.
-:::
-
 #### List of `loadCsv` Parameters
 
-| Option | Type | Description |
-|---|---|---|
-| [`csvFileUrl`](/api/autk-db/interfaces/LoadCsvParams#csvfileurl) | `string` | CSV file URL. |
-| [`csvObject`](/api/autk-db/interfaces/LoadCsvParams#csvobject) | `unknown[][]` | In-memory CSV data. |
-| [`outputTableName`](/api/autk-db/interfaces/LoadCsvParams#outputtablename) | `string` | Output table name. |
-| [`delimiter`](/api/autk-db/interfaces/LoadCsvParams#delimiter) | `string` | Field separator. |
-| [`geometryColumns`](/api/autk-db/interfaces/LoadCsvParams#geometrycolumns) | `true \| object` | Geometry mapping. |
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/LoadCsvParams#csvfileurl"><code>csvFileUrl</code></a></td>
+      <td><code>string</code></td>
+      <td>CSV file URL.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/LoadCsvParams#csvobject"><code>csvObject</code></a></td>
+      <td><code>unknown[][]</code></td>
+      <td>In-memory CSV data.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/LoadCsvParams#outputtablename"><code>outputTableName</code></a></td>
+      <td><code>string</code></td>
+      <td>Output table name.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/LoadCsvParams#delimiter"><code>delimiter</code></a></td>
+      <td><code>string</code></td>
+      <td>Field separator.</td>
+    </tr>
+    <tr>
+      <td>
+        <div style="display:flex; align-items:stretch;">
+          <div style="width:120px; display:flex; align-items:center;"><a href="/api/autk-db/interfaces/LoadCsvParams#geometrycolumns"><code>geometryColumns</code></a></div>
+          <div style="width:140px; border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
+            <code style="display:inline-block; line-height:1;">true</code>
+            <code style="display:inline-block; line-height:1;">latColumnName</code>
+            <code style="display:inline-block; line-height:1;">longColumnName</code>
+            <code style="display:inline-block; line-height:1;">wktColumnName</code>
+            <code style="display:inline-block; line-height:1;">coordinateFormat</code>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
+          <code style="display:inline-block; line-height:1;">true</code>
+          <code style="display:inline-block; line-height:1;">string</code>
+          <code style="display:inline-block; line-height:1;">string</code>
+          <code style="display:inline-block; line-height:1;">string</code>
+          <code style="display:inline-block; line-height:1;">string</code>
+        </div>
+      </td>
+      <td>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <span>Default lat/lng mapping.</span>
+          <span>Latitude column.</span>
+          <span>Longitude column.</span>
+          <span>WKT column.</span>
+          <span>Source CRS.</span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/LoadCsvParams#workspace"><code>workspace</code></a></td>
+      <td><code>string</code></td>
+      <td>Workspace name.</td>
+    </tr>
+  </tbody>
+</table>
 
 
 </div>
