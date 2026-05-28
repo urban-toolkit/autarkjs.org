@@ -119,7 +119,7 @@ To directly fetch from the public [Overpass API](https://overpass-api.de/) and l
 
 3. [`outputTableName`](/api/autk-db/type-aliases/LoadOsmParams#outputtablename) — Optional parameter used to define the base name for the produced DuckDB tables. Each automatically loaded layer is stored as `{outputTableName}_{layer}`. It defaults to `table_osm`. For example, if `layers: ['surface', 'roads', 'buildings']`, the resulting tables are `table_osm_surface`, `table_osm_roads`, and `table_osm_buildings`.
 
-4. [`pbfFileUrl`](/api/autk-db/type-aliases/LoadOsmParams#pbffileurl) — Optional URL to a local or remote `.osm.pbf` extract. When provided, `loadOsm` skips the Overpass API download step and reads OSM data directly from the PBF file instead. This is useful when you want reproducible inputs, need to avoid Overpass rate limits, or want to work with larger pre-cropped extracts. Even when loading from a PBF file, `queryArea` is still required so `autk-db` can identify the requested administrative areas inside the extract and restrict the imported data to those boundaries.
+4. [`pbfFileUrl`](/api/autk-db/type-aliases/LoadOsmParams#pbffileurl) — Optional URL to a local or remote `.osm.pbf` extract. When provided, `loadOsm` skips the Overpass API download step and reads OSM data directly from the PBF file instead. `queryArea` is still required so `autk-db` can identify the requested administrative areas inside the extract.
 
 
 <ClientOnly>
@@ -136,18 +136,18 @@ To directly fetch from the public [Overpass API](https://overpass-api.de/) and l
 
 | Option | Type | Description |
 |---|---|---|
-| `outputTableName` | `string` | Base name for the resulting tables. |
-| `queryArea` | `object` | Geographic region definition used to locate and crop the OSM data. |
-| `queryArea.geocodeArea` | `string` | City or region name for the Overpass geocode query. |
-| `queryArea.areas` | `string[]` | Sub-areas within the geocoded area. |
-| `autoLoadLayers` | `object` | Automatically extracts renderable OSM tables. |
-| `autoLoadLayers.coordinateFormat` | `string` | Source CRS of the OSM coordinates before they are transformed into the workspace CRS. |
-| `autoLoadLayers.layers` | `LayerType[]` | Tables to extract: `'surface'`, `'water'`, `'parks'`, `'roads'`, `'buildings'`. |
-| `autoLoadLayers.dropOsmTable` | `boolean` | If `true`, removes the raw OSM table after extraction. |
-| `pbfFileUrl` | `string` | Optional `.osm.pbf` source used instead of the Overpass API. |
-| `forceRefresh` | `boolean` | If `true`, bypasses the cached Overpass response and fetches fresh data. |
-| `workspace` | `string` | Optional workspace override for the created tables. |
-| `onProgress` | `(phase: LoadingPhase) => void` | Callback fired at each loading phase. |
+| [`outputTableName`](/api/autk-db/type-aliases/LoadOsmParams#outputtablename) | `string` | Base table name. |
+| [`queryArea`](/api/autk-db/type-aliases/LoadOsmParams#queryarea) | `object` | Area definition. |
+| `queryArea.geocodeArea` | `string` | Geocode scope. |
+| `queryArea.areas` | `string[]` | Boundary names. |
+| [`autoLoadLayers`](/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers) | `object` | Layers to extract. |
+| `autoLoadLayers.coordinateFormat` | `string` | Source CRS. |
+| `autoLoadLayers.layers` | `LayerType[]` | Layer names. |
+| `autoLoadLayers.dropOsmTable` | `boolean` | Drop raw table. |
+| [`pbfFileUrl`](/api/autk-db/type-aliases/LoadOsmParams#pbffileurl) | `string` | Optional PBF URL. |
+| [`forceRefresh`](/api/autk-db/type-aliases/LoadOsmParams#forcerefresh) | `boolean` | Bypass cache. |
+| [`workspace`](/api/autk-db/type-aliases/LoadOsmParams#workspace) | `string` | Workspace name. |
+| [`onProgress`](/api/autk-db/type-aliases/LoadOsmParams#onprogress) | `(phase: LoadingPhase) => void` | Progress callback. |
 
 ### Using Static `.pbf` Files
 
