@@ -30,6 +30,7 @@ gtag('config', 'G-P6EVSF42L8');`],
             {
                 text: 'API Reference',
                 items: [
+                    { text: 'autk-core', link: '/api/autk-core/globals' },
                     { text: 'autk-map', link: '/api/autk-map/globals' },
                     { text: 'autk-db', link: '/api/autk-db/globals' },
                     { text: 'autk-compute', link: '/api/autk-compute/globals' },
@@ -144,6 +145,89 @@ gtag('config', 'G-P6EVSF42L8');`],
                             { text: 'PARKS_NATURAL_VALUES', link: '/api/autk-db/variables/PARKS_NATURAL_VALUES' },
                             { text: 'WATER_FEATURE_VALUES', link: '/api/autk-db/variables/WATER_FEATURE_VALUES' },
                             { text: 'WATER_NATURAL_VALUES', link: '/api/autk-db/variables/WATER_NATURAL_VALUES' },
+                        ]
+                    },
+                ],
+            }],
+
+            '/api/autk-core/': [{
+                text: 'autk-core API Reference',
+                items: [
+                    { text: 'All Exports', link: '/api/autk-core/globals' },
+                    {
+                        text: 'Classes', collapsed: false, items: [
+                            { text: 'Camera', link: '/api/autk-core/classes/Camera' },
+                            { text: 'CameraMotion', link: '/api/autk-core/classes/CameraMotion' },
+                            { text: 'ColorMap', link: '/api/autk-core/classes/ColorMap' },
+                            { text: 'EventEmitter', link: '/api/autk-core/classes/EventEmitter' },
+                            { text: 'TriangulatorBuildingWithWindows', link: '/api/autk-core/classes/TriangulatorBuildingWithWindows' },
+                            { text: 'TriangulatorBuildings', link: '/api/autk-core/classes/TriangulatorBuildings' },
+                            { text: 'TriangulatorPoints', link: '/api/autk-core/classes/TriangulatorPoints' },
+                            { text: 'TriangulatorPolygons', link: '/api/autk-core/classes/TriangulatorPolygons' },
+                            { text: 'TriangulatorPolylines', link: '/api/autk-core/classes/TriangulatorPolylines' },
+                            { text: 'TriangulatorRaster', link: '/api/autk-core/classes/TriangulatorRaster' },
+                        ]
+                    },
+                    {
+                        text: 'Enumerations', collapsed: true, items: [
+                            { text: 'ColorMapDomainStrategy', link: '/api/autk-core/enumerations/ColorMapDomainStrategy' },
+                            { text: 'ColorMapInterpolator', link: '/api/autk-core/enumerations/ColorMapInterpolator' },
+                        ]
+                    },
+                    {
+                        text: 'Functions', collapsed: true, items: [
+                            { text: 'buildTransferContext', link: '/api/autk-core/functions/buildTransferContext' },
+                            { text: 'computeAlphaByte', link: '/api/autk-core/functions/computeAlphaByte' },
+                            { text: 'computeBoundingBox', link: '/api/autk-core/functions/computeBoundingBox' },
+                            { text: 'computeGeometryCentroid', link: '/api/autk-core/functions/computeGeometryCentroid' },
+                            { text: 'computeIntersectingClusterIds', link: '/api/autk-core/functions/computeIntersectingClusterIds' },
+                            { text: 'computeOrigin', link: '/api/autk-core/functions/computeOrigin' },
+                            { text: 'isFeatureCollection', link: '/api/autk-core/functions/isFeatureCollection' },
+                            { text: 'isLayerType', link: '/api/autk-core/functions/isLayerType' },
+                            { text: 'isNumericLike', link: '/api/autk-core/functions/isNumericLike' },
+                            { text: 'mapGeometryTypeToLayerType', link: '/api/autk-core/functions/mapGeometryTypeToLayerType' },
+                            { text: 'offsetPolyline', link: '/api/autk-core/functions/offsetPolyline' },
+                            { text: 'valueAtPath', link: '/api/autk-core/functions/valueAtPath' },
+                        ]
+                    },
+                    {
+                        text: 'Interfaces', collapsed: true, items: [
+                            { text: 'BoundingBox', link: '/api/autk-core/interfaces/BoundingBox' },
+                            { text: 'BuildingWindowLayoutEntry', link: '/api/autk-core/interfaces/BuildingWindowLayoutEntry' },
+                            { text: 'BuildingWindowLayoutResult', link: '/api/autk-core/interfaces/BuildingWindowLayoutResult' },
+                            { text: 'CameraData', link: '/api/autk-core/interfaces/CameraData' },
+                            { text: 'LayerBorder', link: '/api/autk-core/interfaces/LayerBorder' },
+                            { text: 'LayerBorderComponent', link: '/api/autk-core/interfaces/LayerBorderComponent' },
+                            { text: 'LayerComponent', link: '/api/autk-core/interfaces/LayerComponent' },
+                            { text: 'LayerGeometry', link: '/api/autk-core/interfaces/LayerGeometry' },
+                            { text: 'PointInstancesData', link: '/api/autk-core/interfaces/PointInstancesData' },
+                            { text: 'SelectionData', link: '/api/autk-core/interfaces/SelectionData' },
+                            { text: 'TransferContext', link: '/api/autk-core/interfaces/TransferContext' },
+                            { text: 'TransferFunction', link: '/api/autk-core/interfaces/TransferFunction' },
+                            { text: 'ViewProjectionParams', link: '/api/autk-core/interfaces/ViewProjectionParams' },
+                        ]
+                    },
+                    {
+                        text: 'Type Aliases', collapsed: true, items: [
+                            { text: 'ColorHEX', link: '/api/autk-core/type-aliases/ColorHEX' },
+                            { text: 'ColorMapConfig', link: '/api/autk-core/type-aliases/ColorMapConfig' },
+                            { text: 'ColorMapDomainSpec', link: '/api/autk-core/type-aliases/ColorMapDomainSpec' },
+                            { text: 'ColorRGB', link: '/api/autk-core/type-aliases/ColorRGB' },
+                            { text: 'ColorTEX', link: '/api/autk-core/type-aliases/ColorTEX' },
+                            { text: 'EventListener', link: '/api/autk-core/type-aliases/EventListener' },
+                            { text: 'LayerType', link: '/api/autk-core/type-aliases/LayerType' },
+                            { text: 'RequiredTransferFunction', link: '/api/autk-core/type-aliases/RequiredTransferFunction' },
+                            { text: 'ResolvedDomain', link: '/api/autk-core/type-aliases/ResolvedDomain' },
+                            { text: 'TypedArray', link: '/api/autk-core/type-aliases/TypedArray' },
+                            { text: 'TypedArrayConstructor', link: '/api/autk-core/type-aliases/TypedArrayConstructor' },
+                        ]
+                    },
+                    {
+                        text: 'Variables', collapsed: true, items: [
+                            { text: 'DEFAULT_COLORMAP_RESOLUTION', link: '/api/autk-core/variables/DEFAULT_COLORMAP_RESOLUTION' },
+                            { text: 'DEFAULT_TRANSFER_FUNCTION', link: '/api/autk-core/variables/DEFAULT_TRANSFER_FUNCTION' },
+                            { text: 'LAYER_TYPE_VALUES', link: '/api/autk-core/variables/LAYER_TYPE_VALUES' },
+                            { text: 'OSM_BASE_LAYER_ORDER', link: '/api/autk-core/variables/OSM_BASE_LAYER_ORDER' },
                         ]
                     },
                 ],
