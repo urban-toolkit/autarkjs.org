@@ -152,7 +152,6 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
   <thead>
     <tr>
       <th>Option</th>
-      <th>Field</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
@@ -160,58 +159,59 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
   <tbody>
     <tr>
       <td><a href="/api/autk-db/type-aliases/LoadOsmParams#outputtablename"><code>outputTableName</code></a></td>
-      <td></td>
       <td><code>string</code></td>
       <td>Base table name.</td>
     </tr>
     <tr>
-      <td rowspan="2"><a href="/api/autk-db/type-aliases/LoadOsmParams#queryarea"><code>queryArea</code></a></td>
-      <td><code>geocodeArea</code></td>
-      <td><code>string</code></td>
-      <td>Geocode scope.</td>
+      <td>
+        <table>
+          <tr>
+            <td rowspan="2"><a href="/api/autk-db/type-aliases/LoadOsmParams#queryarea"><code>queryArea</code></a></td>
+            <td><code>geocodeArea</code></td>
+          </tr>
+          <tr>
+            <td><code>areas</code></td>
+          </tr>
+        </table>
+      </td>
+      <td><code>string</code><br><code>string[]</code></td>
+      <td>Geocode scope.<br>Boundary names.</td>
     </tr>
     <tr>
-      <td><code>areas</code></td>
-      <td><code>string[]</code></td>
-      <td>Boundary names.</td>
-    </tr>
-    <tr>
-      <td rowspan="3"><a href="/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers"><code>autoLoadLayers</code></a></td>
-      <td><code>coordinateFormat</code></td>
-      <td><code>string</code></td>
-      <td>Source CRS.</td>
-    </tr>
-    <tr>
-      <td><code>layers</code></td>
-      <td><code>LayerType[]</code></td>
-      <td>Layer names.</td>
-    </tr>
-    <tr>
-      <td><code>dropOsmTable</code></td>
-      <td><code>boolean</code></td>
-      <td>Drop raw table.</td>
+      <td>
+        <table>
+          <tr>
+            <td rowspan="3"><a href="/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers"><code>autoLoadLayers</code></a></td>
+            <td><code>coordinateFormat</code></td>
+          </tr>
+          <tr>
+            <td><code>layers</code></td>
+          </tr>
+          <tr>
+            <td><code>dropOsmTable</code></td>
+          </tr>
+        </table>
+      </td>
+      <td><code>string</code><br><code>LayerType[]</code><br><code>boolean</code></td>
+      <td>Source CRS.<br>Layer names.<br>Drop raw table.</td>
     </tr>
     <tr>
       <td><a href="/api/autk-db/type-aliases/LoadOsmParams#pbffileurl"><code>pbfFileUrl</code></a></td>
-      <td></td>
       <td><code>string</code></td>
       <td>Optional PBF URL.</td>
     </tr>
     <tr>
       <td><a href="/api/autk-db/type-aliases/LoadOsmParams#forcerefresh"><code>forceRefresh</code></a></td>
-      <td></td>
       <td><code>boolean</code></td>
       <td>Bypass cache.</td>
     </tr>
     <tr>
       <td><a href="/api/autk-db/type-aliases/LoadOsmParams#workspace"><code>workspace</code></a></td>
-      <td></td>
       <td><code>string</code></td>
       <td>Workspace name.</td>
     </tr>
     <tr>
       <td><a href="/api/autk-db/type-aliases/LoadOsmParams#onprogress"><code>onProgress</code></a></td>
-      <td></td>
       <td><code>(phase: LoadingPhase) =&gt; void</code></td>
       <td>Progress callback.</td>
     </tr>
