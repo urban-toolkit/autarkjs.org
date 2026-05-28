@@ -13,6 +13,11 @@ gtag('config', 'G-P6EVSF42L8');`],
         optimizeDeps: {
             exclude: ['@urban-toolkit/autk-db', '@duckdb/duckdb-wasm'],
         },
+        server: {
+            headers: {
+                '.wasm': { 'Content-Type': 'application/wasm' },
+            },
+        },
     },
 
     title: 'Autark',

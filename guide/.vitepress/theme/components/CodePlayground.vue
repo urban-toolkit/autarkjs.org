@@ -126,7 +126,7 @@ async function runCode() {
     const wrapped = `
       return (async () => {
         const AutkMap = __modules.AutkMap;
-        const AutkSpatialDb = __modules.AutkSpatialDb;
+        const AutkDb = __modules.AutkDb;
         const canvas = __canvas;
         const console = {
           log: (...args) => __consoleOut.push({ type: 'log', message: args.map(a => typeof a === 'string' ? a : JSON.stringify(a, null, 2)).join(' ') }),
@@ -143,7 +143,7 @@ async function runCode() {
     const htmlOut = { value: '' }
 
     await new AsyncFunction('__modules', '__canvas', '__consoleOut', '__htmlOut', wrapped)(
-      { AutkMap, AutkSpatialDb },
+      { AutkMap, AutkDb },
       canvas.value,
       consoleOut,
       htmlOut,
