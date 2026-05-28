@@ -11,7 +11,6 @@ const res = await db.loadOsm({
         areas: ['Battery Park City'],
     },
     autoLoadLayers: {
-        coordinateFormat: 'EPSG:3395',
         layers: ['surface', 'parks', 'water'],
     },
     onProgress: (phase) => console.log(phase)
@@ -112,13 +111,15 @@ When a loading method is called, it ingests data into DuckDB and returns the cre
 
 ### Using the Overpass API
 
-To directly fetch from the public [Overpass API](https://overpass-api.de/) and load OpenStreetMap data into DuckDB tables, `autk-db` provides the `loadOsm` method. When you want renderable thematic layers immediately, the most important parameters are:
+To directly fetch from the public [Overpass API](https://overpass-api.de/) and load OpenStreetMap data into DuckDB tables, `autk-db` provides the `loadOsm` method. The most important parameters are:
 
 1. [`queryArea`](/api/autk-db/type-aliases/LoadOsmParams#queryarea) — Defines the geographic region of interest. The region definition is broken into two parts: the `geocodeArea` and a list of administrative areas `areas`. `geocodeArea` is used to define the data search scope and avoid naming ambiguities when querying the Overpass API. `areas` must identify OpenStreetMap boundary relations whose member ways can be reconstructed into a closed polygon. For best results, use exact OSM boundary relation names rather than informal place names.
 
 2. [`autoLoadLayers`](/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers) — List of data layers to automatically extract from raw OSM data (valid values are `buildings`, `roads`, `surface`, `parks`, and `water`). The optional `coordinateFormat` specifies the source CRS of the OSM coordinates before they are transformed into the workspace CRS.
 
-3. [`outputTableName`](/api/autk-db/type-aliases/LoadOsmParams#outputtablename) — The base name for the produced DuckDB tables. Each automatically loaded layer is stored as `{outputTableName}_{layer}`. For example, using `outputTableName: 'osm'` and `layers: ['surface', 'roads', 'buildings']`, the resulting tables are `osm_surface`, `osm_roads`, and `osm_buildings`. This is the identifier you'll use later when querying or retrieving data.
+3. [`outputTableName`](/api/autk-db/type-aliases/LoadOsmParams#outputtablename) — Optional parameter used to define the base name for the produced DuckDB tables. Each automatically loaded layer is stored as `{outputTableName}_{layer}`. It defaults to `table_osm`. For example, if `layers: ['surface', 'roads', 'buildings']`, the resulting tables are `table_osm_surface`, `table_osm_roads`, and `table_osm_buildings`.
+
+4. [`pbfFileUrl`](/api/autk-db/type-aliases/LoadOsmParams#pbffileurl) — Optional URL to a local or remote `.osm.pbf` extract. When provided, `loadOsm` skips the Overpass API download step and reads OSM data directly from the PBF file instead. This is useful when you want reproducible inputs, need to avoid Overpass rate limits, or want to work with larger pre-cropped extracts. Even when loading from a PBF file, `queryArea` is still required so `autk-db` can identify the requested administrative areas inside the extract and restrict the imported data to those boundaries.
 
 
 <ClientOnly>
@@ -136,6 +137,7 @@ To directly fetch from the public [Overpass API](https://overpass-api.de/) and l
 | Option | Type | Description |
 |---|---|---|
 | `outputTableName` | `string` | Base name for the resulting tables. |
+| `queryArea` | `object` | Geographic region definition used to locate and crop the OSM data. |
 | `queryArea.geocodeArea` | `string` | City or region name for the Overpass geocode query. |
 | `queryArea.areas` | `string[]` | Sub-areas within the geocoded area. |
 | `autoLoadLayers` | `object` | Automatically extracts renderable OSM tables. |
