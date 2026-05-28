@@ -234,7 +234,7 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
 
 ## GeoJSON
 
-`loadGeojson` loads a GeoJSON `FeatureCollection` from a URL or an in-memory object and stores it as a named layer table in DuckDB. The only required parameter is `outputTableName`. By default, the input coordinates are expected to be in latitude/longitude (`EPSG:4326`). If the GeoJSON uses a different CRS, provide it through `coordinateFormat`. Use `layerType` to override the automatic geometry-type inference when needed.
+`loadGeojson` loads a GeoJSON `FeatureCollection` from a URL or an in-memory object and stores it as a named layer table in DuckDB. The only required parameter is `outputTableName`. By default, the input coordinates are expected to be in latitude/longitude (`EPSG:4326`). If the GeoJSON uses a different CRS, provide it through `coordinateFormat`. Use `layerType` to override the automatic geometry-type inference performed bu autk-db.
 
 <ClientOnly>
   <CodePlayground :code="loadGeojsonCode" out="console" />
@@ -248,12 +248,12 @@ When OSM data is loaded in the same [workspace](./workspaces.md), its bounding b
 
 | Option | Type | Description |
 |---|---|---|
-| `geojsonFileUrl` | `string` | URL of the GeoJSON file. Mutually exclusive with `geojsonObject`. |
-| `geojsonObject` | `FeatureCollection` | In-memory GeoJSON FeatureCollection. Mutually exclusive with `geojsonFileUrl`. |
-| `outputTableName` | `string` | Name for the resulting layer table. |
-| `coordinateFormat` | `string` | Source CRS of the GeoJSON geometries. Defaults to `EPSG:4326`. |
-| `layerType` | `LayerType` | Optional explicit layer type. If omitted, it is inferred from the first feature geometry. |
-| `boundingBox` | `BoundingBox` | Optional bounding box used to clip or intersect geometries during import. |
+| `geojsonFileUrl` | `string` | GeoJSON file URL. |
+| `geojsonObject` | `FeatureCollection` | In-memory GeoJSON. |
+| `outputTableName` | `string` | Output table name. |
+| `coordinateFormat` | `string` | Source CRS. |
+| `layerType` | `LayerType` | Override inferred layer type. |
+| `boundingBox` | `BoundingBox` | Optional clipping bounds. |
 
 
 
