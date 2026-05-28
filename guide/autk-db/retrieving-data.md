@@ -164,7 +164,7 @@ The entries returned by [`getLayerTables()`](/api/autk-db/classes/AutkDb#getlaye
 </ClientOnly>
 
 :::tip Try changing the code above
-Since the playground runs the example directly, the easiest way to explore [`getTables`](/api/autk-db/classes/AutkDb#gettables) is to edit the code itself. For example, try changing [`tableName`](/api/autk-db/interfaces/GetTablesParams#tablename), increasing [`limit`](/api/autk-db/interfaces/GetTablesParams#limit), adding [`offset`](/api/autk-db/interfaces/GetTablesParams#offset), or logging the returned rows instead of just `rows.length`.
+Use the live code box to experiment with [`getTables`](/api/autk-db/classes/AutkDb#gettables). For example, try changing [`tableName`](/api/autk-db/interfaces/GetTablesParams#tablename), increasing [`limit`](/api/autk-db/interfaces/GetTablesParams#limit), adding [`offset`](/api/autk-db/interfaces/GetTablesParams#offset), or logging the returned rows instead of just `rows.length`.
 :::
 
 #### List of `getTables` parameters
