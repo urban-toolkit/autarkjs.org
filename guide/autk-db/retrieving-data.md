@@ -126,6 +126,7 @@ Use `db.tables` to inspect the tables registered in the current [workspace](./wo
 The returned metadata includes:
 
 - `name` — table name used by `autk-db` methods
+- `columns` — DuckDB column names and types
 - `source` — table origin, such as `'csv'`, `'osm'`, `'geojson'`, or `'geotiff'`
 - `type` — table type such as `'pointset'`, `'polygons'`, `'roads'`, or `'raster'`
 
@@ -137,11 +138,21 @@ When a table comes from OSM auto-loading, its `type` usually reflects one of the
 - `water` — rivers, lakes, coastlines, and other water features
 - `roads` — line features representing the street network
 - `buildings` — polygon features representing building footprints
-
-These types are useful when exporting layers with [`getLayer`](#get-table-as-geojson) or listing renderable tables with [`getLayerTables`](#list-renderable-tables).
 :::
 
-- `columns` — DuckDB column names and types
+## List renderable tables
+
+[`getLayerTables()`](/api/autk-db/classes/AutkDb#getlayertables) returns the subset of [`db.tables`](#inspect-registered-tables) that can be exported with [`getLayer`](#get-table-as-geojson) or [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson).
+
+<ClientOnly>
+  <CodePlayground :code="getLayerTablesCode" out="console" />
+</ClientOnly>
+
+It is useful when you want to inspect all renderable tables without knowing their names in advance.
+
+:::tip Return type
+Returns an array of table metadata objects with `name`, `source`, `type`, and `columns` properties.
+:::
 
 ## Get table data
 
@@ -191,7 +202,7 @@ Modify the previous code sample to explore more of `autk-db`. For example, try c
   </tbody>
 </table>
 
-## Get table as GeoJSON
+## Get vetor tables
 
 [`getLayer`](/api/autk-db/classes/AutkDb#getlayer) exports a renderable vector table as a GeoJSON `FeatureCollection`. Use [`getLayerTables`](#list-renderable-tables) to see which tables qualify.
 
@@ -224,7 +235,7 @@ Calling [`getLayer`](/api/autk-db/classes/AutkDb#getlayer) on a non-vector table
   </tbody>
 </table>
 
-## Get GeoTIFF as raster GeoJSON
+## Get raster tables
 
 [`getGeoTiffLayer`](/api/autk-db/classes/AutkDb#getgeotifflayer) exports a loaded GeoTIFF table as a packed raster `FeatureCollection`. Pass the result to `autk-map` with `loadRasterCollection()`.
 
@@ -254,39 +265,6 @@ Modify the previous code sample to explore more of `autk-db`. For example, try l
     </tr>
   </tbody>
 </table>
-
-## List renderable tables
-
-[`getLayerTables()`](/api/autk-db/classes/AutkDb#getlayertables) returns the subset of [`db.tables`](#inspect-registered-tables) that can be exported with [`getLayer`](#get-table-as-geojson) or [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson).
-
-<ClientOnly>
-  <CodePlayground :code="getLayerTablesCode" out="console" />
-</ClientOnly>
-
-It is useful when you want to inspect all renderable tables without knowing their names in advance.
-
-#### List of `getLayerTables` parameters
-
-<table>
-  <thead>
-    <tr>
-      <th>Option</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>—</td>
-      <td>—</td>
-      <td>No parameters.</td>
-    </tr>
-  </tbody>
-</table>
-
-:::tip Return type
-Returns an array of table metadata objects with `name`, `source`, `type`, and `columns` properties.
-:::
 
 ## Get bounding boxes
 
