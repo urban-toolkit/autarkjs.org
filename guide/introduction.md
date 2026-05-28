@@ -22,9 +22,10 @@ Autark is available as a single package or as individual modules:
 | Package                           | Purpose |
 | ----------------------------------| ------- |
 | **[@urban-toolkit/autk](/autk-db/)**           | Complete package that re-exports the toolkit modules |
+| **[@urban-toolkit/autk-core](/api/autk-core/)** | Core shared definitions — color maps, triangulators, geometry utilities, event emitter, and camera handling — used by all other Autark libraries |
 | **[@urban-toolkit/autk-db](/autk-db/)**        | A spatial database that handles physical and thematic urban datasets |
-| **[@urban-toolkit/autk-compute](/autk-compute/)**   | A WebGPU-based computation engine for implementing general-purpose algorithms using physical and thematic data |
 | **[@urban-toolkit/autk-map](/autk-map/)**       | A WebGPU-based vector map visualization library for exploring 2D and 3D physical and thematic layers |
+| **[@urban-toolkit/autk-compute](/autk-compute/)**   | A WebGPU-based computation engine for implementing general-purpose algorithms using physical and thematic data |
 | **[@urban-toolkit/autk-plot](/autk-plot/)**      | A D3.js-based plot library designed to consume urban data in standard formats and facilitate linked views |
 
 For demonstration and documentation purposes, we provide a large collection of examples illustrating the core functionality of each module in the examples and usecases sections.
@@ -40,11 +41,14 @@ npm install @urban-toolkit/autk
 Or install individual modules when you only need part of the toolkit:
 
 ```bash
+npm install @urban-toolkit/autk-core
 npm install @urban-toolkit/autk-db
+npm install @urban-toolkit/autk-map
 npm install @urban-toolkit/autk-compute
 npm install @urban-toolkit/autk-plot
-npm install @urban-toolkit/autk-map
 ```
+
+`autk-core` contains the shared low-level primitives (color maps, triangulators, geometry utilities, and more) used by `autk-map`, `autk-compute`, and `autk-plot`. You do not normally install it directly — it is already included as a dependency of those packages.
 
 ## Serverless by Design
 
