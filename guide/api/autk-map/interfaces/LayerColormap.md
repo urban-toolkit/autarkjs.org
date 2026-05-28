@@ -14,7 +14,7 @@ Runtime colormap state associated with a layer.
 
 ### computedDomain?
 
-> `optional` **computedDomain?**: [`ResolvedDomain`](../type-aliases/ResolvedDomain.md)
+> `optional` **computedDomain?**: `ResolvedDomain`
 
 Defined in: [autk-map/src/types-layers.ts:37](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/types-layers.ts#L37)
 
@@ -34,7 +34,7 @@ Legend labels derived from the resolved domain, if available.
 
 ### config
 
-> **config**: [`ColorMapConfig`](../type-aliases/ColorMapConfig.md)
+> **config**: `ColorMapConfig`
 
 Defined in: [autk-map/src/types-layers.ts:35](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/types-layers.ts#L35)
 

@@ -8,7 +8,7 @@
 
 > **Binning2dTransformConfig** = `object`
 
-Defined in: [autk-plot/src/api.ts:124](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/api.ts#L124)
+Defined in: [api.ts:124](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/api.ts#L124)
 
 Binning-2d preset config.
 
@@ -21,7 +21,7 @@ Use `'@transform'` in `PlotConfig.attributes.color` to mark the output slot.
 
 > `optional` **options?**: `object`
 
-Defined in: [autk-plot/src/api.ts:126](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/api.ts#L126)
+Defined in: [api.ts:126](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/api.ts#L126)
 
 #### binsX?
 
@@ -53,4 +53,4 @@ Feature property to aggregate for non-count reducers. Required when `reducer` is
 
 > **preset**: `"binning-2d"`
 
-Defined in: [autk-plot/src/api.ts:125](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/api.ts#L125)
+Defined in: [api.ts:125](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/api.ts#L125)

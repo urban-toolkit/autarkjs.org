@@ -128,7 +128,7 @@ Returns a preliminary z-index placeholder for a layer type.
 
 ##### layerType
 
-[`LayerType`](../type-aliases/LayerType.md)
+`LayerType`
 
 Layer type to place in the render stack.
 

@@ -6,7 +6,7 @@
 
 # Interface: LoadGeoTiffParams
 
-Defined in: [autk-db/src/use-cases/load-geotiff/interfaces.ts:1](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-geotiff/interfaces.ts#L1)
+Defined in: [use-cases/load-geotiff/interfaces.ts:1](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-geotiff/interfaces.ts#L1)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [autk-db/src/use-cases/load-geotiff/interfaces.ts:1](https://github.
 
 > `optional` **coordinateFormat?**: `string`
 
-Defined in: [autk-db/src/use-cases/load-geotiff/interfaces.ts:12](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-geotiff/interfaces.ts#L12)
+Defined in: [use-cases/load-geotiff/interfaces.ts:12](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-geotiff/interfaces.ts#L12)
 
 CRS of the input GeoTIFF file (source). Defaults to EPSG:4326.
 The geometry will be transformed from this CRS to the workspace CRS.
@@ -25,7 +25,7 @@ The geometry will be transformed from this CRS to the workspace CRS.
 
 > `optional` **geotiffArrayBuffer?**: `ArrayBuffer`
 
-Defined in: [autk-db/src/use-cases/load-geotiff/interfaces.ts:5](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-geotiff/interfaces.ts#L5)
+Defined in: [use-cases/load-geotiff/interfaces.ts:5](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-geotiff/interfaces.ts#L5)
 
 Raw ArrayBuffer of an already-fetched GeoTIFF file.
 
@@ -35,7 +35,7 @@ Raw ArrayBuffer of an already-fetched GeoTIFF file.
 
 > `optional` **geotiffFileUrl?**: `string`
 
-Defined in: [autk-db/src/use-cases/load-geotiff/interfaces.ts:3](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-geotiff/interfaces.ts#L3)
+Defined in: [use-cases/load-geotiff/interfaces.ts:3](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-geotiff/interfaces.ts#L3)
 
 URL of the GeoTIFF file to fetch and load.
 
@@ -45,7 +45,7 @@ URL of the GeoTIFF file to fetch and load.
 
 > `optional` **maxPixels?**: `number`
 
-Defined in: [autk-db/src/use-cases/load-geotiff/interfaces.ts:17](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-geotiff/interfaces.ts#L17)
+Defined in: [use-cases/load-geotiff/interfaces.ts:17](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-geotiff/interfaces.ts#L17)
 
 Maximum number of pixels to load. Defaults to 500 000.
 An error is thrown if the full raster exceeds this limit.
@@ -56,7 +56,7 @@ An error is thrown if the full raster exceeds this limit.
 
 > **outputTableName**: `string`
 
-Defined in: [autk-db/src/use-cases/load-geotiff/interfaces.ts:7](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-geotiff/interfaces.ts#L7)
+Defined in: [use-cases/load-geotiff/interfaces.ts:7](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-geotiff/interfaces.ts#L7)
 
 Name of the output DuckDB table.
 
@@ -66,4 +66,4 @@ Name of the output DuckDB table.
 
 > `optional` **workspace?**: `string`
 
-Defined in: [autk-db/src/use-cases/load-geotiff/interfaces.ts:18](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-geotiff/interfaces.ts#L18)
+Defined in: [use-cases/load-geotiff/interfaces.ts:18](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-geotiff/interfaces.ts#L18)

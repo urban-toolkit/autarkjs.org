@@ -84,7 +84,6 @@ gtag('config', 'G-P6EVSF42L8');`],
                     {
                         text: 'Interfaces', collapsed: true, items: [
                             { text: 'BaseTable', link: '/api/autk-db/interfaces/BaseTable' },
-                            { text: 'BoundingBox', link: '/api/autk-db/interfaces/BoundingBox' },
                             { text: 'BuildHeatmapParams', link: '/api/autk-db/interfaces/BuildHeatmapParams' },
                             { text: 'Column', link: '/api/autk-db/interfaces/Column' },
                             { text: 'CsvLatLngGeometryColumns', link: '/api/autk-db/interfaces/CsvLatLngGeometryColumns' },
@@ -123,7 +122,6 @@ gtag('config', 'G-P6EVSF42L8');`],
                             { text: 'JsonDefaultLatLngGeometryColumns', link: '/api/autk-db/type-aliases/JsonDefaultLatLngGeometryColumns' },
                             { text: 'JsonGeometryColumns', link: '/api/autk-db/type-aliases/JsonGeometryColumns' },
                             { text: 'JsonGeometryLayerType', link: '/api/autk-db/type-aliases/JsonGeometryLayerType' },
-                            { text: 'LayerType', link: '/api/autk-db/type-aliases/LayerType' },
                             { text: 'LoadOsmParams', link: '/api/autk-db/type-aliases/LoadOsmParams' },
                             { text: 'LoadingPhase', link: '/api/autk-db/type-aliases/LoadingPhase' },
                             { text: 'OnLoadingProgress', link: '/api/autk-db/type-aliases/OnLoadingProgress' },
@@ -241,37 +239,22 @@ gtag('config', 'G-P6EVSF42L8');`],
                         text: 'Classes', collapsed: false, items: [
                             { text: 'AutkMap', link: '/api/autk-map/classes/AutkMap' },
                             { text: 'AutkMapUi', link: '/api/autk-map/classes/AutkMapUi' },
-                            { text: 'Camera', link: '/api/autk-map/classes/Camera' },
-                            { text: 'ColorMap', link: '/api/autk-map/classes/ColorMap' },
                             { text: 'Layer', link: '/api/autk-map/classes/Layer' },
                             { text: 'LayerManager', link: '/api/autk-map/classes/LayerManager' },
                             { text: 'MapStyle', link: '/api/autk-map/classes/MapStyle' },
                             { text: 'Renderer', link: '/api/autk-map/classes/Renderer' },
-                            { text: 'TriangulatorBuildings', link: '/api/autk-map/classes/TriangulatorBuildings' },
-                            { text: 'TriangulatorPoints', link: '/api/autk-map/classes/TriangulatorPoints' },
-                            { text: 'TriangulatorPolygons', link: '/api/autk-map/classes/TriangulatorPolygons' },
-                            { text: 'TriangulatorPolylines', link: '/api/autk-map/classes/TriangulatorPolylines' },
-                            { text: 'TriangulatorRaster', link: '/api/autk-map/classes/TriangulatorRaster' },
                         ]
                     },
                     {
                         text: 'Enumerations', collapsed: true, items: [
-                            { text: 'ColorMapDomainStrategy', link: '/api/autk-map/enumerations/ColorMapDomainStrategy' },
-                            { text: 'ColorMapInterpolator', link: '/api/autk-map/enumerations/ColorMapInterpolator' },
                             { text: 'MapEvent', link: '/api/autk-map/enumerations/MapEvent' },
                             { text: 'MouseStatus', link: '/api/autk-map/enumerations/MouseStatus' },
                         ]
                     },
                     {
                         text: 'Interfaces', collapsed: true, items: [
-                            { text: 'BoundingBox', link: '/api/autk-map/interfaces/BoundingBox' },
-                            { text: 'CameraData', link: '/api/autk-map/interfaces/CameraData' },
-                            { text: 'LayerBorder', link: '/api/autk-map/interfaces/LayerBorder' },
-                            { text: 'LayerBorderComponent', link: '/api/autk-map/interfaces/LayerBorderComponent' },
                             { text: 'LayerColormap', link: '/api/autk-map/interfaces/LayerColormap' },
-                            { text: 'LayerComponent', link: '/api/autk-map/interfaces/LayerComponent' },
                             { text: 'LayerData', link: '/api/autk-map/interfaces/LayerData' },
-                            { text: 'LayerGeometry', link: '/api/autk-map/interfaces/LayerGeometry' },
                             { text: 'LayerInfo', link: '/api/autk-map/interfaces/LayerInfo' },
                             { text: 'LayerRenderInfo', link: '/api/autk-map/interfaces/LayerRenderInfo' },
                             { text: 'LayerThematic', link: '/api/autk-map/interfaces/LayerThematic' },
@@ -287,15 +270,8 @@ gtag('config', 'G-P6EVSF42L8');`],
                     },
                     {
                         text: 'Type Aliases', collapsed: true, items: [
-                            { text: 'ColorHEX', link: '/api/autk-map/type-aliases/ColorHEX' },
-                            { text: 'ColorMapConfig', link: '/api/autk-map/type-aliases/ColorMapConfig' },
-                            { text: 'ColorMapDomainSpec', link: '/api/autk-map/type-aliases/ColorMapDomainSpec' },
-                            { text: 'ColorRGB', link: '/api/autk-map/type-aliases/ColorRGB' },
-                            { text: 'ColorTEX', link: '/api/autk-map/type-aliases/ColorTEX' },
-                            { text: 'LayerType', link: '/api/autk-map/type-aliases/LayerType' },
                             { text: 'MapEventRecord', link: '/api/autk-map/type-aliases/MapEventRecord' },
                             { text: 'MapStylePresetId', link: '/api/autk-map/type-aliases/MapStylePresetId' },
-                            { text: 'ResolvedDomain', link: '/api/autk-map/type-aliases/ResolvedDomain' },
                         ]
                     },
                 ],
@@ -308,8 +284,6 @@ gtag('config', 'G-P6EVSF42L8');`],
                     {
                         text: 'Classes', items: [
                             { text: 'AutkPlot', link: '/api/autk-plot/classes/AutkPlot' },
-                            { text: 'ColorMap', link: '/api/autk-plot/classes/ColorMap' },
-                            { text: 'EventEmitter', link: '/api/autk-plot/classes/EventEmitter' },
                             { text: 'PlotBaseData', link: '/api/autk-plot/classes/PlotBaseData' },
                             { text: 'PlotBaseInteractive', link: '/api/autk-plot/classes/PlotBaseInteractive' },
                             { text: 'PlotStyle', link: '/api/autk-plot/classes/PlotStyle' },
@@ -317,8 +291,6 @@ gtag('config', 'G-P6EVSF42L8');`],
                     },
                     {
                         text: 'Enumerations', collapsed: true, items: [
-                            { text: 'ColorMapDomainStrategy', link: '/api/autk-plot/enumerations/ColorMapDomainStrategy' },
-                            { text: 'ColorMapInterpolator', link: '/api/autk-plot/enumerations/ColorMapInterpolator' },
                             { text: 'PlotEvent', link: '/api/autk-plot/enumerations/PlotEvent' },
                         ]
                     },
@@ -326,11 +298,6 @@ gtag('config', 'G-P6EVSF42L8');`],
                         text: 'Functions', collapsed: true, items: [
                             { text: 'reduceBuckets', link: '/api/autk-plot/functions/reduceBuckets' },
                             { text: 'run', link: '/api/autk-plot/functions/run' },
-                        ]
-                    },
-                    {
-                        text: 'Interfaces', collapsed: true, items: [
-                            { text: 'SelectionData', link: '/api/autk-plot/interfaces/SelectionData' },
                         ]
                     },
                     {
@@ -342,12 +309,6 @@ gtag('config', 'G-P6EVSF42L8');`],
                             { text: 'Binning2dTransformConfig', link: '/api/autk-plot/type-aliases/Binning2dTransformConfig' },
                             { text: 'BinningEventsBucketRow', link: '/api/autk-plot/type-aliases/BinningEventsBucketRow' },
                             { text: 'BinningEventsTransformConfig', link: '/api/autk-plot/type-aliases/BinningEventsTransformConfig' },
-                            { text: 'ColorHEX', link: '/api/autk-plot/type-aliases/ColorHEX' },
-                            { text: 'ColorMapConfig', link: '/api/autk-plot/type-aliases/ColorMapConfig' },
-                            { text: 'ColorMapDomainSpec', link: '/api/autk-plot/type-aliases/ColorMapDomainSpec' },
-                            { text: 'ColorRGB', link: '/api/autk-plot/type-aliases/ColorRGB' },
-                            { text: 'ColorTEX', link: '/api/autk-plot/type-aliases/ColorTEX' },
-                            { text: 'EventListener', link: '/api/autk-plot/type-aliases/EventListener' },
                             { text: 'ExecutedBinning1dTransform', link: '/api/autk-plot/type-aliases/ExecutedBinning1dTransform' },
                             { text: 'ExecutedBinning2dTransform', link: '/api/autk-plot/type-aliases/ExecutedBinning2dTransform' },
                             { text: 'ExecutedBinningEventsTransform', link: '/api/autk-plot/type-aliases/ExecutedBinningEventsTransform' },

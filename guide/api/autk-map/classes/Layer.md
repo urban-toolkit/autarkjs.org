@@ -276,7 +276,7 @@ camera-dependent precomputations.
 
 ##### \_camera
 
-[`Camera`](Camera.md)
+`Camera`
 
 Active camera used to compute view/projection transforms.
 
@@ -304,7 +304,7 @@ pass using the current camera state and any synchronized layer resources.
 
 ##### camera
 
-[`Camera`](Camera.md)
+`Camera`
 
 Active camera used to compute view/projection transforms.
 
@@ -338,7 +338,7 @@ implementation is a no-op.
 
 ##### \_camera
 
-[`Camera`](Camera.md)
+`Camera`
 
 Active camera used to compute view/projection transforms.
 

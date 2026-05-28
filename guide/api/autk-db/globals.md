@@ -25,7 +25,6 @@ console.log(isVectorTable({ source: 'geojson', name: 'roads', columns: [], type:
 ## Interfaces
 
 - [BaseTable](interfaces/BaseTable.md)
-- [BoundingBox](interfaces/BoundingBox.md)
 - [BuildHeatmapParams](interfaces/BuildHeatmapParams.md)
 - [Column](interfaces/Column.md)
 - [CsvLatLngGeometryColumns](interfaces/CsvLatLngGeometryColumns.md)
@@ -63,7 +62,6 @@ console.log(isVectorTable({ source: 'geojson', name: 'roads', columns: [], type:
 - [JsonDefaultLatLngGeometryColumns](type-aliases/JsonDefaultLatLngGeometryColumns.md)
 - [JsonGeometryColumns](type-aliases/JsonGeometryColumns.md)
 - [JsonGeometryLayerType](type-aliases/JsonGeometryLayerType.md)
-- [LayerType](type-aliases/LayerType.md)
 - [LoadingPhase](type-aliases/LoadingPhase.md)
 - [LoadOsmParams](type-aliases/LoadOsmParams.md)
 - [OnLoadingProgress](type-aliases/OnLoadingProgress.md)

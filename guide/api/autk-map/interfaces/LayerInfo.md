@@ -24,7 +24,7 @@ Stable layer identifier used for lookup and updates.
 
 ### typeLayer
 
-> **typeLayer**: [`LayerType`](../type-aliases/LayerType.md)
+> **typeLayer**: `LayerType`
 
 Defined in: [autk-map/src/types-layers.ts:29](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/types-layers.ts#L29)
 

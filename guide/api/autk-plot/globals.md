@@ -6,22 +6,14 @@
 
 ## Enumerations
 
-- [ColorMapDomainStrategy](enumerations/ColorMapDomainStrategy.md)
-- [ColorMapInterpolator](enumerations/ColorMapInterpolator.md)
 - [PlotEvent](enumerations/PlotEvent.md)
 
 ## Classes
 
 - [AutkPlot](classes/AutkPlot.md)
-- [ColorMap](classes/ColorMap.md)
-- [EventEmitter](classes/EventEmitter.md)
 - [PlotBaseData](classes/PlotBaseData.md)
 - [PlotBaseInteractive](classes/PlotBaseInteractive.md)
 - [PlotStyle](classes/PlotStyle.md)
-
-## Interfaces
-
-- [SelectionData](interfaces/SelectionData.md)
 
 ## Type Aliases
 
@@ -32,12 +24,6 @@
 - [Binning2dTransformConfig](type-aliases/Binning2dTransformConfig.md)
 - [BinningEventsBucketRow](type-aliases/BinningEventsBucketRow.md)
 - [BinningEventsTransformConfig](type-aliases/BinningEventsTransformConfig.md)
-- [ColorHEX](type-aliases/ColorHEX.md)
-- [ColorMapConfig](type-aliases/ColorMapConfig.md)
-- [ColorMapDomainSpec](type-aliases/ColorMapDomainSpec.md)
-- [ColorRGB](type-aliases/ColorRGB.md)
-- [ColorTEX](type-aliases/ColorTEX.md)
-- [EventListener](type-aliases/EventListener.md)
 - [ExecutedBinning1dTransform](type-aliases/ExecutedBinning1dTransform.md)
 - [ExecutedBinning2dTransform](type-aliases/ExecutedBinning2dTransform.md)
 - [ExecutedBinningEventsTransform](type-aliases/ExecutedBinningEventsTransform.md)

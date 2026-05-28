@@ -17,7 +17,7 @@ existing color-map state rather than replacing the full configuration.
 
 ### colorMap
 
-> **colorMap**: `Partial`\<[`ColorMapConfig`](../type-aliases/ColorMapConfig.md)\>
+> **colorMap**: `Partial`\<`ColorMapConfig`\>
 
 Defined in: [autk-map/src/api.ts:170](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/api.ts#L170)
 

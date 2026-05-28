@@ -64,7 +64,7 @@ is required to populate the raster value texture.
 
 ### type?
 
-> `optional` **type?**: [`LayerType`](../type-aliases/LayerType.md) \| `null`
+> `optional` **type?**: `LayerType` \| `null`
 
 Defined in: [autk-map/src/api.ts:57](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/api.ts#L57)
 

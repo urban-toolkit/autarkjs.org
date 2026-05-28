@@ -8,7 +8,7 @@
 
 > `const` **EXCLUDED\_BUILDING\_VALUES**: readonly \[`"shed"`, `"garage"`, `"garages"`, `"carport"`, `"hut"`, `"kiosk"`, `"toilets"`, `"service"`, `"transformer_tower"`, `"sty"`, `"container"`\]
 
-Defined in: [autk-db/src/consts.ts:76](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/consts.ts#L76)
+Defined in: [consts.ts:76](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/consts.ts#L76)
 
 OSM building values excluded from building layer generation.
 

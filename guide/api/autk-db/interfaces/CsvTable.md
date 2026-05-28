@@ -6,7 +6,7 @@
 
 # Interface: CsvTable
 
-Defined in: [autk-db/src/interfaces.ts:103](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L103)
+Defined in: [interfaces.ts:103](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L103)
 
 CSV table that may remain tabular or expose renderable geometry.
 
@@ -22,7 +22,7 @@ Represents comma-separated data and can become a point, polyline, or polygon lay
 
 > `optional` **bands?**: [`RasterBandMetadata`](RasterBandMetadata.md)[]
 
-Defined in: [autk-db/src/interfaces.ts:59](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L59)
+Defined in: [interfaces.ts:59](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L59)
 
 Optional raster band metadata when the table stores raster data.
 
@@ -34,9 +34,9 @@ Optional raster band metadata when the table stores raster data.
 
 ### boundingBox?
 
-> `optional` **boundingBox?**: [`BoundingBox`](BoundingBox.md)
+> `optional` **boundingBox?**: `BoundingBox`
 
-Defined in: [autk-db/src/interfaces.ts:57](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L57)
+Defined in: [interfaces.ts:57](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L57)
 
 Cached layer extent when the table contains geometry data.
 
@@ -50,7 +50,7 @@ Cached layer extent when the table contains geometry data.
 
 > **columns**: [`Column`](Column.md)[]
 
-Defined in: [autk-db/src/interfaces.ts:55](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L55)
+Defined in: [interfaces.ts:55](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L55)
 
 Flat schema information returned by DuckDB.
 
@@ -64,7 +64,7 @@ Flat schema information returned by DuckDB.
 
 > **name**: `string`
 
-Defined in: [autk-db/src/interfaces.ts:53](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L53)
+Defined in: [interfaces.ts:53](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L53)
 
 Unique table name within the active workspace.
 
@@ -78,7 +78,7 @@ Unique table name within the active workspace.
 
 > **source**: `"csv"`
 
-Defined in: [autk-db/src/interfaces.ts:105](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L105)
+Defined in: [interfaces.ts:105](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L105)
 
 Marks the table as originating from the CSV loader.
 
@@ -92,6 +92,6 @@ Marks the table as originating from the CSV loader.
 
 > `optional` **type?**: `"water"` \| `"background"` \| `"surface"` \| `"parks"` \| `"roads"` \| `"buildings"` \| `"points"` \| `"polygons"` \| `"polylines"`
 
-Defined in: [autk-db/src/interfaces.ts:107](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L107)
+Defined in: [interfaces.ts:107](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L107)
 
 Optional renderable layer type when geometry columns were materialized during CSV loading.

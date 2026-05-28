@@ -8,7 +8,7 @@
 
 > **ResolvedPlotTransform** = `object`
 
-Defined in: [autk-plot/src/plot-base-data.ts:32](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/plot-base-data.ts#L32)
+Defined in: [plot-base-data.ts:32](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/plot-base-data.ts#L32)
 
 Normalized transform payload returned by `resolveTransformResult()`.
 
@@ -21,7 +21,7 @@ consumed by plot classes.
 
 > `optional` **axisAttributes?**: `string`[]
 
-Defined in: [autk-plot/src/plot-base-data.ts:36](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/plot-base-data.ts#L36)
+Defined in: [plot-base-data.ts:36](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/plot-base-data.ts#L36)
 
 Optional axis bindings exposed by the transformed row shape.
 
@@ -31,7 +31,7 @@ Optional axis bindings exposed by the transformed row shape.
 
 > `optional` **colorAttribute?**: `string`
 
-Defined in: [autk-plot/src/plot-base-data.ts:38](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/plot-base-data.ts#L38)
+Defined in: [plot-base-data.ts:38](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/plot-base-data.ts#L38)
 
 Optional color binding exposed by the transformed row shape.
 
@@ -41,6 +41,6 @@ Optional color binding exposed by the transformed row shape.
 
 > **rows**: [`AutkDatum`](AutkDatum.md)[]
 
-Defined in: [autk-plot/src/plot-base-data.ts:34](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/plot-base-data.ts#L34)
+Defined in: [plot-base-data.ts:34](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/plot-base-data.ts#L34)
 
 Render rows stored on `_data` for the current draw cycle.

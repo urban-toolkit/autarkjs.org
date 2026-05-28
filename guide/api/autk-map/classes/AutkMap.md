@@ -73,7 +73,7 @@ Currently active pick-enabled layer, if any.
 
 #### Get Signature
 
-> **get** **camera**(): [`Camera`](Camera.md)
+> **get** **camera**(): `Camera`
 
 Defined in: [autk-map/src/map.ts:143](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/map.ts#L143)
 
@@ -81,7 +81,7 @@ View and projection camera.
 
 ##### Returns
 
-[`Camera`](Camera.md)
+`Camera`
 
 ***
 

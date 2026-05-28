@@ -6,7 +6,7 @@
 
 # Interface: GetTablesParams
 
-Defined in: [autk-db/src/use-cases/get-tables/interfaces.ts:8](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/get-tables/interfaces.ts#L8)
+Defined in: [use-cases/get-tables/interfaces.ts:8](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/get-tables/interfaces.ts#L8)
 
 Parameters for querying rows from a DuckDB table.
 
@@ -23,7 +23,7 @@ const paramsPaginated: GetTablesParams = { tableName: 'places', limit: 50, offse
 
 > `optional` **limit?**: `number`
 
-Defined in: [autk-db/src/use-cases/get-tables/interfaces.ts:12](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/get-tables/interfaces.ts#L12)
+Defined in: [use-cases/get-tables/interfaces.ts:12](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/get-tables/interfaces.ts#L12)
 
 Maximum number of rows to return.
 
@@ -33,7 +33,7 @@ Maximum number of rows to return.
 
 > `optional` **offset?**: `number`
 
-Defined in: [autk-db/src/use-cases/get-tables/interfaces.ts:14](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/get-tables/interfaces.ts#L14)
+Defined in: [use-cases/get-tables/interfaces.ts:14](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/get-tables/interfaces.ts#L14)
 
 Number of rows to skip before returning results.
 
@@ -43,7 +43,7 @@ Number of rows to skip before returning results.
 
 > **tableName**: `string`
 
-Defined in: [autk-db/src/use-cases/get-tables/interfaces.ts:10](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/get-tables/interfaces.ts#L10)
+Defined in: [use-cases/get-tables/interfaces.ts:10](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/get-tables/interfaces.ts#L10)
 
 Unqualified name of the table to read rows from.
 
@@ -53,6 +53,6 @@ Unqualified name of the table to read rows from.
 
 > `optional` **workspace?**: `string`
 
-Defined in: [autk-db/src/use-cases/get-tables/interfaces.ts:16](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/get-tables/interfaces.ts#L16)
+Defined in: [use-cases/get-tables/interfaces.ts:16](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/get-tables/interfaces.ts#L16)
 
 Workspace namespace used to qualify the table name. Defaults to the system workspace.

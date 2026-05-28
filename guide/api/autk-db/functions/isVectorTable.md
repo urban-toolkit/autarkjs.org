@@ -8,7 +8,7 @@
 
 > **isVectorTable**(`table`): table is OsmLayerTable \| GeojsonTable \| CsvTable & \{ type: "water" \| "background" \| "surface" \| "parks" \| "roads" \| "buildings" \| "points" \| "polygons" \| "polylines" \} \| UserTable & \{ type: "water" \| "background" \| "surface" \| "parks" \| "roads" \| "buildings" \| "points" \| "polygons" \| "polylines" \}
 
-Defined in: [autk-db/src/interfaces.ts:197](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L197)
+Defined in: [interfaces.ts:197](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L197)
 
 Narrows a table to vector geometry layers.
 

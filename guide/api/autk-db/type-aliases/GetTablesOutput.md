@@ -8,7 +8,7 @@
 
 > **GetTablesOutput** = `Record`\<`string`, `unknown`\>[]
 
-Defined in: [autk-db/src/use-cases/get-tables/interfaces.ts:27](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/get-tables/interfaces.ts#L27)
+Defined in: [use-cases/get-tables/interfaces.ts:27](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/get-tables/interfaces.ts#L27)
 
 Array of plain objects representing rows from the queried table.
 

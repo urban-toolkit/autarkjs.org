@@ -8,7 +8,7 @@
 
 > **SortTransformConfig** = `object`
 
-Defined in: [autk-plot/src/api.ts:186](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/api.ts#L186)
+Defined in: [api.ts:186](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/api.ts#L186)
 
 Sort preset config.
 
@@ -22,7 +22,7 @@ Using `'@transform'` in `PlotConfig.attributes` with sort throws an error.
 
 > `optional` **options?**: `object`
 
-Defined in: [autk-plot/src/api.ts:188](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/api.ts#L188)
+Defined in: [api.ts:188](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/api.ts#L188)
 
 #### column?
 
@@ -42,4 +42,4 @@ Sort direction. Defaults to `'asc'`.
 
 > **preset**: `"sort"`
 
-Defined in: [autk-plot/src/api.ts:187](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/api.ts#L187)
+Defined in: [api.ts:187](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/api.ts#L187)

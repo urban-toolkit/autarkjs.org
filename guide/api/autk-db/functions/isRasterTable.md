@@ -8,7 +8,7 @@
 
 > **isRasterTable**(`table`): table is GeotiffTable \| UserTable & \{ type: "raster" \}
 
-Defined in: [autk-db/src/interfaces.ts:215](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L215)
+Defined in: [interfaces.ts:215](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L215)
 
 Narrows a table to raster-backed layers.
 

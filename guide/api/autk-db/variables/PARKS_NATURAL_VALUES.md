@@ -8,7 +8,7 @@
 
 > `const` **PARKS\_NATURAL\_VALUES**: readonly \[`"wood"`, `"grass"`, `"grassland"`, `"forest"`, `"scrub"`, `"heath"`, `"meadow"`\]
 
-Defined in: [autk-db/src/consts.ts:48](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/consts.ts#L48)
+Defined in: [consts.ts:48](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/consts.ts#L48)
 
 OSM `natural` tag values treated as park or vegetated open-space features.
 

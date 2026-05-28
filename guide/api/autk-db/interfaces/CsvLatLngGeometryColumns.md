@@ -6,7 +6,7 @@
 
 # Interface: CsvLatLngGeometryColumns
 
-Defined in: [autk-db/src/use-cases/load-csv/interfaces.ts:25](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-csv/interfaces.ts#L25)
+Defined in: [use-cases/load-csv/interfaces.ts:25](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-csv/interfaces.ts#L25)
 
 Describes how to build point geometry from explicit latitude and longitude columns.
 
@@ -28,7 +28,7 @@ const geometryColumns: CsvLatLngGeometryColumns = {
 
 > `optional` **coordinateFormat?**: `string`
 
-Defined in: [autk-db/src/use-cases/load-csv/interfaces.ts:31](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-csv/interfaces.ts#L31)
+Defined in: [use-cases/load-csv/interfaces.ts:31](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-csv/interfaces.ts#L31)
 
 CRS of the source coordinate columns before they are transformed into the workspace CRS.
 
@@ -38,7 +38,7 @@ CRS of the source coordinate columns before they are transformed into the worksp
 
 > **latColumnName**: `string`
 
-Defined in: [autk-db/src/use-cases/load-csv/interfaces.ts:27](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-csv/interfaces.ts#L27)
+Defined in: [use-cases/load-csv/interfaces.ts:27](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-csv/interfaces.ts#L27)
 
 Name of the column that stores latitude values used to create point geometries.
 
@@ -48,6 +48,6 @@ Name of the column that stores latitude values used to create point geometries.
 
 > **longColumnName**: `string`
 
-Defined in: [autk-db/src/use-cases/load-csv/interfaces.ts:29](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-csv/interfaces.ts#L29)
+Defined in: [use-cases/load-csv/interfaces.ts:29](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-csv/interfaces.ts#L29)
 
 Name of the column that stores longitude values used to create point geometries.

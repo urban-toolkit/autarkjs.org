@@ -87,7 +87,7 @@ Active style identifier.
 
 ### getColor()
 
-> `static` **getColor**(`type`): [`ColorRGB`](../type-aliases/ColorRGB.md)
+> `static` **getColor**(`type`): `ColorRGB`
 
 Defined in: [autk-map/src/map-style.ts:126](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/map-style.ts#L126)
 
@@ -103,7 +103,7 @@ Semantic style key to resolve.
 
 #### Returns
 
-[`ColorRGB`](../type-aliases/ColorRGB.md)
+`ColorRGB`
 
 RGB color for the requested key.
 
@@ -121,7 +121,7 @@ const roadsColor = MapStyle.getColor('roads');
 
 ### getHighlightColor()
 
-> `static` **getHighlightColor**(): [`ColorRGB`](../type-aliases/ColorRGB.md)
+> `static` **getHighlightColor**(): `ColorRGB`
 
 Defined in: [autk-map/src/map-style.ts:180](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/map-style.ts#L180)
 
@@ -129,7 +129,7 @@ Returns the current highlight color.
 
 #### Returns
 
-[`ColorRGB`](../type-aliases/ColorRGB.md)
+`ColorRGB`
 
 RGB highlight color.
 
@@ -141,7 +141,7 @@ Never throws.
 
 ### getInvalidValueColor()
 
-> `static` **getInvalidValueColor**(): [`ColorRGB`](../type-aliases/ColorRGB.md)
+> `static` **getInvalidValueColor**(): `ColorRGB`
 
 Defined in: [autk-map/src/map-style.ts:141](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/map-style.ts#L141)
 
@@ -149,7 +149,7 @@ Returns the color used for invalid thematic values.
 
 #### Returns
 
-[`ColorRGB`](../type-aliases/ColorRGB.md)
+`ColorRGB`
 
 RGB fallback color.
 

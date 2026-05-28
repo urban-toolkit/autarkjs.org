@@ -14,7 +14,7 @@ Render-ready layer payload produced by loaders and triangulation steps.
 
 ### border?
 
-> `optional` **border?**: [`LayerBorder`](LayerBorder.md)[]
+> `optional` **border?**: `LayerBorder`[]
 
 Defined in: [autk-map/src/types-layers.ts:65](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/types-layers.ts#L65)
 
@@ -24,7 +24,7 @@ Optional border geometry for outlined 2D triangle layers.
 
 ### borderComponents?
 
-> `optional` **borderComponents?**: [`LayerBorderComponent`](LayerBorderComponent.md)[]
+> `optional` **borderComponents?**: `LayerBorderComponent`[]
 
 Defined in: [autk-map/src/types-layers.ts:67](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/types-layers.ts#L67)
 
@@ -34,7 +34,7 @@ Cumulative border-component metadata aligned with `border`.
 
 ### components
 
-> **components**: [`LayerComponent`](LayerComponent.md)[]
+> **components**: `LayerComponent`[]
 
 Defined in: [autk-map/src/types-layers.ts:63](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/types-layers.ts#L63)
 
@@ -44,7 +44,7 @@ Per-primitive component metadata aligned with `geometry`.
 
 ### geometry
 
-> **geometry**: [`LayerGeometry`](LayerGeometry.md)[]
+> **geometry**: `LayerGeometry`[]
 
 Defined in: [autk-map/src/types-layers.ts:61](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/types-layers.ts#L61)
 

@@ -19,7 +19,7 @@ the same logical mesh parts.
 
 ### components
 
-> **components**: [`LayerComponent`](LayerComponent.md)[]
+> **components**: `LayerComponent`[]
 
 Defined in: [autk-map/src/api.ts:99](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/api.ts#L99)
 
@@ -32,7 +32,7 @@ with rendered mesh parts.
 
 ### geometry
 
-> **geometry**: [`LayerGeometry`](LayerGeometry.md)[]
+> **geometry**: `LayerGeometry`[]
 
 Defined in: [autk-map/src/api.ts:92](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/api.ts#L92)
 
