@@ -267,36 +267,14 @@ Modify the previous code sample to explore more of `autk-db`. For example, try l
 
 ## Get bounding boxes
 
-Bounding boxes are useful for camera framing, clipping rasters, and defining grid extents.
-
-### Table bounding box
-
-[`getBoundingBoxFromLayer()`](/api/autk-db/classes/AutkDb#getboundingboxfromlayer) computes the bounding box from the geometry of a specific renderable table.
+Bounding boxes are useful for camera framing, clipping rasters, and defining grid extents. [`getBoundingBoxFromLayer()`](/api/autk-db/classes/AutkDb#getboundingboxfromlayer) computes the bounding box from the geometry of a specific renderable table.
 
 <ClientOnly>
   <CodePlayground :code="getLayerBboxCode" out="console" />
 </ClientOnly>
 
-The returned object contains `minLon`, `minLat`, `maxLon`, and `maxLat` properties.
+The returned object contains `minLon`, `minLat`, `maxLon`, and `maxLat` properties. However, these values are not always expressed in latitude and longitude. They are returned in the coordinate system used by the current workspace.
 
-#### List of `getBoundingBoxFromLayer` parameters
-
-<table>
-  <thead>
-    <tr>
-      <th>Option</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>layerName</code></td>
-      <td><code>string</code></td>
-      <td>Layer table name.</td>
-    </tr>
-  </tbody>
-</table>
 
 :::warning Missing or non-geometric layers
 [`getBoundingBoxFromLayer()`](/api/autk-db/classes/AutkDb#getboundingboxfromlayer) throws an error if the database is not initialized, the layer table is missing, or the table does not have a geometry column.
