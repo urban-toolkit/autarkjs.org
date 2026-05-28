@@ -148,7 +148,7 @@ When a table comes from OSM auto-loading, its `type` usually reflects one of the
   <CodePlayground :code="getLayerTablesCode" out="console" />
 </ClientOnly>
 
-This is useful when you want to quickly identify which tables are ready for map rendering or layer export.
+This is useful when a workspace contains many tables and you want to know which ones can be sent directly to visualization tools. Instead of checking each table manually, [`getLayerTables()`](/api/autk-db/classes/AutkDb#getlayertables) gives you the subset that is ready to be exported as vector or raster layers for use with tools such as [`autk-map`](../autk-map/index.md).
 
 :::tip Return type
 Returns an array of table metadata objects with `name`, `source`, `type`, and `columns` properties.
