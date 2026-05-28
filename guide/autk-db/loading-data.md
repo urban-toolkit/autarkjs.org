@@ -77,8 +77,7 @@ await db.init();
 const res = await db.loadGeoTiff({
     geotiffFileUrl: '/data/temperature.tif',
     outputTableName: 'temperature',
-    coordinateFormat: 'EPSG:4326',
-    maxPixels: 500000,
+    coordinateFormat: 'EPSG:4326'
 });
 
 console.log(res)
@@ -249,12 +248,12 @@ If you plan to load OSM and additional layers in the same workspace, load OSM fi
 
 | Option | Type | Description |
 |---|---|---|
-| `geojsonFileUrl` | `string` | GeoJSON file URL. |
-| `geojsonObject` | `FeatureCollection` | In-memory GeoJSON. |
-| `outputTableName` | `string` | Output table name. |
-| `coordinateFormat` | `string` | Source CRS. |
-| `layerType` | `LayerType` | Override inferred layer type. |
-| `boundingBox` | `BoundingBox` | Optional clipping bounds. |
+| [`geojsonFileUrl`](/api/autk-db/interfaces/LoadGeojsonParams#geojsonfileurl) | `string` | GeoJSON file URL. |
+| [`geojsonObject`](/api/autk-db/interfaces/LoadGeojsonParams#geojsonobject) | `FeatureCollection` | In-memory GeoJSON. |
+| [`outputTableName`](/api/autk-db/interfaces/LoadGeojsonParams#outputtablename) | `string` | Output table name. |
+| [`coordinateFormat`](/api/autk-db/interfaces/LoadGeojsonParams#coordinateformat) | `string` | Source CRS. |
+| [`layerType`](/api/autk-db/interfaces/LoadGeojsonParams#layertype) | `LayerType` | Override inferred layer type. |
+| [`boundingBox`](/api/autk-db/interfaces/LoadGeojsonParams#boundingbox) | `BoundingBox` | Optional clipping bounds. |
 
 :::info Layers Cropping
 `autk-db` applies workspace-aware filtering and clipping when new layers are loaded.
@@ -272,18 +271,18 @@ If you plan to load OSM and additional layers in the same workspace, load OSM fi
 </ClientOnly>
 
 :::tip Try changing the previous example
-Modify the previous code sample to explore more of `autk-db`. For example, try changing `maxPixels`, use a different `outputTableName`, or load a raster with a non-default CRS by setting `coordinateFormat`.
+Modify the previous code sample to explore more of `autk-db`. For example, try setting `maxPixels` or use a different `outputTableName`.
 :::
 
 #### List of `loadGeoTiff` Parameters
 
 | Option | Type | Description |
 |---|---|---|
-| `geotiffFileUrl` | `string` | GeoTIFF file URL. |
-| `geotiffArrayBuffer` | `ArrayBuffer` | In-memory GeoTIFF data. |
-| `outputTableName` | `string` | Output table name. |
-| `coordinateFormat` | `string` | Source CRS. |
-| `maxPixels` | `number` | Pixel limit. |
+| [`geotiffFileUrl`](/api/autk-db/interfaces/LoadGeoTiffParams#geotifffileurl) | `string` | GeoTIFF file URL. |
+| [`geotiffArrayBuffer`](/api/autk-db/interfaces/LoadGeoTiffParams#geotiffarraybuffer) | `ArrayBuffer` | In-memory GeoTIFF data. |
+| [`outputTableName`](/api/autk-db/interfaces/LoadGeoTiffParams#outputtablename) | `string` | Output table name. |
+| [`coordinateFormat`](/api/autk-db/interfaces/LoadGeoTiffParams#coordinateformat) | `string` | Source CRS. |
+| [`maxPixels`](/api/autk-db/interfaces/LoadGeoTiffParams#maxpixels) | `number` | Pixel limit. |
 
 
 ## CSV
