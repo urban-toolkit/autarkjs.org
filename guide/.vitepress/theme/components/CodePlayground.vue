@@ -497,17 +497,21 @@ watch(isDark, () => {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--vp-c-text-1);
   font-size: 0.9rem;
   font-family: monospace;
+  background: color-mix(in srgb, var(--vp-c-bg) 82%, transparent);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  padding: 10px 14px;
 }
 
 .code-playground__spinner {
   width: 18px;
   height: 18px;
   flex-shrink: 0;
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  border-top-color: rgba(255, 255, 255, 0.85);
+  border: 2px solid color-mix(in srgb, var(--vp-c-text-2) 25%, transparent);
+  border-top-color: var(--vp-c-text-1);
   border-radius: 50%;
   animation: autk-spin 0.8s linear infinite;
 }
