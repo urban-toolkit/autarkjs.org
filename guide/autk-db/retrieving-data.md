@@ -142,13 +142,13 @@ When a table comes from OSM auto-loading, its `type` usually reflects one of the
 
 ## List renderable tables
 
-[`getLayerTables()`](/api/autk-db/classes/AutkDb#getlayertables) returns the subset of [`db.tables`](#inspect-registered-tables) that can be exported with [`getLayer`](#get-table-as-geojson) or [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson).
+[`getLayerTables()`](/api/autk-db/classes/AutkDb#getlayertables) returns only the tables that can be retrieved as layers. In practice, it filters [`db.tables`](#inspect-registered-tables) down to the entries that work with [`getLayer`](#get-table-as-geojson) or [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson).
 
 <ClientOnly>
   <CodePlayground :code="getLayerTablesCode" out="console" />
 </ClientOnly>
 
-It is useful when you want to inspect all renderable tables without knowing their names in advance.
+This is useful when you want to quickly identify which tables are ready for map rendering or layer export.
 
 :::tip Return type
 Returns an array of table metadata objects with `name`, `source`, `type`, and `columns` properties.
