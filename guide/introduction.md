@@ -80,7 +80,7 @@ const introCode = `
 import { AutkMap } from "@urban-toolkit/autk-map";
 import { AutkDb } from "@urban-toolkit/autk-db";
 
-const db = new AutkDb();
+const db = new AutkSpatialDb();
 await db.init();
 
 await db.loadOsm({
@@ -91,7 +91,7 @@ await db.loadOsm({
   },
   outputTableName: "osm",
   autoLoadLayers: {
-    layers: ["surface", "parks", "water", "roads", "buildings"],
+    layers: ["surface", "parks", "water", "roads"],
     dropOsmTable: true,
   },
   onProgress: (phase) => console.log(phase),
