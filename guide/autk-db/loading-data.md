@@ -231,23 +231,20 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
   </tbody>
 </table>
 
-:::tip Load OSM first when combining layer sources
-If you plan to load OSM and additional GeoJSON layers in the same workspace, load OSM first so its bounding box and `surface` geometry define the filtering and clipping context for the layers loaded later.
+:::danger Load OSM first when combining layer sources
+If you plan to load OSM and additional layers in the same workspace, load OSM first so its bounding box and `surface` geometry define the filtering and clipping context for the project.
 :::
 
 ## GeoJSON
 
-`loadGeojson` loads a GeoJSON `FeatureCollection` from a URL or an in-memory object and stores it as a named layer table in DuckDB. The only required parameter is `outputTableName`. By default, the input coordinates are expected to be in latitude/longitude (`EPSG:4326`). If the GeoJSON uses a different CRS, provide it through `coordinateFormat`. Use `layerType` to override the automatic geometry-type inference performed bu autk-db.
+`loadGeojson` loads a GeoJSON `FeatureCollection` from a URL or an in-memory object and stores it as a named layer table in DuckDB. The only required parameter is `outputTableName`. By default, the input coordinates are expected to be in latitude/longitude (`EPSG:4326`). If the GeoJSON uses a different coordinates system, provide it through `coordinateFormat`. Use `layerType` to override the automatic geometry-type inference performed bu autk-db.
 
 <ClientOnly>
   <CodePlayground :code="loadGeojsonCode" out="console" />
 </ClientOnly>
 
-:::info Layers Cropping
-`autk-db` applies workspace-aware filtering and clipping when new layers are loaded.
-
-1. If OSM data already exists in the current [workspace](./workspaces.md), its bounding box is first used to filter the features of newly loaded layers. The remaining features are then clipped using the OSM `surface` layer geometry.
-2. If OSM data is not available, the first loaded GeoJSON layer provides the workspace bounding box used to filter the features of subsequent layers. If that first layer is a polygon layer, its geometry is also used to clip later layers.
+:::tip Try changing the previous example
+Modify the previous code sample to explore more of `autk-db`. For example, try loading the same file with a different `outputTableName`, provide `coordinateFormat`, set an explicit `layerType`, or load multiple layers in the same workspace to observe the filtering and clipping behavior.
 :::
 
 #### List of `loadGeojson` Parameters
@@ -278,6 +275,13 @@ If you plan to load OSM and additional GeoJSON layers in the same workspace, loa
 | `outputTableName` | `string` | Name for the resulting raster table. |
 | `coordinateFormat` | `string` | Source CRS of the GeoTIFF file. Defaults to `'EPSG:4326'`. |
 | `maxPixels` | `number` | Maximum decoded pixels before throwing an error. Defaults to `500000`. |
+
+:::info Layers Cropping
+`autk-db` applies workspace-aware filtering and clipping when new layers are loaded.
+
+1. If OSM data already exists in the current [workspace](./workspaces.md), its bounding box is first used to filter the features of newly loaded layers. The remaining features are then clipped using the OSM `surface` layer geometry.
+2. If OSM data is not available, the first loaded GeoJSON layer provides the workspace bounding box used to filter the features of subsequent layers. If that first layer is a polygon layer, its geometry is also used to clip later layers.
+:::
 
 
 ## CSV
