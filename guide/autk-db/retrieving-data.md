@@ -115,7 +115,7 @@ console.log(bbox);
 
 Once data is loaded or analyzed, `autk-db` provides getter methods to move results from DuckDB back into JavaScript. These methods let you inspect registered tables, read rows as plain objects, export vector layers as GeoJSON, export raster tables in a map-friendly format, and query layer bounding boxes.
 
-## Inspect registered tables
+## Registered tables
 
 Use `db.tables` to inspect the tables registered in the current [workspace](./workspaces.md). Each entry is table metadata, not the table rows themselves. This is useful when you want to see what is available before calling [`getTables`](#get-table-data), [`getLayer`](#get-table-as-geojson), [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson), or [`getLayerTables`](#list-renderable-tables).
 
@@ -140,7 +140,7 @@ When a table comes from OSM auto-loading, its `type` usually reflects one of the
 - `buildings` — polygon features representing building footprints
 :::
 
-## List renderable tables
+## Get layer tables
 
 [`getLayerTables()`](/api/autk-db/classes/AutkDb#getlayertables) returns only the tables that can be retrieved as layers. In practice, it filters [`db.tables`](#inspect-registered-tables) down to the entries that work with [`getLayer`](#get-table-as-geojson) or [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson).
 
@@ -150,24 +150,21 @@ When a table comes from OSM auto-loading, its `type` usually reflects one of the
 
 [`getLayerTables()`](/api/autk-db/classes/AutkDb#getlayertables)  is useful when a workspace contains many tables and you want to know which ones can be sent directly to visualization tools. Instead of checking each table manually, [`getLayerTables()`](/api/autk-db/classes/AutkDb#getlayertables) gives you the subset that is ready to be exported as vector or raster layers for use with tools such as [`autk-map`](../autk-map/index.md).
 
-:::tip Layer and table names
-The entries returned by [`getLayerTables()`](/api/autk-db/classes/AutkDb#getlayertables) are still DuckDB tables. In other words, a “layer” in this context is a table whose contents can be exported for rendering. The `name` property is therefore the table name you should pass to [`getLayer`](#get-table-as-geojson), [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson), or [`getBoundingBoxFromLayer`](#table-bounding-box).
-
-For OSM data loaded with [`loadOsm`](./loading-data.md#openstreetmap), the names usually follow the `{outputTableName}_{layer}` pattern, such as `table_osm_roads` or `table_osm_buildings`.
+:::tip Layer versus table
+The entries returned by [`getLayerTables()`](/api/autk-db/classes/AutkDb#getlayertables) are still DuckDB tables. In other words, a **layer** in this context is a table whose contents can be exported for rendering. The `name` property is therefore the table name you should pass to [`getLayer`](#get-table-as-geojson), [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson), or [`getBoundingBoxFromLayer`](#table-bounding-box).
 :::
 
 ## Get table data
 
-[`getTables`](/api/autk-db/classes/AutkDb#gettables) returns rows from any registered table as plain JavaScript objects. It works with CSV, JSON, vector, and raster tables.
+[`getTables`](/api/autk-db/classes/AutkDb#gettables) returns rows from any registered table as plain JavaScript objects. It works with CSV, JSON, vector, and raster tables. For large tables, it is possible to use the [`limit`](/api/autk-db/interfaces/GetTablesParams#limit) and [`offset`](/api/autk-db/interfaces/GetTablesParams#offset) attributes to paginate the result.
+
 
 <ClientOnly>
   <CodePlayground :code="getTableRowsCode" out="console" />
 </ClientOnly>
 
-For large tables, use [`limit`](/api/autk-db/interfaces/GetTablesParams#limit) and [`offset`](/api/autk-db/interfaces/GetTablesParams#offset) to paginate the result.
-
-:::tip Try changing the previous example
-Modify the previous code sample to explore more of `autk-db`. For example, try changing [`limit`](/api/autk-db/interfaces/GetTablesParams#limit), add [`offset`](/api/autk-db/interfaces/GetTablesParams#offset), or read a different table by changing [`tableName`](/api/autk-db/interfaces/GetTablesParams#tablename).
+:::tip Try changing the code above
+Since the playground runs the example directly, the easiest way to explore [`getTables`](/api/autk-db/classes/AutkDb#gettables) is to edit the code itself. For example, try changing [`tableName`](/api/autk-db/interfaces/GetTablesParams#tablename), increasing [`limit`](/api/autk-db/interfaces/GetTablesParams#limit), adding [`offset`](/api/autk-db/interfaces/GetTablesParams#offset), or logging the returned rows instead of just `rows.length`.
 :::
 
 #### List of `getTables` parameters
