@@ -1,3 +1,102 @@
+<script setup>
+const fetchOsmCode = `
+import { AutkDb } from "@urban-toolkit/autk-db";
+
+const db = new AutkDb();
+await db.init();
+
+const res = await db.loadOsm({
+    queryArea: {
+        geocodeArea: 'New York',
+        areas: ['Battery Park City'],
+    },
+    autoLoadLayers: {
+        coordinateFormat: 'EPSG:3395',
+        layers: ['surface', 'parks', 'water'],
+        dropOsmTable: true,
+    },
+    outputTableName: 'osm',
+    onProgress: (phase) => console.log(phase)
+});
+
+console.log(res)
+`
+
+const loadPbfCode = `
+import { AutkDb } from "@urban-toolkit/autk-db";
+
+const db = new AutkDb();
+await db.init();
+
+const res = await db.loadOsm({
+    pbfFileUrl: '/data/lower_mnt.osm.pbf',
+    queryArea: {
+        geocodeArea: 'New York',
+        areas: ['Financial District'],
+    },
+    autoLoadLayers: {
+        coordinateFormat: 'EPSG:3395',
+        layers: ['surface', 'parks', 'water', 'roads', 'buildings'],
+        dropOsmTable: true,
+    },
+    outputTableName: 'osm',
+});
+
+console.log(res)
+`
+
+const loadGeojsonCode = `
+import { AutkDb } from "@urban-toolkit/autk-db";
+
+const db = new AutkDb();
+await db.init();
+
+const res = await db.loadGeojson({
+    geojsonFileUrl: '/data/mnt_neighs.geojson',
+    outputTableName: 'neighborhoods',
+    coordinateFormat: 'EPSG:4326',
+});
+
+console.log(res);
+`
+
+const loadCsvCode = `
+import { AutkDb } from "@urban-toolkit/autk-db";
+
+const db = new AutkDb();
+await db.init();
+
+const res = await db.loadCsv({
+    csvFileUrl: '/data/mnt_noise.csv',
+    outputTableName: 'noise',
+    geometryColumns: {
+        latColumnName: 'Latitude',
+        longColumnName: 'Longitude',
+        coordinateFormat: 'EPSG:4326',
+    },
+});
+
+console.log(res);
+`
+
+const loadGeoTiffCode = `
+import { AutkDb } from "@urban-toolkit/autk-db";
+
+const db = new AutkDb();
+await db.init();
+
+const res = await db.loadGeoTiff({
+    geotiffFileUrl: '/data/temperature.tif',
+    outputTableName: 'temperature',
+    coordinateFormat: 'EPSG:4326',
+    maxPixels: 500000,
+});
+
+console.log(res)
+`
+</script>
+
+
 <style scoped>
 .introduction-page :is(p, li, td, th, .custom-block p, .custom-block li, h1, h2, h3, h4, h5, h6) {
   text-align: justify;
@@ -23,111 +122,14 @@ When a loading method is called, it ingests data into DuckDB and returns the cre
 
 ### Using the Overpass API
 
-To directly fetch from the public [Overpass API](https://overpass-api.de/) and load OpenStreetMap data into DuckDB tables, `autk-db` provides the `loadOsm` method, which requires three parameters:
+To directly fetch from the public [Overpass API](https://overpass-api.de/) and load OpenStreetMap data into DuckDB tables, `autk-db` provides the `loadOsm` method. When you want renderable thematic layers immediately, the most important parameters are:
 
 1. `queryArea` — Defines the geographic region of interest. The region definition is broken into two parts: the `geocodeArea` and a list of administrative areas `areas`. `geocodeArea` is used to define the data search scope and avoid naming ambiguities when querying the Overpass API. `areas` must contain OSM features whose tags contain the key-value pair `boundary: administrative`.
 
-2. `autoLoadLayers` — List of data layers to automatically extract from raw OSM data (valid values are `buildings`, `roads`, `surface`, `parks`, and `water`). If the raw OSM data is no longer needed after loading the layers, set `dropOsmTable: true`. `coordinateFormat` specifies the coordinate system used to represent the extracted data. 
+2. `autoLoadLayers` — List of data layers to automatically extract from raw OSM data (valid values are `buildings`, `roads`, `surface`, `parks`, and `water`). Set `dropOsmTable: true` to remove the raw OSM table after extraction. `coordinateFormat` specifies the source CRS of the OSM coordinates before they are transformed into the workspace CRS.
 
 3. `outputTableName` — The base name for the produced DuckDB tables. Each automatically loaded layer is stored as `{outputTableName}_{layer}`. For example, using `outputTableName: 'osm'` and `layers: ['surface', 'roads', 'buildings']`, the resulting tables are `osm_surface`, `osm_roads`, and `osm_buildings`. This is the identifier you'll use later when querying or retrieving data.
 
-
-<script setup>
-const fetchOsmCode = `
-import { AutkSpatialDb } from "@urban-toolkit/autk-db";
-
-const db = new AutkSpatialDb();
-await db.init();
-
-const res = await db.loadOsm({
-    queryArea: {
-        geocodeArea: 'New York',
-        areas: ['Battery Park City'],
-    },
-    autoLoadLayers: {
-        coordinateFormat: 'EPSG:3395',
-        layers: ['surface', 'parks', 'water'],
-    },
-    outputTableName: 'osm',
-    onProgress: (phase) => console.log(phase)
-});
-
-console.log(res)
-`
-
-const loadPbfCode = `
-import { AutkSpatialDb } from "@urban-toolkit/autk-db";
-
-const db = new AutkSpatialDb();
-await db.init();
-
-const res = await db.loadOsm({
-    pbfFileUrl: '/data/lower_mnt.osm.pbf',
-    queryArea: {
-        geocodeArea: 'New York',
-        areas: ['Financial District'],
-    },
-    autoLoadLayers: {
-        coordinateFormat: 'EPSG:3395',
-        layers: ['surface', 'parks', 'water', 'roads', 'buildings'],
-    },
-    outputTableName: 'osm',
-});
-
-console.log(res)
-`
-
-const loadGeojsonCode = `
-import { AutkSpatialDb } from "@urban-toolkit/autk-db";
-
-const db = new AutkSpatialDb();
-await db.init();
-
-const res = await db.loadCustomLayer({
-    geojsonFileUrl: '/data/mnt_neighs.geojson',
-    outputTableName: 'neighborhoods',
-    coordinateFormat: 'EPSG:3395',
-});
-
-console.log(res);
-`
-
-const loadCsvCode = `
-import { AutkSpatialDb } from "@urban-toolkit/autk-db";
-
-const db = new AutkSpatialDb();
-await db.init();
-
-const res = await db.loadCsv({
-    csvFileUrl: '/data/mnt_noise.csv',
-    outputTableName: 'noise',
-    geometryColumns: {
-        latColumnName: 'Latitude',
-        longColumnName: 'Longitude',
-        coordinateFormat: 'EPSG:3395',
-    },
-});
-
-console.log(res);
-`
-
-const loadGeoTiffCode = `
-import { AutkSpatialDb } from "@urban-toolkit/autk-db";
-
-const db = new AutkSpatialDb();
-await db.init();
-
-await db.loadGeoTiff({
-    geotiffFileUrl: '/data/surface-temperature.tif',
-    outputTableName: 'temperature',
-    coordinateFormat: 'EPSG:3395',
-    sourceCrs: 'EPSG:4326',
-    maxPixels: 500000,
-});
-
-console.log(db.tables)
-`
-</script>
 
 <ClientOnly>
   <CodePlayground :code="fetchOsmCode" out="console" />
@@ -147,9 +149,12 @@ console.log(db.tables)
 | `queryArea.geocodeArea` | `string` | City or region name for the Overpass geocode query. |
 | `queryArea.areas` | `string[]` | Sub-areas within the geocoded area. |
 | `autoLoadLayers` | `object` | Automatically extracts renderable OSM tables. |
-| `autoLoadLayers.coordinateFormat` | `string` | Target projection for extracted tables. |
+| `autoLoadLayers.coordinateFormat` | `string` | Source CRS of the OSM coordinates before they are transformed into the workspace CRS. |
 | `autoLoadLayers.layers` | `LayerType[]` | Tables to extract: `'surface'`, `'water'`, `'parks'`, `'roads'`, `'buildings'`. |
 | `autoLoadLayers.dropOsmTable` | `boolean` | If `true`, removes the raw OSM table after extraction. |
+| `pbfFileUrl` | `string` | Optional `.osm.pbf` source used instead of the Overpass API. |
+| `forceRefresh` | `boolean` | If `true`, bypasses the cached Overpass response and fetches fresh data. |
+| `workspace` | `string` | Optional workspace override for the created tables. |
 | `onProgress` | `(phase: LoadingPhase) => void` | Callback fired at each loading phase. |
 
 ### Using Static `.pbf` Files
@@ -172,7 +177,7 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
 
 ## GeoJSON
 
-`loadCustomLayer` loads a GeoJSON `FeatureCollection` from a URL or an in-memory object and stores it as a named layer table. Use it for custom boundaries, points of interest, or any non-OSM geometry. The `outputTableName` and `coordinateFormat`, defined for the `loadOsm` method are also required.
+`loadGeojson` loads a GeoJSON `FeatureCollection` from a URL or an in-memory object and stores it as a named layer table. Use it for custom boundaries, points of interest, or any non-OSM geometry. The required parameter is `outputTableName`. Use `coordinateFormat` when the input GeoJSON is not already in the workspace CRS, and `layerType` when you want to override automatic geometry-type detection.
 
 <ClientOnly>
   <CodePlayground :code="loadGeojsonCode" out="console" />
@@ -180,20 +185,22 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
 
 > **OBS:** When OSM data is loaded in the same [workspace](./workspaces.md), its bounding box is automatically used to crop the GeoJSON.
 
-#### `loadCustomLayer` Parameters
+#### `loadGeojson` Parameters
 
 | Option | Type | Description |
 |---|---|---|
-| `geojsonFileUrl` | `string` |  URL of the GeoJSON file. Mutually exclusive with `geojsonObject`. |
-| `geojsonObject` | `FeatureCollection` |  In-memory GeoJSON FeatureCollection. Mutually exclusive with `geojsonFileUrl`. |
-| `outputTableName` | `string` |  Name for the resulting layer table. |
-| `coordinateFormat` | `string` |  Target projection. Omit to keep original coordinates. |
+| `geojsonFileUrl` | `string` | URL of the GeoJSON file. Mutually exclusive with `geojsonObject`. |
+| `geojsonObject` | `FeatureCollection` | In-memory GeoJSON FeatureCollection. Mutually exclusive with `geojsonFileUrl`. |
+| `outputTableName` | `string` | Name for the resulting layer table. |
+| `coordinateFormat` | `string` | Source CRS of the GeoJSON geometries. Defaults to `EPSG:4326`. |
+| `layerType` | `LayerType` | Optional explicit layer type. If omitted, it is inferred from the first feature geometry. |
+| `boundingBox` | `BoundingBox` | Optional bounding box used to clip or intersect geometries during import. |
 
 
 
 ## GeoTIFF
 
-`loadGeoTiff` loads raster data from a URL or an `ArrayBuffer` and registers it as a raster table in DuckDB. For large rasters, pass a `boundingBox` or reduce `maxPixels` to avoid loading too many pixels into browser memory.
+`loadGeoTiff` loads raster data from a URL or an `ArrayBuffer` and registers it as a raster table in DuckDB. For large rasters, reduce `maxPixels` to avoid loading too many pixels into browser memory.
 
 <ClientOnly>
   <CodePlayground :code="loadGeoTiffCode" out="console" />
@@ -206,9 +213,7 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
 | `geotiffFileUrl` | `string` | URL of the GeoTIFF file. Mutually exclusive with `geotiffArrayBuffer`. |
 | `geotiffArrayBuffer` | `ArrayBuffer` | Already-fetched GeoTIFF data. Mutually exclusive with `geotiffFileUrl`. |
 | `outputTableName` | `string` | Name for the resulting raster table. |
-| `coordinateFormat` | `string` | Target coordinate format. Defaults to `'EPSG:4326'`. |
-| `sourceCrs` | `string` | CRS of the input GeoTIFF — required when transforming coordinates. |
-| `boundingBox` | `BoundingBox` | Optional clip area in the source CRS. Strongly recommended for large rasters. |
+| `coordinateFormat` | `string` | Source CRS of the GeoTIFF file. Defaults to `'EPSG:4326'`. |
 | `maxPixels` | `number` | Maximum decoded pixels before throwing an error. Defaults to `500000`. |
 
 
@@ -216,7 +221,7 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
 
 `loadCsv` loads tabular data from a CSV file or in-memory array into a DuckDB table. If the CSV contains latitude and longitude columns, pass `geometryColumns` to automatically create point geometries and a spatial index.
 
-When `geometryColumns` is provided, the table gains a `geoPoint` column and a spatial index, enabling efficient spatial operations.
+When `geometryColumns` is provided, the table gains a geometry column and a spatial index, enabling efficient spatial operations.
 
 <ClientOnly>
   <CodePlayground :code="loadCsvCode" out="console" />
@@ -232,7 +237,7 @@ When `geometryColumns` is provided, the table gains a `geoPoint` column and a sp
 | `csvObject` | `unknown[][]` | In-memory 2D array of rows. Mutually exclusive with `csvFileUrl`. |
 | `outputTableName` | `string` | Name for the resulting table. |
 | `delimiter` | `string` | Column delimiter. Defaults to `','` — use `'\t'` for TSV. |
-| `geometryColumns` | `object` | Lat/lon column names and target projection to create point geometries. |
+| `geometryColumns` | `true \| object` | Use `true` for default `Latitude` / `Longitude` columns, or provide explicit lat/lon or WKT geometry columns. |
 
 
 </div>
