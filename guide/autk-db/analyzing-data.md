@@ -138,15 +138,48 @@ Once data is loaded into DuckDB, `autk-db` provides methods for spatial analysis
 2. [`near`](/api/autk-db/interfaces/SpatialQueryParams#near) — Optional `NEAR` predicate configuration. When provided, [`spatialQuery`](/api/autk-db/classes/AutkDb#spatialquery)  matches features that lie within the specified distance of the root geometries. If
  omitted, the query uses `INTERSECT` and only matches features whose geometries overlap.
 
+:::warning Units depend on projection
+ `near.distance` is interpreted in the native units of the loaded geometries. For example, when the data uses `EPSG:3395`, distances are measured in meters.
+:::
+
 3. [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby) — Optional aggregation rules applied to the join-side data.
 
 <ClientOnly>
   <CodePlayground :code="spatialQueryCode" out="console" />
 </ClientOnly>
 
-:::warning Units depend on projection
- `near.distance` is interpreted in the native units of the loaded geometries. For example, when the data uses `EPSG:3395`, distances are measured in meters.
- :::
+Regading the format of the output data, each matched feature is written directly under `properties.sjoin`, which can produce multiple rows for the same root feature.
+
+```json
+{
+  "properties": {
+    "sjoin": { "key": 1, "date": "03/31/2025 11:17:00 PM" }
+  }
+}
+```
+### The [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby) output
+
+Grouping summarizes the matched features instead of returning one join result per match. Aggregated values are written into `properties.sjoin.<aggregateFn>.<key>`.
+
+<ClientOnly>
+  <CodePlayground :code="groupQueryCode" out="console" />
+</ClientOnly>
+
+Regarding the output format, when [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby) is used, the matched features are aggregated before being written under `properties.sjoin.<aggregateFn>.<key>`. As a result, the query returns a single summarized row for each root feature.
+
+```json
+{
+  "properties": {
+    "sjoin": {
+      "count": { "noise": 42 }
+    }
+  }
+}
+```
+
+:::tip Normalization
+When `normalize: true` is set on a [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby) entry, the aggregated value is normalized between 0 and 1.
+:::
 
 #### List of `spatialQuery` parameters
 
@@ -218,39 +251,6 @@ Once data is loaded into DuckDB, `autk-db` provides methods for spatial analysis
   </tbody>
 </table>
 
-### Structure of the [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby) output
-
-Grouping summarizes the matched features instead of returning one join result per match. Aggregated values are written into `properties.sjoin.<aggregateFn>.<key>`.
-
-<ClientOnly>
-  <CodePlayground :code="groupQueryCode" out="console" />
-</ClientOnly>
-
-Without [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby), each matched feature is written directly under `properties.sjoin`, which can produce multiple rows for the same root feature.
-
-```json
-{
-  "properties": {
-    "sjoin": { "key": 1, "date": "03/31/2025 11:17:00 PM" }
-  }
-}
-```
-
-With [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby), root features are deduplicated and the aggregated values are grouped by function name.
-
-```json
-{
-  "properties": {
-    "sjoin": {
-      "count": { "noise": 42 }
-    }
-  }
-}
-```
-
-:::tip Normalization
-When `normalize: true` is set on a [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby) entry, the aggregated value is normalized between 0 and 1.
-:::
 
 ## Build heatmap
 
