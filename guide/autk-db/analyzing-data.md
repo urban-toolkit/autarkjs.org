@@ -148,7 +148,7 @@ Once data is loaded into DuckDB, `autk-db` provides methods for spatial analysis
   <CodePlayground :code="spatialQueryCode" out="console" />
 </ClientOnly>
 
-Regading the format of the output data, each matched feature is written directly under `properties.sjoin`, which can produce multiple rows for the same root feature.
+Regarding the output format, each matched feature is written directly under `properties.sjoin`, which can produce multiple rows for the same root feature. For example, if the matched features in the `noise` table contain properties such as `key` and `date`, those same properties are copied into `properties.sjoin`. The output would look like this:
 
 ```json
 {
