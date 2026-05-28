@@ -166,16 +166,16 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
       <td>
         <div style="display:flex; align-items:stretch;">
           <div style="width:120px; display:flex; align-items:center;"><a href="/api/autk-db/type-aliases/LoadOsmParams#queryarea"><code>queryArea</code></a></div>
-          <div style="width:140px; border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; gap:6px; color:var(--vp-c-text-1); background:transparent;">
-            <code style="color:inherit; background:transparent;">geocodeArea</code>
-            <code style="color:inherit; background:transparent;">areas</code>
+          <div style="width:140px; border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
+            <code>geocodeArea</code>
+            <code>areas</code>
           </div>
         </div>
       </td>
       <td>
-        <div style="display:flex; flex-direction:column; gap:6px; background:transparent;">
-          <code style="background:transparent;">string</code>
-          <code style="background:transparent;">string[]</code>
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
+          <code>string</code>
+          <code>string[]</code>
         </div>
       </td>
       <td>
@@ -189,16 +189,16 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
       <td>
         <div style="display:flex; align-items:stretch;">
           <div style="width:120px; display:flex; align-items:center;"><a href="/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers"><code>autoLoadLayers</code></a></div>
-          <div style="width:140px; border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; gap:6px; color:var(--vp-c-text-1); background:transparent;">
-            <code style="color:inherit; background:transparent;">coordinateFormat</code>
-            <code style="color:inherit; background:transparent;">layers</code>
+          <div style="width:140px; border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
+            <code>coordinateFormat</code>
+            <code>layers</code>
           </div>
         </div>
       </td>
       <td>
-        <div style="display:flex; flex-direction:column; gap:6px; background:transparent;">
-          <code style="background:transparent;">string</code>
-          <code style="background:transparent;">LayerType[]</code>
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
+          <code>string</code>
+          <code>LayerType[]</code>
         </div>
       </td>
       <td>
