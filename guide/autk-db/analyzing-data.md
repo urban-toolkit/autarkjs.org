@@ -148,7 +148,7 @@ Once data is loaded into DuckDB, `autk-db` provides methods for spatial analysis
   <CodePlayground :code="spatialQueryCode" out="console" />
 </ClientOnly>
 
-Regarding the output format, each matched feature is written directly under `properties.sjoin`, which can produce multiple rows for the same root feature. For example, if the matched features in the `noise` table contain properties such as `key` and `date`, those same properties are copied into `properties.sjoin`. The output would look like this:
+Regarding the output format, each matched feature is written directly under `properties.sjoin`, which can produce multiple rows for the same root feature. For example, if the matched features in the `noise` table contain properties such as `key` and `date`, those same properties are copied into `properties.sjoin`.
 
 ```json
 {
@@ -165,7 +165,7 @@ Grouping summarizes the matched features instead of returning one join result pe
   <CodePlayground :code="groupQueryCode" out="console" />
 </ClientOnly>
 
-Regarding the output format, when [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby) is used, the matched features are aggregated before being written under `properties.sjoin.<aggregateFn>.<key>`. As a result, the query returns a single summarized row for each root feature.
+When [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby) is used, the matched features are aggregated before being written under `properties.sjoin.<aggregateFn>.<key>`. As a result, the spatial query returns a single summarized row for each root feature.
 
 ```json
 {
@@ -178,7 +178,7 @@ Regarding the output format, when [`groupBy`](/api/autk-db/interfaces/SpatialQue
 ```
 
 :::tip Normalization
-When `normalize: true` is set on a [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby) entry, the aggregated value is normalized between 0 and 1.
+When `normalize: true` is set, the aggregated value is normalized between 0 and 1.
 :::
 
 #### List of `spatialQuery` parameters
@@ -242,7 +242,7 @@ When `normalize: true` is set on a [`groupBy`](/api/autk-db/interfaces/SpatialQu
       </td>
       <td>
         <div style="display:flex; flex-direction:column; gap:6px;">
-          <span>Column to aggregate.</span>
+          <span>Aggregation column.</span>
           <span>Aggregation function.</span>
           <span>Normalize to 0–1.</span>
         </div>
@@ -254,14 +254,14 @@ When `normalize: true` is set on a [`groupBy`](/api/autk-db/interfaces/SpatialQu
 
 ## Build heatmap
 
-[`buildHeatmap`](/api/autk-db/classes/AutkDb#buildheatmap) creates a grid over the current [workspace](./workspaces.md) bounds and aggregates values from a source table into each grid cell. The result is a grid layer table suitable for raster rendering.
+[`buildHeatmap`](/api/autk-db/classes/AutkDb#buildheatmap) creates a grid over the current [workspace](./workspaces.md) bounds and aggregates values from a source table into each grid cell. 
 
 <ClientOnly>
   <CodePlayground :code="heatmapCode" out="console" />
 </ClientOnly>
 
 :::warning Workspace bounds
-[`buildHeatmap`](/api/autk-db/classes/AutkDb#buildheatmap) requires a valid workspace bounding box. In practice, this usually comes from previously loaded OSM or GeoJSON layers.
+[`buildHeatmap`](/api/autk-db/classes/AutkDb#buildheatmap) is built based on workspace bounding box. In practice, this usually comes from previously loaded OSM or GeoJSON layers (see [Loading Data](/guide/autk-db/loading-data.md)).
 :::
 
 #### List of `buildHeatmap` parameters
@@ -338,7 +338,7 @@ When `normalize: true` is set on a [`groupBy`](/api/autk-db/interfaces/SpatialQu
       </td>
       <td>
         <div style="display:flex; flex-direction:column; gap:6px;">
-          <span>Column to aggregate.</span>
+          <span>Aggregation column.</span>
           <span>Band aggregation.</span>
         </div>
       </td>
@@ -348,9 +348,9 @@ When `normalize: true` is set on a [`groupBy`](/api/autk-db/interfaces/SpatialQu
 
 ## Raw SQL {#raw-sql}
 
-While [`spatialQuery`](/api/autk-db/classes/AutkDb#spatialquery) and [`buildHeatmap`](/api/autk-db/classes/AutkDb#buildheatmap) cover common spatial analysis patterns, [`rawQuery`](/api/autk-db/classes/AutkDb#rawquery) gives you direct access to DuckDB SQL for custom logic.
+While [`spatialQuery`](/api/autk-db/classes/AutkDb#spatialquery) and [`buildHeatmap`](/api/autk-db/classes/AutkDb#buildheatmap) cover common spatial analysis patterns, Autark also provides [`rawQuery`](/api/autk-db/classes/AutkDb#rawquery), which gives direct access to DuckDB SQL to run custom queries against the current [workspace](./workspaces.md).
 
-[`rawQuery`](/api/autk-db/classes/AutkDb#rawquery) executes SQL against the current [workspace](./workspaces.md).
+The [`output`](/api/autk-db/interfaces/RawQueryParams#output) parameter controls how the query result is returned. Use `type: 'RETURN_OBJECT'` when you want the selected rows back as plain JavaScript objects. Use `type: 'CREATE_TABLE'` when you want to register the query result as a new table inside the current workspace. In that case, you can also provide `tableName` and optional metadata such as `source` and `tableType`.
 
 <ClientOnly>
   <CodePlayground :code="rawQueryCode" out="console" />
