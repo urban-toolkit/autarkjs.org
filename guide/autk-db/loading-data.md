@@ -152,7 +152,7 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
   <thead>
     <tr>
       <th>Option</th>
-      <th>Sub-option</th>
+      <th>Field</th>
       <th>Type</th>
       <th>Description</th>
     </tr>
@@ -160,7 +160,7 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
   <tbody>
     <tr>
       <td><a href="/api/autk-db/type-aliases/LoadOsmParams#outputtablename"><code>outputTableName</code></a></td>
-      <td>—</td>
+      <td></td>
       <td><code>string</code></td>
       <td>Base table name.</td>
     </tr>
@@ -193,25 +193,25 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
     </tr>
     <tr>
       <td><a href="/api/autk-db/type-aliases/LoadOsmParams#pbffileurl"><code>pbfFileUrl</code></a></td>
-      <td>—</td>
+      <td></td>
       <td><code>string</code></td>
       <td>Optional PBF URL.</td>
     </tr>
     <tr>
       <td><a href="/api/autk-db/type-aliases/LoadOsmParams#forcerefresh"><code>forceRefresh</code></a></td>
-      <td>—</td>
+      <td></td>
       <td><code>boolean</code></td>
       <td>Bypass cache.</td>
     </tr>
     <tr>
       <td><a href="/api/autk-db/type-aliases/LoadOsmParams#workspace"><code>workspace</code></a></td>
-      <td>—</td>
+      <td></td>
       <td><code>string</code></td>
       <td>Workspace name.</td>
     </tr>
     <tr>
       <td><a href="/api/autk-db/type-aliases/LoadOsmParams#onprogress"><code>onProgress</code></a></td>
-      <td>—</td>
+      <td></td>
       <td><code>(phase: LoadingPhase) =&gt; void</code></td>
       <td>Progress callback.</td>
     </tr>
