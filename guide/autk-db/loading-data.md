@@ -164,36 +164,52 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
     </tr>
     <tr>
       <td>
-        <table>
-          <tr>
-            <td rowspan="2"><a href="/api/autk-db/type-aliases/LoadOsmParams#queryarea"><code>queryArea</code></a></td>
-            <td><code>geocodeArea</code></td>
-          </tr>
-          <tr>
-            <td><code>areas</code></td>
-          </tr>
-        </table>
+        <div style="display:flex; gap:12px; align-items:stretch;">
+          <div style="display:flex; align-items:center;"><a href="/api/autk-db/type-aliases/LoadOsmParams#queryarea"><code>queryArea</code></a></div>
+          <div style="border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; gap:6px;">
+            <code>geocodeArea</code>
+            <code>areas</code>
+          </div>
+        </div>
       </td>
-      <td><code>string</code><br><code>string[]</code></td>
-      <td>Geocode scope.<br>Boundary names.</td>
+      <td>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <code>string</code>
+          <code>string[]</code>
+        </div>
+      </td>
+      <td>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <span>Geocode scope.</span>
+          <span>Boundary names.</span>
+        </div>
+      </td>
     </tr>
     <tr>
       <td>
-        <table>
-          <tr>
-            <td rowspan="3"><a href="/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers"><code>autoLoadLayers</code></a></td>
-            <td><code>coordinateFormat</code></td>
-          </tr>
-          <tr>
-            <td><code>layers</code></td>
-          </tr>
-          <tr>
-            <td><code>dropOsmTable</code></td>
-          </tr>
-        </table>
+        <div style="display:flex; gap:12px; align-items:stretch;">
+          <div style="display:flex; align-items:center;"><a href="/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers"><code>autoLoadLayers</code></a></div>
+          <div style="border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; gap:6px;">
+            <code>coordinateFormat</code>
+            <code>layers</code>
+            <code>dropOsmTable</code>
+          </div>
+        </div>
       </td>
-      <td><code>string</code><br><code>LayerType[]</code><br><code>boolean</code></td>
-      <td>Source CRS.<br>Layer names.<br>Drop raw table.</td>
+      <td>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <code>string</code>
+          <code>LayerType[]</code>
+          <code>boolean</code>
+        </div>
+      </td>
+      <td>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <span>Source CRS.</span>
+          <span>Layer names.</span>
+          <span>Drop raw table.</span>
+        </div>
+      </td>
     </tr>
     <tr>
       <td><a href="/api/autk-db/type-aliases/LoadOsmParams#pbffileurl"><code>pbfFileUrl</code></a></td>
