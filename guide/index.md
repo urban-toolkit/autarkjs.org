@@ -14,9 +14,6 @@ hero:
       link: https://github.com/urban-toolkit/autark/
 
 features:
-  - title: autk-core
-    details: Shared low-level primitives — color maps, triangulators, geometry and camera utilities, and an event emitter. Used by autk-map, autk-compute, and autk-plot.
-    link: /api/autk-core/
   - title: autk-db
     details: Run geospatial queries in the browser. Compatible with OpenStreetMap, GeoJSON, GeoTIFF, and CSV.
     link: /autk-db/

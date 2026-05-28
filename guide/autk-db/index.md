@@ -1,65 +1,22 @@
-<style scoped>
-.introduction-page :is(p, li, td, th, .custom-block p, .custom-block li, h1, h2, h3, h4, h5, h6) {
-  text-align: justify;
-}
-
-.introduction-page table th:first-child,
-.introduction-page table td:first-child {
-  width: 35%;
-}
-</style>
-
-<div class="introduction-page">
-
-# autk-db
-
-`autk-db` is a browser-native spatial database powered by [DuckDB](https://duckdb.org/docs/current/clients/wasm/overview). It lets you load, query, and transform geospatial data entirely on the client — no server required.
-
-**Key capabilities:**
-
-- Load data from **OpenStreetMap** (using Overpass API or static `.pbf` files), **CSV**, **JSON**, **GeoJSON**, and **GeoTIFF**.
-- Run **spatial joins** and **custom SQL** queries inside the browser.
-- Isolate multiple datasets in independent **workspaces**.
-- Export tables as **GeoJSON** for `autk-map`, `autk-compute`, `autk-plot` or any software.
-
-## Package Installation
-
-To install `autk-db`, you must install its npm pakage. 
-
-```bash
-npm install @urban-toolkit/autk-db
-```
-
-You can also have access to the library functionalities by installing the complete `@urban-toolkit/autk` package.
-
-```bash
-npm install @urban-toolkit/autk
-```
-
-## Initialization
-
-The main entry point is the `AutkSpatialDb` class. Before calling any `autk-db` method, create a database instance and await `init()`. This command sets up DuckDB and loads its official spatial extension.
-
 <script setup>
 const introCode = `
-import { AutkSpatialDb } from "@urban-toolkit/autk-db";
+import { AutkDb } from "@urban-toolkit/autk-db";
 
-const db = new AutkSpatialDb();
+const db = new AutkDb();
 await db.init();
 
 console.log(db.tables)
 `
 
 const workflowCode = `
-import { AutkSpatialDb } from "@urban-toolkit/autk-db";
+import { AutkDb } from "@urban-toolkit/autk-db";
 
-const db = new AutkSpatialDb();
+const db = new AutkDb();
 await db.init();
 
-await db.loadCustomLayer({
+await db.loadGeojson({
     geojsonFileUrl: '/data/mnt_neighs.geojson',
-    outputTableName: 'neighborhoods',
-    coordinateFormat: 'EPSG:3395'
+    outputTableName: 'neighborhoods'
 });
 
 await db.rawQuery({
@@ -75,6 +32,49 @@ const geojson = await db.getLayer('first10Neigs');
 console.log(geojson)
 `
 </script>
+
+
+<style scoped>
+.introduction-page :is(p, li, td, th, .custom-block p, .custom-block li, h1, h2, h3, h4, h5, h6) {
+  text-align: justify;
+}
+
+.introduction-page table th:first-child,
+.introduction-page table td:first-child {
+  width: 35%;
+}
+</style>
+
+<div class="introduction-page">
+
+# autk-db
+
+`autk-db` is a browser-native spatial database powered by [DuckDB](https://duckdb.org/docs/current/clients/wasm/overview). It lets you load, query, and transform urban data entirely on the browser.
+
+**Key capabilities:**
+
+- Load data from [OpenStreetMap](https://www.openstreetmap.org/) (using [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API) or previously downloaded `.pbf` files, e.g. from [Geofabrik](https://download.geofabrik.de/)), **CSV**, **JSON**, **GeoJSON**, and **GeoTIFF**.
+- Run **spatial operations** and **custom SQL** queries inside the browser.
+- Export processed data for `autk-map`, `autk-compute`, `autk-plot` or any software.
+
+## Package Installation
+
+To install `autk-db`, you must install its [NPM pakage](https://www.npmjs.com/package/@urban-toolkit/autk-db). 
+
+```bash
+npm install @urban-toolkit/autk-db
+```
+
+You can also have access to the library by installing the complete Autark package.
+
+```bash
+npm install @urban-toolkit/autk
+```
+
+## Initialization
+
+The entry point of `autk-db` is the `AutkDb` class. To use it, you must create a database instance and await `init()` seting up DuckDB and loading its official spatial extension.
+
 
 <ClientOnly>
   <CodePlayground :code="introCode" out="console" />

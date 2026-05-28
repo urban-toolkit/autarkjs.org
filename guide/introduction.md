@@ -77,10 +77,10 @@ Try to add `"buildings"` to the `layers` list and click **Run** to test changes.
 
 <script setup>
 const introCode = `
-import { AutkMap } from "@urban-toolkit/autk-map";
 import { AutkDb } from "@urban-toolkit/autk-db";
+import { AutkMap } from "@urban-toolkit/autk-map";
 
-const db = new AutkSpatialDb();
+const db = new AutkDb();
 await db.init();
 
 await db.loadOsm({
@@ -89,10 +89,8 @@ await db.loadOsm({
     geocodeArea: "New York",
     areas: ["Battery Park City", "Financial District"],
   },
-  outputTableName: "osm",
   autoLoadLayers: {
     layers: ["surface", "parks", "water", "roads"],
-    dropOsmTable: true,
   },
   onProgress: (phase) => console.log(phase),
 });
