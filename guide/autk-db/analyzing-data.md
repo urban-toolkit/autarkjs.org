@@ -125,18 +125,19 @@ console.log(result)
 
 <div class="introduction-page">
 
-# Analyzing Data
+# Analyzing data
 
 Once data is loaded into DuckDB, `autk-db` provides methods for spatial analysis and custom SQL queries. Analysis methods update existing tables or create new ones. To inspect the results, use one of the [retrieving data](./retrieving-data.md) methods.
 
-## Spatial Queries
+## Spatial queries
 
 [`spatialQuery`](/api/autk-db/classes/AutkDb#spatialquery) performs a spatial join between two tables. The root table is always modified in place, and the joined values are written into `properties.sjoin`.
 
-The most important parameters are:
-
 1. [`tableRootName`](/api/autk-db/interfaces/SpatialQueryParams#tablerootname) and [`tableJoinName`](/api/autk-db/interfaces/SpatialQueryParams#tablejoinname) — The two tables involved in the join. The root table receives the result; the join table provides the matching features.
-2. [`near`](/api/autk-db/interfaces/SpatialQueryParams#near) — Optional NEAR predicate configuration. If omitted, [`spatialQuery`](/api/autk-db/classes/AutkDb#spatialquery) uses `INTERSECT`.
+
+2. [`near`](/api/autk-db/interfaces/SpatialQueryParams#near) — Optional `NEAR` predicate configuration. When provided, [`spatialQuery`](/api/autk-db/classes/AutkDb#spatialquery)  matches features that lie within the specified distance of the root geometries. If
+ omitted, the query uses `INTERSECT` and only matches features whose geometries overlap.
+
 3. [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby) — Optional aggregation rules applied to the join-side data.
 
 <ClientOnly>
@@ -144,10 +145,10 @@ The most important parameters are:
 </ClientOnly>
 
 :::warning Units depend on projection
-`near.distance` uses the native units of the loaded geometries. With `EPSG:3395`, the unit is meters.
-:::
+ `near.distance` is interpreted in the native units of the loaded geometries. For example, when the data uses `EPSG:3395`, distances are measured in meters.
+ :::
 
-#### List of `spatialQuery` Parameters
+#### List of `spatialQuery` parameters
 
 <table>
   <thead>
@@ -217,7 +218,7 @@ The most important parameters are:
   </tbody>
 </table>
 
-### [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby) output
+### Structure of the [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby) output
 
 Grouping summarizes the matched features instead of returning one join result per match. Aggregated values are written into `properties.sjoin.<aggregateFn>.<key>`.
 
@@ -251,7 +252,7 @@ With [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby), root featu
 When `normalize: true` is set on a [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby) entry, the aggregated value is normalized between 0 and 1.
 :::
 
-## Build Heatmap
+## Build heatmap
 
 [`buildHeatmap`](/api/autk-db/classes/AutkDb#buildheatmap) creates a grid over the current [workspace](./workspaces.md) bounds and aggregates values from a source table into each grid cell. The result is a grid layer table suitable for raster rendering.
 
@@ -263,7 +264,7 @@ When `normalize: true` is set on a [`groupBy`](/api/autk-db/interfaces/SpatialQu
 [`buildHeatmap`](/api/autk-db/classes/AutkDb#buildheatmap) requires a valid workspace bounding box. In practice, this usually comes from previously loaded OSM or GeoJSON layers.
 :::
 
-#### List of `buildHeatmap` Parameters
+#### List of `buildHeatmap` parameters
 
 <table>
   <thead>
@@ -355,7 +356,7 @@ While [`spatialQuery`](/api/autk-db/classes/AutkDb#spatialquery) and [`buildHeat
   <CodePlayground :code="rawQueryCode" out="console" />
 </ClientOnly>
 
-#### List of `rawQuery` Parameters
+#### List of `rawQuery` parameters
 
 <table>
   <thead>

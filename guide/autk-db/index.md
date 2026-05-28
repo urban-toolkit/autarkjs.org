@@ -57,7 +57,7 @@ console.log(geojson)
 - Run **spatial operations** and **custom SQL** queries inside the browser.
 - Export processed data for `autk-map`, `autk-compute`, `autk-plot` or any software.
 
-## Package Installation
+## Package installation
 
 To install `autk-db`, you must install its [NPM pakage](https://www.npmjs.com/package/@urban-toolkit/autk-db). 
 
@@ -81,7 +81,7 @@ The entry point of `autk-db` is the `AutkDb` class. To use it, you must create a
 </ClientOnly>
 
 
-## Basic Workflow
+## Basic workflow
 
 Most `autk-db` workflows follow a simple three-step pattern. First, you load one or more datasets into DuckDB tables. Then you use `autk-db` methods to inspect, filter, join, or transform those tables. Finally, you bring the result back into JavaScript as GeoJSON, so use it in `autk-map`, `autk-plot`, `autk-compute` or any other software:
 

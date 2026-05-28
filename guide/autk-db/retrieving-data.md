@@ -112,11 +112,11 @@ console.log(bbox);
 
 <div class="introduction-page">
 
-# Retrieving Data
+# Retrieving data
 
 After loading and analyzing data, use getter methods to move results from DuckDB back into JavaScript. These methods let you inspect what data is available, export table rows as plain objects, convert tables to GeoJSON, and query layer bounding boxes.
 
-## Inspect Registered Tables
+## Inspect registered tables
 
 Use `db.tables` to inspect the tables registered in the current [workspace](./workspaces.md). Each entry is table metadata, not the table rows themselves. This is useful when you want to see what's available before calling [`getTables`](#get-table-data), [`getLayer`](#get-table-as-geojson), [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson), or [`getLayerTables`](#list-renderable-tables).
 
@@ -132,7 +132,7 @@ The table metadata contains:
 - `columns` — the DuckDB column names and types
 
 
-## Get Table Data
+## Get table data
 
 `getTables` returns rows from any registered table as plain JavaScript objects. It works with all table types — CSV, JSON, layer tables, and raster tables.
 
@@ -143,7 +143,7 @@ For large tables, use `limit` and `offset` to paginate through results.
   <CodePlayground :code="getTableDataCode" out="console" />
 </ClientOnly>
 
-#### `getTables` Parameters
+#### `getTables` parameters
 
 | Option | Type | Description |
 |---|---|---|
@@ -151,7 +151,7 @@ For large tables, use `limit` and `offset` to paginate through results.
 | `limit?` | `number` | Row limit. |
 | `offset?` | `number` | Row offset. |
 
-## Get Table as GeoJSON
+## Get table as GeoJSON
 
 `getLayer` exports a renderable vector table as a GeoJSON `FeatureCollection`. Use [`getLayerTables`](#list-renderable-tables) to see which tables qualify.
 
@@ -163,7 +163,7 @@ For large tables, use `limit` and `offset` to paginate through results.
 The returned `FeatureCollection` includes a `bbox` property. The bounding box is resolved from the workspace bounds when available, then from the layer geometry itself.
 :::
 
-#### `getLayer` Parameters
+#### `getLayer` parameters
 
 | Option | Type | Description |
 |---|---|---|
@@ -173,7 +173,7 @@ The returned `FeatureCollection` includes a `bbox` property. The bounding box is
 Calling `getLayer` on a non-vector table will throw an error. Use [`getLayerTables`](#list-renderable-tables) first to check which tables can be exported, and use [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson) for raster tables.
 :::
 
-## Get GeoTIFF as Raster GeoJSON
+## Get GeoTIFF as raster GeoJSON
 
 `getGeoTiffLayer` exports a loaded GeoTIFF table as a packed raster `FeatureCollection`. Pass the result to `autk-map` with `loadRasterCollection()`.
 
@@ -181,13 +181,13 @@ Calling `getLayer` on a non-vector table will throw an error. Use [`getLayerTabl
   <CodePlayground :code="getGeoTiffLayerCode" out="console" />
 </ClientOnly>
 
-#### `getGeoTiffLayer` Parameters
+#### `getGeoTiffLayer` parameters
 
 | Option | Type | Description |
 |---|---|---|
 | `tableName` | `string` | GeoTIFF table name. |
 
-## List Renderable Tables
+## List renderable tables
 
 `getLayerTables()` returns the subset of [`db.tables`](#inspect-registered-tables) that can be exported with [`getLayer`](#get-table-as-geojson) or [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson). This is useful when you want to inspect all renderable tables without knowing their names in advance.
 
@@ -195,7 +195,7 @@ Calling `getLayer` on a non-vector table will throw an error. Use [`getLayerTabl
   <CodePlayground :code="getLayerTablesCode" out="console" />
 </ClientOnly>
 
-#### `getLayerTables` Parameters
+#### `getLayerTables` parameters
 
 | Option | Type | Description |
 |---|---|---|
@@ -205,11 +205,11 @@ Calling `getLayer` on a non-vector table will throw an error. Use [`getLayerTabl
 Returns an array of table metadata objects with `name`, `source`, `type`, and `columns` properties.
 :::
 
-## Get Bounding Boxes
+## Get bounding boxes
 
 Bounding boxes are useful for camera framing, clipping rasters, and setting grid extents.
 
-### Table Bounding Box
+### Table bounding box
 
 `getBoundingBoxFromLayer()` computes the bounding box from the geometry of a specific renderable table. Returns a `BoundingBox` object with `minLon`, `minLat`, `maxLon`, and `maxLat` properties.
 
@@ -217,7 +217,7 @@ Bounding boxes are useful for camera framing, clipping rasters, and setting grid
   <CodePlayground :code="getLayerBboxCode" out="console" />
 </ClientOnly>
 
-#### `getBoundingBoxFromLayer` Parameters
+#### `getBoundingBoxFromLayer` parameters
 
 | Option | Type | Description |
 |---|---|---|
@@ -227,7 +227,7 @@ Bounding boxes are useful for camera framing, clipping rasters, and setting grid
 Throws an error if the database is not initialized, the layer table is not found, or the table does not have a geometry column.
 :::
 
-## Choosing a Getter
+## Choosing a getter
 
 | Method | Returns | Use for |
 |---|---|---|

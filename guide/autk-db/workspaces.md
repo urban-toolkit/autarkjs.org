@@ -4,7 +4,7 @@ A workspace is an isolated DuckDB schema. Tables created in one workspace are no
 
 The default workspace is `"main"` and is created automatically on `init()`.
 
-## Switching Workspaces
+## Switching workspaces
 
 ```typescript
 await db.setWorkspace('scenario-a');
@@ -18,14 +18,14 @@ await db.setWorkspace('scenario-b');
 
 If the workspace does not exist, `setWorkspace` creates it.
 
-## Listing Workspaces
+## Listing workspaces
 
 ```typescript
 db.getWorkspaces();       // ['main', 'scenario-a', 'scenario-b']
 db.getCurrentWorkspace(); // 'scenario-b'
 ```
 
-## Table Scope
+## Table scope
 
 Each workspace has its own table namespace. That means a table created in one workspace does not appear in another, even if the table names are the same.
 

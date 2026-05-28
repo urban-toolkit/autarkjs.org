@@ -98,7 +98,7 @@ console.log(res)
 
 <div class="introduction-page">
 
-# Loading Data
+# Loading data
 
 `autk-db` can load data from multiple formats and sources. Load methods store data as named tables in DuckDB. Those table names **must be unique** since they are used to identify tables in queries, joins, updates, and retrieval methods. 
 
@@ -129,7 +129,7 @@ To directly fetch from the public [Overpass API](https://overpass-api.de/) and l
 * `autk-db` provides the `onProgress` callback that may be used to track the loading status.
 :::
 
-### Using Static `.pbf` Files
+### Using static `.pbf` files
 
 Instead of querying the Overpass API, you can load OSM data from a local or remote `.osm.pbf` file. PBF extracts are available from [Geofabrik](https://download.geofabrik.de/) and [SliceOSM](https://slice.openstreetmap.us/).
 
@@ -145,7 +145,7 @@ To load from a PBF file, provide the [`pbfFileUrl`](/api/autk-db/type-aliases/Lo
 * Very large files may also take long to process, but the process runs etirely in the browser and no API limits apply. To reduce the loading time, crop the `.pbf` file first using [Osmium](https://osmcode.org/osmium-tool/) as a pre-processing step: `osmium extract --strategy=smart -b <minLon>,<minLat>,<maxLon>,<maxLat> <input.osm.pbf> -o <output.osm.pbf>`. 
 :::
 
-### List of `loadOsm` Parameters
+### List of `loadOsm` parameters
 
 <table>
   <thead>
@@ -244,7 +244,7 @@ If you plan to load OSM and additional layers in the same workspace, load OSM fi
 
  By default, the input coordinates are expected to be in latitude/longitude (`EPSG:4326`). If the GeoJSON uses a different coordinates system, provide it through [`coordinateFormat`](/api/autk-db/interfaces/LoadGeojsonParams#coordinateformat). Use [`layerType`](/api/autk-db/interfaces/LoadGeojsonParams#layertype) to override the automatic geometry-type inference performed by `autk-db`.
 
-#### List of `loadGeojson` Parameters
+#### List of `loadGeojson` parameters
 
 <table>
   <thead>
@@ -312,7 +312,7 @@ If you plan to load OSM and additional layers in the same workspace, load OSM fi
 Modify the previous code sample to explore more of `autk-db`. For example, try setting [`maxPixels`](/api/autk-db/interfaces/LoadGeoTiffParams#maxpixels) or use a different [`outputTableName`](/api/autk-db/interfaces/LoadGeoTiffParams#outputtablename).
 :::
 
-#### List of `loadGeoTiff` Parameters
+#### List of `loadGeoTiff` parameters
 
 <table>
   <thead>
@@ -367,7 +367,7 @@ Modify the previous code sample to explore more of `autk-db`. For example, try s
 
 By default, [`geometryColumns`](/api/autk-db/interfaces/LoadCsvParams#geometrycolumns): `true` expects `Latitude` and `Longitude` columns in `EPSG:4326`. For custom latitude/longitude columns or [`WKT`](https://libgeos.org/specifications/wkt/) geometry, provide an explicit [`geometryColumns`](/api/autk-db/interfaces/LoadCsvParams#geometrycolumns) object. For tab-separated files, set [`delimiter`](/api/autk-db/interfaces/LoadCsvParams#delimiter): `'\t'`.
 
-#### List of `loadCsv` Parameters
+#### List of `loadCsv` parameters
 
 <table>
   <thead>
