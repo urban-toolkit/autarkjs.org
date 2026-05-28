@@ -287,25 +287,27 @@ Modify the previous code sample to explore more of `autk-db`. For example, try s
 
 ## CSV
 
-`loadCsv` loads tabular data from a CSV file or in-memory array into a DuckDB table. If the CSV contains latitude and longitude columns, pass `geometryColumns` to automatically create point geometries and a spatial index.
-
-When `geometryColumns` is provided, the table gains a geometry column and a spatial index, enabling efficient spatial operations.
+`loadCsv` loads tabular data from a CSV file or an in-memory matrix and stores it as a table in DuckDB. The only required parameter is `outputTableName`. If the CSV contains spatial information, provide `geometryColumns` so `autk-db` can create geometries during import.
 
 <ClientOnly>
   <CodePlayground :code="loadCsvCode" out="console" />
 </ClientOnly>
 
-> **Note:** For tab-separated files, set `delimiter: '\t'`.
+By default, `geometryColumns: true` expects `Latitude` and `Longitude` columns in `EPSG:4326`. For custom latitude/longitude columns or [`WKT`](https://libgeos.org/specifications/wkt/) geometry, provide an explicit `geometryColumns` object. For tab-separated files, set `delimiter: '\t'`.
 
-#### `loadCsv` Parameters
+:::tip Try changing the previous example
+Modify the previous code sample to explore more of `autk-db`. For example, try loading a TSV file with `delimiter`, use a different `outputTableName`, or replace `geometryColumns: true` with explicit latitude/longitude or WKT geometry settings.
+:::
+
+#### List of `loadCsv` Parameters
 
 | Option | Type | Description |
 |---|---|---|
-| `csvFileUrl` | `string` | URL of the CSV file. Mutually exclusive with `csvObject`. |
-| `csvObject` | `unknown[][]` | In-memory 2D array of rows. Mutually exclusive with `csvFileUrl`. |
-| `outputTableName` | `string` | Name for the resulting table. |
-| `delimiter` | `string` | Column delimiter. Defaults to `','` — use `'\t'` for TSV. |
-| `geometryColumns` | `true \| object` | Use `true` for default `Latitude` / `Longitude` columns, or provide explicit lat/lon or WKT geometry columns. |
+| [`csvFileUrl`](/api/autk-db/interfaces/LoadCsvParams#csvfileurl) | `string` | CSV file URL. |
+| [`csvObject`](/api/autk-db/interfaces/LoadCsvParams#csvobject) | `unknown[][]` | In-memory CSV data. |
+| [`outputTableName`](/api/autk-db/interfaces/LoadCsvParams#outputtablename) | `string` | Output table name. |
+| [`delimiter`](/api/autk-db/interfaces/LoadCsvParams#delimiter) | `string` | Field separator. |
+| [`geometryColumns`](/api/autk-db/interfaces/LoadCsvParams#geometrycolumns) | `true \| object` | Geometry mapping. |
 
 
 </div>
