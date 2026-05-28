@@ -146,7 +146,7 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
 * Very large files may also take long to process, but the process runs etirely in the browser and no API limits apply. To reduce the loading time, crop the `.pbf` file first using [Osmium](https://osmcode.org/osmium-tool/) as a pre-processing step: `osmium extract --strategy=smart -b <minLon>,<minLat>,<maxLon>,<maxLat> <input.osm.pbf> -o <output.osm.pbf>`. 
 :::
 
-### `loadOsm` Parameters
+### List of `loadOsm` Parameters
 
 <table>
   <thead>
@@ -225,7 +225,7 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
     </tr>
     <tr>
       <td><a href="/api/autk-db/type-aliases/LoadOsmParams#onprogress"><code>onProgress</code></a></td>
-      <td><code>(phase: LoadingPhase) =&gt; void</code></td>
+      <td><code>function</code></td>
       <td>Progress callback.</td>
     </tr>
   </tbody>
@@ -234,15 +234,17 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
 
 ## GeoJSON
 
-`loadGeojson` loads a GeoJSON `FeatureCollection` from a URL or an in-memory object and stores it as a named layer table. Use it for custom boundaries, points of interest, or any non-OSM geometry. The required parameter is `outputTableName`. Use `coordinateFormat` when the input GeoJSON is not already in the workspace CRS, and `layerType` when you want to override automatic geometry-type detection.
+`loadGeojson` loads a GeoJSON `FeatureCollection` from a URL or an in-memory object and stores it as a named layer table in DuckDB. The only required parameter is `outputTableName`. Use `coordinateFormat` to declare the source CRS when the input GeoJSON is not already in the workspace CRS, and use `layerType` to override the automatic geometry-type inference when needed.
 
 <ClientOnly>
   <CodePlayground :code="loadGeojsonCode" out="console" />
 </ClientOnly>
 
-> **OBS:** When OSM data is loaded in the same [workspace](./workspaces.md), its bounding box is automatically used to crop the GeoJSON.
+:::info Layers Cropping
+When OSM data is loaded in the same [workspace](./workspaces.md), its bounding box is automatically used to crop the GeoJSON.
+:::
 
-#### `loadGeojson` Parameters
+#### List of `loadGeojson` Parameters
 
 | Option | Type | Description |
 |---|---|---|
