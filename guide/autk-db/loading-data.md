@@ -164,9 +164,9 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
     </tr>
     <tr>
       <td>
-        <div style="display:flex; gap:12px; align-items:stretch;">
-          <div style="display:flex; align-items:center;"><a href="/api/autk-db/type-aliases/LoadOsmParams#queryarea"><code>queryArea</code></a></div>
-          <div style="border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; gap:6px;">
+        <div style="display:flex; align-items:stretch;">
+          <div style="width:120px; display:flex; align-items:center;"><a href="/api/autk-db/type-aliases/LoadOsmParams#queryarea"><code>queryArea</code></a></div>
+          <div style="width:140px; border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; gap:6px;">
             <code>geocodeArea</code>
             <code>areas</code>
           </div>
@@ -187,12 +187,11 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
     </tr>
     <tr>
       <td>
-        <div style="display:flex; gap:12px; align-items:stretch;">
-          <div style="display:flex; align-items:center;"><a href="/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers"><code>autoLoadLayers</code></a></div>
-          <div style="border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; gap:6px;">
+        <div style="display:flex; align-items:stretch;">
+          <div style="width:120px; display:flex; align-items:center;"><a href="/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers"><code>autoLoadLayers</code></a></div>
+          <div style="width:140px; border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; gap:6px;">
             <code>coordinateFormat</code>
             <code>layers</code>
-            <code>dropOsmTable</code>
           </div>
         </div>
       </td>
@@ -200,14 +199,12 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
         <div style="display:flex; flex-direction:column; gap:6px;">
           <code>string</code>
           <code>LayerType[]</code>
-          <code>boolean</code>
         </div>
       </td>
       <td>
         <div style="display:flex; flex-direction:column; gap:6px;">
           <span>Source CRS.</span>
           <span>Layer names.</span>
-          <span>Drop raw table.</span>
         </div>
       </td>
     </tr>
