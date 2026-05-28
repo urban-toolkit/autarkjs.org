@@ -1,14 +1,3 @@
-<style scoped>
-.introduction-page :is(p, li, td, th, .custom-block p, .custom-block li, h1, h2, h3, h4, h5, h6) {
-  text-align: justify;
-}
-
-.introduction-page table th:first-child,
-.introduction-page table td:first-child {
-  width: 35%;
-}
-</style>
-
 <script setup>
 const getTablesCode = `
 import { AutkDb } from "@urban-toolkit/autk-db";
@@ -24,8 +13,7 @@ await db.loadGeojson({
 console.log(db.tables);
 `
 
-
-const getTableDataCode = `
+const getTableRowsCode = `
 import { AutkDb } from "@urban-toolkit/autk-db";
 
 const db = new AutkDb();
@@ -110,121 +98,218 @@ console.log(bbox);
 `
 </script>
 
+<style scoped>
+.introduction-page :is(p, li, td, th, .custom-block p, .custom-block li, h1, h2, h3, h4, h5, h6) {
+  text-align: justify;
+}
+
+.introduction-page table th:first-child,
+.introduction-page table td:first-child {
+  width: 35%;
+}
+</style>
+
 <div class="introduction-page">
 
 # Retrieving data
 
-After loading and analyzing data, use getter methods to move results from DuckDB back into JavaScript. These methods let you inspect what data is available, export table rows as plain objects, convert tables to GeoJSON, and query layer bounding boxes.
+Once data is loaded or analyzed, `autk-db` provides getter methods to move results from DuckDB back into JavaScript. These methods let you inspect registered tables, read rows as plain objects, export vector layers as GeoJSON, export raster tables in a map-friendly format, and query layer bounding boxes.
 
 ## Inspect registered tables
 
-Use `db.tables` to inspect the tables registered in the current [workspace](./workspaces.md). Each entry is table metadata, not the table rows themselves. This is useful when you want to see what's available before calling [`getTables`](#get-table-data), [`getLayer`](#get-table-as-geojson), [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson), or [`getLayerTables`](#list-renderable-tables).
+Use `db.tables` to inspect the tables registered in the current [workspace](./workspaces.md). Each entry is table metadata, not the table rows themselves. This is useful when you want to see what is available before calling [`getTables`](#get-table-data), [`getLayer`](#get-table-as-geojson), [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson), or [`getLayerTables`](#list-renderable-tables).
 
 <ClientOnly>
   <CodePlayground :code="getTablesCode" out="console" />
 </ClientOnly>
 
-The table metadata contains:
+The returned metadata includes:
 
-- `name` — the table name used by `autk-db` methods
-- `source` — the table source, such as `'csv'`, `'osm'`, or `'geojson'`
-- `type` — the table kind, such as `'pointset'`, `'polygons'`, `'roads'`, `'raster'`, etc.
-- `columns` — the DuckDB column names and types
-
+- `name` — table name used by `autk-db` methods
+- `source` — table origin, such as `'csv'`, `'osm'`, `'geojson'`, or `'geotiff'`
+- `type` — semantic table kind, such as `'pointset'`, `'polygons'`, `'roads'`, or `'raster'`
+- `columns` — DuckDB column names and types
 
 ## Get table data
 
-`getTables` returns rows from any registered table as plain JavaScript objects. It works with all table types — CSV, JSON, layer tables, and raster tables.
-
-For large tables, use `limit` and `offset` to paginate through results.
-
+[`getTables`](/api/autk-db/classes/AutkDb#gettables) returns rows from any registered table as plain JavaScript objects. It works with CSV, JSON, vector, and raster tables.
 
 <ClientOnly>
-  <CodePlayground :code="getTableDataCode" out="console" />
+  <CodePlayground :code="getTableRowsCode" out="console" />
 </ClientOnly>
 
-#### `getTables` parameters
+For large tables, use [`limit`](/api/autk-db/interfaces/GetTablesParams#limit) and [`offset`](/api/autk-db/interfaces/GetTablesParams#offset) to paginate the result.
 
-| Option | Type | Description |
-|---|---|---|
-| `tableName` | `string` | Table name. |
-| `limit?` | `number` | Row limit. |
-| `offset?` | `number` | Row offset. |
+:::tip Try changing the previous example
+Modify the previous code sample to explore more of `autk-db`. For example, try changing [`limit`](/api/autk-db/interfaces/GetTablesParams#limit), add [`offset`](/api/autk-db/interfaces/GetTablesParams#offset), or read a different table by changing [`tableName`](/api/autk-db/interfaces/GetTablesParams#tablename).
+:::
+
+#### List of `getTables` parameters
+
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/GetTablesParams#tablename"><code>tableName</code></a></td>
+      <td><code>string</code></td>
+      <td>Table name.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/GetTablesParams#limit"><code>limit</code></a></td>
+      <td><code>number</code></td>
+      <td>Row limit.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/GetTablesParams#offset"><code>offset</code></a></td>
+      <td><code>number</code></td>
+      <td>Row offset.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/GetTablesParams#workspace"><code>workspace</code></a></td>
+      <td><code>string</code></td>
+      <td>Workspace name.</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Get table as GeoJSON
 
-`getLayer` exports a renderable vector table as a GeoJSON `FeatureCollection`. Use [`getLayerTables`](#list-renderable-tables) to see which tables qualify.
+[`getLayer`](/api/autk-db/classes/AutkDb#getlayer) exports a renderable vector table as a GeoJSON `FeatureCollection`. Use [`getLayerTables`](#list-renderable-tables) to see which tables qualify.
 
 <ClientOnly>
   <CodePlayground :code="getLayerCode" out="console" />
 </ClientOnly>
 
-:::tip Bounding Box in GeoJSON
 The returned `FeatureCollection` includes a `bbox` property. The bounding box is resolved from the workspace bounds when available, then from the layer geometry itself.
+
+:::warning Vector tables only
+Calling [`getLayer`](/api/autk-db/classes/AutkDb#getlayer) on a non-vector table throws an error. Use [`getLayerTables`](#list-renderable-tables) to inspect the available vector tables, and use [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson) for raster tables.
 :::
 
-#### `getLayer` parameters
+#### List of `getLayer` parameters
 
-| Option | Type | Description |
-|---|---|---|
-| `layerTableName` | `string` | Name of the layer table to export. |
-
-:::warning Non-Renderable Tables
-Calling `getLayer` on a non-vector table will throw an error. Use [`getLayerTables`](#list-renderable-tables) first to check which tables can be exported, and use [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson) for raster tables.
-:::
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>layerTableName</code></td>
+      <td><code>string</code></td>
+      <td>Layer table name.</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Get GeoTIFF as raster GeoJSON
 
-`getGeoTiffLayer` exports a loaded GeoTIFF table as a packed raster `FeatureCollection`. Pass the result to `autk-map` with `loadRasterCollection()`.
+[`getGeoTiffLayer`](/api/autk-db/classes/AutkDb#getgeotifflayer) exports a loaded GeoTIFF table as a packed raster `FeatureCollection`. Pass the result to `autk-map` with `loadRasterCollection()`.
 
 <ClientOnly>
   <CodePlayground :code="getGeoTiffLayerCode" out="console" />
 </ClientOnly>
 
-#### `getGeoTiffLayer` parameters
+:::tip Try changing the previous example
+Modify the previous code sample to explore more of `autk-db`. For example, try loading a different raster table or inspect the returned packed properties before passing the result to `autk-map`.
+:::
 
-| Option | Type | Description |
-|---|---|---|
-| `tableName` | `string` | GeoTIFF table name. |
+#### List of `getGeoTiffLayer` parameters
+
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>tableName</code></td>
+      <td><code>string</code></td>
+      <td>GeoTIFF table name.</td>
+    </tr>
+  </tbody>
+</table>
 
 ## List renderable tables
 
-`getLayerTables()` returns the subset of [`db.tables`](#inspect-registered-tables) that can be exported with [`getLayer`](#get-table-as-geojson) or [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson). This is useful when you want to inspect all renderable tables without knowing their names in advance.
+[`getLayerTables()`](/api/autk-db/classes/AutkDb#getlayertables) returns the subset of [`db.tables`](#inspect-registered-tables) that can be exported with [`getLayer`](#get-table-as-geojson) or [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson).
 
 <ClientOnly>
   <CodePlayground :code="getLayerTablesCode" out="console" />
 </ClientOnly>
 
-#### `getLayerTables` parameters
+It is useful when you want to inspect all renderable tables without knowing their names in advance.
 
-| Option | Type | Description |
-|---|---|---|
-| — | — | No parameters. Returns all renderable tables in the current workspace. |
+#### List of `getLayerTables` parameters
 
-:::tip Return Type
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>—</td>
+      <td>—</td>
+      <td>No parameters.</td>
+    </tr>
+  </tbody>
+</table>
+
+:::tip Return type
 Returns an array of table metadata objects with `name`, `source`, `type`, and `columns` properties.
 :::
 
 ## Get bounding boxes
 
-Bounding boxes are useful for camera framing, clipping rasters, and setting grid extents.
+Bounding boxes are useful for camera framing, clipping rasters, and defining grid extents.
 
 ### Table bounding box
 
-`getBoundingBoxFromLayer()` computes the bounding box from the geometry of a specific renderable table. Returns a `BoundingBox` object with `minLon`, `minLat`, `maxLon`, and `maxLat` properties.
+[`getBoundingBoxFromLayer()`](/api/autk-db/classes/AutkDb#getboundingboxfromlayer) computes the bounding box from the geometry of a specific renderable table.
 
 <ClientOnly>
   <CodePlayground :code="getLayerBboxCode" out="console" />
 </ClientOnly>
 
-#### `getBoundingBoxFromLayer` parameters
+The returned object contains `minLon`, `minLat`, `maxLon`, and `maxLat` properties.
 
-| Option | Type | Description |
-|---|---|---|
-| `layerName` | `string` | Name of the layer table to compute bounds from. |
+#### List of `getBoundingBoxFromLayer` parameters
 
-:::warning Throws on Missing or Non-Geometric Layers
-Throws an error if the database is not initialized, the layer table is not found, or the table does not have a geometry column.
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>layerName</code></td>
+      <td><code>string</code></td>
+      <td>Layer table name.</td>
+    </tr>
+  </tbody>
+</table>
+
+:::warning Missing or non-geometric layers
+[`getBoundingBoxFromLayer()`](/api/autk-db/classes/AutkDb#getboundingboxfromlayer) throws an error if the database is not initialized, the layer table is missing, or the table does not have a geometry column.
 :::
 
 ## Choosing a getter
