@@ -231,6 +231,9 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
   </tbody>
 </table>
 
+:::tip Load OSM first when combining layer sources
+If you plan to load OSM and additional GeoJSON layers in the same workspace, load OSM first so its bounding box and `surface` geometry define the filtering and clipping context for the layers loaded later.
+:::
 
 ## GeoJSON
 
@@ -245,8 +248,6 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
 
 1. If OSM data already exists in the current [workspace](./workspaces.md), its bounding box is first used to filter the features of newly loaded layers. The remaining features are then clipped using the OSM `surface` layer geometry.
 2. If OSM data is not available, the first loaded GeoJSON layer provides the workspace bounding box used to filter the features of subsequent layers. If that first layer is a polygon layer, its geometry is also used to clip later layers.
-
-**Tip:** If you plan to add OSM layers, load them first.
 :::
 
 #### List of `loadGeojson` Parameters
@@ -259,8 +260,6 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
 | `coordinateFormat` | `string` | Source CRS. |
 | `layerType` | `LayerType` | Override inferred layer type. |
 | `boundingBox` | `BoundingBox` | Optional clipping bounds. |
-
-
 
 ## GeoTIFF
 
