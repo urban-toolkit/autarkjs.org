@@ -13,9 +13,7 @@ const res = await db.loadOsm({
     autoLoadLayers: {
         coordinateFormat: 'EPSG:3395',
         layers: ['surface', 'parks', 'water'],
-        dropOsmTable: true,
     },
-    outputTableName: 'osm',
     onProgress: (phase) => console.log(phase)
 });
 
@@ -35,11 +33,8 @@ const res = await db.loadOsm({
         areas: ['Financial District'],
     },
     autoLoadLayers: {
-        coordinateFormat: 'EPSG:3395',
         layers: ['surface', 'parks', 'water', 'roads', 'buildings'],
-        dropOsmTable: true,
-    },
-    outputTableName: 'osm',
+    }
 });
 
 console.log(res)
@@ -53,8 +48,7 @@ await db.init();
 
 const res = await db.loadGeojson({
     geojsonFileUrl: '/data/mnt_neighs.geojson',
-    outputTableName: 'neighborhoods',
-    coordinateFormat: 'EPSG:4326',
+    outputTableName: 'neighborhoods'
 });
 
 console.log(res);
@@ -69,11 +63,7 @@ await db.init();
 const res = await db.loadCsv({
     csvFileUrl: '/data/mnt_noise.csv',
     outputTableName: 'noise',
-    geometryColumns: {
-        latColumnName: 'Latitude',
-        longColumnName: 'Longitude',
-        coordinateFormat: 'EPSG:4326',
-    },
+    geometryColumns: true,
 });
 
 console.log(res);
@@ -112,7 +102,7 @@ console.log(res)
 
 # Loading Data
 
-`autk-db` can load data from multiple formats and sources. Load methods store data as named tables in DuckDB. Those table **names must be unique** since they are used later in queries, joins, updates, and retrieval methods. 
+`autk-db` can load data from multiple formats and sources. Load methods store data as named tables in DuckDB. Those table names **must be unique** since they are used to identify tables in queries, joins, updates, and retrieval methods. 
 
 When a loading method is called, it ingests data into DuckDB and returns the created table metadata. To retrieve stored data, one of the [retrieving data](./retrieving-data.md) methods must be used.
 
@@ -124,11 +114,11 @@ When a loading method is called, it ingests data into DuckDB and returns the cre
 
 To directly fetch from the public [Overpass API](https://overpass-api.de/) and load OpenStreetMap data into DuckDB tables, `autk-db` provides the `loadOsm` method. When you want renderable thematic layers immediately, the most important parameters are:
 
-1. `queryArea` — Defines the geographic region of interest. The region definition is broken into two parts: the `geocodeArea` and a list of administrative areas `areas`. `geocodeArea` is used to define the data search scope and avoid naming ambiguities when querying the Overpass API. `areas` must contain OSM features whose tags contain the key-value pair `boundary: administrative`.
+1. [`queryArea`](/api/autk-db/type-aliases/LoadOsmParams#queryarea) — Defines the geographic region of interest. The region definition is broken into two parts: the `geocodeArea` and a list of administrative areas `areas`. `geocodeArea` is used to define the data search scope and avoid naming ambiguities when querying the Overpass API. `areas` must identify OpenStreetMap boundary relations whose member ways can be reconstructed into a closed polygon. For best results, use exact OSM boundary relation names rather than informal place names.
 
-2. `autoLoadLayers` — List of data layers to automatically extract from raw OSM data (valid values are `buildings`, `roads`, `surface`, `parks`, and `water`). Set `dropOsmTable: true` to remove the raw OSM table after extraction. `coordinateFormat` specifies the source CRS of the OSM coordinates before they are transformed into the workspace CRS.
+2. [`autoLoadLayers`](/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers) — List of data layers to automatically extract from raw OSM data (valid values are `buildings`, `roads`, `surface`, `parks`, and `water`). The optional `coordinateFormat` specifies the source CRS of the OSM coordinates before they are transformed into the workspace CRS.
 
-3. `outputTableName` — The base name for the produced DuckDB tables. Each automatically loaded layer is stored as `{outputTableName}_{layer}`. For example, using `outputTableName: 'osm'` and `layers: ['surface', 'roads', 'buildings']`, the resulting tables are `osm_surface`, `osm_roads`, and `osm_buildings`. This is the identifier you'll use later when querying or retrieving data.
+3. [`outputTableName`](/api/autk-db/type-aliases/LoadOsmParams#outputtablename) — The base name for the produced DuckDB tables. Each automatically loaded layer is stored as `{outputTableName}_{layer}`. For example, using `outputTableName: 'osm'` and `layers: ['surface', 'roads', 'buildings']`, the resulting tables are `osm_surface`, `osm_roads`, and `osm_buildings`. This is the identifier you'll use later when querying or retrieving data.
 
 
 <ClientOnly>
