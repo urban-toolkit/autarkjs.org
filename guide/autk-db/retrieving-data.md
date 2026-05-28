@@ -127,7 +127,20 @@ The returned metadata includes:
 
 - `name` — table name used by `autk-db` methods
 - `source` — table origin, such as `'csv'`, `'osm'`, `'geojson'`, or `'geotiff'`
-- `type` — semantic table kind, such as `'pointset'`, `'polygons'`, `'roads'`, or `'raster'`
+- `type` — table type such as `'pointset'`, `'polygons'`, `'roads'`, or `'raster'`
+
+:::info OSM layer types
+When a table comes from OSM auto-loading, its `type` usually reflects one of the predefined thematic layers:
+
+- `surface` — base land polygons used as the workspace surface
+- `parks` — green and recreational areas
+- `water` — rivers, lakes, coastlines, and other water features
+- `roads` — line features representing the street network
+- `buildings` — polygon features representing building footprints
+
+These types are useful when exporting layers with [`getLayer`](#get-table-as-geojson) or listing renderable tables with [`getLayerTables`](#list-renderable-tables).
+:::
+
 - `columns` — DuckDB column names and types
 
 ## Get table data
