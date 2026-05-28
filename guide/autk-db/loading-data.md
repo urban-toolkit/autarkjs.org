@@ -173,9 +173,9 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
         </div>
       </td>
       <td>
-        <div style="display:flex; flex-direction:column; gap:6px;">
-          <code>string</code>
-          <code>string[]</code>
+        <div style="display:flex; flex-direction:column; gap:6px; background:transparent;">
+          <code style="background:transparent;">string</code>
+          <code style="background:transparent;">string[]</code>
         </div>
       </td>
       <td>
@@ -196,9 +196,9 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
         </div>
       </td>
       <td>
-        <div style="display:flex; flex-direction:column; gap:6px;">
-          <code>string</code>
-          <code>LayerType[]</code>
+        <div style="display:flex; flex-direction:column; gap:6px; background:transparent;">
+          <code style="background:transparent;">string</code>
+          <code style="background:transparent;">LayerType[]</code>
         </div>
       </td>
       <td>
