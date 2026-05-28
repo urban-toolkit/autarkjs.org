@@ -1,14 +1,14 @@
-[**autk-plot**](../index.md)
+[**@urban-toolkit/autk-plot**](../index.md)
 
 ***
 
-[autk-plot](../globals.md) / Row
+[@urban-toolkit/autk-plot](../globals.md) / Row
 
 # Type Alias: Row
 
 > **Row** = `object`
 
-Defined in: [autk-plot/src/transforms/kernel.ts:9](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/transforms/kernel.ts#L9)
+Defined in: [autk-plot/src/transforms/kernel.ts:9](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/transforms/kernel.ts#L9)
 
 Minimum row shape expected by `reduceBuckets`.
 
@@ -25,4 +25,4 @@ temporal and timeseries presets.
 
 > `optional` **autkIds?**: `number`[]
 
-Defined in: [autk-plot/src/transforms/kernel.ts:9](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/transforms/kernel.ts#L9)
+Defined in: [autk-plot/src/transforms/kernel.ts:9](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/transforms/kernel.ts#L9)

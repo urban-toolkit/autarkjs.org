@@ -1,12 +1,12 @@
-[**autk-plot**](../index.md)
+[**@urban-toolkit/autk-plot**](../index.md)
 
 ***
 
-[autk-plot](../globals.md) / EventEmitter
+[@urban-toolkit/autk-plot](../globals.md) / EventEmitter
 
 # Class: EventEmitter\<Events\>
 
-Defined in: [autk-core/src/event-emitter.ts:39](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/event-emitter.ts#L39)
+Defined in: autk-core/dist/src/event-emitter.d.ts:36
 
 Type-safe event emitter keyed by an event record.
 
@@ -46,7 +46,7 @@ Record mapping event names to their payload types.
 
 > **emit**\<`K`\>(`event`, `payload`): `void`
 
-Defined in: [autk-core/src/event-emitter.ts:87](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/event-emitter.ts#L87)
+Defined in: autk-core/dist/src/event-emitter.d.ts:71
 
 Dispatches an event payload to all registered listeners synchronously.
 
@@ -90,7 +90,7 @@ emitter.emit('pick', { selection: [1, 2], layerId: 'buildings' });
 
 > **off**\<`K`\>(`event`, `listener`): `void`
 
-Defined in: [autk-core/src/event-emitter.ts:71](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/event-emitter.ts#L71)
+Defined in: autk-core/dist/src/event-emitter.d.ts:61
 
 Removes a previously registered listener by reference.
 
@@ -136,7 +136,7 @@ emitter.off('pick', handler);
 
 > **on**\<`K`\>(`event`, `listener`): `void`
 
-Defined in: [autk-core/src/event-emitter.ts:53](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/event-emitter.ts#L53)
+Defined in: autk-core/dist/src/event-emitter.d.ts:49
 
 Registers a listener for the given event.
 

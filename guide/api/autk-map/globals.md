@@ -1,8 +1,8 @@
-[**autk-map**](index.md)
+[**@urban-toolkit/autk-map**](index.md)
 
 ***
 
-# autk-map
+# @urban-toolkit/autk-map
 
 ## Enumerations
 

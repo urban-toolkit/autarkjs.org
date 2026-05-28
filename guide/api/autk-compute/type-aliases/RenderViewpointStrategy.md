@@ -1,14 +1,14 @@
-[**autk-compute**](../index.md)
+[**@urban-toolkit/autk-compute**](../index.md)
 
 ***
 
-[autk-compute](../globals.md) / RenderViewpointStrategy
+[@urban-toolkit/autk-compute](../globals.md) / RenderViewpointStrategy
 
 # Type Alias: RenderViewpointStrategy
 
 > **RenderViewpointStrategy** = \{ `type`: `"centroid"`; \} \| \{ `floors`: `number`; `type`: `"building-windows"`; \}
 
-Defined in: [api.ts:49](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-compute/src/api.ts#L49)
+Defined in: [api.ts:49](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-compute/src/api.ts#L49)
 
 Selects how view origins are derived from the viewpoints collection.
 

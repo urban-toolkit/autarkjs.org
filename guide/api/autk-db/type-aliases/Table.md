@@ -1,11 +1,15 @@
-[**autk-db**](../index.md)
+[**@urban-toolkit/autk-db**](../index.md)
 
 ***
 
-[autk-db](../globals.md) / Table
+[@urban-toolkit/autk-db](../globals.md) / Table
 
 # Type Alias: Table
 
-> **Table** = [`OsmTable`](OsmTable.md) \| [`LayerTable`](LayerTable.md) \| [`CsvTable`](CsvTable.md) \| [`JsonTable`](JsonTable.md) \| [`CustomLayerTable`](CustomLayerTable.md) \| [`GridLayerTable`](GridLayerTable.md) \| [`GeoTiffTable`](GeoTiffTable.md) \| [`AnyTable`](AnyTable.md)
+> **Table** = [`OsmTable`](../interfaces/OsmTable.md) \| [`OsmLayerTable`](../interfaces/OsmLayerTable.md) \| [`CsvTable`](../interfaces/CsvTable.md) \| [`JsonTable`](../interfaces/JsonTable.md) \| [`GeojsonTable`](../interfaces/GeojsonTable.md) \| [`GeotiffTable`](../interfaces/GeotiffTable.md) \| [`UserTable`](../interfaces/UserTable.md)
 
-Defined in: [autk-db/src/shared/interfaces.ts:17](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/shared/interfaces.ts#L17)
+Defined in: [autk-db/src/interfaces.ts:151](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L151)
+
+All table metadata variants that can be stored in an `AutkDb` workspace.
+
+Serves as the main discriminated union for branching on table source and renderability.

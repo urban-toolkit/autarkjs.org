@@ -1,12 +1,12 @@
-[**autk-map**](../index.md)
+[**@urban-toolkit/autk-map**](../index.md)
 
 ***
 
-[autk-map](../globals.md) / Camera
+[@urban-toolkit/autk-map](../globals.md) / Camera
 
 # Class: Camera
 
-Defined in: [autk-core/src/camera.ts:59](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/camera.ts#L59)
+Defined in: autk-core/dist/src/camera.d.ts:46
 
 Interactive 3-DOF camera for orbit-style navigation.
 
@@ -30,7 +30,7 @@ camera.update();
 
 > **new Camera**(`params?`): `Camera`
 
-Defined in: [autk-core/src/camera.ts:96](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/camera.ts#L96)
+Defined in: autk-core/dist/src/camera.d.ts:77
 
 Creates a camera with the provided initial state.
 
@@ -38,7 +38,7 @@ Creates a camera with the provided initial state.
 
 ##### params?
 
-[`CameraData`](../interfaces/CameraData.md) = `Camera.defaultParams`
+[`CameraData`](../interfaces/CameraData.md)
 
 Initial camera position and orientation (defaults to `[0, 1, 0]` up, 10k units above origin).
 
@@ -63,7 +63,7 @@ const custom = new Camera({ eye: [0, 0, 500], lookAt: [0, 0, 0], up: [0, 1, 0] }
 
 > **getModelViewMatrix**(): `mat4`
 
-Defined in: [autk-core/src/camera.ts:145](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/camera.ts#L145)
+Defined in: autk-core/dist/src/camera.d.ts:109
 
 Returns the current view (model-view) matrix.
 
@@ -90,7 +90,7 @@ const view = camera.getModelViewMatrix();
 
 > **getProjectionMatrix**(): `mat4`
 
-Defined in: [autk-core/src/camera.ts:132](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/camera.ts#L132)
+Defined in: autk-core/dist/src/camera.d.ts:99
 
 Returns the current projection matrix.
 
@@ -113,11 +113,29 @@ const proj = camera.getProjectionMatrix();
 
 ***
 
+### getZoomScale()
+
+> **getZoomScale**(): `number`
+
+Defined in: autk-core/dist/src/camera.d.ts:172
+
+Returns a scalar proportional to the current map zoom for marker sizing.
+
+This uses the camera eye height, which is the quantity changed by the map
+zoom interaction and therefore tracks zoom more reliably than the
+normalized eye-direction vector.
+
+#### Returns
+
+`number`
+
+***
+
 ### pitch()
 
 > **pitch**(`delta`): `void`
 
-Defined in: [autk-core/src/camera.ts:232](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/camera.ts#L232)
+Defined in: autk-core/dist/src/camera.d.ts:164
 
 Tilts the camera up or down (elevation angle).
 
@@ -150,7 +168,7 @@ camera.update();
 
 > **resetCamera**(`wUp`, `wLookAt`, `wEye`): `void`
 
-Defined in: [autk-core/src/camera.ts:111](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/camera.ts#L111)
+Defined in: autk-core/dist/src/camera.d.ts:89
 
 Resets the camera to a new position, orientation, and default projection.
 
@@ -195,7 +213,7 @@ camera.update();
 
 > **resize**(`width`, `height`): `void`
 
-Defined in: [autk-core/src/camera.ts:160](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/camera.ts#L160)
+Defined in: autk-core/dist/src/camera.d.ts:121
 
 Updates viewport size and recomputes matrices in one call.
 
@@ -235,7 +253,7 @@ camera.resize(1920, 1080);  // calls update() internally
 
 > **translate**(`dx`, `dy`): `void`
 
-Defined in: [autk-core/src/camera.ts:195](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/camera.ts#L195)
+Defined in: autk-core/dist/src/camera.d.ts:144
 
 Pans the camera in screen space, scaled by the current view distance.
 
@@ -274,7 +292,7 @@ camera.update();
 
 > **update**(): `void`
 
-Defined in: [autk-core/src/camera.ts:255](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/camera.ts#L255)
+Defined in: autk-core/dist/src/camera.d.ts:183
 
 Rebuilds view and projection matrices from the current camera state.
 
@@ -301,7 +319,7 @@ camera.update();  // rebuild matrices after navigation change
 
 > **yaw**(`delta`): `void`
 
-Defined in: [autk-core/src/camera.ts:217](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/camera.ts#L217)
+Defined in: autk-core/dist/src/camera.d.ts:154
 
 Rotates the camera around the world Z-axis (compass bearing).
 
@@ -334,7 +352,7 @@ camera.update();
 
 > **zoom**(`delta`, `x`, `y`): `void`
 
-Defined in: [autk-core/src/camera.ts:177](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/camera.ts#L177)
+Defined in: autk-core/dist/src/camera.d.ts:133
 
 Zooms the camera at the cursor position, preserving it in world space.
 
@@ -379,7 +397,7 @@ camera.update();
 
 > `static` **buildViewProjection**(`p`): `Float32Array`
 
-Defined in: [autk-core/src/camera.ts:277](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/camera.ts#L277)
+Defined in: autk-core/dist/src/camera.d.ts:196
 
 Builds a stateless view-projection matrix from explicit parameters.
 

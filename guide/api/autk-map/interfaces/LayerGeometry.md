@@ -1,12 +1,12 @@
-[**autk-map**](../index.md)
+[**@urban-toolkit/autk-map**](../index.md)
 
 ***
 
-[autk-map](../globals.md) / LayerGeometry
+[@urban-toolkit/autk-map](../globals.md) / LayerGeometry
 
 # Interface: LayerGeometry
 
-Defined in: [autk-core/src/types-mesh.ts:18](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-mesh.ts#L18)
+Defined in: autk-core/dist/src/types-mesh.d.ts:17
 
 Triangulated vertex buffers for one renderable geometry piece.
 
@@ -20,7 +20,7 @@ them for the target material or pass.
 
 > `optional` **featureIndex?**: `number`
 
-Defined in: [autk-core/src/types-mesh.ts:28](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-mesh.ts#L28)
+Defined in: autk-core/dist/src/types-mesh.d.ts:27
 
 Optional source feature index associated with this geometry chunk.
 
@@ -30,7 +30,7 @@ Optional source feature index associated with this geometry chunk.
 
 > `optional` **indices?**: `Uint32Array`\<`ArrayBufferLike`\>
 
-Defined in: [autk-core/src/types-mesh.ts:24](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-mesh.ts#L24)
+Defined in: autk-core/dist/src/types-mesh.d.ts:23
 
 Optional triangle index buffer referencing vertices in `position`.
 
@@ -40,7 +40,7 @@ Optional triangle index buffer referencing vertices in `position`.
 
 > `optional` **normal?**: `Float32Array`\<`ArrayBufferLike`\>
 
-Defined in: [autk-core/src/types-mesh.ts:22](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-mesh.ts#L22)
+Defined in: autk-core/dist/src/types-mesh.d.ts:21
 
 Optional vertex normal buffer aligned with `position`.
 
@@ -50,7 +50,7 @@ Optional vertex normal buffer aligned with `position`.
 
 > **position**: `Float32Array`
 
-Defined in: [autk-core/src/types-mesh.ts:20](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-mesh.ts#L20)
+Defined in: autk-core/dist/src/types-mesh.d.ts:19
 
 Flat vertex position buffer packed sequentially per vertex.
 
@@ -60,6 +60,6 @@ Flat vertex position buffer packed sequentially per vertex.
 
 > `optional` **texCoord?**: `Float32Array`\<`ArrayBufferLike`\>
 
-Defined in: [autk-core/src/types-mesh.ts:26](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-mesh.ts#L26)
+Defined in: autk-core/dist/src/types-mesh.d.ts:25
 
 Optional texture-coordinate buffer aligned with `position`.

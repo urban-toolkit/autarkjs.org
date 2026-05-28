@@ -1,23 +1,23 @@
-[**autk-plot**](index.md)
+[**@urban-toolkit/autk-plot**](index.md)
 
 ***
 
-# autk-plot
+# @urban-toolkit/autk-plot
 
 ## Enumerations
 
-- [ChartEvent](enumerations/ChartEvent.md)
 - [ColorMapDomainStrategy](enumerations/ColorMapDomainStrategy.md)
 - [ColorMapInterpolator](enumerations/ColorMapInterpolator.md)
+- [PlotEvent](enumerations/PlotEvent.md)
 
 ## Classes
 
-- [AutkChart](classes/AutkChart.md)
-- [ChartBaseData](classes/ChartBaseData.md)
-- [ChartBaseInteractive](classes/ChartBaseInteractive.md)
-- [ChartStyle](classes/ChartStyle.md)
+- [AutkPlot](classes/AutkPlot.md)
 - [ColorMap](classes/ColorMap.md)
 - [EventEmitter](classes/EventEmitter.md)
+- [PlotBaseData](classes/PlotBaseData.md)
+- [PlotBaseInteractive](classes/PlotBaseInteractive.md)
+- [PlotStyle](classes/PlotStyle.md)
 
 ## Interfaces
 
@@ -32,12 +32,6 @@
 - [Binning2dTransformConfig](type-aliases/Binning2dTransformConfig.md)
 - [BinningEventsBucketRow](type-aliases/BinningEventsBucketRow.md)
 - [BinningEventsTransformConfig](type-aliases/BinningEventsTransformConfig.md)
-- [ChartConfig](type-aliases/ChartConfig.md)
-- [ChartEventData](type-aliases/ChartEventData.md)
-- [ChartEventRecord](type-aliases/ChartEventRecord.md)
-- [ChartMargins](type-aliases/ChartMargins.md)
-- [ChartTransformConfig](type-aliases/ChartTransformConfig.md)
-- [ChartType](type-aliases/ChartType.md)
 - [ColorHEX](type-aliases/ColorHEX.md)
 - [ColorMapConfig](type-aliases/ColorMapConfig.md)
 - [ColorMapDomainSpec](type-aliases/ColorMapDomainSpec.md)
@@ -47,18 +41,24 @@
 - [ExecutedBinning1dTransform](type-aliases/ExecutedBinning1dTransform.md)
 - [ExecutedBinning2dTransform](type-aliases/ExecutedBinning2dTransform.md)
 - [ExecutedBinningEventsTransform](type-aliases/ExecutedBinningEventsTransform.md)
-- [ExecutedChartTransform](type-aliases/ExecutedChartTransform.md)
+- [ExecutedPlotTransform](type-aliases/ExecutedPlotTransform.md)
 - [ExecutedReduceSeriesTransform](type-aliases/ExecutedReduceSeriesTransform.md)
 - [ExecutedSortTransform](type-aliases/ExecutedSortTransform.md)
+- [PlotConfig](type-aliases/PlotConfig.md)
+- [PlotEventData](type-aliases/PlotEventData.md)
+- [PlotEventRecord](type-aliases/PlotEventRecord.md)
+- [PlotMargins](type-aliases/PlotMargins.md)
+- [PlotTransformConfig](type-aliases/PlotTransformConfig.md)
+- [PlotType](type-aliases/PlotType.md)
 - [ReducedBucket](type-aliases/ReducedBucket.md)
 - [ReduceSeriesBucketRow](type-aliases/ReduceSeriesBucketRow.md)
 - [ReduceSeriesTransformConfig](type-aliases/ReduceSeriesTransformConfig.md)
-- [ResolvedChartTransform](type-aliases/ResolvedChartTransform.md)
+- [ResolvedPlotTransform](type-aliases/ResolvedPlotTransform.md)
 - [Row](type-aliases/Row.md)
 - [SortTransformConfig](type-aliases/SortTransformConfig.md)
 - [TransformReducer](type-aliases/TransformReducer.md)
 - [TransformResolution](type-aliases/TransformResolution.md)
-- [UnifiedChartConfig](type-aliases/UnifiedChartConfig.md)
+- [UnifiedPlotConfig](type-aliases/UnifiedPlotConfig.md)
 
 ## Functions
 

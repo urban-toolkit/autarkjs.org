@@ -1,12 +1,12 @@
-[**autk-map**](../index.md)
+[**@urban-toolkit/autk-map**](../index.md)
 
 ***
 
-[autk-map](../globals.md) / MapEventData
+[@urban-toolkit/autk-map](../globals.md) / MapEventData
 
 # Interface: MapEventData
 
-Defined in: [autk-map/src/types-events.ts:37](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/types-events.ts#L37)
+Defined in: [autk-map/src/types-events.ts:37](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/types-events.ts#L37)
 
 Payload emitted for feature-picking events.
 
@@ -23,7 +23,7 @@ the layer that produced the hit results.
 
 > **layerId**: `string`
 
-Defined in: [autk-map/src/types-events.ts:39](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/types-events.ts#L39)
+Defined in: [autk-map/src/types-events.ts:39](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/types-events.ts#L39)
 
 Identifier of the layer that emitted the event.
 
@@ -33,7 +33,7 @@ Identifier of the layer that emitted the event.
 
 > **selection**: `number`[]
 
-Defined in: [autk-core/src/event-emitter.ts:22](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/event-emitter.ts#L22)
+Defined in: autk-core/dist/src/event-emitter.d.ts:20
 
 Source feature indices included in the current selection.
 

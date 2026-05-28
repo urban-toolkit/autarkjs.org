@@ -1,14 +1,14 @@
-[**autk-compute**](../index.md)
+[**@urban-toolkit/autk-compute**](../index.md)
 
 ***
 
-[autk-compute](../globals.md) / RenderAggregation
+[@urban-toolkit/autk-compute](../globals.md) / RenderAggregation
 
 # Type Alias: RenderAggregation
 
 > **RenderAggregation** = \{ `backgroundLayerType?`: `string`; `includeBackground?`: `boolean`; `type`: `"classes"`; \} \| \{ `type`: `"objects"`; \}
 
-Defined in: [api.ts:91](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-compute/src/api.ts#L91)
+Defined in: [api.ts:91](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-compute/src/api.ts#L91)
 
 Controls how sampled render results are reduced back onto the viewpoints collection.
 

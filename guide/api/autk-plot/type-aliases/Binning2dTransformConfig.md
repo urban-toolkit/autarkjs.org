@@ -1,19 +1,19 @@
-[**autk-plot**](../index.md)
+[**@urban-toolkit/autk-plot**](../index.md)
 
 ***
 
-[autk-plot](../globals.md) / Binning2dTransformConfig
+[@urban-toolkit/autk-plot](../globals.md) / Binning2dTransformConfig
 
 # Type Alias: Binning2dTransformConfig
 
 > **Binning2dTransformConfig** = `object`
 
-Defined in: [autk-plot/src/api.ts:124](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/api.ts#L124)
+Defined in: [autk-plot/src/api.ts:124](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/api.ts#L124)
 
 Binning-2d preset config.
 
-The x and y columns are read from `ChartConfig.attributes.axis[0]` and `axis[1]`.
-Use `'@transform'` in `ChartConfig.attributes.color` to mark the output slot.
+The x and y columns are read from `PlotConfig.attributes.axis[0]` and `axis[1]`.
+Use `'@transform'` in `PlotConfig.attributes.color` to mark the output slot.
 
 ## Properties
 
@@ -21,7 +21,7 @@ Use `'@transform'` in `ChartConfig.attributes.color` to mark the output slot.
 
 > `optional` **options?**: `object`
 
-Defined in: [autk-plot/src/api.ts:126](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/api.ts#L126)
+Defined in: [autk-plot/src/api.ts:126](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/api.ts#L126)
 
 #### binsX?
 
@@ -53,4 +53,4 @@ Feature property to aggregate for non-count reducers. Required when `reducer` is
 
 > **preset**: `"binning-2d"`
 
-Defined in: [autk-plot/src/api.ts:125](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/api.ts#L125)
+Defined in: [autk-plot/src/api.ts:125](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/api.ts#L125)

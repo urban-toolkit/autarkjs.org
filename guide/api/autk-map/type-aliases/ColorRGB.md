@@ -1,14 +1,14 @@
-[**autk-map**](../index.md)
+[**@urban-toolkit/autk-map**](../index.md)
 
 ***
 
-[autk-map](../globals.md) / ColorRGB
+[@urban-toolkit/autk-map](../globals.md) / ColorRGB
 
 # Type Alias: ColorRGB
 
 > **ColorRGB** = `object`
 
-Defined in: [autk-core/src/types-colormap.ts:175](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-colormap.ts#L175)
+Defined in: autk-core/dist/src/types-colormap.d.ts:176
 
 RGBA color representation used by sampling and map styling APIs.
 
@@ -18,7 +18,7 @@ RGBA color representation used by sampling and map styling APIs.
 
 > **alpha**: `number`
 
-Defined in: [autk-core/src/types-colormap.ts:183](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-colormap.ts#L183)
+Defined in: autk-core/dist/src/types-colormap.d.ts:184
 
 Alpha channel value, typically normalized to the 0-1 range.
 
@@ -28,7 +28,7 @@ Alpha channel value, typically normalized to the 0-1 range.
 
 > **b**: `number`
 
-Defined in: [autk-core/src/types-colormap.ts:181](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-colormap.ts#L181)
+Defined in: autk-core/dist/src/types-colormap.d.ts:182
 
 Blue channel value.
 
@@ -38,7 +38,7 @@ Blue channel value.
 
 > **g**: `number`
 
-Defined in: [autk-core/src/types-colormap.ts:179](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-colormap.ts#L179)
+Defined in: autk-core/dist/src/types-colormap.d.ts:180
 
 Green channel value.
 
@@ -48,6 +48,6 @@ Green channel value.
 
 > **r**: `number`
 
-Defined in: [autk-core/src/types-colormap.ts:177](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-colormap.ts#L177)
+Defined in: autk-core/dist/src/types-colormap.d.ts:178
 
 Red channel value.

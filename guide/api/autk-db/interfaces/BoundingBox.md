@@ -1,12 +1,12 @@
-[**autk-db**](../index.md)
+[**@urban-toolkit/autk-db**](../index.md)
 
 ***
 
-[autk-db](../globals.md) / BoundingBox
+[@urban-toolkit/autk-db](../globals.md) / BoundingBox
 
 # Interface: BoundingBox
 
-Defined in: [autk-core/src/types-layer.ts:63](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-layer.ts#L63)
+Defined in: autk-core/dist/src/types-layer.d.ts:32
 
 Named geographic bounding box returned by GeoJSON utility helpers.
 
@@ -19,7 +19,7 @@ giving each bound an explicit longitude/latitude name.
 
 > **maxLat**: `number`
 
-Defined in: [autk-core/src/types-layer.ts:71](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-layer.ts#L71)
+Defined in: autk-core/dist/src/types-layer.d.ts:40
 
 Maximum latitude contained in the bounds.
 
@@ -29,7 +29,7 @@ Maximum latitude contained in the bounds.
 
 > **maxLon**: `number`
 
-Defined in: [autk-core/src/types-layer.ts:69](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-layer.ts#L69)
+Defined in: autk-core/dist/src/types-layer.d.ts:38
 
 Maximum longitude contained in the bounds.
 
@@ -39,7 +39,7 @@ Maximum longitude contained in the bounds.
 
 > **minLat**: `number`
 
-Defined in: [autk-core/src/types-layer.ts:67](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-layer.ts#L67)
+Defined in: autk-core/dist/src/types-layer.d.ts:36
 
 Minimum latitude contained in the bounds.
 
@@ -49,6 +49,6 @@ Minimum latitude contained in the bounds.
 
 > **minLon**: `number`
 
-Defined in: [autk-core/src/types-layer.ts:65](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-layer.ts#L65)
+Defined in: autk-core/dist/src/types-layer.d.ts:34
 
 Minimum longitude contained in the bounds.

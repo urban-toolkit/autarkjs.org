@@ -1,12 +1,12 @@
-[**autk-db**](../index.md)
+[**@urban-toolkit/autk-db**](../index.md)
 
 ***
 
-[autk-db](../globals.md) / RawQueryParams
+[@urban-toolkit/autk-db](../globals.md) / RawQueryParams
 
 # Interface: RawQueryParams
 
-Defined in: [autk-db/src/spatial/use-cases/raw-query/interfaces.ts:5](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/raw-query/interfaces.ts#L5)
+Defined in: [autk-db/src/use-cases/raw-query/interfaces.ts:6](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/raw-query/interfaces.ts#L6)
 
 ## Properties
 
@@ -14,11 +14,11 @@ Defined in: [autk-db/src/spatial/use-cases/raw-query/interfaces.ts:5](https://gi
 
 > **output**: `object`
 
-Defined in: [autk-db/src/spatial/use-cases/raw-query/interfaces.ts:7](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/raw-query/interfaces.ts#L7)
+Defined in: [autk-db/src/use-cases/raw-query/interfaces.ts:8](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/raw-query/interfaces.ts#L8)
 
 #### source?
 
-> `optional` **source?**: `"user"` \| `"osm"` \| `"geojson"` \| `"csv"`
+> `optional` **source?**: [`TableSource`](../type-aliases/TableSource.md)
 
 Optional: identify the origin/source of this new table
 
@@ -28,9 +28,9 @@ Optional: identify the origin/source of this new table
 
 #### tableType?
 
-> `optional` **tableType?**: [`LayerType`](../type-aliases/LayerType.md) \| `"pointset"`
+> `optional` **tableType?**: [`LayerType`](../type-aliases/LayerType.md)
 
-Optional: logical type of the table (layer type or pointset)
+Optional: semantic layer type of this new table
 
 #### type
 
@@ -42,4 +42,4 @@ Optional: logical type of the table (layer type or pointset)
 
 > **query**: `string`
 
-Defined in: [autk-db/src/spatial/use-cases/raw-query/interfaces.ts:6](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/raw-query/interfaces.ts#L6)
+Defined in: [autk-db/src/use-cases/raw-query/interfaces.ts:7](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/raw-query/interfaces.ts#L7)

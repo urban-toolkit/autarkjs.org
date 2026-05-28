@@ -1,72 +1,71 @@
-[**autk-db**](../index.md)
+[**@urban-toolkit/autk-db**](../index.md)
 
 ***
 
-[autk-db](../globals.md) / SpatialQueryParams
+[@urban-toolkit/autk-db](../globals.md) / SpatialQueryParams
 
 # Interface: SpatialQueryParams
 
-Defined in: [autk-db/src/spatial/use-cases/spatial-join/interfaces.ts:3](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/spatial-join/interfaces.ts#L3)
+Defined in: [autk-db/src/use-cases/spatial-join/interfaces.ts:43](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/spatial-join/interfaces.ts#L43)
+
+Parameters for a spatial join between two tables.
+
+The join always modifies the root table in place using a LEFT join.
+Aggregated results are stored under `properties.sjoin.<aggregateFn>.<key>` in the root table.
+
+## Examples
+
+```ts
+await db.spatialQuery({ tableRootName: 'roads', tableJoinName: 'noise' });
+```
+
+```ts
+await db.spatialQuery({
+  tableRootName: 'neighborhoods',
+  tableJoinName: 'schools',
+  near: { distance: 500 },
+  groupBy: [{ column: 'name', aggregateFn: 'count' }],
+});
+```
 
 ## Properties
 
 ### groupBy?
 
-> `optional` **groupBy?**: `object`
+> `optional` **groupBy?**: `object`[]
 
-Defined in: [autk-db/src/spatial/use-cases/spatial-join/interfaces.ts:14](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/spatial-join/interfaces.ts#L14)
+Defined in: [autk-db/src/use-cases/spatial-join/interfaces.ts:54](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/spatial-join/interfaces.ts#L54)
 
-#### selectColumns
+Optional aggregation applied to join-side data. Keys are derived from `tableJoinName` and the aggregate function.
 
-> **selectColumns**: `object`[]
+#### aggregateFn?
 
-***
+> `optional` **aggregateFn?**: [`AggregateFunction`](../type-aliases/AggregateFunction.md)
 
-### joinType?
+Aggregation function. Omit to pass the column through without aggregation.
 
-> `optional` **joinType?**: `"INNER"` \| `"LEFT"` \| `"RIGHT"` \| `"FULL"`
+#### column
 
-Defined in: [autk-db/src/spatial/use-cases/spatial-join/interfaces.ts:11](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/spatial-join/interfaces.ts#L11)
+> **column**: `string`
 
-***
+Column name to aggregate. Use `'*'` for row-level aggregations like `count`.
 
-### nearDistance?
+#### normalize?
 
-> `optional` **nearDistance?**: `number`
+> `optional` **normalize?**: `boolean`
 
-Defined in: [autk-db/src/spatial/use-cases/spatial-join/interfaces.ts:12](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/spatial-join/interfaces.ts#L12)
-
-***
-
-### nearUseCentroid?
-
-> `optional` **nearUseCentroid?**: `boolean`
-
-Defined in: [autk-db/src/spatial/use-cases/spatial-join/interfaces.ts:13](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/spatial-join/interfaces.ts#L13)
+When `true`, normalizes the aggregated value between 0 and 1.
 
 ***
 
-### output
+### near?
 
-> **output**: `object`
+> `optional` **near?**: [`NearConfig`](NearConfig.md)
 
-Defined in: [autk-db/src/spatial/use-cases/spatial-join/interfaces.ts:6](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/spatial-join/interfaces.ts#L6)
+Defined in: [autk-db/src/use-cases/spatial-join/interfaces.ts:52](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/spatial-join/interfaces.ts#L52)
 
-#### tableName?
-
-> `optional` **tableName?**: `string`
-
-#### type
-
-> **type**: `"MODIFY_ROOT"` \| `"CREATE_NEW"`
-
-***
-
-### spatialPredicate?
-
-> `optional` **spatialPredicate?**: `"INTERSECT"` \| `"NEAR"`
-
-Defined in: [autk-db/src/spatial/use-cases/spatial-join/interfaces.ts:10](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/spatial-join/interfaces.ts#L10)
+NEAR predicate configuration. When present, the join uses `'NEAR'` instead of `'INTERSECT'`.
+Finds features within the specified distance from root geometries.
 
 ***
 
@@ -74,7 +73,9 @@ Defined in: [autk-db/src/spatial/use-cases/spatial-join/interfaces.ts:10](https:
 
 > **tableJoinName**: `string`
 
-Defined in: [autk-db/src/spatial/use-cases/spatial-join/interfaces.ts:5](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/spatial-join/interfaces.ts#L5)
+Defined in: [autk-db/src/use-cases/spatial-join/interfaces.ts:47](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/spatial-join/interfaces.ts#L47)
+
+Name of the table to join against the root.
 
 ***
 
@@ -82,4 +83,6 @@ Defined in: [autk-db/src/spatial/use-cases/spatial-join/interfaces.ts:5](https:/
 
 > **tableRootName**: `string`
 
-Defined in: [autk-db/src/spatial/use-cases/spatial-join/interfaces.ts:4](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/spatial-join/interfaces.ts#L4)
+Defined in: [autk-db/src/use-cases/spatial-join/interfaces.ts:45](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/spatial-join/interfaces.ts#L45)
+
+Name of the root table that will be modified in place.

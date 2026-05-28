@@ -1,14 +1,14 @@
-[**autk-plot**](../index.md)
+[**@urban-toolkit/autk-plot**](../index.md)
 
 ***
 
-[autk-plot](../globals.md) / ExecutedReduceSeriesTransform
+[@urban-toolkit/autk-plot](../globals.md) / ExecutedReduceSeriesTransform
 
 # Type Alias: ExecutedReduceSeriesTransform
 
 > **ExecutedReduceSeriesTransform** = `object`
 
-Defined in: [autk-plot/src/transforms/presets/reduce-series.ts:28](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/transforms/presets/reduce-series.ts#L28)
+Defined in: [autk-plot/src/transforms/presets/reduce-series.ts:28](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/transforms/presets/reduce-series.ts#L28)
 
 Result produced by `runReduceSeries`.
 
@@ -18,7 +18,7 @@ Result produced by `runReduceSeries`.
 
 > **preset**: `"reduce-series"`
 
-Defined in: [autk-plot/src/transforms/presets/reduce-series.ts:30](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/transforms/presets/reduce-series.ts#L30)
+Defined in: [autk-plot/src/transforms/presets/reduce-series.ts:30](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/transforms/presets/reduce-series.ts#L30)
 
 Preset discriminator identifying the executed transform.
 
@@ -28,6 +28,6 @@ Preset discriminator identifying the executed transform.
 
 > **rows**: [`ReduceSeriesBucketRow`](ReduceSeriesBucketRow.md)[]
 
-Defined in: [autk-plot/src/transforms/presets/reduce-series.ts:32](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/transforms/presets/reduce-series.ts#L32)
+Defined in: [autk-plot/src/transforms/presets/reduce-series.ts:32](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/transforms/presets/reduce-series.ts#L32)
 
-Reduced series rows ready for downstream chart rendering.
+Reduced series rows ready for downstream plot rendering.

@@ -1,12 +1,16 @@
-[**autk-db**](../index.md)
+[**@urban-toolkit/autk-db**](../index.md)
 
 ***
 
-[autk-db](../globals.md) / Column
+[@urban-toolkit/autk-db](../globals.md) / Column
 
 # Interface: Column
 
-Defined in: [autk-db/src/shared/interfaces.ts:31](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/shared/interfaces.ts#L31)
+Defined in: [autk-db/src/interfaces.ts:25](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L25)
+
+Describes a single table column as reported by DuckDB.
+
+Keeps schema metadata small and stable for UI rendering and query planning.
 
 ## Properties
 
@@ -14,7 +18,9 @@ Defined in: [autk-db/src/shared/interfaces.ts:31](https://github.com/urban-toolk
 
 > **name**: `string`
 
-Defined in: [autk-db/src/shared/interfaces.ts:32](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/shared/interfaces.ts#L32)
+Defined in: [autk-db/src/interfaces.ts:27](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L27)
+
+Stable column name used in queries and result objects.
 
 ***
 
@@ -22,4 +28,6 @@ Defined in: [autk-db/src/shared/interfaces.ts:32](https://github.com/urban-toolk
 
 > **type**: `string`
 
-Defined in: [autk-db/src/shared/interfaces.ts:33](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/shared/interfaces.ts#L33)
+Defined in: [autk-db/src/interfaces.ts:29](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L29)
+
+Database type string returned for the column.

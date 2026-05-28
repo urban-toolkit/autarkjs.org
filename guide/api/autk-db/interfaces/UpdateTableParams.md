@@ -1,12 +1,26 @@
-[**autk-db**](../index.md)
+[**@urban-toolkit/autk-db**](../index.md)
 
 ***
 
-[autk-db](../globals.md) / UpdateTableParams
+[@urban-toolkit/autk-db](../globals.md) / UpdateTableParams
 
 # Interface: UpdateTableParams
 
-Defined in: [autk-db/src/spatial/use-cases/update-table/interfaces.ts:6](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/update-table/interfaces.ts#L6)
+Defined in: [autk-db/src/use-cases/update-table/interfaces.ts:25](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/update-table/interfaces.ts#L25)
+
+Parameters for updating an existing DuckDB table with new data.
+
+When using the `'update'` strategy, `idColumn` is required and can reference a direct column (e.g. `'id'`) or a nested property (e.g. `'properties.building_id'`).
+
+## Examples
+
+```ts
+const params: UpdateTableParams = { tableName: 'places', data: geoJson, strategy: 'replace' };
+```
+
+```ts
+const params: UpdateTableParams = { tableName: 'buildings', data: geoJson, strategy: 'update', idColumn: 'properties.building_id' };
+```
 
 ## Properties
 
@@ -14,7 +28,9 @@ Defined in: [autk-db/src/spatial/use-cases/update-table/interfaces.ts:6](https:/
 
 > **data**: `FeatureCollection`\<`Geometry`, `GeoJsonProperties`\> \| `Record`\<`string`, `unknown`\>[]
 
-Defined in: [autk-db/src/spatial/use-cases/update-table/interfaces.ts:8](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/update-table/interfaces.ts#L8)
+Defined in: [autk-db/src/use-cases/update-table/interfaces.ts:29](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/update-table/interfaces.ts#L29)
+
+GeoJSON FeatureCollection for layer tables, or a plain object array for CSV/JSON tables.
 
 ***
 
@@ -22,12 +38,11 @@ Defined in: [autk-db/src/spatial/use-cases/update-table/interfaces.ts:8](https:/
 
 > `optional` **idColumn?**: `string`
 
-Defined in: [autk-db/src/spatial/use-cases/update-table/interfaces.ts:21](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/update-table/interfaces.ts#L21)
+Defined in: [autk-db/src/use-cases/update-table/interfaces.ts:41](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/update-table/interfaces.ts#L41)
 
-Required when strategy is 'update'.
-Supports:
-- Direct column: 'id' → matches on the id column directly
-- Nested in properties: 'properties.building_id' → matches on properties->>'building_id'
+Required when `strategy` is `'update'`.
+
+Supports direct column names (`'id'`) or nested property paths (`'properties.building_id'`) that resolve to `properties->>'building_id'` in SQL.
 
 ***
 
@@ -35,11 +50,11 @@ Supports:
 
 > **strategy**: [`UpdateStrategy`](../type-aliases/UpdateStrategy.md)
 
-Defined in: [autk-db/src/spatial/use-cases/update-table/interfaces.ts:14](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/update-table/interfaces.ts#L14)
+Defined in: [autk-db/src/use-cases/update-table/interfaces.ts:35](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/update-table/interfaces.ts#L35)
 
 Strategy for updating the table:
-- 'replace': Drop and recreate the entire table with the new data
-- 'update': Update existing records by ID (does NOT insert new records)
+- `'replace'`: Drop and recreate the entire table with the new data.
+- `'update'`: Update existing records by ID (does not insert new records).
 
 ***
 
@@ -47,7 +62,9 @@ Strategy for updating the table:
 
 > **tableName**: `string`
 
-Defined in: [autk-db/src/spatial/use-cases/update-table/interfaces.ts:7](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/update-table/interfaces.ts#L7)
+Defined in: [autk-db/src/use-cases/update-table/interfaces.ts:27](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/update-table/interfaces.ts#L27)
+
+Name of the table to update.
 
 ***
 
@@ -55,4 +72,6 @@ Defined in: [autk-db/src/spatial/use-cases/update-table/interfaces.ts:7](https:/
 
 > `optional` **workspace?**: `string`
 
-Defined in: [autk-db/src/spatial/use-cases/update-table/interfaces.ts:22](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/update-table/interfaces.ts#L22)
+Defined in: [autk-db/src/use-cases/update-table/interfaces.ts:43](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/update-table/interfaces.ts#L43)
+
+Workspace namespace used to qualify the table name. Defaults to the system workspace.

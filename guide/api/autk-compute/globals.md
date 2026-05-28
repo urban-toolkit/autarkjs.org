@@ -1,8 +1,8 @@
-[**autk-compute**](index.md)
+[**@urban-toolkit/autk-compute**](index.md)
 
 ***
 
-# autk-compute
+# @urban-toolkit/autk-compute
 
 ## Classes
 

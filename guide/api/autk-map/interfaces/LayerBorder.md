@@ -1,12 +1,12 @@
-[**autk-map**](../index.md)
+[**@urban-toolkit/autk-map**](../index.md)
 
 ***
 
-[autk-map](../globals.md) / LayerBorder
+[@urban-toolkit/autk-map](../globals.md) / LayerBorder
 
 # Interface: LayerBorder
 
-Defined in: [autk-core/src/types-mesh.ts:54](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-mesh.ts#L54)
+Defined in: autk-core/dist/src/types-mesh.d.ts:51
 
 Border or outline buffers for line-based rendering.
 
@@ -19,7 +19,7 @@ pass separate from the filled mesh geometry.
 
 > **indices**: `Uint32Array`
 
-Defined in: [autk-core/src/types-mesh.ts:58](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-mesh.ts#L58)
+Defined in: autk-core/dist/src/types-mesh.d.ts:55
 
 Line index buffer referencing vertices in `position`.
 
@@ -29,6 +29,6 @@ Line index buffer referencing vertices in `position`.
 
 > **position**: `Float32Array`
 
-Defined in: [autk-core/src/types-mesh.ts:56](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-mesh.ts#L56)
+Defined in: autk-core/dist/src/types-mesh.d.ts:53
 
 Flat vertex position buffer for the outline geometry.

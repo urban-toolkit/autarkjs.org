@@ -1,12 +1,12 @@
-[**autk-map**](../index.md)
+[**@urban-toolkit/autk-map**](../index.md)
 
 ***
 
-[autk-map](../globals.md) / LayerManager
+[@urban-toolkit/autk-map](../globals.md) / LayerManager
 
 # Class: LayerManager
 
-Defined in: [autk-map/src/layer-manager.ts:37](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/layer-manager.ts#L37)
+Defined in: [autk-map/src/layer-manager.ts:38](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/layer-manager.ts#L38)
 
 Manages all map layers as a single ordered list.
 
@@ -34,7 +34,7 @@ last.
 
 > **get** **hasOrigin**(): `boolean`
 
-Defined in: [autk-map/src/layer-manager.ts:58](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/layer-manager.ts#L58)
+Defined in: [autk-map/src/layer-manager.ts:59](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/layer-manager.ts#L59)
 
 Indicates whether the shared scene origin has been initialized.
 
@@ -50,7 +50,7 @@ Indicates whether the shared scene origin has been initialized.
 
 > **get** **layers**(): [`Layer`](Layer.md)[]
 
-Defined in: [autk-map/src/layer-manager.ts:47](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/layer-manager.ts#L47)
+Defined in: [autk-map/src/layer-manager.ts:48](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/layer-manager.ts#L48)
 
 Registered layers sorted by render z-index.
 
@@ -66,7 +66,7 @@ Registered layers sorted by render z-index.
 
 > **get** **origin**(): `number`[]
 
-Defined in: [autk-map/src/layer-manager.ts:50](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/layer-manager.ts#L50)
+Defined in: [autk-map/src/layer-manager.ts:51](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/layer-manager.ts#L51)
 
 World-space origin derived from the current bounding box center.
 
@@ -80,7 +80,7 @@ World-space origin derived from the current bounding box center.
 
 > **addLayer**(`layerInfo`, `layerRender`, `layerData`): [`Layer`](Layer.md) \| `null`
 
-Defined in: [autk-map/src/layer-manager.ts:80](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/layer-manager.ts#L80)
+Defined in: [autk-map/src/layer-manager.ts:81](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/layer-manager.ts#L81)
 
 Creates, registers, and reorders a layer based on `layerInfo.typeLayer`.
 
@@ -120,7 +120,7 @@ Never throws. Duplicate ids log an error and return `null`.
 
 > **computeZindex**(`layerType`): `number`
 
-Defined in: [autk-map/src/layer-manager.ts:139](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/layer-manager.ts#L139)
+Defined in: [autk-map/src/layer-manager.ts:142](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/layer-manager.ts#L142)
 
 Returns a preliminary z-index placeholder for a layer type.
 
@@ -148,7 +148,7 @@ Never throws.
 
 > **initializeOrigin**(`collection`): `void`
 
-Defined in: [autk-map/src/layer-manager.ts:67](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/layer-manager.ts#L67)
+Defined in: [autk-map/src/layer-manager.ts:68](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/layer-manager.ts#L68)
 
 Computes the shared scene origin from the provided collection.
 
@@ -176,7 +176,7 @@ Never throws.
 
 > **removeLayerById**(`layerId`): `void`
 
-Defined in: [autk-map/src/layer-manager.ts:109](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/layer-manager.ts#L109)
+Defined in: [autk-map/src/layer-manager.ts:112](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/layer-manager.ts#L112)
 
 Removes the layer matching `layerId` and recomputes dynamic z-order.
 
@@ -204,7 +204,7 @@ Never throws.
 
 > **searchByLayerId**(`layerId`): [`Layer`](Layer.md) \| `null`
 
-Defined in: [autk-map/src/layer-manager.ts:128](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/layer-manager.ts#L128)
+Defined in: [autk-map/src/layer-manager.ts:131](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/layer-manager.ts#L131)
 
 Returns the layer with the given `layerId`, or `null` if not found.
 

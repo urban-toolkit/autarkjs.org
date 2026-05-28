@@ -1,14 +1,14 @@
-[**autk-plot**](../index.md)
+[**@urban-toolkit/autk-plot**](../index.md)
 
 ***
 
-[autk-plot](../globals.md) / AutkDatum
+[@urban-toolkit/autk-plot](../globals.md) / AutkDatum
 
 # Type Alias: AutkDatum
 
 > **AutkDatum** = `GeoJsonProperties` & `object`
 
-Defined in: [autk-plot/src/types-chart.ts:9](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/types-chart.ts#L9)
+Defined in: [autk-plot/src/types-plot.ts:9](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/types-plot.ts#L9)
 
 Datum contract bound to interactive marks.
 

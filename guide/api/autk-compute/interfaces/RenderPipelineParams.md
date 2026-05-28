@@ -1,12 +1,12 @@
-[**autk-compute**](../index.md)
+[**@urban-toolkit/autk-compute**](../index.md)
 
 ***
 
-[autk-compute](../globals.md) / RenderPipelineParams
+[@urban-toolkit/autk-compute](../globals.md) / RenderPipelineParams
 
 # Interface: RenderPipelineParams
 
-Defined in: [api.ts:110](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-compute/src/api.ts#L110)
+Defined in: [api.ts:110](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-compute/src/api.ts#L110)
 
 Parameters for the render pipeline.
 
@@ -16,7 +16,7 @@ Parameters for the render pipeline.
 
 > **aggregation**: [`RenderAggregation`](../type-aliases/RenderAggregation.md)
 
-Defined in: [api.ts:115](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-compute/src/api.ts#L115)
+Defined in: [api.ts:115](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-compute/src/api.ts#L115)
 
 Reduction strategy applied after rendering.
 
@@ -26,7 +26,7 @@ Reduction strategy applied after rendering.
 
 > `optional` **camera?**: [`RenderCameraOptions`](RenderCameraOptions.md)
 
-Defined in: [api.ts:121](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-compute/src/api.ts#L121)
+Defined in: [api.ts:121](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-compute/src/api.ts#L121)
 
 Optional camera controls.
 
@@ -36,7 +36,7 @@ Optional camera controls.
 
 > **layers**: [`RenderLayer`](RenderLayer.md)[]
 
-Defined in: [api.ts:112](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-compute/src/api.ts#L112)
+Defined in: [api.ts:112](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-compute/src/api.ts#L112)
 
 Geometry layers rendered from each sampled camera.
 
@@ -46,7 +46,7 @@ Geometry layers rendered from each sampled camera.
 
 > `optional` **tileSize?**: `number`
 
-Defined in: [api.ts:124](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-compute/src/api.ts#L124)
+Defined in: [api.ts:124](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-compute/src/api.ts#L124)
 
 Tile resolution in pixels; must be a multiple of 8.
 
@@ -62,6 +62,6 @@ Tile resolution in pixels; must be a multiple of 8.
 
 > **viewpoints**: [`RenderViewpoints`](RenderViewpoints.md)
 
-Defined in: [api.ts:118](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-compute/src/api.ts#L118)
+Defined in: [api.ts:118](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-compute/src/api.ts#L118)
 
 Viewpoint collection and origin/sampling strategy used for the render pass.

@@ -1,16 +1,16 @@
-[**autk-plot**](../index.md)
+[**@urban-toolkit/autk-plot**](../index.md)
 
 ***
 
-[autk-plot](../globals.md) / BinningEventsBucketRow
+[@urban-toolkit/autk-plot](../globals.md) / BinningEventsBucketRow
 
 # Type Alias: BinningEventsBucketRow
 
 > **BinningEventsBucketRow** = `object`
 
-Defined in: [autk-plot/src/transforms/presets/binning-events.ts:34](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/transforms/presets/binning-events.ts#L34)
+Defined in: [autk-plot/src/transforms/presets/binning-events.ts:34](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/transforms/presets/binning-events.ts#L34)
 
-A single event bucket row ready for chart rendering.
+A single event bucket row ready for plot rendering.
 
 `bucket` is a formatted string key (e.g. `"2024-03"` for monthly resolution).
 
@@ -20,7 +20,7 @@ A single event bucket row ready for chart rendering.
 
 > **autkIds**: `number`[]
 
-Defined in: [autk-plot/src/transforms/presets/binning-events.ts:42](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/transforms/presets/binning-events.ts#L42)
+Defined in: [autk-plot/src/transforms/presets/binning-events.ts:42](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/transforms/presets/binning-events.ts#L42)
 
 Merged source feature ids represented by the bucket.
 
@@ -30,7 +30,7 @@ Merged source feature ids represented by the bucket.
 
 > **bucket**: `string`
 
-Defined in: [autk-plot/src/transforms/presets/binning-events.ts:36](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/transforms/presets/binning-events.ts#L36)
+Defined in: [autk-plot/src/transforms/presets/binning-events.ts:36](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/transforms/presets/binning-events.ts#L36)
 
 Formatted bucket identifier (for example `"2024-03"`).
 
@@ -40,7 +40,7 @@ Formatted bucket identifier (for example `"2024-03"`).
 
 > **count**: `number`
 
-Defined in: [autk-plot/src/transforms/presets/binning-events.ts:40](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/transforms/presets/binning-events.ts#L40)
+Defined in: [autk-plot/src/transforms/presets/binning-events.ts:40](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/transforms/presets/binning-events.ts#L40)
 
 Number of source event rows collapsed into the bucket.
 
@@ -50,6 +50,6 @@ Number of source event rows collapsed into the bucket.
 
 > **value**: `number`
 
-Defined in: [autk-plot/src/transforms/presets/binning-events.ts:38](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/transforms/presets/binning-events.ts#L38)
+Defined in: [autk-plot/src/transforms/presets/binning-events.ts:38](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/transforms/presets/binning-events.ts#L38)
 
 Reduced numeric result for the bucket.

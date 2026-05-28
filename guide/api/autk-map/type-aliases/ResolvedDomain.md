@@ -1,14 +1,14 @@
-[**autk-map**](../index.md)
+[**@urban-toolkit/autk-map**](../index.md)
 
 ***
 
-[autk-map](../globals.md) / ResolvedDomain
+[@urban-toolkit/autk-map](../globals.md) / ResolvedDomain
 
 # Type Alias: ResolvedDomain
 
 > **ResolvedDomain** = `number`[] \| `string`[]
 
-Defined in: [autk-core/src/types-colormap.ts:34](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-colormap.ts#L34)
+Defined in: autk-core/dist/src/types-colormap.d.ts:32
 
 Domain resolved from input data and a colormap configuration.
 

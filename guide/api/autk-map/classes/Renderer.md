@@ -1,12 +1,12 @@
-[**autk-map**](../index.md)
+[**@urban-toolkit/autk-map**](../index.md)
 
 ***
 
-[autk-map](../globals.md) / Renderer
+[@urban-toolkit/autk-map](../globals.md) / Renderer
 
 # Class: Renderer
 
-Defined in: [autk-map/src/renderer.ts:25](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L25)
+Defined in: [autk-map/src/renderer.ts:25](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L25)
 
 WebGPU renderer responsible for canvas setup, render-target management, and
 frame-level GPU resource lifecycle.
@@ -22,7 +22,7 @@ size-dependent resources after resize events.
 
 > **new Renderer**(`canvas`): `Renderer`
 
-Defined in: [autk-map/src/renderer.ts:90](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L90)
+Defined in: [autk-map/src/renderer.ts:91](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L91)
 
 Creates a renderer bound to a canvas.
 
@@ -50,7 +50,7 @@ Never throws.
 
 > **get** **canvas**(): `HTMLCanvasElement`
 
-Defined in: [autk-map/src/renderer.ts:96](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L96)
+Defined in: [autk-map/src/renderer.ts:97](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L97)
 
 Underlying render canvas.
 
@@ -66,7 +66,7 @@ Underlying render canvas.
 
 > **get** **canvasFormat**(): `GPUTextureFormat`
 
-Defined in: [autk-map/src/renderer.ts:126](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L126)
+Defined in: [autk-map/src/renderer.ts:127](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L127)
 
 Preferred canvas format negotiated with WebGPU.
 
@@ -82,7 +82,7 @@ Preferred canvas format negotiated with WebGPU.
 
 > **get** **commandEncoder**(): `GPUCommandEncoder`
 
-Defined in: [autk-map/src/renderer.ts:151](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L151)
+Defined in: [autk-map/src/renderer.ts:152](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L152)
 
 Active command encoder for the current frame.
 
@@ -98,7 +98,7 @@ Active command encoder for the current frame.
 
 > **get** **context**(): `GPUCanvasContext` \| `null`
 
-Defined in: [autk-map/src/renderer.ts:131](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L131)
+Defined in: [autk-map/src/renderer.ts:132](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L132)
 
 Active WebGPU canvas context, if configured.
 
@@ -114,7 +114,7 @@ Active WebGPU canvas context, if configured.
 
 > **get** **cssHeight**(): `number`
 
-Defined in: [autk-map/src/renderer.ts:106](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L106)
+Defined in: [autk-map/src/renderer.ts:107](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L107)
 
 Canvas layout height in CSS pixels.
 
@@ -130,7 +130,7 @@ Canvas layout height in CSS pixels.
 
 > **get** **cssWidth**(): `number`
 
-Defined in: [autk-map/src/renderer.ts:101](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L101)
+Defined in: [autk-map/src/renderer.ts:102](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L102)
 
 Canvas layout width in CSS pixels.
 
@@ -146,7 +146,7 @@ Canvas layout width in CSS pixels.
 
 > **get** **depthBuffer**(): `GPURenderPassDepthStencilAttachment`
 
-Defined in: [autk-map/src/renderer.ts:146](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L146)
+Defined in: [autk-map/src/renderer.ts:147](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L147)
 
 Depth attachment used by the primary render pass.
 
@@ -162,7 +162,7 @@ Depth attachment used by the primary render pass.
 
 > **get** **device**(): `GPUDevice`
 
-Defined in: [autk-map/src/renderer.ts:136](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L136)
+Defined in: [autk-map/src/renderer.ts:137](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L137)
 
 Logical GPU device.
 
@@ -178,7 +178,7 @@ Logical GPU device.
 
 > **get** **devicePixelRatio**(): `number`
 
-Defined in: [autk-map/src/renderer.ts:121](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L121)
+Defined in: [autk-map/src/renderer.ts:122](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L122)
 
 Device pixel ratio currently applied to the render surface.
 
@@ -194,7 +194,7 @@ Device pixel ratio currently applied to the render surface.
 
 > **get** **frameBuffer**(): `GPURenderPassColorAttachment`
 
-Defined in: [autk-map/src/renderer.ts:141](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L141)
+Defined in: [autk-map/src/renderer.ts:142](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L142)
 
 Main color attachment used by the primary render pass.
 
@@ -210,7 +210,7 @@ Main color attachment used by the primary render pass.
 
 > **get** **pickingBuffer**(): `GPURenderPassColorAttachment`
 
-Defined in: [autk-map/src/renderer.ts:169](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L169)
+Defined in: [autk-map/src/renderer.ts:170](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L170)
 
 Picking color attachment descriptor.
 
@@ -226,7 +226,7 @@ Picking color attachment descriptor.
 
 > **get** **pickingDepthBuffer**(): `GPURenderPassDepthStencilAttachment`
 
-Defined in: [autk-map/src/renderer.ts:174](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L174)
+Defined in: [autk-map/src/renderer.ts:175](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L175)
 
 Picking depth attachment descriptor.
 
@@ -242,7 +242,7 @@ Picking depth attachment descriptor.
 
 > **get** **pickingTexture**(): `GPUTexture`
 
-Defined in: [autk-map/src/renderer.ts:164](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L164)
+Defined in: [autk-map/src/renderer.ts:165](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L165)
 
 Picking color texture used for object-id readback.
 
@@ -258,7 +258,7 @@ Picking color texture used for object-id readback.
 
 > **get** **pixelHeight**(): `number`
 
-Defined in: [autk-map/src/renderer.ts:116](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L116)
+Defined in: [autk-map/src/renderer.ts:117](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L117)
 
 Canvas backing-store height in device pixels.
 
@@ -274,7 +274,7 @@ Canvas backing-store height in device pixels.
 
 > **get** **pixelWidth**(): `number`
 
-Defined in: [autk-map/src/renderer.ts:111](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L111)
+Defined in: [autk-map/src/renderer.ts:112](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L112)
 
 Canvas backing-store width in device pixels.
 
@@ -290,7 +290,7 @@ Canvas backing-store width in device pixels.
 
 > **get** **sampleCount**(): `number`
 
-Defined in: [autk-map/src/renderer.ts:159](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L159)
+Defined in: [autk-map/src/renderer.ts:160](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L160)
 
 MSAA sample count used for the main pass.
 
@@ -304,7 +304,7 @@ MSAA sample count used for the main pass.
 
 > **beginMainRenderPass**(): `GPURenderPassEncoder`
 
-Defined in: [autk-map/src/renderer.ts:425](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L425)
+Defined in: [autk-map/src/renderer.ts:448](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L448)
 
 Opens the shared main render pass for the current frame.
 
@@ -324,7 +324,7 @@ If the renderer has not been initialized or GPU context is null.
 
 > **configureContext**(): `void`
 
-Defined in: [autk-map/src/renderer.ts:254](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L254)
+Defined in: [autk-map/src/renderer.ts:264](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L264)
 
 Configures the WebGPU canvas context.
 
@@ -341,7 +341,7 @@ canvas format and render-attachment usage.
 
 > **configureDepthBuffer**(): `void`
 
-Defined in: [autk-map/src/renderer.ts:369](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L369)
+Defined in: [autk-map/src/renderer.ts:383](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L383)
 
 Creates or recreates the main depth attachment.
 
@@ -358,7 +358,7 @@ the primary render pass.
 
 > **configureFrameBuffer**(): `void`
 
-Defined in: [autk-map/src/renderer.ts:328](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L328)
+Defined in: [autk-map/src/renderer.ts:338](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L338)
 
 Creates or recreates the main color attachment and multisample texture.
 
@@ -375,7 +375,7 @@ configured background color as its clear value.
 
 > **configurePickingBuffer**(): `void`
 
-Defined in: [autk-map/src/renderer.ts:280](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L280)
+Defined in: [autk-map/src/renderer.ts:290](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L290)
 
 Creates or recreates color and depth attachments for picking.
 
@@ -392,7 +392,7 @@ backing store so object ids can be read back at pixel precision.
 
 > **destroy**(): `void`
 
-Defined in: [autk-map/src/renderer.ts:584](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L584)
+Defined in: [autk-map/src/renderer.ts:607](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L607)
 
 Releases GPU resources, unconfigures the canvas, and resets renderer state.
 
@@ -410,7 +410,7 @@ Never throws.
 
 > **enqueuePickingReadback**(`slotIndex`, `pickIndex`, `x`, `y`): `void`
 
-Defined in: [autk-map/src/renderer.ts:525](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L525)
+Defined in: [autk-map/src/renderer.ts:548](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L548)
 
 Queues a single-pixel picking texture readback into a reserved slot.
 
@@ -454,7 +454,7 @@ If the requested slot is not reserved.
 
 > **finish**(): `void`
 
-Defined in: [autk-map/src/renderer.ts:451](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L451)
+Defined in: [autk-map/src/renderer.ts:474](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L474)
 
 Submits the current command buffer and clears the active encoder.
 
@@ -472,7 +472,7 @@ Never throws. Silently returns when not initialized or no encoder exists.
 
 > **init**(): `Promise`\<`void`\>
 
-Defined in: [autk-map/src/renderer.ts:183](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L183)
+Defined in: [autk-map/src/renderer.ts:184](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L184)
 
 Initializes WebGPU and creates all core render targets.
 
@@ -490,7 +490,7 @@ Never throws. Failures log to console and leave the renderer uninitialized.
 
 > **initWebGPU**(): `Promise`\<`boolean`\>
 
-Defined in: [autk-map/src/renderer.ts:204](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L204)
+Defined in: [autk-map/src/renderer.ts:205](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L205)
 
 Initializes the WebGPU device and preferred canvas format.
 
@@ -510,7 +510,7 @@ Never throws. Errors are caught and return `false`.
 
 > **readPickingResults**(`slotIndex`, `pickCount`): `Promise`\<`number`[]\>
 
-Defined in: [autk-map/src/renderer.ts:555](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L555)
+Defined in: [autk-map/src/renderer.ts:578](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L578)
 
 Maps a reserved readback slot and decodes all picked ids.
 
@@ -544,7 +544,7 @@ If the buffer map operation times out or the device is lost.
 
 > **reservePickingReadbackSlot**(`pickCount`): `number` \| `null`
 
-Defined in: [autk-map/src/renderer.ts:487](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L487)
+Defined in: [autk-map/src/renderer.ts:510](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L510)
 
 Reserves a double-buffered picking readback slot for the current frame.
 
@@ -572,7 +572,7 @@ Never throws.
 
 > **resize**(`cssWidth`, `cssHeight`, `devicePixelRatio?`): `void`
 
-Defined in: [autk-map/src/renderer.ts:235](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L235)
+Defined in: [autk-map/src/renderer.ts:245](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L245)
 
 Resizes the canvas and recreates size-dependent render targets.
 
@@ -610,7 +610,7 @@ Never throws.
 
 > **start**(): `void`
 
-Defined in: [autk-map/src/renderer.ts:400](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L400)
+Defined in: [autk-map/src/renderer.ts:416](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L416)
 
 Starts the main render pass by clearing configured attachments.
 
@@ -620,7 +620,9 @@ Starts the main render pass by clearing configured attachments.
 
 #### Throws
 
-Never throws. Silently returns when not initialized.
+Never throws. Silently returns when not initialized or when the
+canvas context has been transiently unconfigured (e.g. by a sibling
+renderer's destroy/recreate cycle in a multi-instance setup).
 
 ***
 
@@ -628,7 +630,7 @@ Never throws. Silently returns when not initialized.
 
 > **startPickingRenderPass**(): `void`
 
-Defined in: [autk-map/src/renderer.ts:464](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L464)
+Defined in: [autk-map/src/renderer.ts:487](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L487)
 
 Starts the picking render pass by clearing picking attachments.
 
@@ -646,7 +648,7 @@ Never throws. Silently returns when not initialized.
 
 > **toPixelCoordinates**(`x`, `y`): \[`number`, `number`\]
 
-Defined in: [autk-map/src/renderer.ts:630](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-map/src/renderer.ts#L630)
+Defined in: [autk-map/src/renderer.ts:659](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/renderer.ts#L659)
 
 Converts CSS-relative coordinates into clamped backing-store pixel coordinates.
 

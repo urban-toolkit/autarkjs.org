@@ -1,13 +1,13 @@
-[**autk-plot**](../index.md)
+[**@urban-toolkit/autk-plot**](../index.md)
 
 ***
 
-[autk-plot](../globals.md) / TransformReducer
+[@urban-toolkit/autk-plot](../globals.md) / TransformReducer
 
 # Type Alias: TransformReducer
 
 > **TransformReducer** = `"count"` \| `"sum"` \| `"avg"` \| `"min"` \| `"max"`
 
-Defined in: [autk-plot/src/api.ts:95](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/api.ts#L95)
+Defined in: [autk-plot/src/api.ts:95](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/api.ts#L95)
 
 Supported reducer names for built-in transform presets.

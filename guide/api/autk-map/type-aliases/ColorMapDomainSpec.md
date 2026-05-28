@@ -1,14 +1,14 @@
-[**autk-map**](../index.md)
+[**@urban-toolkit/autk-map**](../index.md)
 
 ***
 
-[autk-map](../globals.md) / ColorMapDomainSpec
+[@urban-toolkit/autk-map](../globals.md) / ColorMapDomainSpec
 
 # Type Alias: ColorMapDomainSpec
 
 > **ColorMapDomainSpec** = \{ `params`: `number`[] \| `string`[]; `type`: [`USER`](../enumerations/ColorMapDomainStrategy.md#user); \} \| \{ `type`: [`MIN_MAX`](../enumerations/ColorMapDomainStrategy.md#min_max); \} \| \{ `params?`: \[`number`, `number`\]; `type`: [`PERCENTILE`](../enumerations/ColorMapDomainStrategy.md#percentile); \}
 
-Defined in: [autk-core/src/types-colormap.ts:43](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-colormap.ts#L43)
+Defined in: autk-core/dist/src/types-colormap.d.ts:40
 
 Specification for how a colormap domain should be derived.
 

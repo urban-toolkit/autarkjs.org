@@ -1,12 +1,12 @@
-[**autk-map**](../index.md)
+[**@urban-toolkit/autk-map**](../index.md)
 
 ***
 
-[autk-map](../globals.md) / TriangulatorBuildings
+[@urban-toolkit/autk-map](../globals.md) / TriangulatorBuildings
 
 # Class: TriangulatorBuildings
 
-Defined in: [autk-core/src/triangulator-buildings.ts:39](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-buildings.ts#L39)
+Defined in: autk-core/dist/src/triangulator-buildings.d.ts:15
 
 Builds extruded mesh geometry for OSM-style buildings.
 
@@ -38,7 +38,7 @@ const [mesh, components] = TriangulatorBuildings.buildMesh(buildings, origin);
 
 > `static` **buildMesh**(`geojson`, `origin`, `allowZeroHeightBuildings?`): \[[`LayerGeometry`](../interfaces/LayerGeometry.md)[], [`LayerComponent`](../interfaces/LayerComponent.md)[]\]
 
-Defined in: [autk-core/src/triangulator-buildings.ts:51](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/triangulator-buildings.ts#L51)
+Defined in: autk-core/dist/src/triangulator-buildings.d.ts:27
 
 Builds extruded building geometry for an OSM-style building collection.
 
@@ -58,7 +58,7 @@ World-space origin used to convert coordinates into local XY space.
 
 ##### allowZeroHeightBuildings?
 
-`boolean` = `false`
+`boolean`
 
 When `true`, parts with no height metadata get a random fallback height.
 

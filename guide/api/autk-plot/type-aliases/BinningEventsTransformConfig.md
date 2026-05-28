@@ -1,18 +1,18 @@
-[**autk-plot**](../index.md)
+[**@urban-toolkit/autk-plot**](../index.md)
 
 ***
 
-[autk-plot](../globals.md) / BinningEventsTransformConfig
+[@urban-toolkit/autk-plot](../globals.md) / BinningEventsTransformConfig
 
 # Type Alias: BinningEventsTransformConfig
 
 > **BinningEventsTransformConfig** = `object`
 
-Defined in: [autk-plot/src/api.ts:145](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/api.ts#L145)
+Defined in: [autk-plot/src/api.ts:145](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/api.ts#L145)
 
 Binning-events preset config.
 
-The events array column is read from `ChartConfig.attributes.axis[0]`.
+The events array column is read from `PlotConfig.attributes.axis[0]`.
 Use `'@transform'` in `axis[1]` to mark the output slot.
 `timestamp` and `value` are sub-fields within each event object.
 
@@ -22,7 +22,7 @@ Use `'@transform'` in `axis[1]` to mark the output slot.
 
 > `optional` **options?**: `object`
 
-Defined in: [autk-plot/src/api.ts:147](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/api.ts#L147)
+Defined in: [autk-plot/src/api.ts:147](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/api.ts#L147)
 
 #### reducer?
 
@@ -54,4 +54,4 @@ Field within each event object used for non-count reducers. Defaults to `'value'
 
 > **preset**: `"binning-events"`
 
-Defined in: [autk-plot/src/api.ts:146](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/api.ts#L146)
+Defined in: [autk-plot/src/api.ts:146](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/api.ts#L146)

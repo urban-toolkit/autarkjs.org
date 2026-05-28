@@ -1,16 +1,16 @@
-[**autk-plot**](../index.md)
+[**@urban-toolkit/autk-plot**](../index.md)
 
 ***
 
-[autk-plot](../globals.md) / run
+[@urban-toolkit/autk-plot](../globals.md) / run
 
 # Function: run()
 
-> **run**(`rows`, `config`, `columns`): [`ExecutedChartTransform`](../type-aliases/ExecutedChartTransform.md)
+> **run**(`rows`, `config`, `columns`): [`ExecutedPlotTransform`](../type-aliases/ExecutedPlotTransform.md)
 
-Defined in: [autk-plot/src/transforms/index.ts:61](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/transforms/index.ts#L61)
+Defined in: [autk-plot/src/transforms/index.ts:61](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/transforms/index.ts#L61)
 
-Runs a chart transform config through the preset pipeline.
+Runs a plot transform config through the preset pipeline.
 
 ## Parameters
 
@@ -22,7 +22,7 @@ Input rows to transform.
 
 ### config
 
-[`ChartTransformConfig`](../type-aliases/ChartTransformConfig.md)
+[`PlotTransformConfig`](../type-aliases/PlotTransformConfig.md)
 
 Transform configuration selecting the preset runner.
 
@@ -34,7 +34,7 @@ Ordered source columns passed to the chosen preset.
 
 ## Returns
 
-[`ExecutedChartTransform`](../type-aliases/ExecutedChartTransform.md)
+[`ExecutedPlotTransform`](../type-aliases/ExecutedPlotTransform.md)
 
 Executed transform payload tagged with its preset discriminator.
 

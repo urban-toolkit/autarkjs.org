@@ -1,12 +1,12 @@
-[**autk-db**](../index.md)
+[**@urban-toolkit/autk-db**](../index.md)
 
 ***
 
-[autk-db](../globals.md) / OsmLoadTimings
+[@urban-toolkit/autk-db](../globals.md) / OsmLoadTimings
 
 # Interface: OsmLoadTimings
 
-Defined in: [autk-db/src/spatial/use-cases/load-osm-from-overpass-api/interfaces.ts:36](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/load-osm-from-overpass-api/interfaces.ts#L36)
+Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:36](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L36)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [autk-db/src/spatial/use-cases/load-osm-from-overpass-api/interfaces
 
 > **boundariesProcessingMs**: `number`
 
-Defined in: [autk-db/src/spatial/use-cases/load-osm-from-overpass-api/interfaces.ts:44](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/load-osm-from-overpass-api/interfaces.ts#L44)
+Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:44](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L44)
 
 Time in ms to insert boundary elements into DuckDB (excludes HTTP download).
 
@@ -24,7 +24,7 @@ Time in ms to insert boundary elements into DuckDB (excludes HTTP download).
 
 > **boundaryElementCount**: `number`
 
-Defined in: [autk-db/src/spatial/use-cases/load-osm-from-overpass-api/interfaces.ts:40](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/load-osm-from-overpass-api/interfaces.ts#L40)
+Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:40](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L40)
 
 Number of elements in the boundary dataset.
 
@@ -34,7 +34,7 @@ Number of elements in the boundary dataset.
 
 > **layers**: [`LayerLoadTimings`](LayerLoadTimings.md)[]
 
-Defined in: [autk-db/src/spatial/use-cases/load-osm-from-overpass-api/interfaces.ts:46](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/load-osm-from-overpass-api/interfaces.ts#L46)
+Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:46](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L46)
 
 Per-layer timing and feature count details (populated when autoLoadLayers is used).
 
@@ -44,7 +44,7 @@ Per-layer timing and feature count details (populated when autoLoadLayers is use
 
 > **osmDataProcessingMs**: `number`
 
-Defined in: [autk-db/src/spatial/use-cases/load-osm-from-overpass-api/interfaces.ts:42](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/load-osm-from-overpass-api/interfaces.ts#L42)
+Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:42](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L42)
 
 Time in ms to insert OSM elements into DuckDB (excludes HTTP download).
 
@@ -54,6 +54,6 @@ Time in ms to insert OSM elements into DuckDB (excludes HTTP download).
 
 > **osmElementCount**: `number`
 
-Defined in: [autk-db/src/spatial/use-cases/load-osm-from-overpass-api/interfaces.ts:38](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-db/src/spatial/use-cases/load-osm-from-overpass-api/interfaces.ts#L38)
+Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:38](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L38)
 
 Number of OSM elements (nodes + ways + relations) in the main dataset.

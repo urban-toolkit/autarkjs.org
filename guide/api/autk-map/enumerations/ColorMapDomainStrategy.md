@@ -1,12 +1,12 @@
-[**autk-map**](../index.md)
+[**@urban-toolkit/autk-map**](../index.md)
 
 ***
 
-[autk-map](../globals.md) / ColorMapDomainStrategy
+[@urban-toolkit/autk-map](../globals.md) / ColorMapDomainStrategy
 
 # Enumeration: ColorMapDomainStrategy
 
-Defined in: [autk-core/src/types-colormap.ts:19](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-colormap.ts#L19)
+Defined in: autk-core/dist/src/types-colormap.d.ts:18
 
 Strategies for deriving a colormap domain.
 
@@ -19,7 +19,7 @@ computed from numeric min/max values, or computed from numeric percentiles.
 
 > **MIN\_MAX**: `"minMax"`
 
-Defined in: [autk-core/src/types-colormap.ts:23](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-colormap.ts#L23)
+Defined in: autk-core/dist/src/types-colormap.d.ts:22
 
 Derive the domain from the observed minimum and maximum values.
 
@@ -29,7 +29,7 @@ Derive the domain from the observed minimum and maximum values.
 
 > **PERCENTILE**: `"percentile"`
 
-Defined in: [autk-core/src/types-colormap.ts:25](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-colormap.ts#L25)
+Defined in: autk-core/dist/src/types-colormap.d.ts:24
 
 Derive the domain from lower and upper percentiles.
 
@@ -39,6 +39,6 @@ Derive the domain from lower and upper percentiles.
 
 > **USER**: `"user"`
 
-Defined in: [autk-core/src/types-colormap.ts:21](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-core/src/types-colormap.ts#L21)
+Defined in: autk-core/dist/src/types-colormap.d.ts:20
 
 Use the caller-provided domain verbatim.

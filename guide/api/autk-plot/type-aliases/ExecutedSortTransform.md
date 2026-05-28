@@ -1,14 +1,14 @@
-[**autk-plot**](../index.md)
+[**@urban-toolkit/autk-plot**](../index.md)
 
 ***
 
-[autk-plot](../globals.md) / ExecutedSortTransform
+[@urban-toolkit/autk-plot](../globals.md) / ExecutedSortTransform
 
 # Type Alias: ExecutedSortTransform
 
 > **ExecutedSortTransform** = `object`
 
-Defined in: [autk-plot/src/transforms/presets/sort.ts:22](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/transforms/presets/sort.ts#L22)
+Defined in: [autk-plot/src/transforms/presets/sort.ts:22](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/transforms/presets/sort.ts#L22)
 
 Result produced by `runSort`.
 
@@ -21,7 +21,7 @@ for downstream selection linking.
 
 > **preset**: `"sort"`
 
-Defined in: [autk-plot/src/transforms/presets/sort.ts:24](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/transforms/presets/sort.ts#L24)
+Defined in: [autk-plot/src/transforms/presets/sort.ts:24](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/transforms/presets/sort.ts#L24)
 
 Preset discriminator identifying the executed transform.
 
@@ -31,6 +31,6 @@ Preset discriminator identifying the executed transform.
 
 > **rows**: [`AutkDatum`](AutkDatum.md)[]
 
-Defined in: [autk-plot/src/transforms/presets/sort.ts:26](https://github.com/urban-toolkit/autark/blob/be27d66c55f885979ab5d4dff54048f4e2c468a1/autk-plot/src/transforms/presets/sort.ts#L26)
+Defined in: [autk-plot/src/transforms/presets/sort.ts:26](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/transforms/presets/sort.ts#L26)
 
 Sorted rows preserving their original `autkIds` provenance.
