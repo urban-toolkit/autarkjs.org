@@ -241,7 +241,12 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
 </ClientOnly>
 
 :::info Layers Cropping
-When OSM data is loaded in the same [workspace](./workspaces.md), its bounding box is automatically used to crop the GeoJSON.
+`autk-db` applies workspace-aware filtering and clipping when new layers are loaded.
+
+1. If OSM data already exists in the current [workspace](./workspaces.md), its bounding box is first used to filter the features of newly loaded layers. The remaining features are then clipped using the OSM `surface` layer geometry.
+2. If OSM data is not available, the first loaded GeoJSON layer provides the workspace bounding box used to filter the features of subsequent layers. If that first layer is a polygon layer, its geometry is also used to clip later layers.
+
+**Tip:** If you plan to add OSM layers, load them first.
 :::
 
 #### List of `loadGeojson` Parameters
