@@ -117,7 +117,7 @@ async function runCode() {
 
   try {
     const { AutkMap } = await import('@urban-toolkit/autk-map')
-    const { AutkSpatialDb } = await import('@urban-toolkit/autk-db')
+    const { AutkDb } = await import('@urban-toolkit/autk-db')
 
     const userCode = editableCode.value
       .replace(/import\s*{[^}]*}\s*from\s*["'][^"']*["']\s*;?/g, '')
