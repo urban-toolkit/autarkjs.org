@@ -13,139 +13,113 @@
 
 # Analyzing Data
 
-Once data is loaded into DuckDB, `autk-db` provides methods for spatial analysis and custom SQL queries. Analysis methods transform data and store results as new or updated tables. To access the result data, use one of the [retrieving data](./retrieving-data.md) methods.
+Once data is loaded into DuckDB, `autk-db` provides methods for spatial analysis and custom SQL queries. Analysis methods update existing tables or create new ones. To inspect the results, use one of the [retrieving data](./retrieving-data.md) methods.
 
 <script setup>
 const spatialQueryCode = `
-import { AutkSpatialDb } from "@urban-toolkit/autk-db";
+import { AutkDb } from "@urban-toolkit/autk-db";
 
-const db = new AutkSpatialDb();
+const db = new AutkDb();
 await db.init();
 
-await db.loadCustomLayer({
+await db.loadGeojson({
     geojsonFileUrl: '/data/mnt_neighs.geojson',
     outputTableName: 'neighborhoods',
-    coordinateFormat: 'EPSG:3395',
 });
 
 await db.loadCsv({
     csvFileUrl: '/data/mnt_noise.csv',
     outputTableName: 'noise',
-    geometryColumns: {
-        latColumnName: 'Latitude',
-        longColumnName: 'Longitude',
-        coordinateFormat: 'EPSG:3395',
-    },
+    geometryColumns: true,
 });
 
 const res = await db.spatialQuery({
     tableRootName: 'neighborhoods',
     tableJoinName: 'noise',
-    spatialPredicate: 'INTERSECT',
-    output: { type: 'MODIFY_ROOT' }
 });
 
 console.log(res)
 `
 
 const groupQueryCode = `
-import { AutkSpatialDb } from "@urban-toolkit/autk-db";
+import { AutkDb } from "@urban-toolkit/autk-db";
 
-const db = new AutkSpatialDb();
+const db = new AutkDb();
 await db.init();
 
-await db.loadCustomLayer({
+await db.loadGeojson({
     geojsonFileUrl: '/data/mnt_neighs.geojson',
     outputTableName: 'neighborhoods',
-    coordinateFormat: 'EPSG:3395',
 });
 
 await db.loadCsv({
     csvFileUrl: '/data/mnt_noise.csv',
     outputTableName: 'noise',
-    geometryColumns: {
-        latColumnName: 'Latitude',
-        longColumnName: 'Longitude',
-        coordinateFormat: 'EPSG:3395',
-    },
+    geometryColumns: true,
 });
 
 const res = await db.spatialQuery({
     tableRootName: 'neighborhoods',
     tableJoinName: 'noise',
-    spatialPredicate: 'INTERSECT',
-    output: { type: 'MODIFY_ROOT' },
-    groupBy: {
-        selectColumns: [
-            {
-                tableName: 'noise',
-                column: 'key',
-                aggregateFn: 'count',
-            },
-        ],
-    },
+    groupBy: [
+        {
+            column: '*',
+            aggregateFn: 'count',
+        },
+    ],
 });
 
 console.log(res)
 `
 
-
 const heatmapCode = `
-import { AutkSpatialDb } from "@urban-toolkit/autk-db";
+import { AutkDb } from "@urban-toolkit/autk-db";
 
-const db = new AutkSpatialDb();
+const db = new AutkDb();
 await db.init();
 
-await db.loadCustomLayer({
+await db.loadGeojson({
     geojsonFileUrl: '/data/mnt_neighs.geojson',
     outputTableName: 'neighborhoods',
-    coordinateFormat: 'EPSG:3395',
+    layerType: 'polygons',
 });
 
 await db.loadCsv({
     csvFileUrl: '/data/mnt_noise.csv',
     outputTableName: 'noise',
-    geometryColumns: {
-        latColumnName: 'Latitude',
-        longColumnName: 'Longitude',
-        coordinateFormat: 'EPSG:3395',
-    },
+    geometryColumns: true,
 });
 
 const res = await db.buildHeatmap({
     tableJoinName: 'noise',
     outputTableName: 'heatmap',
-    nearDistance: 250,
+    near: { distance: 250 },
     grid: { rows: 20, columns: 20 },
-    groupBy: {
-        selectColumns: [
-            {
-                tableName: 'noise',
-                column: 'key',
-                aggregateFn: 'count'
-            },
-        ],
-    },
+    groupBy: [
+        {
+            column: '*',
+            aggregateFn: 'count'
+        },
+    ],
 });
 
 console.log(res)
 `
 
 const rawQueryCode = `
-import { AutkSpatialDb } from "@urban-toolkit/autk-db";
+import { AutkDb } from "@urban-toolkit/autk-db";
 
-const db = new AutkSpatialDb();
+const db = new AutkDb();
 await db.init();
 
-await db.loadCustomLayer({
+await db.loadGeojson({
     geojsonFileUrl: '/data/mnt_neighs.geojson',
     outputTableName: 'neighborhoods',
-    coordinateFormat: 'EPSG:3395',
 });
 
 const result = await db.rawQuery({
-    query: \`SELECT properties.ntaname, CAST(properties.shape_area AS DOUBLE) AS shape_area 
-             FROM neighborhoods 
+    query: \`SELECT properties.ntaname, CAST(properties.shape_area AS DOUBLE) AS shape_area
+             FROM neighborhoods
              WHERE CAST(properties.shape_area AS DOUBLE) > 1000\`,
     output: { type: 'RETURN_OBJECT' },
 });
@@ -156,59 +130,101 @@ console.log(result)
 
 ## Spatial Queries
 
-`spatialQuery` is the main method for spatial analysis. It can perform spatial joins between layers or compute features within a given radius. The method requires these parameters:
+`spatialQuery` performs a spatial join between two tables. The root table is always modified in place, and the joined values are written into `properties.sjoin`.
 
-1. `tableRootName` and `tableJoinName` — The two tables involved in the query. The root table receives the results; the join table provides the data to match against.
+The most important parameters are:
 
-2. `spatialPredicate`—  Defines how features are matched: `'INTERSECT'` for geometry-based joins, or `'NEAR'` for proximity-based queries within a given radius.
-
-3. `output` — Controls where results go. Use `'MODIFY_ROOT'` to update the root table in-place, or `'CREATE_NEW'` with a `tableName` to create a new table.
-
-4. `nearDistance` — Required when using `'NEAR'`. Distance threshold.
+1. `tableRootName` and `tableJoinName` — The two tables involved in the join. The root table receives the result; the join table provides the matching features.
+2. `near` — Optional NEAR predicate configuration. If omitted, `spatialQuery` uses `INTERSECT`.
+3. `groupBy` — Optional aggregation rules applied to the join-side data.
 
 <ClientOnly>
   <CodePlayground :code="spatialQueryCode" out="console" />
 </ClientOnly>
 
-:::warning Units Depend on Projection
-`nearDistance` operates in the native units of your geometries. When using `EPSG:3395`, the unit is **meters**. If you use a different projection, units will differ.
+:::warning Units depend on projection
+`near.distance` uses the native units of the loaded geometries. With `EPSG:3395`, the unit is meters.
 :::
 
-#### `spatialQuery` Parameters
+#### List of `spatialQuery` Parameters
 
-| Option | Type | Description |
-|---|---|---|
-| `tableRootName` | `string` | The root table to join into. |
-| `tableJoinName` | `string` | The table to join from. |
-| `output.type` | `'MODIFY_ROOT'` \| `'CREATE_NEW'` | Modify the root table in-place or create a new table. |
-| `output.tableName` | `string` | Required when `output.type` is `'CREATE_NEW'`. Name for the new table. |
-| `spatialPredicate` | `'INTERSECT'` \| `'NEAR'` | How features are matched spatially. |
-| `nearDistance` | `number` | Distance threshold for `'NEAR'`. |
-| `groupBy` | `object` | Optional aggregation config. See details below. |
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/SpatialQueryParams#tablerootname"><code>tableRootName</code></a></td>
+      <td><code>string</code></td>
+      <td>Root table name.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/SpatialQueryParams#tablejoinname"><code>tableJoinName</code></a></td>
+      <td><code>string</code></td>
+      <td>Join table name.</td>
+    </tr>
+    <tr>
+      <td>
+        <div style="display:flex; align-items:stretch;">
+          <div style="width:120px; display:flex; align-items:center;"><a href="/api/autk-db/interfaces/SpatialQueryParams#near"><code>near</code></a></div>
+          <div style="width:140px; border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
+            <code style="display:inline-block; line-height:1;">distance</code>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
+          <code style="display:inline-block; line-height:1;">number</code>
+        </div>
+      </td>
+      <td>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <span>NEAR distance.</span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div style="display:flex; align-items:stretch;">
+          <div style="width:120px; display:flex; align-items:center;"><a href="/api/autk-db/interfaces/SpatialQueryParams#groupby"><code>groupBy</code></a></div>
+          <div style="width:140px; border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
+            <code style="display:inline-block; line-height:1;">column</code>
+            <code style="display:inline-block; line-height:1;">aggregateFn</code>
+            <code style="display:inline-block; line-height:1;">normalize</code>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
+          <code style="display:inline-block; line-height:1;">string</code>
+          <code style="display:inline-block; line-height:1;">AggregateFunction</code>
+          <code style="display:inline-block; line-height:1;">boolean</code>
+        </div>
+      </td>
+      <td>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <span>Column to aggregate.</span>
+          <span>Aggregation function.</span>
+          <span>Normalize to 0–1.</span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-### `groupBy` columns
+### `groupBy` output
 
-Grouping is one of the most important operations in spatial analysis because it turns many individual feature matches into summaries that can be mapped, compared, and reused. Instead of inspecting every joined point, line, or polygon separately, `groupBy` lets you compute counts, totals, averages, ranges, and normalized values for each root feature.
+Grouping summarizes the matched features instead of returning one join result per match. Aggregated values are written into `properties.sjoin.<aggregateFn>.<key>`.
 
 <ClientOnly>
   <CodePlayground :code="groupQueryCode" out="console" />
 </ClientOnly>
 
-When `groupBy` is provided, `spatialQuery` aggregates matched features instead of producing one row per match. Each entry in `selectColumns` defines a resulting summary column, including which source column to aggregate, which aggregate function to apply, and whether to normalize the result.
-
-| Option | Type | Description |
-|---|---|---|
-| `tableName` | `string` | Which table to select the column from. |
-| `column` | `string` | Column name to aggregate. |
-| `aggregateFn` | `'sum'` \| `'avg'` \| `'count'` \| `'min'` \| `'max'` | Aggregate function to apply. |
-| `aggregateFnResultColumnName` | `string` | Custom key name in the output JSON. Defaults to the table name for `count` or `tableName.column` (for others). |
-| `normalize` | `boolean` | If `true`, adds a min-max normalized version of the column (0–1 range) as `<resultColumnName>_norm`. |
-
-### Output structure
-
-All `spatialQuery` results are written into the **`properties`** column of the root table, nested under a `sjoin` key.
-
-1. **Without `groupBy`** the join table's properties are merged flat into `properties.sjoin`. This produces **multiple rows per root feature**, one for each matched join feature.
+Without `groupBy`, each matched feature is written directly under `properties.sjoin`, which can produce multiple rows for the same root feature.
 
 ```json
 {
@@ -218,67 +234,177 @@ All `spatialQuery` results are written into the **`properties`** column of the r
 }
 ```
 
-2. **With `groupBy`** results are nested by aggregate function name into `properties.sjoin`. Root features are **deduplicated**, only one row per feature is produced.
+With `groupBy`, root features are deduplicated and the aggregated values are grouped by function name.
 
 ```json
 {
   "properties": {
     "sjoin": {
-      "count": { "noise_count": 42 }
+      "count": { "noise": 42 }
     }
   }
 }
 ```
+
 :::tip Normalization
-When `normalize: true` is set on a column, an additional key is added with a `_norm` suffix.
+When `normalize: true` is set on a `groupBy` entry, the aggregated value is normalized between 0 and 1.
 :::
 
 ## Build Heatmap
 
-`buildHeatmap` creates a grid over the current [workspace](./workspaces.md) bounding box and aggregates values from a source table into each grid cell using a proximity-based spatial query. The result is a grid layer table suitable for raster rendering.
+`buildHeatmap` creates a grid over the current [workspace](./workspaces.md) bounds and aggregates values from a source table into each grid cell. The result is a grid layer table suitable for raster rendering.
 
 <ClientOnly>
   <CodePlayground :code="heatmapCode" out="console" />
 </ClientOnly>
 
-:::warning Workspace Bounding Box
-If OSM data is loaded, the grid extent defaults to the OSM bounding box. When no OSM data is available, the grid is computed from the GeoJSON layers.
+:::warning Workspace bounds
+`buildHeatmap` requires a valid workspace bounding box. In practice, this usually comes from previously loaded OSM or GeoJSON layers.
 :::
 
-#### `buildHeatmap` Parameters
+#### List of `buildHeatmap` Parameters
 
-| Option | Type | Description |
-|---|---|---|
-| `tableJoinName` | `string` | Source table to aggregate (must have geometry). |
-| `outputTableName` | `string` | Name for the resulting grid table. |
-| `nearDistance` | `number` | Distance threshold. Each grid cell captures features within this radius. |
-| `grid.rows` | `number` | Number of rows in the grid. |
-| `grid.columns` | `number` | Number of columns in the grid. |
-| `groupBy` | `object` | Aggregation config — same `selectColumns` format as [spatialQuery](#groupby-columns). |
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/BuildHeatmapParams#tablejoinname"><code>tableJoinName</code></a></td>
+      <td><code>string</code></td>
+      <td>Source table name.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/BuildHeatmapParams#outputtablename"><code>outputTableName</code></a></td>
+      <td><code>string</code></td>
+      <td>Output table name.</td>
+    </tr>
+    <tr>
+      <td>
+        <div style="display:flex; align-items:stretch;">
+          <div style="width:120px; display:flex; align-items:center;"><a href="/api/autk-db/interfaces/BuildHeatmapParams#near"><code>near</code></a></div>
+          <div style="width:140px; border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
+            <code style="display:inline-block; line-height:1;">distance</code>
+          </div>
+        </div>
+      </td>
+      <td><code>number</code></td>
+      <td>NEAR distance.</td>
+    </tr>
+    <tr>
+      <td>
+        <div style="display:flex; align-items:stretch;">
+          <div style="width:120px; display:flex; align-items:center;"><a href="/api/autk-db/interfaces/BuildHeatmapParams#grid"><code>grid</code></a></div>
+          <div style="width:140px; border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
+            <code style="display:inline-block; line-height:1;">rows</code>
+            <code style="display:inline-block; line-height:1;">columns</code>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
+          <code style="display:inline-block; line-height:1;">number</code>
+          <code style="display:inline-block; line-height:1;">number</code>
+        </div>
+      </td>
+      <td>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <span>Grid rows.</span>
+          <span>Grid columns.</span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div style="display:flex; align-items:stretch;">
+          <div style="width:120px; display:flex; align-items:center;"><a href="/api/autk-db/interfaces/BuildHeatmapParams#groupby"><code>groupBy</code></a></div>
+          <div style="width:140px; border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
+            <code style="display:inline-block; line-height:1;">column</code>
+            <code style="display:inline-block; line-height:1;">aggregateFn</code>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
+          <code style="display:inline-block; line-height:1;">string</code>
+          <code style="display:inline-block; line-height:1;">HeatmapAggregateFunction</code>
+        </div>
+      </td>
+      <td>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <span>Column to aggregate.</span>
+          <span>Band aggregation.</span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Raw SQL {#raw-sql}
 
-While `spatialQuery` and `buildHeatmap` cover the most common spatial analysis patterns, complex or ad-hoc queries often require the flexibility of raw SQL. `rawQuery` gives you direct access to DuckDB's full SQL engine — window functions, CTEs, custom aggregations, or cross-table joins that don't fit the structured API. It's the escape hatch when the higher-level methods aren't expressive enough.
+While `spatialQuery` and `buildHeatmap` cover common spatial analysis patterns, `rawQuery` gives you direct access to DuckDB SQL for custom logic.
 
-`rawQuery` executes arbitrary DuckDB SQL against your loaded tables. The [workspace](workspaces.md) schema prefix is applied automatically.
+`rawQuery` executes SQL against the current [workspace](./workspaces.md).
 
 <ClientOnly>
   <CodePlayground :code="rawQueryCode" out="console" />
 </ClientOnly>
 
-#### `rawQuery` Parameters
+#### List of `rawQuery` Parameters
 
-| Option | Type | Description |
-|---|---|---|
-| `query` | `string` | SQL query to execute. |
-| `output.type` | `'CREATE_TABLE'` \| `'RETURN_OBJECT'` | `CREATE_TABLE` registers the result as a named table; `RETURN_OBJECT` returns rows as plain objects. |
-| `output.tableName` | `string` | Required when `type` is `'CREATE_TABLE'`. Name for the new table. |
-| `output.source` | `'csv'` \| `'osm'` \| `'geojson'` \| `'user'` | Optional. Sets the table's source metadata when creating a table. |
-| `output.tableType` | `LayerType` \| `'pointset'` | Optional. Sets the table's type metadata (e.g. `'polygons'`, `'pointset'`). |
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>query</code></td>
+      <td><code>string</code></td>
+      <td>SQL query.</td>
+    </tr>
+    <tr>
+      <td>
+        <div style="display:flex; align-items:stretch;">
+          <div style="width:120px; display:flex; align-items:center;"><code>output</code></div>
+          <div style="width:140px; border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
+            <code style="display:inline-block; line-height:1;">type</code>
+            <code style="display:inline-block; line-height:1;">tableName</code>
+            <code style="display:inline-block; line-height:1;">source</code>
+            <code style="display:inline-block; line-height:1;">tableType</code>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
+          <code style="display:inline-block; line-height:1;">"CREATE_TABLE" | "RETURN_OBJECT"</code>
+          <code style="display:inline-block; line-height:1;">string</code>
+          <code style="display:inline-block; line-height:1;">TableSource</code>
+          <code style="display:inline-block; line-height:1;">LayerType</code>
+        </div>
+      </td>
+      <td>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <span>Output mode.</span>
+          <span>New table name.</span>
+          <span>Result source metadata.</span>
+          <span>Result table type.</span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-:::warning Raw Query Limitations
-- Queries run against the **current workspace** only. Tables from other workspaces are not visible.
-- `rawQuery` **only allows** `SELECT` and `WITH` queries. Statements like `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, and `REPLACE` are rejected with a `NonSelectQueryError`.
+:::warning Raw query limitations
+- Queries run against the **current workspace** only.
+- `rawQuery` supports `SELECT` and `WITH` queries. Statements such as `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, and `REPLACE` are rejected.
 :::
 
 </div>
