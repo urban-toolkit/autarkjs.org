@@ -119,35 +119,16 @@ To directly fetch from the public [Overpass API](https://overpass-api.de/) and l
 
 3. [`outputTableName`](/api/autk-db/type-aliases/LoadOsmParams#outputtablename) — Optional parameter used to define the base name for the produced DuckDB tables. Each automatically loaded layer is stored as `{outputTableName}_{layer}`. It defaults to `table_osm`. For example, if `layers: ['surface', 'roads', 'buildings']`, the resulting tables are `table_osm_surface`, `table_osm_roads`, and `table_osm_buildings`.
 
-4. [`pbfFileUrl`](/api/autk-db/type-aliases/LoadOsmParams#pbffileurl) — Optional URL to a local or remote `.osm.pbf` extract. When provided, `loadOsm` skips the Overpass API download step and reads OSM data directly from the PBF file instead. `queryArea` is still required so `autk-db` can identify the requested administrative areas inside the extract.
-
 
 <ClientOnly>
   <CodePlayground :code="fetchOsmCode" out="console" />
 </ClientOnly>
 
-:::tip Overpass API Limits
+:::warning Overpass API Limits
 * Fetching large areas is slow and may fail — be aware that the public Overpass API servers can reject queries when they're busy or out of slots. Keep areas small and use specific `geocodeArea` + `areas` for the best results.
 
 * `autk-db` provides the `onProgress` callback that may be used to track the loading status.
 :::
-
-#### `loadOsm` Parameters
-
-| Option | Type | Description |
-|---|---|---|
-| [`outputTableName`](/api/autk-db/type-aliases/LoadOsmParams#outputtablename) | `string` | Base table name. |
-| [`queryArea`](/api/autk-db/type-aliases/LoadOsmParams#queryarea) | `object` | Area definition. |
-| `queryArea.geocodeArea` | `string` | Geocode scope. |
-| `queryArea.areas` | `string[]` | Boundary names. |
-| [`autoLoadLayers`](/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers) | `object` | Layers to extract. |
-| `autoLoadLayers.coordinateFormat` | `string` | Source CRS. |
-| `autoLoadLayers.layers` | `LayerType[]` | Layer names. |
-| `autoLoadLayers.dropOsmTable` | `boolean` | Drop raw table. |
-| [`pbfFileUrl`](/api/autk-db/type-aliases/LoadOsmParams#pbffileurl) | `string` | Optional PBF URL. |
-| [`forceRefresh`](/api/autk-db/type-aliases/LoadOsmParams#forcerefresh) | `boolean` | Bypass cache. |
-| [`workspace`](/api/autk-db/type-aliases/LoadOsmParams#workspace) | `string` | Workspace name. |
-| [`onProgress`](/api/autk-db/type-aliases/LoadOsmParams#onprogress) | `(phase: LoadingPhase) => void` | Progress callback. |
 
 ### Using Static `.pbf` Files
 
@@ -162,9 +143,80 @@ To load from a PBF file, provide the `pbfFileUrl` parameter to the `loadOsm` fun
 :::tip PBF Loading Times
 * The `.pbf` loader scans the file in three stages: first it identifies the regions informed in `queryArea`, then it computes the bounding box of these regions and, lastly, it collects the OSM features inside these areas. 
 
-* Very large files may also take long to process, but the entire process runs locally in the browser and no server limits apply. To reduce the loading time, crop the `.pbf` file first using [Osmium](https://osmcode.org/osmium-tool/) as a pre-processing step: `osmium extract --strategy=smart -b <minLon>,<minLat>,<maxLon>,<maxLat> <input.osm.pbf> -o <output.osm.pbf>`. 
+* Very large files may also take long to process, but the process runs etirely in the browser and no API limits apply. To reduce the loading time, crop the `.pbf` file first using [Osmium](https://osmcode.org/osmium-tool/) as a pre-processing step: `osmium extract --strategy=smart -b <minLon>,<minLat>,<maxLon>,<maxLat> <input.osm.pbf> -o <output.osm.pbf>`. 
 :::
 
+### `loadOsm` Parameters
+
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Sub-option</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="/api/autk-db/type-aliases/LoadOsmParams#outputtablename"><code>outputTableName</code></a></td>
+      <td>—</td>
+      <td><code>string</code></td>
+      <td>Base table name.</td>
+    </tr>
+    <tr>
+      <td rowspan="2"><a href="/api/autk-db/type-aliases/LoadOsmParams#queryarea"><code>queryArea</code></a></td>
+      <td><code>geocodeArea</code></td>
+      <td><code>string</code></td>
+      <td>Geocode scope.</td>
+    </tr>
+    <tr>
+      <td><code>areas</code></td>
+      <td><code>string[]</code></td>
+      <td>Boundary names.</td>
+    </tr>
+    <tr>
+      <td rowspan="3"><a href="/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers"><code>autoLoadLayers</code></a></td>
+      <td><code>coordinateFormat</code></td>
+      <td><code>string</code></td>
+      <td>Source CRS.</td>
+    </tr>
+    <tr>
+      <td><code>layers</code></td>
+      <td><code>LayerType[]</code></td>
+      <td>Layer names.</td>
+    </tr>
+    <tr>
+      <td><code>dropOsmTable</code></td>
+      <td><code>boolean</code></td>
+      <td>Drop raw table.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/type-aliases/LoadOsmParams#pbffileurl"><code>pbfFileUrl</code></a></td>
+      <td>—</td>
+      <td><code>string</code></td>
+      <td>Optional PBF URL.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/type-aliases/LoadOsmParams#forcerefresh"><code>forceRefresh</code></a></td>
+      <td>—</td>
+      <td><code>boolean</code></td>
+      <td>Bypass cache.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/type-aliases/LoadOsmParams#workspace"><code>workspace</code></a></td>
+      <td>—</td>
+      <td><code>string</code></td>
+      <td>Workspace name.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/type-aliases/LoadOsmParams#onprogress"><code>onProgress</code></a></td>
+      <td>—</td>
+      <td><code>(phase: LoadingPhase) =&gt; void</code></td>
+      <td>Progress callback.</td>
+    </tr>
+  </tbody>
+</table>
 
 
 ## GeoJSON
