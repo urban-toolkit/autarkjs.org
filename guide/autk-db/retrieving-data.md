@@ -284,10 +284,10 @@ The returned object contains `minLon`, `minLat`, `maxLon`, and `maxLat` properti
 
 | Method | Returns | Use for |
 |---|---|---|
-| [`getTables`](#get-table-data)({ tableName }) | `Record<string, unknown>[]` | Plain rows for tables, charts, or custom logic |
-| [`getLayer`](#get-table-as-geojson)(name) | `FeatureCollection` | Vector tables for [`autk-map`](../autk-map/index.md) or [`autk-plot`](../autk-plot/index.md) |
-| [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson)(name) | `FeatureCollection` | Raster tables for `autk-map.loadRasterCollection()` |
-| [`getLayerTables`](#list-renderable-tables)() | Table metadata array | Listing renderable tables before export |
-| [`getBoundingBoxFromLayer`](#table-bounding-box)(name) | `BoundingBox` object | Bounds of one renderable table |
+| [`getTables`](#get-table-data)(params) | `Record<string, unknown>[]` | Plain rows |
+| [`getLayer`](#get-table-as-geojson)(name) | `FeatureCollection` | Vector layer export |
+| [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson)(name) | `FeatureCollection` | Raster layer export |
+| [`getLayerTables`](#list-renderable-tables)() | Table metadata array | Renderable table listing |
+| [`getBoundingBoxFromLayer`](#get-bounding-boxes)(name) | `BoundingBox` object | Layer bounds |
 
 </div>
