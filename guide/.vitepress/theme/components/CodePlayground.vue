@@ -4,6 +4,9 @@ import { createHighlighter } from 'shiki'
 import { createJavaScriptRegexEngine } from '@shikijs/engine-javascript'
 import JsonTree from './JsonTree.vue'
 
+let shikiSingleton: Awaited<ReturnType<typeof createHighlighter>> | null = null
+let shikiSingletonPromise: Promise<Awaited<ReturnType<typeof createHighlighter>>> | null = null
+
 const props = defineProps<{
   /** The TypeScript source code to display and execute. */
   code: string
@@ -170,12 +173,17 @@ onMounted(async () => {
   defaultCode.value = normalizeCode(props.code)
   editableCode.value = defaultCode.value
 
-  const jsEngine = createJavaScriptRegexEngine()
-  shiki = await createHighlighter({
-    themes: ['github-dark'],
-    langs: ['typescript'],
-    engine: jsEngine,
-  })
+  if (!shikiSingletonPromise) {
+    const jsEngine = createJavaScriptRegexEngine()
+    shikiSingletonPromise = createHighlighter({
+      themes: ['github-dark'],
+      langs: ['typescript'],
+      engine: jsEngine,
+    })
+  }
+
+  shikiSingleton = await shikiSingletonPromise
+  shiki = shikiSingleton
   updateHighlight()
 })
 </script>
