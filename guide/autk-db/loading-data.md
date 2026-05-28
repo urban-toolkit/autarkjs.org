@@ -237,15 +237,13 @@ If you plan to load OSM and additional layers in the same workspace, load OSM fi
 
 ## GeoJSON
 
-`loadGeojson` loads a GeoJSON `FeatureCollection` from a URL or an in-memory object and stores it as a named layer table in DuckDB. The only required parameter is `outputTableName`. By default, the input coordinates are expected to be in latitude/longitude (`EPSG:4326`). If the GeoJSON uses a different coordinates system, provide it through `coordinateFormat`. Use `layerType` to override the automatic geometry-type inference performed bu autk-db.
+`loadGeojson` loads a GeoJSON `FeatureCollection` from a URL or an in-memory object and stores it as a named layer table in DuckDB. The only required parameter is `outputTableName`.
 
 <ClientOnly>
   <CodePlayground :code="loadGeojsonCode" out="console" />
 </ClientOnly>
 
-:::tip Try changing the previous example
-Modify the previous code sample to explore more of `autk-db`. For example, try loading the same file with a different `outputTableName`, provide `coordinateFormat`, set an explicit `layerType`, or load multiple layers in the same workspace to observe the filtering and clipping behavior.
-:::
+ By default, the input coordinates are expected to be in latitude/longitude (`EPSG:4326`). If the GeoJSON uses a different coordinates system, provide it through `coordinateFormat`. Use `layerType` to override the automatic geometry-type inference performed bu autk-db.
 
 #### List of `loadGeojson` Parameters
 
@@ -258,30 +256,34 @@ Modify the previous code sample to explore more of `autk-db`. For example, try l
 | `layerType` | `LayerType` | Override inferred layer type. |
 | `boundingBox` | `BoundingBox` | Optional clipping bounds. |
 
-## GeoTIFF
-
-`loadGeoTiff` loads raster data from a URL or an `ArrayBuffer` and registers it as a raster table in DuckDB. For large rasters, reduce `maxPixels` to avoid loading too many pixels into browser memory.
-
-<ClientOnly>
-  <CodePlayground :code="loadGeoTiffCode" out="console" />
-</ClientOnly>
-
-#### `loadGeoTiff` Parameters
-
-| Option | Type | Description |
-|---|---|---|
-| `geotiffFileUrl` | `string` | URL of the GeoTIFF file. Mutually exclusive with `geotiffArrayBuffer`. |
-| `geotiffArrayBuffer` | `ArrayBuffer` | Already-fetched GeoTIFF data. Mutually exclusive with `geotiffFileUrl`. |
-| `outputTableName` | `string` | Name for the resulting raster table. |
-| `coordinateFormat` | `string` | Source CRS of the GeoTIFF file. Defaults to `'EPSG:4326'`. |
-| `maxPixels` | `number` | Maximum decoded pixels before throwing an error. Defaults to `500000`. |
-
 :::info Layers Cropping
 `autk-db` applies workspace-aware filtering and clipping when new layers are loaded.
 
 1. If OSM data already exists in the current [workspace](./workspaces.md), its bounding box is first used to filter the features of newly loaded layers. The remaining features are then clipped using the OSM `surface` layer geometry.
 2. If OSM data is not available, the first loaded GeoJSON layer provides the workspace bounding box used to filter the features of subsequent layers. If that first layer is a polygon layer, its geometry is also used to clip later layers.
 :::
+
+## GeoTIFF
+
+`loadGeoTiff` loads raster data from a URL or an `ArrayBuffer` and stores it as a raster table in DuckDB. The only required parameter is `outputTableName`. By default, the input raster is expected to use latitude/longitude coordinates (`EPSG:4326`). If the GeoTIFF uses a different coordinate system, provide it through `coordinateFormat`. For large rasters, reduce `maxPixels` to avoid loading too many pixels into browser memory.
+
+<ClientOnly>
+  <CodePlayground :code="loadGeoTiffCode" out="console" />
+</ClientOnly>
+
+:::tip Try changing the previous example
+Modify the previous code sample to explore more of `autk-db`. For example, try changing `maxPixels`, use a different `outputTableName`, or load a raster with a non-default CRS by setting `coordinateFormat`.
+:::
+
+#### List of `loadGeoTiff` Parameters
+
+| Option | Type | Description |
+|---|---|---|
+| `geotiffFileUrl` | `string` | GeoTIFF file URL. |
+| `geotiffArrayBuffer` | `ArrayBuffer` | In-memory GeoTIFF data. |
+| `outputTableName` | `string` | Output table name. |
+| `coordinateFormat` | `string` | Source CRS. |
+| `maxPixels` | `number` | Pixel limit. |
 
 
 ## CSV
