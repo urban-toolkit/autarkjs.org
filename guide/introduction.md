@@ -22,7 +22,7 @@ Autark is available as a single package or as individual modules:
 | Package                           | Purpose |
 | ----------------------------------| ------- |
 | **[@urban-toolkit/autk](/autk-db/)**           | Complete package that re-exports the toolkit modules |
-| **[@urban-toolkit/autk-core](/api/autk-core/)** | Core shared definitions — color maps, triangulators, geometry utilities, event emitter, and camera handling — used by all other Autark libraries |
+| **[@urban-toolkit/autk-core](/api/autk-core/)** | Core shared definitions used by all other Autark libraries |
 | **[@urban-toolkit/autk-db](/autk-db/)**        | A spatial database that handles physical and thematic urban datasets |
 | **[@urban-toolkit/autk-map](/autk-map/)**       | A WebGPU-based vector map visualization library for exploring 2D and 3D physical and thematic layers |
 | **[@urban-toolkit/autk-compute](/autk-compute/)**   | A WebGPU-based computation engine for implementing general-purpose algorithms using physical and thematic data |
@@ -48,14 +48,16 @@ npm install @urban-toolkit/autk-compute
 npm install @urban-toolkit/autk-plot
 ```
 
-`autk-core` contains the shared low-level primitives (color maps, triangulators, geometry utilities, and more) used by `autk-map`, `autk-compute`, and `autk-plot`. You do not normally install it directly — it is already included as a dependency of those packages.
+:::info autk-core is automatically bundled
+`autk-core` contains the shared low-level primitives (color maps, triangulators, geometry utilities, and more) used by `autk-db`, `autk-map`, `autk-compute`, and `autk-plot`. You do not normally install it directly. It is already included as a dependency of those packages.
+:::
 
 ## Serverless by Design
 
-All Autark packages run in the browser without a backend. Data is fetched directly from public APIs such as the [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API) or from static file servers. Queries run inside a [DuckDB](https://duckdb.org/docs/current/clients/wasm/overview) instance in the browser. Map visualization and analytical compute workloads use WebGPU. Interactive plots are built using [D3.js](https://d3js.org/).
+All Autark packages run in the browser without a backend. Data is fetched directly from public APIs such as the [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API) or from static file servers. Queries run inside a [DuckDB](https://duckdb.org/docs/current/clients/wasm/overview) instance in the browser. Map visualization and analytical compute workloads use [WebGPU](https://webgpu.org/). Interactive plots are built using [D3.js](https://d3js.org/).
 
-:::tip Browser requirements
-`autk-map` and `autk-compute` require a browser with **WebGPU** support.
+:::info Browser requirements
+`autk-map` and `autk-compute` require a browser with **WebGPU** support. `autk-db` and `autk-plot` work in any modern browser. The table below shows the compatible browser versions.
 
 | Browser | Support Status | Minimum Version |
 |---|---|---|
@@ -64,34 +66,33 @@ All Autark packages run in the browser without a backend. Data is fetched direct
 | Safari | Full | 26+  |
 | Firefox | Full | 141+ |
 | Opera | Full | 99+ |
-
- `autk-db` and `autk-plot` work in any modern browser.
 :::
 
 
 ## Minimal Example
 
-The playground below loads OpenStreetMap data for the Financial District in New York and renders it as a full 3D city map — with surface, parks, water and roads. 
+The **interactive playground** below loads OpenStreetMap data for the Financial District in New York and renders it as a full 3D city map — with surface, parks, water and roads. 
 
 Try to add `"buildings"` to the `layers` list and click **Run** to test changes.
 
 <script setup>
 const introCode = `
 import { AutkMap } from "@urban-toolkit/autk-map";
-import { AutkSpatialDb } from "@urban-toolkit/autk-db";
+import { AutkDb } from "@urban-toolkit/autk-db";
 
-const db = new AutkSpatialDb();
+const db = new AutkDb();
 await db.init();
 
 await db.loadOsm({
+  pbfFileUrl: "/data/lower_mnt.osm.pbf",
   queryArea: {
     geocodeArea: "New York",
-    areas: ["Financial District"]
+    areas: ["Battery Park City", "Financial District"],
   },
   outputTableName: "osm",
   autoLoadLayers: {
-    coordinateFormat: "EPSG:3395",
-    layers: ["surface", "parks", "water", "roads"],
+    layers: ["surface", "parks", "water", "roads", "buildings"],
+    dropOsmTable: true,
   },
   onProgress: (phase) => console.log(phase),
 });
@@ -99,9 +100,9 @@ await db.loadOsm({
 const map = new AutkMap(canvas);
 await map.init();
 
-for (const layer of db.getLayerTables()) {
-  const geojson = await db.getLayer(layer.name);
-  map.loadCollection(layer.name, { collection: geojson, type: layer.type });
+for (const layerData of db.getLayerTables()) {
+  const geojson = await db.getLayer(layerData.name);
+  map.loadCollection(layerData.name, { collection: geojson, type: layerData.type });
 }
 
 map.draw();
