@@ -42,6 +42,30 @@ await db.setWorkspace('scenario-b');
 console.log(db.getTablesMetadata()); // only tables in "scenario-b"
 ```
 
+## Workspace bounding box and clipping layer
+
+In addition to storing tables, each workspace may also keep a spatial bounding box and an optional clipping layer. These two pieces of spatial metadata are used to constrain newly loaded geometry tables.
+
+The workspace bounding box is initialized from the **first geometry-bearing table** loaded into the workspace. Once it is set, later tables do not replace it automatically. When a new geometry table is loaded, `autk-db` first filters it against this bounding box, removing features that fall completely outside the workspace extent.
+
+The workspace clipping layer is initialized from the **first polygonal table** loaded into the workspace. In practice, this may be a table of type `surface`, `parks`, `water`, `buildings`, or `polygons`. When such a clipping layer exists, newly loaded geometry tables are also constrained against its geometry.
+
+These two steps are applied in order:
+
+1. **Bounding-box filtering** — features outside the workspace extent are removed.
+2. **Clipping-layer filtering or cropping** — features are then constrained to the workspace clipping layer, when one exists.
+
+The second step does not always behave the same way for every table type:
+
+- for polygon and line-like layers, geometry may be cropped with a geometric intersection
+- for `points`, `buildings`, and `raster` tables, geometries are not cut; rows are only filtered by intersection
+
+This distinction is important because the workspace bounding box only filters by extent, while the clipping layer may also reshape geometries depending on the table type.
+
+:::tip OSM workflows
+When loading OSM data with a `surface` layer, `autk-db` uses that surface as the workspace clipping layer. Other OSM-derived layers are then constrained against it, which helps keep the workspace aligned to the same project footprint.
+:::
+
 :::tip When to use workspaces
 If your application has a single dataset, you do not need extra workspaces. The default `"autk"` workspace is sufficient.
 :::
