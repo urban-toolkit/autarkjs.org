@@ -51,26 +51,24 @@ import { AutkDb } from "@urban-toolkit/autk-db";
 const db = new AutkDb();
 await db.init();
 
-await db.loadJson({
-    outputTableName: 'places',
-    jsonObject: [
-        { id: 1, name: 'A', score: 10 },
-        { id: 2, name: 'B', score: 20 },
-        { id: 3, name: 'C', score: 30 },
-    ],
+await db.loadCsv({
+    csvFileUrl: '/data/mnt_noise.csv',
+    outputTableName: 'noise',
 });
+
+const updates = [
+    { key: 1, value: 100 },
+    { key: 3, value: 300 },
+];
 
 await db.updateTable({
-    tableName: 'places',
+    tableName: 'noise',
     strategy: 'update',
-    idColumn: 'id',
-    data: [
-        { id: 1, score: 100 },
-        { id: 3, score: 300 },
-    ],
+    idColumn: 'key',
+    data: updates,
 });
 
-console.log(await db.getTable('places'));
+console.log(await db.getTable('noise'));
 `
 
 const removeLayerCode = `
@@ -149,7 +147,7 @@ Use the [`update`](/api/autk-db/type-aliases/UpdateStrategy) strategy when you w
   <CodePlayground :code="updateByIdCode" out="console" />
 </ClientOnly>
 
-In the example above, only the rows whose `id` values match existing records in the `places` table are updated.
+In the example above, only the rows whose `key` values match existing records in the `noise` table are updated.
 
 The [`idColumn`](/api/autk-db/interfaces/UpdateTableParams#idcolumn) value may refer to:
 
