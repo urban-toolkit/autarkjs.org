@@ -56,10 +56,13 @@ await db.loadCsv({
     outputTableName: 'noise',
 });
 
-const updates = [
-    { key: 1, value: 100 },
-    { key: 3, value: 300 },
-];
+const csv = await db.getTable('noise');
+const updates = csv
+    .filter(row => row.key === 1 || row.key === 3)
+    .map(row => ({
+        ...row,
+        date: '04/01/2025 12:00:00 AM',
+    }));
 
 await db.updateTable({
     tableName: 'noise',
@@ -148,6 +151,8 @@ Use the [`update`](/api/autk-db/type-aliases/UpdateStrategy) strategy when you w
 </ClientOnly>
 
 In the example above, only the rows whose `key` values match existing records in the `noise` table are updated.
+
+Notice that `updates` contains full rows, not partial patches. For tabular tables, the `update` strategy expects the replacement rows to have the same column structure as the target table.
 
 The [`idColumn`](/api/autk-db/interfaces/UpdateTableParams#idcolumn) value may refer to:
 
