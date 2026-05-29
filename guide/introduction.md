@@ -98,7 +98,7 @@ await db.loadOsm({
 const map = new AutkMap(canvas);
 await map.init();
 
-for (const layerData of db.getLayerTables()) {
+for (const layerData of db.getLayersMetadata()) {
   const geojson = await db.getLayer(layerData.name);
   map.loadCollection(layerData.name, { collection: geojson, type: layerData.type });
 }
