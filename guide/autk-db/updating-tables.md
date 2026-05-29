@@ -51,31 +51,26 @@ import { AutkDb } from "@urban-toolkit/autk-db";
 const db = new AutkDb();
 await db.init();
 
-await db.loadGeojson({
-    geojsonFileUrl: '/data/mnt_neighs.geojson',
-    outputTableName: 'neighborhoods',
+await db.loadJson({
+    outputTableName: 'places',
+    jsonObject: [
+        { id: 1, name: 'A', score: 10 },
+        { id: 2, name: 'B', score: 20 },
+        { id: 3, name: 'C', score: 30 },
+    ],
 });
 
-const layer = await db.getLayer('neighborhoods');
-const updates = {
-    type: 'FeatureCollection',
-    features: layer.features.slice(0, 2).map((feature, index) => ({
-        ...feature,
-        properties: {
-            ...feature.properties,
-            priority: index + 1,
-        },
-    })),
-};
-
-const table = await db.updateTable({
-    tableName: 'neighborhoods',
-    data: updates,
+await db.updateTable({
+    tableName: 'places',
     strategy: 'update',
-    idColumn: 'properties.ntaname',
+    idColumn: 'id',
+    data: [
+        { id: 1, score: 100 },
+        { id: 3, score: 300 },
+    ],
 });
 
-console.log(table.name, table.columns.map((column) => column.name));
+console.log(await db.getTable('places'));
 `
 
 const removeLayerCode = `
@@ -89,7 +84,6 @@ await db.loadGeojson({
     outputTableName: 'neighborhoods',
 });
 
-console.log(db.getTablesMetadata().map((table) => table.name));
 await db.removeLayer('neighborhoods');
 console.log(db.getTablesMetadata().map((table) => table.name));
 `
@@ -155,7 +149,7 @@ Use the [`update`](/api/autk-db/type-aliases/UpdateStrategy) strategy when you w
   <CodePlayground :code="updateByIdCode" out="console" />
 </ClientOnly>
 
-In the example above, only the features whose `properties.ntaname` values match existing rows in the `neighborhoods` table are updated.
+In the example above, only the rows whose `id` values match existing records in the `places` table are updated.
 
 The [`idColumn`](/api/autk-db/interfaces/UpdateTableParams#idcolumn) value may refer to:
 
