@@ -4,6 +4,14 @@ A workspace is an isolated DuckDB schema. Tables created in one workspace are no
 
 The default workspace is `"autk"` and is created automatically on `init()`.
 
+## Default workspace coordinate system
+
+Autark stores workspace geometries in the default workspace coordinate reference system [`EPSG:3395`](/api/autk-db/variables/DEFAULT_WORKSPACE_COORDINATE_FORMAT), also known as **World Mercator**.
+
+This means spatial tables inside a workspace are normalized to a projected CRS so filtering, clipping, joins, and distance-based operations can run against a consistent coordinate system.
+
+When you load OSM data, you can override the source coordinate format through `autoLoadLayers.coordinateFormat`, but the workspace itself still uses its own projected working CRS for stored geometry.
+
 ## Switching workspaces
 
 ```typescript
