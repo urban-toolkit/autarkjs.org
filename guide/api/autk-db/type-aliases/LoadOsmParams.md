@@ -8,25 +8,21 @@
 
 > **LoadOsmParams** = `object`
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:49](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L49)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:49](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L49)
 
 ## Properties
 
-### autoLoadLayers?
+### autoLoadLayers
 
-> `optional` **autoLoadLayers?**: `object`
+> **autoLoadLayers**: `object`
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:51](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L51)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:51](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L51)
 
 #### coordinateFormat?
 
 > `optional` **coordinateFormat?**: `string`
 
 CRS of the OSM input data (source). Defaults to EPSG:4326.
-
-#### dropOsmTable
-
-> **dropOsmTable**: `boolean`
 
 #### layers
 
@@ -38,7 +34,7 @@ CRS of the OSM input data (source). Defaults to EPSG:4326.
 
 > `optional` **forceRefresh?**: `boolean`
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:64](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L64)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:63](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L63)
 
 When true, bypasses the cached Overpass response and fetches fresh data.
 
@@ -48,15 +44,15 @@ When true, bypasses the cached Overpass response and fetches fresh data.
 
 > `optional` **onProgress?**: [`OnLoadingProgress`](OnLoadingProgress.md)
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:66](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L66)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:65](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L65)
 
 ***
 
-### outputTableName
+### outputTableName?
 
-> **outputTableName**: `string`
+> `optional` **outputTableName?**: `string`
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:50](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L50)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:50](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L50)
 
 ***
 
@@ -64,7 +60,7 @@ Defined in: [use-cases/load-osm-overpass/interfaces.ts:50](https://github.com/ur
 
 > `optional` **pbfFileUrl?**: `string`
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:62](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L62)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:61](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L61)
 
 If provided, OSM data is loaded from this `.osm.pbf` file instead of the Overpass API.
 
@@ -74,7 +70,7 @@ If provided, OSM data is loaded from this `.osm.pbf` file instead of the Overpas
 
 > **queryArea**: `object`
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:57](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L57)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:56](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L56)
 
 #### areas
 
@@ -90,4 +86,4 @@ Defined in: [use-cases/load-osm-overpass/interfaces.ts:57](https://github.com/ur
 
 > `optional` **workspace?**: `string`
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:65](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L65)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:64](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L64)

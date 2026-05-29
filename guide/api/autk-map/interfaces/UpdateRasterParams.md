@@ -6,7 +6,7 @@
 
 # Interface: UpdateRasterParams
 
-Defined in: [autk-map/src/api.ts:122](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/api.ts#L122)
+Defined in: [autk-map/src/api.ts:122](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/api.ts#L122)
 
 Parameters for updating a raster layer's values.
 
@@ -20,7 +20,7 @@ Raster updates replace the value source for an existing raster layer. The
 
 > **collection**: `FeatureCollection`\<`Geometry` \| `null`\>
 
-Defined in: [autk-map/src/api.ts:126](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/api.ts#L126)
+Defined in: [autk-map/src/api.ts:126](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/api.ts#L126)
 
 GeoTIFF-derived feature collection containing raster payload data.
 
@@ -30,7 +30,7 @@ GeoTIFF-derived feature collection containing raster payload data.
 
 > **property**: `string`
 
-Defined in: [autk-map/src/api.ts:130](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/api.ts#L130)
+Defined in: [autk-map/src/api.ts:130](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/api.ts#L130)
 
 Dot-path accessor for the numeric value in each raster cell.
 
@@ -40,6 +40,6 @@ Dot-path accessor for the numeric value in each raster cell.
 
 > `optional` **transferFunction?**: `TransferFunction`
 
-Defined in: [autk-map/src/api.ts:134](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/api.ts#L134)
+Defined in: [autk-map/src/api.ts:134](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/api.ts#L134)
 
 Optional transfer function used to derive raster opacity from values.

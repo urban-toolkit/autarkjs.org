@@ -6,7 +6,7 @@
 
 # Class: TriangulatorRaster
 
-Defined in: [triangulator-raster.ts:24](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-core/src/triangulator-raster.ts#L24)
+Defined in: [triangulator-raster.ts:24](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-core/src/triangulator-raster.ts#L24)
 
 Builds textured mesh geometry for GeoTIFF raster layers.
 
@@ -31,7 +31,7 @@ UVs spanning `[0, 1]` to match normalized texture coordinates.
 
 > `static` **buildMesh**(`geotiff`, `origin`): \[[`LayerGeometry`](../interfaces/LayerGeometry.md)[], [`LayerComponent`](../interfaces/LayerComponent.md)[]\]
 
-Defined in: [triangulator-raster.ts:35](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-core/src/triangulator-raster.ts#L35)
+Defined in: [triangulator-raster.ts:35](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-core/src/triangulator-raster.ts#L35)
 
 Builds a single textured quad covering the raster bounding box.
 

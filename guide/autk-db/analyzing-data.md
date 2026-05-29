@@ -261,7 +261,7 @@ When `normalize: true` is set, the aggregated value is normalized between 0 and 
 </ClientOnly>
 
 :::warning Workspace bounds
-[`buildHeatmap`](/api/autk-db/classes/AutkDb#buildheatmap) is built based on workspace bounding box. In practice, this usually comes from previously loaded OSM or GeoJSON layers (see [Loading Data](/guide/autk-db/loading-data.md)).
+[`buildHeatmap`](/api/autk-db/classes/AutkDb#buildheatmap) is built based on workspace bounding box. In practice, this usually comes from previously loaded OSM or GeoJSON layers (see [Loading data](./loading-data.md)).
 :::
 
 #### List of `buildHeatmap` parameters
@@ -396,7 +396,7 @@ The [`output`](/api/autk-db/interfaces/RawQueryParams#output) parameter controls
         <div style="display:flex; flex-direction:column; gap:6px;">
           <span>Output mode.</span>
           <span>New table name.</span>
-          <span>Result source metadata.</span>
+          <span>Result table source metadata.</span>
           <span>Result table type.</span>
         </div>
       </td>

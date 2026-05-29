@@ -6,7 +6,7 @@
 
 # Class: PlotStyle
 
-Defined in: [plot-style.ts:12](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/plot-style.ts#L12)
+Defined in: [plot-style.ts:12](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/plot-style.ts#L12)
 
 Global style helpers shared by all plot implementations.
 
@@ -32,7 +32,7 @@ affects all plots that read style values after the update.
 
 > `protected` `static` **\_default**: `` `#${string}` `` = `'#bfbfbf'`
 
-Defined in: [plot-style.ts:14](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/plot-style.ts#L14)
+Defined in: [plot-style.ts:14](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/plot-style.ts#L14)
 
 Default fill/stroke color used for non-selected marks.
 
@@ -42,7 +42,7 @@ Default fill/stroke color used for non-selected marks.
 
 > `protected` `static` **\_highlight**: `` `#${string}` `` = `'#5dade2'`
 
-Defined in: [plot-style.ts:16](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/plot-style.ts#L16)
+Defined in: [plot-style.ts:16](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/plot-style.ts#L16)
 
 Highlight color used for selected marks.
 
@@ -54,7 +54,7 @@ Highlight color used for selected marks.
 
 > **get** `static` **default**(): `` `#${string}` ``
 
-Defined in: [plot-style.ts:22](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/plot-style.ts#L22)
+Defined in: [plot-style.ts:22](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/plot-style.ts#L22)
 
 Gets the default mark color.
 
@@ -72,7 +72,7 @@ Hex color used for non-selected marks.
 
 > **get** `static` **highlight**(): `` `#${string}` ``
 
-Defined in: [plot-style.ts:30](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/plot-style.ts#L30)
+Defined in: [plot-style.ts:30](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/plot-style.ts#L30)
 
 Gets the highlight mark color.
 
@@ -88,7 +88,7 @@ Hex color used for selected marks.
 
 > `static` **setDefaultColor**(`color`): `void`
 
-Defined in: [plot-style.ts:54](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/plot-style.ts#L54)
+Defined in: [plot-style.ts:54](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/plot-style.ts#L54)
 
 Updates the global default color used for non-selected marks.
 
@@ -120,7 +120,7 @@ PlotStyle.setDefaultColor('#cccccc');
 
 > `static` **setHighlightColor**(`color`): `void`
 
-Defined in: [plot-style.ts:42](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/plot-style.ts#L42)
+Defined in: [plot-style.ts:42](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/plot-style.ts#L42)
 
 Updates the global highlight color used by selection styling.
 

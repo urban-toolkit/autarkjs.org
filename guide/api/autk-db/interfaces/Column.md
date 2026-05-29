@@ -6,7 +6,7 @@
 
 # Interface: Column
 
-Defined in: [interfaces.ts:25](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L25)
+Defined in: [interfaces.ts:25](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/interfaces.ts#L25)
 
 Describes a single table column as reported by DuckDB.
 
@@ -18,7 +18,7 @@ Keeps schema metadata small and stable for UI rendering and query planning.
 
 > **name**: `string`
 
-Defined in: [interfaces.ts:27](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L27)
+Defined in: [interfaces.ts:27](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/interfaces.ts#L27)
 
 Stable column name used in queries and result objects.
 
@@ -28,6 +28,6 @@ Stable column name used in queries and result objects.
 
 > **type**: `string`
 
-Defined in: [interfaces.ts:29](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L29)
+Defined in: [interfaces.ts:29](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/interfaces.ts#L29)
 
 Database type string returned for the column.

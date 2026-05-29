@@ -6,7 +6,7 @@
 
 # Interface: RenderLayer
 
-Defined in: [api.ts:18](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-compute/src/api.ts#L18)
+Defined in: [api.ts:18](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-compute/src/api.ts#L18)
 
 Describes one geometry layer rendered for each sampled viewpoint.
 
@@ -16,7 +16,7 @@ Describes one geometry layer rendered for each sampled viewpoint.
 
 > **collection**: `FeatureCollection`
 
-Defined in: [api.ts:23](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-compute/src/api.ts#L23)
+Defined in: [api.ts:23](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-compute/src/api.ts#L23)
 
 GeoJSON collection triangulated for this layer.
 
@@ -26,7 +26,7 @@ GeoJSON collection triangulated for this layer.
 
 > **id**: `string`
 
-Defined in: [api.ts:20](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-compute/src/api.ts#L20)
+Defined in: [api.ts:20](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-compute/src/api.ts#L20)
 
 Unique layer identifier used to scope aggregation results.
 
@@ -36,7 +36,7 @@ Unique layer identifier used to scope aggregation results.
 
 > `optional` **objectIdProperty?**: `string`
 
-Defined in: [api.ts:29](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-compute/src/api.ts#L29)
+Defined in: [api.ts:29](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-compute/src/api.ts#L29)
 
 Optional feature property used as a stable object identifier.
 
@@ -46,6 +46,6 @@ Optional feature property used as a stable object identifier.
 
 > **type**: `LayerType`
 
-Defined in: [api.ts:26](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-compute/src/api.ts#L26)
+Defined in: [api.ts:26](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-compute/src/api.ts#L26)
 
 Layer type used for triangulation and aggregation buckets.

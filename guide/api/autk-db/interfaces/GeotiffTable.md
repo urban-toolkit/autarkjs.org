@@ -6,7 +6,7 @@
 
 # Interface: GeotiffTable
 
-Defined in: [interfaces.ts:127](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L127)
+Defined in: [interfaces.ts:127](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/interfaces.ts#L127)
 
 GeoTIFF-backed raster table.
 
@@ -22,7 +22,7 @@ Identifies tables whose data should be treated as raster imagery rather than vec
 
 > `optional` **bands?**: [`RasterBandMetadata`](RasterBandMetadata.md)[]
 
-Defined in: [interfaces.ts:59](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L59)
+Defined in: [interfaces.ts:59](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/interfaces.ts#L59)
 
 Optional raster band metadata when the table stores raster data.
 
@@ -36,7 +36,7 @@ Optional raster band metadata when the table stores raster data.
 
 > `optional` **boundingBox?**: `BoundingBox`
 
-Defined in: [interfaces.ts:57](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L57)
+Defined in: [interfaces.ts:57](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/interfaces.ts#L57)
 
 Cached layer extent when the table contains geometry data.
 
@@ -50,7 +50,7 @@ Cached layer extent when the table contains geometry data.
 
 > **columns**: [`Column`](Column.md)[]
 
-Defined in: [interfaces.ts:55](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L55)
+Defined in: [interfaces.ts:55](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/interfaces.ts#L55)
 
 Flat schema information returned by DuckDB.
 
@@ -64,7 +64,7 @@ Flat schema information returned by DuckDB.
 
 > **name**: `string`
 
-Defined in: [interfaces.ts:53](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L53)
+Defined in: [interfaces.ts:53](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/interfaces.ts#L53)
 
 Unique table name within the active workspace.
 
@@ -78,7 +78,7 @@ Unique table name within the active workspace.
 
 > **source**: `"geotiff"`
 
-Defined in: [interfaces.ts:129](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L129)
+Defined in: [interfaces.ts:129](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/interfaces.ts#L129)
 
 Marks the table as originating from the GeoTIFF loader.
 
@@ -92,6 +92,6 @@ Marks the table as originating from the GeoTIFF loader.
 
 > **type**: `"raster"`
 
-Defined in: [interfaces.ts:131](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L131)
+Defined in: [interfaces.ts:131](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/interfaces.ts#L131)
 
 Fixed raster layer kind used by raster-specific rendering paths.

@@ -6,7 +6,7 @@
 
 # Interface: LayerData
 
-Defined in: [autk-map/src/types-layers.ts:59](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/types-layers.ts#L59)
+Defined in: [autk-map/src/types-layers.ts:59](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L59)
 
 Render-ready layer payload produced by loaders and triangulation steps.
 
@@ -16,7 +16,7 @@ Render-ready layer payload produced by loaders and triangulation steps.
 
 > `optional` **border?**: `LayerBorder`[]
 
-Defined in: [autk-map/src/types-layers.ts:65](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/types-layers.ts#L65)
+Defined in: [autk-map/src/types-layers.ts:65](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L65)
 
 Optional border geometry for outlined 2D triangle layers.
 
@@ -26,7 +26,7 @@ Optional border geometry for outlined 2D triangle layers.
 
 > `optional` **borderComponents?**: `LayerBorderComponent`[]
 
-Defined in: [autk-map/src/types-layers.ts:67](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/types-layers.ts#L67)
+Defined in: [autk-map/src/types-layers.ts:67](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L67)
 
 Cumulative border-component metadata aligned with `border`.
 
@@ -36,7 +36,7 @@ Cumulative border-component metadata aligned with `border`.
 
 > **components**: `LayerComponent`[]
 
-Defined in: [autk-map/src/types-layers.ts:63](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/types-layers.ts#L63)
+Defined in: [autk-map/src/types-layers.ts:63](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L63)
 
 Per-primitive component metadata aligned with `geometry`.
 
@@ -46,7 +46,7 @@ Per-primitive component metadata aligned with `geometry`.
 
 > **geometry**: `LayerGeometry`[]
 
-Defined in: [autk-map/src/types-layers.ts:61](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/types-layers.ts#L61)
+Defined in: [autk-map/src/types-layers.ts:61](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L61)
 
 Geometry buffers for the layer primitives.
 
@@ -56,7 +56,7 @@ Geometry buffers for the layer primitives.
 
 > `optional` **pointInstanceCount?**: `number`
 
-Defined in: [autk-map/src/types-layers.ts:71](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/types-layers.ts#L71)
+Defined in: [autk-map/src/types-layers.ts:71](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L71)
 
 Number of point instances stored in `pointInstances`.
 
@@ -66,7 +66,7 @@ Number of point instances stored in `pointInstances`.
 
 > `optional` **pointInstances?**: `Float32Array`\<`ArrayBufferLike`\>
 
-Defined in: [autk-map/src/types-layers.ts:69](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/types-layers.ts#L69)
+Defined in: [autk-map/src/types-layers.ts:69](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L69)
 
 Packed point-instance centers `[x, y, ...]` for instanced point rendering.
 
@@ -76,7 +76,7 @@ Packed point-instance centers `[x, y, ...]` for instanced point rendering.
 
 > `optional` **pointSize?**: `number`
 
-Defined in: [autk-map/src/types-layers.ts:73](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/types-layers.ts#L73)
+Defined in: [autk-map/src/types-layers.ts:73](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L73)
 
 Base point radius in local planar units for instanced point rendering.
 
@@ -86,7 +86,7 @@ Base point radius in local planar units for instanced point rendering.
 
 > `optional` **raster?**: `Float32Array`\<`ArrayBufferLike`\>
 
-Defined in: [autk-map/src/types-layers.ts:79](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/types-layers.ts#L79)
+Defined in: [autk-map/src/types-layers.ts:79](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L79)
 
 Raster scalar values, for raster layers only.
 
@@ -96,7 +96,7 @@ Raster scalar values, for raster layers only.
 
 > `optional` **rasterResX?**: `number`
 
-Defined in: [autk-map/src/types-layers.ts:75](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/types-layers.ts#L75)
+Defined in: [autk-map/src/types-layers.ts:75](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L75)
 
 Raster grid width in cells, for raster layers only.
 
@@ -106,7 +106,7 @@ Raster grid width in cells, for raster layers only.
 
 > `optional` **rasterResY?**: `number`
 
-Defined in: [autk-map/src/types-layers.ts:77](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/types-layers.ts#L77)
+Defined in: [autk-map/src/types-layers.ts:77](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L77)
 
 Raster grid height in cells, for raster layers only.
 
@@ -116,6 +116,6 @@ Raster grid height in cells, for raster layers only.
 
 > `optional` **thematic?**: [`LayerThematic`](LayerThematic.md)[]
 
-Defined in: [autk-map/src/types-layers.ts:81](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-map/src/types-layers.ts#L81)
+Defined in: [autk-map/src/types-layers.ts:81](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L81)
 
 Per-component or per-cell thematic values used for color mapping.

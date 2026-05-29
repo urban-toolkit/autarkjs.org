@@ -6,7 +6,7 @@
 
 # Interface: RasterBandMetadata
 
-Defined in: [interfaces.ts:37](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L37)
+Defined in: [interfaces.ts:37](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/interfaces.ts#L37)
 
 Metadata for one raster band exposed by a GeoTIFF-backed table.
 
@@ -18,7 +18,7 @@ Used by raster-aware consumers to present labels and target individual bands.
 
 > **id**: `string`
 
-Defined in: [interfaces.ts:39](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L39)
+Defined in: [interfaces.ts:39](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/interfaces.ts#L39)
 
 Internal band identifier used by raster operations.
 
@@ -28,6 +28,6 @@ Internal band identifier used by raster operations.
 
 > **label**: `string`
 
-Defined in: [interfaces.ts:41](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/interfaces.ts#L41)
+Defined in: [interfaces.ts:41](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/interfaces.ts#L41)
 
 Human-readable label shown in UI controls and outputs.

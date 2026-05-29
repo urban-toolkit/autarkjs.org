@@ -6,7 +6,7 @@
 
 # Interface: BuildHeatmapParams
 
-Defined in: [use-cases/build-heatmap/interfaces.ts:13](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/build-heatmap/interfaces.ts#L13)
+Defined in: [use-cases/build-heatmap/interfaces.ts:23](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/use-cases/build-heatmap/interfaces.ts#L23)
 
 Parameters for building a heatmap from spatially joined data.
 
@@ -20,7 +20,7 @@ Requires a valid bounding box and source table to be passed at execution time.
 
 > **grid**: `object`
 
-Defined in: [use-cases/build-heatmap/interfaces.ts:28](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/build-heatmap/interfaces.ts#L28)
+Defined in: [use-cases/build-heatmap/interfaces.ts:33](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/use-cases/build-heatmap/interfaces.ts#L33)
 
 Grid dimensions for the heatmap overlay.
 
@@ -40,37 +40,21 @@ Number of rows in the output grid.
 
 ### groupBy?
 
-> `optional` **groupBy?**: `object`[]
+> `optional` **groupBy?**: `HeatmapGroupBy`[]
 
-Defined in: [use-cases/build-heatmap/interfaces.ts:21](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/build-heatmap/interfaces.ts#L21)
+Defined in: [use-cases/build-heatmap/interfaces.ts:31](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/use-cases/build-heatmap/interfaces.ts#L31)
 
 Optional group-by columns to aggregate into separate raster bands.
-
-#### aggregateFn?
-
-> `optional` **aggregateFn?**: [`HeatmapAggregateFunction`](../type-aliases/HeatmapAggregateFunction.md)
-
-Aggregation function to apply on the grouped values.
-
-#### column
-
-> **column**: `string`
-
-Column name to aggregate. Use `'*'` for row-level aggregations like `count`.
 
 ***
 
 ### near
 
-> **near**: `object`
+> **near**: [`NearConfig`](NearConfig.md)
 
-Defined in: [use-cases/build-heatmap/interfaces.ts:17](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/build-heatmap/interfaces.ts#L17)
+Defined in: [use-cases/build-heatmap/interfaces.ts:27](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/use-cases/build-heatmap/interfaces.ts#L27)
 
 NEAR predicate configuration for heatmap generation.
-
-#### distance
-
-> **distance**: `number`
 
 ***
 
@@ -78,7 +62,7 @@ NEAR predicate configuration for heatmap generation.
 
 > **outputTableName**: `string`
 
-Defined in: [use-cases/build-heatmap/interfaces.ts:19](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/build-heatmap/interfaces.ts#L19)
+Defined in: [use-cases/build-heatmap/interfaces.ts:29](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/use-cases/build-heatmap/interfaces.ts#L29)
 
 Name of the output table that will hold the heatmap result.
 
@@ -88,6 +72,6 @@ Name of the output table that will hold the heatmap result.
 
 > **tableJoinName**: `string`
 
-Defined in: [use-cases/build-heatmap/interfaces.ts:15](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/build-heatmap/interfaces.ts#L15)
+Defined in: [use-cases/build-heatmap/interfaces.ts:25](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/use-cases/build-heatmap/interfaces.ts#L25)
 
 Name of the source table to join against the grid.

@@ -150,13 +150,13 @@ When a table comes from OSM auto-loading, its `type` usually reflects one of the
 
 [`getLayerTables()`](/api/autk-db/classes/AutkDb#getlayertables)  is useful when a workspace contains many tables and you want to know which ones can be sent directly to visualization tools. Instead of checking each table manually, [`getLayerTables()`](/api/autk-db/classes/AutkDb#getlayertables) gives you the subset that is ready to be exported as vector or raster layers for use with tools such as [`autk-map`](../autk-map/index.md).
 
-:::tip Layer versus table
+:::info Layer versus table
 The entries returned by [`getLayerTables()`](/api/autk-db/classes/AutkDb#getlayertables) are still DuckDB tables. In other words, a **layer** in this context is a table whose contents can be exported for rendering. The `name` property is therefore the table name you should pass to [`getLayer`](#get-table-as-geojson), [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson), or [`getBoundingBoxFromLayer`](#table-bounding-box).
 :::
 
 ## Get table data
 
-[`getTables`](/api/autk-db/classes/AutkDb#gettables) returns rows from any registered table as plain JavaScript objects. It works with CSV, JSON, vector, and raster tables. For large tables, it is possible to use the [`limit`](/api/autk-db/interfaces/GetTablesParams#limit) and [`offset`](/api/autk-db/interfaces/GetTablesParams#offset) attributes to paginate the result.
+[`getTables`](/api/autk-db/classes/AutkDb#gettables) returns rows from any registered table as plain JavaScript objects. It works with CSV, JSON, vector, and raster tables. For large tables, it is possible to use the `limit` and `offset` attributes to paginate the result.
 
 
 <ClientOnly>
@@ -164,7 +164,7 @@ The entries returned by [`getLayerTables()`](/api/autk-db/classes/AutkDb#getlaye
 </ClientOnly>
 
 :::tip Try changing the code above
-Use the live code box to experiment with [`getTables`](/api/autk-db/classes/AutkDb#gettables). For example, try changing [`tableName`](/api/autk-db/interfaces/GetTablesParams#tablename), increasing [`limit`](/api/autk-db/interfaces/GetTablesParams#limit), adding [`offset`](/api/autk-db/interfaces/GetTablesParams#offset), or logging the returned rows instead of just `rows.length`.
+Use the live code box to experiment with [`getTables`](/api/autk-db/classes/AutkDb#gettables). For example, try changing `tableName`, increasing `limit`, adding `offset`, or logging the returned rows instead of just `rows.length`.
 :::
 
 #### List of `getTables` parameters
@@ -179,22 +179,22 @@ Use the live code box to experiment with [`getTables`](/api/autk-db/classes/Autk
   </thead>
   <tbody>
     <tr>
-      <td><a href="/api/autk-db/interfaces/GetTablesParams#tablename"><code>tableName</code></a></td>
+      <td><code>tableName</code></td>
       <td><code>string</code></td>
       <td>Table name.</td>
     </tr>
     <tr>
-      <td><a href="/api/autk-db/interfaces/GetTablesParams#limit"><code>limit</code></a></td>
+      <td><code>limit</code></td>
       <td><code>number</code></td>
       <td>Row limit.</td>
     </tr>
     <tr>
-      <td><a href="/api/autk-db/interfaces/GetTablesParams#offset"><code>offset</code></a></td>
+      <td><code>offset</code></td>
       <td><code>number</code></td>
       <td>Row offset.</td>
     </tr>
     <tr>
-      <td><a href="/api/autk-db/interfaces/GetTablesParams#workspace"><code>workspace</code></a></td>
+      <td><code>workspace</code></td>
       <td><code>string</code></td>
       <td>Workspace name.</td>
     </tr>
@@ -288,6 +288,6 @@ The returned object contains `minLon`, `minLat`, `maxLon`, and `maxLat` properti
 | [`getLayer`](#get-table-as-geojson)(name) | `FeatureCollection` | Vector layer export |
 | [`getGeoTiffLayer`](#get-geotiff-as-raster-geojson)(name) | `FeatureCollection` | Raster layer export |
 | [`getLayerTables`](#list-renderable-tables)() | Table metadata array | Renderable table listing |
-| [`getBoundingBoxFromLayer`](#get-bounding-boxes)(name) | `BoundingBox` object | Layer bounds |
+| [`getBoundingBoxFromLayer`](#get-bounding-boxes)(name) | `BoundingBox` | Layer bounds |
 
 </div>

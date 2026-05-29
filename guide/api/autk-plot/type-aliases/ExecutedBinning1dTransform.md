@@ -8,7 +8,7 @@
 
 > **ExecutedBinning1dTransform** = `object`
 
-Defined in: [transforms/presets/binning-1d.ts:25](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/transforms/presets/binning-1d.ts#L25)
+Defined in: [transforms/presets/binning-1d.ts:25](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/transforms/presets/binning-1d.ts#L25)
 
 Result produced by `runBinning1d`.
 
@@ -21,7 +21,7 @@ ready for bar-plot rendering.
 
 > **preset**: `"binning-1d"`
 
-Defined in: [transforms/presets/binning-1d.ts:27](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/transforms/presets/binning-1d.ts#L27)
+Defined in: [transforms/presets/binning-1d.ts:27](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/transforms/presets/binning-1d.ts#L27)
 
 Preset discriminator identifying the executed transform.
 
@@ -31,6 +31,6 @@ Preset discriminator identifying the executed transform.
 
 > **rows**: [`Binning1dBinRow`](Binning1dBinRow.md)[]
 
-Defined in: [transforms/presets/binning-1d.ts:29](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-plot/src/transforms/presets/binning-1d.ts#L29)
+Defined in: [transforms/presets/binning-1d.ts:29](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/transforms/presets/binning-1d.ts#L29)
 
 Binned rows ready for downstream plot rendering.

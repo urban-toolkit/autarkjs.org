@@ -8,4 +8,4 @@
 
 > **RawQueryOutput** = `Record`\<`string`, `unknown`\>[]
 
-Defined in: [use-cases/raw-query/interfaces.ts:4](https://github.com/urban-toolkit/autark/blob/2086406f6ed56aea8faab9b6b840f71fa86be019/autk-db/src/use-cases/raw-query/interfaces.ts#L4)
+Defined in: [use-cases/raw-query/interfaces.ts:4](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/use-cases/raw-query/interfaces.ts#L4)
