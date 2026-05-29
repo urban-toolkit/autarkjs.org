@@ -5,7 +5,7 @@ import { AutkDb } from "@urban-toolkit/autk-db";
 const db = new AutkDb();
 await db.init();
 
-console.log(db.tables)
+console.log(db.getTablesMetadata())
 `
 
 const workflowCode = `

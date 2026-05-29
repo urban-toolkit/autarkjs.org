@@ -29,23 +29,20 @@ const db = new AutkDb();
 await db.init();
 
 await db.loadCsv({
-    csvFileUrl: '/data/example.csv',
-    outputTableName: 'incidents',
+    csvFileUrl: '/data/mnt_noise.csv',
+    outputTableName: 'noise',
 });
+
+let csv = await db.getTable('noise');
+csv = csv.filter(row => row.key < 20);
 
 const table = await db.updateTable({
-    tableName: 'incidents',
-    data: [
-        { id: 1, type: 'collision', severity: 2 },
-        { id: 2, type: 'noise', severity: 4 },
-        { id: 3, type: 'fire', severity: 5 },
-        { id: 4, type: 'medical', severity: 1 },
-    ],
+    tableName: 'noise',
     strategy: 'replace',
+    data: csv
 });
 
-const rows = await db.getTables({ tableName: 'incidents' });
-console.log(table.name, rows);
+console.log(table);
 `
 
 const updateByIdCode = `
@@ -92,9 +89,9 @@ await db.loadGeojson({
     outputTableName: 'neighborhoods',
 });
 
-console.log(db.tables.map((table) => table.name));
+console.log(db.getTablesMetadata().map((table) => table.name));
 await db.removeLayer('neighborhoods');
-console.log(db.tables.map((table) => table.name));
+console.log(db.getTablesMetadata().map((table) => table.name));
 `
 </script>
 
@@ -214,7 +211,7 @@ The [`update`](/api/autk-db/type-aliases/UpdateStrategy) strategy only modifies 
   <CodePlayground :code="removeLayerCode" out="console" />
 </ClientOnly>
 
-After removal, the table no longer appears in [`db.tables`](./retrieving-data.md#inspect-registered-tables) or [`getLayerTables()`](./retrieving-data.md#list-renderable-tables). This is useful when a table is no longer needed, when you want to free the workspace from intermediate results, or when a temporary layer should not remain available to later analysis steps.
+After removal, the table no longer appears in [`getTablesMetadata()`](./retrieving-data.md#registered-tables) or [`getLayersMetadata()`](./retrieving-data.md#get-layer-metadata). This is useful when a table is no longer needed, when you want to free the workspace from intermediate results, or when a temporary layer should not remain available to later analysis steps.
 
 #### List of `removeLayer` parameters
 
