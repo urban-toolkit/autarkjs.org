@@ -13,12 +13,12 @@ await db.loadGeojson({
 await db.loadCsv({
     csvFileUrl: '/data/mnt_noise.csv',
     outputTableName: 'noise',
-    geometryColumns: true,
+    geometryColumns: true
 });
 
 const res = await db.spatialQuery({
     tableRootName: 'neighborhoods',
-    tableJoinName: 'noise',
+    tableJoinName: 'noise'
 });
 
 console.log(res)
@@ -32,13 +32,13 @@ await db.init();
 
 await db.loadGeojson({
     geojsonFileUrl: '/data/mnt_neighs.geojson',
-    outputTableName: 'neighborhoods',
+    outputTableName: 'neighborhoods'
 });
 
 await db.loadCsv({
     csvFileUrl: '/data/mnt_noise.csv',
     outputTableName: 'noise',
-    geometryColumns: true,
+    geometryColumns: true
 });
 
 const res = await db.spatialQuery({
@@ -47,9 +47,9 @@ const res = await db.spatialQuery({
     groupBy: [
         {
             column: '*',
-            aggregateFn: 'count',
-        },
-    ],
+            aggregateFn: 'count'
+        }
+    ]
 });
 
 console.log(res)
@@ -82,8 +82,8 @@ const res = await db.buildHeatmap({
         {
             column: '*',
             aggregateFn: 'count'
-        },
-    ],
+        }
+    ]
 });
 
 console.log(res)
@@ -101,10 +101,11 @@ await db.loadGeojson({
 });
 
 const result = await db.rawQuery({
-    query: \`SELECT properties.ntaname, CAST(properties.shape_area AS DOUBLE) AS shape_area
+    query: \`SELECT properties.ntaname, 
+             CAST(properties.shape_area AS DOUBLE) AS shape_area
              FROM neighborhoods
              WHERE CAST(properties.shape_area AS DOUBLE) > 1000\`,
-    output: { type: 'RETURN_OBJECT' },
+    output: { type: 'RETURN_OBJECT' }
 });
 
 console.log(result)

@@ -114,17 +114,17 @@ To directly fetch from the public [Overpass API](https://overpass-api.de/) and l
 
 1. [`queryArea`](/api/autk-db/type-aliases/LoadOsmParams#queryarea) — Defines the geographic region of interest. The region definition is broken into two parts: the `geocodeArea` and a list of administrative areas `areas`. `geocodeArea` is used to define the data search scope and avoid naming ambiguities when querying the Overpass API. `areas` must identify OpenStreetMap boundary relations whose member ways can be reconstructed into a closed polygon. For best results, use exact OSM boundary relation names rather than informal place names.
 
-2. [`autoLoadLayers`](/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers) — List of data layers to automatically extract from raw OSM data (valid values are `buildings`, `roads`, `surface`, `parks`, and `water`). The optional [`coordinateFormat`](/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers) specifies the source CRS of the OSM coordinates before they are transformed into the workspace CRS.
+2. [`autoLoadLayers`](/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers) — List of data layers to automatically extract from raw OSM data. The valid osm layer values in Autark are `buildings`, `roads`, `surface`, `parks`, and `water`. The optional [`coordinateFormat`](/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers) specifies the source CRS of the OSM coordinates before they are transformed into the workspace CRS.
 
-3. [`outputTableName`](/api/autk-db/type-aliases/LoadOsmParams#outputtablename) — Optional parameter used to define the base name for the produced DuckDB tables. Each automatically loaded layer is stored as `{outputTableName}_{layer}`. It defaults to `table_osm`. For example, if `layers: ['surface', 'roads', 'buildings']`, the resulting tables are `table_osm_surface`, `table_osm_roads`, and `table_osm_buildings`.
+3. [`outputTableName`](/api/autk-db/type-aliases/LoadOsmParams#outputtablename) — Optional parameter used to define the base name for the produced tables. Each automatically loaded layer is stored as `{outputTableName}_{layer}`. It defaults to `table_osm`. For example, if `layers: ['surface', 'roads']`, the resulting tables are `table_osm_surface`, and `table_osm_roads`.
 
 
 <ClientOnly>
   <CodePlayground :code="fetchOsmCode" out="console" />
 </ClientOnly>
 
-:::warning Overpass API Limits
-* Fetching large areas is slow and may fail — be aware that the public Overpass API servers can reject queries when they're busy or out of slots. Keep areas small and use specific `geocodeArea` + `areas` for the best results.
+:::danger Overpass API limits
+* Fetching large areas is slow and may fail. Be aware that the public Overpass API servers can reject queries when they're busy or out of slots. Keep areas small and use specific `geocodeArea` + `areas` for the best results.
 
 * `autk-db` provides the `onProgress` callback that may be used to track the loading status.
 :::
@@ -139,7 +139,7 @@ To load from a PBF file, provide the [`pbfFileUrl`](/api/autk-db/type-aliases/Lo
   <CodePlayground :code="loadPbfCode" out="console" />
 </ClientOnly>
 
-:::tip PBF Loading Times
+:::tip PBF loading times
 * The `.pbf` loader scans the file in three stages: first it identifies the regions informed in `queryArea`, then it computes the bounding box of these regions and, lastly, it collects the OSM features inside these areas. 
 
 * Very large files may also take long to process, but the process runs etirely in the browser and no API limits apply. To reduce the loading time, crop the `.pbf` file first using [Osmium](https://osmcode.org/osmium-tool/) as a pre-processing step: `osmium extract --strategy=smart -b <minLon>,<minLat>,<maxLon>,<maxLat> <input.osm.pbf> -o <output.osm.pbf>`. 
@@ -231,18 +231,20 @@ To load from a PBF file, provide the [`pbfFileUrl`](/api/autk-db/type-aliases/Lo
 </table>
 
 :::danger Load OSM first when combining layer sources
-If you plan to load OSM and additional layers in the same workspace, load OSM first so its bounding box and `surface` geometry define the filtering and clipping context for the project.
+If you plan to load OSM and additional layers in the same workspace, you **must load OSM first**. By doing so, the osm data bounding box and the `surface` layer geometry will be used to filter and clip the additional layers to make sure all data spam the same area (see [workspace](/guide/autk-db/workspaces.md)).
 :::
 
 ## GeoJSON
 
-`loadGeojson` loads a GeoJSON `FeatureCollection` from a URL or an in-memory object and stores it as a named layer table in DuckDB. The only required parameter is [`outputTableName`](/api/autk-db/interfaces/LoadGeojsonParams#outputtablename).
+`loadGeojson` loads a GeoJSON `FeatureCollection` from a URL or an in-memory object and stores it as a named layer. The only required parameter is [`outputTableName`](/api/autk-db/interfaces/LoadGeojsonParams#outputtablename).
 
 <ClientOnly>
   <CodePlayground :code="loadGeojsonCode" out="console" />
 </ClientOnly>
 
- By default, the input coordinates are expected to be in latitude/longitude (`EPSG:4326`). If the GeoJSON uses a different coordinates system, provide it through [`coordinateFormat`](/api/autk-db/interfaces/LoadGeojsonParams#coordinateformat). Use [`layerType`](/api/autk-db/interfaces/LoadGeojsonParams#layertype) to override the automatic geometry-type inference performed by `autk-db`.
+ By default, the input coordinates are expected to be in latitude/longitude, that is, it uses the `EPSG:4326` system. If the loaded GeoJSON uses a different coordinates system,its coodinate system must be provided using the [`coordinateFormat`](/api/autk-db/interfaces/LoadGeojsonParams#coordinateformat) attribute. 
+ 
+ Also, you must use [`layerType`](/api/autk-db/interfaces/LoadGeojsonParams#layertype) define the type of the loaded layer. If no type is provided, it will be authomatically inference performed by `autk-db`.
 
 #### List of `loadGeojson` parameters
 
@@ -293,20 +295,16 @@ If you plan to load OSM and additional layers in the same workspace, load OSM fi
   </tbody>
 </table>
 
-:::info Layers Cropping
-`autk-db` applies workspace-aware filtering and clipping when new layers are loaded.
-
-1. If OSM data already exists in the current [workspace](./workspaces.md), its bounding box is first used to filter the features of newly loaded layers. The remaining features are then clipped using the OSM `surface` layer geometry.
-2. If OSM data is not available, the first loaded GeoJSON layer provides the workspace bounding box used to filter the features of subsequent layers. If that first layer is a polygon layer, its geometry is also used to clip later layers.
-:::
 
 ## GeoTIFF
 
-`loadGeoTiff` loads raster data from a URL or an `ArrayBuffer` and stores it as a raster table in DuckDB. The only required parameter is [`outputTableName`](/api/autk-db/interfaces/LoadGeoTiffParams#outputtablename). By default, the input raster is expected to use latitude/longitude coordinates (`EPSG:4326`). If the GeoTIFF uses a different coordinate system, provide it through [`coordinateFormat`](/api/autk-db/interfaces/LoadGeoTiffParams#coordinateformat). For large rasters, reduce [`maxPixels`](/api/autk-db/interfaces/LoadGeoTiffParams#maxpixels) to avoid loading too many pixels into browser memory.
+`loadGeoTiff` loads raster data from a URL or an `ArrayBuffer` and stores it as a raster table in DuckDB. The only required parameter is [`outputTableName`](/api/autk-db/interfaces/LoadGeoTiffParams#outputtablename). 
 
 <ClientOnly>
   <CodePlayground :code="loadGeoTiffCode" out="console" />
 </ClientOnly>
+
+By default, the input raster is expected to use `EPSG:4326`. If the GeoTIFF uses a different coordinate system, provide it through [`coordinateFormat`](/api/autk-db/interfaces/LoadGeoTiffParams#coordinateformat). For large rasters, reduce [`maxPixels`](/api/autk-db/interfaces/LoadGeoTiffParams#maxpixels) to avoid loading too many pixels into browser memory.
 
 :::tip Try changing the previous example
 Modify the previous code sample to explore more of `autk-db`. For example, try setting [`maxPixels`](/api/autk-db/interfaces/LoadGeoTiffParams#maxpixels) or use a different [`outputTableName`](/api/autk-db/interfaces/LoadGeoTiffParams#outputtablename).
@@ -365,7 +363,7 @@ Modify the previous code sample to explore more of `autk-db`. For example, try s
   <CodePlayground :code="loadCsvCode" out="console" />
 </ClientOnly>
 
-By default, [`geometryColumns`](/api/autk-db/interfaces/LoadCsvParams#geometrycolumns): `true` expects `Latitude` and `Longitude` columns in `EPSG:4326`. For custom latitude/longitude columns or [`WKT`](https://libgeos.org/specifications/wkt/) geometry, provide an explicit [`geometryColumns`](/api/autk-db/interfaces/LoadCsvParams#geometrycolumns) object. For tab-separated files, set [`delimiter`](/api/autk-db/interfaces/LoadCsvParams#delimiter): `'\t'`.
+By default, [`geometryColumns`](/api/autk-db/interfaces/LoadCsvParams#geometrycolumns): `true` expects `Latitude` and `Longitude` columns in `EPSG:4326`. For columns with different names or with [`WKT`](https://libgeos.org/specifications/wkt/) geometry, provide them using the [`geometryColumns`](/api/autk-db/interfaces/LoadCsvParams#geometrycolumns) object. For tab-separated files, set [`delimiter`](/api/autk-db/interfaces/LoadCsvParams#delimiter): `'\t'`.
 
 #### List of `loadCsv` parameters
 

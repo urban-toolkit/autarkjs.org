@@ -77,3 +77,10 @@ When loading OSM data with a `surface` layer, `autk-db` uses that surface as the
 :::tip When to use workspaces
 If your application has a single dataset, you do not need extra workspaces. The default `"autk"` workspace is sufficient.
 :::
+
+:::info Layers Cropping
+`autk-db` applies workspace-aware filtering and clipping when new layers are loaded.
+
+1. If OSM data already exists in the current [workspace](./workspaces.md), its bounding box is first used to filter the features of newly loaded layers. The remaining features are then clipped using the OSM `surface` layer geometry.
+2. If OSM data is not available, the first loaded GeoJSON layer provides the workspace bounding box used to filter the features of subsequent layers. If that first layer is a polygon layer, its geometry is also used to clip later layers.
+:::

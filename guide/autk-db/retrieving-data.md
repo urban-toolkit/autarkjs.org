@@ -7,7 +7,7 @@ await db.init();
 
 await db.loadGeojson({
     geojsonFileUrl: '/data/mnt_neighs.geojson',
-    outputTableName: 'neighborhoods',
+    outputTableName: 'neighborhoods'
 });
 
 console.log(db.getTablesMetadata());
@@ -22,7 +22,7 @@ await db.init();
 await db.loadCsv({
     csvFileUrl: '/data/mnt_noise.csv',
     outputTableName: 'noise',
-    geometryColumns: true,
+    geometryColumns: true
 });
 
 const rows = await db.getTable('noise');
@@ -37,7 +37,7 @@ await db.init();
 
 await db.loadGeojson({
     geojsonFileUrl: '/data/mnt_neighs.geojson',
-    outputTableName: 'neighborhoods',
+    outputTableName: 'neighborhoods'
 });
 
 const geojson = await db.getLayer('neighborhoods');
@@ -52,7 +52,7 @@ await db.init();
 
 await db.loadGeojson({
     geojsonFileUrl: '/data/mnt_neighs.geojson',
-    outputTableName: 'neighborhoods',
+    outputTableName: 'neighborhoods'
 });
 
 const layerTables = db.getLayersMetadata();
@@ -70,7 +70,7 @@ await db.init();
 
 await db.loadGeoTiff({
     geotiffFileUrl: '/data/temperature.tif',
-    outputTableName: 'temperature',
+    outputTableName: 'temperature'
 });
 
 const rasterTables = db.getRastersMetadata();
@@ -88,7 +88,7 @@ await db.init();
 
 await db.loadGeoTiff({
     geotiffFileUrl: '/data/temperature.tif',
-    outputTableName: 'temperature',
+    outputTableName: 'temperature'
 });
 
 const raster = await db.getRaster('temperature');
@@ -103,7 +103,7 @@ await db.init();
 
 await db.loadGeojson({
     geojsonFileUrl: '/data/mnt_neighs.geojson',
-    outputTableName: 'neighborhoods',
+    outputTableName: 'neighborhoods'
 });
 
 const bbox = await db.getBoundingBoxFromLayer('neighborhoods');
@@ -208,7 +208,7 @@ Use the live code box to experiment with [`getTable`](/api/autk-db/classes/AutkD
   </tbody>
 </table>
 
-## Get layers data 
+## Get layer data 
 
 [`getLayer`](/api/autk-db/classes/AutkDb#getlayer) exports a renderable vector table as a GeoJSON `FeatureCollection`. Use [`getLayersMetadata`](#get-layer-metadata) to see which tables qualify.
 

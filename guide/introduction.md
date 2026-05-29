@@ -73,8 +73,6 @@ All Autark packages run in the browser without a backend. Data is fetched direct
 
 The **interactive playground** below loads OpenStreetMap data for the Financial District in New York and renders it as a full 3D city map — with surface, parks, water and roads. 
 
-Try to add `"buildings"` to the `layers` list and click **Run** to test changes.
-
 <script setup>
 const introCode = `
 import { AutkDb } from "@urban-toolkit/autk-db";
@@ -91,8 +89,7 @@ await db.loadOsm({
   },
   autoLoadLayers: {
     layers: ["surface", "parks", "water", "roads"],
-  },
-  onProgress: (phase) => console.log(phase),
+  }
 });
 
 const map = new AutkMap(canvas);
@@ -111,6 +108,11 @@ map.draw();
   <CodePlayground :code="introCode" out="dom" />
 </ClientOnly>
 
-The `canvas` argument used in the autk-map constructor must be a reference to a DOM node containing a HTML canvas.
+:::tip Make changes to the examples
+Try to add `"buildings"` to the `layers` list and click **Run** to test changes.
+:::
 
+:::info The `canvas` 
+The `canvas` argument used in the autk-map constructor must be a reference to a DOM node containing a HTML canvas.
+:::
 </div>
