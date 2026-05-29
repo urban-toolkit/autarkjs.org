@@ -11,16 +11,8 @@ await db.loadGeojson({
 });
 
 const layer = await db.getLayer('neighborhoods');
-const updatedGeojson = {
-    ...layer,
-    features: layer.features.map((feature, index) => ({
-        ...feature,
-        properties: {
-            ...feature.properties,
-            highlighted: index < 3,
-        },
-    })),
-};
+const updatedGeojson = structuredClone(layer);
+updatedGeojson.features[0].properties.highlighted = true;
 
 const table = await db.updateTable({
     tableName: 'neighborhoods',
@@ -124,19 +116,16 @@ console.log(db.tables.map((table) => table.name));
 
 # Updating tables
 
-Once a table is loaded into DuckDB, [`updateTable`](/api/autk-db/classes/AutkDb#updatetable) lets you replace its contents or update existing records without creating a new table name. This is useful when you compute new attributes, apply edits coming from a user interface, or refresh a dataset while keeping the rest of your code pointed at the same table.
+Once a table is loaded into DuckDB, [`updateTable`](/api/autk-db/classes/AutkDb#updatetable) lets you replace its contents or update existing records without creating a new table name. Unlike the loading methods described in [Loading data](./loading-data.md), updating does not create a new table. Instead, it modifies a table that already exists in the current [workspace](./workspaces.md).
 
-Unlike the loading methods described in [Loading data](./loading-data.md), updating does not create a new table. Instead, it modifies a table that already exists in the current workspace. That makes it especially useful in iterative workflows where the table has already been used by analysis or rendering code.
+:::info Returned metadata
+Every [`updateTable`](/api/autk-db/classes/AutkDb#updatetable) call returns the updated table metadata after the operation completes.
+:::
+
 
 ## Replace a table
 
-Use the [`replace`](/api/autk-db/type-aliases/UpdateStrategy) strategy when the entire dataset should be swapped with a new one. Internally, `autk-db` drops the previous table and recreates it from the new data.
-
-This is the simplest strategy when:
-
-- the full dataset has changed
-- the number of rows or features may change
-- you want the table to keep the same name while replacing all of its contents
+Use the [`replace`](/api/autk-db/type-aliases/UpdateStrategy) strategy when the entire dataset should be swapped with a new one. Internally, `autk-db` drops the previous table and recreates it from the new data. This is the simplest strategy when the full dataset has changed and you want the table to keep the same name while replacing all of its contents.
 
 ### Replacing a vector layer
 
@@ -146,7 +135,7 @@ For renderable vector tables, pass a GeoJSON `FeatureCollection` as [`data`](/ap
   <CodePlayground :code="replaceLayerCode" out="console" />
 </ClientOnly>
 
-In this example, the `neighborhoods` table is first loaded from GeoJSON, then rewritten with an updated `highlighted` property. Because the strategy is `replace`, the old table contents are discarded and the new `FeatureCollection` becomes the full table.
+In this example, the `neighborhoods` table is first loaded from GeoJSON, then rewritten after adding a `highlighted` property to one feature. Because the strategy is `replace`, the old table contents are discarded and the new `FeatureCollection` becomes the full table.
 
 ### Replacing tabular data
 
@@ -162,7 +151,7 @@ This pattern is useful when a non-spatial dataset is edited outside DuckDB and t
 Use [`replace`](/api/autk-db/type-aliases/UpdateStrategy) when you already have the full next version of the dataset in memory. It is often the most predictable option because the final table is determined entirely by the new input.
 :::
 
-## Update existing records by ID
+## Update records
 
 Use the [`update`](/api/autk-db/type-aliases/UpdateStrategy) strategy when you want to modify only records that already exist in the table. In this mode, [`idColumn`](/api/autk-db/interfaces/UpdateTableParams#idcolumn) is required so `autk-db` knows how to match incoming records with stored ones.
 
@@ -181,14 +170,6 @@ The [`idColumn`](/api/autk-db/interfaces/UpdateTableParams#idcolumn) value may r
 The [`update`](/api/autk-db/type-aliases/UpdateStrategy) strategy only modifies rows that already exist. If an incoming record does not match an existing ID, it is not inserted as a new row. If you need to fully replace the dataset, use [`replace`](/api/autk-db/type-aliases/UpdateStrategy) instead.
 :::
 
-## Returned value
-
-[`updateTable`](/api/autk-db/classes/AutkDb#updatetable) returns the updated table metadata after the operation completes. This is useful when you want to inspect the refreshed schema, confirm the table name, or pass the updated table to later steps.
-
-```ts
-const table = await db.updateTable({ ... });
-console.log(table.columns);
-```
 
 ## List of `updateTable` parameters
 
