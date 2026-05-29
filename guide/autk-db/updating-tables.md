@@ -11,16 +11,15 @@ await db.loadGeojson({
 });
 
 const layer = await db.getLayer('neighborhoods');
-const updatedGeojson = structuredClone(layer);
-updatedGeojson.features[0].properties.highlighted = true;
+layer.features.forEach(f => f.properties.highlighted = true);
 
 const table = await db.updateTable({
     tableName: 'neighborhoods',
-    data: updatedGeojson,
+    data: layer,
     strategy: 'replace',
 });
 
-console.log(table.name, table.columns.length);
+console.log(table);
 `
 
 const replaceRowsCode = `
@@ -29,20 +28,18 @@ import { AutkDb } from "@urban-toolkit/autk-db";
 const db = new AutkDb();
 await db.init();
 
-await db.loadJson({
-    jsonObject: [
-        { id: 1, severity: 3, label: 'A' },
-        { id: 2, severity: 4, label: 'B' },
-    ],
+await db.loadCsv({
+    csvFileUrl: '/data/example.csv',
     outputTableName: 'incidents',
 });
 
 const table = await db.updateTable({
     tableName: 'incidents',
     data: [
-        { id: 1, severity: 2, label: 'Updated A' },
-        { id: 2, severity: 5, label: 'Updated B' },
-        { id: 3, severity: 1, label: 'New C' },
+        { id: 1, type: 'collision', severity: 2 },
+        { id: 2, type: 'noise', severity: 4 },
+        { id: 3, type: 'fire', severity: 5 },
+        { id: 4, type: 'medical', severity: 1 },
     ],
     strategy: 'replace',
 });
@@ -135,7 +132,7 @@ For renderable vector tables, pass a GeoJSON `FeatureCollection` as [`data`](/ap
   <CodePlayground :code="replaceLayerCode" out="console" />
 </ClientOnly>
 
-In this example, the `neighborhoods` table is first loaded from GeoJSON, then rewritten after adding a `highlighted` property to one feature. Because the strategy is `replace`, the old table contents are discarded and the new `FeatureCollection` becomes the full table.
+In this example, the `neighborhoods` table is first loaded from GeoJSON, then rewritten after adding a `highlighted` property to the features. Because the strategy is `replace`, the old table contents are discarded and the new `FeatureCollection` becomes the full table.
 
 ### Replacing tabular data
 
@@ -145,7 +142,7 @@ For JSON or CSV-style tables, pass an array of plain objects.
   <CodePlayground :code="replaceRowsCode" out="console" />
 </ClientOnly>
 
-This pattern is useful when a non-spatial dataset is edited outside DuckDB and then written back in one step. Because the whole table is recreated, rows can be added, removed, or reordered freely.
+This pattern is useful when a non-spatial dataset is loaded from a file, edited in JavaScript, and then written back in one step. Because the whole table is recreated, rows can be added, removed, or reordered freely.
 
 :::tip When to prefer `replace`
 Use [`replace`](/api/autk-db/type-aliases/UpdateStrategy) when you already have the full next version of the dataset in memory. It is often the most predictable option because the final table is determined entirely by the new input.
