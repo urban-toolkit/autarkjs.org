@@ -165,7 +165,7 @@ When a table comes from OSM auto-loading, its `type` usually reflects one of the
 The entries returned by [`getLayersMetadata()`](/api/autk-db/classes/AutkDb#getlayersmetadata) are still DuckDB tables. In other words, a **layer** in this context is a table whose contents can be exported as a vetor layer. 
 :::
 
-## Raster layers metadata
+## Raster metadata
 
 [`getRastersMetadata()`](/api/autk-db/classes/AutkDb#getrastersmetadata) returns only the raster tables that can be exported with [`getRaster`](#get-raster-tables). This is useful when a workspace contains many tables and you want to know which raster datasets are ready for map rendering or raster export.
 
@@ -208,7 +208,7 @@ Use the live code box to experiment with [`getTable`](/api/autk-db/classes/AutkD
   </tbody>
 </table>
 
-## Get vector layers
+## Get layers data 
 
 [`getLayer`](/api/autk-db/classes/AutkDb#getlayer) exports a renderable vector table as a GeoJSON `FeatureCollection`. Use [`getLayersMetadata`](#get-layer-metadata) to see which tables qualify.
 
@@ -241,7 +241,7 @@ Calling [`getLayer`](/api/autk-db/classes/AutkDb#getlayer) on a non-vector table
   </tbody>
 </table>
 
-## Get raster tables
+## Get raster data
 
 [`getRaster`](/api/autk-db/classes/AutkDb#getraster) exports a loaded GeoTIFF table as a packed raster `FeatureCollection`. Pass the result to `autk-map` with `loadRasterCollection()`.
 

@@ -15,8 +15,8 @@ layer.features.forEach(f => f.properties.highlighted = true);
 
 const table = await db.updateTable({
     tableName: 'neighborhoods',
-    data: layer,
     strategy: 'replace',
+    data: layer
 });
 
 console.log(table);
@@ -113,7 +113,9 @@ console.log(db.getTablesMetadata().map((table) => table.name));
 Once a table is loaded into DuckDB, [`updateTable`](/api/autk-db/classes/AutkDb#updatetable) lets you replace its contents or update existing records without creating a new table name. Unlike the loading methods described in [Loading data](./loading-data.md), updating does not create a new table. Instead, it modifies a table that already exists in the current [workspace](./workspaces.md).
 
 :::info Returned metadata
-Every [`updateTable`](/api/autk-db/classes/AutkDb#updatetable) call returns the updated table metadata after the operation completes.
+1. Every table manipulation call returns the updated table metadata.
+
+2. Operates on a table that already exists in the current workspace. In practice, this means you should make sure the intended workspace is active before updating a table.
 :::
 
 
@@ -121,7 +123,7 @@ Every [`updateTable`](/api/autk-db/classes/AutkDb#updatetable) call returns the 
 
 Use the [`replace`](/api/autk-db/type-aliases/UpdateStrategy) strategy when the entire dataset should be swapped with a new one. Internally, `autk-db` drops the previous table and recreates it from the new data. This is the simplest strategy when the full dataset has changed and you want the table to keep the same name while replacing all of its contents.
 
-### Replacing a vector layer
+### Replacing layer data
 
 For renderable vector tables, pass a GeoJSON `FeatureCollection` as [`data`](/api/autk-db/interfaces/UpdateTableParams#data).
 
@@ -153,7 +155,7 @@ Use the [`update`](/api/autk-db/type-aliases/UpdateStrategy) strategy when you w
   <CodePlayground :code="updateByIdCode" out="console" />
 </ClientOnly>
 
-In the example above, only the features whose `properties.ntaname` values match existing rows in the `neighborhoods` table are updated. The rest of the table is left untouched.
+In the example above, only the features whose `properties.ntaname` values match existing rows in the `neighborhoods` table are updated.
 
 The [`idColumn`](/api/autk-db/interfaces/UpdateTableParams#idcolumn) value may refer to:
 
@@ -161,7 +163,7 @@ The [`idColumn`](/api/autk-db/interfaces/UpdateTableParams#idcolumn) value may r
 - a nested GeoJSON property path such as `properties.building_id`
 
 :::warning `update` does not insert new rows
-The [`update`](/api/autk-db/type-aliases/UpdateStrategy) strategy only modifies rows that already exist. If an incoming record does not match an existing ID, it is not inserted as a new row. If you need to fully replace the dataset, use [`replace`](/api/autk-db/type-aliases/UpdateStrategy) instead.
+The [`update`](/api/autk-db/type-aliases/UpdateStrategy) strategy only modifies rows that already exist. If an incoming record does not match an existing ID, it is not inserted as a new row.
 :::
 
 
@@ -199,13 +201,11 @@ The [`update`](/api/autk-db/type-aliases/UpdateStrategy) strategy only modifies 
   </tbody>
 </table>
 
-:::info Workspace behavior
-[`updateTable`](/api/autk-db/classes/AutkDb#updatetable) operates on a table that already exists in the current workspace. In practice, this means you should make sure the intended workspace is active before updating a table.
-:::
+
 
 ## Remove a table
 
-[`removeLayer`](/api/autk-db/classes/AutkDb#removelayer) drops a table from DuckDB and unregisters it from the active workspace.
+[`removeLayer`](/api/autk-db/classes/AutkDb#removelayer) drops a table from the active workspace.
 
 <ClientOnly>
   <CodePlayground :code="removeLayerCode" out="console" />
@@ -231,11 +231,5 @@ After removal, the table no longer appears in [`getTablesMetadata()`](./retrievi
     </tr>
   </tbody>
 </table>
-
-## Updating vs loading again
-
-Use [`updateTable`](/api/autk-db/classes/AutkDb#updatetable) when you want to preserve the existing table name and keep downstream code pointing to the same object in the workspace. This is especially useful after running custom logic in JavaScript or after editing properties in a UI.
-
-Use the loading methods again when the source itself needs to be fetched, parsed, or re-ingested from its original format. In other words, loading is usually the right choice when the external source of truth has changed, while updating is often the better choice when the data has already been brought into the application and only needs to be rewritten.
 
 </div>
