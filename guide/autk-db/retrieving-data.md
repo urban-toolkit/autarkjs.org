@@ -62,6 +62,24 @@ for (const table of layerTables) {
 }
 `
 
+const getRastersMetadataCode = `
+import { AutkDb } from "@urban-toolkit/autk-db";
+
+const db = new AutkDb();
+await db.init();
+
+await db.loadGeoTiff({
+    geotiffFileUrl: '/data/temperature.tif',
+    outputTableName: 'temperature',
+});
+
+const rasterTables = db.getRastersMetadata();
+
+for (const table of rasterTables) {
+    console.log(table.name, table.type);
+}
+`
+
 const getRasterCode = `
 import { AutkDb } from "@urban-toolkit/autk-db";
 
@@ -110,7 +128,7 @@ console.log(bbox);
 
 Once data is loaded or analyzed, `autk-db` provides getter methods to move results from DuckDB back into JavaScript. These methods let you inspect registered tables, read rows as plain objects, export vector layers as GeoJSON, export raster tables in a map-friendly format, and query layer bounding boxes.
 
-## Registered tables
+## Tables metadata
 
 Use [`getTablesMetadata()`](/api/autk-db/classes/AutkDb#gettablesmetadata) to inspect the tables registered in the current [workspace](./workspaces.md). Each entry is table metadata, not the table rows themselves. This is useful when you want to see what is available before calling [`getTable`](#get-table-data), [`getLayer`](#get-vector-layers), [`getRaster`](#get-raster-tables), or [`getLayersMetadata`](#get-layer-metadata).
 
@@ -135,7 +153,7 @@ When a table comes from OSM auto-loading, its `type` usually reflects one of the
 - `buildings` — polygon features representing building footprints
 :::
 
-## Get layer metadata
+## Layers metadata
 
 [`getLayersMetadata()`](/api/autk-db/classes/AutkDb#getlayersmetadata) returns only the vector tables that can be exported with [`getLayer`](#get-vector-layers). This is useful when a workspace contains many tables and you want to know which ones are ready for map rendering or layer export.
 
@@ -144,9 +162,19 @@ When a table comes from OSM auto-loading, its `type` usually reflects one of the
 </ClientOnly>
 
 :::info Layer versus table
-The entries returned by [`getLayersMetadata()`](/api/autk-db/classes/AutkDb#getlayersmetadata) are still DuckDB tables. In other words, a **layer** in this context is a table whose contents can be exported for rendering. The `name` property is therefore the table name you should pass to [`getLayer`](#get-vector-layers) or [`getBoundingBoxFromLayer`](#get-bounding-boxes).
+The entries returned by [`getLayersMetadata()`](/api/autk-db/classes/AutkDb#getlayersmetadata) are still DuckDB tables. In other words, a **layer** in this context is a table whose contents can be exported as a vetor layer. 
+:::
 
-For OSM data loaded with [`loadOsm`](./loading-data.md#openstreetmap), the names usually follow the `{outputTableName}_{layer}` pattern, such as `table_osm_roads` or `table_osm_buildings`.
+## Raster layers metadata
+
+[`getRastersMetadata()`](/api/autk-db/classes/AutkDb#getrastersmetadata) returns only the raster tables that can be exported with [`getRaster`](#get-raster-tables). This is useful when a workspace contains many tables and you want to know which raster datasets are ready for map rendering or raster export.
+
+<ClientOnly>
+  <CodePlayground :code="getRastersMetadataCode" out="console" />
+</ClientOnly>
+
+:::info Layer versus raster table
+The entries returned by [`getRastersMetadata()`](/api/autk-db/classes/AutkDb#getrastersmetadata) are also DuckDB tables. The difference is that a **layer** usually refers to vector geometries that can be exported with [`getLayer`](#get-vector-layers), while a **raster table** stores pixel-based data that must be exported with [`getRaster`](#get-raster-tables).
 :::
 
 ## Get table data
