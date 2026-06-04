@@ -124,8 +124,20 @@ async function runCode() {
   headerOutput.value = ''
 
   try {
-    const { AutkMap } = await import('@urban-toolkit/autk-map')
-    const { AutkDb } = await import('@urban-toolkit/autk-db')
+    const autkMap = await import('@urban-toolkit/autk-map')
+    const autkDb = await import('@urban-toolkit/autk-db')
+    const autkCore = await import('@urban-toolkit/autk-core')
+
+    const modules = {
+      ...autkMap,
+      ...autkDb,
+      ...autkCore,
+    }
+
+    const scopeDeclarations = Object.keys(modules)
+      .filter((key) => /^[$A-Z_][0-9A-Z_$]*$/i.test(key))
+      .map((key) => `const ${key} = __modules.${key};`)
+      .join('\n')
 
     const userCode = editableCode.value
       .replace(/import\s*{[^}]*}\s*from\s*["'][^"']*["']\s*;?/g, '')
@@ -133,8 +145,7 @@ async function runCode() {
 
     const wrapped = `
       return (async () => {
-        const AutkMap = __modules.AutkMap;
-        const AutkDb = __modules.AutkDb;
+        ${scopeDeclarations}
         const canvas = __canvas;
         const console = {
           log: (...args) => __consoleOut.push({ type: 'log', message: args.map(a => typeof a === 'string' ? a : JSON.stringify(a, null, 2)).join(' ') }),
@@ -151,7 +162,7 @@ async function runCode() {
     const htmlOut = { value: '' }
 
     await new AsyncFunction('__modules', '__canvas', '__consoleOut', '__htmlOut', wrapped)(
-      { AutkMap, AutkDb },
+      modules,
       canvas.value,
       consoleOut,
       htmlOut,

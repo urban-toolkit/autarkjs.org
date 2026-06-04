@@ -231,7 +231,7 @@ To load from a PBF file, provide the [`pbfFileUrl`](/api/autk-db/type-aliases/Lo
 </table>
 
 :::danger Load OSM first when combining layer sources
-If you plan to load OSM and additional layers in the same workspace, you **must load OSM first**. By doing so, the osm data bounding box and the `surface` layer geometry will be used to filter and clip the additional layers to make sure all data spam the same area (see [workspace](/guide/autk-db/workspaces.md)).
+If you plan to load OSM and additional layers in the same workspace, you **must load OSM first**. By doing so, the osm data bounding box and the `surface` layer geometry will be used to filter and clip the additional layers to make sure all data span the same area (see [workspace](/autk-db/workspaces)).
 :::
 
 ## GeoJSON
