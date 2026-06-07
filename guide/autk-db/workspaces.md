@@ -1,3 +1,16 @@
+<style scoped>
+.package-page :is(p, li, td, th, .custom-block p, .custom-block li, h1, h2, h3, h4, h5, h6) {
+  text-align: justify;
+}
+
+.package-page table th:first-child,
+.package-page table td:first-child {
+  width: 35%;
+}
+</style>
+
+<div class="package-page">
+
 # Workspaces
 
 A workspace is an isolated DuckDB schema. Tables created in one workspace are not visible in another. This is useful when building multi-panel applications where each panel operates on a different dataset, or when you want to run several independent analyses without name conflicts.
@@ -84,3 +97,5 @@ If your application has a single dataset, you do not need extra workspaces. The 
 1. If OSM data already exists in the current [workspace](./workspaces.md), its bounding box is first used to filter the features of newly loaded layers. The remaining features are then clipped using the OSM `surface` layer geometry.
 2. If OSM data is not available, the first loaded GeoJSON layer provides the workspace bounding box used to filter the features of subsequent layers. If that first layer is a polygon layer, its geometry is also used to clip later layers.
 :::
+
+</div>

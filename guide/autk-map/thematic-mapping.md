@@ -93,7 +93,7 @@ map.draw();
 
 <div class="package-page">
 
-# Thematic Mapping
+# Thematic Data
 
 Thematic mapping colors features according to an attribute. In `autk-map`, the usual workflow is:
 

@@ -165,6 +165,6 @@ Thematic rendering uses a color map. You can change the palette independently fr
 
 Use sequential or diverging interpolators for numeric data. Use categorical palettes such as `OBSERVABLE10` for class labels.
 
-For the full thematic workflow, continue to [Thematic Mapping](./thematic-mapping).
+For the full thematic workflow, continue to [Thematic Data](./thematic-mapping).
 
 </div>
