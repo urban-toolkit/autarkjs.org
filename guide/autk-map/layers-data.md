@@ -107,11 +107,9 @@ const [neighborhoods, meshData] = await Promise.all([
 const southManhattan = {
   ...neighborhoods,
   features: neighborhoods.features.filter((feature) =>
-    [
-      "Financial District-Battery Park City",
-      "Chinatown-Two Bridges",
-      "Lower East Side"
-    ].includes(feature.properties?.ntaname)
+    ["Financial District-Battery Park City", "Tribeca-Civic Center"].includes(
+      feature.properties?.ntaname
+    )
   )
 };
 
