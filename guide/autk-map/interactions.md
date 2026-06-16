@@ -5,25 +5,17 @@ import { AutkMap, MapEvent } from "@urban-toolkit/autk-map";
 const map = new AutkMap(canvas);
 await map.init();
 
-const [neighborhoods, points] = await Promise.all([
-  fetch("/data/mnt_neighs_proj.geojson").then((res) => res.json()),
-  fetch("/data/mnt_noise_proj.geojson").then((res) => res.json())
-]);
+const neighborhoods = await fetch("/data/mnt_neighs_proj.geojson")
+  .then((res) => res.json());
 
 map.loadCollection("neighborhoods", {
   collection: neighborhoods,
   type: "polygons"
 });
 
-map.loadCollection("points", {
-  collection: points,
-  type: "points"
-});
-
 // Mark a layer as pickable. Only layers with isPick set to true
 // emit picking events.
 map.updateRenderInfo("neighborhoods", { isPick: true });
-map.updateRenderInfo("points", { isPick: true });
 
 map.events.on(MapEvent.PICKING, ({ selection, layerId }) => {
   console.log({ layerId, selection });
@@ -38,19 +30,12 @@ import { AutkMap } from "@urban-toolkit/autk-map";
 const map = new AutkMap(canvas);
 await map.init();
 
-const [neighborhoods, points] = await Promise.all([
-  fetch("/data/mnt_neighs_proj.geojson").then((res) => res.json()),
-  fetch("/data/mnt_noise_proj.geojson").then((res) => res.json())
-]);
+const neighborhoods = await fetch("/data/mnt_neighs_proj.geojson")
+  .then((res) => res.json());
 
 map.loadCollection("neighborhoods", {
   collection: neighborhoods,
   type: "polygons"
-});
-
-map.loadCollection("points", {
-  collection: points,
-  type: "points"
 });
 
 map.draw();
@@ -64,13 +49,13 @@ setTimeout(() => {
 
 setTimeout(() => {
   map.clearHighlightedIds("neighborhoods");
-  map.setSkippedIds("points", [0, 1, 2]);
-  console.log("Temporarily skipped points 0, 1, 2.");
+  map.setSkippedIds("neighborhoods", [5, 6, 7]);
+  console.log("Temporarily skipped neighborhoods 5, 6, 7.");
 }, 1600);
 
 setTimeout(() => {
-  map.clearSkippedIds("points");
-  console.log("Restored all points.");
+  map.clearSkippedIds("neighborhoods");
+  console.log("Restored all neighborhoods.");
 }, 2400);
 `;
 
@@ -80,19 +65,12 @@ import { AutkMap } from "@urban-toolkit/autk-map";
 const map = new AutkMap(canvas);
 await map.init();
 
-const [neighborhoods, points] = await Promise.all([
-  fetch("/data/mnt_neighs_proj.geojson").then((res) => res.json()),
-  fetch("/data/mnt_noise_proj.geojson").then((res) => res.json())
-]);
+const neighborhoods = await fetch("/data/mnt_neighs_proj.geojson")
+  .then((res) => res.json());
 
 map.loadCollection("neighborhoods", {
   collection: neighborhoods,
   type: "polygons"
-});
-
-map.loadCollection("points", {
-  collection: points,
-  type: "points"
 });
 
 map.draw();
@@ -100,9 +78,9 @@ map.draw();
 // Layer-level visibility is controlled with isSkip.
 // Use updateRenderInfo to toggle it and removeLayer to
 // fully detach the layer from the map.
-setTimeout(() => map.updateRenderInfo("points", { isSkip: true }), 800);
-setTimeout(() => map.updateRenderInfo("points", { isSkip: false }), 1600);
-setTimeout(() => map.removeLayer("points"), 2400);
+setTimeout(() => map.updateRenderInfo("neighborhoods", { isSkip: true }), 800);
+setTimeout(() => map.updateRenderInfo("neighborhoods", { isSkip: false }), 1600);
+setTimeout(() => map.removeLayer("neighborhoods"), 2400);
 `;
 
 const linkedViewsCode = `
@@ -111,19 +89,12 @@ import { AutkMap, MapEvent } from "@urban-toolkit/autk-map";
 const map = new AutkMap(canvas);
 await map.init();
 
-const [neighborhoods, points] = await Promise.all([
-  fetch("/data/mnt_neighs_proj.geojson").then((res) => res.json()),
-  fetch("/data/mnt_noise_proj.geojson").then((res) => res.json())
-]);
+const neighborhoods = await fetch("/data/mnt_neighs_proj.geojson")
+  .then((res) => res.json());
 
 map.loadCollection("neighborhoods", {
   collection: neighborhoods,
   type: "polygons"
-});
-
-map.loadCollection("points", {
-  collection: points,
-  type: "points"
 });
 
 map.updateRenderInfo("neighborhoods", { isPick: true });
@@ -168,7 +139,7 @@ map.events.on(MapEvent.PICKING, ({ selection, layerId }) => {
 2. **Programmatic highlight and skip** — direct control over which components stand out or are hidden, useful for cross-view coordination.
 3. **Layer visibility** — show, hide, or fully remove an entire layer.
 
-All examples below load the same two layers (southern Manhattan neighborhoods and noise event points) as projected Mercator data, so each section focuses on a single interaction concern.
+All examples below load the same neighborhood polygons as projected Mercator data, so each section focuses on a single interaction concern.
 
 ## Picking
 
