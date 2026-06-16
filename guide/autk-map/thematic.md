@@ -187,7 +187,7 @@ for (const layerData of db.getLayersMetadata()) {
 const collection = await db.getLayer(layer);
 map.updateColorMap(layer, {
   colorMap: {
-    interpolator: ColorMapInterpolator.SEQ_VIRIDIS,
+    interpolator: ColorMapInterpolator.SEQ_INFERNO,
     domainSpec: { type: ColorMapDomainStrategy.PERCENTILE }
   }
 });
