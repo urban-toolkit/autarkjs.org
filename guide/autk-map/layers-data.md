@@ -1,5 +1,5 @@
 <script setup>
-const semanticLayersCode = `
+const physicalLayersCode = `
 import { AutkDb } from "@urban-toolkit/autk-db";
 import { AutkMap } from "@urban-toolkit/autk-map";
 
@@ -123,17 +123,17 @@ console.log(db.getLayersMetadata());
 
 <div class="package-page">
 
-# Layers
+# Layers data
 
-Every `autk-map` layer has a type. The type tells the renderer how to interpret the input data, which styling rules apply, and whether the layer should behave like a semantic map layer, a generic vector dataset, or a raster grid. In practice, layers are loaded with `loadCollection()` and then rendered according to the selected type.
+Layers are the main data units rendered by `autk-map`. Each layer combines a dataset with a rendering type, allowing the map to interpret the input geometry, apply the appropriate visual rules, and compose multiple datasets in the same view. In practice, layers are loaded with `loadCollection()` and then rendered according to the selected type.
 
 :::warning Projected coordinates required
 `autk-map` expects data in projected coordinates. You may use any projected coordinate system, but all loaded layers must use the same selected system.
 :::
 
-## Semantic layers
+## Physical layers
 
-Semantic layers are specialized layer types designed for common OpenStreetMap map components. They are used to build the map context and are useful when the dataset already represents streets, buildings, parks, water, or ground surface. In most cases, semantic layers should be loaded with `type` passed explicitly.
+Physical layers are specialized layer types designed for common map components such as streets, buildings, parks, water, and ground surface. They are used to build the map context and are useful when the dataset already represents those physical urban elements. In most cases, physical layers should be loaded with `type` passed explicitly.
 
 | Type | Geometry | Description |
 |---|---|---|
@@ -144,16 +144,16 @@ Semantic layers are specialized layer types designed for common OpenStreetMap ma
 | `buildings` | Polygon | 3D buildings rendered with extrusion |
 
 <ClientOnly>
-  <CodePlayground :code="semanticLayersCode" out="dom" />
+  <CodePlayground :code="physicalLayersCode" out="dom" />
 </ClientOnly>
 
-:::tip Semantic layers are not limited to OSM
-Semantic layers are used to build the map context, but they are not restricted to OpenStreetMap data. You can also load GeoJSON files as `surface`, `parks`, `water`, `roads`, or `buildings` when your own data already matches those semantic categories.
+:::tip Physical layers are not limited to OSM
+Physical layers are used to build the map context, but they are not restricted to OpenStreetMap data. You can also load GeoJSON files as `surface`, `parks`, `water`, `roads`, or `buildings` when your own data already matches those physical categories.
 :::
 
 ## Vector layers
 
-Vector layers are the generic layer types used for custom GeoJSON data. They map directly to the three main geometry families, so they are the right choice when the data is not meant to be interpreted as one of the semantic layers. `loadCollection()` is the standard entry point for these collections.
+Vector layers are the generic layer types used for custom GeoJSON data. They map directly to the three main geometry families, so they are the right choice when the data is not meant to be interpreted as one of the physical layers. `loadCollection()` is the standard entry point for these collections.
 
 | Type | Geometry |
 |---|---|
@@ -166,7 +166,7 @@ Vector layers are the generic layer types used for custom GeoJSON data. They map
 </ClientOnly>
 
 :::tip Automatic inference
-When `type` is omitted, `loadCollection()` can infer vector layer types from geometry: `Point` and `MultiPoint` become `points`, `LineString` and `MultiLineString` become `polylines`, and `Polygon` and `MultiPolygon` become `polygons`. Semantic types such as `roads`, `buildings`, `surface`, `parks`, and `water` are not inferred automatically. If a collection mixes geometry families, pass `type` explicitly.
+When `type` is omitted, `loadCollection()` can infer vector layer types from geometry: `Point` and `MultiPoint` become `points`, `LineString` and `MultiLineString` become `polylines`, and `Polygon` and `MultiPolygon` become `polygons`. Physical types such as `roads`, `buildings`, `surface`, `parks`, and `water` are not inferred automatically. If a collection mixes geometry families, pass `type` explicitly.
 :::
 
 ## Raster layers
