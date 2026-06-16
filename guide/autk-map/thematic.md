@@ -95,7 +95,6 @@ await db.loadCsv({
 
 const layer = "table_osm_buildings";
 
-// Count noise events within 1000 m of each building.
 await db.spatialQuery({
   tableRootName: layer,
   tableJoinName: "noise",
@@ -112,13 +111,12 @@ for (const layerData of db.getLayersMetadata()) {
     collection,
     type: layerData.type
   });
-  // Hide the source CSV layer; only the joined result is shown.
   map.updateRenderInfo(layerData.name, {
     isSkip: layerData.source === "csv"
   });
 }
 
-const buildings = await db.getLayer(layer);
+const collection = await db.getLayer(layer);
 map.updateColorMap(layer, {
   colorMap: {
     interpolator: ColorMapInterpolator.SEQ_INFERNO,
@@ -126,7 +124,7 @@ map.updateColorMap(layer, {
   }
 });
 map.updateThematic(layer, {
-  collection: buildings,
+  collection,
   property: "properties.sjoin.count.noise"
 });
 map.updateRenderInfo(layer, { isColorMap: true });
@@ -165,7 +163,6 @@ await db.loadCsv({
 
 const layer = "table_osm_roads";
 
-// Same spatial join, applied to roads this time.
 await db.spatialQuery({
   tableRootName: layer,
   tableJoinName: "noise",
@@ -187,7 +184,7 @@ for (const layerData of db.getLayersMetadata()) {
   });
 }
 
-const roads = await db.getLayer(layer);
+const collection = await db.getLayer(layer);
 map.updateColorMap(layer, {
   colorMap: {
     interpolator: ColorMapInterpolator.SEQ_VIRIDIS,
@@ -195,7 +192,7 @@ map.updateColorMap(layer, {
   }
 });
 map.updateThematic(layer, {
-  collection: roads,
+  collection,
   property: "properties.sjoin.count.noise"
 });
 map.updateRenderInfo(layer, { isColorMap: true });
