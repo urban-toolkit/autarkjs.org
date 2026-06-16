@@ -34,34 +34,27 @@ map.draw();
 `
 
 const divergingCode = `
-import { AutkMap } from "@urban-toolkit/autk-map";
 import {
   ColorMapDomainStrategy,
   ColorMapInterpolator
 } from "@urban-toolkit/autk-core";
+
+import { AutkMap } from "@urban-toolkit/autk-map";
 
 const map = new AutkMap(canvas);
 await map.init();
 
 const collection = await fetch("/data/mnt_neighs_proj.geojson")
   .then((res) => res.json());
+map.loadCollection("neighborhoods", { collection });
 
-map.loadCollection("neighborhoods", {
-  collection,
-  type: "polygons"
-});
-
-// Diverging palettes suit signed or centered quantities.
-// The PERCENTILE domain trims outliers so most of the
-// distribution maps to a clear range of colors. The
-// neighborhood file is already in projected Mercator, so
-// it can be loaded directly without going through autk-db.
 map.updateColorMap("neighborhoods", {
   colorMap: {
-    interpolator: ColorMapInterpolator.DIV_SPECTRAL,
+    interpolator: ColorMapInterpolator.DIV_RED_BLUE,
     domainSpec: { type: ColorMapDomainStrategy.PERCENTILE }
   }
 });
+
 map.updateThematic("neighborhoods", {
   collection,
   property: "properties.shape_area"
