@@ -62,42 +62,82 @@ await db.init();
 
 await db.loadGeojson({
   geojsonFileUrl: "/data/mnt_neighs.geojson",
-  outputTableName: "neighborhoods",
-  coordinateFormat: "EPSG:4326"
+  outputTableName: "neighborhoods"
 });
-
-await db.loadGeoTiff({
-  geotiffFileUrl: "/data/mnt_heat_deviation_smooth.tif",
-  outputTableName: "temperature",
-  coordinateFormat: "EPSG:4326"
+await db.loadCsv({
+  csvFileUrl: "/data/mnt_noise.csv",
+  outputTableName: "noise",
+  geometryColumns: true
 });
-
-const neighborhoods = await db.getLayer("neighborhoods");
-const raster = await db.getRaster("temperature");
+await db.buildHeatmap({
+  tableJoinName: "noise",
+  outputTableName: "heatmap",
+  near: { distance: 500 },
+  grid: { rows: 50, columns: 50 },
+  groupBy: [{ column: "key", aggregateFn: "count" }]
+});
+await db.removeLayer("noise");
 
 const map = new AutkMap(canvas);
 await map.init();
 
+for (const layer of db.getTablesMetadata()) {
+  const { name, type } = layer;
+  const collection = await db.getLayer(name);
+  const params = type === "raster"
+    ? { collection, type, property: "band_1" }
+    : { collection, type };
+
+  map.loadCollection(name, params);
+}
+map.draw();
+`;
+
+const meshCode = `
+import { AutkMap } from "@urban-toolkit/autk-map";
+
+const map = new AutkMap(canvas);
+await map.init();
+
+const [neighborhoods, meshData] = await Promise.all([
+  fetch("/data/mnt_neighs_proj.geojson").then((res) => res.json()),
+  fetch("/data/mnt_wtc_mesh.json").then((res) => res.json())
+]);
+
+const southManhattan = {
+  ...neighborhoods,
+  features: neighborhoods.features.filter((feature) =>
+    [
+      "Financial District-Battery Park City",
+      "Chinatown-Two Bridges",
+      "Lower East Side"
+    ].includes(feature.properties?.ntaname)
+  )
+};
+
 map.loadCollection("neighborhoods", {
-  collection: neighborhoods,
+  collection: southManhattan,
   type: "polygons"
 });
 
-map.updateRenderInfo("neighborhoods", { opacity: 0.2 });
+const [originX, originY] = map.layerManager.origin;
+const geometry = meshData.geometry.map((mesh) => ({
+  position: new Float32Array(
+    mesh.position.map((value, index) =>
+      index % 3 === 0 ? value - originX : index % 3 === 1 ? value - originY : value
+    )
+  ),
+  normal: new Float32Array(mesh.normal)
+}));
 
-map.loadCollection("temperature", {
-  collection: raster,
-  type: "raster",
-  property: "band_1"
+map.loadMesh("buildings-mesh", {
+  geometry,
+  components: meshData.components,
+  type: "buildings"
 });
 
-map.updateRenderInfo("temperature", {
-  opacity: 0.75,
-  isColorMap: true
-});
 map.draw();
-`;
-</script>
+`;</script>
 
 <style scoped>
 .package-page :is(p, li, td, th, .custom-block p, .custom-block li, h1, h2, h3, h4, h5, h6) {
@@ -189,16 +229,22 @@ Raster layers represent gridded data such as temperature, density, or any other 
 |---|---|
 | `raster` | Grid-based data such as heatmaps or GeoTIFF-derived collections |
 
-Raster layers require a property path so the renderer knows which numeric value to read from each cell feature. Raster collections are commonly produced by `autk-db.getRaster()`, and `updateRaster()` can be used later to swap the active values or property path while keeping the same layer id.
-
-The example below uses Manhattan neighborhoods from `/data/mnt_neighs.geojson` in latitude/longitude together with a reduced Manhattan-only surface-temperature GeoTIFF derived from the NYC Heat Map project. The neighborhood layer is loaded first so `autk-db` can establish workspace bounds before exporting the raster for rendering. Because both sources are in latitude/longitude, the example passes `coordinateFormat: "EPSG:4326"` for both loads before `autk-db` transforms them into the workspace projection. Note that `db.getRaster()` returns packed raster cell objects, so the property path is `band_1` rather than `properties.band_1`.
+Raster layers need a property path that tells the renderer which numeric value to use in each cell. The example below builds a heatmap raster from Manhattan noise events with `autk-db` and renders the result in `autk-map`. GeoTIFF files can also be loaded with `autk-db`. For now, `autk-map` renders raster collections returned by `autk-db`, including heatmaps created with `buildHeatmap()`.
 
 <ClientOnly>
   <CodePlayground :code="rasterLayersCode" out="dom" />
 </ClientOnly>
 
-## Prebuilt meshes
+## 3D meshes
 
-`autk-map` also supports `loadMesh()` for pre-triangulated geometry. This is useful when your application already has local mesh coordinates and aligned component metadata. At the moment, mesh loading is intended for `buildings`-style geometry. See [`AutkMap.loadMesh()`](/api/autk-map/classes/AutkMap#loadmesh).
+`autk-map` also supports `loadMesh()` for pre-triangulated geometry. This is useful when your application already has local mesh coordinates and aligned component metadata. At the moment, mesh loading is intended for `buildings`-style geometry.
+
+The example below loads a few southern Manhattan neighborhoods and adds a higher-detail building mesh around the World Trade Center area, derived from the official NYC 3D building model.
+
+<ClientOnly>
+  <CodePlayground :code="meshCode" out="dom" />
+</ClientOnly>
+
+See [`AutkMap.loadMesh()`](/api/autk-map/classes/AutkMap#loadmesh).
 
 </div>
