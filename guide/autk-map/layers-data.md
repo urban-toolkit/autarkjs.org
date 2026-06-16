@@ -67,7 +67,7 @@ await db.loadGeojson({
 });
 
 await db.loadGeoTiff({
-  geotiffFileUrl: "/data/nyc_heat_deviation_smooth.tif",
+  geotiffFileUrl: "/data/mnt_heat_deviation_smooth.tif",
   outputTableName: "temperature",
   coordinateFormat: "EPSG:4326"
 });
@@ -88,10 +88,13 @@ map.updateRenderInfo("neighborhoods", { opacity: 0.2 });
 map.loadCollection("temperature", {
   collection: raster,
   type: "raster",
-  property: "properties.band_1"
+  property: "band_1"
 });
 
-map.updateRenderInfo("temperature", { opacity: 0.75 });
+map.updateRenderInfo("temperature", {
+  opacity: 0.75,
+  isColorMap: true
+});
 map.draw();
 `;
 </script>
@@ -188,7 +191,7 @@ Raster layers represent gridded data such as temperature, density, or any other 
 
 Raster layers require a property path so the renderer knows which numeric value to read from each cell feature. Raster collections are commonly produced by `autk-db.getRaster()`, and `updateRaster()` can be used later to swap the active values or property path while keeping the same layer id.
 
-The example below uses Manhattan neighborhoods from `/data/mnt_neighs.geojson` in latitude/longitude together with a smoothed NYC surface-temperature GeoTIFF from the NYC Heat Map project. The neighborhood layer is loaded first so `autk-db` can establish workspace bounds and clip the raster export to the Manhattan area. Because both sources are in latitude/longitude, the example passes `coordinateFormat: "EPSG:4326"` for both loads before `autk-db` transforms them into the workspace projection.
+The example below uses Manhattan neighborhoods from `/data/mnt_neighs.geojson` in latitude/longitude together with a reduced Manhattan-only surface-temperature GeoTIFF derived from the NYC Heat Map project. The neighborhood layer is loaded first so `autk-db` can establish workspace bounds before exporting the raster for rendering. Because both sources are in latitude/longitude, the example passes `coordinateFormat: "EPSG:4326"` for both loads before `autk-db` transforms them into the workspace projection. Note that `db.getRaster()` returns packed raster cell objects, so the property path is `band_1` rather than `properties.band_1`.
 
 <ClientOnly>
   <CodePlayground :code="rasterLayersCode" out="dom" />
