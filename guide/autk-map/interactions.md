@@ -23,52 +23,27 @@ map.draw();
 `;
 
 const highlightCode = `
-import { AutkMap, MapStyle } from "@urban-toolkit/autk-map";
-
-MapStyle.setHighlightColor("#ff4d4f");
+import { AutkMap } from "@urban-toolkit/autk-map";
 
 const map = new AutkMap(canvas);
 await map.init();
 
-const neighborhoods = await fetch("/data/mnt_neighs_proj.geojson")
+const collection = await fetch("/data/mnt_neighs_proj.geojson")
   .then((res) => res.json());
 
-const focus = {
-  ...neighborhoods,
-  features: neighborhoods.features.filter((feature) =>
-    [
-      "Financial District-Battery Park City",
-      "Tribeca-Civic Center",
-      "Chinatown-Two Bridges",
-      "Lower East Side"
-    ].includes(feature.properties?.ntaname)
-  )
-};
-
-map.loadCollection("neighborhoods", {
-  collection: focus,
-  type: "polygons"
-});
-
+map.loadCollection("neighborhoods", { collection });
+map.updateRenderInfo("neighborhoods", { isPick: true });
 map.draw();
 
-// Programmatically emphasize or hide specific components
-// without changing the underlying collection.
 setTimeout(() => {
-  map.setHighlightedIds("neighborhoods", [0]);
-  console.log("Highlighted Financial District-Battery Park City.");
+  map.setSkippedIds("neighborhoods", [5, 8, 13, 18, 20, 25]);
+  console.log("Skipping....");
 }, 800);
 
 setTimeout(() => {
-  map.clearHighlightedIds("neighborhoods");
-  map.setSkippedIds("neighborhoods", [2]);
-  console.log("Temporarily skipped Chinatown-Two Bridges.");
+  map.setHighlightedIds("neighborhoods", [10, 12, 15]);
+  console.log("Highlighting....");
 }, 1600);
-
-setTimeout(() => {
-  map.clearSkippedIds("neighborhoods");
-  console.log("Restored all neighborhoods.");
-}, 2400);
 `;
 
 const visibilityCode = `
@@ -77,22 +52,24 @@ import { AutkMap } from "@urban-toolkit/autk-map";
 const map = new AutkMap(canvas);
 await map.init();
 
-const neighborhoods = await fetch("/data/mnt_neighs_proj.geojson")
-  .then((res) => res.json());
+const [neighborhoods, points] = await Promise.all([
+  fetch("/data/mnt_neighs_proj.geojson").then((res) => res.json()),
+  fetch("/data/mnt_noise_proj.geojson").then((res) => res.json())
+]);
 
 map.loadCollection("neighborhoods", {
   collection: neighborhoods,
   type: "polygons"
 });
-
+map.loadCollection("points", {
+  collection: points,
+  type: "points"
+});
 map.draw();
 
-// Layer-level visibility is controlled with isSkip.
-// Use updateRenderInfo to toggle it and removeLayer to
-// fully detach the layer from the map.
-setTimeout(() => map.updateRenderInfo("neighborhoods", { isSkip: true }), 800);
-setTimeout(() => map.updateRenderInfo("neighborhoods", { isSkip: false }), 1600);
-setTimeout(() => map.removeLayer("neighborhoods"), 2400);
+setTimeout(() => map.updateRenderInfo("points", { isSkip: true }), 800);
+setTimeout(() => map.updateRenderInfo("points", { isSkip: false }), 1600);
+setTimeout(() => map.removeLayer("points"), 2400);
 `;
 
 const linkedViewsCode = `
