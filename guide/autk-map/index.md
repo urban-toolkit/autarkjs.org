@@ -29,7 +29,7 @@ map.draw();
 
 # autk-map
 
-`autk-map` is a browser-native geospatial renderer powered by [WebGPU](https://webgpu.org/). It renders [GeoJSON](https://geojson.org/) directly on an HTML `<canvas>`, supports semantic [OpenStreetMap](https://www.openstreetmap.org/) layer types, and can display thematic values without a tile server.
+`autk-map` is a geospatial data renderer powered by [WebGPU](https://webgpu.org/). It can handle [GeoJSON](https://geojson.org/), semantic [OpenStreetMap](https://www.openstreetmap.org/) layer types, and can display thematic values without a tile server.
 
 **Key capabilities:**
 
@@ -71,23 +71,12 @@ The entry point of **autk-map** is the `AutkMap` class. To create a map, you mus
 
 ## Core concepts
 
-- **Layer ids** — each loaded layer is registered under a unique string id. This id is used later to update thematic values, change visibility, enable picking, highlight components, or remove the layer entirely. See [Loading Layers](./loading-layers) and [Interactions](./interactions).
-- **Layer types** — rendering behavior depends on the layer type. Semantic types such as `surface`, `parks`, `water`, `roads`, and `buildings` use specialized rendering rules, while generic types such as `points`, `polylines`, `polygons`, and `raster` support custom datasets. See [Layer Types](./layer-types).
-- **Bounding box** — the first loaded layer defines the shared map extent and internal spatial reference used to frame the camera and place subsequent layers, unless you set the bounding box manually beforehand. See [Loading Layers](./loading-layers).
-- **Render state** — each layer has render state controlling properties such as opacity, visibility, picking, and whether thematic coloring is active. These properties can be updated dynamically without reloading the layer. See [Styling](./styling) and [Interactions](./interactions).
-- **Thematic data** — thematic data rendering maps numeric or categorical feature attributes to colors. In practice, you configure a color map, point to a property path, and enable thematic display for the layer. See [Thematic Data](./thematic-mapping) and [Styling](./styling).
-- **Map styles** — default base colors for semantic layers come from `MapStyle`, which provides built-in presets and custom styles for controlling the overall visual appearance of the map. See [Styling](./styling).
+Autark is built over some core concepts, that guides data data loading, rendering and interactions. Next you can find a brief description of each concept and a reference to their detailed description in this guide.
 
-## Documentation sections
-
-The current `autk-map` guide is organized around the package's main feature groups:
-
-- [Layer Types](./layer-types) — supported semantic and geometric layer kinds
-- [Loading Layers](./loading-layers) — GeoJSON, raster collections, `autk-db` integration, and mesh loading
-- [Thematic Data](./thematic-mapping) — coloring features based on thematic data
-- [Interactions](./interactions) — picking, highlighting, filtering, and layer visibility
-- [Styling](./styling) — base map styles, opacity, and color-map configuration
-
-For lower-level APIs and details, please use the [API Reference](/api/autk-map/globals).
+- **Layer ids** — each layer is identified by an unique string id. This id must be used when the user wants to update rendering properties such as the layer's thematic data, rendering state, etc. See [Loading Layers](./loading-layers) for details.
+- **Layer types** — each layer has a type that can be either a semantic type or a generic type. Semantic types such as `surface`, `parks`, `water`, `roads`, and `buildings` use specialized types used to build the map context, while generic types such as `points`, `polylines`, `polygons`, and `raster` support custom datasets. See [Layer Types](./layer-types).
+- **Render state** — each layer has render state controlling properties such as opacity, visibility, picking, and whether thematic coloring is active. These properties can be updated dynamically without reloading the layer. See [Styling](./styling).
+- **Thematic data** — thematic data rendering maps numeric or categorical feature attributes to colors. In practice, you configure a color map, point to a property path, and enable thematic display for the layer. See [Thematic Data](./thematic-mapping).
+- **Interactions** — interactions let users explore layers through picking, highlighting, filtering, and visibility control without changing the underlying data. See [Interactions](./interactions).
 
 </div>
