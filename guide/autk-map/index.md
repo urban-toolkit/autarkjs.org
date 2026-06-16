@@ -29,6 +29,8 @@ map.draw();
 
 # autk-map
 
+[![npm version](https://img.shields.io/npm/v/%40urban-toolkit%2Fautk-map?logo=npm)](https://www.npmjs.com/package/@urban-toolkit/autk-map)
+
 `autk-map` is a geospatial data renderer powered by [WebGPU](https://webgpu.org/). It can handle [GeoJSON](https://geojson.org/), semantic [OpenStreetMap](https://www.openstreetmap.org/) layer types, and can display thematic values without a tile server.
 
 **Key capabilities:**

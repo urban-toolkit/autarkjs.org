@@ -1,5 +1,7 @@
 # autk-plot
 
+[![npm version](https://img.shields.io/npm/v/%40urban-toolkit%2Fautk-plot?logo=npm)](https://www.npmjs.com/package/@urban-toolkit/autk-plot)
+
 `autk-plot` is a D3-based chart library that takes GeoJSON feature properties as input and supports linked views with `autk-map`. Charts react to map selections and can drive map highlights through brush and click events.
 
 ## Installation

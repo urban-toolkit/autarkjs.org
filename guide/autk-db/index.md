@@ -49,6 +49,8 @@ console.log(geojson)
 
 # autk-db
 
+[![npm version](https://img.shields.io/npm/v/%40urban-toolkit%2Fautk-db?logo=npm)](https://www.npmjs.com/package/@urban-toolkit/autk-db)
+
 `autk-db` is a browser-native spatial database powered by [DuckDB](https://duckdb.org/docs/current/clients/wasm/overview). It lets you load, query, and transform urban data entirely on the browser.
 
 **Key capabilities:**
