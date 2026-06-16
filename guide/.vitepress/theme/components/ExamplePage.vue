@@ -143,14 +143,14 @@ const fullCode = computed(() => props.codeFull || props.code || '')
   display: inline-flex;
   align-items: center;
   padding: 5px 11px;
-  border-radius: 5px;
+  border-radius: 2px;
   font-family: Verdana, Geneva, DejaVu Sans, sans-serif;
   font-size: 12px;
   font-weight: 400;
   line-height: 1;
   letter-spacing: 0;
   color: white;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45);
   box-shadow: none;
 }
 
