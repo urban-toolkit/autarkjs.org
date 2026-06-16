@@ -1,18 +1,18 @@
 <script setup>
 const categoricalCode = `
-import { AutkMap } from "@urban-toolkit/autk-map";
 import {
   ColorMapDomainStrategy,
   ColorMapInterpolator
 } from "@urban-toolkit/autk-core";
+
+import { AutkMap } from "@urban-toolkit/autk-map";
 
 const map = new AutkMap(canvas);
 await map.init();
 
 const collection = await fetch("/data/mnt_roads_categorized_proj.geojson")
   .then((res) => res.json());
-
-map.loadCollection("roads", { collection, type: "roads" });
+map.loadCollection("roads", { collection });
 
 map.updateColorMap("roads", {
   colorMap: {
@@ -23,6 +23,7 @@ map.updateColorMap("roads", {
     }
   }
 });
+
 map.updateThematic("roads", {
   collection,
   property: "properties.compute.highwayGroup"
@@ -33,33 +34,28 @@ map.draw();
 `
 
 const divergingCode = `
-import { AutkDb } from "@urban-toolkit/autk-db";
 import { AutkMap } from "@urban-toolkit/autk-map";
 import {
   ColorMapDomainStrategy,
   ColorMapInterpolator
 } from "@urban-toolkit/autk-core";
 
-const db = new AutkDb();
-await db.init();
-
-await db.loadGeojson({
-  geojsonFileUrl: "/data/mnt_neighs.geojson",
-  outputTableName: "neighborhoods"
-});
-
 const map = new AutkMap(canvas);
 await map.init();
 
-const neighborhoods = await db.getLayer("neighborhoods");
+const collection = await fetch("/data/mnt_neighs_proj.geojson")
+  .then((res) => res.json());
+
 map.loadCollection("neighborhoods", {
-  collection: neighborhoods,
+  collection,
   type: "polygons"
 });
 
 // Diverging palettes suit signed or centered quantities.
 // The PERCENTILE domain trims outliers so most of the
-// distribution maps to a clear range of colors.
+// distribution maps to a clear range of colors. The
+// neighborhood file is already in projected Mercator, so
+// it can be loaded directly without going through autk-db.
 map.updateColorMap("neighborhoods", {
   colorMap: {
     interpolator: ColorMapInterpolator.DIV_SPECTRAL,
@@ -67,7 +63,7 @@ map.updateColorMap("neighborhoods", {
   }
 });
 map.updateThematic("neighborhoods", {
-  collection: neighborhoods,
+  collection,
   property: "properties.shape_area"
 });
 map.updateRenderInfo("neighborhoods", { isColorMap: true });
