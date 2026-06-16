@@ -143,7 +143,7 @@ const fullCode = computed(() => props.codeFull || props.code || '')
   display: inline-flex;
   align-items: center;
   padding: 5px 11px;
-  border-radius: 8px;
+  border-radius: 5px;
   font-family: Verdana, Geneva, DejaVu Sans, sans-serif;
   font-size: 12px;
   font-weight: 400;
