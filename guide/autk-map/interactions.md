@@ -1,5 +1,38 @@
 <script setup>
-const baseCode = `
+const pickingCode = `
+import { AutkMap, MapEvent } from "@urban-toolkit/autk-map";
+
+const map = new AutkMap(canvas);
+await map.init();
+
+const [neighborhoods, points] = await Promise.all([
+  fetch("/data/mnt_neighs_proj.geojson").then((res) => res.json()),
+  fetch("/data/mnt_noise_proj.geojson").then((res) => res.json())
+]);
+
+map.loadCollection("neighborhoods", {
+  collection: neighborhoods,
+  type: "polygons"
+});
+
+map.loadCollection("points", {
+  collection: points,
+  type: "points"
+});
+
+// Mark a layer as pickable. Only layers with isPick set to true
+// emit picking events.
+map.updateRenderInfo("neighborhoods", { isPick: true });
+map.updateRenderInfo("points", { isPick: true });
+
+map.events.on(MapEvent.PICKING, ({ selection, layerId }) => {
+  console.log({ layerId, selection });
+});
+
+map.draw();
+`;
+
+const highlightCode = `
 import { AutkMap } from "@urban-toolkit/autk-map";
 
 const map = new AutkMap(canvas);
@@ -21,25 +54,6 @@ map.loadCollection("points", {
 });
 
 map.draw();
-`;
-
-const pickingCode = `
-${baseCode}
-
-import { MapEvent } from "@urban-toolkit/autk-map";
-
-// Mark a layer as pickable. Only layers with isPick set to true
-// emit picking events.
-map.updateRenderInfo("neighborhoods", { isPick: true });
-map.updateRenderInfo("points", { isPick: true });
-
-map.events.on(MapEvent.PICKING, ({ selection, layerId }) => {
-  console.log({ layerId, selection });
-});
-`;
-
-const highlightCode = `
-${baseCode}
 
 // Programmatically emphasize or hide specific components
 // without changing the underlying collection.
@@ -61,7 +75,27 @@ setTimeout(() => {
 `;
 
 const visibilityCode = `
-${baseCode}
+import { AutkMap } from "@urban-toolkit/autk-map";
+
+const map = new AutkMap(canvas);
+await map.init();
+
+const [neighborhoods, points] = await Promise.all([
+  fetch("/data/mnt_neighs_proj.geojson").then((res) => res.json()),
+  fetch("/data/mnt_noise_proj.geojson").then((res) => res.json())
+]);
+
+map.loadCollection("neighborhoods", {
+  collection: neighborhoods,
+  type: "polygons"
+});
+
+map.loadCollection("points", {
+  collection: points,
+  type: "points"
+});
+
+map.draw();
 
 // Layer-level visibility is controlled with isSkip.
 // Use updateRenderInfo to toggle it and removeLayer to
@@ -72,11 +106,29 @@ setTimeout(() => map.removeLayer("points"), 2400);
 `;
 
 const linkedViewsCode = `
-${baseCode}
+import { AutkMap, MapEvent } from "@urban-toolkit/autk-map";
 
-import { MapEvent } from "@urban-toolkit/autk-map";
+const map = new AutkMap(canvas);
+await map.init();
+
+const [neighborhoods, points] = await Promise.all([
+  fetch("/data/mnt_neighs_proj.geojson").then((res) => res.json()),
+  fetch("/data/mnt_noise_proj.geojson").then((res) => res.json())
+]);
+
+map.loadCollection("neighborhoods", {
+  collection: neighborhoods,
+  type: "polygons"
+});
+
+map.loadCollection("points", {
+  collection: points,
+  type: "points"
+});
 
 map.updateRenderInfo("neighborhoods", { isPick: true });
+
+map.draw();
 
 // Forward the picking selection to a console payload
 // shaped like an autk-plot input. A typical linked-view
@@ -116,11 +168,11 @@ map.events.on(MapEvent.PICKING, ({ selection, layerId }) => {
 2. **Programmatic highlight and skip** — direct control over which components stand out or are hidden, useful for cross-view coordination.
 3. **Layer visibility** — show, hide, or fully remove an entire layer.
 
-All examples below start from the same two layers (southern Manhattan neighborhoods and noise event points) loaded as projected Mercator data, so each section focuses on a single interaction concern.
+All examples below load the same two layers (southern Manhattan neighborhoods and noise event points) as projected Mercator data, so each section focuses on a single interaction concern.
 
 ## Picking
 
-Enable picking on a layer with `isPick` and subscribe to `MapEvent.PICKING` through `map.events.on()`. The handler receives the picking payload for the current frame.
+Enable picking on a layer with `isPick` and subscribe to `MapEvent.PICKING` through `map.events.on()`. The handler receives the picking payload for the current frame. Click on a feature to see the payload appear in the console.
 
 <ClientOnly>
   <CodePlayground :code="pickingCode" out="both" />
@@ -157,7 +209,7 @@ For layer-level visibility, use `updateRenderInfo()` with `isSkip`. To fully det
 
 ## Linked views
 
-A common pattern is to forward the picking payload directly to another Autark view. The `selection` and `layerId` from `MapEvent.PICKING` are enough to drive an `autk-plot` filter or a linked chart, so the same features light up across map and chart views.
+A common pattern is to forward the picking payload directly to another Autark view. The `selection` and `layerId` from `MapEvent.PICKING` are enough to drive an `autk-plot` filter or a linked chart, so the same features light up across map and chart views. Click on a neighborhood to see the forwarded payload in the console.
 
 <ClientOnly>
   <CodePlayground :code="linkedViewsCode" out="both" />
