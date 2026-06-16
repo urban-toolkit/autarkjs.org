@@ -151,23 +151,23 @@ const fullCode = computed(() => props.codeFull || props.code || '')
 }
 
 .example-tag.autk-map {
-  background: linear-gradient(135deg, #0ea5e9, #3b82f6);
-  box-shadow: 0 4px 10px rgba(59,130,246,0.25);
+  background: #0ea5e9;
+  box-shadow: 0 4px 10px rgba(14, 165, 233, 0.25);
 }
 
 .example-tag.autk-db {
-  background: linear-gradient(135deg, #f59e0b, #ea580c);
-  box-shadow: 0 4px 10px rgba(234,88,12,0.25);
+  background: #f59e0b;
+  box-shadow: 0 4px 10px rgba(245, 158, 11, 0.25);
 }
 
 .example-tag.autk-compute {
-  background: linear-gradient(135deg, #10b981, #059669);
-  box-shadow: 0 4px 10px rgba(5,150,105,0.22);
+  background: #10b981;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.22);
 }
 
 .example-tag.autk-plot {
-  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-  box-shadow: 0 4px 10px rgba(124,58,237,0.22);
+  background: #8b5cf6;
+  box-shadow: 0 4px 10px rgba(139, 92, 246, 0.22);
 }
 
 .example-title {
