@@ -1,30 +1,19 @@
 <script setup>
 const categoricalCode = `
-import { AutkDb } from "@urban-toolkit/autk-db";
 import { AutkMap } from "@urban-toolkit/autk-map";
 import {
   ColorMapDomainStrategy,
   ColorMapInterpolator
 } from "@urban-toolkit/autk-core";
 
-const db = new AutkDb();
-await db.init();
-
-await db.loadGeojson({
-  geojsonFileUrl: "/data/mnt_roads_categorized.geojson",
-  outputTableName: "roads"
-});
-
 const map = new AutkMap(canvas);
 await map.init();
 
-const roads = await db.getLayer("roads");
-map.loadCollection("roads", { collection: roads, type: "roads" });
+const collection = await fetch("/data/mnt_roads_categorized_proj.geojson")
+  .then((res) => res.json());
 
-// The road file already pre-groups the raw OSM highway
-// tags into "primary", "secondary", and "other" under
-// properties.compute.highwayGroup so the palette has a
-// stable, ordered domain.
+map.loadCollection("roads", { collection, type: "roads" });
+
 map.updateColorMap("roads", {
   colorMap: {
     interpolator: ColorMapInterpolator.CAT_OBSERVABLE10,
@@ -35,7 +24,7 @@ map.updateColorMap("roads", {
   }
 });
 map.updateThematic("roads", {
-  collection: roads,
+  collection,
   property: "properties.compute.highwayGroup"
 });
 map.updateRenderInfo("roads", { isColorMap: true });
