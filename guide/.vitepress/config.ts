@@ -391,7 +391,7 @@ gtag('config', 'G-P6EVSF42L8');`],
                     collapsed: false,
                     items: [
                         { text: 'Overview', link: '/autk-map/' },
-                        { text: 'Layers data', link: '/autk-map/layers-data' },
+                        { text: 'Layers data', link: '/autk-map/layers' },
                         { text: 'Thematic data', link: '/autk-map/thematic' },
                         { text: 'Interactions', link: '/autk-map/interactions' },
                         { text: 'Styling', link: '/autk-map/styling' },
