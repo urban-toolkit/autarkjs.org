@@ -23,29 +23,19 @@ map.draw();
 `;
 
 const highlightCode = `
-import { AutkMap } from "@urban-toolkit/autk-map";
+import { AutkMap, MapStyle } from "@urban-toolkit/autk-map";
+
+MapStyle.setHighlightColor("#ff4d4f");
 
 const map = new AutkMap(canvas);
 await map.init();
 
-const neighborhoods = await fetch("/data/mnt_neighs_proj.geojson")
+const roads = await fetch("/data/mnt_roads_categorized_proj.geojson")
   .then((res) => res.json());
 
-const focus = {
-  ...neighborhoods,
-  features: neighborhoods.features.filter((feature) =>
-    [
-      "Financial District-Battery Park City",
-      "Tribeca-Civic Center",
-      "Chinatown-Two Bridges",
-      "Lower East Side"
-    ].includes(feature.properties?.ntaname)
-  )
-};
-
-map.loadCollection("neighborhoods", {
-  collection: focus,
-  type: "polygons"
+map.loadCollection("roads", {
+  collection: roads,
+  type: "roads"
 });
 
 map.draw();
@@ -53,19 +43,19 @@ map.draw();
 // Programmatically emphasize or hide specific components
 // without changing the underlying collection.
 setTimeout(() => {
-  map.setHighlightedIds("neighborhoods", [0]);
-  console.log("Highlighted Financial District-Battery Park City.");
+  map.setHighlightedIds("roads", [0, 1, 2]);
+  console.log("Highlighted road components 0, 1, 2.");
 }, 800);
 
 setTimeout(() => {
-  map.clearHighlightedIds("neighborhoods");
-  map.setSkippedIds("neighborhoods", [2]);
-  console.log("Temporarily skipped Chinatown-Two Bridges.");
+  map.clearHighlightedIds("roads");
+  map.setSkippedIds("roads", [3, 4, 5]);
+  console.log("Temporarily skipped road components 3, 4, 5.");
 }, 1600);
 
 setTimeout(() => {
-  map.clearSkippedIds("neighborhoods");
-  console.log("Restored all neighborhoods.");
+  map.clearSkippedIds("roads");
+  console.log("Restored all roads.");
 }, 2400);
 `;
 
@@ -149,7 +139,7 @@ map.events.on(MapEvent.PICKING, ({ selection, layerId }) => {
 2. **Programmatic highlight and skip** — direct control over which components stand out or are hidden, useful for cross-view coordination.
 3. **Layer visibility** — show, hide, or fully remove an entire layer.
 
-All examples below load the same neighborhood polygons as projected Mercator data, so each section focuses on a single interaction concern.
+All examples below use projected Mercator data already prepared for the docs site, so each section focuses on a single interaction concern.
 
 ## Picking
 
