@@ -231,6 +231,10 @@ map.draw();
   text-align: justify;
 }
 
+.package-page > p:first-of-type {
+  font-size: 1.05em;
+}
+
 .package-page table th:first-child,
 .package-page table td:first-child {
   width: 35%;
