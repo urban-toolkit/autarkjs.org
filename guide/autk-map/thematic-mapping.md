@@ -1,81 +1,234 @@
 <script setup>
-const numericThematicCode = `
+const categoricalCode = `
+import { AutkDb } from "@urban-toolkit/autk-db";
 import { AutkMap } from "@urban-toolkit/autk-map";
-import { ColorMapInterpolator } from "@urban-toolkit/autk-core";
+import {
+  ColorMapDomainStrategy,
+  ColorMapInterpolator
+} from "@urban-toolkit/autk-core";
+
+const db = new AutkDb();
+await db.init();
+
+await db.loadGeojson({
+  geojsonFileUrl: "/data/mnt_roads.geojson",
+  outputTableName: "roads"
+});
 
 const map = new AutkMap(canvas);
 await map.init();
 
-const buildings = {
-  type: "FeatureCollection",
-  features: [
-    {
-      type: "Feature",
-      id: "b1",
-      properties: { height: 20 },
-      geometry: { type: "Polygon", coordinates: [[[-74.012, 40.706], [-74.0105, 40.706], [-74.0105, 40.7075], [-74.012, 40.7075], [-74.012, 40.706]]] }
-    },
-    {
-      type: "Feature",
-      id: "b2",
-      properties: { height: 55 },
-      geometry: { type: "Polygon", coordinates: [[[-74.0095, 40.707], [-74.008, 40.707], [-74.008, 40.7085], [-74.0095, 40.7085], [-74.0095, 40.707]]] }
-    },
-    {
-      type: "Feature",
-      id: "b3",
-      properties: { height: 90 },
-      geometry: { type: "Polygon", coordinates: [[[-74.007, 40.709], [-74.0052, 40.709], [-74.0052, 40.7108], [-74.007, 40.7108], [-74.007, 40.709]]] }
-    }
-  ]
-};
+const roads = await db.getLayer("roads");
+map.loadCollection("roads", { collection: roads, type: "roads" });
 
-map.loadCollection("buildings", { collection: buildings, type: "buildings" });
-map.updateColorMap("buildings", {
-  colorMap: { interpolator: ColorMapInterpolator.SEQUENTIAL_REDS }
+// Group raw OSM highway tags into a small set of categories
+// so the categorical palette has a stable, ordered domain.
+roads.features.forEach((feature) => {
+  const highway = feature.properties?.highway;
+  feature.properties = feature.properties ?? {};
+  feature.properties.compute = feature.properties.compute ?? {};
+  feature.properties.compute.highwayGroup = ["primary", "secondary"].includes(highway)
+    ? highway
+    : "other";
 });
-map.updateThematic("buildings", { collection: buildings, property: "properties.height" });
-map.updateRenderInfo("buildings", { isColorMap: true });
+
+map.updateColorMap("roads", {
+  colorMap: {
+    interpolator: ColorMapInterpolator.CAT_OBSERVABLE10,
+    domainSpec: {
+      type: ColorMapDomainStrategy.USER,
+      params: ["primary", "secondary", "other"]
+    }
+  }
+});
+map.updateThematic("roads", {
+  collection: roads,
+  property: "properties.compute.highwayGroup"
+});
+map.updateRenderInfo("roads", { isColorMap: true });
+
 map.draw();
 `
 
-const categoricalThematicCode = `
+const divergingCode = `
+import { AutkDb } from "@urban-toolkit/autk-db";
 import { AutkMap } from "@urban-toolkit/autk-map";
-import { ColorMapInterpolator } from "@urban-toolkit/autk-core";
+import {
+  ColorMapDomainStrategy,
+  ColorMapInterpolator
+} from "@urban-toolkit/autk-core";
+
+const db = new AutkDb();
+await db.init();
+
+await db.loadGeojson({
+  geojsonFileUrl: "/data/mnt_neighs.geojson",
+  outputTableName: "neighborhoods"
+});
 
 const map = new AutkMap(canvas);
 await map.init();
 
-const roads = {
-  type: "FeatureCollection",
-  features: [
-    {
-      type: "Feature",
-      id: "r1",
-      properties: { highway_class: "primary" },
-      geometry: { type: "LineString", coordinates: [[-74.0125, 40.707], [-74.003, 40.707]] }
-    },
-    {
-      type: "Feature",
-      id: "r2",
-      properties: { highway_class: "secondary" },
-      geometry: { type: "LineString", coordinates: [[-74.011, 40.7095], [-74.0045, 40.711]] }
-    },
-    {
-      type: "Feature",
-      id: "r3",
-      properties: { highway_class: "other" },
-      geometry: { type: "LineString", coordinates: [[-74.009, 40.7055], [-74.009, 40.7122]] }
-    }
-  ]
-};
-
-map.loadCollection("roads", { collection: roads, type: "roads" });
-map.updateColorMap("roads", {
-  colorMap: { interpolator: ColorMapInterpolator.OBSERVABLE10 }
+const neighborhoods = await db.getLayer("neighborhoods");
+map.loadCollection("neighborhoods", {
+  collection: neighborhoods,
+  type: "polygons"
 });
-map.updateThematic("roads", { collection: roads, property: "properties.highway_class" });
-map.updateRenderInfo("roads", { isColorMap: true });
+
+// Diverging palettes suit signed or centered quantities.
+// The PERCENTILE domain trims outliers so most of the
+// distribution maps to a clear range of colors.
+map.updateColorMap("neighborhoods", {
+  colorMap: {
+    interpolator: ColorMapInterpolator.DIV_SPECTRAL,
+    domainSpec: { type: ColorMapDomainStrategy.PERCENTILE }
+  }
+});
+map.updateThematic("neighborhoods", {
+  collection: neighborhoods,
+  property: "properties.shape_area"
+});
+map.updateRenderInfo("neighborhoods", { isColorMap: true });
+
+map.draw();
+`
+
+const spatialJoinBuildingsCode = `
+import { AutkDb } from "@urban-toolkit/autk-db";
+import { AutkMap } from "@urban-toolkit/autk-map";
+import {
+  ColorMapDomainStrategy,
+  ColorMapInterpolator
+} from "@urban-toolkit/autk-core";
+
+const db = new AutkDb();
+await db.init();
+
+await db.loadOsm({
+  pbfFileUrl: "/data/lower_mnt.osm.pbf",
+  queryArea: {
+    geocodeArea: "New York",
+    areas: ["Battery Park City", "Financial District"]
+  },
+  outputTableName: "table_osm",
+  autoLoadLayers: {
+    layers: ["surface", "parks", "water", "roads", "buildings"]
+  }
+});
+
+await db.loadCsv({
+  csvFileUrl: "/data/mnt_noise.csv",
+  outputTableName: "noise",
+  geometryColumns: true
+});
+
+const layer = "table_osm_buildings";
+
+// Count noise events within 1000 m of each building.
+await db.spatialQuery({
+  tableRootName: layer,
+  tableJoinName: "noise",
+  near: { distance: 1000 },
+  groupBy: [{ column: "key", aggregateFn: "count" }]
+});
+
+const map = new AutkMap(canvas);
+await map.init();
+
+for (const layerData of db.getLayersMetadata()) {
+  const collection = await db.getLayer(layerData.name);
+  map.loadCollection(layerData.name, {
+    collection,
+    type: layerData.type
+  });
+  // Hide the source CSV layer; only the joined result is shown.
+  map.updateRenderInfo(layerData.name, {
+    isSkip: layerData.source === "csv"
+  });
+}
+
+const buildings = await db.getLayer(layer);
+map.updateColorMap(layer, {
+  colorMap: {
+    interpolator: ColorMapInterpolator.SEQ_INFERNO,
+    domainSpec: { type: ColorMapDomainStrategy.PERCENTILE }
+  }
+});
+map.updateThematic(layer, {
+  collection: buildings,
+  property: "properties.sjoin.count.noise"
+});
+map.updateRenderInfo(layer, { isColorMap: true });
+
+map.draw();
+`
+
+const spatialJoinRoadsCode = `
+import { AutkDb } from "@urban-toolkit/autk-db";
+import { AutkMap } from "@urban-toolkit/autk-map";
+import {
+  ColorMapDomainStrategy,
+  ColorMapInterpolator
+} from "@urban-toolkit/autk-core";
+
+const db = new AutkDb();
+await db.init();
+
+await db.loadOsm({
+  pbfFileUrl: "/data/lower_mnt.osm.pbf",
+  queryArea: {
+    geocodeArea: "New York",
+    areas: ["Battery Park City", "Financial District"]
+  },
+  outputTableName: "table_osm",
+  autoLoadLayers: {
+    layers: ["surface", "parks", "water", "roads", "buildings"]
+  }
+});
+
+await db.loadCsv({
+  csvFileUrl: "/data/mnt_noise.csv",
+  outputTableName: "noise",
+  geometryColumns: true
+});
+
+const layer = "table_osm_roads";
+
+// Same spatial join, applied to roads this time.
+await db.spatialQuery({
+  tableRootName: layer,
+  tableJoinName: "noise",
+  near: { distance: 1000 },
+  groupBy: [{ column: "key", aggregateFn: "count" }]
+});
+
+const map = new AutkMap(canvas);
+await map.init();
+
+for (const layerData of db.getLayersMetadata()) {
+  const collection = await db.getLayer(layerData.name);
+  map.loadCollection(layerData.name, {
+    collection,
+    type: layerData.type
+  });
+  map.updateRenderInfo(layerData.name, {
+    isSkip: layerData.source === "csv"
+  });
+}
+
+const roads = await db.getLayer(layer);
+map.updateColorMap(layer, {
+  colorMap: {
+    interpolator: ColorMapInterpolator.SEQ_VIRIDIS,
+    domainSpec: { type: ColorMapDomainStrategy.PERCENTILE }
+  }
+});
+map.updateThematic(layer, {
+  collection: roads,
+  property: "properties.sjoin.count.noise"
+});
+map.updateRenderInfo(layer, { isColorMap: true });
+
 map.draw();
 `
 </script>
@@ -93,39 +246,61 @@ map.draw();
 
 <div class="package-page">
 
-# Thematic Data
+# Thematic data
 
-Thematic mapping colors features according to an attribute. In `autk-map`, the usual workflow is:
+Thematic data rendering maps a feature attribute to color. In `autk-map`, the usual workflow is:
 
-1. Load the layer
-2. Configure the color map
-3. Call `updateThematic()` with the source collection and property path
-4. Enable thematic rendering with `isColorMap`
+1. Load the layer with `loadCollection()`.
+2. Configure the color map with `updateColorMap()`.
+3. Point to the source property with `updateThematic()`.
+4. Enable thematic display with `isColorMap` in `updateRenderInfo()`.
 
-## Numeric attributes
+`autk-core` provides the `ColorMapInterpolator` and `ColorMapDomainStrategy` enums used to pick a palette and a value-to-color domain.
 
-Use sequential or diverging interpolators for continuous values such as height, density, score, or temperature:
-
-<ClientOnly>
-  <CodePlayground :code="numericThematicCode" out="dom" />
-</ClientOnly>
-
-The renderer normalizes numeric values to the active color-map domain and updates legend labels automatically.
+| Part | Description |
+|---|---|
+| `interpolator` | A color scheme from `ColorMapInterpolator` (categorical, sequential, or diverging). |
+| `domainSpec` | How the renderer maps raw values to colors (`AUTO`, `MIN_MAX`, `PERCENTILE`, or `USER`). |
+| `property` | Dot-path to the feature property that supplies the value or class. |
 
 ## Categorical attributes
 
-For class labels or categories, use a categorical palette such as `OBSERVABLE10`:
+Categorical palettes assign one color per class. Use them for class labels such as road types. In practice, it helps to first fold the raw values into a small, ordered set of groups so the palette domain stays stable.
 
 <ClientOnly>
-  <CodePlayground :code="categoricalThematicCode" out="dom" />
+  <CodePlayground :code="categoricalCode" out="dom" />
 </ClientOnly>
 
-## Updating thematic values
+The `USER` domain lists the exact classes to encode, in the order they should appear in the legend. Anything outside the list falls back to the last color.
 
-Call `updateThematic()` again whenever the property path or source collection changes, for example with `collection: updatedCollection` and `property: "properties.compute.score"`.
+## Diverging attributes
+
+Diverging palettes suit signed or centered quantities, or any attribute where a meaningful midpoint separates two regimes. The `PERCENTILE` domain trims outliers so most of the distribution maps to a clear range of colors.
+
+<ClientOnly>
+  <CodePlayground :code="divergingCode" out="dom" />
+</ClientOnly>
+
+## Spatial joins
+
+Spatial joins attach an aggregate from a second table to each feature of a base layer. A common use is counting point events (for example, noise complaints) inside a buffer around each polygon or line.
+
+The example below joins the Manhattan noise event table to OSM buildings in the Battery Park City / Financial District area, counting events within 1000 m of each building. The result is stored as a new property path `properties.sjoin.count.noise` that `autk-map` can read directly.
+
+<ClientOnly>
+  <CodePlayground :code="spatialJoinBuildingsCode" out="dom" />
+</ClientOnly>
+
+The same pattern works for linear features. The next example joins the same noise table to OSM roads in the same area, again using a 1000 m buffer.
+
+<ClientOnly>
+  <CodePlayground :code="spatialJoinRoadsCode" out="dom" />
+</ClientOnly>
 
 ## Alignment rules
 
-Thematic values are matched back to rendered components using feature ids when possible. If ids are missing, the renderer falls back to feature order. For reliable updates, keep stable `feature.id` values or preserve collection ordering.
+Thematic values are matched back to rendered components using feature ids when available, with a fallback to feature order. For reliable updates, keep stable `feature.id` values or preserve collection ordering across calls to `updateThematic()`.
+
+See [`AutkMap.updateThematic()`](/api/autk-map/classes/AutkMap#updatethematic) and [`AutkMap.updateColorMap()`](/api/autk-map/classes/AutkMap#updatecolormap).
 
 </div>
