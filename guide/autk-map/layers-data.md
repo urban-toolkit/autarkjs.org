@@ -61,14 +61,15 @@ const db = new AutkDb();
 await db.init();
 
 await db.loadGeojson({
-  geojsonFileUrl: "/data/mnt_neighs_proj.geojson",
+  geojsonFileUrl: "/data/mnt_neighs.geojson",
   outputTableName: "neighborhoods",
-  coordinateFormat: "EPSG:3395"
+  coordinateFormat: "EPSG:4326"
 });
 
 await db.loadGeoTiff({
-  geotiffFileUrl: "/data/temperature.tif",
-  outputTableName: "temperature"
+  geotiffFileUrl: "/data/nyc_heat_deviation_smooth.tif",
+  outputTableName: "temperature",
+  coordinateFormat: "EPSG:4326"
 });
 
 const neighborhoods = await db.getLayer("neighborhoods");
@@ -81,6 +82,8 @@ map.loadCollection("neighborhoods", {
   collection: neighborhoods,
   type: "polygons"
 });
+
+map.updateRenderInfo("neighborhoods", { opacity: 0.2 });
 
 map.loadCollection("temperature", {
   collection: raster,
@@ -185,7 +188,7 @@ Raster layers represent gridded data such as temperature, density, or any other 
 
 Raster layers require a property path so the renderer knows which numeric value to read from each cell feature. Raster collections are commonly produced by `autk-db.getRaster()`, and `updateRaster()` can be used later to swap the active values or property path while keeping the same layer id.
 
-When loading a GeoTIFF through `autk-db`, it is usually best to load a vector base layer first so the workspace has a bounding box context. That bounding box is then reused by the exported raster collection and by the map framing.
+The example below uses Manhattan neighborhoods from `/data/mnt_neighs.geojson` in latitude/longitude together with a smoothed NYC surface-temperature GeoTIFF from the NYC Heat Map project. The neighborhood layer is loaded first so `autk-db` can establish workspace bounds and clip the raster export to the Manhattan area. Because both sources are in latitude/longitude, the example passes `coordinateFormat: "EPSG:4326"` for both loads before `autk-db` transforms them into the workspace projection.
 
 <ClientOnly>
   <CodePlayground :code="rasterLayersCode" out="dom" />
