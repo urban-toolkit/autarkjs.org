@@ -13,8 +13,6 @@ map.loadCollection("neighborhoods", {
   type: "polygons"
 });
 
-// Mark a layer as pickable. Only layers with isPick set to true
-// emit picking events.
 map.updateRenderInfo("neighborhoods", { isPick: true });
 
 map.events.on(MapEvent.PICKING, ({ selection, layerId }) => {
@@ -22,6 +20,8 @@ map.events.on(MapEvent.PICKING, ({ selection, layerId }) => {
 });
 
 map.draw();
+
+console.log("Hover or click a neighborhood to inspect it.");
 `;
 
 const highlightCode = `
@@ -111,6 +111,10 @@ map.events.on(MapEvent.PICKING, ({ selection, layerId }) => {
   };
   console.log({ plotInput });
 });
+
+map.draw();
+
+console.log("Hover or click a neighborhood to see the forwarded payload.");
 `;
 </script>
 
@@ -143,7 +147,7 @@ All examples below load the same neighborhood polygons as projected Mercator dat
 
 ## Picking
 
-Enable picking on a layer with `isPick` and subscribe to `MapEvent.PICKING` through `map.events.on()`. The handler receives the picking payload for the current frame. Click on a feature to see the payload appear in the console.
+Enable picking on a layer with `isPick` and subscribe to `MapEvent.PICKING` through `map.events.on()`. The handler receives the picking payload for the current frame. Hover or click a feature to see the payload appear in the console.
 
 <ClientOnly>
   <CodePlayground :code="pickingCode" out="both" />
@@ -158,7 +162,7 @@ Enable picking on a layer with `isPick` and subscribe to `MapEvent.PICKING` thro
 Picking works on the rendered geometry. For 3D buildings, picking hits the building footprint or its extruded surface depending on the layer type.
 :::
 
-## Programmatic highlight and skip
+## Highlight and skip
 
 Besides pointer picking, `autk-map` lets you control the visible selection directly. This is the main hook for cross-view coordination: a chart, a filter, or any external state can push which components should stand out or be hidden.
 
@@ -180,7 +184,7 @@ For layer-level visibility, use `updateRenderInfo()` with `isSkip`. To fully det
 
 ## Linked views
 
-A common pattern is to forward the picking payload directly to another Autark view. The `selection` and `layerId` from `MapEvent.PICKING` are enough to drive an `autk-plot` filter or a linked chart, so the same features light up across map and chart views. Click on a neighborhood to see the forwarded payload in the console.
+A common pattern is to forward the picking payload directly to another Autark view. The `selection` and `layerId` from `MapEvent.PICKING` are enough to drive an `autk-plot` filter or a linked chart, so the same features light up across map and chart views. Hover or click a neighborhood to see the forwarded payload in the console.
 
 <ClientOnly>
   <CodePlayground :code="linkedViewsCode" out="both" />
