@@ -148,9 +148,9 @@ async function runCode() {
         ${scopeDeclarations}
         const canvas = __canvas;
         const console = {
-          log: (...args) => __consoleOut.push({ type: 'log', message: args.map(a => typeof a === 'string' ? a : JSON.stringify(a, null, 2)).join(' ') }),
-          error: (...args) => __consoleOut.push({ type: 'error', message: args.map(a => typeof a === 'string' ? a : JSON.stringify(a, null, 2)).join(' ') }),
-          warn: (...args) => __consoleOut.push({ type: 'warn', message: args.map(a => typeof a === 'string' ? a : JSON.stringify(a, null, 2)).join(' ') }),
+          log: (...args) => __appendConsole('log', args.map(a => typeof a === 'string' ? a : JSON.stringify(a, null, 2)).join(' ')),
+          error: (...args) => __appendConsole('error', args.map(a => typeof a === 'string' ? a : JSON.stringify(a, null, 2)).join(' ')),
+          warn: (...args) => __appendConsole('warn', args.map(a => typeof a === 'string' ? a : JSON.stringify(a, null, 2)).join(' ')),
         };
         const output = (html) => { __htmlOut.value = html; };
         ${userCode}
@@ -158,17 +158,18 @@ async function runCode() {
     `
 
     const AsyncFunction = Object.getPrototypeOf(async function () { }).constructor
-    const consoleOut: Array<{ type: 'log' | 'error' | 'warn'; message: string }> = []
     const htmlOut = { value: '' }
+    const appendConsole = (_type: 'log' | 'error' | 'warn', message: string) => {
+      consoleOutput.value = [...consoleOutput.value, message]
+    }
 
-    await new AsyncFunction('__modules', '__canvas', '__consoleOut', '__htmlOut', wrapped)(
+    await new AsyncFunction('__modules', '__canvas', '__appendConsole', '__htmlOut', wrapped)(
       modules,
       canvas.value,
-      consoleOut,
+      appendConsole,
       htmlOut,
     )
 
-    consoleOutput.value = consoleOut.map((e) => e.message)
     headerOutput.value = htmlOut.value
     status.value = ''
   } catch (e: any) {
