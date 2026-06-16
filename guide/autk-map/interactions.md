@@ -30,12 +30,24 @@ MapStyle.setHighlightColor("#ff4d4f");
 const map = new AutkMap(canvas);
 await map.init();
 
-const roads = await fetch("/data/mnt_roads_categorized_proj.geojson")
+const neighborhoods = await fetch("/data/mnt_neighs_proj.geojson")
   .then((res) => res.json());
 
-map.loadCollection("roads", {
-  collection: roads,
-  type: "roads"
+const focus = {
+  ...neighborhoods,
+  features: neighborhoods.features.filter((feature) =>
+    [
+      "Financial District-Battery Park City",
+      "Tribeca-Civic Center",
+      "Chinatown-Two Bridges",
+      "Lower East Side"
+    ].includes(feature.properties?.ntaname)
+  )
+};
+
+map.loadCollection("neighborhoods", {
+  collection: focus,
+  type: "polygons"
 });
 
 map.draw();
@@ -43,19 +55,19 @@ map.draw();
 // Programmatically emphasize or hide specific components
 // without changing the underlying collection.
 setTimeout(() => {
-  map.setHighlightedIds("roads", [0, 1, 2]);
-  console.log("Highlighted road components 0, 1, 2.");
+  map.setHighlightedIds("neighborhoods", [0]);
+  console.log("Highlighted Financial District-Battery Park City.");
 }, 800);
 
 setTimeout(() => {
-  map.clearHighlightedIds("roads");
-  map.setSkippedIds("roads", [3, 4, 5]);
-  console.log("Temporarily skipped road components 3, 4, 5.");
+  map.clearHighlightedIds("neighborhoods");
+  map.setSkippedIds("neighborhoods", [2]);
+  console.log("Temporarily skipped Chinatown-Two Bridges.");
 }, 1600);
 
 setTimeout(() => {
-  map.clearSkippedIds("roads");
-  console.log("Restored all roads.");
+  map.clearSkippedIds("neighborhoods");
+  console.log("Restored all neighborhoods.");
 }, 2400);
 `;
 
