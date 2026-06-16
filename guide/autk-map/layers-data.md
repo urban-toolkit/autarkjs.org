@@ -60,15 +60,27 @@ import { AutkMap } from "@urban-toolkit/autk-map";
 const db = new AutkDb();
 await db.init();
 
+await db.loadGeojson({
+  geojsonFileUrl: "/data/mnt_neighs_proj.geojson",
+  outputTableName: "neighborhoods",
+  coordinateFormat: "EPSG:3395"
+});
+
 await db.loadGeoTiff({
   geotiffFileUrl: "/data/temperature.tif",
   outputTableName: "temperature"
 });
 
+const neighborhoods = await db.getLayer("neighborhoods");
 const raster = await db.getRaster("temperature");
 
 const map = new AutkMap(canvas);
 await map.init();
+
+map.loadCollection("neighborhoods", {
+  collection: neighborhoods,
+  type: "polygons"
+});
 
 map.loadCollection("temperature", {
   collection: raster,
@@ -76,37 +88,8 @@ map.loadCollection("temperature", {
   property: "properties.band_1"
 });
 
+map.updateRenderInfo("temperature", { opacity: 0.75 });
 map.draw();
-`;
-
-const dbLayersCode = `
-import { AutkDb } from "@urban-toolkit/autk-db";
-import { AutkMap } from "@urban-toolkit/autk-map";
-
-const db = new AutkDb();
-await db.init();
-
-await db.loadOsm({
-  pbfFileUrl: "/data/lower_mnt.osm.pbf",
-  queryArea: {
-    geocodeArea: "New York",
-    areas: ["Battery Park City"]
-  },
-  autoLoadLayers: {
-    layers: ["surface", "parks", "water", "roads", "buildings"]
-  }
-});
-
-const map = new AutkMap(canvas);
-await map.init();
-
-for (const { name, type } of db.getLayersMetadata()) {
-  const geojson = await db.getLayer(name);
-  map.loadCollection(name, { collection: geojson, type });
-}
-
-map.draw();
-console.log(db.getLayersMetadata());
 `;
 </script>
 
@@ -125,11 +108,32 @@ console.log(db.getLayersMetadata());
 
 # Layers data
 
-Layers are the main data units rendered by `autk-map`. Each layer combines a dataset with a rendering type, allowing the map to interpret the input geometry, apply the appropriate visual rules, and compose multiple datasets in the same view. In practice, layers are loaded with `loadCollection()` and then rendered according to the selected type.
+Layers are the main data units rendered by `autk-map`. Each layer combines a dataset with a rendering type, allowing the map to interpret the input geometry, apply the appropriate visual rules, and compose multiple datasets in the same view. 
+## Layer basics
 
-:::warning Projected coordinates required
-`autk-map` expects data in projected coordinates. You may use any projected coordinate system, but all loaded layers must use the same selected system.
-:::
+Layers are loaded with `loadCollection()` and then rendered according to the selected type. The basic call has the following shape:
+
+```ts
+map.loadCollection(layerId, {
+  collection,
+  type,      // optional for inferred vector layers
+  property,  // required for raster layers
+});
+```
+
+| Part | Description |
+|---|---|
+| `layerId` | Unique layer identifier used later to update thematic data, visibility, picking, and other rendering properties. |
+| `params.collection` | Source `FeatureCollection` to load. |
+| `params.type` | Optional when the geometry can be inferred for vector layers. Physical layers should usually pass `type` explicitly. |
+| `params.property` | Required for raster layers so the renderer knows which numeric value to read from each cell. |
+
+`autk-map` also assumes a few basic rules about how layer data is organized and loaded:
+
+- **Projected coordinates** — `autk-map` expects projected coordinates. You may use any projected coordinate system, but all loaded layers must use the same selected system.
+- **Initial framing** — the first loaded layer defines the initial map bounding box and camera framing.
+- **Existing bounds** — if the collection already includes a `bbox`, `autk-map` uses it instead of recomputing bounds.
+- **Manual bounds** — you can set the bounding box before loading any layer with `map.boundingBox = [minLon, minLat, maxLon, maxLat]`.
 
 ## Physical layers
 
@@ -148,7 +152,7 @@ Physical layers are specialized layer types designed for common map components s
 </ClientOnly>
 
 :::tip Physical layers are not limited to OSM
-Physical layers are used to build the map context, but they are not restricted to OpenStreetMap data. You can also load GeoJSON files as `surface`, `parks`, `water`, `roads`, or `buildings` when your own data already matches those physical categories.
+Physical layers are used to build the map context, but they are not restricted to OpenStreetMap data loaded using [autk-db](/autk-db/). You can also load GeoJSON files as `surface`, `parks`, `water`, `roads`, or `buildings` when your own data already matches those physical categories.
 :::
 
 ## Vector layers
@@ -166,7 +170,9 @@ Vector layers are the generic layer types used for custom GeoJSON data. They map
 </ClientOnly>
 
 :::tip Automatic inference
-When `type` is omitted, `loadCollection()` can infer vector layer types from geometry: `Point` and `MultiPoint` become `points`, `LineString` and `MultiLineString` become `polylines`, and `Polygon` and `MultiPolygon` become `polygons`. Physical types such as `roads`, `buildings`, `surface`, `parks`, and `water` are not inferred automatically. If a collection mixes geometry families, pass `type` explicitly.
+* When `type` is omitted, `loadCollection()` can infer vector layer types from geometry: `Point` and `MultiPoint` become `points`, `LineString` and `MultiLineString` become `polylines`, and `Polygon` and `MultiPolygon` become `polygons`. 
+
+* Physical types such as `roads`, `buildings`, `surface`, `parks`, and `water` are not inferred automatically. If a collection mixes geometry families, pass `type` explicitly.
 :::
 
 ## Raster layers
@@ -179,22 +185,10 @@ Raster layers represent gridded data such as temperature, density, or any other 
 
 Raster layers require a property path so the renderer knows which numeric value to read from each cell feature. Raster collections are commonly produced by `autk-db.getRaster()`, and `updateRaster()` can be used later to swap the active values or property path while keeping the same layer id.
 
+When loading a GeoTIFF through `autk-db`, it is usually best to load a vector base layer first so the workspace has a bounding box context. That bounding box is then reused by the exported raster collection and by the map framing.
+
 <ClientOnly>
   <CodePlayground :code="rasterLayersCode" out="dom" />
-</ClientOnly>
-
-## Loading behavior
-
-`loadCollection(layerId, params)` is the standard method for adding layers to the map. The `layerId` must be unique and is later used to update thematic data, visibility, picking, or other rendering properties.
-
-The first loaded layer defines the initial map bounding box and camera framing. If the collection already includes a `bbox`, `autk-map` reuses it. Otherwise, the bounding box is computed from the geometries. You can also set the bounding box manually before loading any layer with `map.boundingBox = [minLon, minLat, maxLon, maxLat]`.
-
-## Loading layers from `autk-db`
-
-A common workflow is to prepare layers in `autk-db` and then load each exported GeoJSON layer into `autk-map` using the type metadata returned by the database.
-
-<ClientOnly>
-  <CodePlayground :code="dbLayersCode" out="both" />
 </ClientOnly>
 
 ## Prebuilt meshes
