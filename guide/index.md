@@ -2,9 +2,9 @@
 layout: home
 
 hero:
-  name: 'Autark <a class="hero-npm-badge" href="https://www.npmjs.com/package/@urban-toolkit/autk"><img alt="@urban-toolkit/autk npm version" src="https://img.shields.io/npm/v/%40urban-toolkit%2Fautk?logo=npm&labelColor=111827&color=2563eb"></a>'
+  name: Autark
   text: A Serverless Toolkit for Prototyping Urban Visual Analytics Systems
-  tagline: Load, process, and visualize geospatial data entirely in the browser.
+  tagline: 'Load, process, and visualize geospatial data entirely in the browser.<br><span class="home-umbrella-badge"><span>Install the full toolkit:</span> <a href="https://www.npmjs.com/package/@urban-toolkit/autk"><img alt="@urban-toolkit/autk npm version" src="https://img.shields.io/npm/v/%40urban-toolkit%2Fautk?logo=npm&labelColor=111827&color=2563eb"></a></span>'
   actions:
     - theme: brand
       text: Get Started
@@ -29,27 +29,22 @@ features:
 ---
 
 <style>
-.VPHome .name {
+.VPHome .home-umbrella-badge {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
   flex-wrap: wrap;
+  margin-top: 12px;
+  color: var(--vp-c-text-2);
+  font-size: 14px;
+  font-weight: 600;
 }
 
-.VPHome .hero-npm-badge {
+.VPHome .home-umbrella-badge a {
   display: inline-flex;
   align-items: center;
   line-height: 1;
-}
-
-.VPHome .hero-npm-badge img {
-  height: 20px;
-}
-
-@media (min-width: 640px) {
-  .VPHome .hero-npm-badge img {
-    height: 22px;
-  }
+  vertical-align: middle;
 }
 </style>
 
