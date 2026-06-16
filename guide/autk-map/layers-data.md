@@ -92,114 +92,7 @@ for (const layer of db.getTablesMetadata()) {
 }
 map.draw();
 `;
-
-const meshCode = `
-import { AutkMap } from "@urban-toolkit/autk-map";
-
-const map = new AutkMap(canvas);
-await map.init();
-
-const [neighborhoods, objText] = await Promise.all([
-  fetch("/data/mnt_neighs_proj.geojson").then((res) => res.json()),
-  fetch("/data/mnt_wtc_mesh.obj").then((res) => res.text())
-]);
-
-const southManhattan = {
-  ...neighborhoods,
-  features: neighborhoods.features.filter((feature) =>
-    ["Financial District-Battery Park City", "Tribeca-Civic Center"].includes(
-      feature.properties?.ntaname
-    )
-  )
-};
-
-map.loadCollection("neighborhoods", {
-  collection: southManhattan,
-  type: "polygons"
-});
-
-// Parse the OBJ file into buffers for loadMesh().
-const vertices = [];
-const normals = [];
-const objects = [];
-let current = null;
-
-for (const line of objText.split("\n")) {
-  const parts = line.trim().split(" ").filter((p) => p.length > 0);
-  if (!parts.length || parts[0].startsWith("#")) continue;
-
-  if (parts[0] === "v") {
-    vertices.push(parts.slice(1).map(Number));
-  } else if (parts[0] === "vn") {
-    normals.push(parts.slice(1).map(Number));
-  } else if (parts[0] === "o" || parts[0] === "g") {
-    current = { name: parts[1] || "building-" + objects.length, faces: [] };
-    objects.push(current);
-  } else if (parts[0] === "f" && current) {
-    current.faces.push(
-      parts.slice(1).map((token) => {
-        const [vi, , vni] = token.split("/").map((s) => (s ? Number(s) : undefined));
-        return { vi: vi - 1, vni: vni ? vni - 1 : vi - 1 };
-      })
-    );
-  }
-}
-
-const [originX, originY] = map.layerManager.origin;
-const geometry = [];
-const components = [];
-
-for (let i = 0; i < objects.length; i++) {
-  const obj = objects[i];
-  const indexMap = new Map();
-  const position = [];
-  const normal = [];
-  const indices = [];
-  let nextLocal = 0;
-
-  for (const face of obj.faces) {
-    if (face.length !== 3) continue;
-    for (const { vi, vni } of face) {
-      const key = vi + "/" + vni;
-      if (!indexMap.has(key)) {
-        const v = vertices[vi];
-        const n = normals[vni];
-        position.push(v[0] - originX, v[1] - originY, v[2]);
-        normal.push(n[0], n[1], n[2]);
-        indexMap.set(key, nextLocal++);
-      }
-    }
-    indices.push(
-      indexMap.get(face[0].vi + "/" + face[0].vni),
-      indexMap.get(face[1].vi + "/" + face[1].vni),
-      indexMap.get(face[2].vi + "/" + face[2].vni)
-    );
-  }
-
-  if (position.length) {
-    geometry.push({
-      position: new Float32Array(position),
-      normal: new Float32Array(normal),
-      indices: new Uint32Array(indices),
-      featureIndex: i
-    });
-    components.push({
-      featureIndex: i,
-      featureId: obj.name,
-      nPoints: position.length / 3,
-      nTriangles: indices.length / 3
-    });
-  }
-}
-
-map.loadMesh("buildings-mesh", {
-  geometry,
-  components,
-  type: "buildings"
-});
-
-map.draw();
-`;</script>
+</script>
 
 <style scoped>
 .package-page :is(p, li, td, th, .custom-block p, .custom-block li, h1, h2, h3, h4, h5, h6) {
@@ -296,17 +189,5 @@ Raster layers need a property path that tells the renderer which numeric value t
 <ClientOnly>
   <CodePlayground :code="rasterLayersCode" out="dom" />
 </ClientOnly>
-
-## 3D meshes
-
-`autk-map` also supports `loadMesh()` for pre-triangulated geometry. This is useful when your application already has local mesh coordinates and aligned component metadata. At the moment, mesh loading is intended for `buildings`-style geometry.
-
-The example below loads a few southern Manhattan neighborhoods and adds a higher-detail building mesh around the World Trade Center area, derived from the official NYC 3D building model.
-
-<ClientOnly>
-  <CodePlayground :code="meshCode" out="dom" />
-</ClientOnly>
-
-See [`AutkMap.loadMesh()`](/api/autk-map/classes/AutkMap#loadmesh).
 
 </div>
