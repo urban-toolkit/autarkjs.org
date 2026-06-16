@@ -148,26 +148,23 @@ const fullCode = computed(() => props.codeFull || props.code || '')
   font-weight: 700;
   letter-spacing: 0.02em;
   color: white;
+  box-shadow: none;
 }
 
 .example-tag.autk-map {
   background: #0ea5e9;
-  box-shadow: 0 4px 10px rgba(14, 165, 233, 0.25);
 }
 
 .example-tag.autk-db {
   background: #f59e0b;
-  box-shadow: 0 4px 10px rgba(245, 158, 11, 0.25);
 }
 
 .example-tag.autk-compute {
   background: #10b981;
-  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.22);
 }
 
 .example-tag.autk-plot {
   background: #8b5cf6;
-  box-shadow: 0 4px 10px rgba(139, 92, 246, 0.22);
 }
 
 .example-title {
