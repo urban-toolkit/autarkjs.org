@@ -43,12 +43,12 @@ features:
 }
 
 .VPHome .hero-npm-badge img {
-  height: 28px;
+  height: 20px;
 }
 
 @media (min-width: 640px) {
   .VPHome .hero-npm-badge img {
-    height: 32px;
+    height: 22px;
   }
 }
 </style>
