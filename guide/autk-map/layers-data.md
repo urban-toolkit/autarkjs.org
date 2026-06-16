@@ -127,7 +127,8 @@ const geometry = meshData.geometry.map((mesh) => ({
       index % 3 === 0 ? value - originX : index % 3 === 1 ? value - originY : value
     )
   ),
-  normal: new Float32Array(mesh.normal)
+  normal: new Float32Array(mesh.normal),
+  indices: new Uint32Array(mesh.indices)
 }));
 
 map.loadMesh("buildings-mesh", {
