@@ -11,7 +11,7 @@ const db = new AutkDb();
 await db.init();
 
 await db.loadGeojson({
-  geojsonFileUrl: "/data/mnt_roads.geojson",
+  geojsonFileUrl: "/data/mnt_roads_categorized.geojson",
   outputTableName: "roads"
 });
 
@@ -21,17 +21,10 @@ await map.init();
 const roads = await db.getLayer("roads");
 map.loadCollection("roads", { collection: roads, type: "roads" });
 
-// Group raw OSM highway tags into a small set of categories
-// so the categorical palette has a stable, ordered domain.
-roads.features.forEach((feature) => {
-  const highway = feature.properties?.highway;
-  feature.properties = feature.properties ?? {};
-  feature.properties.compute = feature.properties.compute ?? {};
-  feature.properties.compute.highwayGroup = ["primary", "secondary"].includes(highway)
-    ? highway
-    : "other";
-});
-
+// The road file already pre-groups the raw OSM highway
+// tags into "primary", "secondary", and "other" under
+// properties.compute.highwayGroup so the palette has a
+// stable, ordered domain.
 map.updateColorMap("roads", {
   colorMap: {
     interpolator: ColorMapInterpolator.CAT_OBSERVABLE10,
