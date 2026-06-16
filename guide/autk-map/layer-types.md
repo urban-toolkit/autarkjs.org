@@ -38,7 +38,7 @@ await map.init();
 
 const [neighborhoods,points] = await Promise.all([
   fetch("/data/mnt_neighs_proj.geojson").then((res) => res.json()),
-  fetch("/data/noise_manhattan_proj.geojson").then((res) => res.json())
+  fetch("/data/mnt_noise_proj.geojson").then((res) => res.json())
 ]);
 
 map.loadCollection("neighborhoods", {
