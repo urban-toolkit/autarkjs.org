@@ -125,7 +125,7 @@ const objects = [];
 let current = null;
 
 for (const line of objText.split("\n")) {
-  const parts = line.trim().split(/\s+/);
+  const parts = line.trim().split(" ").filter((p) => p.length > 0);
   if (!parts.length || parts[0].startsWith("#")) continue;
 
   if (parts[0] === "v") {
