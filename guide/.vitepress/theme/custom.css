@@ -15,18 +15,19 @@
 .vp-doc .case-tag,
 .case-tag {
   display: inline-block;
-  padding: 6px 12px;
-  border-radius: 999px;
+  padding: 5px 11px;
+  border-radius: 8px;
 
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 0.7rem;
+  font-family: Verdana, Geneva, DejaVu Sans, sans-serif;
+  font-size: 12px;
   font-weight: 700;
-  line-height: normal;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: none;
 
   color: #ffffff !important;
   text-decoration: none !important;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.18);
 
   border: 0;
   box-shadow: none;
