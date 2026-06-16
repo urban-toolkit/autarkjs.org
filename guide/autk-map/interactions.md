@@ -1,112 +1,103 @@
 <script setup>
-const pickingCode = `
-import { AutkMap, MapEvent } from "@urban-toolkit/autk-map";
+const baseCode = `
+import { AutkMap } from "@urban-toolkit/autk-map";
 
 const map = new AutkMap(canvas);
 await map.init();
 
-const neighborhoods = {
-  type: "FeatureCollection",
-  features: [
-    {
-      type: "Feature",
-      id: "n1",
-      properties: { name: "West" },
-      geometry: { type: "Polygon", coordinates: [[[-74.0125, 40.706], [-74.008, 40.706], [-74.008, 40.712], [-74.0125, 40.712], [-74.0125, 40.706]]] }
-    },
-    {
-      type: "Feature",
-      id: "n2",
-      properties: { name: "East" },
-      geometry: { type: "Polygon", coordinates: [[[-74.008, 40.706], [-74.0035, 40.706], [-74.0035, 40.712], [-74.008, 40.712], [-74.008, 40.706]]] }
-    }
-  ]
-};
+const [neighborhoods, points] = await Promise.all([
+  fetch("/data/mnt_neighs_proj.geojson").then((res) => res.json()),
+  fetch("/data/mnt_noise_proj.geojson").then((res) => res.json())
+]);
 
-map.loadCollection("neighborhoods", { collection: neighborhoods, type: "polygons" });
+map.loadCollection("neighborhoods", {
+  collection: neighborhoods,
+  type: "polygons"
+});
+
+map.loadCollection("points", {
+  collection: points,
+  type: "points"
+});
+
+map.draw();
+`;
+
+const pickingCode = `
+${baseCode}
+
+import { MapEvent } from "@urban-toolkit/autk-map";
+
+// Mark a layer as pickable. Only layers with isPick set to true
+// emit picking events.
 map.updateRenderInfo("neighborhoods", { isPick: true });
+map.updateRenderInfo("points", { isPick: true });
 
 map.events.on(MapEvent.PICKING, ({ selection, layerId }) => {
   console.log({ layerId, selection });
 });
-
-map.draw();
-`
+`;
 
 const highlightCode = `
-import { AutkMap } from "@urban-toolkit/autk-map";
+${baseCode}
 
-const map = new AutkMap(canvas);
-await map.init();
-
-const roads = {
-  type: "FeatureCollection",
-  features: [
-    {
-      type: "Feature",
-      id: "r1",
-      properties: { name: "Main" },
-      geometry: { type: "LineString", coordinates: [[-74.012, 40.708], [-74.004, 40.708]] }
-    },
-    {
-      type: "Feature",
-      id: "r2",
-      properties: { name: "Broad" },
-      geometry: { type: "LineString", coordinates: [[-74.009, 40.706], [-74.009, 40.712]] }
-    }
-  ]
-};
-
-map.loadCollection("roads", { collection: roads, type: "roads" });
-map.draw();
-
+// Programmatically emphasize or hide specific components
+// without changing the underlying collection.
 setTimeout(() => {
-  map.setHighlightedIds("roads", [0]);
-  console.log("Highlighted component 0.");
+  map.setHighlightedIds("neighborhoods", [0, 1]);
+  console.log("Highlighted neighborhoods 0 and 1.");
 }, 800);
 
 setTimeout(() => {
-  map.setSkippedIds("roads", [1]);
-  console.log("Temporarily skipped component 1.");
+  map.clearHighlightedIds("neighborhoods");
+  map.setSkippedIds("points", [0, 1, 2]);
+  console.log("Temporarily skipped points 0, 1, 2.");
 }, 1600);
-`
 
-const layerVisibilityCode = `
-import { AutkMap } from "@urban-toolkit/autk-map";
+setTimeout(() => {
+  map.clearSkippedIds("points");
+  console.log("Restored all points.");
+}, 2400);
+`;
 
-const map = new AutkMap(canvas);
-await map.init();
+const visibilityCode = `
+${baseCode}
 
-const parks = {
-  type: "FeatureCollection",
-  features: [{
-    type: "Feature",
-    properties: {},
-    geometry: {
-      type: "Polygon",
-      coordinates: [[
-        [-74.0115, 40.7075],
-        [-74.006, 40.7075],
-        [-74.006, 40.7115],
-        [-74.0115, 40.7115],
-        [-74.0115, 40.7075]
-      ]]
-    }
-  }]
-};
+// Layer-level visibility is controlled with isSkip.
+// Use updateRenderInfo to toggle it and removeLayer to
+// fully detach the layer from the map.
+setTimeout(() => map.updateRenderInfo("points", { isSkip: true }), 800);
+setTimeout(() => map.updateRenderInfo("points", { isSkip: false }), 1600);
+setTimeout(() => map.removeLayer("points"), 2400);
+`;
 
-map.loadCollection("parks", { collection: parks, type: "parks" });
-map.draw();
+const linkedViewsCode = `
+${baseCode}
 
-setTimeout(() => map.updateRenderInfo("parks", { isSkip: true }), 800);
-setTimeout(() => map.updateRenderInfo("parks", { isSkip: false }), 1600);
-setTimeout(() => map.removeLayer("parks"), 2400);
-`
+import { MapEvent } from "@urban-toolkit/autk-map";
+
+map.updateRenderInfo("neighborhoods", { isPick: true });
+
+// Forward the picking selection to a console payload
+// shaped like an autk-plot input. A typical linked-view
+// setup pipes selection into PlotBaseData or a chart
+// filter, so the same features light up across views.
+map.events.on(MapEvent.PICKING, ({ selection, layerId }) => {
+  const plotInput = {
+    filter: { layerId, ids: selection }
+  };
+  console.log({ plotInput });
+});
+`;
 </script>
 
 <style scoped>
 .package-page :is(p, li, td, th, .custom-block p, .custom-block li, h1, h2, h3, h4, h5, h6) {
   text-align: justify;
+}
+
+.package-page > p:first-of-type {
+  font-size: 1.05em;
 }
 
 .package-page table th:first-child,
@@ -119,43 +110,59 @@ setTimeout(() => map.removeLayer("parks"), 2400);
 
 # Interactions
 
+`autk-map` exposes three complementary interaction mechanisms. They share the same render-info flags and the same event bus, so they can be combined in any order:
+
+1. **Picking** — pointer-driven selection that emits events through `map.events.on()`.
+2. **Programmatic highlight and skip** — direct control over which components stand out or are hidden, useful for cross-view coordination.
+3. **Layer visibility** — show, hide, or fully remove an entire layer.
+
+All examples below start from the same two layers (southern Manhattan neighborhoods and noise event points) loaded as projected Mercator data, so each section focuses on a single interaction concern.
+
 ## Picking
 
-Enable picking on a layer with `isPick`, then subscribe to `MapEvent.PICKING` through `map.events.on()`:
+Enable picking on a layer with `isPick` and subscribe to `MapEvent.PICKING` through `map.events.on()`. The handler receives the picking payload for the current frame.
 
 <ClientOnly>
   <CodePlayground :code="pickingCode" out="both" />
 </ClientOnly>
 
-The payload contains:
+| Field | Description |
+|---|---|
+| `layerId` | The layer that produced the event. Layers without `isPick: true` never emit. |
+| `selection` | Selected component ids in that layer. An empty array means the user clicked outside any pickable feature. |
 
-- `selection` — selected component ids
-- `layerId` — the layer that produced the event
+:::tip
+Picking works on the rendered geometry. For 3D buildings, picking hits the building footprint or its extruded surface depending on the layer type.
+:::
 
-An empty `selection` means the user clicked outside any pickable feature.
+## Programmatic highlight and skip
 
-## Programmatic highlighting and filtering
-
-Besides pointer picking, `autk-map` also lets you control the visible selection directly:
+Besides pointer picking, `autk-map` lets you control the visible selection directly. This is the main hook for cross-view coordination: a chart, a filter, or any external state can push which components should stand out or be hidden.
 
 <ClientOnly>
   <CodePlayground :code="highlightCode" out="both" />
 </ClientOnly>
 
-- `setHighlightedIds()` highlights specific components
-- `setSkippedIds()` hides specific components without removing the whole layer
-- `clearHighlightedIds()` and `clearSkippedIds()` reset those states
+- `setHighlightedIds()` emphasizes specific components while keeping them visible.
+- `setSkippedIds()` hides specific components without removing the whole layer.
+- `clearHighlightedIds()` and `clearSkippedIds()` reset those states.
 
-## Show, hide, and remove layers
+## Layer visibility
 
-For layer-level visibility, use `updateRenderInfo()` with `isSkip`. To fully remove a layer, call `removeLayer()`:
+For layer-level visibility, use `updateRenderInfo()` with `isSkip`. To fully detach a layer from the map, call `removeLayer()`. The latter also frees its GPU resources.
 
 <ClientOnly>
-  <CodePlayground :code="layerVisibilityCode" out="dom" />
+  <CodePlayground :code="visibilityCode" out="dom" />
 </ClientOnly>
 
-:::tip Linked views
-The picking payload can be forwarded directly to other Autark views. A common pattern is to connect `selection` to `autk-plot` so the same features are highlighted across map and chart views.
-:::
+## Linked views
+
+A common pattern is to forward the picking payload directly to another Autark view. The `selection` and `layerId` from `MapEvent.PICKING` are enough to drive an `autk-plot` filter or a linked chart, so the same features light up across map and chart views.
+
+<ClientOnly>
+  <CodePlayground :code="linkedViewsCode" out="both" />
+</ClientOnly>
+
+See [`AutkMap`](/api/autk-map/classes/AutkMap) for the full list of interaction methods.
 
 </div>
