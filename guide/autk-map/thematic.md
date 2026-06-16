@@ -65,12 +65,13 @@ map.draw();
 `
 
 const spatialJoinBuildingsCode = `
-import { AutkDb } from "@urban-toolkit/autk-db";
-import { AutkMap } from "@urban-toolkit/autk-map";
 import {
   ColorMapDomainStrategy,
   ColorMapInterpolator
 } from "@urban-toolkit/autk-core";
+
+import { AutkDb } from "@urban-toolkit/autk-db";
+import { AutkMap } from "@urban-toolkit/autk-map";
 
 const db = new AutkDb();
 await db.init();
@@ -81,64 +82,51 @@ await db.loadOsm({
     geocodeArea: "New York",
     areas: ["Battery Park City", "Financial District"]
   },
-  outputTableName: "table_osm",
   autoLoadLayers: {
     layers: ["surface", "parks", "water", "roads", "buildings"]
   }
 });
-
 await db.loadCsv({
   csvFileUrl: "/data/mnt_noise.csv",
   outputTableName: "noise",
   geometryColumns: true
 });
-
-const layer = "table_osm_buildings";
-
 await db.spatialQuery({
-  tableRootName: layer,
+  tableRootName: "table_osm_buildings",
   tableJoinName: "noise",
   near: { distance: 1000 },
   groupBy: [{ column: "key", aggregateFn: "count" }]
 });
+await db.removeLayer("noise");
 
 const map = new AutkMap(canvas);
 await map.init();
 
-for (const layerData of db.getLayersMetadata()) {
-  const collection = await db.getLayer(layerData.name);
-  map.loadCollection(layerData.name, {
-    collection,
-    type: layerData.type
-  });
-  map.updateRenderInfo(layerData.name, {
-    isSkip: layerData.source === "csv"
-  });
+for (const layer of db.getLayersMetadata()) {
+  const {name, type} = layer;
+  const collection = await db.getLayer(name);
+  map.loadCollection(name, {collection, type });
 }
 
-const collection = await db.getLayer(layer);
-map.updateColorMap(layer, {
-  colorMap: {
-    interpolator: ColorMapInterpolator.SEQ_INFERNO,
-    domainSpec: { type: ColorMapDomainStrategy.PERCENTILE }
-  }
-});
-map.updateThematic(layer, {
-  collection,
+const buildings = await db.getLayer("table_osm_buildings");
+map.updateThematic("table_osm_buildings", {
+  collection: buildings,
   property: "properties.sjoin.count.noise"
 });
-map.updateRenderInfo(layer, { isColorMap: true });
-
+map.updateRenderInfo("table_osm_buildings", { 
+  isColorMap: true 
+});
 map.draw();
 `
 
 const spatialJoinRoadsCode = `
-import { AutkDb } from "@urban-toolkit/autk-db";
-import { AutkMap } from "@urban-toolkit/autk-map";
 import {
   ColorMapDomainStrategy,
   ColorMapInterpolator
 } from "@urban-toolkit/autk-core";
+
+import { AutkDb } from "@urban-toolkit/autk-db";
+import { AutkMap } from "@urban-toolkit/autk-map";
 
 const db = new AutkDb();
 await db.init();
@@ -149,54 +137,40 @@ await db.loadOsm({
     geocodeArea: "New York",
     areas: ["Battery Park City", "Financial District"]
   },
-  outputTableName: "table_osm",
   autoLoadLayers: {
     layers: ["surface", "parks", "water", "roads", "buildings"]
   }
 });
-
 await db.loadCsv({
   csvFileUrl: "/data/mnt_noise.csv",
   outputTableName: "noise",
   geometryColumns: true
 });
-
-const layer = "table_osm_roads";
-
 await db.spatialQuery({
-  tableRootName: layer,
+  tableRootName: "table_osm_buildings",
   tableJoinName: "noise",
   near: { distance: 1000 },
   groupBy: [{ column: "key", aggregateFn: "count" }]
 });
+await db.removeLayer("noise");
 
 const map = new AutkMap(canvas);
 await map.init();
 
-for (const layerData of db.getLayersMetadata()) {
-  const collection = await db.getLayer(layerData.name);
-  map.loadCollection(layerData.name, {
-    collection,
-    type: layerData.type
-  });
-  map.updateRenderInfo(layerData.name, {
-    isSkip: layerData.source === "csv"
-  });
+for (const layer of db.getLayersMetadata()) {
+  const {name, type} = layer;
+  const collection = await db.getLayer(name);
+  map.loadCollection(name, {collection, type });
 }
 
-const collection = await db.getLayer(layer);
-map.updateColorMap(layer, {
-  colorMap: {
-    interpolator: ColorMapInterpolator.SEQ_INFERNO,
-    domainSpec: { type: ColorMapDomainStrategy.PERCENTILE }
-  }
-});
-map.updateThematic(layer, {
-  collection,
+const buildings = await db.getLayer("table_osm_buildings");
+map.updateThematic("table_osm_buildings", {
+  collection: buildings,
   property: "properties.sjoin.count.noise"
 });
-map.updateRenderInfo(layer, { isColorMap: true });
-
+map.updateRenderInfo("table_osm_buildings", { 
+  isColorMap: true 
+});
 map.draw();
 `
 </script>
@@ -275,10 +249,9 @@ The same pattern works for linear features. The next example joins the same nois
   <CodePlayground :code="spatialJoinRoadsCode" out="dom" />
 </ClientOnly>
 
-## Alignment rules
-
+:::tip Data alignment
 Thematic values are matched back to rendered components using feature ids when available, with a fallback to feature order. For reliable updates, keep stable `feature.id` values or preserve collection ordering across calls to `updateThematic()`.
 
 See [`AutkMap.updateThematic()`](/api/autk-map/classes/AutkMap#updatethematic) and [`AutkMap.updateColorMap()`](/api/autk-map/classes/AutkMap#updatecolormap).
-
+:::
 </div>

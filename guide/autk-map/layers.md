@@ -22,8 +22,8 @@ await map.init();
 
 for (const layer of db.getLayersMetadata()) {
   const { name, type } = layer;
-  const geojson = await db.getLayer(name);
-  map.loadCollection(name, { collection: geojson, type });
+  const collection = await db.getLayer(name);
+  map.loadCollection(name, { collection, type });
 }
 
 map.draw();
