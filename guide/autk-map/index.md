@@ -76,7 +76,7 @@ Autark is built over some core concepts, that guides data data loading, renderin
 - **Layer ids** — each layer is identified by an unique string id. This id must be used when the user wants to update rendering properties such as the layer's thematic data, rendering state, etc. See [Layers data](./layers-data) for details.
 - **Layer types** — each layer has a type that can be either a physical type or a generic type. Physical types such as `surface`, `parks`, `water`, `roads`, and `buildings` are used to build the map context, while generic types such as `points`, `polylines`, `polygons`, and `raster` support custom datasets. See [Layers data](./layers-data).
 - **Render state** — each layer has render state controlling properties such as opacity, visibility, picking, and whether thematic coloring is active. These properties can be updated dynamically without reloading the layer. See [Styling](./styling).
-- **Thematic data** — thematic data rendering maps numeric or categorical feature attributes to colors. In practice, you configure a color map, point to a property path, and enable thematic display for the layer. See [Thematic data](./thematic-mapping).
+- **Thematic data** — thematic data rendering maps numeric or categorical feature attributes to colors. In practice, you configure a color map, point to a property path, and enable thematic display for the layer. See [Thematic data](./thematic).
 - **Interactions** — interactions let users explore layers through picking, highlighting, filtering, and visibility control without changing the underlying data. See [Interactions](./interactions).
 
 </div>
