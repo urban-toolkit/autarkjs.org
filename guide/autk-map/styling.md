@@ -185,4 +185,8 @@ Sequential palettes are typically used for one-directional numeric values such a
 
 For the full thematic workflow, continue to [Thematic data](./thematic).
 
+:::tip Layer controls in the hamburger menu
+The currently selected `isPick` layer and the thematic-data display can also be activated from the hamburger menu in the map UI.
+:::
+
 </div>
