@@ -99,9 +99,9 @@ import { AutkMap } from "@urban-toolkit/autk-map";
 const map = new AutkMap(canvas);
 await map.init();
 
-const [neighborhoods, meshData] = await Promise.all([
+const [neighborhoods, objText] = await Promise.all([
   fetch("/data/mnt_neighs_proj.geojson").then((res) => res.json()),
-  fetch("/data/mnt_wtc_mesh.json").then((res) => res.json())
+  fetch("/data/mnt_wtc_mesh.obj").then((res) => res.text())
 ]);
 
 const southManhattan = {
@@ -118,20 +118,83 @@ map.loadCollection("neighborhoods", {
   type: "polygons"
 });
 
+// Parse the OBJ file into buffers for loadMesh().
+const vertices = [];
+const normals = [];
+const objects = [];
+let current = null;
+
+for (const line of objText.split("\n")) {
+  const parts = line.trim().split(/\s+/);
+  if (!parts.length || parts[0].startsWith("#")) continue;
+
+  if (parts[0] === "v") {
+    vertices.push(parts.slice(1).map(Number));
+  } else if (parts[0] === "vn") {
+    normals.push(parts.slice(1).map(Number));
+  } else if (parts[0] === "o" || parts[0] === "g") {
+    current = { name: parts[1] || "building-" + objects.length, faces: [] };
+    objects.push(current);
+  } else if (parts[0] === "f" && current) {
+    current.faces.push(
+      parts.slice(1).map((token) => {
+        const [vi, , vni] = token.split("/").map((s) => (s ? Number(s) : undefined));
+        return { vi: vi - 1, vni: vni ? vni - 1 : vi - 1 };
+      })
+    );
+  }
+}
+
 const [originX, originY] = map.layerManager.origin;
-const geometry = meshData.geometry.map((mesh) => ({
-  position: new Float32Array(
-    mesh.position.map((value, index) =>
-      index % 3 === 0 ? value - originX : index % 3 === 1 ? value - originY : value
-    )
-  ),
-  normal: new Float32Array(mesh.normal),
-  indices: new Uint32Array(mesh.indices)
-}));
+const geometry = [];
+const components = [];
+
+for (let i = 0; i < objects.length; i++) {
+  const obj = objects[i];
+  const indexMap = new Map();
+  const position = [];
+  const normal = [];
+  const indices = [];
+  let nextLocal = 0;
+
+  for (const face of obj.faces) {
+    if (face.length !== 3) continue;
+    for (const { vi, vni } of face) {
+      const key = vi + "/" + vni;
+      if (!indexMap.has(key)) {
+        const v = vertices[vi];
+        const n = normals[vni];
+        position.push(v[0] - originX, v[1] - originY, v[2]);
+        normal.push(n[0], n[1], n[2]);
+        indexMap.set(key, nextLocal++);
+      }
+    }
+    indices.push(
+      indexMap.get(face[0].vi + "/" + face[0].vni),
+      indexMap.get(face[1].vi + "/" + face[1].vni),
+      indexMap.get(face[2].vi + "/" + face[2].vni)
+    );
+  }
+
+  if (position.length) {
+    geometry.push({
+      position: new Float32Array(position),
+      normal: new Float32Array(normal),
+      indices: new Uint32Array(indices),
+      featureIndex: i
+    });
+    components.push({
+      featureIndex: i,
+      featureId: obj.name,
+      nPoints: position.length / 3,
+      nTriangles: indices.length / 3
+    });
+  }
+}
 
 map.loadMesh("buildings-mesh", {
   geometry,
-  components: meshData.components,
+  components,
   type: "buildings"
 });
 
