@@ -127,11 +127,13 @@ async function runCode() {
     const autkMap = await import('@urban-toolkit/autk-map')
     const autkDb = await import('@urban-toolkit/autk-db')
     const autkCore = await import('@urban-toolkit/autk-core')
+    const autkCompute = await import('@urban-toolkit/autk-compute')
 
     const modules = {
       ...autkMap,
       ...autkDb,
       ...autkCore,
+      ...autkCompute,
     }
 
     const scopeDeclarations = Object.keys(modules)
