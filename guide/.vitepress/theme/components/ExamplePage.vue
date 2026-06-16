@@ -146,11 +146,11 @@ const fullCode = computed(() => props.codeFull || props.code || '')
   border-radius: 8px;
   font-family: Verdana, Geneva, DejaVu Sans, sans-serif;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1;
   letter-spacing: 0;
   color: white;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.18);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
   box-shadow: none;
 }
 
