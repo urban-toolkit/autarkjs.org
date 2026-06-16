@@ -12,20 +12,19 @@ await db.loadOsm({
     geocodeArea: "New York",
     areas: ["Financial District"]
   },
-  outputTableName: "osm",
   autoLoadLayers: {
-    coordinateFormat: "EPSG:3395",
-    layers: ["water", "roads", "buildings"]
+    layers: ["surface", "parks", "water", "roads", "buildings"]
   }
 });
 
 const map = new AutkMap(canvas);
 await map.init();
 
-for (const layerName of ["osm_water", "osm_roads", "osm_buildings"]) {
-  const geojson = await db.getLayer(layerName);
-  const type = layerName.replace("osm_", "");
-  map.loadCollection(layerName, { collection: geojson, type });
+for (const layer of db.getLayersMetadata()) {
+  const { name, type } = layer
+  const geojson = await db.getLayer(name);
+
+  map.loadCollection(name, { collection: geojson, type });
 }
 
 map.draw();
@@ -37,20 +36,14 @@ import { AutkMap } from "@urban-toolkit/autk-map";
 const map = new AutkMap(canvas);
 await map.init();
 
-const [neighborhoods, roads, points] = await Promise.all([
+const [neighborhoods,points] = await Promise.all([
   fetch("/data/mnt_neighs_proj.geojson").then((res) => res.json()),
-  fetch("/data/mnt_roads.geojson").then((res) => res.json()),
-  fetch("/data/mnt_points_test_proj.geojson").then((res) => res.json())
+  fetch("/data/noise_manhattan_proj.geojson").then((res) => res.json())
 ]);
 
 map.loadCollection("neighborhoods", {
   collection: neighborhoods,
   type: "polygons"
-});
-
-map.loadCollection("roads", {
-  collection: roads,
-  type: "polylines"
 });
 
 map.loadCollection("points", {
@@ -133,13 +126,15 @@ Semantic layers are specialized layer types designed for common OpenStreetMap ma
 | `parks` | Polygon | Parks and green areas |
 | `water` | Polygon | Water bodies |
 | `roads` | Polyline | Road network |
-| `buildings` | Polygon | Buildings rendered with extrusion |
-
-`buildings` is the only semantic layer type rendered as 3D extruded geometry.
+| `buildings` | Polygon | 3D buildings rendered with extrusion |
 
 <ClientOnly>
   <CodePlayground :code="semanticLayersCode" out="dom" />
 </ClientOnly>
+
+:::tip Semantic layers are not limited to OSM
+Semantic layers are used to build the map context, but they are not restricted to OpenStreetMap data. You can also load GeoJSON files as `surface`, `parks`, `water`, `roads`, or `buildings` when your own data already matches those semantic categories.
+:::
 
 ## Vector layers
 
