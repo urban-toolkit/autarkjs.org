@@ -245,7 +245,13 @@ map.draw();
 
 # Thematic data
 
-Thematic data rendering maps a feature attribute to color. In `autk-map`, the usual workflow is:
+Thematic data rendering maps a feature attribute to color. The attribute does not have to live on the feature itself: `autk-map` treats any value reachable through a property path on the `FeatureCollection` as thematic input. That value can be an intrinsic attribute of the geometry, but it can also be urban data that has been projected onto the feature, for example:
+
+- sensor readings, survey responses, or point-of-interest categories joined to the nearest building, road, or neighborhood;
+- aggregates from a second table, such as the count of noise events within a buffer of each polygon, computed in `autk-db` with `spatialQuery`;
+- pre-computed fields added to the source GeoJSON, such as a grouped highway class, so the renderer can read a stable categorical value directly.
+
+In `autk-map`, the usual workflow is:
 
 1. Load the layer with `loadCollection()`.
 2. Configure the color map with `updateColorMap()`.
@@ -258,7 +264,7 @@ Thematic data rendering maps a feature attribute to color. In `autk-map`, the us
 |---|---|
 | `interpolator` | A color scheme from `ColorMapInterpolator` (categorical, sequential, or diverging). |
 | `domainSpec` | How the renderer maps raw values to colors (`AUTO`, `MIN_MAX`, `PERCENTILE`, or `USER`). |
-| `property` | Dot-path to the feature property that supplies the value or class. |
+| `property` | Dot-path to the feature property that supplies the value or class. It can reach an intrinsic attribute or any urban data joined into the feature. |
 
 ## Categorical attributes
 
