@@ -138,7 +138,7 @@ await db.loadOsm({
     areas: ["Battery Park City", "Financial District"]
   },
   autoLoadLayers: {
-    layers: ["surface", "parks", "water", "roads", "buildings"]
+    layers: ["surface", "parks", "water", "roads"]
   }
 });
 await db.loadCsv({
@@ -147,7 +147,7 @@ await db.loadCsv({
   geometryColumns: true
 });
 await db.spatialQuery({
-  tableRootName: "table_osm_buildings",
+  tableRootName: "table_osm_roads",
   tableJoinName: "noise",
   near: { distance: 1000 },
   groupBy: [{ column: "key", aggregateFn: "count" }]
@@ -163,12 +163,12 @@ for (const layer of db.getLayersMetadata()) {
   map.loadCollection(name, {collection, type });
 }
 
-const buildings = await db.getLayer("table_osm_buildings");
-map.updateThematic("table_osm_buildings", {
-  collection: buildings,
+const roads = await db.getLayer("table_osm_roads");
+map.updateThematic("table_osm_roads", {
+  collection: roads,
   property: "properties.sjoin.count.noise"
 });
-map.updateRenderInfo("table_osm_buildings", { 
+map.updateRenderInfo("table_osm_roads", { 
   isColorMap: true 
 });
 map.draw();
