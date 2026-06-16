@@ -18,7 +18,6 @@ await db.loadOsm({
   }
 });
 
-// Apply the Google-style preset before the map is initialized.
 MapStyle.setPredefinedStyle("google");
 
 const map = new AutkMap(canvas);
@@ -31,7 +30,6 @@ for (const layer of db.getLayersMetadata()) {
     type: layer.type
   });
 }
-
 map.draw();
 `;
 
@@ -65,9 +63,7 @@ for (const layer of db.getLayersMetadata()) {
   });
 }
 
-// Per-layer opacity is controlled with updateRenderInfo().
 map.updateRenderInfo("table_osm_buildings", { opacity: 0.45 });
-
 map.draw();
 `;
 

@@ -69,37 +69,6 @@ map.draw();
 
 setTimeout(() => map.updateRenderInfo("points", { isSkip: true }), 800);
 setTimeout(() => map.updateRenderInfo("points", { isSkip: false }), 1600);
-setTimeout(() => map.removeLayer("points"), 2400);
-`;
-
-const linkedViewsCode = `
-import { AutkMap, MapEvent } from "@urban-toolkit/autk-map";
-
-const map = new AutkMap(canvas);
-await map.init();
-
-const neighborhoods = await fetch("/data/mnt_neighs_proj.geojson")
-  .then((res) => res.json());
-
-map.loadCollection("neighborhoods", {
-  collection: neighborhoods,
-  type: "polygons"
-});
-
-map.updateRenderInfo("neighborhoods", { isPick: true });
-
-map.draw();
-
-// Forward the picking selection to a console payload
-// shaped like an autk-plot input. A typical linked-view
-// setup pipes selection into PlotBaseData or a chart
-// filter, so the same features light up across views.
-map.events.on(MapEvent.PICKING, ({ selection, layerId }) => {
-  const plotInput = {
-    filter: { layerId, ids: selection }
-  };
-  console.log({ plotInput });
-});
 `;
 </script>
 
@@ -166,15 +135,5 @@ For layer-level visibility, use `updateRenderInfo()` with `isSkip`. To fully det
 <ClientOnly>
   <CodePlayground :code="visibilityCode" out="dom" />
 </ClientOnly>
-
-## Linked views
-
-A common pattern is to forward the picking payload directly to another Autark view. The `selection` and `layerId` from `MapEvent.PICKING` are enough to drive an `autk-plot` filter or a linked chart, so the same features light up across map and chart views. Click on a neighborhood to see the forwarded payload in the console.
-
-<ClientOnly>
-  <CodePlayground :code="linkedViewsCode" out="both" />
-</ClientOnly>
-
-See [`AutkMap`](/api/autk-map/classes/AutkMap) for the full list of interaction methods.
 
 </div>
