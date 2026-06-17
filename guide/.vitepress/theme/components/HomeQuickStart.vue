@@ -105,7 +105,6 @@ onMounted(async () => {
             </div>
 
             <div v-show="activeTab === 'example'" class="home-terminal-panel home-terminal-panel--example">
-              <div class="home-terminal-file">minimal-example.ts</div>
               <pre class="home-terminal-code"><code><span class="token-keyword">import</span> { <span class="token-class">AutkDb</span>, <span class="token-class">AutkMap</span> } <span class="token-keyword">from</span> <span class="token-string">"@urban-toolkit/autk"</span>;
 
 <span class="token-keyword">const</span> db = <span class="token-keyword">new</span> <span class="token-class">AutkDb</span>();
@@ -257,6 +256,7 @@ map.draw();</code></pre>
   display: flex;
   flex: 1;
   flex-direction: column;
+  min-height: 560px;
   background: var(--vp-code-block-bg);
 }
 
@@ -312,13 +312,6 @@ map.draw();</code></pre>
   gap: 12px;
   color: inherit;
   text-decoration: none;
-}
-
-.home-terminal-file {
-  margin-bottom: 12px;
-  color: var(--vp-c-text-2);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace;
-  font-size: 0.78rem;
 }
 
 .home-terminal-prompt,
@@ -493,6 +486,7 @@ map.draw();</code></pre>
     grid-template-columns: 1fr;
   }
 
+  .home-terminal,
   .quickstart-preview {
     min-height: 420px;
   }
@@ -527,6 +521,7 @@ map.draw();</code></pre>
     display: none;
   }
 
+  .home-terminal,
   .quickstart-preview {
     min-height: 360px;
   }
