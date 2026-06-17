@@ -4,6 +4,7 @@ import { ref, onMounted } from 'vue'
 const canvas = ref<HTMLCanvasElement | null>(null)
 const status = ref('Initializing…')
 const error = ref('')
+const activeTab = ref<'install' | 'example'>('install')
 
 const phaseLabels: Record<string, string> = {
   'querying-osm-server': 'Querying OSM server…',
@@ -70,21 +71,32 @@ onMounted(async () => {
 
       <div class="quickstart-grid">
         <div class="quickstart-card quickstart-card--terminal">
-          <div class="quickstart-card-header">
-            <h3 class="quickstart-card-title">Install and code</h3>
-            <a class="quickstart-card-link" href="/introduction">Open introduction →</a>
-          </div>
-
           <div class="home-terminal">
             <div class="home-terminal-bar">
               <div class="home-terminal-dots" aria-hidden="true">● ● ●</div>
-              <div class="home-terminal-tabs">
-                <span class="home-terminal-tab home-terminal-tab--active">install.sh</span>
-                <span class="home-terminal-tab">minimal-example.ts</span>
+              <div class="home-terminal-tabs" role="tablist" aria-label="Quick start code examples">
+                <button
+                  type="button"
+                  class="home-terminal-tab"
+                  :class="{ 'home-terminal-tab--active': activeTab === 'install' }"
+                  :aria-selected="activeTab === 'install'"
+                  @click="activeTab = 'install'"
+                >
+                  install.sh
+                </button>
+                <button
+                  type="button"
+                  class="home-terminal-tab"
+                  :class="{ 'home-terminal-tab--active': activeTab === 'example' }"
+                  :aria-selected="activeTab === 'example'"
+                  @click="activeTab = 'example'"
+                >
+                  minimal-example.ts
+                </button>
               </div>
             </div>
 
-            <div class="home-terminal-panel home-terminal-panel--install">
+            <div v-show="activeTab === 'install'" class="home-terminal-panel home-terminal-panel--install">
               <a class="home-terminal-link" href="https://www.npmjs.com/package/@urban-toolkit/autk" aria-label="Install @urban-toolkit/autk from npm">
                 <span class="home-terminal-prompt">$</span>
                 <span class="home-terminal-command" aria-hidden="true">npm install @urban-toolkit/autk</span>
@@ -92,9 +104,7 @@ onMounted(async () => {
               </a>
             </div>
 
-            <div class="home-terminal-separator"></div>
-
-            <div class="home-terminal-panel home-terminal-panel--example">
+            <div v-show="activeTab === 'example'" class="home-terminal-panel home-terminal-panel--example">
               <div class="home-terminal-file">minimal-example.ts</div>
               <pre class="home-terminal-code"><code><span class="token-keyword">import</span> { <span class="token-class">AutkDb</span>, <span class="token-class">AutkMap</span> } <span class="token-keyword">from</span> <span class="token-string">"@urban-toolkit/autk"</span>;
 
@@ -117,14 +127,14 @@ onMounted(async () => {
 map.draw();</code></pre>
             </div>
           </div>
+
+          <div class="quickstart-card-header quickstart-card-header--footer">
+            <h3 class="quickstart-card-title">Install and code</h3>
+            <a class="quickstart-card-link" href="/introduction">Open introduction →</a>
+          </div>
         </div>
 
         <div class="quickstart-card quickstart-card--preview">
-          <div class="quickstart-card-header">
-            <h3 class="quickstart-card-title">Live result</h3>
-            <a class="quickstart-card-link" href="/introduction#minimal-example">See full example →</a>
-          </div>
-
           <div class="quickstart-preview">
             <canvas ref="canvas" class="quickstart-preview-canvas" />
 
@@ -135,6 +145,11 @@ map.draw();</code></pre>
                 {{ status }}
               </div>
             </div>
+          </div>
+
+          <div class="quickstart-card-header quickstart-card-header--footer">
+            <h3 class="quickstart-card-title">Live result</h3>
+            <a class="quickstart-card-link" href="/introduction#minimal-example">See full example →</a>
           </div>
         </div>
       </div>
@@ -212,7 +227,10 @@ map.draw();</code></pre>
   justify-content: space-between;
   gap: 12px;
   padding: 18px 20px;
-  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.quickstart-card-header--footer {
+  border-top: 1px solid var(--vp-c-divider);
 }
 
 .quickstart-card-title {
@@ -270,10 +288,12 @@ map.draw();</code></pre>
   padding: 7px 12px;
   border: 1px solid transparent;
   border-radius: 999px;
+  background: transparent;
   color: var(--vp-c-text-2);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace;
   font-size: 0.85rem;
   line-height: 1;
+  cursor: pointer;
 }
 
 .home-terminal-tab--active {
@@ -292,11 +312,6 @@ map.draw();</code></pre>
   gap: 12px;
   color: inherit;
   text-decoration: none;
-}
-
-.home-terminal-separator {
-  height: 1px;
-  background: var(--vp-c-divider);
 }
 
 .home-terminal-file {

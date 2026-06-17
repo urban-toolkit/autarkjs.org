@@ -3,6 +3,19 @@
   max-width: 100% !important;
 }
 
+.VPHomeHero .container,
+.VPHomeHero .main {
+  text-align: center;
+}
+
+.VPHomeHero .main {
+  margin: 0 auto;
+}
+
+.VPHomeHero .actions {
+  justify-content: center;
+}
+
 .case-tags {
   display: flex;
   gap: 8px;
