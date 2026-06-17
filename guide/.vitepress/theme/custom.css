@@ -12,8 +12,15 @@
   margin: 0 auto;
 }
 
-.VPHomeHero .name {
-  display: block;
+.VPHomeHero .heading {
+  align-items: center;
+}
+
+.VPHomeHero .name,
+.VPHomeHero .text,
+.VPHomeHero .tagline {
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
 }
 
