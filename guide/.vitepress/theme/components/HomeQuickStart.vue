@@ -256,7 +256,6 @@ map.draw();</code></pre>
   display: flex;
   flex: 1;
   flex-direction: column;
-  height: 560px;
   background: var(--vp-code-block-bg);
 }
 
@@ -303,7 +302,7 @@ map.draw();</code></pre>
 }
 
 .home-terminal-panel {
-  flex: 1;
+  height: 560px;
   padding: 22px;
   overflow: auto;
 }
@@ -488,7 +487,7 @@ map.draw();</code></pre>
     grid-template-columns: 1fr;
   }
 
-  .home-terminal,
+  .home-terminal-panel,
   .quickstart-preview {
     height: 420px;
   }
@@ -523,7 +522,7 @@ map.draw();</code></pre>
     display: none;
   }
 
-  .home-terminal,
+  .home-terminal-panel,
   .quickstart-preview {
     height: 360px;
   }
