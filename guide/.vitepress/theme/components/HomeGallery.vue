@@ -3,6 +3,7 @@
     <div class="gallery-shell">
       <div class="gallery-header">
         <h2 class="section-title">Gallery</h2>
+        <div class="section-divider" aria-hidden="true"></div>
         <p class="section-description">
           Interactive examples showcasing the core capabilities of Autark.
         </p>
@@ -131,15 +132,25 @@
 
 .section-title {
   margin: 0;
-  font-size: clamp(2rem, 4vw, 2.9rem);
+  padding-top: 0;
+  border-top: 0;
+  color: var(--vp-c-brand-1);
+  font-size: clamp(1.75rem, 3vw, 2.35rem);
   line-height: 1.1;
   font-weight: 800;
   letter-spacing: -0.03em;
-  color: var(--vp-c-text-1);
+}
+
+.section-divider {
+  width: 96px;
+  height: 3px;
+  margin: 16px auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--vp-c-brand-2), var(--vp-c-brand-1));
 }
 
 .section-description {
-  margin: 14px auto 0;
+  margin: 16px auto 0;
   max-width: 720px;
   font-size: 1rem;
   line-height: 1.75;
@@ -156,27 +167,17 @@
   display: flex;
   flex-direction: column;
   min-height: 100%;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 20px;
+  border: 1px solid var(--vp-c-bg-soft);
+  border-radius: 12px;
   overflow: hidden;
   text-decoration: none;
   color: inherit;
   background: var(--vp-c-bg-soft);
-  transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    border-color 0.18s ease;
-  box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.04),
-    0 1px 4px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.25s, background-color 0.25s;
 }
 
 .gallery-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(59, 130, 246, 0.28);
-  box-shadow:
-    0 18px 36px rgba(0, 0, 0, 0.08),
-    0 6px 16px rgba(0, 0, 0, 0.06);
+  border-color: var(--vp-c-brand-1);
 }
 
 .gallery-image {

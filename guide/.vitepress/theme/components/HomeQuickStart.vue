@@ -1,41 +1,102 @@
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+
+const canvas = ref<HTMLCanvasElement | null>(null)
+const status = ref('Initializing…')
+const error = ref('')
+
+const phaseLabels: Record<string, string> = {
+  'querying-osm-server': 'Querying OSM server…',
+  'downloading-osm-data': 'Downloading OSM data…',
+  'querying-osm-boundaries': 'Querying boundaries…',
+  'downloading-boundaries': 'Downloading boundaries…',
+  'processing-osm-data': 'Processing data…',
+  'processing-boundaries': 'Processing boundaries…',
+}
+
+onMounted(async () => {
+  if (!canvas.value) return
+
+  try {
+    const { AutkDb } = await import('@urban-toolkit/autk-db')
+    const { AutkMap } = await import('@urban-toolkit/autk-map')
+
+    const db = new AutkDb()
+    status.value = 'Initializing database…'
+    await db.init()
+
+    await db.loadOsm({
+      pbfFileUrl: '/data/lower_mnt.osm.pbf',
+      queryArea: {
+        geocodeArea: 'New York',
+        areas: ['Battery Park City', 'Financial District'],
+      },
+      autoLoadLayers: {
+        layers: ['surface', 'parks', 'water', 'roads'],
+      },
+      onProgress: (phase: string) => {
+        status.value = phaseLabels[phase] ?? 'Loading…'
+      },
+    })
+
+    const map = new AutkMap(canvas.value)
+    status.value = 'Initializing map…'
+    await map.init()
+
+    for (const layerData of db.getLayersMetadata()) {
+      const geojson = await db.getLayer(layerData.name)
+      map.loadCollection(layerData.name, { collection: geojson, type: layerData.type })
+    }
+
+    map.draw()
+    status.value = ''
+  } catch (e: any) {
+    error.value = e?.message ?? String(e)
+    status.value = ''
+  }
+})
+</script>
+
 <template>
   <section class="home-quickstart vp-raw">
-    <div class="home-quickstart-shell">
-      <div class="home-quickstart-copy">
-        <p class="home-quickstart-kicker">Quick Start</p>
-        <h2 class="home-quickstart-title">Install Autark and render your first map.</h2>
-        <p class="home-quickstart-description">
-          Start with the full toolkit, then use the same minimal example from the introduction to load OpenStreetMap data and draw a 3D scene in the browser.
+    <div class="quickstart-shell">
+      <div class="quickstart-header">
+        <h2 class="section-title">Quick Start</h2>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p class="section-description">
+          Install the full toolkit, copy the minimal example, and see the result directly in the browser.
         </p>
-        <div class="home-quickstart-actions">
-          <a class="home-quickstart-link" href="/introduction">Open introduction</a>
-          <a class="home-quickstart-link home-quickstart-link--alt" href="https://www.npmjs.com/package/@urban-toolkit/autk">View package</a>
-        </div>
       </div>
 
-      <div class="home-quickstart-demo">
-        <div class="home-terminal">
-          <div class="home-terminal-bar">
-            <div class="home-terminal-dots" aria-hidden="true">● ● ●</div>
-            <div class="home-terminal-tabs" aria-label="Quick start tabs">
-              <span class="home-terminal-tab home-terminal-tab--active">install.sh</span>
-              <span class="home-terminal-tab">minimal-example.ts</span>
+      <div class="quickstart-grid">
+        <div class="quickstart-card quickstart-card--terminal">
+          <div class="quickstart-card-header">
+            <h3 class="quickstart-card-title">Install and code</h3>
+            <a class="quickstart-card-link" href="/introduction">Open introduction →</a>
+          </div>
+
+          <div class="home-terminal">
+            <div class="home-terminal-bar">
+              <div class="home-terminal-dots" aria-hidden="true">● ● ●</div>
+              <div class="home-terminal-tabs">
+                <span class="home-terminal-tab home-terminal-tab--active">install.sh</span>
+                <span class="home-terminal-tab">minimal-example.ts</span>
+              </div>
             </div>
-          </div>
 
-          <div class="home-terminal-panel home-terminal-panel--install">
-            <a class="home-terminal-link" href="https://www.npmjs.com/package/@urban-toolkit/autk" aria-label="Install @urban-toolkit/autk from npm">
-              <span class="home-terminal-prompt">$</span>
-              <span class="home-terminal-command" aria-hidden="true">npm install @urban-toolkit/autk</span>
-              <span class="sr-only">npm install @urban-toolkit/autk</span>
-            </a>
-          </div>
+            <div class="home-terminal-panel home-terminal-panel--install">
+              <a class="home-terminal-link" href="https://www.npmjs.com/package/@urban-toolkit/autk" aria-label="Install @urban-toolkit/autk from npm">
+                <span class="home-terminal-prompt">$</span>
+                <span class="home-terminal-command" aria-hidden="true">npm install @urban-toolkit/autk</span>
+                <span class="sr-only">npm install @urban-toolkit/autk</span>
+              </a>
+            </div>
 
-          <div class="home-terminal-separator"></div>
+            <div class="home-terminal-separator"></div>
 
-          <div class="home-terminal-panel home-terminal-panel--example">
-            <div class="home-terminal-file">minimal-example.ts</div>
-            <pre class="home-terminal-code"><code><span class="token-keyword">import</span> { <span class="token-class">AutkDb</span>, <span class="token-class">AutkMap</span> } <span class="token-keyword">from</span> <span class="token-string">"@urban-toolkit/autk"</span>;
+            <div class="home-terminal-panel home-terminal-panel--example">
+              <div class="home-terminal-file">minimal-example.ts</div>
+              <pre class="home-terminal-code"><code><span class="token-keyword">import</span> { <span class="token-class">AutkDb</span>, <span class="token-class">AutkMap</span> } <span class="token-keyword">from</span> <span class="token-string">"@urban-toolkit/autk"</span>;
 
 <span class="token-keyword">const</span> db = <span class="token-keyword">new</span> <span class="token-class">AutkDb</span>();
 <span class="token-keyword">await</span> db.init();
@@ -44,12 +105,36 @@
   pbfFileUrl: <span class="token-string">"/data/lower_mnt.osm.pbf"</span>,
   queryArea: {
     geocodeArea: <span class="token-string">"New York"</span>,
-    areas: [<span class="token-string">"Battery Park City"</span>, <span class="token-string">"Financial District"</span>]
-  }
+    areas: [<span class="token-string">"Battery Park City"</span>, <span class="token-string">"Financial District"</span>],
+  },
+  autoLoadLayers: {
+    layers: [<span class="token-string">"surface"</span>, <span class="token-string">"parks"</span>, <span class="token-string">"water"</span>, <span class="token-string">"roads"</span>],
+  },
 });
 
 <span class="token-keyword">const</span> map = <span class="token-keyword">new</span> <span class="token-class">AutkMap</span>(canvas);
-<span class="token-keyword">await</span> map.init();</code></pre>
+<span class="token-keyword">await</span> map.init();
+map.draw();</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="quickstart-card quickstart-card--preview">
+          <div class="quickstart-card-header">
+            <h3 class="quickstart-card-title">Live result</h3>
+            <a class="quickstart-card-link" href="/introduction#minimal-example">See full example →</a>
+          </div>
+
+          <div class="quickstart-preview">
+            <canvas ref="canvas" class="quickstart-preview-canvas" />
+
+            <div v-if="status || error" class="quickstart-preview-overlay">
+              <div v-if="error" class="quickstart-preview-error">{{ error }}</div>
+              <div v-else class="quickstart-preview-status">
+                <div class="quickstart-preview-spinner" />
+                {{ status }}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -59,91 +144,102 @@
 
 <style scoped>
 .home-quickstart {
-  padding: 16px 24px 28px;
+  padding: 64px 24px 24px;
 }
 
-.home-quickstart-shell {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 28px;
-  align-items: center;
-  max-width: 1152px;
+.quickstart-shell {
+  width: 100%;
   margin: 0 auto;
+  padding-top: 24px;
 }
 
-.home-quickstart-kicker {
-  margin: 0 0 10px;
-  color: var(--vp-c-brand-1);
-  font-size: 0.92rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.quickstart-header {
+  text-align: center;
+  margin-bottom: 36px;
 }
 
-.home-quickstart-title {
+.section-title {
   margin: 0;
-  color: var(--vp-c-text-1);
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  padding-top: 0;
+  border-top: 0;
+  color: var(--vp-c-brand-1);
+  font-size: clamp(1.75rem, 3vw, 2.35rem);
   line-height: 1.1;
   font-weight: 800;
   letter-spacing: -0.03em;
 }
 
-.home-quickstart-description {
-  margin: 16px 0 0;
-  max-width: 38rem;
-  color: var(--vp-c-text-2);
+.section-divider {
+  width: 96px;
+  height: 3px;
+  margin: 16px auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--vp-c-brand-2), var(--vp-c-brand-1));
+}
+
+.section-description {
+  margin: 16px auto 0;
+  max-width: 720px;
   font-size: 1rem;
   line-height: 1.75;
+  color: var(--vp-c-text-2);
 }
 
-.home-quickstart-actions {
+.quickstart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.quickstart-card {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 20px;
-}
-
-.home-quickstart-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 16px;
-  border: 1px solid var(--vp-c-brand-1);
-  border-radius: 999px;
-  background: var(--vp-c-brand-1);
-  color: var(--vp-c-bg) !important;
-  font-weight: 600;
-  text-decoration: none !important;
-  transition:
-    transform 0.18s ease,
-    opacity 0.18s ease,
-    border-color 0.18s ease;
-}
-
-.home-quickstart-link:hover {
-  transform: translateY(-1px);
-  opacity: 0.94;
-}
-
-.home-quickstart-link--alt {
-  border-color: var(--vp-c-divider);
+  flex-direction: column;
+  min-height: 100%;
+  border: 1px solid var(--vp-c-bg-soft);
+  border-radius: 12px;
+  overflow: hidden;
   background: var(--vp-c-bg-soft);
-  color: var(--vp-c-text-1) !important;
+  transition: border-color 0.25s, background-color 0.25s;
 }
 
-.home-quickstart-demo {
-  min-width: 0;
+.quickstart-card:hover {
+  border-color: var(--vp-c-brand-1);
+}
+
+.quickstart-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.quickstart-card-title {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+}
+
+.quickstart-card-link {
+  color: var(--vp-c-brand-1);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.quickstart-card-link:hover {
+  text-decoration: underline;
 }
 
 .home-terminal {
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 20px;
-  overflow: hidden;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   background: var(--vp-code-block-bg);
-  box-shadow:
-    0 14px 36px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .home-terminal-bar {
@@ -187,7 +283,6 @@
 }
 
 .home-terminal-panel {
-  min-height: 0;
   padding: 22px;
 }
 
@@ -280,6 +375,60 @@
   color: #ecc48d;
 }
 
+.quickstart-preview {
+  position: relative;
+  flex: 1;
+  min-height: 560px;
+  background: var(--vp-c-bg-alt);
+}
+
+.quickstart-preview-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.quickstart-preview-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.quickstart-preview-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--vp-c-text-1);
+  font-size: 0.9rem;
+  font-family: monospace;
+  background: color-mix(in srgb, var(--vp-c-bg) 82%, transparent);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+.quickstart-preview-spinner {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border: 2px solid color-mix(in srgb, var(--vp-c-text-2) 25%, transparent);
+  border-top-color: var(--vp-c-text-1);
+  border-radius: 50%;
+  animation: autk-spin 0.8s linear infinite;
+}
+
+.quickstart-preview-error {
+  color: var(--vp-c-danger-1);
+  font-family: monospace;
+  font-size: 0.85rem;
+  text-align: center;
+  max-width: 90%;
+  white-space: pre-wrap;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -307,6 +456,12 @@
   }
 }
 
+@keyframes autk-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .home-terminal-command {
     max-width: 32ch;
@@ -319,14 +474,23 @@
 }
 
 @media (max-width: 960px) {
-  .home-quickstart-shell {
+  .quickstart-grid {
     grid-template-columns: 1fr;
+  }
+
+  .quickstart-preview {
+    min-height: 420px;
   }
 }
 
 @media (max-width: 640px) {
   .home-quickstart {
-    padding: 12px 24px 20px;
+    padding: 64px 24px 16px;
+  }
+
+  .quickstart-card-header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .home-terminal-panel {
@@ -346,6 +510,10 @@
 
   .home-terminal-command::after {
     display: none;
+  }
+
+  .quickstart-preview {
+    min-height: 360px;
   }
 }
 </style>

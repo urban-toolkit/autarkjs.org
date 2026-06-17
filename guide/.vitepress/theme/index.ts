@@ -4,6 +4,7 @@ import './custom.css'
 import AutkMapExample from './components/AutkMapExample.vue'
 import HomeCaseStudies from './components/HomeCaseStudies.vue'
 import HomeGallery from './components/HomeGallery.vue'
+import HomeQuickStart from './components/HomeQuickStart.vue'
 import InstitutionsFooter from './components/InstitutionsFooter.vue'
 import ExamplePage from './components/ExamplePage.vue'
 import LiveCasePage from './components/LiveCasePage.vue'
@@ -23,6 +24,7 @@ export default {
   enhanceApp({ app }) {
     app.component('AutkMapExample', AutkMapExample)
     app.component('HomeGallery', HomeGallery)
+    app.component('HomeQuickStart', HomeQuickStart)
     app.component('HomeCaseStudies', HomeCaseStudies)
     app.component('ExamplePage', ExamplePage)
     app.component('LiveCasePage', LiveCasePage)
