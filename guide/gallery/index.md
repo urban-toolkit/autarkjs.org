@@ -18,3 +18,7 @@ Each example demonstrates how modules like **autk-db**, **autk-map**, **autk-plo
 - [Neighborhood Bars](/gallery/ex4)
 - [Computed Neighborhoods](/gallery/ex5)
 - [Points over Polygons](/gallery/ex6)
+- [Building Picker](/gallery/ex7)
+- [Area Scatter](/gallery/ex8)
+- [Neighborhood Histogram](/gallery/ex9)
+- [Road Event Timeline](/gallery/ex10)

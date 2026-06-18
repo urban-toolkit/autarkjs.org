@@ -106,10 +106,51 @@
       tags: [
         { label: 'autk-map', className: 'case-tag--map' },
       ],
+    },
+    {
+      href: '/gallery/ex7',
+      img: '/imgs/ex3.png',
+      title: 'Building Picker',
+      description: 'Pick 3D buildings, inspect their attributes, and adjust building opacity live.',
+      tags: [
+        { label: 'autk-db', className: 'case-tag--db' },
+        { label: 'autk-map', className: 'case-tag--map' },
+      ],
+    },
+    {
+      href: '/gallery/ex8',
+      img: '/imgs/ex4.png',
+      title: 'Area Scatter',
+      description: 'Brush a scatterplot of neighborhood metrics and highlight the matching map features.',
+      tags: [
+        { label: 'autk-map', className: 'case-tag--map' },
+        { label: 'autk-plot', className: 'case-tag--plot' },
+      ],
+    },
+    {
+      href: '/gallery/ex9',
+      img: '/imgs/ex5.png',
+      title: 'Neighborhood Histogram',
+      description: 'Bin neighborhood areas into a histogram and brush the distribution to filter the map.',
+      tags: [
+        { label: 'autk-map', className: 'case-tag--map' },
+        { label: 'autk-plot', className: 'case-tag--plot' },
+      ],
+    },
+    {
+      href: '/gallery/ex10',
+      img: '/imgs/ex2.png',
+      title: 'Road Event Timeline',
+      description: 'Join complaint events to roads and explore the results with a linked time chart.',
+      tags: [
+        { label: 'autk-db', className: 'case-tag--db' },
+        { label: 'autk-map', className: 'case-tag--map' },
+        { label: 'autk-plot', className: 'case-tag--plot' },
+      ],
     }
   ]
 
-  const featuredExamples = examples.slice(0, 6)
+  const featuredExamples = examples.slice(0, 10)
 
 </script>
 
