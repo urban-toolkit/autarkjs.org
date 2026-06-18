@@ -18,7 +18,6 @@ setStatus('Loading neighborhoods...')
 await db.loadGeojson({
   geojsonFileUrl: '/data/mnt_neighs.geojson',
   outputTableName: 'neighborhoods',
-  coordinateFormat: 'EPSG:3395',
 })
 
 let geojson = await db.getLayer('neighborhoods')
