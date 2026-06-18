@@ -7,10 +7,10 @@ const error = ref('')
 const activeTab = ref<'install' | 'example'>('install')
 
 const phaseLabels: Record<string, string> = {
-  'querying-osm-server': 'Scanning local PBF data…',
-  'downloading-osm-data': 'Reading OSM features from the local extract…',
-  'querying-osm-boundaries': 'Resolving requested area boundaries…',
-  'downloading-boundaries': 'Reading boundary geometry from the local extract…',
+  'querying-osm-server': 'Scanning PBF data…',
+  'downloading-osm-data': 'Reading OSM features…',
+  'querying-osm-boundaries': 'Resolving boundaries…',
+  'downloading-boundaries': 'Reading boundary geometry…',
   'processing-osm-data': 'Processing OSM features…',
   'processing-boundaries': 'Processing boundary geometry…',
 }
@@ -51,6 +51,8 @@ onMounted(async () => {
       map.loadCollection(layerData.name, { collection: geojson, type: layerData.type })
     }
 
+    map.camera.zoom(-3, 0.45, 0.45)
+    map.camera.update()
     map.draw()
     status.value = ''
   } catch (e: any) {
@@ -147,6 +149,12 @@ map.draw();</code></pre>
                 <div class="quickstart-preview-spinner" />
                 {{ status }}
               </div>
+            </div>
+
+            <div v-if="!status && !error" class="quickstart-preview-hints">
+              <span><strong>click & drag</strong> → pan</span>
+              <span><strong>wheel</strong> → zoom</span>
+              <span><strong>shift + click & drag</strong> → rotate</span>
             </div>
           </div>
 
@@ -442,6 +450,32 @@ map.draw();</code></pre>
   text-align: center;
   max-width: 90%;
   white-space: pre-wrap;
+}
+
+.quickstart-preview-hints {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 16px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  color: var(--vp-c-text-2);
+  background: color-mix(in srgb, var(--vp-c-bg) 78%, transparent);
+  border: 1px solid var(--vp-c-divider);
+  backdrop-filter: blur(4px);
+}
+
+.quickstart-preview-hints span {
+  white-space: nowrap;
+}
+
+.quickstart-preview-hints strong {
+  color: var(--vp-c-brand-1);
 }
 
 .sr-only {

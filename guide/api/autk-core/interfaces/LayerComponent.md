@@ -6,7 +6,7 @@
 
 # Interface: LayerComponent
 
-Defined in: [types-mesh.ts:37](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-core/src/types-mesh.ts#L37)
+Defined in: [types-mesh.ts:37](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/types-mesh.ts#L37)
 
 Per-feature counts for a triangulated mesh component.
 
@@ -19,7 +19,7 @@ and determine how many vertices and triangles belong to each component.
 
 > `optional` **featureId?**: `string` \| `number`
 
-Defined in: [types-mesh.ts:45](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-core/src/types-mesh.ts#L45)
+Defined in: [types-mesh.ts:45](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/types-mesh.ts#L45)
 
 Optional stable feature identifier copied from the source data.
 
@@ -29,7 +29,7 @@ Optional stable feature identifier copied from the source data.
 
 > **featureIndex**: `number`
 
-Defined in: [types-mesh.ts:43](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-core/src/types-mesh.ts#L43)
+Defined in: [types-mesh.ts:43](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/types-mesh.ts#L43)
 
 Index of the source feature represented by this component.
 
@@ -39,7 +39,7 @@ Index of the source feature represented by this component.
 
 > **nPoints**: `number`
 
-Defined in: [types-mesh.ts:39](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-core/src/types-mesh.ts#L39)
+Defined in: [types-mesh.ts:39](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/types-mesh.ts#L39)
 
 Number of vertices contributed by the component.
 
@@ -49,6 +49,6 @@ Number of vertices contributed by the component.
 
 > **nTriangles**: `number`
 
-Defined in: [types-mesh.ts:41](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-core/src/types-mesh.ts#L41)
+Defined in: [types-mesh.ts:41](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/types-mesh.ts#L41)
 
 Number of triangles contributed by the component.

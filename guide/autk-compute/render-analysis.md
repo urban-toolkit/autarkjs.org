@@ -113,7 +113,7 @@ The returned collection is the viewpoints collection enriched with values under 
 This example follows the existing gallery pattern. Roads act as viewpoints, buildings act as occluders, and the transparent background is counted as `sky`.
 
 <ClientOnly>
-  <CodePlayground :code="skyExposureCode" out="dom" />
+  <CodePlayground :code="skyExposureCode" out="dom" :auto-run="true" />
 </ClientOnly>
 
 ## Core inputs

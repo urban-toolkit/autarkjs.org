@@ -92,8 +92,6 @@ await db.loadOsm({
   }
 });
 
-MapStyle.setPredefinedStyle("apple");
-
 const map = new AutkMap(canvas);
 await map.init();
 
@@ -107,7 +105,7 @@ map.draw();
 </script>
 
 <ClientOnly>
-  <CodePlayground :code="introCode" out="dom" />
+  <CodePlayground :code="introCode" out="dom" :auto-run="true" />
 </ClientOnly>
 
 :::tip Make changes to the examples

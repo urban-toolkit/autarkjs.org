@@ -6,36 +6,17 @@
 
 # Interface: LoadCollectionParams
 
-Defined in: [autk-map/src/api.ts:42](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/api.ts#L42)
+Defined in: [autk-map/src/api.ts:56](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/api.ts#L56)
 
-Parameters for loading a feature collection as a map layer.
-
-When `type` is omitted, the map may infer a vector layer type from the
-collection's non-null geometries. Mixed-geometry collections require an
-explicit `type`. Pass `type: 'raster'` together with `property` to load a
-GeoTIFF-derived raster layer.
-
-For vector layers, `property` is optional and is used to initialize thematic
-mapping immediately after the layer is created. For raster layers, `property`
-is required so a numeric value can be extracted from each raster cell.
+Parameter types for the main `AutkMap` loading and update APIs.
 
 ## Properties
-
-### allowZeroHeightBuildings?
-
-> `optional` **allowZeroHeightBuildings?**: `boolean`
-
-Defined in: [autk-map/src/api.ts:62](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/api.ts#L62)
-
-Optional flag to treat building zero-height extrusions.
-
-***
 
 ### collection
 
 > **collection**: `FeatureCollection`\<`Geometry` \| `null`\>
 
-Defined in: [autk-map/src/api.ts:49](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/api.ts#L49)
+Defined in: [autk-map/src/api.ts:63](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/api.ts#L63)
 
 Source feature collection to load.
 
@@ -44,11 +25,21 @@ are resolved from raster cell payloads rather than vector geometry.
 
 ***
 
+### loadConfig?
+
+> `optional` **loadConfig?**: [`LoadCollectionConfig`](LoadCollectionConfig.md)
+
+Defined in: [autk-map/src/api.ts:75](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/api.ts#L75)
+
+Optional geometry-building configuration applied while loading.
+
+***
+
 ### property?
 
 > `optional` **property?**: `string`
 
-Defined in: [autk-map/src/api.ts:74](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/api.ts#L74)
+Defined in: [autk-map/src/api.ts:87](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/api.ts#L87)
 
 Property accessor used to derive layer values.
 
@@ -66,7 +57,7 @@ is required to populate the raster value texture.
 
 > `optional` **type?**: `LayerType` \| `null`
 
-Defined in: [autk-map/src/api.ts:57](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/api.ts#L57)
+Defined in: [autk-map/src/api.ts:71](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/api.ts#L71)
 
 Optional explicit layer type override.
 

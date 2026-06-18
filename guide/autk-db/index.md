@@ -79,7 +79,7 @@ The entry point of `autk-db` is the `AutkDb` class. To use it, you must create a
 
 
 <ClientOnly>
-  <CodePlayground :code="introCode" out="console" />
+  <CodePlayground :code="introCode" out="console" :auto-run="true" />
 </ClientOnly>
 
 
@@ -92,7 +92,7 @@ Most `autk-db` workflows follow a simple three-step pattern. First, you load one
 3. **Retrieve the result** back into JavaScript when needed.
 
 <ClientOnly>
-  <CodePlayground :code="workflowCode" out="console" />
+  <CodePlayground :code="workflowCode" out="console" :auto-run="true" />
 </ClientOnly>
 
 </div>

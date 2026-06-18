@@ -1,5 +1,5 @@
 ---
-title: Points over Polygons
+title: Layer Overlay
 aside: true
 outline: deep
 ---
@@ -30,7 +30,7 @@ clearStatus()
   <a class="case-tag case-tag--map" href="/autk-map/">autk-map</a>
 </div>
 
-# Points over Polygons
+# Layer Overlay
 
 Overlay projected point and polygon datasets in the same scene to show how standalone GeoJSON layers can be combined without any database preprocessing. This example highlights multi-layer rendering and mixed geometry visualization.
 

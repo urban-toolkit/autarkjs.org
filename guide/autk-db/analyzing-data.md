@@ -146,7 +146,7 @@ Once data is loaded into DuckDB, `autk-db` provides methods for spatial analysis
 3. [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby) — Optional aggregation rules applied to the join-side data.
 
 <ClientOnly>
-  <CodePlayground :code="spatialQueryCode" out="console" />
+  <CodePlayground :code="spatialQueryCode" out="console" :auto-run="true" />
 </ClientOnly>
 
 Regarding the output format, each matched feature is written directly under `properties.sjoin`, which can produce multiple rows for the same root feature. For example, if the matched features in the `noise` table contain properties such as `key` and `date`, those same properties are copied into `properties.sjoin`.
@@ -163,7 +163,7 @@ Regarding the output format, each matched feature is written directly under `pro
 Grouping summarizes the matched features instead of returning one join result per match. Aggregated values are written into `properties.sjoin.<aggregateFn>.<key>`.
 
 <ClientOnly>
-  <CodePlayground :code="groupQueryCode" out="console" />
+  <CodePlayground :code="groupQueryCode" out="console" :auto-run="true" />
 </ClientOnly>
 
 When [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby) is used, the matched features are aggregated before being written under `properties.sjoin.<aggregateFn>.<key>`. As a result, the spatial query returns a single summarized row for each root feature.
@@ -258,7 +258,7 @@ When `normalize: true` is set, the aggregated value is normalized between 0 and 
 [`buildHeatmap`](/api/autk-db/classes/AutkDb#buildheatmap) creates a grid over the current [workspace](./workspaces.md) bounds and aggregates values from a source table into each grid cell. 
 
 <ClientOnly>
-  <CodePlayground :code="heatmapCode" out="console" />
+  <CodePlayground :code="heatmapCode" out="console" :auto-run="true" />
 </ClientOnly>
 
 :::warning Workspace bounds
@@ -354,7 +354,7 @@ While [`spatialQuery`](/api/autk-db/classes/AutkDb#spatialquery) and [`buildHeat
 The [`output`](/api/autk-db/interfaces/RawQueryParams#output) parameter controls how the query result is returned. Use `type: 'RETURN_OBJECT'` when you want the selected rows back as plain JavaScript objects. Use `type: 'CREATE_TABLE'` when you want to register the query result as a new table inside the current workspace. In that case, you can also provide `tableName` and optional metadata such as `source` and `tableType`.
 
 <ClientOnly>
-  <CodePlayground :code="rawQueryCode" out="console" />
+  <CodePlayground :code="rawQueryCode" out="console" :auto-run="true" />
 </ClientOnly>
 
 #### List of `rawQuery` parameters

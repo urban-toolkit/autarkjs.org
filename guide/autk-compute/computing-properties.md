@@ -123,7 +123,7 @@ The returned collection is a copy of the input collection with computed values a
 This example computes a compactness-like score from neighborhood area and perimeter, then sends the result directly to the map as thematic data.
 
 <ClientOnly>
-  <CodePlayground :code="compactnessCode" out="dom" />
+  <CodePlayground :code="compactnessCode" out="dom" :auto-run="true" />
 </ClientOnly>
 
 ## Variable mapping
@@ -235,7 +235,7 @@ wgslBody: 'return (x * coeffs[0] + y * coeffs[1]) * multiplier;',
 This example follows the same pattern as the gallery OSM compute example. It loads roads, fixes missing or invalid lane counts, and colors the network by the computed value.
 
 <ClientOnly>
-  <CodePlayground :code="roadsCode" out="dom" />
+  <CodePlayground :code="roadsCode" out="dom" :auto-run="true" />
 </ClientOnly>
 
 ## Notes

@@ -6,7 +6,7 @@
 
 # Class: TriangulatorBuildingWithWindows
 
-Defined in: [triangulator-windows.ts:81](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-core/src/triangulator-windows.ts#L81)
+Defined in: [triangulator-windows.ts:81](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/triangulator-windows.ts#L81)
 
 Triangulates simplified building roofs and procedural facade windows.
 
@@ -42,7 +42,7 @@ const [geometry, components] = TriangulatorBuildingWithWindows.buildMesh(
 
 > `static` **buildMesh**(`geojson`, `origin`, `floors`): \[[`LayerGeometry`](../interfaces/LayerGeometry.md)[], [`LayerComponent`](../interfaces/LayerComponent.md)[]\]
 
-Defined in: [triangulator-windows.ts:94](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-core/src/triangulator-windows.ts#L94)
+Defined in: [triangulator-windows.ts:94](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/triangulator-windows.ts#L94)
 
 Builds renderable roof and window geometry for a building collection.
 
@@ -89,7 +89,7 @@ const [meshes, comps] = TriangulatorBuildingWithWindows.buildMesh(buildings, ori
 
 > `static` **buildWindowLayout**(`source`, `floors`): [`BuildingWindowLayoutResult`](../interfaces/BuildingWindowLayoutResult.md)
 
-Defined in: [triangulator-windows.ts:146](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-core/src/triangulator-windows.ts#L146)
+Defined in: [triangulator-windows.ts:146](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/triangulator-windows.ts#L146)
 
 Generates a procedural facade-window layout for a building collection.
 
@@ -129,7 +129,7 @@ const { collection, windows } = TriangulatorBuildingWithWindows.buildWindowLayou
 
 > `static` **resolveHeight**(`feature`): `number`
 
-Defined in: [triangulator-windows.ts:236](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-core/src/triangulator-windows.ts#L236)
+Defined in: [triangulator-windows.ts:236](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/triangulator-windows.ts#L236)
 
 Resolves an effective building height from feature and part metadata.
 

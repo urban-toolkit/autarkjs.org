@@ -8,7 +8,7 @@
 
 > **reduceBuckets**(`options`): [`ReducedBucket`](../type-aliases/ReducedBucket.md)[]
 
-Defined in: [transforms/kernel.ts:39](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/transforms/kernel.ts#L39)
+Defined in: [transforms/kernel.ts:39](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/transforms/kernel.ts#L39)
 
 Groups rows into keyed buckets and reduces each bucket to a single value.
 

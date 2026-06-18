@@ -1,5 +1,5 @@
 ---
-title: Neighborhood Explorer
+title: Geojson Layer
 aside: true
 outline: deep
 ---
@@ -27,7 +27,7 @@ clearStatus()
   <a class="case-tag case-tag--map" href="/autk-map/">autk-map</a>
 </div>
 
-# Neighborhood Explorer
+# Geojson Layer
 
 Render a projected GeoJSON layer directly in the browser with the smallest possible Autark map workflow. This example highlights standalone map initialization, local data loading, and immediate layer rendering.
 
@@ -36,6 +36,10 @@ Render a projected GeoJSON layer directly in the browser with the smallest possi
 <ClientOnly>
   <CodePlayground :code="code" out="dom" :auto-run="true" />
 </ClientOnly>
+
+:::tip Enable picking from the map menu
+Use the hamburger menu in the top-left corner of the map to open the layer controls, then click the pointer icon <svg viewBox="0 0 16 16" width="20" height="20" fill="#555" style="display:inline-block; vertical-align:middle; margin:0 4px;"><path d="M2 1l4.5 13 2.1-5.1L14 6.8z"></path></svg> next to the layer to enable **picking**. Once picking is active, you can **double click** map features to inspect and highlight them.
+:::
 
 ## Highlights
 

@@ -6,7 +6,7 @@
 
 # Class: AutkPlot
 
-Defined in: [plot.ts:41](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/plot.ts#L41)
+Defined in: [plot.ts:41](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/plot.ts#L41)
 
 Unified public entrypoint for autk-plot plot creation and interaction.
 
@@ -38,7 +38,7 @@ plot.events.on('click', ({ selection }) => {
 
 > **new AutkPlot**(`div`, `config`): `AutkPlot`
 
-Defined in: [plot.ts:56](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/plot.ts#L56)
+Defined in: [plot.ts:56](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/plot.ts#L56)
 
 Creates a plot wrapper for the requested plot type.
 
@@ -78,7 +78,7 @@ const plot = new AutkPlot(plotDiv, { type: 'scatterplot', collection, attributes
 
 > **get** **events**(): `EventEmitter`\<[`PlotEventRecord`](../type-aliases/PlotEventRecord.md)\>
 
-Defined in: [plot.ts:93](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/plot.ts#L93)
+Defined in: [plot.ts:93](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/plot.ts#L93)
 
 Gets the plot event dispatcher.
 
@@ -96,7 +96,7 @@ Typed event dispatcher exposed by the concrete plot.
 
 > **get** **instance**(): [`PlotBaseInteractive`](PlotBaseInteractive.md)
 
-Defined in: [plot.ts:77](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/plot.ts#L77)
+Defined in: [plot.ts:77](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/plot.ts#L77)
 
 Gets the underlying concrete plot instance.
 
@@ -117,7 +117,7 @@ Internal plot implementation instance.
 
 > **get** **selection**(): `number`[]
 
-Defined in: [plot.ts:85](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/plot.ts#L85)
+Defined in: [plot.ts:85](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/plot.ts#L85)
 
 Gets the active selection as source feature ids.
 
@@ -135,7 +135,7 @@ Selected source feature ids.
 
 > **get** **type**(): [`PlotType`](../type-aliases/PlotType.md)
 
-Defined in: [plot.ts:65](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/plot.ts#L65)
+Defined in: [plot.ts:65](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/plot.ts#L65)
 
 Gets the active plot type handled by this wrapper.
 
@@ -151,7 +151,7 @@ Active plot type discriminator.
 
 > **draw**(): `void`
 
-Defined in: [plot.ts:128](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/plot.ts#L128)
+Defined in: [plot.ts:128](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/plot.ts#L128)
 
 Triggers a synchronous redraw of the underlying plot implementation.
 
@@ -175,7 +175,7 @@ plot.draw();
 
 > **setSelection**(`selection`): `void`
 
-Defined in: [plot.ts:105](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/plot.ts#L105)
+Defined in: [plot.ts:105](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/plot.ts#L105)
 
 Applies a new selection to the plot as source feature ids.
 
@@ -207,7 +207,7 @@ plot.setSelection([0, 3, 7]);
 
 > **updateCollection**(`collection`): `void`
 
-Defined in: [plot.ts:117](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/plot.ts#L117)
+Defined in: [plot.ts:117](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/plot.ts#L117)
 
 Replaces the plot's data collection and redraws in place.
 

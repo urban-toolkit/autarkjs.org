@@ -133,7 +133,7 @@ Once data is loaded or analyzed, `autk-db` provides getter methods to move resul
 Use [`getTablesMetadata()`](/api/autk-db/classes/AutkDb#gettablesmetadata) to inspect the tables registered in the current [workspace](./workspaces.md). Each entry is table metadata, not the table rows themselves. This is useful when you want to see what is available before calling [`getTable`](#get-table-data), [`getLayer`](#get-vector-layers), [`getRaster`](#get-raster-tables), or [`getLayersMetadata`](#get-layer-metadata).
 
 <ClientOnly>
-  <CodePlayground :code="getTablesMetadataCode" out="console" />
+  <CodePlayground :code="getTablesMetadataCode" out="console" :auto-run="true" />
 </ClientOnly>
 
 The returned metadata includes:
@@ -158,7 +158,7 @@ When a table comes from OSM auto-loading, its `type` usually reflects one of the
 [`getLayersMetadata()`](/api/autk-db/classes/AutkDb#getlayersmetadata) returns only the vector tables that can be exported with [`getLayer`](#get-vector-layers). This is useful when a workspace contains many tables and you want to know which ones are ready for map rendering or layer export.
 
 <ClientOnly>
-  <CodePlayground :code="getLayersMetadataCode" out="console" />
+  <CodePlayground :code="getLayersMetadataCode" out="console" :auto-run="true" />
 </ClientOnly>
 
 :::info Layer versus table
@@ -170,7 +170,7 @@ The entries returned by [`getLayersMetadata()`](/api/autk-db/classes/AutkDb#getl
 [`getRastersMetadata()`](/api/autk-db/classes/AutkDb#getrastersmetadata) returns only the raster tables that can be exported with [`getRaster`](#get-raster-tables). This is useful when a workspace contains many tables and you want to know which raster datasets are ready for map rendering or raster export.
 
 <ClientOnly>
-  <CodePlayground :code="getRastersMetadataCode" out="console" />
+  <CodePlayground :code="getRastersMetadataCode" out="console" :auto-run="true" />
 </ClientOnly>
 
 :::info Layer versus raster table
@@ -182,7 +182,7 @@ The entries returned by [`getRastersMetadata()`](/api/autk-db/classes/AutkDb#get
 [`getTable`](/api/autk-db/classes/AutkDb#gettable) returns all rows from a registered table as plain JavaScript objects. It works with CSV, JSON, vector, and raster tables.
 
 <ClientOnly>
-  <CodePlayground :code="getTableRowsCode" out="console" />
+  <CodePlayground :code="getTableRowsCode" out="console" :auto-run="true" />
 </ClientOnly>
 
 :::tip Try changing the code above
@@ -213,7 +213,7 @@ Use the live code box to experiment with [`getTable`](/api/autk-db/classes/AutkD
 [`getLayer`](/api/autk-db/classes/AutkDb#getlayer) exports a renderable vector table as a GeoJSON `FeatureCollection`. Use [`getLayersMetadata`](#get-layer-metadata) to see which tables qualify.
 
 <ClientOnly>
-  <CodePlayground :code="getLayerCode" out="console" />
+  <CodePlayground :code="getLayerCode" out="console" :auto-run="true" />
 </ClientOnly>
 
 The returned `FeatureCollection` includes a `bbox` property. The bounding box is resolved from the workspace bounds when available, then from the layer geometry itself.
@@ -246,7 +246,7 @@ Calling [`getLayer`](/api/autk-db/classes/AutkDb#getlayer) on a non-vector table
 [`getRaster`](/api/autk-db/classes/AutkDb#getraster) exports a loaded GeoTIFF table as a packed raster `FeatureCollection`. Pass the result to `autk-map` with `loadRasterCollection()`.
 
 <ClientOnly>
-  <CodePlayground :code="getRasterCode" out="console" />
+  <CodePlayground :code="getRasterCode" out="console" :auto-run="true" />
 </ClientOnly>
 
 If you need metadata for raster tables before exporting them, use [`getRastersMetadata()`](/api/autk-db/classes/AutkDb#getrastersmetadata).
@@ -279,7 +279,7 @@ Modify the previous code sample to explore more of `autk-db`. For example, try l
 Bounding boxes are useful for camera framing, clipping rasters, and defining grid extents. [`getBoundingBoxFromLayer()`](/api/autk-db/classes/AutkDb#getboundingboxfromlayer) computes the bounding box from the geometry of a specific renderable table.
 
 <ClientOnly>
-  <CodePlayground :code="getLayerBboxCode" out="console" />
+  <CodePlayground :code="getLayerBboxCode" out="console" :auto-run="true" />
 </ClientOnly>
 
 The returned object contains `minLon`, `minLat`, `maxLon`, and `maxLat` properties. However, these values are not always expressed in latitude and longitude. They are returned in the coordinate system used by the current workspace.

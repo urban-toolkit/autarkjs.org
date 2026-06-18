@@ -149,7 +149,7 @@ Physical layers are specialized layer types designed for common map components s
 | `buildings` | Polygon | 3D buildings rendered with extrusion |
 
 <ClientOnly>
-  <CodePlayground :code="physicalLayersCode" out="dom" />
+  <CodePlayground :code="physicalLayersCode" out="dom" :auto-run="true" />
 </ClientOnly>
 
 :::tip Physical layers are not limited to OSM
@@ -167,7 +167,7 @@ Vector layers are the generic layer types used for custom GeoJSON data. They map
 | `polygons` | `Polygon` / `MultiPolygon` |
 
 <ClientOnly>
-  <CodePlayground :code="vectorLayersCode" out="dom" />
+  <CodePlayground :code="vectorLayersCode" out="dom" :auto-run="true" />
 </ClientOnly>
 
 :::tip Automatic inference
@@ -187,7 +187,7 @@ Raster layers represent gridded data such as temperature, density, or any other 
 Raster layers need a property path that tells the renderer which numeric value to use in each cell. The example below builds a heatmap raster from Manhattan noise events with `autk-db` and renders the result in `autk-map`. GeoTIFF files can also be loaded with `autk-db`. For now, `autk-map` renders raster collections returned by `autk-db`, including heatmaps created with `buildHeatmap()`.
 
 <ClientOnly>
-  <CodePlayground :code="rasterLayersCode" out="dom" />
+  <CodePlayground :code="rasterLayersCode" out="dom" :auto-run="true" />
 </ClientOnly>
 
 </div>

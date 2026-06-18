@@ -28,6 +28,19 @@
   justify-content: center;
 }
 
+.VPHomeHero .actions .VPButton {
+  min-width: 140px;
+  justify-content: center;
+}
+
+.VPNavBarMenuLink[href="javascript:void(0)"],
+.VPFlyout .link[href="javascript:void(0)"] {
+  color: var(--vp-c-text-3) !important;
+  opacity: 0.6;
+  pointer-events: none;
+  cursor: default;
+}
+
 .case-tags {
   display: flex;
   gap: 8px;
@@ -124,4 +137,9 @@
 
 .case-tag--compute {
   background: #10b981;
+}
+/* Justify body text across all guide pages */
+.vp-doc p,
+.vp-doc li {
+  text-align: justify;
 }

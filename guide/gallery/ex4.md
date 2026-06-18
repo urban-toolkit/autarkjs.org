@@ -1,5 +1,5 @@
 ---
-title: Neighborhood Bars
+title: Linked Views
 aside: true
 outline: deep
 ---
@@ -8,9 +8,6 @@ outline: deep
 const code = `
 import { AutkMap, MapEvent } from '@urban-toolkit/autk-map'
 import { AutkPlot, PlotEvent } from '@urban-toolkit/autk-plot'
-
-output('<div style="height: 320px;"><div id="plotBody" style="width: 100%; height: 100%;"></div></div>')
-const plotDiv = mount.querySelector('#plotBody')
 
 setStatus('Initializing map...')
 const map = new AutkMap(canvas)
@@ -23,7 +20,7 @@ map.updateRenderInfo('neighborhoods', { isPick: true })
 map.draw()
 
 setStatus('Building linked bar chart...')
-const plot = new AutkPlot(plotDiv, {
+const chart = new AutkPlot(plot, {
   type: 'barchart',
   collection: geojson,
   attributes: { axis: ['ntaname', 'shape_area'] },
@@ -31,16 +28,17 @@ const plot = new AutkPlot(plotDiv, {
     axis: ['Neighborhood', 'Area'],
     title: 'Neighborhood area',
   },
-  margins: { left: 60, right: 20, top: 50, bottom: 280 },
-  width: plotDiv.clientWidth || 900,
+  margins: { left: 44, right: 20, top: 50, bottom: 220 },
+  width: plot.clientWidth || 900,
+  height: 420,
   events: [PlotEvent.CLICK],
 })
 
 map.events.on(MapEvent.PICKING, ({ selection }) => {
-  plot.setSelection(selection)
+  chart.setSelection(selection)
 })
 
-plot.events.on(PlotEvent.CLICK, ({ selection }) => {
+chart.events.on(PlotEvent.CLICK, ({ selection }) => {
   map.setHighlightedIds('neighborhoods', selection)
 })
 
@@ -53,14 +51,14 @@ clearStatus()
   <a class="case-tag case-tag--plot" href="/autk-plot/">autk-plot</a>
 </div>
 
-# Neighborhood Bars
+# Linked Views
 
 Link a neighborhood map to an interactive bar chart so picks and chart clicks stay synchronized. This example highlights coordinated selection, shared data across views, and lightweight linked analysis in the browser.
 
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :code="code" out="dom" :auto-run="true" />
+  <CodePlayground :code="code" out="dom" :auto-run="true" :render-canvas="false" :mounts="[{ name: 'plot', height: 420 }]" />
 </ClientOnly>
 
 ## Highlights

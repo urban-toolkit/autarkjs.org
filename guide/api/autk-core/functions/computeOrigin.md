@@ -8,7 +8,7 @@
 
 > **computeOrigin**(`geojson`): \[`number`, `number`\]
 
-Defined in: [utils-geojson.ts:52](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-core/src/utils-geojson.ts#L52)
+Defined in: [utils-geojson.ts:52](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/utils-geojson.ts#L52)
 
 Computes a spatial origin from a feature collection's bounding-box center.
 

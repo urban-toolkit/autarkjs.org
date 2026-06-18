@@ -6,7 +6,7 @@
 
 # Interface: LayerBorderComponent
 
-Defined in: [types-mesh.ts:67](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-core/src/types-mesh.ts#L67)
+Defined in: [types-mesh.ts:67](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/types-mesh.ts#L67)
 
 Per-feature counts for a border or outline component.
 
@@ -19,7 +19,7 @@ feature.
 
 > **nLines**: `number`
 
-Defined in: [types-mesh.ts:71](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-core/src/types-mesh.ts#L71)
+Defined in: [types-mesh.ts:71](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/types-mesh.ts#L71)
 
 Number of lines contributed by the border component.
 
@@ -29,6 +29,6 @@ Number of lines contributed by the border component.
 
 > **nPoints**: `number`
 
-Defined in: [types-mesh.ts:69](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-core/src/types-mesh.ts#L69)
+Defined in: [types-mesh.ts:69](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/types-mesh.ts#L69)
 
 Number of vertices contributed by the border component.

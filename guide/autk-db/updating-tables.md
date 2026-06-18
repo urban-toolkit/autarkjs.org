@@ -130,7 +130,7 @@ Use the [`replace`](/api/autk-db/type-aliases/UpdateStrategy) strategy when the 
 For renderable vector tables, pass a GeoJSON `FeatureCollection` as [`data`](/api/autk-db/interfaces/UpdateTableParams#data).
 
 <ClientOnly>
-  <CodePlayground :code="replaceLayerCode" out="console" />
+  <CodePlayground :code="replaceLayerCode" out="console" :auto-run="true" />
 </ClientOnly>
 
 In this example, the `neighborhoods` table is first loaded from GeoJSON, then rewritten after adding a `highlighted` property to the features. Because the strategy is `replace`, the old table contents are discarded and the new `FeatureCollection` becomes the full table.
@@ -140,7 +140,7 @@ In this example, the `neighborhoods` table is first loaded from GeoJSON, then re
 For JSON or CSV-style tables, pass an array of plain objects.
 
 <ClientOnly>
-  <CodePlayground :code="replaceRowsCode" out="console" />
+  <CodePlayground :code="replaceRowsCode" out="console" :auto-run="true" />
 </ClientOnly>
 
 This pattern is useful when a non-spatial dataset is loaded from a file, edited in JavaScript, and then written back in one step. Because the whole table is recreated, rows can be added, removed, or reordered freely.
@@ -154,7 +154,7 @@ Use [`replace`](/api/autk-db/type-aliases/UpdateStrategy) when you already have 
 Use the [`update`](/api/autk-db/type-aliases/UpdateStrategy) strategy when you want to modify only records that already exist in the table. In this mode, [`idColumn`](/api/autk-db/interfaces/UpdateTableParams#idcolumn) is required so `autk-db` knows how to match incoming records with stored ones.
 
 <ClientOnly>
-  <CodePlayground :code="updateByIdCode" out="console" />
+  <CodePlayground :code="updateByIdCode" out="console" :auto-run="true" />
 </ClientOnly>
 
 In the example above, only the rows whose `key` values match existing records in the `noise` table are updated.
@@ -212,7 +212,7 @@ The [`update`](/api/autk-db/type-aliases/UpdateStrategy) strategy only modifies 
 [`removeLayer`](/api/autk-db/classes/AutkDb#removelayer) drops a table from the active workspace.
 
 <ClientOnly>
-  <CodePlayground :code="removeLayerCode" out="console" />
+  <CodePlayground :code="removeLayerCode" out="console" :auto-run="true" />
 </ClientOnly>
 
 After removal, the table no longer appears in [`getTablesMetadata()`](./retrieving-data.md#registered-tables) or [`getLayersMetadata()`](./retrieving-data.md#get-layer-metadata). This is useful when a table is no longer needed, when you want to free the workspace from intermediate results, or when a temporary layer should not remain available to later analysis steps.

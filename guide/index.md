@@ -10,8 +10,8 @@ hero:
       text: Get Started
       link: /introduction
     - theme: alt
-      text: View on GitHub
-      link: https://github.com/urban-toolkit/autark/
+      text: Gallery
+      link: /gallery/
 
 features:
   - title: autk-db
@@ -30,6 +30,6 @@ features:
 
 <HomeQuickStart />
 
-<HomeGallery />
+<!-- <HomeGallery /> -->
 
-<HomeCaseStudies />
+<!-- <HomeCaseStudies /> -->

@@ -8,7 +8,7 @@
 
 > `const` **DEFAULT\_WORKSPACE\_NAME**: `"autk"` = `'autk'`
 
-Defined in: [consts.ts:6](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-db/src/consts.ts#L6)
+Defined in: [consts.ts:6](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-db/src/consts.ts#L6)
 
 Default workspace name assigned when callers do not provide one explicitly.
 

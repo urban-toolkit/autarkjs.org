@@ -1,5 +1,5 @@
 ---
-title: Road Classes
+title: Categorical Data
 aside: true
 outline: deep
 ---
@@ -48,7 +48,7 @@ clearStatus()
   <a class="case-tag case-tag--map" href="/autk-map/">autk-map</a>
 </div>
 
-# Road Classes
+# Categorical Data
 
 Render pre-grouped road categories with a stable categorical palette. This example highlights thematic styling, user-defined class domains, and property-path driven color mapping.
 

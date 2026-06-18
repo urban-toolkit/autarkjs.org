@@ -8,7 +8,7 @@
 
 > **ReducedBucket** = `object`
 
-Defined in: [transforms/kernel.ts:14](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/transforms/kernel.ts#L14)
+Defined in: [transforms/kernel.ts:14](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/transforms/kernel.ts#L14)
 
 Output of a single aggregated bucket after reduction.
 
@@ -18,7 +18,7 @@ Output of a single aggregated bucket after reduction.
 
 > **autkIds**: `number`[]
 
-Defined in: [transforms/kernel.ts:22](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/transforms/kernel.ts#L22)
+Defined in: [transforms/kernel.ts:22](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/transforms/kernel.ts#L22)
 
 Merged source feature ids from all rows in this bucket, used for selection linking.
 
@@ -28,7 +28,7 @@ Merged source feature ids from all rows in this bucket, used for selection linki
 
 > **count**: `number`
 
-Defined in: [transforms/kernel.ts:20](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/transforms/kernel.ts#L20)
+Defined in: [transforms/kernel.ts:20](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/transforms/kernel.ts#L20)
 
 How many rows fell into this bucket.
 
@@ -38,7 +38,7 @@ How many rows fell into this bucket.
 
 > **key**: `string`
 
-Defined in: [transforms/kernel.ts:16](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/transforms/kernel.ts#L16)
+Defined in: [transforms/kernel.ts:16](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/transforms/kernel.ts#L16)
 
 The bucket identifier (e.g. `"2024-03"`, `"1k-2k"`).
 
@@ -48,6 +48,6 @@ The bucket identifier (e.g. `"2024-03"`, `"1k-2k"`).
 
 > **value**: `number`
 
-Defined in: [transforms/kernel.ts:18](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/transforms/kernel.ts#L18)
+Defined in: [transforms/kernel.ts:18](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/transforms/kernel.ts#L18)
 
 The reduced numeric result (count, sum, avg, min, or max).

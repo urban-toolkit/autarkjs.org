@@ -52,7 +52,7 @@
     {
       href: '/gallery/ex1',
       img: '/imgs/ex1.png',
-      title: 'Neighborhood Explorer',
+      title: 'Geojson Layer',
       description: 'Render a projected GeoJSON layer with the smallest possible Autark map workflow.',
       tags: [
         { label: 'autk-map', className: 'case-tag--map' },
@@ -61,7 +61,7 @@
     {
       href: '/gallery/ex2',
       img: '/imgs/ex2.png',
-      title: 'Road Classes',
+      title: 'Categorical Data',
       description: 'Render categorized roads with a stable categorical palette and explicit class ordering.',
       tags: [
         { label: 'autk-map', className: 'case-tag--map' },
@@ -70,7 +70,7 @@
     {
       href: '/gallery/ex3',
       img: '/imgs/ex3.png',
-      title: 'City Stack',
+      title: 'OSM Layers',
       description: 'Build a layered 3D scene from OpenStreetMap with surface, parks, water, roads, and buildings.',
       tags: [
         { label: 'autk-db', className: 'case-tag--db' },
@@ -80,7 +80,7 @@
     {
       href: '/gallery/ex4',
       img: '/imgs/ex4.png',
-      title: 'Neighborhood Bars',
+      title: 'Linked Views',
       description: 'Link a neighborhood map and bar chart for coordinated picking and highlighting.',
       tags: [
         { label: 'autk-map', className: 'case-tag--map' },
@@ -90,7 +90,7 @@
     {
       href: '/gallery/ex5',
       img: '/imgs/ex5.png',
-      title: 'Computed Neighborhoods',
+      title: 'GPU Computation',
       description: 'Compute a derived compactness score and render it as a thematic neighborhood map.',
       tags: [
         { label: 'autk-db', className: 'case-tag--db' },
@@ -101,7 +101,7 @@
     {
       href: '/gallery/ex6',
       img: '/imgs/ex6.png',
-      title: 'Points over Polygons',
+      title: 'Layer Overlay',
       description: 'Overlay projected point and polygon layers in one standalone map scene.',
       tags: [
         { label: 'autk-map', className: 'case-tag--map' },
@@ -109,8 +109,8 @@
     },
     {
       href: '/gallery/ex7',
-      img: '/imgs/ex3.png',
-      title: 'Building Picker',
+      img: '/imgs/ex7.png',
+      title: '3D Picking',
       description: 'Pick 3D buildings, inspect their attributes, and adjust building opacity live.',
       tags: [
         { label: 'autk-db', className: 'case-tag--db' },
@@ -119,8 +119,8 @@
     },
     {
       href: '/gallery/ex8',
-      img: '/imgs/ex4.png',
-      title: 'Area Scatter',
+      img: '/imgs/ex8.png',
+      title: 'Scatterplot',
       description: 'Brush a scatterplot of neighborhood metrics and highlight the matching map features.',
       tags: [
         { label: 'autk-map', className: 'case-tag--map' },
@@ -129,8 +129,8 @@
     },
     {
       href: '/gallery/ex9',
-      img: '/imgs/ex5.png',
-      title: 'Neighborhood Histogram',
+      img: '/imgs/ex9.png',
+      title: 'Bar chart',
       description: 'Bin neighborhood areas into a histogram and brush the distribution to filter the map.',
       tags: [
         { label: 'autk-map', className: 'case-tag--map' },
@@ -139,18 +139,62 @@
     },
     {
       href: '/gallery/ex10',
-      img: '/imgs/ex2.png',
-      title: 'Road Event Timeline',
+      img: '/imgs/ex10.png',
+      title: 'Spatial Join',
       description: 'Join complaint events to roads and explore the results with a linked time chart.',
       tags: [
         { label: 'autk-db', className: 'case-tag--db' },
         { label: 'autk-map', className: 'case-tag--map' },
         { label: 'autk-plot', className: 'case-tag--plot' },
       ],
-    }
+    },
+    {
+      href: '/gallery/ex11',
+      img: '/imgs/ex11.png',
+      title: 'Parallel Coords',
+      description: 'Compare multiple neighborhood attributes with linked parallel coordinates and map brushing.',
+      tags: [
+        { label: 'autk-map', className: 'case-tag--map' },
+        { label: 'autk-plot', className: 'case-tag--plot' },
+      ],
+    },
+    {
+      href: '/gallery/ex15',
+      img: '/imgs/ex15.png',
+      title: 'Sky Exposure',
+      description: 'Compute sky exposure over the road network and render it as a thematic street layer.',
+      tags: [
+        { label: 'autk-db', className: 'case-tag--db' },
+        { label: 'autk-map', className: 'case-tag--map' },
+        { label: 'autk-compute', className: 'case-tag--compute' },
+      ],
+    },
+    {
+      href: '/gallery/ex16',
+      img: '/imgs/ex16.png',
+      title: 'Visibility',
+      description: 'Pick a building and compute which surrounding buildings are visible from sampled viewpoints.',
+      tags: [
+        { label: 'autk-db', className: 'case-tag--db' },
+        { label: 'autk-map', className: 'case-tag--map' },
+        { label: 'autk-compute', className: 'case-tag--compute' },
+      ],
+    },
+    {
+      href: '/gallery/ex17',
+      img: '/imgs/ex17.png',
+      title: 'View Score',
+      description: 'Render selected-building view metrics in 3D and compare window-level values in linked parallel coordinates.',
+      tags: [
+        { label: 'autk-db', className: 'case-tag--db' },
+        { label: 'autk-map', className: 'case-tag--map' },
+        { label: 'autk-compute', className: 'case-tag--compute' },
+        { label: 'autk-plot', className: 'case-tag--plot' },
+      ],
+    },
   ]
 
-  const featuredExamples = examples.slice(0, 10)
+  const featuredExamples = examples.slice(0, 14)
 
 </script>
 

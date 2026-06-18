@@ -104,7 +104,7 @@ All examples below use projected Mercator data already prepared for the docs sit
 Enable picking on a layer with `isPick` and subscribe to `MapEvent.PICKING` through `map.events.on()`. The handler receives the picking payload for the current frame. Click on a feature to see the payload appear in the console.
 
 <ClientOnly>
-  <CodePlayground :code="pickingCode" out="both" />
+  <CodePlayground :code="pickingCode" out="both" :auto-run="true" />
 </ClientOnly>
 
 | Field | Description |
@@ -121,7 +121,7 @@ Picking works on the rendered geometry. For 3D buildings, picking hits the build
 Besides pointer picking, `autk-map` lets you control the visible selection directly. This is the main hook for cross-view coordination: a chart, a filter, or any external state can push which components should stand out or be hidden.
 
 <ClientOnly>
-  <CodePlayground :code="highlightCode" out="both" />
+  <CodePlayground :code="highlightCode" out="both" :auto-run="true" />
 </ClientOnly>
 
 - `setHighlightedIds()` emphasizes specific components while keeping them visible.
@@ -133,7 +133,7 @@ Besides pointer picking, `autk-map` lets you control the visible selection direc
 For layer-level visibility, use `updateRenderInfo()` with `isSkip`. To fully detach a layer from the map, call `removeLayer()`. The latter also frees its GPU resources.
 
 <ClientOnly>
-  <CodePlayground :code="visibilityCode" out="dom" />
+  <CodePlayground :code="visibilityCode" out="dom" :auto-run="true" />
 </ClientOnly>
 
 </div>

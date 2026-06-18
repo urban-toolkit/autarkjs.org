@@ -220,7 +220,7 @@ In `autk-map`, the usual workflow is:
 Categorical palettes assign one color per class. Use them for class labels such as road types. In practice, it helps to first fold the raw values into a small, ordered set of groups so the palette domain stays stable.
 
 <ClientOnly>
-  <CodePlayground :code="categoricalCode" out="dom" />
+  <CodePlayground :code="categoricalCode" out="dom" :auto-run="true" />
 </ClientOnly>
 
 The `USER` domain lists the exact classes to encode, in the order they should appear in the legend. Anything outside the list falls back to the last color.
@@ -230,7 +230,7 @@ The `USER` domain lists the exact classes to encode, in the order they should ap
 Diverging palettes suit signed or centered quantities, or any attribute where a meaningful midpoint separates two regimes. The `PERCENTILE` domain trims outliers so most of the distribution maps to a clear range of colors.
 
 <ClientOnly>
-  <CodePlayground :code="divergingCode" out="dom" />
+  <CodePlayground :code="divergingCode" out="dom" :auto-run="true" />
 </ClientOnly>
 
 ## Spatial joins
@@ -240,13 +240,13 @@ Spatial joins attach an aggregate from a second table to each feature of a base 
 The example below joins the Manhattan noise event table to OSM buildings in the Battery Park City / Financial District area, counting events within 1000 m of each building. The result is stored as a new property path `properties.sjoin.count.noise` that `autk-map` can read directly.
 
 <ClientOnly>
-  <CodePlayground :code="spatialJoinBuildingsCode" out="dom" />
+  <CodePlayground :code="spatialJoinBuildingsCode" out="dom" :auto-run="true" />
 </ClientOnly>
 
 The same pattern works for linear features. The next example joins the same noise table to OSM roads in the same area, again using a 1000 m buffer.
 
 <ClientOnly>
-  <CodePlayground :code="spatialJoinRoadsCode" out="dom" />
+  <CodePlayground :code="spatialJoinRoadsCode" out="dom" :auto-run="true" />
 </ClientOnly>
 
 :::tip Data alignment

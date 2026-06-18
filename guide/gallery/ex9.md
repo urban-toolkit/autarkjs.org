@@ -1,5 +1,5 @@
 ---
-title: Neighborhood Histogram
+title: Bar chart
 aside: true
 outline: deep
 ---
@@ -8,9 +8,6 @@ outline: deep
 const code = `
 import { AutkMap, MapEvent } from '@urban-toolkit/autk-map'
 import { AutkPlot, PlotEvent } from '@urban-toolkit/autk-plot'
-
-output('<div style="height: 340px;"><div id="plotBody" style="width: 100%; height: 100%;"></div></div>')
-const plotDiv = mount.querySelector('#plotBody')
 
 setStatus('Loading neighborhood dataset...')
 const geojson = await fetch('/data/mnt_neighs_proj.geojson').then((res) => res.json())
@@ -23,7 +20,7 @@ map.updateRenderInfo('neighborhoods', { isPick: true })
 map.draw()
 
 setStatus('Building histogram...')
-const plot = new AutkPlot(plotDiv, {
+const chart = new AutkPlot(plot, {
   type: 'barchart',
   collection: geojson,
   attributes: { axis: ['shape_area', '@transform'] },
@@ -32,17 +29,18 @@ const plot = new AutkPlot(plotDiv, {
     preset: 'binning-1d',
     options: { bins: 10 },
   },
-  margins: { left: 60, right: 20, top: 50, bottom: 80 },
-  width: plotDiv.clientWidth || 900,
+  margins: { left: 44, right: 20, top: 50, bottom: 56 },
+  width: plot.clientWidth || 900,
+  height: 420,
   events: [PlotEvent.BRUSH_X],
 })
 
-plot.events.on(PlotEvent.BRUSH_X, ({ selection }) => {
+chart.events.on(PlotEvent.BRUSH_X, ({ selection }) => {
   map.setHighlightedIds('neighborhoods', selection)
 })
 
 map.events.on(MapEvent.PICKING, ({ selection }) => {
-  plot.setSelection(selection)
+  chart.setSelection(selection)
 })
 
 clearStatus()
@@ -54,14 +52,14 @@ clearStatus()
   <a class="case-tag case-tag--plot" href="/autk-plot/">autk-plot</a>
 </div>
 
-# Neighborhood Histogram
+# Bar chart
 
 Bin neighborhood areas into a histogram and brush across the x-axis to filter highlighted map features. This example highlights distribution analysis, one-dimensional brushing, and linked filtering.
 
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :code="code" out="dom" :auto-run="true" />
+  <CodePlayground :code="code" out="dom" :auto-run="true" :render-canvas="false" :mounts="[{ name: 'plot', height: 420 }]" />
 </ClientOnly>
 
 ## Highlights

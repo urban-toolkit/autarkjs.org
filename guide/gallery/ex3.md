@@ -1,5 +1,5 @@
 ---
-title: City Stack
+title: OSM Layers
 aside: true
 outline: deep
 ---
@@ -46,7 +46,7 @@ clearStatus()
   <a class="case-tag case-tag--map" href="/autk-map/">autk-map</a>
 </div>
 
-# City Stack
+# OSM Layers
 
 Build a layered 3D scene from OpenStreetMap data and render it directly in the browser. This example highlights OSM ingestion, automatic layer extraction, and multi-layer urban rendering with surface, parks, water, roads, and buildings.
 

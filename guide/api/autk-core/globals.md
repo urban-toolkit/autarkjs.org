@@ -40,15 +40,18 @@
 
 ## Type Aliases
 
+- [CategoricalDomain](type-aliases/CategoricalDomain.md)
 - [ColorHEX](type-aliases/ColorHEX.md)
 - [ColorMapConfig](type-aliases/ColorMapConfig.md)
 - [ColorMapDomainSpec](type-aliases/ColorMapDomainSpec.md)
 - [ColorRGB](type-aliases/ColorRGB.md)
 - [ColorTEX](type-aliases/ColorTEX.md)
+- [DivergingDomain](type-aliases/DivergingDomain.md)
 - [EventListener](type-aliases/EventListener.md)
 - [LayerType](type-aliases/LayerType.md)
 - [RequiredTransferFunction](type-aliases/RequiredTransferFunction.md)
 - [ResolvedDomain](type-aliases/ResolvedDomain.md)
+- [SequentialDomain](type-aliases/SequentialDomain.md)
 - [TypedArray](type-aliases/TypedArray.md)
 - [TypedArrayConstructor](type-aliases/TypedArrayConstructor.md)
 

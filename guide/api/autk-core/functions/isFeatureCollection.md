@@ -8,7 +8,7 @@
 
 > **isFeatureCollection**(`data`): `data is FeatureCollection<Geometry, GeoJsonProperties>`
 
-Defined in: [utils-geojson.ts:31](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-core/src/utils-geojson.ts#L31)
+Defined in: [utils-geojson.ts:31](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/utils-geojson.ts#L31)
 
 Type guard that checks whether a value is a GeoJSON FeatureCollection.
 

@@ -1,0 +1,137 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": null,
+      "properties": {
+        "series": [
+          {
+            "timestamp": "2025-03-01",
+            "value": 50
+          },
+          {
+            "timestamp": "2025-03-02",
+            "value": 48
+          },
+          {
+            "timestamp": "2025-03-03",
+            "value": 80
+          },
+          {
+            "timestamp": "2025-03-04",
+            "value": 68
+          },
+          {
+            "timestamp": "2025-03-05",
+            "value": 64
+          },
+          {
+            "timestamp": "2025-03-06",
+            "value": 100
+          },
+          {
+            "timestamp": "2025-03-07",
+            "value": 94
+          },
+          {
+            "timestamp": "2025-03-08",
+            "value": 95
+          },
+          {
+            "timestamp": "2025-03-09",
+            "value": 42
+          },
+          {
+            "timestamp": "2025-03-10",
+            "value": 71
+          },
+          {
+            "timestamp": "2025-03-11",
+            "value": 89
+          },
+          {
+            "timestamp": "2025-03-12",
+            "value": 108
+          },
+          {
+            "timestamp": "2025-03-13",
+            "value": 103
+          },
+          {
+            "timestamp": "2025-03-14",
+            "value": 68
+          },
+          {
+            "timestamp": "2025-03-15",
+            "value": 85
+          },
+          {
+            "timestamp": "2025-03-16",
+            "value": 76
+          },
+          {
+            "timestamp": "2025-03-17",
+            "value": 122
+          },
+          {
+            "timestamp": "2025-03-18",
+            "value": 104
+          },
+          {
+            "timestamp": "2025-03-19",
+            "value": 97
+          },
+          {
+            "timestamp": "2025-03-20",
+            "value": 87
+          },
+          {
+            "timestamp": "2025-03-21",
+            "value": 79
+          },
+          {
+            "timestamp": "2025-03-22",
+            "value": 98
+          },
+          {
+            "timestamp": "2025-03-23",
+            "value": 52
+          },
+          {
+            "timestamp": "2025-03-24",
+            "value": 76
+          },
+          {
+            "timestamp": "2025-03-25",
+            "value": 110
+          },
+          {
+            "timestamp": "2025-03-26",
+            "value": 99
+          },
+          {
+            "timestamp": "2025-03-27",
+            "value": 83
+          },
+          {
+            "timestamp": "2025-03-28",
+            "value": 75
+          },
+          {
+            "timestamp": "2025-03-29",
+            "value": 85
+          },
+          {
+            "timestamp": "2025-03-30",
+            "value": 43
+          },
+          {
+            "timestamp": "2025-03-31",
+            "value": 87
+          }
+        ]
+      }
+    }
+  ]
+}

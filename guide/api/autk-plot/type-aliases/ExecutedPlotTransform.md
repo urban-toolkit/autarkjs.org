@@ -8,6 +8,6 @@
 
 > **ExecutedPlotTransform** = [`ExecutedBinning1dTransform`](ExecutedBinning1dTransform.md) \| [`ExecutedBinning2dTransform`](ExecutedBinning2dTransform.md) \| [`ExecutedSortTransform`](ExecutedSortTransform.md) \| [`ExecutedBinningEventsTransform`](ExecutedBinningEventsTransform.md) \| [`ExecutedReduceSeriesTransform`](ExecutedReduceSeriesTransform.md)
 
-Defined in: [transforms/index.ts:41](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-plot/src/transforms/index.ts#L41)
+Defined in: [transforms/index.ts:41](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/transforms/index.ts#L41)
 
 Discriminated union of all executed transform result types.

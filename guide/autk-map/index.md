@@ -64,7 +64,7 @@ The entry point of **autk-map** is the `AutkMap` class. To create a map, you mus
 :::
 
 <ClientOnly>
-  <CodePlayground :code="introCode" out="dom" />
+  <CodePlayground :code="introCode" out="dom" :auto-run="true" />
 </ClientOnly>
 
 :::warning WebGPU required

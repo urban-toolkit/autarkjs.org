@@ -6,17 +6,27 @@
 
 # Interface: LayerRenderInfo
 
-Defined in: [autk-map/src/types-layers.ts:43](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L43)
+Defined in: [autk-map/src/types-layers.ts:44](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/types-layers.ts#L44)
 
 Mutable render state associated with a layer.
 
 ## Properties
 
+### color?
+
+> `optional` **color?**: `ColorRGB`
+
+Defined in: [autk-map/src/types-layers.ts:46](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/types-layers.ts#L46)
+
+Optional fixed layer color used when thematic color mapping is disabled.
+
+***
+
 ### colormap
 
 > **colormap**: [`LayerColormap`](LayerColormap.md)
 
-Defined in: [autk-map/src/types-layers.ts:53](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L53)
+Defined in: [autk-map/src/types-layers.ts:58](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/types-layers.ts#L58)
 
 Current colormap configuration and derived runtime domain or label state.
 
@@ -26,7 +36,7 @@ Current colormap configuration and derived runtime domain or label state.
 
 > `optional` **isColorMap?**: `boolean`
 
-Defined in: [autk-map/src/types-layers.ts:47](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L47)
+Defined in: [autk-map/src/types-layers.ts:52](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/types-layers.ts#L52)
 
 Enables thematic color interpolation when `true`.
 
@@ -36,7 +46,7 @@ Enables thematic color interpolation when `true`.
 
 > `optional` **isPick?**: `boolean`
 
-Defined in: [autk-map/src/types-layers.ts:51](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L51)
+Defined in: [autk-map/src/types-layers.ts:56](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/types-layers.ts#L56)
 
 Enables picking for this layer when `true`.
 
@@ -46,7 +56,7 @@ Enables picking for this layer when `true`.
 
 > `optional` **isSkip?**: `boolean`
 
-Defined in: [autk-map/src/types-layers.ts:49](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L49)
+Defined in: [autk-map/src/types-layers.ts:54](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/types-layers.ts#L54)
 
 Skips rendering work for this layer when `true`.
 
@@ -56,7 +66,7 @@ Skips rendering work for this layer when `true`.
 
 > **opacity**: `number`
 
-Defined in: [autk-map/src/types-layers.ts:45](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L45)
+Defined in: [autk-map/src/types-layers.ts:50](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/types-layers.ts#L50)
 
 Layer opacity in the range `[0, 1]`.
 
@@ -66,6 +76,16 @@ Layer opacity in the range `[0, 1]`.
 
 > `optional` **pickedComps?**: `number`[]
 
-Defined in: [autk-map/src/types-layers.ts:55](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L55)
+Defined in: [autk-map/src/types-layers.ts:60](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/types-layers.ts#L60)
 
 Pending canvas-relative pick coordinates `[x, y]` in CSS pixels, if any.
+
+***
+
+### strokeColor?
+
+> `optional` **strokeColor?**: `ColorRGB`
+
+Defined in: [autk-map/src/types-layers.ts:48](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/types-layers.ts#L48)
+
+Optional fixed border/outline color used by layers with a border pass.

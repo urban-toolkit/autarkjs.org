@@ -1,5 +1,5 @@
 ---
-title: Computed Neighborhoods
+title: GPU Computation
 aside: true
 outline: deep
 ---
@@ -51,7 +51,7 @@ clearStatus()
   <a class="case-tag case-tag--compute" href="/autk-compute/">autk-compute</a>
 </div>
 
-# Computed Neighborhoods
+# GPU Computation
 
 Load neighborhood polygons through the browser database, compute a derived compactness score, and render the result as a thematic map. This example highlights the handoff between database loading, GPU-backed compute, and map styling.
 

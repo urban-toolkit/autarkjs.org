@@ -8,7 +8,7 @@
 
 > **isNumericLike**(`value`): `boolean`
 
-Defined in: [utils-data.ts:41](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-core/src/utils-data.ts#L41)
+Defined in: [utils-data.ts:41](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/utils-data.ts#L41)
 
 Returns `true` when the value can be treated as a finite numeric scalar.
 

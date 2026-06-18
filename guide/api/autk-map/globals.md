@@ -25,6 +25,7 @@
 - [LayerInfo](interfaces/LayerInfo.md)
 - [LayerRenderInfo](interfaces/LayerRenderInfo.md)
 - [LayerThematic](interfaces/LayerThematic.md)
+- [LoadCollectionConfig](interfaces/LoadCollectionConfig.md)
 - [LoadCollectionParams](interfaces/LoadCollectionParams.md)
 - [LoadMeshParams](interfaces/LoadMeshParams.md)
 - [MapEventData](interfaces/MapEventData.md)

@@ -141,7 +141,7 @@ In practice, that means you usually:
 `MapStyle` controls the default semantic colors used by the renderer. Built-in presets provide quick visual baselines for the same data. The example below loads a basic lower-Manhattan OSM scene and applies the `google` preset before map initialization.
 
 <ClientOnly>
-  <CodePlayground :code="mapStyleCode" out="dom" />
+  <CodePlayground :code="mapStyleCode" out="dom" :auto-run="true" />
 </ClientOnly>
 
 Built-in presets currently include:
@@ -161,7 +161,7 @@ Per-layer styling is controlled with `updateRenderInfo()`. This is the main entr
 The example below uses the same OSM scene and lowers only the building opacity so the rest of the base map stays unchanged.
 
 <ClientOnly>
-  <CodePlayground :code="opacityCode" out="dom" />
+  <CodePlayground :code="opacityCode" out="dom" :auto-run="true" />
 </ClientOnly>
 
 | Render flag | Description |
@@ -178,7 +178,7 @@ Thematic rendering separates the data values from the palette. `updateThematic()
 The example below follows the same neighborhood-based thematic setup used elsewhere in the docs, but focuses on the palette configuration itself.
 
 <ClientOnly>
-  <CodePlayground :code="colorMapCode" out="dom" />
+  <CodePlayground :code="colorMapCode" out="dom" :auto-run="true" />
 </ClientOnly>
 
 Sequential palettes are typically used for one-directional numeric values such as counts, density, or intensity. Diverging palettes are better when the values should be read around a midpoint or contrasted across two directions.

@@ -6,7 +6,7 @@
 
 # Interface: LayerThematic
 
-Defined in: [autk-map/src/types-layers.ts:85](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L85)
+Defined in: [autk-map/src/types-layers.ts:90](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/types-layers.ts#L90)
 
 Numeric thematic payload associated with a layer.
 
@@ -16,7 +16,7 @@ Numeric thematic payload associated with a layer.
 
 > **valid**: `number`
 
-Defined in: [autk-map/src/types-layers.ts:89](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L89)
+Defined in: [autk-map/src/types-layers.ts:94](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/types-layers.ts#L94)
 
 Numeric validity flag propagated with the thematic value.
 
@@ -26,6 +26,6 @@ Numeric validity flag propagated with the thematic value.
 
 > **value**: `number`
 
-Defined in: [autk-map/src/types-layers.ts:87](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/types-layers.ts#L87)
+Defined in: [autk-map/src/types-layers.ts:92](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/types-layers.ts#L92)
 
 Scalar value aligned with one rendered component or raster cell.

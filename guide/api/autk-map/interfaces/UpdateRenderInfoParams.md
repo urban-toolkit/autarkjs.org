@@ -6,7 +6,7 @@
 
 # Interface: UpdateRenderInfoParams
 
-Defined in: [autk-map/src/api.ts:179](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/api.ts#L179)
+Defined in: [autk-map/src/api.ts:192](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/api.ts#L192)
 
 Parameters for updating one or more render properties of a layer.
 
@@ -19,6 +19,6 @@ or other supported layer render flags without rebuilding the layer.
 
 > **renderInfo**: `Partial`\<[`LayerRenderInfo`](LayerRenderInfo.md)\>
 
-Defined in: [autk-map/src/api.ts:183](https://github.com/urban-toolkit/autark/blob/0ca848b459ec6c4e26521fd8e4539d654b74fd8f/autk-map/src/api.ts#L183)
+Defined in: [autk-map/src/api.ts:196](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/api.ts#L196)
 
 Partial render-state patch applied to the target layer.

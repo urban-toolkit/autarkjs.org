@@ -1,33 +1,17 @@
 ---
-title: Building Picker
+title: 3D Picking
 aside: true
 outline: deep
 ---
 
 <script setup>
-const code = `
+const mainCode = `
 import { AutkDb } from '@urban-toolkit/autk-db'
 import { AutkMap, MapEvent } from '@urban-toolkit/autk-map'
 
 const LAYER = 'table_osm_buildings'
 
-output(` + '"' + `<div style="display:grid; gap:12px;">
-  <div style="padding:12px; border:1px solid var(--vp-c-divider); border-radius:10px; background:var(--vp-c-bg-soft);">
-    <label for="opacity-control" style="display:flex; justify-content:space-between; gap:12px; align-items:center; font-weight:600;">
-      <span>Building opacity</span>
-      <span id="opacity-value">0.94</span>
-    </label>
-    <input id="opacity-control" type="range" min="0.15" max="1" step="0.01" value="0.94" style="width:100%; margin-top:8px;" />
-  </div>
-  <div style="padding:14px; border:1px solid var(--vp-c-divider); border-radius:10px; background:var(--vp-c-bg-soft); display:grid; gap:8px;">
-    <div id="info-title" style="font-weight:700; font-size:1rem;">Click a building</div>
-    <div><strong>OSM ID:</strong> <span id="info-osm-id">—</span></div>
-    <div><strong>Type:</strong> <span id="info-type">—</span></div>
-    <div><strong>Height:</strong> <span id="info-height">—</span></div>
-    <div><strong>Levels:</strong> <span id="info-levels">—</span></div>
-    <div><strong>Address:</strong> <span id="info-address">—</span></div>
-  </div>
-</div>` + '"' + `)
+output(buildInterfaceMarkup())
 
 const opacityInput = mount.querySelector('#opacity-control')
 const opacityValue = mount.querySelector('#opacity-value')
@@ -60,27 +44,6 @@ for (const layerData of db.getLayersMetadata()) {
   map.loadCollection(layerData.name, { collection: geojson, type: layerData.type })
 }
 
-const setPanel = (values) => {
-  const set = (id, text) => {
-    const el = mount.querySelector('#' + id)
-    if (el) el.textContent = text
-  }
-  set('info-title', values.title)
-  set('info-osm-id', values.osmId)
-  set('info-type', values.type)
-  set('info-height', values.height)
-  set('info-levels', values.levels)
-  set('info-address', values.address)
-}
-
-const getValue = (props, ...keys) => {
-  for (const key of keys) {
-    const value = props?.[key]
-    if (value !== undefined && value !== null && String(value).trim() !== '') return String(value)
-  }
-  return '—'
-}
-
 map.updateRenderInfo(LAYER, { isPick: true, opacity: 0.94 })
 
 opacityInput?.addEventListener('input', (event) => {
@@ -95,7 +58,7 @@ map.events.on(MapEvent.PICKING, ({ selection, layerId }) => {
 
   if (selection.length === 0) {
     map.setHighlightedIds(LAYER, [])
-    setPanel({ title: 'Click a building', osmId: '—', type: '—', height: '—', levels: '—', address: '—' })
+    setBuildingPanel(mount, { buildingId: '—', height: '—' })
     return
   }
 
@@ -104,22 +67,58 @@ map.events.on(MapEvent.PICKING, ({ selection, layerId }) => {
 
   const feature = buildings.features[pickedId]
   const props = feature?.properties ?? {}
-  const levels = getValue(props, 'building:levels', 'levels')
-  const rawHeight = getValue(props, 'height')
+  const levels = getPropertyValue(props, 'building:levels', 'levels')
+  const rawHeight = getPropertyValue(props, 'height')
   const height = rawHeight !== '—' ? rawHeight : levels !== '—' ? '~' + (Number(levels) * 3).toFixed(0) + ' m (est.)' : '—'
 
-  setPanel({
-    title: getValue(props, 'name', 'addr:housename') !== '—' ? getValue(props, 'name', 'addr:housename') : 'Building ' + pickedId,
-    osmId: getValue(props, 'id', 'osm_id', '@id'),
-    type: getValue(props, 'building'),
+  setBuildingPanel(mount, {
+    buildingId: getPropertyValue(props, 'id', 'osm_id', '@id') !== '—' ? getPropertyValue(props, 'id', 'osm_id', '@id') : String(pickedId),
     height,
-    levels,
-    address: [getValue(props, 'addr:housenumber'), getValue(props, 'addr:street')].filter((v) => v !== '—').join(' ') || '—',
   })
 })
 
 map.draw()
 clearStatus()
+`
+
+const uiCode = `
+function buildInterfaceMarkup() {
+  return [
+    '<div style="display:grid; gap:12px;">',
+    '  <div style="display:grid; gap:12px; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items:start;">',
+    '    <div style="padding:12px; border:1px solid var(--vp-c-divider); border-radius:10px; background:var(--vp-c-bg-soft);">',
+    '      <label for="opacity-control" style="display:flex; justify-content:space-between; gap:12px; align-items:center; font-weight:600;">',
+    '        <span>Building opacity</span>',
+    '        <span id="opacity-value">0.94</span>',
+    '      </label>',
+    '      <input id="opacity-control" type="range" min="0.15" max="1" step="0.01" value="0.94" style="width:100%; margin-top:8px;" />',
+    '    </div>',
+    '    <div style="padding:14px; border:1px solid var(--vp-c-divider); border-radius:10px; background:var(--vp-c-bg-soft); display:grid; gap:8px;">',
+    '      <div><strong>Building ID:</strong> <span id="info-building-id">—</span></div>',
+    '      <div><strong>Height:</strong> <span id="info-height">—</span></div>',
+    '    </div>',
+    '  </div>',
+    '</div>',
+  ].join('\\n')
+}
+
+function setBuildingPanel(root, values) {
+  const set = (id, text) => {
+    const el = root.querySelector('#' + id)
+    if (el) el.textContent = text
+  }
+
+  set('info-building-id', values.buildingId)
+  set('info-height', values.height)
+}
+
+function getPropertyValue(props, ...keys) {
+  for (const key of keys) {
+    const value = props?.[key]
+    if (value !== undefined && value !== null && String(value).trim() !== '') return String(value)
+  }
+  return '—'
+}
 `
 </script>
 
@@ -128,14 +127,17 @@ clearStatus()
   <a class="case-tag case-tag--map" href="/autk-map/">autk-map</a>
 </div>
 
-# Building Picker
+# 3D Picking
 
 Pick 3D buildings, inspect their key attributes, and adjust building opacity to compare the selected feature against the surrounding scene. This example highlights browser-side OSM loading, feature picking, lightweight UI controls, and render updates.
 
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :code="code" out="dom" :auto-run="true" />
+  <CodePlayground :files="[
+    { label: 'building-picker.ts', code: mainCode },
+    { label: 'ui.ts', code: uiCode },
+  ]" out="dom" :auto-run="true" :canvas-height="500" />
 </ClientOnly>
 
 ## Highlights

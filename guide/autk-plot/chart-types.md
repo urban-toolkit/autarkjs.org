@@ -1,117 +1,88 @@
-# Chart Types
+---
+title: Chart Types
+aside: true
+outline: deep
+---
 
-All chart types are created through the unified `AutkChart` constructor with a `type` discriminator.
+<script setup>
+const scatterCode = `
+import { AutkPlot } from '@urban-toolkit/autk-plot'
 
-## Bar Chart
+const geojson = await fetch('/data/mnt_neighs_proj.geojson').then((res) => res.json())
 
-Displays one categorical axis (X) and one numeric axis (Y). Supports click selection.
-
-```typescript
-import { AutkChart } from 'autk-plot';
-
-const chart = new AutkChart(document.querySelector('#chart') as HTMLElement, {
-  type: 'barchart',
-  collection: geojson,
-  attributes: { axis: ['neighborhood', 'population'] },
-  labels: {
-    axis: ['Neighborhood', 'Population'],
-    title: 'Population by Neighborhood',
-  },
-  width: 600,
-  height: 400,
-});
-```
-
-`axis[0]` is the X (categorical), `axis[1]` is the Y (numeric). Values are read from `feature.properties`.
-
-## Scatter Plot
-
-Displays two numeric axes. Supports brush selection.
-
-```typescript
-import { AutkChart } from 'autk-plot';
-
-const chart = new AutkChart(document.querySelector('#chart') as HTMLElement, {
+const chart = new AutkPlot(plot, {
   type: 'scatterplot',
   collection: geojson,
-  attributes: { axis: ['area', 'height'] },
+  attributes: { axis: ['shape_leng', 'shape_area'] },
   labels: {
-    axis: ['Area', 'Height'],
-    title: 'Building Area vs Height',
+    axis: ['Perimeter', 'Area'],
+    title: 'Neighborhood area vs perimeter',
   },
-  width: 600,
-  height: 400,
-});
-```
+  width: plot.clientWidth || 900,
+  height: 420,
+  margins: { left: 64, right: 30, top: 50, bottom: 56 },
+})
+`
 
-## Parallel Coordinates
+const parallelCode = `
+import { AutkPlot } from '@urban-toolkit/autk-plot'
 
-Displays multiple numeric axes as parallel vertical lines. Features are drawn as polylines connecting their values across axes. Supports brush selection on individual axes.
+const geojson = await fetch('/data/mnt_neighs_proj.geojson').then((res) => res.json())
 
-```typescript
-import { AutkChart } from 'autk-plot';
-
-const chart = new AutkChart(document.querySelector('#chart') as HTMLElement, {
+const chart = new AutkPlot(plot, {
   type: 'parallel-coordinates',
   collection: geojson,
-  attributes: { axis: ['area', 'height', 'floors', 'year_built'] },
+  attributes: { axis: ['shape_area', 'shape_leng'] },
   labels: {
-    axis: ['Area', 'Height', 'Floors', 'Year Built'],
-    title: 'Building Attributes',
+    axis: ['Area', 'Perimeter'],
+    title: 'Neighborhood metrics',
   },
-  width: 800,
-  height: 400,
-});
-```
+  width: plot.clientWidth || 900,
+  height: 420,
+  margins: { left: 60, right: 40, top: 50, bottom: 40 },
+})
+`
+</script>
 
-`axis` lists all the property keys to display as parallel axes. Each key must be numeric.
+# Chart Types
 
-## Line Chart
+`AutkPlot` supports six chart types through a single `type` discriminator. This page shows the two types that work directly on the input GeoJSON without a transform. The remaining types are most useful with a pre-render transform and are covered in [Transformations](./transformations).
 
-Displays a time series or sequential data.
+## Scatter plot
 
-```typescript
-import { AutkChart } from 'autk-plot';
+A scatter plot maps two numeric properties to the X and Y axes. It is ideal for exploring correlations and supports rectangular brush selection.
 
-const chart = new AutkChart(document.querySelector('#chart') as HTMLElement, {
-  type: 'linechart',
-  collection: geojson,
-  attributes: { axis: ['year', 'temperature'] },
-  labels: {
-    axis: ['Year', 'Temperature (°C)'],
-    title: 'Temperature Over Time',
-  },
-  width: 600,
-  height: 300,
-});
-```
+- Both `attributes.axis[0]` and `attributes.axis[1]` must be numeric.
+- Emits `PlotEvent.BRUSH` when the user drags a selection rectangle.
 
-## Table
+<ClientOnly>
+  <CodePlayground :code="scatterCode" out="dom" :auto-run="true" :render-canvas="false" :mounts="[{ name: 'plot', height: 420 }]" />
+</ClientOnly>
 
-Displays data as a scrollable table.
+## Parallel coordinates
 
-```typescript
-const chart = new AutkChart(div, {
-  type: 'table',
-  collection: geojson,
-  attributes: { axis: ['name', 'area', 'population'] },
-  labels: { axis: ['Name', 'Area', 'Population'], title: 'Neighborhoods' },
-  width: 800,
-});
-```
+Parallel coordinates show multiple numeric attributes at once. Each feature is drawn as a polyline that crosses every vertical axis at its value.
 
-## Heat Matrix
+- `attributes.axis` is an array of numeric property names.
+- Each axis can be brushed independently on the Y axis.
+- Emits `PlotEvent.BRUSH_Y`.
 
-Displays a 2D binning heatmap.
+<ClientOnly>
+  <CodePlayground :code="parallelCode" out="dom" :auto-run="true" :render-canvas="false" :mounts="[{ name: 'plot', height: 420 }]" />
+</ClientOnly>
 
-```typescript
-const chart = new AutkChart(div, {
-  type: 'heatmatrix',
-  collection: geojson,
-  attributes: { axis: ['x', 'y'], color: '@transform' },
-  transform: { preset: 'binning-2d' },
-  labels: { axis: ['X', 'Y'], title: 'Density' },
-  width: 600,
-  height: 400,
-});
-```
+## Charts that use transforms
+
+The following chart types are usually paired with a transform. Live examples for each one are in the [Transformations](./transformations) page.
+
+| Chart | Typical transform | Use case |
+|---|---|---|
+| `barchart` | `sort`, `binning-1d` | Compare magnitudes or show a histogram. |
+| `linechart` | `reduce-series`, `binning-events` | Show aggregated time series. |
+| `table` | `sort` | Inspect and sort raw values. |
+| `heatmatrix` | `binning-2d` | Show 2D density. |
+
+## Next steps
+
+- [Transformations](./transformations) — bar charts, line charts, tables, and heat matrices with transforms.
+- [Interactivity](./interactivity) — click, brush, and programmatic selection.

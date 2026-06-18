@@ -32,6 +32,7 @@ console.log(isVectorTable({ source: 'geojson', name: 'roads', columns: [], type:
 - [CsvWktGeometryColumns](interfaces/CsvWktGeometryColumns.md)
 - [GeojsonTable](interfaces/GeojsonTable.md)
 - [GeotiffTable](interfaces/GeotiffTable.md)
+- [HeatmapGroupBy](interfaces/HeatmapGroupBy.md)
 - [JsonLatLngGeometryColumns](interfaces/JsonLatLngGeometryColumns.md)
 - [JsonTable](interfaces/JsonTable.md)
 - [JsonWktGeometryColumns](interfaces/JsonWktGeometryColumns.md)

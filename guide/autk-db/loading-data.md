@@ -120,7 +120,7 @@ To directly fetch from the public [Overpass API](https://overpass-api.de/) and l
 
 
 <ClientOnly>
-  <CodePlayground :code="fetchOsmCode" out="console" />
+  <CodePlayground :code="fetchOsmCode" out="console" :auto-run="true" />
 </ClientOnly>
 
 :::danger Overpass API limits
@@ -136,7 +136,7 @@ Instead of querying the Overpass API, you can load OSM data from a local or remo
 To load from a PBF file, provide the [`pbfFileUrl`](/api/autk-db/type-aliases/LoadOsmParams#pbffileurl) parameter to the `loadOsm` function. All other parameters must be defined as in the Overpass API use case.
 
 <ClientOnly>
-  <CodePlayground :code="loadPbfCode" out="console" />
+  <CodePlayground :code="loadPbfCode" out="console" :auto-run="true" />
 </ClientOnly>
 
 :::tip PBF loading times
@@ -239,7 +239,7 @@ If you plan to load OSM and additional layers in the same workspace, you **must 
 `loadGeojson` loads a GeoJSON `FeatureCollection` from a URL or an in-memory object and stores it as a named layer. The only required parameter is [`outputTableName`](/api/autk-db/interfaces/LoadGeojsonParams#outputtablename).
 
 <ClientOnly>
-  <CodePlayground :code="loadGeojsonCode" out="console" />
+  <CodePlayground :code="loadGeojsonCode" out="console" :auto-run="true" />
 </ClientOnly>
 
  By default, the input coordinates are expected to be in latitude/longitude, that is, it uses the `EPSG:4326` system. If the loaded GeoJSON uses a different coordinates system,its coodinate system must be provided using the [`coordinateFormat`](/api/autk-db/interfaces/LoadGeojsonParams#coordinateformat) attribute. 
@@ -301,7 +301,7 @@ If you plan to load OSM and additional layers in the same workspace, you **must 
 `loadGeoTiff` loads raster data from a URL or an `ArrayBuffer` and stores it as a raster table in DuckDB. The only required parameter is [`outputTableName`](/api/autk-db/interfaces/LoadGeoTiffParams#outputtablename). 
 
 <ClientOnly>
-  <CodePlayground :code="loadGeoTiffCode" out="console" />
+  <CodePlayground :code="loadGeoTiffCode" out="console" :auto-run="true" />
 </ClientOnly>
 
 By default, the input raster is expected to use `EPSG:4326`. If the GeoTIFF uses a different coordinate system, provide it through [`coordinateFormat`](/api/autk-db/interfaces/LoadGeoTiffParams#coordinateformat). For large rasters, reduce [`maxPixels`](/api/autk-db/interfaces/LoadGeoTiffParams#maxpixels) to avoid loading too many pixels into browser memory.
@@ -360,7 +360,7 @@ Modify the previous code sample to explore more of `autk-db`. For example, try s
 `loadCsv` loads tabular data from a CSV file or an in-memory matrix and stores it as a table in DuckDB. The only required parameter is [`outputTableName`](/api/autk-db/interfaces/LoadCsvParams#outputtablename). If the CSV contains spatial information, provide [`geometryColumns`](/api/autk-db/interfaces/LoadCsvParams#geometrycolumns) so `autk-db` can create geometries during import.
 
 <ClientOnly>
-  <CodePlayground :code="loadCsvCode" out="console" />
+  <CodePlayground :code="loadCsvCode" out="console" :auto-run="true" />
 </ClientOnly>
 
 By default, [`geometryColumns`](/api/autk-db/interfaces/LoadCsvParams#geometrycolumns): `true` expects `Latitude` and `Longitude` columns in `EPSG:4326`. For columns with different names or with [`WKT`](https://libgeos.org/specifications/wkt/) geometry, provide them using the [`geometryColumns`](/api/autk-db/interfaces/LoadCsvParams#geometrycolumns) object. For tab-separated files, set [`delimiter`](/api/autk-db/interfaces/LoadCsvParams#delimiter): `'\t'`.
