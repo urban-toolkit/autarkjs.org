@@ -29,10 +29,6 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run gallery:build
-
-      - run: npm run usecases:build
-
       - run: npm run build
 
       - uses: actions/upload-pages-artifact@v3

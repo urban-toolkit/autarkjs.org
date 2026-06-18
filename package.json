@@ -9,9 +9,7 @@
   "scripts": {
     "dev": "vitepress dev guide",
     "build": "vitepress build guide",
-    "preview": "vitepress preview guide",
-    "gallery:build": "tsc && vite build && mkdir -p guide/public/gallery/dist && mkdir -p guide/public/gallery/assets && cp -R dist-temp/gallery/* guide/public/gallery/dist/ && cp -R dist-temp/assets/* guide/public/gallery/assets/ && cp node_modules/@urban-toolkit/autk-db/dist/duckdb-browser-eh.worker.js guide/public/gallery/assets/ && cp node_modules/@urban-toolkit/autk-db/dist/duckdb-browser-mvp.worker.js guide/public/gallery/assets/ && cp node_modules/@urban-toolkit/autk-db/dist/duckdb-eh.wasm guide/public/gallery/assets/ && cp node_modules/@urban-toolkit/autk-db/dist/duckdb-mvp.wasm guide/public/gallery/assets/",
-    "usecases:build": "tsc && vite build && mkdir -p guide/public/usecases/urbane && mkdir -p guide/public/usecases/heat && mkdir -p guide/public/usecases/shadows && rm -rf guide/public/assets && cp dist-temp/usecases/urbane/main.html guide/public/usecases/urbane/main.html && cp dist-temp/usecases/heat/main.html guide/public/usecases/heat/main.html && cp dist-temp/usecases/shadows/main.html guide/public/usecases/shadows/main.html && cp dist-temp/usecases/urbane.js guide/public/usecases/urbane.js && cp dist-temp/usecases/heat.js guide/public/usecases/heat.js && cp dist-temp/usecases/shadows.js guide/public/usecases/shadows.js && cp -R dist-temp/assets guide/public/assets && cp node_modules/@urban-toolkit/autk-db/dist/duckdb-browser-eh.worker.js guide/public/assets/ && cp node_modules/@urban-toolkit/autk-db/dist/duckdb-browser-mvp.worker.js guide/public/assets/ && cp node_modules/@urban-toolkit/autk-db/dist/duckdb-eh.wasm guide/public/assets/ && cp node_modules/@urban-toolkit/autk-db/dist/duckdb-mvp.wasm guide/public/assets/"
+    "preview": "vitepress preview guide"
   },
   "repository": {
     "type": "git",

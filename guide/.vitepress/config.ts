@@ -57,9 +57,6 @@ gtag('config', 'G-P6EVSF42L8');`],
         ],
 
         sidebar: {
-            // remove sidebar apenas nos live case studies
-            '/usecases/live/': [],
-
             '/api/autk-db/': [{
                 text: 'autk-db API Reference',
                 items: [
