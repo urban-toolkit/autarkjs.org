@@ -257,6 +257,7 @@ map.draw();</code></pre>
   display: flex;
   flex: 1;
   flex-direction: column;
+  height: 560px;
   background: var(--vp-code-block-bg);
 }
 
@@ -303,7 +304,8 @@ map.draw();</code></pre>
 }
 
 .home-terminal-panel {
-  height: 560px;
+  flex: 1;
+  min-height: 0;
   padding: 22px;
   overflow: auto;
 }
@@ -488,7 +490,7 @@ map.draw();</code></pre>
     grid-template-columns: 1fr;
   }
 
-  .home-terminal-panel,
+  .home-terminal,
   .quickstart-preview {
     height: 420px;
   }
@@ -523,7 +525,7 @@ map.draw();</code></pre>
     display: none;
   }
 
-  .home-terminal-panel,
+  .home-terminal,
   .quickstart-preview {
     height: 360px;
   }
