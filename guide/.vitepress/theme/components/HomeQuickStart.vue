@@ -33,7 +33,7 @@ onMounted(async () => {
         areas: ['Battery Park City', 'Financial District'],
       },
       autoLoadLayers: {
-        layers: ['surface', 'parks', 'water', 'roads'],
+        layers: ['surface', 'parks', 'water', 'roads', 'buildings'],
       },
       onProgress: (phase: string) => {
         status.value = phaseLabels[phase] ?? 'Loading…'
@@ -117,7 +117,7 @@ onMounted(async () => {
     areas: [<span class="token-string">"Battery Park City"</span>, <span class="token-string">"Financial District"</span>],
   },
   autoLoadLayers: {
-    layers: [<span class="token-string">"surface"</span>, <span class="token-string">"parks"</span>, <span class="token-string">"water"</span>, <span class="token-string">"roads"</span>],
+    layers: [<span class="token-string">"surface"</span>, <span class="token-string">"parks"</span>, <span class="token-string">"water"</span>, <span class="token-string">"roads"</span>, <span class="token-string">"buildings"</span>],
   },
 });
 
@@ -163,6 +163,7 @@ map.draw();</code></pre>
 
 .quickstart-shell {
   width: 100%;
+  max-width: 1152px;
   margin: 0 auto;
   padding-top: 24px;
 }
