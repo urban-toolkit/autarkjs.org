@@ -170,6 +170,7 @@ map.draw();</code></pre>
 
 <style scoped>
 .home-quickstart {
+  --quickstart-panel-height: 560px;
   margin-left: var(--vp-offset, calc(50% - 50vw));
   margin-right: var(--vp-offset, calc(50% - 50vw));
   padding: 64px 24px 24px;
@@ -271,7 +272,7 @@ map.draw();</code></pre>
   display: flex;
   flex: 1;
   flex-direction: column;
-  min-height: 560px;
+  height: var(--quickstart-panel-height);
   background: var(--vp-code-block-bg);
 }
 
@@ -318,6 +319,8 @@ map.draw();</code></pre>
 }
 
 .home-terminal-panel {
+  flex: 1;
+  overflow: auto;
   padding: 22px;
 }
 
@@ -401,7 +404,7 @@ map.draw();</code></pre>
 .quickstart-preview {
   position: relative;
   flex: 1;
-  min-height: 560px;
+  height: var(--quickstart-panel-height);
   background: var(--vp-c-bg-alt);
 }
 
@@ -530,13 +533,12 @@ map.draw();</code></pre>
 }
 
 @media (max-width: 960px) {
-  .quickstart-grid {
-    grid-template-columns: 1fr;
+  .home-quickstart {
+    --quickstart-panel-height: 420px;
   }
 
-  .home-terminal,
-  .quickstart-preview {
-    min-height: 420px;
+  .quickstart-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -549,6 +551,7 @@ map.draw();</code></pre>
 
 @media (max-width: 640px) {
   .home-quickstart {
+    --quickstart-panel-height: 360px;
     padding: 64px 24px 16px;
   }
 
@@ -576,9 +579,5 @@ map.draw();</code></pre>
     display: none;
   }
 
-  .home-terminal,
-  .quickstart-preview {
-    min-height: 360px;
-  }
 }
 </style>
