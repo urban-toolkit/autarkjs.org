@@ -7,12 +7,12 @@ const error = ref('')
 const activeTab = ref<'install' | 'example'>('install')
 
 const phaseLabels: Record<string, string> = {
-  'querying-osm-server': 'Querying OSM server…',
-  'downloading-osm-data': 'Downloading OSM data…',
-  'querying-osm-boundaries': 'Querying boundaries…',
-  'downloading-boundaries': 'Downloading boundaries…',
-  'processing-osm-data': 'Processing data…',
-  'processing-boundaries': 'Processing boundaries…',
+  'querying-osm-server': 'Scanning local PBF data…',
+  'downloading-osm-data': 'Reading OSM features from the local extract…',
+  'querying-osm-boundaries': 'Resolving requested area boundaries…',
+  'downloading-boundaries': 'Reading boundary geometry from the local extract…',
+  'processing-osm-data': 'Processing OSM features…',
+  'processing-boundaries': 'Processing boundary geometry…',
 }
 
 onMounted(async () => {
