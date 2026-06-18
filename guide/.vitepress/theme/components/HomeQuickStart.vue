@@ -20,7 +20,7 @@ onMounted(async () => {
 
   try {
     const { AutkDb } = await import('@urban-toolkit/autk-db')
-    const { AutkMap } = await import('@urban-toolkit/autk-map')
+    const { AutkMap, MapStyle } = await import('@urban-toolkit/autk-map')
 
     const db = new AutkDb()
     status.value = 'Initializing database…'
@@ -39,6 +39,8 @@ onMounted(async () => {
         status.value = phaseLabels[phase] ?? 'Loading…'
       },
     })
+
+    MapStyle.setPredefinedStyle('apple')
 
     const map = new AutkMap(canvas.value)
     status.value = 'Initializing map…'
@@ -105,7 +107,7 @@ onMounted(async () => {
             </div>
 
             <div v-show="activeTab === 'example'" class="home-terminal-panel home-terminal-panel--example">
-              <pre class="home-terminal-code"><code><span class="token-keyword">import</span> { <span class="token-class">AutkDb</span>, <span class="token-class">AutkMap</span> } <span class="token-keyword">from</span> <span class="token-string">"@urban-toolkit/autk"</span>;
+              <pre class="home-terminal-code"><code><span class="token-keyword">import</span> { <span class="token-class">AutkDb</span>, <span class="token-class">AutkMap</span>, <span class="token-class">MapStyle</span> } <span class="token-keyword">from</span> <span class="token-string">"@urban-toolkit/autk"</span>;
 
 <span class="token-keyword">const</span> db = <span class="token-keyword">new</span> <span class="token-class">AutkDb</span>();
 <span class="token-keyword">await</span> db.init();
@@ -120,6 +122,8 @@ onMounted(async () => {
     layers: [<span class="token-string">"surface"</span>, <span class="token-string">"parks"</span>, <span class="token-string">"water"</span>, <span class="token-string">"roads"</span>, <span class="token-string">"buildings"</span>],
   },
 });
+
+<span class="token-class">MapStyle</span>.setPredefinedStyle(<span class="token-string">"apple"</span>);
 
 <span class="token-keyword">const</span> map = <span class="token-keyword">new</span> <span class="token-class">AutkMap</span>(canvas);
 <span class="token-keyword">await</span> map.init();
@@ -259,6 +263,7 @@ map.draw();</code></pre>
   display: flex;
   flex: 1;
   flex-direction: column;
+  min-height: 560px;
   background: var(--vp-code-block-bg);
 }
 
@@ -324,7 +329,7 @@ map.draw();</code></pre>
 
 .home-terminal-prompt {
   color: var(--vp-c-brand-1);
-  font-size: 0.98rem;
+  font-size: 0.92rem;
   font-weight: 700;
   line-height: 1.7;
 }
@@ -336,7 +341,7 @@ map.draw();</code></pre>
   overflow: hidden;
   white-space: nowrap;
   color: var(--vp-c-text-1);
-  font-size: 0.98rem;
+  font-size: 0.92rem;
   line-height: 1.7;
   animation: home-install-type 2.4s steps(32, end) 0.35s forwards;
 }
@@ -355,8 +360,8 @@ map.draw();</code></pre>
 .home-terminal-code {
   margin: 0;
   color: var(--vp-c-text-1);
-  font-size: 0.9rem;
-  line-height: 1.72;
+  font-size: 0.84rem;
+  line-height: 1.68;
   white-space: pre-wrap;
   word-break: break-word;
 }
@@ -495,6 +500,7 @@ map.draw();</code></pre>
     grid-template-columns: 1fr;
   }
 
+  .home-terminal,
   .quickstart-preview {
     min-height: 420px;
   }
@@ -536,6 +542,7 @@ map.draw();</code></pre>
     display: none;
   }
 
+  .home-terminal,
   .quickstart-preview {
     min-height: 360px;
   }
