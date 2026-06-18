@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
     head: [
+        ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
         ['script', { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-P6EVSF42L8' }],
         ['script', {}, `window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}

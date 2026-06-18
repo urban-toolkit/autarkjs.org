@@ -100,16 +100,17 @@ onMounted(async () => {
               </div>
             </div>
 
-            <div v-show="activeTab === 'install'" class="home-terminal-panel home-terminal-panel--install">
-              <a class="home-terminal-link" href="https://www.npmjs.com/package/@urban-toolkit/autk" aria-label="Install @urban-toolkit/autk from npm">
-                <span class="home-terminal-prompt">$</span>
-                <span class="home-terminal-command" aria-hidden="true">npm install @urban-toolkit/autk</span>
-                <span class="sr-only">npm install @urban-toolkit/autk</span>
-              </a>
-            </div>
+            <div class="home-terminal-body">
+              <div v-show="activeTab === 'install'" class="home-terminal-panel home-terminal-panel--install">
+                <a class="home-terminal-link" href="https://www.npmjs.com/package/@urban-toolkit/autk" aria-label="Install @urban-toolkit/autk from npm">
+                  <span class="home-terminal-prompt">$</span>
+                  <span class="home-terminal-command" aria-hidden="true">npm install @urban-toolkit/autk</span>
+                  <span class="sr-only">npm install @urban-toolkit/autk</span>
+                </a>
+              </div>
 
-            <div v-show="activeTab === 'example'" class="home-terminal-panel home-terminal-panel--example">
-              <pre class="home-terminal-code"><code><span class="token-keyword">import</span> { <span class="token-class">AutkDb</span>, <span class="token-class">AutkMap</span>, <span class="token-class">MapStyle</span> } <span class="token-keyword">from</span> <span class="token-string">"@urban-toolkit/autk"</span>;
+              <div v-show="activeTab === 'example'" class="home-terminal-panel home-terminal-panel--example">
+                <pre class="home-terminal-code"><code><span class="token-keyword">import</span> { <span class="token-class">AutkDb</span>, <span class="token-class">AutkMap</span>, <span class="token-class">MapStyle</span> } <span class="token-keyword">from</span> <span class="token-string">"@urban-toolkit/autk"</span>;
 
 <span class="token-keyword">const</span> db = <span class="token-keyword">new</span> <span class="token-class">AutkDb</span>();
 <span class="token-keyword">await</span> db.init();
@@ -130,6 +131,7 @@ onMounted(async () => {
 <span class="token-keyword">const</span> map = <span class="token-keyword">new</span> <span class="token-class">AutkMap</span>(canvas);
 <span class="token-keyword">await</span> map.init();
 map.draw();</code></pre>
+              </div>
             </div>
           </div>
 
@@ -170,7 +172,7 @@ map.draw();</code></pre>
 
 <style scoped>
 .home-quickstart {
-  --quickstart-panel-height: 560px;
+  --quickstart-card-height: 680px;
   margin-left: var(--vp-offset, calc(50% - 50vw));
   margin-right: var(--vp-offset, calc(50% - 50vw));
   padding: 64px 24px 24px;
@@ -224,7 +226,7 @@ map.draw();</code></pre>
 .quickstart-card {
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  height: var(--quickstart-card-height);
   border: 1px solid var(--vp-c-bg-soft);
   border-radius: 12px;
   overflow: hidden;
@@ -271,8 +273,8 @@ map.draw();</code></pre>
 .home-terminal {
   display: flex;
   flex: 1;
+  min-height: 0;
   flex-direction: column;
-  height: var(--quickstart-panel-height);
   background: var(--vp-code-block-bg);
 }
 
@@ -318,8 +320,15 @@ map.draw();</code></pre>
   color: var(--vp-c-text-1);
 }
 
-.home-terminal-panel {
+.home-terminal-body {
+  position: relative;
   flex: 1;
+  min-height: 0;
+}
+
+.home-terminal-panel {
+  position: absolute;
+  inset: 0;
   overflow: auto;
   padding: 22px;
 }
@@ -404,7 +413,7 @@ map.draw();</code></pre>
 .quickstart-preview {
   position: relative;
   flex: 1;
-  height: var(--quickstart-panel-height);
+  min-height: 0;
   background: var(--vp-c-bg-alt);
 }
 
@@ -534,7 +543,7 @@ map.draw();</code></pre>
 
 @media (max-width: 960px) {
   .home-quickstart {
-    --quickstart-panel-height: 420px;
+    --quickstart-card-height: 620px;
   }
 
   .quickstart-grid {
@@ -551,7 +560,7 @@ map.draw();</code></pre>
 
 @media (max-width: 640px) {
   .home-quickstart {
-    --quickstart-panel-height: 360px;
+    --quickstart-card-height: 560px;
     padding: 64px 24px 16px;
   }
 
