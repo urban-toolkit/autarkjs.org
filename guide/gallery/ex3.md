@@ -13,28 +13,27 @@ setStatus('Initializing spatial database...')
 const db = new AutkDb()
 await db.init()
 
-setStatus('Loading OpenStreetMap layers from a local PBF...')
+setStatus('Loading OpenStreetMap layers from the local PBF...')
 await db.loadOsm({
   pbfFileUrl: '/data/lower_mnt.osm.pbf',
   queryArea: {
     geocodeArea: 'New York',
-    areas: ['Battery Park City', 'Financial District'],
+    areas: ['Financial District']
   },
-  outputTableName: 'table_osm',
   autoLoadLayers: {
-    coordinateFormat: 'EPSG:3395',
-    layers: ['surface', 'parks', 'water', 'roads', 'buildings'],
-  },
+    layers: ['surface', 'parks', 'water', 'roads', 'buildings']
+  }
 })
 
-setStatus('Initializing 3D map...')
+setStatus('Initializing map...')
 const map = new AutkMap(canvas)
 await map.init()
 
-setStatus('Rendering layered urban scene...')
+setStatus('Rendering physical layers...')
 for (const layer of db.getLayersMetadata()) {
-  const geojson = await db.getLayer(layer.name)
-  map.loadCollection(layer.name, { collection: geojson, type: layer.type })
+  const { name, type } = layer
+  const collection = await db.getLayer(name)
+  map.loadCollection(name, { collection, type })
 }
 
 map.draw()
