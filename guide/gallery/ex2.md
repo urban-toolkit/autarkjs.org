@@ -11,10 +11,9 @@ import {
   ColorMapInterpolator
 } from '@urban-toolkit/autk-core'
 
-import { AutkMap, MapStyle } from '@urban-toolkit/autk-map'
+import { AutkMap } from '@urban-toolkit/autk-map'
 
 setStatus('Initializing map...')
-MapStyle.setPredefinedStyle('google')
 const map = new AutkMap(canvas)
 await map.init()
 
