@@ -7,7 +7,8 @@
     "example": "gallery"
   },
   "scripts": {
-    "postinstall": "node .scripts/fix-duckdb-sourcemap.cjs",
+    "postinstall": "node .scripts/fix-duckdb-sourcemap.cjs && node .scripts/sync-duckdb-assets.cjs",
+    "prebuild": "node .scripts/sync-duckdb-assets.cjs",
     "dev": "vitepress dev guide",
     "build": "vitepress build guide",
     "preview": "vitepress preview guide"
