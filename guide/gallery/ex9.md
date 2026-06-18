@@ -59,7 +59,7 @@ Bin neighborhood areas into a histogram and brush across the x-axis to filter hi
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :code="code" out="dom" :auto-run="true" :render-canvas="false" :mounts="[{ name: 'plot', height: 420 }]" />
+  <CodePlayground :code="code" out="dom" :auto-run="true" :mounts="[{ name: 'plot', height: 420 }]" />
 </ClientOnly>
 
 ## Highlights

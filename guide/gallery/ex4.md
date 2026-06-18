@@ -58,7 +58,7 @@ Link a neighborhood map to an interactive bar chart so picks and chart clicks st
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :code="code" out="dom" :auto-run="true" :render-canvas="false" :mounts="[{ name: 'plot', height: 420 }]" />
+  <CodePlayground :code="code" out="dom" :auto-run="true" :mounts="[{ name: 'plot', height: 420 }]" />
 </ClientOnly>
 
 ## Highlights

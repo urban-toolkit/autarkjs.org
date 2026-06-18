@@ -399,7 +399,6 @@ watch(isDark, () => {
         </div>
       </div>
 
-      <div v-if="out !== 'console' && hasDomOutput" class="code-playground__output-label">Output</div>
       <div ref="mount" class="code-playground__dom-output" :class="{ 'code-playground__dom-output--active': hasDomOutput }" />
       <div v-if="namedMounts.length > 0" class="code-playground__named-mounts">
         <div

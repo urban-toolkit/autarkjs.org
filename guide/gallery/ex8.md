@@ -55,7 +55,7 @@ Brush a scatterplot of neighborhood area and perimeter to highlight the matching
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :code="code" out="dom" :auto-run="true" :render-canvas="false" :mounts="[{ name: 'plot', height: 420 }]" />
+  <CodePlayground :code="code" out="dom" :auto-run="true" :mounts="[{ name: 'plot', height: 420 }]" />
 </ClientOnly>
 
 ## Highlights
