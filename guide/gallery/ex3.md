@@ -24,7 +24,6 @@ await db.loadOsm({
   autoLoadLayers: {
     coordinateFormat: 'EPSG:3395',
     layers: ['surface', 'parks', 'water', 'roads', 'buildings'],
-    dropOsmTable: true,
   },
 })
 
@@ -33,7 +32,7 @@ const map = new AutkMap(canvas)
 await map.init()
 
 setStatus('Rendering layered urban scene...')
-for (const layer of db.getLayerTables()) {
+for (const layer of db.getLayersMetadata()) {
   const geojson = await db.getLayer(layer.name)
   map.loadCollection(layer.name, { collection: geojson, type: layer.type })
 }

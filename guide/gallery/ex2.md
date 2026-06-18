@@ -14,7 +14,7 @@ const db = new AutkDb()
 await db.init()
 
 setStatus('Loading road data into the browser database...')
-await db.loadCustomLayer({
+await db.loadGeojson({
   geojsonFileUrl: '/data/mnt_roads.geojson',
   outputTableName: 'roads',
   coordinateFormat: 'EPSG:3395',
@@ -26,7 +26,7 @@ const map = new AutkMap(canvas)
 await map.init()
 
 setStatus('Adding database layers to the map...')
-for (const layer of db.getLayerTables()) {
+for (const layer of db.getLayersMetadata()) {
   const geojson = await db.getLayer(layer.name)
   map.loadCollection(layer.name, { collection: geojson, type: layer.type })
 }

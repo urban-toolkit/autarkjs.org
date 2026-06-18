@@ -15,7 +15,7 @@ const db = new AutkDb()
 await db.init()
 
 setStatus('Loading neighborhoods...')
-await db.loadCustomLayer({
+await db.loadGeojson({
   geojsonFileUrl: '/data/mnt_neighs.geojson',
   outputTableName: 'neighborhoods',
   coordinateFormat: 'EPSG:3395',
