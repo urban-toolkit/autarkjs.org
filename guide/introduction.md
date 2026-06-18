@@ -76,7 +76,7 @@ The **interactive playground** below loads OpenStreetMap data for the Financial 
 <script setup>
 const introCode = `
 import { AutkDb } from "@urban-toolkit/autk-db";
-import { AutkMap } from "@urban-toolkit/autk-map";
+import { AutkMap, MapStyle } from "@urban-toolkit/autk-map";
 
 const db = new AutkDb();
 await db.init();
@@ -91,6 +91,8 @@ await db.loadOsm({
     layers: ["surface", "parks", "water", "roads"],
   }
 });
+
+MapStyle.setPredefinedStyle("apple");
 
 const map = new AutkMap(canvas);
 await map.init();
