@@ -6,54 +6,51 @@ outline: deep
 
 <script setup>
 const code = `
-import { AutkDb } from '@urban-toolkit/autk-db'
-import { AutkMap, ColorMapInterpolator, MapStyle } from '@urban-toolkit/autk-map'
+import {
+  ColorMapDomainStrategy,
+  ColorMapInterpolator
+} from '@urban-toolkit/autk-core'
 
-setStatus('Initializing spatial database...')
-const db = new AutkDb()
-await db.init()
-
-setStatus('Loading road data into the browser database...')
-await db.loadGeojson({
-  geojsonFileUrl: '/data/mnt_roads.geojson',
-  outputTableName: 'roads',
-  coordinateFormat: 'EPSG:3395',
-})
+import { AutkMap } from '@urban-toolkit/autk-map'
 
 setStatus('Initializing map...')
-MapStyle.setPredefinedStyle('light')
 const map = new AutkMap(canvas)
 await map.init()
 
-setStatus('Adding database layers to the map...')
-for (const layer of db.getLayersMetadata()) {
-  const geojson = await db.getLayer(layer.name)
-  map.loadCollection(layer.name, { collection: geojson, type: layer.type })
-}
+setStatus('Loading categorized road data...')
+const collection = await fetch('/data/mnt_roads_categorized_proj.geojson')
+  .then((res) => res.json())
+map.loadCollection('roads', { collection })
 
-const roads = await db.getLayer('roads')
-for (const feature of roads.features) {
-  const highway = feature.properties?.highway
-  feature.properties.highway_class = ['primary', 'secondary'].includes(highway) ? highway : 'other'
-}
+setStatus('Applying categorical thematic colors...')
+map.updateColorMap('roads', {
+  colorMap: {
+    interpolator: ColorMapInterpolator.CAT_OBSERVABLE10,
+    domainSpec: {
+      type: ColorMapDomainStrategy.USER,
+      params: ['primary', 'secondary', 'other']
+    }
+  }
+})
 
-setStatus('Applying categorical styling...')
-map.updateColorMap('roads', { colorMap: { interpolator: ColorMapInterpolator.OBSERVABLE10 } })
-map.updateThematic('roads', { collection: roads, property: 'properties.highway_class' })
+map.updateThematic('roads', {
+  collection,
+  property: 'properties.compute.highwayGroup'
+})
 map.updateRenderInfo('roads', { isColorMap: true })
+
 map.draw()
 clearStatus()
 `
 </script>
 
 <div class="case-tags">
-  <a class="case-tag case-tag--db" href="/autk-db/">autk-db</a>
   <a class="case-tag case-tag--map" href="/autk-map/">autk-map</a>
 </div>
 
 # Road Classes
 
-Load a GeoJSON roads layer into the in-browser spatial database, pull it back out as a renderable layer, and style it by road class. This example highlights browser-side data loading, table-to-layer retrieval, and thematic coloring.
+Render pre-grouped road categories with a stable categorical palette. This example highlights thematic styling, user-defined class domains, and property-path driven color mapping.
 
 ## Live Playground
 
@@ -63,7 +60,7 @@ Load a GeoJSON roads layer into the in-browser spatial database, pull it back ou
 
 ## Highlights
 
-- in-browser spatial database initialization
-- GeoJSON import with projected coordinates
-- database-backed layer retrieval
-- categorical thematic styling with `ColorMapInterpolator`
+- standalone `AutkMap` initialization
+- categorical palette via `ColorMapInterpolator.CAT_OBSERVABLE10`
+- explicit class ordering with `ColorMapDomainStrategy.USER`
+- thematic rendering from `properties.compute.highwayGroup`

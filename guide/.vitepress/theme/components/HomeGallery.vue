@@ -62,9 +62,8 @@
       href: '/gallery/ex2',
       img: '/imgs/ex2.png',
       title: 'Road Classes',
-      description: 'Load roads into the browser database and style them with categorical thematic colors.',
+      description: 'Render categorized roads with a stable categorical palette and explicit class ordering.',
       tags: [
-        { label: 'autk-db', className: 'case-tag--db' },
         { label: 'autk-map', className: 'case-tag--map' },
       ],
     },
