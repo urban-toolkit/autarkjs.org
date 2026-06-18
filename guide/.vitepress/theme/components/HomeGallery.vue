@@ -116,6 +116,8 @@
 
 <style scoped>
 .home-gallery {
+  margin-left: var(--vp-offset, calc(50% - 50vw));
+  margin-right: var(--vp-offset, calc(50% - 50vw));
   padding: 64px 24px 72px;
 }
 
@@ -264,5 +266,18 @@
   border-color: var(--vp-c-brand-1);
   color: var(--vp-c-brand-1);
   transform: translateY(-1px);
+}
+@media (min-width: 640px) {
+  .home-gallery {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+@media (min-width: 960px) {
+  .home-gallery {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
 }
 </style>
