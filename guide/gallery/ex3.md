@@ -6,11 +6,11 @@ outline: deep
 
 <script setup>
 const code = `
-import { AutkSpatialDb } from '@urban-toolkit/autk-db'
+import { AutkDb } from '@urban-toolkit/autk-db'
 import { AutkMap } from '@urban-toolkit/autk-map'
 
 setStatus('Initializing spatial database...')
-const db = new AutkSpatialDb()
+const db = new AutkDb()
 await db.init()
 
 setStatus('Loading OpenStreetMap layers from a local PBF...')

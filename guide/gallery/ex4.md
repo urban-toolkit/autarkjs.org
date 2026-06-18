@@ -36,7 +36,7 @@ const plot = new AutkPlot(plotDiv, {
   events: [PlotEvent.CLICK],
 })
 
-map.events.addEventListener(MapEvent.PICKING, (selection) => {
+map.events.on(MapEvent.PICKING, ({ selection }) => {
   plot.setSelection(selection)
 })
 

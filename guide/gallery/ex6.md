@@ -15,8 +15,8 @@ await map.init()
 setStatus('Loading neighborhood polygons...')
 const neighborhoods = await fetch('/data/mnt_neighs_proj.geojson').then((r) => r.json())
 
-setStatus('Loading point features...')
-const points = await fetch('/data/mnt_points_test_proj.geojson').then((r) => r.json())
+setStatus('Loading dense point features...')
+const points = await fetch('/data/mnt_noise_proj.geojson').then((r) => r.json())
 
 setStatus('Rendering both layers together...')
 map.loadCollection('neighborhoods', { collection: neighborhoods })
