@@ -1,58 +1,44 @@
 ---
-title: Standalone GeoJSON
+title: Neighborhood Explorer
 aside: true
 outline: deep
 ---
+
+<script setup>
+const code = `
+import { AutkMap } from '@urban-toolkit/autk-map'
+
+setStatus('Initializing map...')
+
+const map = new AutkMap(canvas)
+await map.init()
+
+setStatus('Loading Manhattan neighborhoods...')
+const geojson = await fetch('/data/mnt_neighs_proj.geojson').then((r) => r.json())
+
+setStatus('Rendering GeoJSON layer...')
+map.loadCollection('neighborhoods', { collection: geojson })
+map.draw()
+clearStatus()
+`
+</script>
 
 <div class="case-tags">
   <a class="case-tag case-tag--map" href="/autk-map/">autk-map</a>
 </div>
 
-# Standalone GeoJSON
+# Neighborhood Explorer
 
-This example demonstrates the simplest possible Autark workflow for loading and rendering a projected GeoJSON dataset directly in the browser.
+Render a projected GeoJSON layer directly in the browser with the smallest possible Autark map workflow. This example highlights standalone map initialization, local data loading, and immediate layer rendering.
 
-## Live Example
+## Live Playground
 
-<LiveExampleFrame
-  id="ex1-live-frame"
-  src="/gallery/raw/ex1.html"
-  height="clamp(740px, 80vh, 880px)"
-/>
+<ClientOnly>
+  <CodePlayground :code="code" out="dom" :auto-run="true" />
+</ClientOnly>
 
-## Objective
+## Highlights
 
-This example shows how to:
-
-- create and initialize an `AutkMap`;
-- load a projected GeoJSON dataset with `fetch`;
-- add the dataset directly as a map layer;
-- render the result immediately in the canvas.
-
-It serves as the most basic standalone map example before introducing multiple datasets, joins, or linked analytical views.
-
-## Source Code
-
-```ts
-import { AutkMap } from 'autk-map';
-
-async function main() {
-    const canvas = document.querySelector('canvas')!;
-
-    const map = new AutkMap(canvas);
-    await map.init();
-
-    const geojson = await fetch('/data/mnt_neighs_proj.geojson').then(r => r.json());
-
-    map.loadCollection('neighborhoods', { collection: geojson });
-    map.draw();
-}
-
-main();
-```
-
-## Full Code
-
-You can access the complete source file here:
-
-- [View full code](https://raw.githubusercontent.com/urban-toolkit/autarkjs.org/main/gallery/ex1.ts)
+- standalone `AutkMap` initialization
+- projected GeoJSON fetched from a local dataset
+- direct `loadCollection()` rendering without database preprocessing

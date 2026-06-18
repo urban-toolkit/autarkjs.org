@@ -1,72 +1,47 @@
 ---
-title: Polygons and Points
+title: Points over Polygons
 aside: true
 outline: deep
 ---
+
+<script setup>
+const code = `
+import { AutkMap } from '@urban-toolkit/autk-map'
+
+setStatus('Initializing map...')
+const map = new AutkMap(canvas)
+await map.init()
+
+setStatus('Loading neighborhood polygons...')
+const neighborhoods = await fetch('/data/mnt_neighs_proj.geojson').then((r) => r.json())
+
+setStatus('Loading point features...')
+const points = await fetch('/data/mnt_points_test_proj.geojson').then((r) => r.json())
+
+setStatus('Rendering both layers together...')
+map.loadCollection('neighborhoods', { collection: neighborhoods })
+map.loadCollection('points', { collection: points })
+map.draw()
+clearStatus()
+`
+</script>
 
 <div class="case-tags">
   <a class="case-tag case-tag--map" href="/autk-map/">autk-map</a>
 </div>
 
-# Polygons and Points
+# Points over Polygons
 
-This example demonstrates how **Autark Map** can render two GeoJSON layer types: neighborhood polygons amd point set features.
+Overlay projected point and polygon datasets in the same scene to show how standalone GeoJSON layers can be combined without any database preprocessing. This example highlights multi-layer rendering and mixed geometry visualization.
 
-## Live Example
+## Live Playground
 
-<LiveExampleFrame
-  id="ex6-live-frame"
-  src="/gallery/raw/ex6.html"
-  height="clamp(740px, 80vh, 880px)"
-/>
+<ClientOnly>
+  <CodePlayground :code="code" out="dom" :auto-run="true" />
+</ClientOnly>
 
-## Objective
+## Highlights
 
-- initialize a standalone `AutkMap`;
-- load projected neighborhood polygons from GeoJSON;
-- load projected point features from a second GeoJSON file;
-- render both layers together in the same map view;
-- demonstrate multi-layer browser-side visualization without database preprocessing.
-
-## Source Code
-
-```ts
-import { AutkMap } from 'autk-map';
-
-export class StandaloneGeojsonLayersVis {
-    protected map!: AutkMap;
-
-    public async run(canvas: HTMLCanvasElement): Promise<void> {
-        this.map = new AutkMap(canvas);
-        await this.map.init();
-
-        const neighs = await fetch('/data/mnt_neighs_proj.geojson').then(res => res.json());
-        const points = await fetch('/data/mnt_points_test_proj.geojson').then(res => res.json());
-
-        this.map.loadCollection('neighborhoods', { collection: neighs });
-        this.map.loadCollection('points', { collection: points });
-
-        this.map.draw();
-    }
-}
-
-async function main() {
-    const example = new StandaloneGeojsonLayersVis();
-
-    const canvas = document.querySelector('canvas');
-    if (!canvas) {
-        console.error('Canvas element not found');
-        return;
-    }
-
-    await example.run(canvas as HTMLCanvasElement);
-}
-
-main();
-````
-
-## Full Code
-
-You can access the complete source file here:
-
-- [View full code](https://raw.githubusercontent.com/urban-toolkit/autarkjs.org/main/gallery/ex6.ts)
+- standalone `AutkMap` setup
+- projected polygon and point GeoJSON layers
+- multi-layer browser-side visualization

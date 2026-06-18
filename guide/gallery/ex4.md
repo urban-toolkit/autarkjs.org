@@ -1,79 +1,70 @@
 ---
-title: Linked Views
+title: Neighborhood Bars
 aside: true
 outline: deep
 ---
+
+<script setup>
+const code = `
+import { AutkMap, MapEvent } from '@urban-toolkit/autk-map'
+import { AutkPlot, PlotEvent } from '@urban-toolkit/autk-plot'
+
+output('<div style="height: 320px;"><div id="plotBody" style="width: 100%; height: 100%;"></div></div>')
+const plotDiv = mount.querySelector('#plotBody')
+
+setStatus('Initializing map...')
+const map = new AutkMap(canvas)
+await map.init()
+
+setStatus('Loading Manhattan neighborhoods...')
+const geojson = await fetch('/data/mnt_neighs_proj.geojson').then((r) => r.json())
+map.loadCollection('neighborhoods', { collection: geojson })
+map.updateRenderInfo('neighborhoods', { isPick: true })
+map.draw()
+
+setStatus('Building linked bar chart...')
+const plot = new AutkPlot(plotDiv, {
+  type: 'barchart',
+  collection: geojson,
+  attributes: { axis: ['ntaname', 'shape_area'] },
+  labels: {
+    axis: ['Neighborhood', 'Area'],
+    title: 'Neighborhood area',
+  },
+  margins: { left: 60, right: 20, top: 50, bottom: 280 },
+  width: plotDiv.clientWidth || 900,
+  events: [PlotEvent.CLICK],
+})
+
+map.events.addEventListener(MapEvent.PICKING, (selection) => {
+  plot.setSelection(selection)
+})
+
+plot.events.on(PlotEvent.CLICK, ({ selection }) => {
+  map.setHighlightedIds('neighborhoods', selection)
+})
+
+clearStatus()
+`
+</script>
 
 <div class="case-tags">
   <a class="case-tag case-tag--map" href="/autk-map/">autk-map</a>
   <a class="case-tag case-tag--plot" href="/autk-plot/">autk-plot</a>
 </div>
 
-# Linked Views
+# Neighborhood Bars
 
-This example demonstrates coordinated interaction between **Autark Map** and **Autark Plot**. A neighborhood layer is rendered on the map while a bar chart shows an attribute from the same dataset. Selecting elements in one view highlights the corresponding elements in the other.
+Link a neighborhood map to an interactive bar chart so picks and chart clicks stay synchronized. This example highlights coordinated selection, shared data across views, and lightweight linked analysis in the browser.
 
-## Live Example
+## Live Playground
 
-<LiveExampleFrame
-  id="ex4-live-frame"
-  src="/gallery/raw/ex4.html"
-  height="clamp(740px, 80vh, 880px)"
-/>
+<ClientOnly>
+  <CodePlayground :code="code" out="dom" :auto-run="true" />
+</ClientOnly>
 
-## Objective
+## Highlights
 
-- render a GeoJSON neighborhood layer with `AutkMap`;
-- create an interactive bar chart with `AutkChart`;
-- connect map selection to chart highlighting;
-- connect chart selection back to the map layer;
-- demonstrate linked views entirely in the browser.
-
-## Source Code
-
-```ts
-import { AutkMap, MapEvent } from 'autk-map';
-import { AutkChart, ChartEvent } from 'autk-plot';
-
-async function main() {
-    const canvas = document.querySelector('canvas')!;
-    const plotDiv = document.querySelector('#plotBody') as HTMLElement;
-
-    const map = new AutkMap(canvas);
-    await map.init();
-
-    const geojson = await fetch('/data/mnt_neighs_proj.geojson').then(r => r.json());
-
-    map.loadCollection('neighborhoods', { collection: geojson });
-    map.updateRenderInfo('neighborhoods', { isPick: true });
-    map.draw();
-
-    const plot = new AutkChart(plotDiv, {
-        type: 'barchart',
-        collection: geojson,
-        attributes: { axis: ['ntaname', 'shape_area'] },
-        labels: {
-            axis: ['Neighborhood', 'Area'],
-            title: 'Neighborhood area',
-        },
-        width: plotDiv.clientWidth || 900,
-        events: [ChartEvent.CLICK],
-    });
-
-    map.events.addEventListener(MapEvent.PICKING, (selection) => {
-        plot.setSelection(selection);
-    });
-
-    plot.events.on(ChartEvent.CLICK, ({ selection }) => {
-        map.setHighlightedIds('neighborhoods', selection);
-    });
-}
-
-main();
-````
-
-## Full Code
-
-You can access the complete source file here:
-
-- [View full code](https://raw.githubusercontent.com/urban-toolkit/autarkjs.org/main/gallery/ex4.ts)
+- linked `autk-map` and `autk-plot` views
+- map picking forwarded to the chart
+- chart clicks reflected back onto the map

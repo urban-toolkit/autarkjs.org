@@ -13,6 +13,8 @@ const props = defineProps<{
   code: string
   /** Which output panels to show. Defaults to 'both'. */
   out?: 'dom' | 'console' | 'both'
+  /** Run the example automatically after the editor is ready. */
+  autoRun?: boolean
 }>()
 
 const out = computed(() => props.out ?? 'both')
@@ -22,21 +24,20 @@ const defaultCode = ref('')
 const editableCode = ref('')
 const highlightedCode = ref('')
 const canvas = ref<HTMLCanvasElement | null>(null)
+const mount = ref<HTMLDivElement | null>(null)
 const status = ref('')
 const error = ref<string | null>(null)
 const isRunning = ref(false)
 const consoleOutput = ref<string[]>([])
-const headerOutput = ref<string>('')
+const hasDomOutput = ref(false)
 
 let shiki: Awaited<ReturnType<typeof createHighlighter>> | null = null
 
 function normalizeCode(src: string): string {
   const lines = src.split('\n')
-  // Strip leading/trailing blank lines
   while (lines.length && lines[0].trim() === '') lines.shift()
   while (lines.length && lines[lines.length - 1].trim() === '') lines.pop()
   if (lines.length === 0) return ''
-  // Detect and strip common leading indent
   const firstIndent = lines[0].match(/^(\s*)/)?.[1] ?? ''
   if (firstIndent) {
     return lines.map((line) => (line.startsWith(firstIndent) ? line.slice(firstIndent.length) : line)).join('\n')
@@ -57,8 +58,6 @@ function parseJson(str: string): unknown {
     return str
   }
 }
-
-// --- Shiki highlighting ---
 
 function escapeHtml(s: string): string {
   return s
@@ -98,7 +97,6 @@ async function updateHighlight() {
   highlightedCode.value = highlight(editableCode.value)
 }
 
-// Allow Tab key to insert spaces instead of losing focus
 function onTabKey(e: KeyboardEvent) {
   if (e.key === 'Tab') {
     e.preventDefault()
@@ -106,7 +104,6 @@ function onTabKey(e: KeyboardEvent) {
     const start = ta.selectionStart
     const end = ta.selectionEnd
     editableCode.value = editableCode.value.substring(0, start) + '  ' + editableCode.value.substring(end)
-    // Re-highlight and restore cursor position
     requestAnimationFrame(() => {
       ta.selectionStart = ta.selectionEnd = start + 2
     })
@@ -114,26 +111,57 @@ function onTabKey(e: KeyboardEvent) {
   }
 }
 
-// --- Run code ---
+function clearCanvas() {
+  const el = canvas.value
+  if (!el) return
+  const width = Math.max(1, el.clientWidth)
+  const height = Math.max(1, el.clientHeight)
+  el.width = width
+  el.height = height
+}
+
+function clearMount() {
+  if (mount.value) {
+    mount.value.innerHTML = ''
+  }
+  hasDomOutput.value = false
+}
+
+function setMountHtml(html: string) {
+  if (!mount.value) return
+  mount.value.innerHTML = html
+  hasDomOutput.value = html.trim().length > 0
+}
+
+function setPlaygroundStatus(message: string) {
+  status.value = message
+}
+
+function clearPlaygroundStatus() {
+  status.value = ''
+}
 
 async function runCode() {
   isRunning.value = true
   error.value = null
   status.value = 'Running…'
   consoleOutput.value = []
-  headerOutput.value = ''
+  clearCanvas()
+  clearMount()
 
   try {
     const autkMap = await import('@urban-toolkit/autk-map')
     const autkDb = await import('@urban-toolkit/autk-db')
     const autkCore = await import('@urban-toolkit/autk-core')
     const autkCompute = await import('@urban-toolkit/autk-compute')
+    const autkPlot = await import('@urban-toolkit/autk-plot')
 
     const modules = {
       ...autkMap,
       ...autkDb,
       ...autkCore,
       ...autkCompute,
+      ...autkPlot,
     }
 
     const scopeDeclarations = Object.keys(modules)
@@ -149,30 +177,47 @@ async function runCode() {
       return (async () => {
         ${scopeDeclarations}
         const canvas = __canvas;
+        const mount = __mount;
         const console = {
           log: (...args) => __appendConsole('log', args.map(a => typeof a === 'string' ? a : JSON.stringify(a, null, 2)).join(' ')),
           error: (...args) => __appendConsole('error', args.map(a => typeof a === 'string' ? a : JSON.stringify(a, null, 2)).join(' ')),
           warn: (...args) => __appendConsole('warn', args.map(a => typeof a === 'string' ? a : JSON.stringify(a, null, 2)).join(' ')),
         };
-        const output = (html) => { __htmlOut.value = html; };
+        const output = (html) => __setMountHtml(html);
+        const setStatus = (message) => __setStatus(message);
+        const clearStatus = () => __clearStatus();
+        const clearOutput = () => __clearMount();
         ${userCode}
       })()
     `
 
     const AsyncFunction = Object.getPrototypeOf(async function () { }).constructor
-    const htmlOut = { value: '' }
     const appendConsole = (_type: 'log' | 'error' | 'warn', message: string) => {
       consoleOutput.value = [...consoleOutput.value, message]
     }
 
-    await new AsyncFunction('__modules', '__canvas', '__appendConsole', '__htmlOut', wrapped)(
+    await new AsyncFunction(
+      '__modules',
+      '__canvas',
+      '__mount',
+      '__appendConsole',
+      '__setMountHtml',
+      '__setStatus',
+      '__clearStatus',
+      '__clearMount',
+      wrapped,
+    )(
       modules,
       canvas.value,
+      mount.value,
       appendConsole,
-      htmlOut,
+      setMountHtml,
+      setPlaygroundStatus,
+      clearPlaygroundStatus,
+      clearMount,
     )
 
-    headerOutput.value = htmlOut.value
+    hasDomOutput.value = (mount.value?.childNodes.length ?? 0) > 0
     status.value = ''
   } catch (e: any) {
     error.value = e?.message ?? String(e)
@@ -204,6 +249,10 @@ onMounted(async () => {
   shikiSingleton = await shikiSingletonPromise
   shiki = shikiSingleton
   updateHighlight()
+
+  if (props.autoRun) {
+    await runCode()
+  }
 })
 
 watch(isDark, () => {
@@ -249,10 +298,6 @@ watch(isDark, () => {
     </div>
 
     <div class="code-playground__output">
-      <!-- Output section header: only shown when there is HTML output -->
-      <div v-if="out !== 'dom' && headerOutput" class="code-playground__output-label">Output</div>
-
-      <!-- DOM / Canvas Output -->
       <div v-if="out !== 'console'" class="code-playground__canvas-wrap">
         <canvas ref="canvas" class="code-playground__canvas" />
         <div v-if="status || error" class="code-playground__overlay">
@@ -264,16 +309,13 @@ watch(isDark, () => {
         </div>
       </div>
 
-      <!-- HTML Output -->
-      <div v-if="out !== 'dom' && headerOutput" class="code-playground__html-output">
-        <div class="code-playground__html-output-body" v-html="headerOutput" />
-      </div>
+      <div v-if="out !== 'console' && hasDomOutput" class="code-playground__output-label">Output</div>
+      <div ref="mount" class="code-playground__dom-output" :class="{ 'code-playground__dom-output--active': hasDomOutput }" />
 
-      <!-- Console Output -->
       <div v-if="out !== 'dom'" class="code-playground__console">
         <div class="code-playground__console-label">Console Output</div>
         <div class="code-playground__console-lines">
-          <template v-if="consoleOutput.length === 0 && !headerOutput">
+          <template v-if="consoleOutput.length === 0 && !hasDomOutput">
             <span class="code-playground__console-placeholder">Output will appear here…</span>
           </template>
           <template v-else>
@@ -354,8 +396,6 @@ watch(isDark, () => {
   background: var(--vp-c-default-2);
 }
 
-/* --- Code area: grid overlay technique --- */
-
 .code-playground__code-wrap {
   display: grid;
   max-height: 800px;
@@ -383,7 +423,6 @@ watch(isDark, () => {
   pointer-events: none;
 }
 
-/* Ensure Shiki spans render correctly */
 :deep(.code-playground__highlight span[style]) {
   background: none !important;
 }
@@ -404,8 +443,6 @@ watch(isDark, () => {
   background: rgba(96, 165, 250, 0.25);
 }
 
-/* --- Canvas output --- */
-
 .code-playground__canvas-wrap {
   position: relative;
   width: 100%;
@@ -413,7 +450,6 @@ watch(isDark, () => {
   background: var(--vp-c-bg-soft);
 }
 
-/* Output header label */
 .code-playground__output-label {
   border-bottom: 1px solid var(--vp-c-divider);
   border-top: 1px solid var(--vp-c-divider);
@@ -424,14 +460,12 @@ watch(isDark, () => {
   text-transform: uppercase;
 }
 
-/* When canvas + other panels are shown, shrink canvas slightly */
 .code-playground__output:has(.code-playground__console) .code-playground__canvas-wrap,
-.code-playground__output:has(.code-playground__html-output) .code-playground__canvas-wrap {
+.code-playground__output:has(.code-playground__dom-output--active) .code-playground__canvas-wrap {
   height: 350px;
 }
 
-/* When both HTML output and console are shown, shrink canvas more */
-.code-playground__output:has(.code-playground__console):has(.code-playground__html-output) .code-playground__canvas-wrap {
+.code-playground__output:has(.code-playground__console):has(.code-playground__dom-output--active) .code-playground__canvas-wrap {
   height: 280px;
 }
 
@@ -441,24 +475,23 @@ watch(isDark, () => {
   display: block;
 }
 
-/* --- Header / HTML output --- */
-
-.code-playground__html-output {
-  border-top: 1px solid var(--vp-c-divider);
-  background: var(--vp-c-bg);
-  max-height: 200px;
-  overflow: auto;
+.code-playground__dom-output {
+  min-height: 0;
 }
 
-.code-playground__html-output-body {
+.code-playground__dom-output:empty {
+  display: none;
+}
+
+.code-playground__dom-output--active {
+  border-top: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg);
   padding: 12px;
 }
 
-.code-playground__html-output-body :deep(*) {
-  margin: 0;
+.code-playground__dom-output--active :deep(*) {
+  box-sizing: border-box;
 }
-
-/* --- Console output --- */
 
 .code-playground__console {
   border-top: 1px solid var(--vp-c-divider);

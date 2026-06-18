@@ -1,78 +1,69 @@
 ---
-title: Map and Database
+title: Road Classes
 aside: true
 outline: deep
 ---
+
+<script setup>
+const code = `
+import { AutkSpatialDb } from '@urban-toolkit/autk-db'
+import { AutkMap, ColorMapInterpolator, MapStyle } from '@urban-toolkit/autk-map'
+
+setStatus('Initializing spatial database...')
+const db = new AutkSpatialDb()
+await db.init()
+
+setStatus('Loading road data into the browser database...')
+await db.loadCustomLayer({
+  geojsonFileUrl: '/data/mnt_roads.geojson',
+  outputTableName: 'roads',
+  coordinateFormat: 'EPSG:3395',
+})
+
+setStatus('Initializing map...')
+MapStyle.setPredefinedStyle('light')
+const map = new AutkMap(canvas)
+await map.init()
+
+setStatus('Adding database layers to the map...')
+for (const layer of db.getLayerTables()) {
+  const geojson = await db.getLayer(layer.name)
+  map.loadCollection(layer.name, { collection: geojson, type: layer.type })
+}
+
+const roads = await db.getLayer('roads')
+for (const feature of roads.features) {
+  const highway = feature.properties?.highway
+  feature.properties.highway_class = ['primary', 'secondary'].includes(highway) ? highway : 'other'
+}
+
+setStatus('Applying categorical styling...')
+map.updateColorMap('roads', { colorMap: { interpolator: ColorMapInterpolator.OBSERVABLE10 } })
+map.updateThematic('roads', { collection: roads, property: 'properties.highway_class' })
+map.updateRenderInfo('roads', { isColorMap: true })
+map.draw()
+clearStatus()
+`
+</script>
 
 <div class="case-tags">
   <a class="case-tag case-tag--db" href="/autk-db/">autk-db</a>
   <a class="case-tag case-tag--map" href="/autk-map/">autk-map</a>
 </div>
 
-# Map and Database
+# Road Classes
 
-This example demonstrates how **Autark Database** and **Autark Map** work together in the browser. A GeoJSON roads dataset is first loaded into the in-browser spatial database, then automatically retrieved and rendered on the map with thematic styling based on road type.
+Load a GeoJSON roads layer into the in-browser spatial database, pull it back out as a renderable layer, and style it by road class. This example highlights browser-side data loading, table-to-layer retrieval, and thematic coloring.
 
-## Result
+## Live Playground
 
-<LiveExampleFrame
-  id="ex2-live-frame"
-  src="/gallery/raw/ex2.html"
-  height="clamp(740px, 80vh, 880px)"
-/>
+<ClientOnly>
+  <CodePlayground :code="code" out="dom" :auto-run="true" />
+</ClientOnly>
 
-## Objective
+## Highlights
 
-- initialize an in-browser spatial database;
-- load a GeoJSON file as a custom layer;
-- retrieve layers from the database;
-- render them with `AutkMap`;
-- apply thematic coloring based on feature properties.
-
-## Source Code
-
-```ts
-import { AutkSpatialDb } from 'autk-db';
-import { AutkMap, ColorMapInterpolator, MapStyle } from 'autk-map';
-
-async function main() {
-    const canvas = document.querySelector('canvas')!;
-
-    const db = new AutkSpatialDb();
-    await db.init();
-
-    await db.loadCustomLayer({
-        geojsonFileUrl: '/data/mnt_roads.geojson',
-        outputTableName: 'roads',
-        coordinateFormat: 'EPSG:3395',
-    });
-
-    const map = new AutkMap(canvas);
-    MapStyle.setPredefinedStyle('light');
-    await map.init();
-
-    for (const layer of db.getLayerTables()) {
-        const geojson = await db.getLayer(layer.name);
-        map.loadCollection(layer.name, { collection: geojson, type: layer.type });
-    }
-
-    const roadsGeojson = await db.getLayer('roads');
-    for (const feature of roadsGeojson.features) {
-        const highway = feature.properties?.highway;
-        feature.properties!.highway_class = ['primary', 'secondary'].includes(highway) ? highway : 'other';
-    }
-    map.updateColorMap('roads', { colorMap: { interpolator: ColorMapInterpolator.OBSERVABLE10 } });
-    map.updateThematic('roads', { collection: roadsGeojson, property: 'properties.highway_class' });
-    map.updateRenderInfo('roads', { isColorMap: true });
-
-    map.draw();
-}
-
-main();
-```
-
-## Full Code
-
-You can access the complete source file here:
-
-- [View full code](https://raw.githubusercontent.com/urban-toolkit/autarkjs.org/main/gallery/ex2.ts)
+- in-browser spatial database initialization
+- GeoJSON import with projected coordinates
+- database-backed layer retrieval
+- categorical thematic styling with `ColorMapInterpolator`
