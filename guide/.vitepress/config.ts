@@ -432,7 +432,7 @@ gtag('config', 'G-P6EVSF42L8');`],
 
         footer: {
             message: 'Released under the MIT License.',
-            copyright: '© 2025 Autark',
+            copyright: '2026 Autark',
         },
 
         search: {

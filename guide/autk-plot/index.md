@@ -56,7 +56,7 @@ chart.events.on(PlotEvent.BRUSH_X, ({ selection }) => {
 
 # autk-plot
 
-[![npm version](https://img.shields.io/npm/v/%40urban-toolkit%2Fautk-plot?logo=npm)](https://www.npmjs.com/package/@urban-toolkit/autk-plot)
+[![npm version](https://img.shields.io/badge/npm-v2.4.1-8b5cf6?logo=npm&labelColor=111827)](https://www.npmjs.com/package/@urban-toolkit/autk-plot)
 
 `autk-plot` is a D3-based chart library that takes a GeoJSON `FeatureCollection` as input and turns `feature.properties` into interactive charts. Because it shares the same data model as [`autk-db`](../autk-db/) and [`autk-map`](../autk-map/), it is straightforward to build coordinated visualizations where charts and maps selection stay in sync.
 

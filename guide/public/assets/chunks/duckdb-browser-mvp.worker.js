@@ -11,4 +11,3 @@ js-sha256/src/sha256.js:
    * @license MIT
    *)
 */
-//# sourceMappingURL=duckdb-browser-mvp.worker.js.map
