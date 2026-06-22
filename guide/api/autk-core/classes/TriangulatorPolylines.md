@@ -6,7 +6,7 @@
 
 # Class: TriangulatorPolylines
 
-Defined in: [triangulator-polylines.ts:17](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/triangulator-polylines.ts#L17)
+Defined in: [triangulator-polylines.ts:17](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/triangulator-polylines.ts#L17)
 
 Triangulates polyline features into stroked mesh geometry.
 
@@ -26,7 +26,7 @@ Triangulates polyline features into stroked mesh geometry.
 
 > `readonly` `static` **DEFAULT\_ROAD\_HALF\_WIDTH**: `number` = `3.5`
 
-Defined in: [triangulator-polylines.ts:43](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/triangulator-polylines.ts#L43)
+Defined in: [triangulator-polylines.ts:43](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/triangulator-polylines.ts#L43)
 
 Default road half-width used when no known `highway` tag value is available.
 
@@ -36,7 +36,7 @@ Default road half-width used when no known `highway` tag value is available.
 
 > `static` **offset**: `number` = `5`
 
-Defined in: [triangulator-polylines.ts:19](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/triangulator-polylines.ts#L19)
+Defined in: [triangulator-polylines.ts:19](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/triangulator-polylines.ts#L19)
 
 Default half-width, in local planar units, used when buffering source polylines.
 
@@ -46,7 +46,7 @@ Default half-width, in local planar units, used when buffering source polylines.
 
 > `readonly` `static` **ROAD\_HALF\_WIDTH\_BY\_HIGHWAY**: `Record`\<`string`, `number`\>
 
-Defined in: [triangulator-polylines.ts:22](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/triangulator-polylines.ts#L22)
+Defined in: [triangulator-polylines.ts:22](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/triangulator-polylines.ts#L22)
 
 OSM road half-widths, in local planar units, keyed by normalized `highway` tag value.
 
@@ -56,7 +56,7 @@ OSM road half-widths, in local planar units, keyed by normalized `highway` tag v
 
 > `static` **buildMesh**(`geojson`, `origin`, `resolveOffset?`): \[[`LayerGeometry`](../interfaces/LayerGeometry.md)[], [`LayerComponent`](../interfaces/LayerComponent.md)[]\]
 
-Defined in: [triangulator-polylines.ts:59](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/triangulator-polylines.ts#L59)
+Defined in: [triangulator-polylines.ts:59](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/triangulator-polylines.ts#L59)
 
 Builds triangulated polyline geometry for a GeoJSON feature collection.
 
@@ -102,7 +102,7 @@ const [meshes, comps] = TriangulatorPolylines.buildMesh(lineFC, origin);
 
 > `readonly` `static` **defaultOffsetResolver**(`_feature`, `_featureIndex`): `number`
 
-Defined in: [triangulator-polylines.ts:46](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/triangulator-polylines.ts#L46)
+Defined in: [triangulator-polylines.ts:46](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/triangulator-polylines.ts#L46)
 
 Optional callback used to resolve a per-feature polyline half-width.
 
@@ -126,7 +126,7 @@ Optional callback used to resolve a per-feature polyline half-width.
 
 > `static` **geometryCollectionToPolyline**(`feature`, `origin`, `offset`, `featureIndex`): `object`[]
 
-Defined in: [triangulator-polylines.ts:178](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/triangulator-polylines.ts#L178)
+Defined in: [triangulator-polylines.ts:178](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/triangulator-polylines.ts#L178)
 
 Flattens supported children of a `GeometryCollection` into polyline meshes.
 
@@ -178,7 +178,7 @@ const meshes = TriangulatorPolylines.geometryCollectionToPolyline(feature, origi
 
 > `static` **lineStringToPolyline**(`feature`, `origin`, `offset`): `object`[]
 
-Defined in: [triangulator-polylines.ts:121](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/triangulator-polylines.ts#L121)
+Defined in: [triangulator-polylines.ts:121](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/triangulator-polylines.ts#L121)
 
 Converts a single `LineString` feature into triangulated polyline mesh data.
 
@@ -224,7 +224,7 @@ const [mesh] = TriangulatorPolylines.lineStringToPolyline(feature, origin, 5);
 
 > `static` **multiLineStringToPolyline**(`feature`, `origin`, `offset`): `object`[]
 
-Defined in: [triangulator-polylines.ts:146](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/triangulator-polylines.ts#L146)
+Defined in: [triangulator-polylines.ts:146](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/triangulator-polylines.ts#L146)
 
 Converts a `MultiLineString` feature into triangulated polyline meshes.
 
@@ -270,7 +270,7 @@ const meshes = TriangulatorPolylines.multiLineStringToPolyline(feature, origin, 
 
 > `static` **normalizeRoadHighwayValue**(`highway`): `string` \| `null`
 
-Defined in: [triangulator-polylines.ts:221](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/triangulator-polylines.ts#L221)
+Defined in: [triangulator-polylines.ts:221](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/triangulator-polylines.ts#L221)
 
 Normalizes an OSM `highway` tag value for road-width lookup.
 
@@ -305,7 +305,7 @@ TriangulatorPolylines.normalizeRoadHighwayValue('primary;secondary');  // 'prima
 
 > `static` **resolveRoadHalfWidth**(`feature`): `number`
 
-Defined in: [triangulator-polylines.ts:204](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/triangulator-polylines.ts#L204)
+Defined in: [triangulator-polylines.ts:204](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/triangulator-polylines.ts#L204)
 
 Resolves a road polyline half-width from OSM `highway` tag semantics.
 

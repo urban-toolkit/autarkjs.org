@@ -8,7 +8,7 @@
 
 > **Binning2dCellRow** = `object`
 
-Defined in: [transforms/presets/binning-2d.ts:42](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/transforms/presets/binning-2d.ts#L42)
+Defined in: [transforms/presets/binning-2d.ts:42](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/transforms/presets/binning-2d.ts#L42)
 
 A single aggregated cell ready for plot rendering.
 
@@ -21,7 +21,7 @@ formatted numeric range such as `"1k-2k"`.
 
 > **autkIds**: `number`[]
 
-Defined in: [transforms/presets/binning-2d.ts:56](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/transforms/presets/binning-2d.ts#L56)
+Defined in: [transforms/presets/binning-2d.ts:56](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/transforms/presets/binning-2d.ts#L56)
 
 Merged source feature ids from all rows in this cell, used for selection linking.
 
@@ -31,7 +31,7 @@ Merged source feature ids from all rows in this cell, used for selection linking
 
 > **count**: `number`
 
-Defined in: [transforms/presets/binning-2d.ts:54](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/transforms/presets/binning-2d.ts#L54)
+Defined in: [transforms/presets/binning-2d.ts:54](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/transforms/presets/binning-2d.ts#L54)
 
 How many rows fell into this cell.
 
@@ -41,7 +41,7 @@ How many rows fell into this cell.
 
 > **value**: `number`
 
-Defined in: [transforms/presets/binning-2d.ts:52](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/transforms/presets/binning-2d.ts#L52)
+Defined in: [transforms/presets/binning-2d.ts:52](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/transforms/presets/binning-2d.ts#L52)
 
 The reduced numeric result (count, sum, avg, min, or max) for this cell.
 
@@ -51,7 +51,7 @@ The reduced numeric result (count, sum, avg, min, or max) for this cell.
 
 > **x**: `string`
 
-Defined in: [transforms/presets/binning-2d.ts:44](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/transforms/presets/binning-2d.ts#L44)
+Defined in: [transforms/presets/binning-2d.ts:44](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/transforms/presets/binning-2d.ts#L44)
 
 Bin label for the x axis — category string or formatted numeric range such as `"1k-2k"`.
 
@@ -61,7 +61,7 @@ Bin label for the x axis — category string or formatted numeric range such as 
 
 > **xOrder**: `number`
 
-Defined in: [transforms/presets/binning-2d.ts:48](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/transforms/presets/binning-2d.ts#L48)
+Defined in: [transforms/presets/binning-2d.ts:48](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/transforms/presets/binning-2d.ts#L48)
 
 Numeric sort key for the x bin (bin index for quantitative, insertion order for categorical).
 
@@ -71,7 +71,7 @@ Numeric sort key for the x bin (bin index for quantitative, insertion order for 
 
 > **y**: `string`
 
-Defined in: [transforms/presets/binning-2d.ts:46](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/transforms/presets/binning-2d.ts#L46)
+Defined in: [transforms/presets/binning-2d.ts:46](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/transforms/presets/binning-2d.ts#L46)
 
 Bin label for the y axis — category string or formatted numeric range such as `"1k-2k"`.
 
@@ -81,6 +81,6 @@ Bin label for the y axis — category string or formatted numeric range such as 
 
 > **yOrder**: `number`
 
-Defined in: [transforms/presets/binning-2d.ts:50](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/transforms/presets/binning-2d.ts#L50)
+Defined in: [transforms/presets/binning-2d.ts:50](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/transforms/presets/binning-2d.ts#L50)
 
 Numeric sort key for the y bin (bin index for quantitative, insertion order for categorical).

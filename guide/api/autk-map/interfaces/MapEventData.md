@@ -6,7 +6,7 @@
 
 # Interface: MapEventData
 
-Defined in: [autk-map/src/types-events.ts:37](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/types-events.ts#L37)
+Defined in: [autk-map/src/types-events.ts:37](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/types-events.ts#L37)
 
 Payload emitted for feature-picking events.
 
@@ -23,7 +23,7 @@ the layer that produced the hit results.
 
 > **layerId**: `string`
 
-Defined in: [autk-map/src/types-events.ts:39](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/types-events.ts#L39)
+Defined in: [autk-map/src/types-events.ts:39](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/types-events.ts#L39)
 
 Identifier of the layer that emitted the event.
 

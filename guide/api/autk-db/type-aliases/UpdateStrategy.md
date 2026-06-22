@@ -8,7 +8,7 @@
 
 > **UpdateStrategy** = `"replace"` \| `"update"`
 
-Defined in: [use-cases/update-table/interfaces.ts:13](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-db/src/use-cases/update-table/interfaces.ts#L13)
+Defined in: [use-cases/update-table/interfaces.ts:13](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-db/src/use-cases/update-table/interfaces.ts#L13)
 
 Strategy for replacing or updating an existing table.
 

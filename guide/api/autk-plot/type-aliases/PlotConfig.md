@@ -8,7 +8,7 @@
 
 > **PlotConfig** = `object`
 
-Defined in: [api.ts:39](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/api.ts#L39)
+Defined in: [api.ts:39](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/api.ts#L39)
 
 Base configuration accepted by all plot implementations.
 
@@ -18,7 +18,7 @@ Base configuration accepted by all plot implementations.
 
 > `optional` **attributes?**: `object`
 
-Defined in: [api.ts:62](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/api.ts#L62)
+Defined in: [api.ts:62](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/api.ts#L62)
 
 Feature property names to map to visual channels.
 
@@ -40,7 +40,7 @@ Property name mapped to the color channel.
 
 > `optional` **categoricalColorMapInterpolator?**: `ColorMapInterpolator`
 
-Defined in: [api.ts:77](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/api.ts#L77)
+Defined in: [api.ts:77](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/api.ts#L77)
 
 Color interpolator used when the color attribute contains categorical (string) values. Defaults to `OBSERVABLE10`.
 
@@ -50,7 +50,7 @@ Color interpolator used when the color attribute contains categorical (string) v
 
 > **collection**: `FeatureCollection`\<`Geometry`, `GeoJsonProperties`\>
 
-Defined in: [api.ts:43](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/api.ts#L43)
+Defined in: [api.ts:43](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/api.ts#L43)
 
 GeoJSON feature collection used as the plot data source.
 
@@ -60,7 +60,7 @@ GeoJSON feature collection used as the plot data source.
 
 > `optional` **colorMapInterpolator?**: `ColorMapInterpolator`
 
-Defined in: [api.ts:75](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/api.ts#L75)
+Defined in: [api.ts:75](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/api.ts#L75)
 
 Color interpolator used for continuous (numeric) color encoding.
 
@@ -70,7 +70,7 @@ Color interpolator used for continuous (numeric) color encoding.
 
 > **div**: `HTMLElement`
 
-Defined in: [api.ts:41](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/api.ts#L41)
+Defined in: [api.ts:41](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/api.ts#L41)
 
 Host HTML element where the plot renders.
 
@@ -80,7 +80,7 @@ Host HTML element where the plot renders.
 
 > `optional` **domainSpec?**: `ColorMapDomainSpec`
 
-Defined in: [api.ts:73](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/api.ts#L73)
+Defined in: [api.ts:73](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/api.ts#L73)
 
 Domain specification controlling how the colormap range is derived.
 
@@ -90,7 +90,7 @@ Domain specification controlling how the colormap range is derived.
 
 > `optional` **events?**: [`PlotEvent`](../enumerations/PlotEvent.md)[]
 
-Defined in: [api.ts:45](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/api.ts#L45)
+Defined in: [api.ts:45](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/api.ts#L45)
 
 Interaction events the plot should emit (click, brush, etc).
 
@@ -100,7 +100,7 @@ Interaction events the plot should emit (click, brush, etc).
 
 > `optional` **height?**: `number`
 
-Defined in: [api.ts:51](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/api.ts#L51)
+Defined in: [api.ts:51](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/api.ts#L51)
 
 Plot height in pixels. Defaults to `500`.
 
@@ -110,7 +110,7 @@ Plot height in pixels. Defaults to `500`.
 
 > `optional` **labels?**: `object`
 
-Defined in: [api.ts:53](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/api.ts#L53)
+Defined in: [api.ts:53](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/api.ts#L53)
 
 Display labels for axes, title, and color legend.
 
@@ -138,7 +138,7 @@ Plot title.
 
 > `optional` **margins?**: [`PlotMargins`](PlotMargins.md)
 
-Defined in: [api.ts:47](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/api.ts#L47)
+Defined in: [api.ts:47](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/api.ts#L47)
 
 Pixel margins around the plot drawing area.
 
@@ -148,7 +148,7 @@ Pixel margins around the plot drawing area.
 
 > `optional` **tickFormats?**: `string`[]
 
-Defined in: [api.ts:71](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/api.ts#L71)
+Defined in: [api.ts:71](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/api.ts#L71)
 
 D3 format strings for each axis tick.
 
@@ -158,7 +158,7 @@ D3 format strings for each axis tick.
 
 > `optional` **transform?**: [`PlotTransformConfig`](PlotTransformConfig.md)
 
-Defined in: [api.ts:69](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/api.ts#L69)
+Defined in: [api.ts:69](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/api.ts#L69)
 
 Optional data transform applied before rendering.
 
@@ -168,6 +168,6 @@ Optional data transform applied before rendering.
 
 > `optional` **width?**: `number`
 
-Defined in: [api.ts:49](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/api.ts#L49)
+Defined in: [api.ts:49](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/api.ts#L49)
 
 Plot width in pixels. Defaults to `800`.

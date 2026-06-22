@@ -6,7 +6,7 @@
 
 # Class: AutkMap
 
-Defined in: [autk-map/src/map.ts:93](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L93)
+Defined in: [autk-map/src/map.ts:93](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L93)
 
 Main map controller for rendering, interaction, and layer lifecycle.
 
@@ -31,7 +31,7 @@ map.loadCollection('my_data', { collection: geojsonData });
 
 > **new AutkMap**(`canvas`): `AutkMap`
 
-Defined in: [autk-map/src/map.ts:127](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L127)
+Defined in: [autk-map/src/map.ts:127](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L127)
 
 Creates an AutkMap instance bound to a canvas element.
 
@@ -59,7 +59,7 @@ Never throws.
 
 > **get** **activePickingLayer**(): [`Layer`](Layer.md) \| `null`
 
-Defined in: [autk-map/src/map.ts:173](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L173)
+Defined in: [autk-map/src/map.ts:173](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L173)
 
 Currently active pick-enabled layer, if any.
 
@@ -75,7 +75,7 @@ Currently active pick-enabled layer, if any.
 
 > **get** **camera**(): `Camera`
 
-Defined in: [autk-map/src/map.ts:143](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L143)
+Defined in: [autk-map/src/map.ts:143](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L143)
 
 View and projection camera.
 
@@ -91,7 +91,7 @@ View and projection camera.
 
 > **get** **canvas**(): `HTMLCanvasElement`
 
-Defined in: [autk-map/src/map.ts:158](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L158)
+Defined in: [autk-map/src/map.ts:158](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L158)
 
 Backing WebGPU canvas element.
 
@@ -107,7 +107,7 @@ Backing WebGPU canvas element.
 
 > **get** **events**(): `EventEmitter`\<[`MapEventRecord`](../type-aliases/MapEventRecord.md)\>
 
-Defined in: [autk-map/src/map.ts:168](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L168)
+Defined in: [autk-map/src/map.ts:168](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L168)
 
 Public typed map-event bus (e.g., picking).
 
@@ -123,7 +123,7 @@ Public typed map-event bus (e.g., picking).
 
 > **get** **layerManager**(): [`LayerManager`](LayerManager.md)
 
-Defined in: [autk-map/src/map.ts:153](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L153)
+Defined in: [autk-map/src/map.ts:153](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L153)
 
 Ordered layer stack manager.
 
@@ -139,7 +139,7 @@ Ordered layer stack manager.
 
 > **get** **renderer**(): [`Renderer`](Renderer.md)
 
-Defined in: [autk-map/src/map.ts:148](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L148)
+Defined in: [autk-map/src/map.ts:148](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L148)
 
 WebGPU renderer.
 
@@ -155,7 +155,7 @@ WebGPU renderer.
 
 > **get** **ui**(): [`AutkMapUi`](AutkMapUi.md)
 
-Defined in: [autk-map/src/map.ts:163](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L163)
+Defined in: [autk-map/src/map.ts:163](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L163)
 
 Map UI controller.
 
@@ -169,7 +169,7 @@ Map UI controller.
 
 > **clearHighlightedIds**(`id`): `void`
 
-Defined in: [autk-map/src/map.ts:666](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L666)
+Defined in: [autk-map/src/map.ts:684](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L684)
 
 Clears the highlighted selection of a pickable layer.
 
@@ -197,7 +197,7 @@ Never throws.
 
 > **clearSkippedIds**(`id`): `void`
 
-Defined in: [autk-map/src/map.ts:699](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L699)
+Defined in: [autk-map/src/map.ts:717](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L717)
 
 Clears skipped rendering state for a vector layer.
 
@@ -225,7 +225,7 @@ Never throws.
 
 > **destroy**(): `void`
 
-Defined in: [autk-map/src/map.ts:757](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L757)
+Defined in: [autk-map/src/map.ts:775](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L775)
 
 Tears down map resources, event bindings, and GPU allocations.
 
@@ -251,7 +251,7 @@ map.destroy();
 
 > **draw**(`fps?`): `void`
 
-Defined in: [autk-map/src/map.ts:717](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L717)
+Defined in: [autk-map/src/map.ts:735](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L735)
 
 Starts the continuous render loop at the target frame rate.
 
@@ -285,7 +285,7 @@ map.draw(30);  // render at 30 fps
 
 > **init**(): `Promise`\<`void`\>
 
-Defined in: [autk-map/src/map.ts:185](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L185)
+Defined in: [autk-map/src/map.ts:185](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L185)
 
 Initializes renderer resources, event bindings, and UI.
 
@@ -311,7 +311,7 @@ await map.init();
 
 > **loadCollection**(`id`, `params`): `void`
 
-Defined in: [autk-map/src/map.ts:223](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L223)
+Defined in: [autk-map/src/map.ts:223](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L223)
 
 Loads a GeoJSON feature collection as a map layer.
 
@@ -352,7 +352,7 @@ Never throws. Errors are logged to the console.
 
 > **loadMesh**(`id`, `params`): `void`
 
-Defined in: [autk-map/src/map.ts:292](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L292)
+Defined in: [autk-map/src/map.ts:292](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L292)
 
 Loads a prebuilt 3D triangle mesh directly into the map.
 
@@ -389,7 +389,7 @@ If the map origin has not been initialized.
 
 > **removeLayer**(`id`): `void`
 
-Defined in: [autk-map/src/map.ts:636](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L636)
+Defined in: [autk-map/src/map.ts:654](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L654)
 
 Removes all layers matching the provided id.
 
@@ -417,7 +417,7 @@ Never throws. Unknown ids are silently ignored.
 
 > **setHighlightedIds**(`id`, `selection`): `void`
 
-Defined in: [autk-map/src/map.ts:650](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L650)
+Defined in: [autk-map/src/map.ts:668](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L668)
 
 Replaces the highlighted selection of a pickable layer.
 
@@ -451,7 +451,7 @@ Never throws.
 
 > **setSkippedIds**(`id`, `selection`): `void`
 
-Defined in: [autk-map/src/map.ts:683](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L683)
+Defined in: [autk-map/src/map.ts:701](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L701)
 
 Toggles skipped rendering for the provided component ids of a vector layer.
 
@@ -485,7 +485,7 @@ Never throws.
 
 > **updateColorMap**(`id`, `params`): `void`
 
-Defined in: [autk-map/src/map.ts:539](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L539)
+Defined in: [autk-map/src/map.ts:557](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L557)
 
 Updates color-map configuration for a layer.
 
@@ -519,7 +519,7 @@ Never throws. Unknown layers are silently ignored.
 
 > **updateRaster**(`id`, `params`): `void`
 
-Defined in: [autk-map/src/map.ts:493](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L493)
+Defined in: [autk-map/src/map.ts:493](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L493)
 
 Updates raster layer values and color domain.
 
@@ -551,7 +551,7 @@ Never throws. Errors are logged to the console.
 
 > **updateRenderInfo**(`id`, `params`): `void`
 
-Defined in: [autk-map/src/map.ts:596](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L596)
+Defined in: [autk-map/src/map.ts:614](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L614)
 
 Updates one or more render properties of a layer.
 
@@ -591,7 +591,7 @@ Never throws. Unknown layers are silently ignored.
 
 > **updateThematic**(`id`, `params`): `void`
 
-Defined in: [autk-map/src/map.ts:339](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/map.ts#L339)
+Defined in: [autk-map/src/map.ts:339](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/map.ts#L339)
 
 Updates the thematic (color-mapped) values of a layer from a feature collection.
 

@@ -6,7 +6,7 @@
 
 # Interface: LoadCollectionParams
 
-Defined in: [autk-map/src/api.ts:56](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/api.ts#L56)
+Defined in: [autk-map/src/api.ts:57](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/api.ts#L57)
 
 Parameter types for the main `AutkMap` loading and update APIs.
 
@@ -16,12 +16,13 @@ Parameter types for the main `AutkMap` loading and update APIs.
 
 > **collection**: `FeatureCollection`\<`Geometry` \| `null`\>
 
-Defined in: [autk-map/src/api.ts:63](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/api.ts#L63)
+Defined in: [autk-map/src/api.ts:65](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/api.ts#L65)
 
 Source feature collection to load.
 
 Raster-derived collections may contain `null` geometries because values
-are resolved from raster cell payloads rather than vector geometry.
+are provided as flat band arrays on the feature properties rather than as
+per-cell vector geometries.
 
 ***
 
@@ -29,7 +30,7 @@ are resolved from raster cell payloads rather than vector geometry.
 
 > `optional` **loadConfig?**: [`LoadCollectionConfig`](LoadCollectionConfig.md)
 
-Defined in: [autk-map/src/api.ts:75](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/api.ts#L75)
+Defined in: [autk-map/src/api.ts:77](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/api.ts#L77)
 
 Optional geometry-building configuration applied while loading.
 
@@ -39,7 +40,7 @@ Optional geometry-building configuration applied while loading.
 
 > `optional` **property?**: `string`
 
-Defined in: [autk-map/src/api.ts:87](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/api.ts#L87)
+Defined in: [autk-map/src/api.ts:89](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/api.ts#L89)
 
 Property accessor used to derive layer values.
 
@@ -48,8 +49,8 @@ Use a dot-path string accessor such as `properties.shape_area`.
 For vector layers, the path is resolved from each feature and is applied
 immediately as the initial thematic mapping when provided.
 
-For raster layers, the path is resolved from each raster cell object and
-is required to populate the raster value texture.
+For raster layers, the path is resolved from the feature properties and
+must point to a flat band array such as `band_1`.
 
 ***
 
@@ -57,7 +58,7 @@ is required to populate the raster value texture.
 
 > `optional` **type?**: `LayerType` \| `null`
 
-Defined in: [autk-map/src/api.ts:71](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/api.ts#L71)
+Defined in: [autk-map/src/api.ts:73](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/api.ts#L73)
 
 Optional explicit layer type override.
 

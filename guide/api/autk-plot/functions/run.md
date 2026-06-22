@@ -8,7 +8,7 @@
 
 > **run**(`rows`, `config`, `columns`): [`ExecutedPlotTransform`](../type-aliases/ExecutedPlotTransform.md)
 
-Defined in: [transforms/index.ts:61](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/transforms/index.ts#L61)
+Defined in: [transforms/index.ts:61](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/transforms/index.ts#L61)
 
 Runs a plot transform config through the preset pipeline.
 

@@ -8,7 +8,7 @@
 
 > **AutkDatum** = `GeoJsonProperties` & `object`
 
-Defined in: [types-plot.ts:9](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/types-plot.ts#L9)
+Defined in: [types-plot.ts:9](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/types-plot.ts#L9)
 
 Datum contract bound to interactive marks.
 

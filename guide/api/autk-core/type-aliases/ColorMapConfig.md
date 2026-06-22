@@ -8,7 +8,7 @@
 
 > **ColorMapConfig** = `object`
 
-Defined in: [types-colormap.ts:160](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/types-colormap.ts#L160)
+Defined in: [types-colormap.ts:160](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/types-colormap.ts#L160)
 
 Unified color-map configuration used by map rendering and legend generation.
 
@@ -21,7 +21,7 @@ both `autk-core` and `@urban-toolkit/autk-map` resolve and display the same scal
 
 > **domainSpec**: [`ColorMapDomainSpec`](ColorMapDomainSpec.md)
 
-Defined in: [types-colormap.ts:164](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/types-colormap.ts#L164)
+Defined in: [types-colormap.ts:164](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/types-colormap.ts#L164)
 
 Strategy used to derive the domain passed to the interpolator.
 
@@ -31,6 +31,6 @@ Strategy used to derive the domain passed to the interpolator.
 
 > **interpolator**: [`ColorMapInterpolator`](../enumerations/ColorMapInterpolator.md)
 
-Defined in: [types-colormap.ts:162](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-core/src/types-colormap.ts#L162)
+Defined in: [types-colormap.ts:162](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/types-colormap.ts#L162)
 
 Selected interpolator or color scheme.

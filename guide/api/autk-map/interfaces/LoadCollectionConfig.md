@@ -6,7 +6,7 @@
 
 # Interface: LoadCollectionConfig
 
-Defined in: [autk-map/src/api.ts:42](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/api.ts#L42)
+Defined in: [autk-map/src/api.ts:43](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/api.ts#L43)
 
 Parameters for loading a feature collection as a map layer.
 
@@ -17,7 +17,8 @@ GeoTIFF-derived raster layer.
 
 For vector layers, `property` is optional and is used to initialize thematic
 mapping immediately after the layer is created. For raster layers, `property`
-is required so a numeric value can be extracted from each raster cell.
+selects the band array stored on the raster feature properties (for example
+`band_1`).
 
 ## Properties
 
@@ -25,7 +26,7 @@ is required so a numeric value can be extracted from each raster cell.
 
 > `optional` **buildingsZeroHeight?**: `boolean`
 
-Defined in: [autk-map/src/api.ts:46](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/api.ts#L46)
+Defined in: [autk-map/src/api.ts:47](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/api.ts#L47)
 
 Optional flag to preserve buildings that lack valid height metadata.
 
@@ -35,7 +36,7 @@ Optional flag to preserve buildings that lack valid height metadata.
 
 > `optional` **polylinesWidth?**: `number`
 
-Defined in: [autk-map/src/api.ts:53](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/api.ts#L53)
+Defined in: [autk-map/src/api.ts:54](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/api.ts#L54)
 
 Optional full visual width for triangulated polyline/road layers.
 

@@ -6,7 +6,7 @@
 
 # Interface: NearConfig
 
-Defined in: [use-cases/spatial-join/interfaces.ts:20](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-db/src/use-cases/spatial-join/interfaces.ts#L20)
+Defined in: [use-cases/spatial-join/interfaces.ts:20](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-db/src/use-cases/spatial-join/interfaces.ts#L20)
 
 Configuration for the NEAR spatial predicate.
 
@@ -25,7 +25,7 @@ const near: NearConfig = { distance: 1000, useCentroid: true };
 
 > **distance**: `number`
 
-Defined in: [use-cases/spatial-join/interfaces.ts:22](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-db/src/use-cases/spatial-join/interfaces.ts#L22)
+Defined in: [use-cases/spatial-join/interfaces.ts:22](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-db/src/use-cases/spatial-join/interfaces.ts#L22)
 
 Maximum search distance.
 
@@ -35,6 +35,6 @@ Maximum search distance.
 
 > `optional` **useCentroid?**: `boolean`
 
-Defined in: [use-cases/spatial-join/interfaces.ts:24](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-db/src/use-cases/spatial-join/interfaces.ts#L24)
+Defined in: [use-cases/spatial-join/interfaces.ts:24](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-db/src/use-cases/spatial-join/interfaces.ts#L24)
 
 When `true`, uses centroid-to-centroid distance. Defaults to `true`.

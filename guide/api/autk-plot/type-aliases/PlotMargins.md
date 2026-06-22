@@ -8,7 +8,7 @@
 
 > **PlotMargins** = `object`
 
-Defined in: [api.ts:25](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/api.ts#L25)
+Defined in: [api.ts:25](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/api.ts#L25)
 
 Margin values in pixels around the plot drawing area.
 
@@ -18,7 +18,7 @@ Margin values in pixels around the plot drawing area.
 
 > **bottom**: `number`
 
-Defined in: [api.ts:33](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/api.ts#L33)
+Defined in: [api.ts:33](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/api.ts#L33)
 
 Bottom margin in pixels.
 
@@ -28,7 +28,7 @@ Bottom margin in pixels.
 
 > **left**: `number`
 
-Defined in: [api.ts:27](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/api.ts#L27)
+Defined in: [api.ts:27](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/api.ts#L27)
 
 Left margin in pixels.
 
@@ -38,7 +38,7 @@ Left margin in pixels.
 
 > **right**: `number`
 
-Defined in: [api.ts:29](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/api.ts#L29)
+Defined in: [api.ts:29](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/api.ts#L29)
 
 Right margin in pixels.
 
@@ -48,6 +48,6 @@ Right margin in pixels.
 
 > **top**: `number`
 
-Defined in: [api.ts:31](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-plot/src/api.ts#L31)
+Defined in: [api.ts:31](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/api.ts#L31)
 
 Top margin in pixels.

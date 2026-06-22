@@ -6,7 +6,7 @@
 
 # Interface: LoadMeshParams
 
-Defined in: [autk-map/src/api.ts:98](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/api.ts#L98)
+Defined in: [autk-map/src/api.ts:100](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/api.ts#L100)
 
 Parameters for loading a prebuilt triangle mesh directly.
 
@@ -21,7 +21,7 @@ the same logical mesh parts.
 
 > **components**: `LayerComponent`[]
 
-Defined in: [autk-map/src/api.ts:112](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/api.ts#L112)
+Defined in: [autk-map/src/api.ts:114](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/api.ts#L114)
 
 Per-component metadata aligned with `geometry`.
 
@@ -34,7 +34,7 @@ with rendered mesh parts.
 
 > **geometry**: `LayerGeometry`[]
 
-Defined in: [autk-map/src/api.ts:105](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/api.ts#L105)
+Defined in: [autk-map/src/api.ts:107](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/api.ts#L107)
 
 Mesh geometry in map-local coordinates.
 
@@ -47,7 +47,7 @@ shared origin.
 
 > `optional` **thematic?**: [`LayerThematic`](LayerThematic.md)[]
 
-Defined in: [autk-map/src/api.ts:119](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/api.ts#L119)
+Defined in: [autk-map/src/api.ts:121](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/api.ts#L121)
 
 Optional thematic values aligned one-to-one with `components`.
 
@@ -60,7 +60,7 @@ the same index.
 
 > `optional` **type?**: `"buildings"`
 
-Defined in: [autk-map/src/api.ts:125](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-map/src/api.ts#L125)
+Defined in: [autk-map/src/api.ts:127](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/api.ts#L127)
 
 Mesh render type.
 

@@ -8,7 +8,7 @@
 
 > **isRenderableTable**(`table`): `table is Table & { type: LayerType }`
 
-Defined in: [interfaces.ts:181](https://github.com/urban-toolkit/autark/blob/671ed3ea2a6b32fefc861d3849220f8c785a203d/autk-db/src/interfaces.ts#L181)
+Defined in: [interfaces.ts:181](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-db/src/interfaces.ts#L181)
 
 Narrows a table to metadata that can be rendered on a map.
 

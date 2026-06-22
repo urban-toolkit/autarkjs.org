@@ -1,3 +1,25 @@
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+body,
+#app,
+.Layout {
+  min-height: 100vh;
+}
+
+#app,
+.Layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.Layout .VPContent {
+  flex: 1 0 auto;
+}
+
 .VPHero .text,
 .VPHero .tagline {
   max-width: 100% !important;
