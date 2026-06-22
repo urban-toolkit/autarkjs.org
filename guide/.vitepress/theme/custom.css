@@ -29,8 +29,13 @@ body,
 
 .VPHome .VPHero {
   min-height: auto;
-  padding-top: 88px;
+  padding-top: 108px;
   padding-bottom: 40px;
+}
+
+.VPFooter {
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
 }
 
 .VPHero .text,

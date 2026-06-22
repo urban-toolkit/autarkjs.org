@@ -25,7 +25,7 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  padding: 20px 24px;
+  padding: 12px 24px;
   border-top: 1px solid var(--vp-c-divider);
 }
 
