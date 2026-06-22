@@ -24,13 +24,13 @@ body,
 }
 
 .VPHome {
-  min-height: calc(100dvh - var(--vp-nav-height));
+  min-height: auto;
 }
 
 .VPHome .VPHero {
-  min-height: calc(100dvh - var(--vp-nav-height));
-  display: flex;
-  align-items: center;
+  min-height: auto;
+  padding-top: 72px;
+  padding-bottom: 40px;
 }
 
 .VPHero .text,
