@@ -11,13 +11,26 @@ body,
 }
 
 #app,
-.Layout {
+.Layout,
+.VPContent,
+.VPHome {
   display: flex;
   flex-direction: column;
 }
 
-.Layout .VPContent {
+.Layout .VPContent,
+.VPHome {
   flex: 1 0 auto;
+}
+
+.VPHome {
+  min-height: calc(100vh - var(--vp-nav-height));
+}
+
+.VPHome .VPHero {
+  min-height: calc(100vh - var(--vp-nav-height));
+  display: flex;
+  align-items: center;
 }
 
 .VPHero .text,
