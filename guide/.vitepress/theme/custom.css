@@ -7,7 +7,7 @@ body,
 body,
 #app,
 .Layout {
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 #app,
@@ -24,11 +24,11 @@ body,
 }
 
 .VPHome {
-  min-height: calc(100vh - var(--vp-nav-height));
+  min-height: calc(100dvh - var(--vp-nav-height));
 }
 
 .VPHome .VPHero {
-  min-height: calc(100vh - var(--vp-nav-height));
+  min-height: calc(100dvh - var(--vp-nav-height));
   display: flex;
   align-items: center;
 }
