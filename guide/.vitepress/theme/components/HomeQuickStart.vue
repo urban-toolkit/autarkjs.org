@@ -175,7 +175,7 @@ map.draw();</code></pre>
   --quickstart-card-height: 660px;
   margin-left: var(--vp-offset, calc(50% - 50vw));
   margin-right: var(--vp-offset, calc(50% - 50vw));
-  padding: 64px 24px 24px;
+  padding: 64px 24px 8px;
 }
 
 .quickstart-shell {
