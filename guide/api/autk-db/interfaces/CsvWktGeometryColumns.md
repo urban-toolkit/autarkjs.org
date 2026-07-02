@@ -6,7 +6,7 @@
 
 # Interface: CsvWktGeometryColumns
 
-Defined in: [use-cases/load-csv/interfaces.ts:45](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-db/src/use-cases/load-csv/interfaces.ts#L45)
+Defined in: [use-cases/load-csv/interfaces.ts:45](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-db/src/use-cases/load-csv/interfaces.ts#L45)
 
 Describes how to build geometry from a single WKT column.
 
@@ -27,7 +27,7 @@ const geometryColumns: CsvWktGeometryColumns = {
 
 > `optional` **coordinateFormat?**: `string`
 
-Defined in: [use-cases/load-csv/interfaces.ts:49](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-db/src/use-cases/load-csv/interfaces.ts#L49)
+Defined in: [use-cases/load-csv/interfaces.ts:49](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-db/src/use-cases/load-csv/interfaces.ts#L49)
 
 CRS of the source WKT geometry before it is transformed into the workspace CRS.
 
@@ -37,6 +37,6 @@ CRS of the source WKT geometry before it is transformed into the workspace CRS.
 
 > **wktColumnName**: `string`
 
-Defined in: [use-cases/load-csv/interfaces.ts:47](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-db/src/use-cases/load-csv/interfaces.ts#L47)
+Defined in: [use-cases/load-csv/interfaces.ts:47](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-db/src/use-cases/load-csv/interfaces.ts#L47)
 
 Name of the column that stores WKT geometry text such as `POINT(...)` or `POLYGON(...)`.

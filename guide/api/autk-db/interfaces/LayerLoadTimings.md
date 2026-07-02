@@ -6,7 +6,7 @@
 
 # Interface: LayerLoadTimings
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:27](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L27)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:27](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L27)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [use-cases/load-osm-overpass/interfaces.ts:27](https://github.com/ur
 
 > **featureCount**: `number`
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:33](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L33)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:33](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L33)
 
 Number of GeoJSON features in the loaded layer.
 
@@ -24,7 +24,7 @@ Number of GeoJSON features in the loaded layer.
 
 > **layerName**: `string`
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:28](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L28)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:28](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L28)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [use-cases/load-osm-overpass/interfaces.ts:28](https://github.com/ur
 
 > **layerType**: `string`
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:29](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L29)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:29](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L29)
 
 ***
 
@@ -40,6 +40,6 @@ Defined in: [use-cases/load-osm-overpass/interfaces.ts:29](https://github.com/ur
 
 > **loadMs**: `number`
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:31](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L31)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:31](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L31)
 
 Time in ms to run the SQL query that extracts this layer from the OSM table (excludes HTTP).

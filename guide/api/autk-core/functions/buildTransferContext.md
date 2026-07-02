@@ -8,7 +8,7 @@
 
 > **buildTransferContext**(`values`, `config?`): [`TransferContext`](../interfaces/TransferContext.md)
 
-Defined in: [transfer-function.ts:91](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/transfer-function.ts#L91)
+Defined in: [transfer-function.ts:91](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/transfer-function.ts#L91)
 
 Builds a transfer-function context from valid scalar values.
 

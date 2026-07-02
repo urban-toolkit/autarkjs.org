@@ -6,7 +6,7 @@
 
 # Interface: LoadCollectionParams
 
-Defined in: [autk-map/src/api.ts:57](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/api.ts#L57)
+Defined in: [autk-map/src/api.ts:57](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-map/src/api.ts#L57)
 
 Parameter types for the main `AutkMap` loading and update APIs.
 
@@ -16,7 +16,7 @@ Parameter types for the main `AutkMap` loading and update APIs.
 
 > **collection**: `FeatureCollection`\<`Geometry` \| `null`\>
 
-Defined in: [autk-map/src/api.ts:65](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/api.ts#L65)
+Defined in: [autk-map/src/api.ts:65](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-map/src/api.ts#L65)
 
 Source feature collection to load.
 
@@ -30,7 +30,7 @@ per-cell vector geometries.
 
 > `optional` **loadConfig?**: [`LoadCollectionConfig`](LoadCollectionConfig.md)
 
-Defined in: [autk-map/src/api.ts:77](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/api.ts#L77)
+Defined in: [autk-map/src/api.ts:77](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-map/src/api.ts#L77)
 
 Optional geometry-building configuration applied while loading.
 
@@ -40,7 +40,7 @@ Optional geometry-building configuration applied while loading.
 
 > `optional` **property?**: `string`
 
-Defined in: [autk-map/src/api.ts:89](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/api.ts#L89)
+Defined in: [autk-map/src/api.ts:89](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-map/src/api.ts#L89)
 
 Property accessor used to derive layer values.
 
@@ -58,7 +58,7 @@ must point to a flat band array such as `band_1`.
 
 > `optional` **type?**: `LayerType` \| `null`
 
-Defined in: [autk-map/src/api.ts:73](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/api.ts#L73)
+Defined in: [autk-map/src/api.ts:73](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-map/src/api.ts#L73)
 
 Optional explicit layer type override.
 

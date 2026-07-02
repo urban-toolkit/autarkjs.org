@@ -29,7 +29,7 @@ map.draw();
 
 # autk-map
 
-[![npm version](https://img.shields.io/badge/npm-v2.4.3-0ea5e9?logo=npm&labelColor=111827)](https://www.npmjs.com/package/@urban-toolkit/autk-map)
+[![npm version](https://img.shields.io/badge/npm-v3.0.0-0ea5e9?logo=npm&labelColor=111827)](https://www.npmjs.com/package/@urban-toolkit/autk-map)
 
 `autk-map` is a geospatial data renderer powered by [WebGPU](https://webgpu.org/). It can handle [GeoJSON](https://geojson.org/), semantic [OpenStreetMap](https://www.openstreetmap.org/) layer types, and can display thematic values without a tile server.
 
@@ -80,5 +80,6 @@ Autark is built over some core concepts, that guides data data loading, renderin
 - **Render state** — each layer has render state controlling properties such as opacity, visibility, picking, and whether thematic coloring is active. These properties can be updated dynamically without reloading the layer. See [Styling](./styling).
 - **Thematic data** — thematic data rendering maps numeric or categorical feature attributes to colors. In practice, you configure a color map, point to a property path, and enable thematic display for the layer. See [Thematic data](./thematic).
 - **Interactions** — interactions let users explore layers through picking, highlighting, filtering, and visibility control without changing the underlying data. See [Interactions](./interactions).
+- **Terrain data** — terrain mode replaces the flat ground plane with a heightfield built from an elevation raster, draping the loaded layers over real topography. See [Terrain data](./terrain).
 
 </div>

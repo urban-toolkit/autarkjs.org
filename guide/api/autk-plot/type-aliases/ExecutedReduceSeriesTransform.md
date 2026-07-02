@@ -8,7 +8,7 @@
 
 > **ExecutedReduceSeriesTransform** = `object`
 
-Defined in: [transforms/presets/reduce-series.ts:28](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/transforms/presets/reduce-series.ts#L28)
+Defined in: [transforms/presets/reduce-series.ts:28](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-plot/src/transforms/presets/reduce-series.ts#L28)
 
 Result produced by `runReduceSeries`.
 
@@ -18,7 +18,7 @@ Result produced by `runReduceSeries`.
 
 > **preset**: `"reduce-series"`
 
-Defined in: [transforms/presets/reduce-series.ts:30](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/transforms/presets/reduce-series.ts#L30)
+Defined in: [transforms/presets/reduce-series.ts:30](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-plot/src/transforms/presets/reduce-series.ts#L30)
 
 Preset discriminator identifying the executed transform.
 
@@ -28,6 +28,6 @@ Preset discriminator identifying the executed transform.
 
 > **rows**: [`ReduceSeriesBucketRow`](ReduceSeriesBucketRow.md)[]
 
-Defined in: [transforms/presets/reduce-series.ts:32](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/transforms/presets/reduce-series.ts#L32)
+Defined in: [transforms/presets/reduce-series.ts:32](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-plot/src/transforms/presets/reduce-series.ts#L32)
 
 Reduced series rows ready for downstream plot rendering.

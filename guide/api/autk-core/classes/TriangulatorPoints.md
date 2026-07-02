@@ -6,7 +6,7 @@
 
 # Class: TriangulatorPoints
 
-Defined in: [triangulator-points.ts:31](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/triangulator-points.ts#L31)
+Defined in: [triangulator-points.ts:31](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-points.ts#L31)
 
 Converts point-based GeoJSON features into packed point instances.
 
@@ -30,7 +30,7 @@ skipping unsupported features with a warning.
 
 > `static` **buildInstances**(`geojson`, `origin`): [`PointInstancesData`](../interfaces/PointInstancesData.md)
 
-Defined in: [triangulator-points.ts:62](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/triangulator-points.ts#L62)
+Defined in: [triangulator-points.ts:62](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-points.ts#L62)
 
 Builds point-instance data for a feature collection.
 
@@ -64,7 +64,7 @@ Never throws. Unsupported features are skipped with a console warning.
 
 > `static` **getPointSize**(): `number`
 
-Defined in: [triangulator-points.ts:50](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/triangulator-points.ts#L50)
+Defined in: [triangulator-points.ts:50](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-points.ts#L50)
 
 Returns the shared point-marker radius used by point rendering.
 
@@ -78,7 +78,7 @@ Returns the shared point-marker radius used by point rendering.
 
 > `static` **setPointSize**(`size`): `void`
 
-Defined in: [triangulator-points.ts:42](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/triangulator-points.ts#L42)
+Defined in: [triangulator-points.ts:42](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-points.ts#L42)
 
 Sets the shared base point radius used by sprite rendering.
 

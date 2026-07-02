@@ -8,7 +8,7 @@
 
 > **LayerType** = `"background"` \| `"surface"` \| `"parks"` \| `"water"` \| `"roads"` \| `"buildings"` \| `"points"` \| `"polygons"` \| `"polylines"` \| `"raster"`
 
-Defined in: [types-layer.ts:17](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/types-layer.ts#L17)
+Defined in: [types-layer.ts:17](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/types-layer.ts#L17)
 
 Canonical layer families recognized by collection loading and rendering.
 

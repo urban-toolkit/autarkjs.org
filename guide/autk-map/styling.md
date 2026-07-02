@@ -1,7 +1,7 @@
 <script setup>
 const mapStyleCode = `
 import { AutkDb } from "@urban-toolkit/autk-db";
-import { AutkMap, MapStyle } from "@urban-toolkit/autk-map";
+import { AutkMap } from "@urban-toolkit/autk-map";
 
 const db = new AutkDb();
 await db.init();
@@ -18,10 +18,10 @@ await db.loadOsm({
   }
 });
 
-MapStyle.setPredefinedStyle("google");
-
 const map = new AutkMap(canvas);
 await map.init();
+
+map.style.setPredefinedStyle("google");
 
 for (const layer of db.getLayersMetadata()) {
   const collection = await db.getLayer(layer.name);
@@ -132,13 +132,13 @@ In practice, that means you usually:
 
 | Part | Description |
 |---|---|
-| `MapStyle` | Global semantic color system for `surface`, `parks`, `water`, `roads`, `buildings`, and generic vector types. |
+| `MapStyle` | Per-map semantic color system (accessed via `map.style`) for `surface`, `parks`, `water`, `roads`, `buildings`, and generic vector types. |
 | `updateRenderInfo()` | Per-layer render state such as `opacity`, `isSkip`, `isPick`, and `isColorMap`. |
 | `updateColorMap()` | Palette and domain configuration used when thematic rendering is enabled. |
 
 ## Base map styles
 
-`MapStyle` controls the default semantic colors used by the renderer. Built-in presets provide quick visual baselines for the same data. The example below loads a basic lower-Manhattan OSM scene and applies the `google` preset before map initialization.
+`MapStyle` controls the default semantic colors used by the renderer. Each [`AutkMap`](/api/autk-map/classes/AutkMap) owns its own `MapStyle` instance, exposed through `map.style`, so multiple maps can use different visual treatments. Built-in presets provide quick visual baselines for the same data. The example below loads a basic lower-Manhattan OSM scene and applies the `google` preset through the map's style instance after initialization.
 
 <ClientOnly>
   <CodePlayground :code="mapStyleCode" out="dom" :auto-run="true" />
@@ -152,7 +152,7 @@ Built-in presets currently include:
 - `apple`
 - `osm`
 
-For full control, use `MapStyle.setCustomStyle()` with a complete semantic color object. See [`MapStyle`](/api/autk-map/classes/MapStyle).
+For full control, use `map.style.setCustomStyle()` with a complete semantic color object. See [`MapStyle`](/api/autk-map/classes/MapStyle).
 
 ## Opacity and layer render state
 

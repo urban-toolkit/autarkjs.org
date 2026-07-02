@@ -6,7 +6,7 @@
 
 # Interface: LoadCsvParams
 
-Defined in: [use-cases/load-csv/interfaces.ts:80](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-db/src/use-cases/load-csv/interfaces.ts#L80)
+Defined in: [use-cases/load-csv/interfaces.ts:80](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-db/src/use-cases/load-csv/interfaces.ts#L80)
 
 Describes the inputs required to load CSV data into DuckDB.
 
@@ -28,7 +28,7 @@ const params: LoadCsvParams = {
 
 > `optional` **csvFileUrl?**: `string`
 
-Defined in: [use-cases/load-csv/interfaces.ts:82](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-db/src/use-cases/load-csv/interfaces.ts#L82)
+Defined in: [use-cases/load-csv/interfaces.ts:82](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-db/src/use-cases/load-csv/interfaces.ts#L82)
 
 URL of the CSV file to fetch and load into DuckDB.
 
@@ -38,7 +38,7 @@ URL of the CSV file to fetch and load into DuckDB.
 
 > `optional` **csvObject?**: `unknown`[][]
 
-Defined in: [use-cases/load-csv/interfaces.ts:84](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-db/src/use-cases/load-csv/interfaces.ts#L84)
+Defined in: [use-cases/load-csv/interfaces.ts:84](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-db/src/use-cases/load-csv/interfaces.ts#L84)
 
 In-memory CSV rows to serialize, including the header row as the first entry.
 
@@ -48,7 +48,7 @@ In-memory CSV rows to serialize, including the header row as the first entry.
 
 > `optional` **delimiter?**: `string`
 
-Defined in: [use-cases/load-csv/interfaces.ts:88](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-db/src/use-cases/load-csv/interfaces.ts#L88)
+Defined in: [use-cases/load-csv/interfaces.ts:88](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-db/src/use-cases/load-csv/interfaces.ts#L88)
 
 Field delimiter used by the CSV source. Defaults to `,` in the use case.
 
@@ -58,7 +58,7 @@ Field delimiter used by the CSV source. Defaults to `,` in the use case.
 
 > `optional` **geometryColumns?**: [`CsvGeometryColumns`](../type-aliases/CsvGeometryColumns.md)
 
-Defined in: [use-cases/load-csv/interfaces.ts:90](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-db/src/use-cases/load-csv/interfaces.ts#L90)
+Defined in: [use-cases/load-csv/interfaces.ts:90](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-db/src/use-cases/load-csv/interfaces.ts#L90)
 
 Optional geometry strategy used to create a spatial column while loading.
 
@@ -68,7 +68,7 @@ Optional geometry strategy used to create a spatial column while loading.
 
 > **outputTableName**: `string`
 
-Defined in: [use-cases/load-csv/interfaces.ts:86](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-db/src/use-cases/load-csv/interfaces.ts#L86)
+Defined in: [use-cases/load-csv/interfaces.ts:86](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-db/src/use-cases/load-csv/interfaces.ts#L86)
 
 Name of the output table created inside the target workspace.
 
@@ -78,6 +78,6 @@ Name of the output table created inside the target workspace.
 
 > `optional` **workspace?**: `string`
 
-Defined in: [use-cases/load-csv/interfaces.ts:92](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-db/src/use-cases/load-csv/interfaces.ts#L92)
+Defined in: [use-cases/load-csv/interfaces.ts:92](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-db/src/use-cases/load-csv/interfaces.ts#L92)
 
 Optional workspace override used by higher-level callers when qualifying the table name.

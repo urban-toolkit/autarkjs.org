@@ -31,6 +31,6 @@
     "vitepress": "^1.6.3"
   },
   "dependencies": {
-    "@urban-toolkit/autk": "^2.4.5"
+    "@urban-toolkit/autk": "^3.0.0"
   }
 }

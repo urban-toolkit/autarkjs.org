@@ -6,7 +6,7 @@
 
 # Interface: RenderViewpoints
 
-Defined in: [api.ts:60](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-compute/src/api.ts#L60)
+Defined in: [api.ts:60](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-compute/src/api.ts#L60)
 
 Configures the collection and strategy used to derive render viewpoints.
 
@@ -16,7 +16,7 @@ Configures the collection and strategy used to derive render viewpoints.
 
 > **collection**: `FeatureCollection`
 
-Defined in: [api.ts:62](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-compute/src/api.ts#L62)
+Defined in: [api.ts:62](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-compute/src/api.ts#L62)
 
 GeoJSON collection used to derive camera origins and receive results.
 
@@ -26,7 +26,7 @@ GeoJSON collection used to derive camera origins and receive results.
 
 > `optional` **sampling?**: [`RenderViewSampling`](RenderViewSampling.md)
 
-Defined in: [api.ts:68](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-compute/src/api.ts#L68)
+Defined in: [api.ts:68](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-compute/src/api.ts#L68)
 
 Camera sampling controls applied to each derived origin.
 
@@ -36,7 +36,7 @@ Camera sampling controls applied to each derived origin.
 
 > `optional` **strategy?**: [`RenderViewpointStrategy`](../type-aliases/RenderViewpointStrategy.md)
 
-Defined in: [api.ts:65](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-compute/src/api.ts#L65)
+Defined in: [api.ts:65](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-compute/src/api.ts#L65)
 
 Strategy used to derive origins.
 

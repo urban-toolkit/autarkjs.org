@@ -6,7 +6,7 @@
 
 # Interface: LoadCollectionConfig
 
-Defined in: [autk-map/src/api.ts:43](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/api.ts#L43)
+Defined in: [autk-map/src/api.ts:43](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-map/src/api.ts#L43)
 
 Parameters for loading a feature collection as a map layer.
 
@@ -26,7 +26,7 @@ selects the band array stored on the raster feature properties (for example
 
 > `optional` **buildingsZeroHeight?**: `boolean`
 
-Defined in: [autk-map/src/api.ts:47](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/api.ts#L47)
+Defined in: [autk-map/src/api.ts:47](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-map/src/api.ts#L47)
 
 Optional flag to preserve buildings that lack valid height metadata.
 
@@ -36,7 +36,7 @@ Optional flag to preserve buildings that lack valid height metadata.
 
 > `optional` **polylinesWidth?**: `number`
 
-Defined in: [autk-map/src/api.ts:54](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/api.ts#L54)
+Defined in: [autk-map/src/api.ts:54](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-map/src/api.ts#L54)
 
 Optional full visual width for triangulated polyline/road layers.
 

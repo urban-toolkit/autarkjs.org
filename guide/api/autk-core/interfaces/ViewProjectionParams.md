@@ -6,7 +6,7 @@
 
 # Interface: ViewProjectionParams
 
-Defined in: [camera.ts:28](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/camera.ts#L28)
+Defined in: [camera.ts:28](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/camera.ts#L28)
 
 Explicit parameters for building a single view-projection matrix.
 
@@ -16,7 +16,7 @@ Explicit parameters for building a single view-projection matrix.
 
 > **aspect**: `number`
 
-Defined in: [camera.ts:38](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/camera.ts#L38)
+Defined in: [camera.ts:38](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/camera.ts#L38)
 
 Viewport aspect ratio (width / height).
 
@@ -26,7 +26,7 @@ Viewport aspect ratio (width / height).
 
 > **eye**: \[`number`, `number`, `number`\]
 
-Defined in: [camera.ts:30](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/camera.ts#L30)
+Defined in: [camera.ts:30](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/camera.ts#L30)
 
 Eye (camera) position in world space.
 
@@ -36,7 +36,7 @@ Eye (camera) position in world space.
 
 > **far**: `number`
 
-Defined in: [camera.ts:42](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/camera.ts#L42)
+Defined in: [camera.ts:42](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/camera.ts#L42)
 
 Far clipping plane distance.
 
@@ -46,7 +46,7 @@ Far clipping plane distance.
 
 > **fovDeg**: `number`
 
-Defined in: [camera.ts:36](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/camera.ts#L36)
+Defined in: [camera.ts:36](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/camera.ts#L36)
 
 Vertical field of view in degrees.
 
@@ -56,7 +56,7 @@ Vertical field of view in degrees.
 
 > **lookAt**: \[`number`, `number`, `number`\]
 
-Defined in: [camera.ts:32](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/camera.ts#L32)
+Defined in: [camera.ts:32](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/camera.ts#L32)
 
 Point the camera looks at in world space.
 
@@ -66,7 +66,7 @@ Point the camera looks at in world space.
 
 > **near**: `number`
 
-Defined in: [camera.ts:40](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/camera.ts#L40)
+Defined in: [camera.ts:40](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/camera.ts#L40)
 
 Near clipping plane distance.
 
@@ -76,6 +76,6 @@ Near clipping plane distance.
 
 > **up**: \[`number`, `number`, `number`\]
 
-Defined in: [camera.ts:34](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/camera.ts#L34)
+Defined in: [camera.ts:34](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/camera.ts#L34)
 
 World-space up vector.

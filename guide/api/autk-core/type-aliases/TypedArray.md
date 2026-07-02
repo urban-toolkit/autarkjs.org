@@ -8,7 +8,7 @@
 
 > **TypedArray** = `Float32Array` \| `Float64Array` \| `Int8Array` \| `Int16Array` \| `Int32Array` \| `Uint8Array` \| `Uint8ClampedArray` \| `Uint16Array` \| `Uint32Array`
 
-Defined in: [types-buffer.ts:17](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/types-buffer.ts#L17)
+Defined in: [types-buffer.ts:17](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/types-buffer.ts#L17)
 
 Supported TypedArray views for shared binary data buffers.
 

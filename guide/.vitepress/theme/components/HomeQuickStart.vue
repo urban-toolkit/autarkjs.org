@@ -20,7 +20,7 @@ onMounted(async () => {
 
   try {
     const { AutkDb } = await import('@urban-toolkit/autk-db')
-    const { AutkMap, MapStyle } = await import('@urban-toolkit/autk-map')
+    const { AutkMap } = await import('@urban-toolkit/autk-map')
 
     const db = new AutkDb()
     status.value = 'Initializing database…'
@@ -40,11 +40,11 @@ onMounted(async () => {
       },
     })
 
-    MapStyle.setPredefinedStyle('apple')
-
     const map = new AutkMap(canvas.value)
     status.value = 'Initializing map…'
     await map.init()
+
+    map.style.setPredefinedStyle('apple')
 
     for (const layerData of db.getLayersMetadata()) {
       const geojson = await db.getLayer(layerData.name)

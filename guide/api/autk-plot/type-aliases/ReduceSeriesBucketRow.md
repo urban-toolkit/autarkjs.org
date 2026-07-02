@@ -8,7 +8,7 @@
 
 > **ReduceSeriesBucketRow** = `object`
 
-Defined in: [transforms/presets/reduce-series.ts:41](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/transforms/presets/reduce-series.ts#L41)
+Defined in: [transforms/presets/reduce-series.ts:41](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-plot/src/transforms/presets/reduce-series.ts#L41)
 
 A single reduce-series bucket row ready for plot rendering.
 
@@ -21,7 +21,7 @@ timestamp string for object-based series.
 
 > **autkIds**: `number`[]
 
-Defined in: [transforms/presets/reduce-series.ts:49](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/transforms/presets/reduce-series.ts#L49)
+Defined in: [transforms/presets/reduce-series.ts:49](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-plot/src/transforms/presets/reduce-series.ts#L49)
 
 Merged source feature ids represented by the bucket.
 
@@ -31,7 +31,7 @@ Merged source feature ids represented by the bucket.
 
 > **bucket**: `string`
 
-Defined in: [transforms/presets/reduce-series.ts:43](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/transforms/presets/reduce-series.ts#L43)
+Defined in: [transforms/presets/reduce-series.ts:43](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-plot/src/transforms/presets/reduce-series.ts#L43)
 
 Timestamp or index key identifying the reduced bucket.
 
@@ -41,7 +41,7 @@ Timestamp or index key identifying the reduced bucket.
 
 > **count**: `number`
 
-Defined in: [transforms/presets/reduce-series.ts:47](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/transforms/presets/reduce-series.ts#L47)
+Defined in: [transforms/presets/reduce-series.ts:47](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-plot/src/transforms/presets/reduce-series.ts#L47)
 
 Number of source points collapsed into the bucket.
 
@@ -51,6 +51,6 @@ Number of source points collapsed into the bucket.
 
 > **value**: `number`
 
-Defined in: [transforms/presets/reduce-series.ts:45](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-plot/src/transforms/presets/reduce-series.ts#L45)
+Defined in: [transforms/presets/reduce-series.ts:45](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-plot/src/transforms/presets/reduce-series.ts#L45)
 
 Reduced numeric result for the bucket.

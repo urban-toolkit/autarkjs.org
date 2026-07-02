@@ -6,7 +6,7 @@
 
 # Interface: LayerInfo
 
-Defined in: [autk-map/src/types-layers.ts:24](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/types-layers.ts#L24)
+Defined in: [autk-map/src/types-layers.ts:24](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-map/src/types-layers.ts#L24)
 
 Static metadata used to identify and order a layer in the map stack.
 
@@ -16,7 +16,7 @@ Static metadata used to identify and order a layer in the map stack.
 
 > **id**: `string`
 
-Defined in: [autk-map/src/types-layers.ts:26](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/types-layers.ts#L26)
+Defined in: [autk-map/src/types-layers.ts:26](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-map/src/types-layers.ts#L26)
 
 Stable layer identifier used for lookup and updates.
 
@@ -26,7 +26,7 @@ Stable layer identifier used for lookup and updates.
 
 > **typeLayer**: `LayerType`
 
-Defined in: [autk-map/src/types-layers.ts:30](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/types-layers.ts#L30)
+Defined in: [autk-map/src/types-layers.ts:30](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-map/src/types-layers.ts#L30)
 
 Semantic layer type and geometry family handled by the layer.
 
@@ -36,6 +36,6 @@ Semantic layer type and geometry family handled by the layer.
 
 > **zIndex**: `number`
 
-Defined in: [autk-map/src/types-layers.ts:28](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/types-layers.ts#L28)
+Defined in: [autk-map/src/types-layers.ts:28](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-map/src/types-layers.ts#L28)
 
 Rendering order relative to other layers.

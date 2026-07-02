@@ -6,7 +6,7 @@
 
 # Interface: LayerColormap
 
-Defined in: [autk-map/src/types-layers.ts:34](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/types-layers.ts#L34)
+Defined in: [autk-map/src/types-layers.ts:34](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-map/src/types-layers.ts#L34)
 
 Runtime colormap state associated with a layer.
 
@@ -16,7 +16,7 @@ Runtime colormap state associated with a layer.
 
 > `optional` **computedDomain?**: `ResolvedDomain`
 
-Defined in: [autk-map/src/types-layers.ts:38](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/types-layers.ts#L38)
+Defined in: [autk-map/src/types-layers.ts:38](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-map/src/types-layers.ts#L38)
 
 Domain resolved from the current thematic or raster data, if available.
 
@@ -26,7 +26,7 @@ Domain resolved from the current thematic or raster data, if available.
 
 > `optional` **computedLabels?**: `string`[]
 
-Defined in: [autk-map/src/types-layers.ts:40](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/types-layers.ts#L40)
+Defined in: [autk-map/src/types-layers.ts:40](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-map/src/types-layers.ts#L40)
 
 Legend labels derived from the resolved domain, if available.
 
@@ -36,6 +36,6 @@ Legend labels derived from the resolved domain, if available.
 
 > **config**: `ColorMapConfig`
 
-Defined in: [autk-map/src/types-layers.ts:36](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-map/src/types-layers.ts#L36)
+Defined in: [autk-map/src/types-layers.ts:36](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-map/src/types-layers.ts#L36)
 
 User colormap configuration used for thematic styling.

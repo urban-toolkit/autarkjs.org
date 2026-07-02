@@ -6,7 +6,7 @@
 
 # Interface: TransferContext
 
-Defined in: [transfer-function.ts:59](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/transfer-function.ts#L59)
+Defined in: [transfer-function.ts:59](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/transfer-function.ts#L59)
 
 Precomputed transfer-function context for efficient per-value alpha mapping.
 
@@ -16,7 +16,7 @@ Precomputed transfer-function context for efficient per-value alpha mapping.
 
 > **config**: [`RequiredTransferFunction`](../type-aliases/RequiredTransferFunction.md)
 
-Defined in: [transfer-function.ts:71](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/transfer-function.ts#L71)
+Defined in: [transfer-function.ts:71](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/transfer-function.ts#L71)
 
 Fully resolved transfer-function configuration used during evaluation.
 
@@ -26,7 +26,7 @@ Fully resolved transfer-function configuration used during evaluation.
 
 > **max**: `number`
 
-Defined in: [transfer-function.ts:63](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/transfer-function.ts#L63)
+Defined in: [transfer-function.ts:63](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/transfer-function.ts#L63)
 
 Maximum scalar value found among valid source values.
 
@@ -36,7 +36,7 @@ Maximum scalar value found among valid source values.
 
 > **maxAbsDistance**: `number`
 
-Defined in: [transfer-function.ts:67](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/transfer-function.ts#L67)
+Defined in: [transfer-function.ts:67](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/transfer-function.ts#L67)
 
 Maximum absolute distance from `config.zeroCenter`.
 
@@ -46,7 +46,7 @@ Maximum absolute distance from `config.zeroCenter`.
 
 > **min**: `number`
 
-Defined in: [transfer-function.ts:61](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/transfer-function.ts#L61)
+Defined in: [transfer-function.ts:61](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/transfer-function.ts#L61)
 
 Minimum scalar value found among valid source values.
 
@@ -56,7 +56,7 @@ Minimum scalar value found among valid source values.
 
 > **range**: `number`
 
-Defined in: [transfer-function.ts:65](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/transfer-function.ts#L65)
+Defined in: [transfer-function.ts:65](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/transfer-function.ts#L65)
 
 Difference between `max` and `min`.
 
@@ -66,6 +66,6 @@ Difference between `max` and `min`.
 
 > **validCount**: `number`
 
-Defined in: [transfer-function.ts:69](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/transfer-function.ts#L69)
+Defined in: [transfer-function.ts:69](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/transfer-function.ts#L69)
 
 Number of valid scalar values used to build the context.

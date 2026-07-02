@@ -6,7 +6,7 @@
 
 # Interface: PointInstancesData
 
-Defined in: [triangulator-points.ts:19](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/triangulator-points.ts#L19)
+Defined in: [triangulator-points.ts:19](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-points.ts#L19)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [triangulator-points.ts:19](https://github.com/urban-toolkit/autark/
 
 > **components**: [`LayerComponent`](LayerComponent.md)[]
 
-Defined in: [triangulator-points.ts:21](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/triangulator-points.ts#L21)
+Defined in: [triangulator-points.ts:21](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-points.ts#L21)
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: [triangulator-points.ts:21](https://github.com/urban-toolkit/autark/
 
 > **instances**: `Float32Array`
 
-Defined in: [triangulator-points.ts:20](https://github.com/urban-toolkit/autark/blob/ca69bb08b43e4b2da0a43855d7da420f72c78546/autk-core/src/triangulator-points.ts#L20)
+Defined in: [triangulator-points.ts:20](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-points.ts#L20)
