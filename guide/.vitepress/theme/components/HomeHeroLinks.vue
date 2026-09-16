@@ -2,7 +2,7 @@
   <p class="hero-links">
     Other ways to use Autark:
     <span class="hero-link-soon" title="Within a Python-based interactive notebook">pyautark (soon)</span>,
-    <a href="https://github.com/urban-toolkit/autk-grammar" target="_blank" rel="noreferrer" title="Through a grammar">autk-grammar</a>
+    <a href="/grammar/" title="Through a grammar">autk-grammar</a>
   </p>
 </template>
 
