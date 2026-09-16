@@ -15,6 +15,11 @@
   color: var(--vp-c-text-2);
 }
 
+.hero-links a,
+.hero-link-soon {
+  white-space: nowrap;
+}
+
 .hero-links a {
   font-weight: 600;
   color: var(--vp-c-brand-1);
