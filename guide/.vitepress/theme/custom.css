@@ -219,6 +219,10 @@ body,
 .case-tag--compute {
   background: #10b981;
 }
+
+.case-tag--data {
+  background: #f59e0b;
+}
 /* Justify body text across all guide pages */
 .vp-doc p,
 .vp-doc li {

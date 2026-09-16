@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { GRAMMAR_EXAMPLES, GRAMMAR_EXAMPLE_GROUPS } from './theme/data/grammarExamples'
 
 export default defineConfig({
     head: [
@@ -12,7 +13,7 @@ gtag('config', 'G-P6EVSF42L8');`],
 
     vite: {
         optimizeDeps: {
-            exclude: ['@urban-toolkit/autk-db', '@duckdb/duckdb-wasm'],
+            exclude: ['@urban-toolkit/autk-db', '@urban-toolkit/autk-grammar', '@duckdb/duckdb-wasm'],
         },
         server: {
             headers: {
@@ -55,11 +56,27 @@ gtag('config', 'G-P6EVSF42L8');`],
                     { text: 'autk-plot', link: '/api/autk-plot/globals' },
                 ],
             },
-            { text: 'autk-grammar', link: 'https://github.com/urban-toolkit/autk-grammar' },
+            { text: 'autk-grammar', link: '/grammar/', activeMatch: '^/grammar/' },
             { text: 'pyautark (soon)', link: 'javascript:void(0)' },
         ],
 
         sidebar: {
+            '/grammar/': [
+                {
+                    text: 'autk-grammar',
+                    items: [
+                        { text: 'Guide', link: '/grammar/' },
+                        { text: 'Examples', link: '/grammar/examples/' },
+                    ],
+                },
+                ...GRAMMAR_EXAMPLE_GROUPS.map((group) => ({
+                    text: group,
+                    collapsed: true,
+                    items: GRAMMAR_EXAMPLES
+                        .filter((example) => example.group === group)
+                        .map((example) => ({ text: example.title, link: `/grammar/examples/${example.slug}` })),
+                })),
+            ],
             '/api/autk-db/': [{
                 text: 'autk-db API Reference',
                 items: [
