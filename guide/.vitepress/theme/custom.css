@@ -74,11 +74,52 @@ body,
 }
 
 .VPNavBarMenuLink[href="javascript:void(0)"],
+.VPNavScreenMenuLink[href="javascript:void(0)"],
 .VPFlyout .link[href="javascript:void(0)"] {
   color: var(--vp-c-text-3) !important;
   opacity: 0.6;
   pointer-events: none;
   cursor: default;
+}
+
+.VPNavBarMenuLink[href="javascript:void(0)"]::after,
+.VPNavScreenMenuLink[href="javascript:void(0)"]::after {
+  display: none !important;
+}
+
+/* Keep the theme toggle and GitHub link in the top bar instead of the "..." menu */
+@media (min-width: 768px) {
+  .VPNavBar .VPNavBarAppearance,
+  .VPNavBar .VPNavBarSocialLinks {
+    display: flex !important;
+    align-items: center;
+  }
+
+  .VPNavBar .VPNavBarExtra {
+    display: none !important;
+  }
+}
+
+/* Make room for them on narrower screens: icon-only search, tighter menu */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .VPNavBar .DocSearch-Button .DocSearch-Button-Placeholder,
+  .VPNavBar .DocSearch-Button .DocSearch-Button-Keys {
+    display: none !important;
+  }
+
+  .VPNavBar .VPNavBarMenuLink,
+  .VPNavBar .VPNavBarMenuGroup .button {
+    padding: 0 6px !important;
+  }
+
+  .VPNavBar .content-body .appearance::before,
+  .VPNavBar .content-body .social-links::before {
+    display: none !important;
+  }
+
+  .VPNavBar .content-body .appearance {
+    margin-left: 8px;
+  }
 }
 
 .case-tags {
