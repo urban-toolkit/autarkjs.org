@@ -16,6 +16,10 @@ type PlaygroundFile = {
 type PlaygroundMount = {
   name: string
   height?: number
+  /** Optional DOM id, for libraries that look up their targets by id. */
+  id?: string
+  /** Element to create. Defaults to 'div'. */
+  kind?: 'div' | 'canvas'
 }
 
 const props = withDefaults(defineProps<{
@@ -33,6 +37,14 @@ const props = withDefaults(defineProps<{
   canvasHeight?: number
   /** Whether to render the default map canvas. Defaults to true. */
   renderCanvas?: boolean
+  /** Optional DOM id for the default map canvas. */
+  canvasId?: string
+  /** Also expose the autk-grammar exports (AutkGrammar, ...) to user code. */
+  grammar?: boolean
+  /** An autk-grammar spec (object literal) to show and run instead of `code`. */
+  spec?: string
+  /** Element ids passed to `new AutkGrammar(targets)` when running `spec`. */
+  targets?: Record<string, string | string[]>
 }>(), {
   renderCanvas: true,
 })
@@ -82,11 +94,34 @@ function normalizeCode(src: string): string {
 }
 
 function buildInitialFiles(): PlaygroundFile[] {
+  if (props.spec !== undefined) {
+    return [{ label: 'spec', code: normalizeCode(props.spec) }]
+  }
+
   if (props.files && props.files.length > 0) {
     return props.files.map((file) => ({ label: file.label, code: normalizeCode(file.code) }))
   }
 
   return [{ label: 'example.ts', code: normalizeCode(props.code ?? '') }]
+}
+
+/** Wraps the edited spec in the code that runs it. Specs without a map or plot print their tables. */
+function getSpecCode(): string {
+  return `
+    const spec = (${editableFiles.value[0]?.code ?? '{}'}
+    )
+    setStatus('Running the spec...')
+    const grammar = new AutkGrammar(${JSON.stringify(props.targets ?? {})})
+    await grammar.run(spec)
+    clearStatus()
+    if (!spec.map && !spec.plot) {
+      for (const name of Object.keys(grammar.data)) {
+        const table = await grammar.data[name]
+        console.log(name + ': ' + table.features.length + ' features')
+        console.log(table.features.slice(0, 3).map((feature) => feature.properties))
+      }
+    }
+  `
 }
 
 function getUserCode(): string {
@@ -227,6 +262,7 @@ async function runCode() {
     const autkCore = await import('@urban-toolkit/autk-core')
     const autkCompute = await import('@urban-toolkit/autk-compute')
     const autkPlot = await import('@urban-toolkit/autk-plot')
+    const autkGrammar = props.grammar || props.spec !== undefined ? await import('@urban-toolkit/autk-grammar') : {}
 
     const modules = {
       ...autkMap,
@@ -234,6 +270,7 @@ async function runCode() {
       ...autkCore,
       ...autkCompute,
       ...autkPlot,
+      ...autkGrammar,
     }
 
     const scopeDeclarations = Object.keys(modules)
@@ -241,7 +278,7 @@ async function runCode() {
       .map((key) => `const ${key} = __modules.${key};`)
       .join('\n')
 
-    const userCode = getUserCode()
+    const userCode = props.spec !== undefined ? getSpecCode() : getUserCode()
 
     const namedMountDeclarations = getNamedMountScopeDeclarations()
 
@@ -338,7 +375,7 @@ watch(isDark, () => {
 
 <template>
   <div class="code-playground" aria-live="polite">
-    <div class="code-playground__label">Live Code</div>
+    <div class="code-playground__label">{{ spec !== undefined ? 'Live Spec' : 'Live Code' }}</div>
 
     <div class="code-playground__editor">
       <div v-if="hasTabs" class="code-playground__file-tabs" role="tablist" aria-label="Code files">
@@ -389,7 +426,7 @@ watch(isDark, () => {
 
     <div class="code-playground__output">
       <div v-if="showCanvas && out !== 'console'" class="code-playground__canvas-wrap" :style="canvasHeightStyle ? { height: canvasHeightStyle } : undefined">
-        <canvas ref="canvasEl" class="code-playground__canvas" />
+        <canvas ref="canvasEl" class="code-playground__canvas" :id="canvasId" />
         <div v-if="status || error" class="code-playground__overlay">
           <div v-if="error" class="code-playground__error">{{ error }}</div>
           <div v-else class="code-playground__status">
@@ -401,10 +438,13 @@ watch(isDark, () => {
 
       <div ref="mount" class="code-playground__dom-output" :class="{ 'code-playground__dom-output--active': hasDomOutput }" />
       <div v-if="namedMounts.length > 0" class="code-playground__named-mounts">
-        <div
+        <component
+          :is="namedMount.kind ?? 'div'"
           v-for="namedMount in namedMounts"
           :key="namedMount.name"
+          :id="namedMount.id"
           class="code-playground__named-mount"
+          :class="{ 'code-playground__named-mount--canvas': namedMount.kind === 'canvas' }"
           :style="namedMount.height ? { height: `${namedMount.height}px` } : undefined"
           :ref="(el) => setNamedMountRef(namedMount.name, el as HTMLElement | null)"
         />
@@ -617,6 +657,13 @@ watch(isDark, () => {
 
 .code-playground__named-mount {
   min-height: 120px;
+  overflow-x: auto;
+}
+
+.code-playground__named-mount--canvas {
+  display: block;
+  width: 100%;
+  background: var(--vp-c-bg-soft);
 }
 
 .code-playground :deep(.autk-table-container) {

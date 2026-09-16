@@ -1,9 +1,9 @@
 <template>
   <div class="gallery-page vp-raw">
-    <h2 class="gallery-page-section-title">Filter by package</h2>
+    <h2 class="gallery-page-section-title">{{ filterLabel }}</h2>
     <div class="gallery-page-filters">
       <label
-        v-for="pkg in packages"
+        v-for="pkg in filterOptions"
         :key="pkg.id"
         class="gallery-page-filter"
         :class="{ 'gallery-page-filter--active': selected.has(pkg.id) }"
@@ -56,14 +56,27 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
-const packages = [
+type GalleryFilter = { id: string; className: string }
+type GalleryExample = { href: string; img: string; title: string; description: string; tags: string[] }
+
+const props = withDefaults(defineProps<{
+  /** Cards to show. Defaults to the Autark gallery. */
+  examples?: GalleryExample[]
+  /** Tag filters shown above the grid. Defaults to the Autark packages. */
+  filters?: GalleryFilter[]
+  filterLabel?: string
+}>(), {
+  filterLabel: 'Filter by package',
+})
+
+const defaultFilters: GalleryFilter[] = [
   { id: 'autk-map', className: 'case-tag--map' },
   { id: 'autk-db', className: 'case-tag--db' },
   { id: 'autk-plot', className: 'case-tag--plot' },
   { id: 'autk-compute', className: 'case-tag--compute' },
 ]
 
-const examples = [
+const defaultExamples: GalleryExample[] = [
   {
     href: '/gallery/ex1',
     img: '/imgs/ex1.png',
@@ -164,6 +177,9 @@ const examples = [
   },
 ]
 
+const filterOptions = computed(() => props.filters ?? defaultFilters)
+const examples = computed(() => props.examples ?? defaultExamples)
+
 const selected = ref(new Set<string>())
 
 function toggle(id: string): void {
@@ -177,8 +193,8 @@ function toggle(id: string): void {
 }
 
 const visibleExamples = computed(() => {
-  if (selected.value.size === 0) return examples
-  return examples.filter((example) =>
+  if (selected.value.size === 0) return examples.value
+  return examples.value.filter((example) =>
     example.tags.some((tag) => selected.value.has(tag)),
   )
 })
