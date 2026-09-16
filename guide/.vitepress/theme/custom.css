@@ -74,11 +74,17 @@ body,
 }
 
 .VPNavBarMenuLink[href="javascript:void(0)"],
+.VPNavScreenMenuLink[href="javascript:void(0)"],
 .VPFlyout .link[href="javascript:void(0)"] {
   color: var(--vp-c-text-3) !important;
   opacity: 0.6;
   pointer-events: none;
   cursor: default;
+}
+
+.VPNavBarMenuLink[href="javascript:void(0)"]::after,
+.VPNavScreenMenuLink[href="javascript:void(0)"]::after {
+  display: none !important;
 }
 
 .case-tags {

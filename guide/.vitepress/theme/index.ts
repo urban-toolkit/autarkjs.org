@@ -6,7 +6,6 @@ import HomeCaseStudies from './components/HomeCaseStudies.vue'
 import HomeGallery from './components/HomeGallery.vue'
 import HomeQuickStart from './components/HomeQuickStart.vue'
 import GalleryPageGrid from './components/GalleryPageGrid.vue'
-import PyautarkBadge from './components/PyautarkBadge.vue'
 import HomeHeroLinks from './components/HomeHeroLinks.vue'
 import InstitutionsFooter from './components/InstitutionsFooter.vue'
 import ExamplePage from './components/ExamplePage.vue'
@@ -22,7 +21,6 @@ export default {
   Layout() {
     return h(DefaultTheme.Layout, null, {
       'layout-bottom': () => h(InstitutionsFooter),
-      'nav-bar-content-after': () => h(PyautarkBadge),
       'home-hero-actions-after': () => h(HomeHeroLinks),
     })
   },
@@ -31,7 +29,6 @@ export default {
     app.component('HomeGallery', HomeGallery)
     app.component('HomeQuickStart', HomeQuickStart)
     app.component('GalleryPageGrid', GalleryPageGrid)
-    app.component('PyautarkBadge', PyautarkBadge)
     app.component('HomeCaseStudies', HomeCaseStudies)
     app.component('ExamplePage', ExamplePage)
     app.component('LiveCasePage', LiveCasePage)

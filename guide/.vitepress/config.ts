@@ -56,6 +56,7 @@ gtag('config', 'G-P6EVSF42L8');`],
                 ],
             },
             { text: 'autk-grammar', link: 'https://github.com/urban-toolkit/autk-grammar' },
+            { text: 'pyautark (soon)', link: 'javascript:void(0)' },
         ],
 
         sidebar: {
