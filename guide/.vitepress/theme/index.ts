@@ -7,6 +7,7 @@ import HomeGallery from './components/HomeGallery.vue'
 import HomeQuickStart from './components/HomeQuickStart.vue'
 import GalleryPageGrid from './components/GalleryPageGrid.vue'
 import PyautarkBadge from './components/PyautarkBadge.vue'
+import HomeHeroLinks from './components/HomeHeroLinks.vue'
 import InstitutionsFooter from './components/InstitutionsFooter.vue'
 import ExamplePage from './components/ExamplePage.vue'
 import LiveCasePage from './components/LiveCasePage.vue'
@@ -22,6 +23,7 @@ export default {
     return h(DefaultTheme.Layout, null, {
       'layout-bottom': () => h(InstitutionsFooter),
       'nav-bar-content-after': () => h(PyautarkBadge),
+      'home-hero-actions-after': () => h(HomeHeroLinks),
     })
   },
   enhanceApp({ app }) {
