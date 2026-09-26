@@ -45,6 +45,7 @@ gtag('config', 'G-P6EVSF42L8');`],
 
         nav: [
             { text: 'Guide', link: '/introduction' },
+            { text: 'Tutorial', link: 'https://observablehq.com/@autarkjs/-/collection/urban-computing-with-autark' },
             { text: 'Gallery', link: '/gallery/' },
             {
                 text: 'API Reference',
