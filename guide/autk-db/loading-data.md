@@ -112,7 +112,9 @@ When a loading method is called, it ingests data into DuckDB and returns the cre
 
 To directly fetch from the public [Overpass API](https://overpass-api.de/) and load OpenStreetMap data into DuckDB tables, `autk-db` provides the `loadOsm` method. The most important parameters are:
 
-1. [`queryArea`](/api/autk-db/type-aliases/LoadOsmParams#queryarea) — Defines the geographic region of interest. The region definition is broken into two parts: the `geocodeArea` and a list of administrative areas `areas`. `geocodeArea` is used to define the data search scope and avoid naming ambiguities when querying the Overpass API. `areas` must identify OpenStreetMap boundary relations whose member ways can be reconstructed into a closed polygon. For best results, use exact OSM boundary relation names rather than informal place names.
+1. [`queryArea`](/api/autk-db/type-aliases/LoadOsmParams#queryarea) — Defines the geographic region of interest in one of two ways:
+   - **Named area** — provide `geocodeArea` and a list of administrative boundary names in `areas`. `geocodeArea` defines the search scope and avoids naming ambiguities; use exact OSM boundary relation names rather than informal place names.
+   - **Bounding box** — provide `bbox: [west, south, east, north]` in WGS84 (`EPSG:4326`). All four values must be finite geographic coordinates, with `west < east` and `south < north`; antimeridian-crossing boxes are not supported.
 
 2. [`autoLoadLayers`](/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers) — List of data layers to automatically extract from raw OSM data. The valid osm layer values in Autark are `buildings`, `roads`, `surface`, `parks`, and `water`. The optional [`coordinateFormat`](/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers) specifies the source CRS of the OSM coordinates before they are transformed into the workspace CRS. In v4, `surface` is always built as the workspace clipping mask, even when it is omitted from `layers`; include it when you also want it returned as a public layer.
 
@@ -199,8 +201,8 @@ To load from a PBF file, provide the [`pbfFileUrl`](/api/autk-db/type-aliases/Lo
       </td>
       <td>
         <div style="display:flex; flex-direction:column; gap:6px;">
-          <span>Geocode scope.</span>
-          <span>Boundary names.</span>
+          <span>Named-area geocode scope.</span>
+          <span>Boundary names, or use a WGS84 <code>bbox</code>.</span>
         </div>
       </td>
     </tr>
