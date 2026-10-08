@@ -64,7 +64,7 @@ async function walkMarkdown(directory) {
   return files
 }
 
-async function normalizeReference(destination) {
+async function normalizeReference(destination, version) {
   const readme = join(destination, 'README.md')
   try {
     await rename(readme, join(destination, 'index.md'))
@@ -73,6 +73,12 @@ async function normalizeReference(destination) {
   }
 
   await writeFile(join(destination, 'index.md'), 'See [All Exports](globals.md) for the full API listing.\n')
+
+  const globals = join(destination, 'globals.md')
+  const globalsContent = await readFile(globals, 'utf8')
+  const withVersion = globalsContent.replace(/^# @urban-toolkit\/.+$/m, (heading) => `${heading}\n\n> Version: \`${version}\``)
+  if (withVersion === globalsContent) throw new Error(`Could not add the version to ${globals}.`)
+  await writeFile(globals, withVersion)
 
   for (const file of await walkMarkdown(destination)) {
     const original = await readFile(file, 'utf8')
@@ -84,13 +90,13 @@ async function normalizeReference(destination) {
   }
 }
 
-async function copyReference(source, destination) {
+async function copyReference(source, destination, version) {
   await rm(destination, { recursive: true, force: true })
   await cp(source, destination, {
     recursive: true,
     filter: (path) => !relative(source, path).split('/').includes('_media'),
   })
-  await normalizeReference(destination)
+  await normalizeReference(destination, version)
 }
 
 async function packageVersion() {
@@ -192,8 +198,9 @@ async function main() {
 
     for (const packageName of packages) {
       const docs = join(source, packageName, 'docs')
+      const manifest = JSON.parse(await readFile(join(source, packageName, 'package.json'), 'utf8'))
       if (!(await stat(docs)).isDirectory()) throw new Error(`TypeDoc did not create ${docs}.`)
-      await copyReference(docs, join(root, 'guide', 'api', packageName))
+      await copyReference(docs, join(root, 'guide', 'api', packageName), manifest.version)
     }
 
     const sitePackages = [

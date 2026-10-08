@@ -4,6 +4,8 @@
 
 # @urban-toolkit/autk-db
 
+> Version: `4.0.0`
+
 Public entry point for the `@urban-toolkit/autk-db` package.
 
 Re-exports the database class, shared table metadata types, loading parameter types, and OSM-related constants from a single module.

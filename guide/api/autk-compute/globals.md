@@ -4,6 +4,8 @@
 
 # @urban-toolkit/autk-compute
 
+> Version: `4.0.0`
+
 ## Classes
 
 - [AutkComputeEngine](classes/AutkComputeEngine.md)

@@ -4,6 +4,8 @@
 
 # @urban-toolkit/autk-core
 
+> Version: `4.0.0`
+
 ## Enumerations
 
 - [ColorMapDomainStrategy](enumerations/ColorMapDomainStrategy.md)

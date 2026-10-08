@@ -4,6 +4,8 @@
 
 # @urban-toolkit/autk-plot
 
+> Version: `4.0.0`
+
 ## Enumerations
 
 - [PlotEvent](enumerations/PlotEvent.md)

@@ -4,6 +4,8 @@
 
 # @urban-toolkit/autk-map
 
+> Version: `4.0.0`
+
 ## Enumerations
 
 - [MapEvent](enumerations/MapEvent.md)
