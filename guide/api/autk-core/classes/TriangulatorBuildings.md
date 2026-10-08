@@ -6,12 +6,13 @@
 
 # Class: TriangulatorBuildings
 
-Defined in: [triangulator-buildings.ts:39](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-buildings.ts#L39)
+Defined in: [triangulator-buildings.ts:40](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-buildings.ts#L40)
 
 Builds extruded mesh geometry for OSM-style buildings.
 
-Each feature is expected to contain a `GeometryCollection` whose entries are
-matched by index against `feature.properties.parts`. For every supported part
+Each feature contains original component geometries associated with
+`properties.parts[].geometryIndex` (legacy positional metadata is accepted).
+Parts inherit building attributes and override them individually. For every supported part
 geometry, the triangulator converts world coordinates into local XY space,
 resolves wall heights from part metadata, and emits mesh chunks with feature
 component counts. Roof geometry is delegated to `triangulator-roofs`.
@@ -38,7 +39,7 @@ const [mesh, components] = TriangulatorBuildings.buildMesh(buildings, origin);
 
 > `static` **buildMesh**(`geojson`, `origin`, `allowZeroHeightBuildings?`): \[[`LayerGeometry`](../interfaces/LayerGeometry.md)[], [`LayerComponent`](../interfaces/LayerComponent.md)[]\]
 
-Defined in: [triangulator-buildings.ts:51](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-buildings.ts#L51)
+Defined in: [triangulator-buildings.ts:54](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-buildings.ts#L54)
 
 Builds extruded building geometry for an OSM-style building collection.
 
@@ -60,7 +61,8 @@ World-space origin used to convert coordinates into local XY space.
 
 `boolean` = `false`
 
-When `true`, parts with no height metadata get a random fallback height.
+When `true`, parts with missing height tags get a random fallback height.
+Explicit zero or invalid height tags are never replaced by that fallback.
 
 #### Returns
 
@@ -70,7 +72,8 @@ A tuple of mesh chunks and per-feature component metadata.
 
 #### Throws
 
-Never throws. Parts without height metadata are skipped (or given fallback height).
+If building geometries or part indices are unsupported or ambiguous.
+Parts without height metadata are skipped (or given fallback height).
 
 #### Example
 

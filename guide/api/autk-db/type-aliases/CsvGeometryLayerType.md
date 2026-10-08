@@ -8,7 +8,7 @@
 
 > **CsvGeometryLayerType** = `Extract`\<`LayerType`, `"points"` \| `"polylines"` \| `"polygons"`\>
 
-Defined in: [use-cases/load-csv/interfaces.ts:103](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-db/src/use-cases/load-csv/interfaces.ts#L103)
+Defined in: [use-cases/load-csv/interfaces.ts:103](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-db/src/use-cases/load-csv/interfaces.ts#L103)
 
 Restricts CSV-derived geometry to vector layer families supported by the database.
 

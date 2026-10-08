@@ -6,9 +6,7 @@
 
 # Interface: BuildingWindowLayoutResult
 
-Defined in: [triangulator-windows.ts:58](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-windows.ts#L58)
-
-Window-layout result for a building collection.
+Defined in: [triangulator-windows.ts:32](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L32)
 
 ## Properties
 
@@ -16,9 +14,7 @@ Window-layout result for a building collection.
 
 > **collection**: `FeatureCollection`\<`Point`\>
 
-Defined in: [triangulator-windows.ts:60](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-windows.ts#L60)
-
-GeoJSON point features representing generated window centers.
+Defined in: [triangulator-windows.ts:33](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L33)
 
 ***
 
@@ -26,6 +22,4 @@ GeoJSON point features representing generated window centers.
 
 > **windows**: [`BuildingWindowLayoutEntry`](BuildingWindowLayoutEntry.md)[]
 
-Defined in: [triangulator-windows.ts:62](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-windows.ts#L62)
-
-Detailed metadata for each generated window instance.
+Defined in: [triangulator-windows.ts:34](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L34)

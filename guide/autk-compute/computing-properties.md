@@ -183,7 +183,9 @@ The pipeline also supports richer inputs when a single scalar per feature is not
 | `attributeMatrices` | Per-feature matrices |
 | `uniforms` | Global scalar constants |
 | `uniformArrays` | Global constant arrays |
-| `uniformMatrices` | Global constant matrices |
+| `uniformMatrices` | Global read-only storage matrices |
+
+`uniformArrays` and `uniformMatrices` are read-only global storage buffers in v4, not mutable function-local copies. Access arrays as `name[index]` with `name_length`; access a row-major matrix as `name[row * name_cols + col]` with `name_rows` and `name_cols`. Each global array or matrix consumes a storage binding, so a dispatch that exceeds the device binding limit rejects before GPU resources are created. GPU validation, memory, and internal errors now reject `gpgpuPipeline()` with the GPU error message instead of silently returning zeroed output.
 
 ### Arrays
 

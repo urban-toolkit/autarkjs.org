@@ -6,9 +6,9 @@
 
 # Function: isVectorTable()
 
-> **isVectorTable**(`table`): table is OsmLayerTable \| GeojsonTable \| CsvTable & \{ type: "water" \| "background" \| "surface" \| "parks" \| "roads" \| "buildings" \| "points" \| "polygons" \| "polylines" \} \| UserTable & \{ type: "water" \| "background" \| "surface" \| "parks" \| "roads" \| "buildings" \| "points" \| "polygons" \| "polylines" \}
+> **isVectorTable**(`table`): table is OsmLayerTable \| GeojsonTable \| CsvTable & \{ type: "background" \| "surface" \| "parks" \| "water" \| "roads" \| "buildings" \| "points" \| "polygons" \| "polylines" \} \| UserTable & \{ type: "background" \| "surface" \| "parks" \| "water" \| "roads" \| "buildings" \| "points" \| "polygons" \| "polylines" \}
 
-Defined in: [interfaces.ts:197](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-db/src/interfaces.ts#L197)
+Defined in: [interfaces.ts:201](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-db/src/interfaces.ts#L201)
 
 Narrows a table to vector geometry layers.
 
@@ -24,7 +24,7 @@ Table metadata to inspect.
 
 ## Returns
 
-table is OsmLayerTable \| GeojsonTable \| CsvTable & \{ type: "water" \| "background" \| "surface" \| "parks" \| "roads" \| "buildings" \| "points" \| "polygons" \| "polylines" \} \| UserTable & \{ type: "water" \| "background" \| "surface" \| "parks" \| "roads" \| "buildings" \| "points" \| "polygons" \| "polylines" \}
+table is OsmLayerTable \| GeojsonTable \| CsvTable & \{ type: "background" \| "surface" \| "parks" \| "water" \| "roads" \| "buildings" \| "points" \| "polygons" \| "polylines" \} \| UserTable & \{ type: "background" \| "surface" \| "parks" \| "water" \| "roads" \| "buildings" \| "points" \| "polygons" \| "polylines" \}
 
 `true` when the table has a non-raster layer `type`.
 

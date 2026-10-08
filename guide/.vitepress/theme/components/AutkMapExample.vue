@@ -18,9 +18,9 @@ onMounted(async () => {
 
   try {
     const { AutkMap } = await import('@urban-toolkit/autk-map')
-    const { AutkSpatialDb } = await import('@urban-toolkit/autk-db')
+    const { AutkDb } = await import('@urban-toolkit/autk-db')
 
-    const db = new AutkSpatialDb()
+    const db = new AutkDb()
     status.value = 'Initializing database…'
     await db.init()
 
@@ -33,7 +33,6 @@ onMounted(async () => {
       autoLoadLayers: {
         coordinateFormat: 'EPSG:3395',
         layers: ['surface', 'parks', 'water', 'roads', 'buildings'],
-        dropOsmTable: true,
       },
       onProgress: (phase: string) => {
         status.value = phaseLabels[phase] ?? 'Loading…'
@@ -43,7 +42,7 @@ onMounted(async () => {
     const map = new AutkMap(canvas.value)
     await map.init()
 
-    for (const layer of db.getLayerTables()) {
+    for (const layer of db.getLayersMetadata()) {
       const geojson = await db.getLayer(layer.name)
       map.loadCollection(layer.name, { collection: geojson, type: layer.type })
     }

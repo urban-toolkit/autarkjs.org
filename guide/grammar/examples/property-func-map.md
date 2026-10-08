@@ -18,7 +18,7 @@ const spec = `
       outputTableName: 'table_osm',
       autoLoadLayers: {
         layers: ['buildings'],
-        dropOsmTable: true,
+
       },
     },
   ],

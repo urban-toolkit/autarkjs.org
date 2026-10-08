@@ -8,6 +8,6 @@
 
 > **ColorTEX** = `number`[]
 
-Defined in: [types-colormap.ts:189](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/types-colormap.ts#L189)
+Defined in: [types-colormap.ts:189](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/types-colormap.ts#L189)
 
 Flat RGBA texture buffer laid out as `[r, g, b, a, ...]`.

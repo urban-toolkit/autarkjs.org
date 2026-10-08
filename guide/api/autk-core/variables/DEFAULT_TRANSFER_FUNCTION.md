@@ -8,7 +8,7 @@
 
 > `const` **DEFAULT\_TRANSFER\_FUNCTION**: [`RequiredTransferFunction`](../type-aliases/RequiredTransferFunction.md)
 
-Defined in: [transfer-function.ts:48](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/transfer-function.ts#L48)
+Defined in: [transfer-function.ts:48](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/transfer-function.ts#L48)
 
 Default transfer-function configuration merged into user options before
 evaluation.

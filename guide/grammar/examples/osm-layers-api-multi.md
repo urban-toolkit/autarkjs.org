@@ -18,7 +18,6 @@ const spec = `
       outputTableName: 'table_osm_battery',
       autoLoadLayers: {
         layers: ['surface', 'parks', 'water', 'roads', 'buildings'],
-        dropOsmTable: true,
       },
     },
     {
@@ -31,7 +30,6 @@ const spec = `
       outputTableName: 'table_osm',
       autoLoadLayers: {
         layers: ['surface', 'parks', 'water', 'roads', 'buildings'],
-        dropOsmTable: true,
       },
     },
   ],

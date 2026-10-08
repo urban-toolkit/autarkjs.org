@@ -25,6 +25,17 @@ This means spatial tables inside a workspace are normalized to a projected CRS s
 
 When you load OSM data, you can override the source coordinate format through `autoLoadLayers.coordinateFormat`, but the workspace itself still uses its own projected working CRS for stored geometry.
 
+In v4, the default workspace also uses a `0.01` precision grid in its CRS units. Vector imports, updates, and spatial results are normalized to that grid, so byte-identical coordinate round trips and polygon ring order are not guaranteed. Inspect the active configuration with `db.getWorkspaceConfiguration()`.
+
+For a non-default CRS, set the CRS and an appropriate positive `precisionGrid` together while the workspace is empty. The precision is measured in the workspace CRS units; for example, geographic degrees need a much smaller grid than metric `EPSG:3395`. Autark does not allow changing either setting after the workspace has populated spatial data.
+
+```ts
+await db.setWorkspace('geographic', {
+  coordinateFormat: 'EPSG:4326',
+  precisionGrid: 1e-7,
+});
+```
+
 ## Switching workspaces
 
 ```typescript

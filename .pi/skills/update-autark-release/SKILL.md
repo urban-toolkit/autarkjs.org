@@ -39,8 +39,9 @@ version before applying changes.
    npm run release:prepare -- --version <version>
    ```
 
-   It pins `@urban-toolkit/autk`, regenerates TypeDoc API references for all five
-   modules, and creates the local impact report. Do not commit `.release/`.
+   It pins the five Autark modules and a compatible `autk-grammar`, regenerates
+   TypeDoc API references for all five modules, and creates the local impact report.
+   Do not commit `.release/`.
 
 ## 2. Update content affected by the API diff
 

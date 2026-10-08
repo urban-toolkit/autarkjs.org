@@ -6,12 +6,9 @@
 
 # Interface: BuildingWindowLayoutEntry
 
-Defined in: [triangulator-windows.ts:32](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-windows.ts#L32)
+Defined in: [triangulator-windows.ts:16](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L16)
 
-Metadata for one generated facade window.
-
-Each entry is derived from a convex hull edge and floor index, and mirrors a
-GeoJSON point feature in the returned layout collection.
+Metadata for one facade window, associated with its original building component.
 
 ## Properties
 
@@ -19,9 +16,7 @@ GeoJSON point feature in the returned layout collection.
 
 > **buildingHeight**: `number`
 
-Defined in: [triangulator-windows.ts:52](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-windows.ts#L52)
-
-Resolved building height used when generating the window.
+Defined in: [triangulator-windows.ts:29](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L29)
 
 ***
 
@@ -29,9 +24,7 @@ Resolved building height used when generating the window.
 
 > **center**: \[`number`, `number`, `number`\]
 
-Defined in: [triangulator-windows.ts:44](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-windows.ts#L44)
-
-World-space window center `[x, y, z]`.
+Defined in: [triangulator-windows.ts:25](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L25)
 
 ***
 
@@ -39,9 +32,7 @@ World-space window center `[x, y, z]`.
 
 > **edgeIndex**: `number`
 
-Defined in: [triangulator-windows.ts:38](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-windows.ts#L38)
-
-Index of the hull edge on which the window is placed.
+Defined in: [triangulator-windows.ts:22](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L22)
 
 ***
 
@@ -49,9 +40,15 @@ Index of the hull edge on which the window is placed.
 
 > **floorIndex**: `number`
 
-Defined in: [triangulator-windows.ts:40](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-windows.ts#L40)
+Defined in: [triangulator-windows.ts:23](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L23)
 
-Zero-based floor index of the window.
+***
+
+### geometryIndex
+
+> **geometryIndex**: `number`
+
+Defined in: [triangulator-windows.ts:19](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L19)
 
 ***
 
@@ -59,9 +56,7 @@ Zero-based floor index of the window.
 
 > **height**: `number`
 
-Defined in: [triangulator-windows.ts:50](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-windows.ts#L50)
-
-Window height in local vertical units.
+Defined in: [triangulator-windows.ts:28](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L28)
 
 ***
 
@@ -69,9 +64,23 @@ Window height in local vertical units.
 
 > **normal**: \[`number`, `number`, `number`\]
 
-Defined in: [triangulator-windows.ts:46](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-windows.ts#L46)
+Defined in: [triangulator-windows.ts:26](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L26)
 
-Outward-facing facade normal `[x, y, z]`.
+***
+
+### polygonIndex
+
+> **polygonIndex**: `number`
+
+Defined in: [triangulator-windows.ts:20](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L20)
+
+***
+
+### ringIndex
+
+> **ringIndex**: `number`
+
+Defined in: [triangulator-windows.ts:21](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L21)
 
 ***
 
@@ -79,9 +88,7 @@ Outward-facing facade normal `[x, y, z]`.
 
 > **sourceFeatureIndex**: `number`
 
-Defined in: [triangulator-windows.ts:36](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-windows.ts#L36)
-
-Index of the source feature that produced this window.
+Defined in: [triangulator-windows.ts:18](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L18)
 
 ***
 
@@ -89,9 +96,7 @@ Index of the source feature that produced this window.
 
 > **width**: `number`
 
-Defined in: [triangulator-windows.ts:48](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-windows.ts#L48)
-
-Window width in local planar units.
+Defined in: [triangulator-windows.ts:27](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L27)
 
 ***
 
@@ -99,9 +104,7 @@ Window width in local planar units.
 
 > **windowId**: `string`
 
-Defined in: [triangulator-windows.ts:34](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-windows.ts#L34)
-
-Stable identifier for the generated window instance.
+Defined in: [triangulator-windows.ts:17](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L17)
 
 ***
 
@@ -109,6 +112,4 @@ Stable identifier for the generated window instance.
 
 > **windowIndex**: `number`
 
-Defined in: [triangulator-windows.ts:42](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/triangulator-windows.ts#L42)
-
-Zero-based window index within its edge and floor.
+Defined in: [triangulator-windows.ts:24](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L24)

@@ -25,6 +25,7 @@
 ## Interfaces
 
 - [BoundingBox](interfaces/BoundingBox.md)
+- [BuildingPartProperties](interfaces/BuildingPartProperties.md)
 - [BuildingWindowLayoutEntry](interfaces/BuildingWindowLayoutEntry.md)
 - [BuildingWindowLayoutResult](interfaces/BuildingWindowLayoutResult.md)
 - [CameraData](interfaces/CameraData.md)
@@ -76,5 +77,6 @@
 - [isLayerType](functions/isLayerType.md)
 - [isNumericLike](functions/isNumericLike.md)
 - [mapGeometryTypeToLayerType](functions/mapGeometryTypeToLayerType.md)
+- [normalizeBuildingFeature](functions/normalizeBuildingFeature.md)
 - [offsetPolyline](functions/offsetPolyline.md)
 - [valueAtPath](functions/valueAtPath.md)

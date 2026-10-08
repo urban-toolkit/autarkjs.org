@@ -8,7 +8,7 @@
 
 > **heightfieldFromRaster**(`collection`, `property`, `origin`): [`Heightfield`](../interfaces/Heightfield.md)
 
-Defined in: [heightfield.ts:58](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/heightfield.ts#L58)
+Defined in: [heightfield.ts:58](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/heightfield.ts#L58)
 
 Builds a local-space heightfield from a raster feature collection.
 

@@ -114,7 +114,7 @@ To directly fetch from the public [Overpass API](https://overpass-api.de/) and l
 
 1. [`queryArea`](/api/autk-db/type-aliases/LoadOsmParams#queryarea) — Defines the geographic region of interest. The region definition is broken into two parts: the `geocodeArea` and a list of administrative areas `areas`. `geocodeArea` is used to define the data search scope and avoid naming ambiguities when querying the Overpass API. `areas` must identify OpenStreetMap boundary relations whose member ways can be reconstructed into a closed polygon. For best results, use exact OSM boundary relation names rather than informal place names.
 
-2. [`autoLoadLayers`](/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers) — List of data layers to automatically extract from raw OSM data. The valid osm layer values in Autark are `buildings`, `roads`, `surface`, `parks`, and `water`. The optional [`coordinateFormat`](/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers) specifies the source CRS of the OSM coordinates before they are transformed into the workspace CRS.
+2. [`autoLoadLayers`](/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers) — List of data layers to automatically extract from raw OSM data. The valid osm layer values in Autark are `buildings`, `roads`, `surface`, `parks`, and `water`. The optional [`coordinateFormat`](/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers) specifies the source CRS of the OSM coordinates before they are transformed into the workspace CRS. In v4, `surface` is always built as the workspace clipping mask, even when it is omitted from `layers`; include it when you also want it returned as a public layer.
 
 3. [`outputTableName`](/api/autk-db/type-aliases/LoadOsmParams#outputtablename) — Optional parameter used to define the base name for the produced tables. Each automatically loaded layer is stored as `{outputTableName}_{layer}`. It defaults to `table_osm`. For example, if `layers: ['surface', 'roads']`, the resulting tables are `table_osm_surface`, and `table_osm_roads`.
 
@@ -128,6 +128,26 @@ To directly fetch from the public [Overpass API](https://overpass-api.de/) and l
 
 * `autk-db` provides the `onProgress` callback that may be used to track the loading status.
 :::
+
+### Loading custom OSM tag sets
+
+With Overpass, `tagSets` can load custom layers beside the standard OSM themes. Each [`OsmTagSet`](/api/autk-db/type-aliases/OsmTagSet) declares exactly one geometry family (`points`, `polylines`, or `polygons`) and produces `{outputTableName}_{name}_{type}`. Filters in one set are combined with OR.
+
+```ts
+await db.loadOsm({
+  queryArea: { bbox: [-74.019, 40.700, -74.003, 40.714] },
+  autoLoadLayers: { layers: [] },
+  tagSets: [{
+    name: 'cafes',
+    type: 'points',
+    tags: [{ key: 'amenity', value: 'cafe' }],
+  }],
+});
+
+const cafes = await db.getLayer('table_osm_cafes_points', { osmElements: true });
+```
+
+`tagSets` are not supported with `pbfFileUrl`; use the Overpass workflow for these custom layers.
 
 ### Using static `.pbf` files
 

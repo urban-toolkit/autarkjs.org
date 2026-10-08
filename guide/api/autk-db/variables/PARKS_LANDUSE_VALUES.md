@@ -8,7 +8,7 @@
 
 > `const` **PARKS\_LANDUSE\_VALUES**: readonly \[`"wood"`, `"grass"`, `"forest"`, `"orchard"`, `"village_green"`, `"vineyard"`, `"cemetery"`, `"meadow"`\]
 
-Defined in: [consts.ts:41](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-db/src/consts.ts#L41)
+Defined in: [consts.ts:50](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-db/src/consts.ts#L50)
 
 OSM `landuse` tag values treated as park or green-space features.
 

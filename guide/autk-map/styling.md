@@ -123,6 +123,12 @@ map.draw();
 
 Styling in `autk-map` happens at two levels. First, `MapStyle` defines the semantic base colors used by the renderer for physical and generic layers. Second, per-layer render settings such as opacity, visibility, and thematic display are applied with `updateRenderInfo()` and `updateColorMap()`.
 
+In v4, polygon borders can be toggled without rebuilding the layer geometry:
+
+```ts
+map.updateRenderInfo('neighborhoods', { showBorders: false });
+```
+
 In practice, that means you usually:
 
 1. choose or customize a base map style;

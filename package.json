@@ -32,7 +32,12 @@
     "vitepress": "^1.6.3"
   },
   "dependencies": {
-    "@urban-toolkit/autk": "^3.0.0",
-    "@urban-toolkit/autk-grammar": "^0.2.0"
+    "@urban-toolkit/autk": "4.0.0",
+    "@urban-toolkit/autk-compute": "4.0.0",
+    "@urban-toolkit/autk-core": "4.0.0",
+    "@urban-toolkit/autk-db": "4.0.0",
+    "@urban-toolkit/autk-grammar": "4.0.0",
+    "@urban-toolkit/autk-map": "4.0.0",
+    "@urban-toolkit/autk-plot": "4.0.0"
   }
 }

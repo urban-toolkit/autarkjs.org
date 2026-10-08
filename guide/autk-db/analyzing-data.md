@@ -149,15 +149,21 @@ Once data is loaded into DuckDB, `autk-db` provides methods for spatial analysis
   <CodePlayground :code="spatialQueryCode" out="console" :auto-run="true" />
 </ClientOnly>
 
-Regarding the output format, each matched feature is written directly under `properties.sjoin`, which can produce multiple rows for the same root feature. For example, if the matched features in the `noise` table contain properties such as `key` and `date`, those same properties are copied into `properties.sjoin`.
+Without `groupBy`, each root feature remains a single row. Matches are written to `properties.sjoin.matches` as an array of `{ id?, properties }` entries, so the root geometry is never duplicated. For example, matches from the `noise` table look like:
 
 ```json
 {
   "properties": {
-    "sjoin": { "key": 1, "date": "03/31/2025 11:17:00 PM" }
+    "sjoin": {
+      "matches": [
+        { "id": 1, "properties": { "key": 1, "date": "03/31/2025 11:17:00 PM" } }
+      ]
+    }
   }
 }
 ```
+
+No match produces an empty `matches` array. When you need a scalar value for thematic rendering or charting, use `groupBy` to aggregate the matches.
 ### The [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby) output
 
 Grouping summarizes the matched features instead of returning one join result per match. Aggregated values are written into `properties.sjoin.<aggregateFn>.<key>`.

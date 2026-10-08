@@ -6,7 +6,7 @@
 
 # Interface: Heightfield
 
-Defined in: [heightfield.ts:20](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/heightfield.ts#L20)
+Defined in: [heightfield.ts:20](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/heightfield.ts#L20)
 
 Local-space grid of scalar height samples.
 
@@ -19,7 +19,7 @@ coordinates are already shifted by the supplied map origin.
 
 > **bounds**: \[`number`, `number`, `number`, `number`\]
 
-Defined in: [heightfield.ts:40](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/heightfield.ts#L40)
+Defined in: [heightfield.ts:40](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/heightfield.ts#L40)
 
 Local-space bounds as `[minX, minY, maxX, maxY]`.
 
@@ -29,7 +29,7 @@ Local-space bounds as `[minX, minY, maxX, maxY]`.
 
 > **cellSizeX**: `number`
 
-Defined in: [heightfield.ts:30](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/heightfield.ts#L30)
+Defined in: [heightfield.ts:30](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/heightfield.ts#L30)
 
 Local-space distance between adjacent samples along X.
 
@@ -39,7 +39,7 @@ Local-space distance between adjacent samples along X.
 
 > **cellSizeY**: `number`
 
-Defined in: [heightfield.ts:32](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/heightfield.ts#L32)
+Defined in: [heightfield.ts:32](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/heightfield.ts#L32)
 
 Local-space distance between adjacent samples along Y.
 
@@ -49,7 +49,7 @@ Local-space distance between adjacent samples along Y.
 
 > **data**: `Float32Array`
 
-Defined in: [heightfield.ts:38](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/heightfield.ts#L38)
+Defined in: [heightfield.ts:38](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/heightfield.ts#L38)
 
 Row-major scalar height samples. Non-finite source values are replaced with `0`.
 
@@ -59,7 +59,7 @@ Row-major scalar height samples. Non-finite source values are replaced with `0`.
 
 > **height**: `number`
 
-Defined in: [heightfield.ts:24](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/heightfield.ts#L24)
+Defined in: [heightfield.ts:24](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/heightfield.ts#L24)
 
 Number of grid samples along the Y axis.
 
@@ -69,7 +69,7 @@ Number of grid samples along the Y axis.
 
 > **maxHeight**: `number`
 
-Defined in: [heightfield.ts:36](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/heightfield.ts#L36)
+Defined in: [heightfield.ts:36](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/heightfield.ts#L36)
 
 Largest finite height value found in the source data.
 
@@ -79,7 +79,7 @@ Largest finite height value found in the source data.
 
 > **minHeight**: `number`
 
-Defined in: [heightfield.ts:34](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/heightfield.ts#L34)
+Defined in: [heightfield.ts:34](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/heightfield.ts#L34)
 
 Smallest finite height value found in the source data.
 
@@ -89,7 +89,7 @@ Smallest finite height value found in the source data.
 
 > **originX**: `number`
 
-Defined in: [heightfield.ts:26](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/heightfield.ts#L26)
+Defined in: [heightfield.ts:26](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/heightfield.ts#L26)
 
 Local-space X coordinate of the first grid sample.
 
@@ -99,7 +99,7 @@ Local-space X coordinate of the first grid sample.
 
 > **originY**: `number`
 
-Defined in: [heightfield.ts:28](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/heightfield.ts#L28)
+Defined in: [heightfield.ts:28](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/heightfield.ts#L28)
 
 Local-space Y coordinate of the first grid sample.
 
@@ -109,6 +109,6 @@ Local-space Y coordinate of the first grid sample.
 
 > **width**: `number`
 
-Defined in: [heightfield.ts:22](https://github.com/urban-toolkit/autark/blob/ace1b4c58f43d6ec5f6df6a8f89ec83b8006278b/autk-core/src/heightfield.ts#L22)
+Defined in: [heightfield.ts:22](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/heightfield.ts#L22)
 
 Number of grid samples along the X axis.

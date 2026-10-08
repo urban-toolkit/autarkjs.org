@@ -11,8 +11,8 @@ function formatConsoleValue(value: unknown): string {
 
 onMounted(async () => {
   try {
-    const { AutkSpatialDb } = await import('@urban-toolkit/autk-db')
-    const db = new AutkSpatialDb()
+    const { AutkDb } = await import('@urban-toolkit/autk-db')
+    const db = new AutkDb()
     await db.init()
 
     await db.loadCsv({
@@ -25,7 +25,7 @@ onMounted(async () => {
       logs.push(values.map(formatConsoleValue).join(' '))
     }
 
-    log(db.tables)
+    log(db.getTablesMetadata())
     output.value = logs.join('\n')
   } catch (err) {
     error.value = err instanceof Error ? err.message : String(err)

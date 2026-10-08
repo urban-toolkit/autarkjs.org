@@ -32,6 +32,7 @@ console.log(isVectorTable({ source: 'geojson', name: 'roads', columns: [], type:
 - [CsvWktGeometryColumns](interfaces/CsvWktGeometryColumns.md)
 - [GeojsonTable](interfaces/GeojsonTable.md)
 - [GeotiffTable](interfaces/GeotiffTable.md)
+- [GetLayerOptions](interfaces/GetLayerOptions.md)
 - [HeatmapGroupBy](interfaces/HeatmapGroupBy.md)
 - [JsonLatLngGeometryColumns](interfaces/JsonLatLngGeometryColumns.md)
 - [JsonTable](interfaces/JsonTable.md)
@@ -50,6 +51,7 @@ console.log(isVectorTable({ source: 'geojson', name: 'roads', columns: [], type:
 - [SpatialQueryParams](interfaces/SpatialQueryParams.md)
 - [UpdateTableParams](interfaces/UpdateTableParams.md)
 - [UserTable](interfaces/UserTable.md)
+- [WorkspaceConfiguration](interfaces/WorkspaceConfiguration.md)
 
 ## Type Aliases
 
@@ -65,6 +67,11 @@ console.log(isVectorTable({ source: 'geojson', name: 'roads', columns: [], type:
 - [LoadingPhase](type-aliases/LoadingPhase.md)
 - [LoadOsmParams](type-aliases/LoadOsmParams.md)
 - [OnLoadingProgress](type-aliases/OnLoadingProgress.md)
+- [OsmBoundingBoxArea](type-aliases/OsmBoundingBoxArea.md)
+- [OsmNamedArea](type-aliases/OsmNamedArea.md)
+- [OsmQueryArea](type-aliases/OsmQueryArea.md)
+- [OsmTagFilter](type-aliases/OsmTagFilter.md)
+- [OsmTagSet](type-aliases/OsmTagSet.md)
 - [RawQueryOutput](type-aliases/RawQueryOutput.md)
 - [Table](type-aliases/Table.md)
 - [TableSource](type-aliases/TableSource.md)
@@ -75,6 +82,7 @@ console.log(isVectorTable({ source: 'geojson', name: 'roads', columns: [], type:
 - [DEFAULT\_INPUT\_COORDINATE\_FORMAT](variables/DEFAULT_INPUT_COORDINATE_FORMAT.md)
 - [DEFAULT\_WORKSPACE\_COORDINATE\_FORMAT](variables/DEFAULT_WORKSPACE_COORDINATE_FORMAT.md)
 - [DEFAULT\_WORKSPACE\_NAME](variables/DEFAULT_WORKSPACE_NAME.md)
+- [DEFAULT\_WORKSPACE\_PRECISION\_GRID](variables/DEFAULT_WORKSPACE_PRECISION_GRID.md)
 - [EXCLUDED\_BUILDING\_VALUES](variables/EXCLUDED_BUILDING_VALUES.md)
 - [EXCLUDED\_ROADS\_VALUES](variables/EXCLUDED_ROADS_VALUES.md)
 - [PARKS\_LANDUSE\_VALUES](variables/PARKS_LANDUSE_VALUES.md)
@@ -85,6 +93,7 @@ console.log(isVectorTable({ source: 'geojson', name: 'roads', columns: [], type:
 
 ## Functions
 
+- [isBoundingBoxArea](functions/isBoundingBoxArea.md)
 - [isRasterTable](functions/isRasterTable.md)
 - [isRenderableTable](functions/isRenderableTable.md)
 - [isVectorTable](functions/isVectorTable.md)

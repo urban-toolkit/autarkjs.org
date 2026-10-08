@@ -166,6 +166,10 @@ The [`idColumn`](/api/autk-db/interfaces/UpdateTableParams#idcolumn) value may r
 - a direct column such as `id`
 - a nested GeoJSON property path such as `properties.building_id`
 
+:::warning GeoJSON updates require feature IDs
+When `data` is a GeoJSON `FeatureCollection` and `strategy` is `update`, every incoming feature must have a `Feature.id`. Autark preserves a string or numeric ID separately from its internal row ID; missing IDs are rejected. Use an `idColumn` such as `properties.building_id` when that is the field used to match stored rows.
+:::
+
 :::warning `update` does not insert new rows
 The [`update`](/api/autk-db/type-aliases/UpdateStrategy) strategy only modifies rows that already exist. If an incoming record does not match an existing ID, it is not inserted as a new row.
 :::

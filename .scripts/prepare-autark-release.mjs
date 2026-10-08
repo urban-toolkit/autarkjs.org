@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url'
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const repository = 'https://github.com/urban-toolkit/autark.git'
 const packages = ['autk-core', 'autk-db', 'autk-map', 'autk-plot', 'autk-compute']
+const grammarPackage = '@urban-toolkit/autk-grammar'
 
 function usage() {
   console.log(`Usage: npm run release:prepare -- --version <version> [--dry-run]
@@ -100,6 +101,24 @@ async function packageVersion() {
   return match[0]
 }
 
+function dependencyMajor(range) {
+  return range?.match(/\d+(?=\.)/)?.[0]
+}
+
+function compatibleGrammar(version) {
+  const metadata = JSON.parse(run('npm', ['view', `${grammarPackage}@latest`, 'version', 'dependencies', '--json'], { capture: true }))
+  const targetMajor = version.split('.')[0]
+  const compatible = packages.every((packageName) =>
+    dependencyMajor(metadata.dependencies?.[`@urban-toolkit/${packageName}`]) === targetMajor,
+  )
+
+  if (!compatible) {
+    throw new Error(`${grammarPackage}@${metadata.version} is not compatible with Autark ${version}.`)
+  }
+
+  return metadata.version
+}
+
 async function writeReport({ previousVersion, version, source, previousTag, tag }) {
   const changedPaths = run('git', [
     '-C', source,
@@ -143,6 +162,7 @@ async function main() {
   const version = normalizeVersion(readArgument('--version'))
   const dryRun = process.argv.includes('--dry-run')
   const previousVersion = await packageVersion()
+  const grammarVersion = compatibleGrammar(version)
   const tag = `@urban-toolkit/autk@${version}`
   const previousTag = `@urban-toolkit/autk@${previousVersion}`
 
@@ -176,7 +196,12 @@ async function main() {
       await copyReference(docs, join(root, 'guide', 'api', packageName))
     }
 
-    run('npm', ['install', '--save-exact', `@urban-toolkit/autk@${version}`])
+    const sitePackages = [
+      `@urban-toolkit/autk@${version}`,
+      ...packages.map((packageName) => `@urban-toolkit/${packageName}@${version}`),
+      `${grammarPackage}@${grammarVersion}`,
+    ]
+    run('npm', ['install', '--save-exact', ...sitePackages])
     console.log(`Prepared Autark ${version}. Review ${report}, update affected guides and examples, then run npm run build.`)
   } finally {
     await rm(temporaryDirectory, { recursive: true, force: true })
