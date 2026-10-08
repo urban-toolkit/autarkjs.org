@@ -256,6 +256,43 @@ To load from a PBF file, provide the [`pbfFileUrl`](/api/autk-db/type-aliases/Lo
 If you plan to load OSM and additional layers in the same workspace, you **must load OSM first**. By doing so, the osm data bounding box and the `surface` layer geometry will be used to filter and clip the additional layers to make sure all data span the same area (see [workspace](/autk-db/workspaces)).
 :::
 
+## JSON tables
+
+[`loadJson()`](/api/autk-db/classes/AutkDb#loadjson) imports an array of records into DuckDB. Use it for API responses, event lists, or other tabular JSON that is **not** a GeoJSON `FeatureCollection`.
+
+Provide either `jsonFileUrl` or `jsonObject`, not both. The examples below assume `db.init()` has completed:
+
+```ts
+// Load an array already available in memory.
+await db.loadJson({
+  jsonObject: [
+    { id: 'sensor-a', temperature: 24, Latitude: -22.9, Longitude: -43.2 },
+    { id: 'sensor-b', temperature: 26, Latitude: -22.91, Longitude: -43.21 },
+  ],
+  outputTableName: 'sensors',
+  geometryColumns: true,
+});
+
+// Alternatively, load a JSON array from your own URL.
+await db.loadJson({
+  jsonFileUrl: '/data/events.json',
+  outputTableName: 'events',
+});
+```
+
+Without `geometryColumns`, the result is a plain table: inspect it with `getTable()`. With geometry columns, it can also be exported with `getLayer()` for mapping.
+
+| Option | Purpose |
+|---|---|
+| `jsonFileUrl` / `jsonObject` | JSON array URL or in-memory array of records. |
+| `outputTableName` | Required output table name. |
+| `geometryColumns` | Omit for a plain table; use `true` for `Latitude`/`Longitude` in `EPSG:4326`, or an object for custom fields. |
+| `workspace` | Optional destination workspace. |
+
+For custom coordinate fields, use `geometryColumns: { latColumnName: 'lat', longColumnName: 'lon', coordinateFormat: 'EPSG:4326' }`. For WKT, use `{ wktColumnName: 'shape', coordinateFormat: 'EPSG:4326' }`. Coordinates are transformed into the workspace CRS.
+
+Use [`loadGeojson()`](#geojson) instead when the input already contains GeoJSON features and geometries. See [`LoadJsonParams`](/api/autk-db/interfaces/LoadJsonParams) for the full contract.
+
 ## GeoJSON
 
 `loadGeojson` loads a GeoJSON `FeatureCollection` from a URL or an in-memory object and stores it as a named layer. The only required parameter is [`outputTableName`](/api/autk-db/interfaces/LoadGeojsonParams#outputtablename).

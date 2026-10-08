@@ -71,6 +71,30 @@ The entry point of **autk-map** is the `AutkMap` class. To create a map, you mus
 `autk-map` requires a browser with WebGPU support. We recommend using recent versions of **Chrome**, **Edge**, or **Safari**. See the browser support table in the [Introduction](/introduction).
 :::
 
+## Initialization and lifecycle
+
+The optional second constructor argument controls the floating map UI. Pass `false` when your application provides its own controls:
+
+```ts
+const map = new AutkMap(canvas, false);
+await map.init();
+map.loadCollection('neighborhoods', { collection: neighborhoods });
+map.draw();
+```
+
+`showUi` is a read-only property reflecting that constructor choice. Hiding the UI does not disable programmatic layer, selection, or camera controls.
+
+When removing the canvas, changing routes, or replacing the visualization, call [`destroy()`](/api/autk-map/classes/AutkMap#destroy):
+
+```ts
+// In your component's unmount/disposal callback:
+map.destroy();
+```
+
+This cancels the render loop, removes event bindings and floating UI, and releases layer/renderer GPU resources. Calling it again is safe, but a destroyed map should not be reused: create a new instance for the next mount. Also destroy the instance if initialization fails. If a component can unmount while `init()` is pending, defer final cleanup until that promise settles and do not load layers or start rendering after unmount.
+
+For navigation and resetting the view, see [Camera controls](./interactions#camera-controls).
+
 ## Core concepts
 
 Autark is built over some core concepts, that guides data data loading, rendering and interactions. Next you can find a brief description of each concept and a reference to their detailed description in this guide.

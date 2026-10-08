@@ -102,6 +102,17 @@ After this call the flat render path is replaced with the terrain render path. S
 Call `map.init()` before `enableTerrainMode()`. The heightfield is built relative to the map origin, which is only known once the map is initialized and at least one layer has been loaded to establish the spatial extent. Enabling terrain before any layer is loaded throws.
 :::
 
+## Returning to the flat map
+
+Call [`disableTerrainMode()`](/api/autk-map/classes/AutkMap#disableterrainmode) to release terrain resources and restore the flat render path. Existing layers remain loaded:
+
+```ts
+map.disableTerrainMode();
+map.resetCamera();
+```
+
+If the render loop is already running, it continues with the flat view. To enable terrain again, call `enableTerrainMode(elevation, 'band_1')` with a valid raster collection, then `resetCamera()` to frame the terrain. There is no need to reload the vector context.
+
 ## Full example
 
 The example below matches the [terrain layers gallery example](/gallery/) for Niterói. It loads the OSM context, ingests an elevation GeoTIFF, loads the vector layers, and finally enables terrain from `band_1`.

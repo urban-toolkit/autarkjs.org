@@ -106,7 +106,7 @@ const result = await compute.renderPipeline({
 });
 ```
 
-The returned collection is the viewpoints collection enriched with values under `properties.compute.render`.
+For the centroid strategy used here, the returned collection is a copy of the viewpoints collection enriched with values under `properties.compute.render`. The `building-windows` strategy returns a derived window-point collection instead.
 
 ## Sky exposure on roads
 
@@ -198,7 +198,11 @@ viewpoints: {
 }
 ```
 
-This strategy is used by the gallery view-score example to evaluate visibility from many windows on a selected building.
+This strategy is used by the gallery view-score example to evaluate visibility from many windows on a selected building. It returns one derived point feature per window, **not** one result feature per original building. Each point has a window ID and metadata such as `sourceFeatureIndex`, `geometryIndex`, and `floorIndex` in its properties.
+
+Use `sourceFeatureIndex` to associate a window with `buildings.features[sourceFeatureIndex]`, and `geometryIndex` to identify its original building component. Aggregate the window metrics yourself if you need a single score per building. Do not pass window feature indices directly as building selection indices.
+
+Window cameras are oriented from the facade layout; the centroid strategy's `sampling` controls are not applied to `building-windows`.
 
 ### Sampling controls
 
@@ -223,7 +227,7 @@ These settings are useful when tuning visibility scale, occlusion depth, or anal
 
 ## Output shape
 
-The render pipeline always returns the viewpoints collection. The computed metrics live inside `properties.compute.render`.
+With `centroid`, the render pipeline returns a copy of the source viewpoints collection. With `building-windows`, it returns the derived window-point collection. In both cases, computed metrics live inside `properties.compute.render`; the input collection is not mutated.
 
 ```ts
 feature.properties.compute.render

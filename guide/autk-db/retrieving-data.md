@@ -243,7 +243,18 @@ Calling [`getLayer`](/api/autk-db/classes/AutkDb#getlayer) on a non-vector table
 
 ## Get raster data
 
-[`getRaster`](/api/autk-db/classes/AutkDb#getraster) exports a loaded GeoTIFF table as a packed raster `FeatureCollection`. Pass the result to `autk-map` with `loadRasterCollection()`.
+[`getRaster`](/api/autk-db/classes/AutkDb#getraster) exports a loaded GeoTIFF table as a packed raster `FeatureCollection`. Pass the result to `autk-map` with `loadCollection()`, selecting the raster type and a band:
+
+```ts
+const raster = await db.getRaster('elevation');
+map.loadCollection('elevation', {
+  collection: raster,
+  type: 'raster',
+  property: 'band_1',
+});
+```
+
+To replace the displayed band later, see [Updating raster values](/autk-map/layers#updating-raster-values).
 
 <ClientOnly>
   <CodePlayground :code="getRasterCode" out="console" :auto-run="true" />

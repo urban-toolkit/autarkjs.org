@@ -145,6 +145,20 @@ Once data is loaded into DuckDB, `autk-db` provides methods for spatial analysis
 
 3. [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby) — Optional aggregation rules applied to the join-side data.
 
+### Centroid distance versus geometry distance
+
+[`near.useCentroid`](/api/autk-db/interfaces/NearConfig#usecentroid) defaults to `true`: the distance test compares the centroids of the root and join geometries. Set it to `false` to measure the minimum distance between the geometries themselves.
+
+```ts
+await db.spatialQuery({
+  tableRootName: 'districts',
+  tableJoinName: 'parks',
+  near: { distance: 250, useCentroid: false },
+});
+```
+
+For example, a long park can touch a district while their centroids are more than 250 meters apart. Geometry distance includes that park; centroid distance may exclude it. Both modes use the workspace CRS units, so choose the mode according to whether you care about centers or proximity to the actual shapes.
+
 <ClientOnly>
   <CodePlayground :code="spatialQueryCode" out="console" :auto-run="true" />
 </ClientOnly>

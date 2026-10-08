@@ -212,7 +212,7 @@ In `autk-map`, the usual workflow is:
 | Part | Description |
 |---|---|
 | `interpolator` | A color scheme from `ColorMapInterpolator` (categorical, sequential, or diverging). |
-| `domainSpec` | How the renderer maps raw values to colors (`AUTO`, `MIN_MAX`, `PERCENTILE`, or `USER`). |
+| `domainSpec` | How the renderer maps raw values to colors (`MIN_MAX`, `PERCENTILE`, or `USER`). |
 | `property` | Dot-path to the feature property that supplies the value or class. It can reach an intrinsic attribute or any urban data joined into the feature. |
 
 ## Categorical attributes

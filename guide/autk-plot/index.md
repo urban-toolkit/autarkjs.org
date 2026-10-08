@@ -123,10 +123,52 @@ The example below loads the same neighborhood layer into a map and a histogram. 
 | `width` / `height` | `number` | Canvas size in pixels. |
 | `events` | `PlotEvent[]` | Events the plot should emit. |
 | `transform` | `object` | Optional pre-render transform such as sorting or binning. |
+| `domainSpec` | `ColorMapDomainSpec` | Numeric range or explicit categories used for color encoding. |
+| `colorMapInterpolator` | `ColorMapInterpolator` | Palette for numeric color values. |
+| `categoricalColorMapInterpolator` | `ColorMapInterpolator` | Palette for string color values; defaults to `CAT_OBSERVABLE10`. |
+| `tickFormats` | `string[]` | D3 number-format strings, one per axis. |
 
 ::: warning Categorical vs numeric axes
 Scatter plots and parallel coordinates require numeric axes. Bar charts expect a categorical first axis and a numeric second axis.
 :::
+
+## Colors and axis formatting
+
+Choose the palette according to the **color attribute's values**, not the axis types. Numeric color values use `colorMapInterpolator`; string categories use `categoricalColorMapInterpolator`.
+
+```ts
+import { AutkPlot } from '@urban-toolkit/autk-plot';
+import { ColorMapDomainStrategy, ColorMapInterpolator } from '@urban-toolkit/autk-core';
+
+const numericPlot = new AutkPlot(div, {
+  type: 'scatterplot',
+  collection: neighborhoods,
+  attributes: { axis: ['shape_area', 'shape_leng'], color: 'shape_area' },
+  colorMapInterpolator: ColorMapInterpolator.SEQ_BLUES,
+  domainSpec: { type: ColorMapDomainStrategy.USER, params: [0, 10000000] },
+  tickFormats: ['~s', ',.0f'],
+});
+numericPlot.draw();
+```
+
+`~s` formats compact SI values, while `,.0f` formats integers with thousands separators. These are [D3 format strings](https://d3js.org/d3-format), not JavaScript format expressions.
+
+`MIN_MAX` derives a numeric range from the data; `PERCENTILE` can limit it to percentile bounds such as `params: [5, 95]`. `USER` accepts explicit numeric bounds or category strings. Share the same numeric domain and interpolator across charts (or a thematic map) to keep equal values the same color.
+
+For a string property such as `category`, configure a categorical palette and an explicit category order:
+
+```ts
+const categoricalPlot = new AutkPlot(categoryDiv, {
+  type: 'scatterplot',
+  collection: categorizedNeighborhoods,
+  attributes: { axis: ['shape_area', 'shape_leng'], color: 'category' },
+  categoricalColorMapInterpolator: ColorMapInterpolator.CAT_OBSERVABLE10,
+  domainSpec: { type: ColorMapDomainStrategy.USER, params: ['residential', 'commercial', 'mixed'] },
+});
+categoricalPlot.draw();
+```
+
+The named properties must exist in your input collection. Use the same category domain/order across related views instead of inferring a different order from each subset. See [`PlotConfig`](/api/autk-plot/type-aliases/PlotConfig) for all options.
 
 ## Margins
 

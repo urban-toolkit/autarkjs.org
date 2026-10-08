@@ -167,7 +167,7 @@ A heat matrix requires `binning-2d`. Two numeric attributes define the grid, and
 
 ## Reducers and resolutions
 
-Supported reducers are `count`, `sum`, `avg`, `min`, and `max`. For `binning-events`, `resolution` can be `year`, `month`, `week`, `day`, `hour`, `minute`, or `second`.
+Supported reducers are `count`, `sum`, `avg`, `min`, and `max`. For `binning-events`, `resolution` can be `hour`, `day`, `weekday`, `monthday`, `month`, or `year` (default: `month`). `weekday` groups by day of the week, and `monthday` groups by day of the month, rather than by a complete calendar date. `week`, `minute`, and `second` are not supported.
 
 ::: tip Transform results are ephemeral
 The original `collection` is not modified. The transform produces an internal derived table used only for rendering. Call `updateCollection` if you need to change the source data.

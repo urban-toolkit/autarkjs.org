@@ -56,7 +56,7 @@ const result = await compute.gpgpuPipeline({
 
 ### Render analysis
 
-`renderPipeline()` returns the viewpoints collection enriched with aggregated render metrics under `properties.compute.render`.
+`renderPipeline()` returns aggregated render metrics under `properties.compute.render`. With the default `centroid` strategy, these enrich a copy of the source viewpoints collection; `building-windows` returns a derived collection of window points instead. See [Output shape](./render-analysis#output-shape).
 
 ```ts
 const result = await compute.renderPipeline({

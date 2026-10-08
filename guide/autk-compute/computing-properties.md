@@ -25,7 +25,7 @@ map.loadCollection("neighborhoods", {
 });
 map.updateColorMap("neighborhoods", {
   colorMap: {
-    interpolator: ColorMapInterpolator.SEQUENTIAL_BLUES
+    interpolator: ColorMapInterpolator.SEQ_BLUES
   }
 });
 map.updateThematic("neighborhoods", {

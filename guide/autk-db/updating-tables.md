@@ -151,13 +151,13 @@ Use [`replace`](/api/autk-db/type-aliases/UpdateStrategy) when you already have 
 
 ## Update records
 
-Use the [`update`](/api/autk-db/type-aliases/UpdateStrategy) strategy when you want to modify only records that already exist in the table. In this mode, [`idColumn`](/api/autk-db/interfaces/UpdateTableParams#idcolumn) is required so `autk-db` knows how to match incoming records with stored ones.
+Use the [`update`](/api/autk-db/type-aliases/UpdateStrategy) strategy to match incoming rows by ID. Layer tables update matching records only; plain CSV/JSON tables replace matching rows and also insert unmatched incoming rows. In this mode, [`idColumn`](/api/autk-db/interfaces/UpdateTableParams#idcolumn) is required so `autk-db` knows how to match incoming records with stored ones.
 
 <ClientOnly>
   <CodePlayground :code="updateByIdCode" out="console" :auto-run="true" />
 </ClientOnly>
 
-In the example above, only the rows whose `key` values match existing records in the `noise` table are updated.
+In the example above, rows whose `key` values match existing records in the `noise` table are replaced. Because this is a tabular table, incoming rows with new keys are also inserted; existing rows not included in `updates` remain unchanged.
 
 Notice that `updates` contains full rows, not partial patches. For tabular tables, the `update` strategy expects each replacement row to include the same columns as the target table.
 
@@ -170,8 +170,8 @@ The [`idColumn`](/api/autk-db/interfaces/UpdateTableParams#idcolumn) value may r
 When `data` is a GeoJSON `FeatureCollection` and `strategy` is `update`, every incoming feature must have a `Feature.id`. Autark preserves a string or numeric ID separately from its internal row ID; missing IDs are rejected. Use an `idColumn` such as `properties.building_id` when that is the field used to match stored rows.
 :::
 
-:::warning `update` does not insert new rows
-The [`update`](/api/autk-db/type-aliases/UpdateStrategy) strategy only modifies rows that already exist. If an incoming record does not match an existing ID, it is not inserted as a new row.
+:::warning Layer updates and tabular updates differ
+For **layer tables**, `update` only modifies matching existing rows; unmatched incoming features are not inserted. For **plain CSV/JSON tables**, matching rows are deleted and all incoming rows are inserted, including new IDs. These are full-row replacements, not partial patches.
 :::
 
 
@@ -199,7 +199,7 @@ The [`update`](/api/autk-db/type-aliases/UpdateStrategy) strategy only modifies 
     <tr>
       <td><a href="/api/autk-db/interfaces/UpdateTableParams#strategy"><code>strategy</code></a></td>
       <td><code>"replace" | "update"</code></td>
-      <td>Update mode. <code>replace</code> recreates the whole table; <code>update</code> modifies matching existing records only.</td>
+      <td>Update mode. <code>replace</code> recreates the whole table; <code>update</code> matches rows by ID: layers update existing rows only; plain tables replace matching rows and insert new ones.</td>
     </tr>
     <tr>
       <td><a href="/api/autk-db/interfaces/UpdateTableParams#idcolumn"><code>idColumn</code></a></td>

@@ -136,4 +136,21 @@ For layer-level visibility, use `updateRenderInfo()` with `isSkip`. To fully det
   <CodePlayground :code="visibilityCode" out="dom" :auto-run="true" />
 </ClientOnly>
 
+## Camera controls
+
+After initializing the map and loading a layer, use `resetCamera()` to return to the default framing for the active render mode: flat-map framing or terrain bounds.
+
+```ts
+map.resetCamera();
+
+// Navigation angles are expressed in radians.
+map.camera.yaw(Math.PI / 4);
+map.camera.pitch(-0.2);
+map.camera.update();
+```
+
+[`map.camera`](/api/autk-core/classes/Camera) is the shared `autk-core` camera. It also exposes translation and zoom controls. Call `camera.update()` after changing its state to rebuild the matrices. If `map.draw()` is already running, the next frame displays the new view; there is no need to start another render loop.
+
+See [Initialization and lifecycle](./#initialization-and-lifecycle) for hiding the floating map interface and cleaning up a map when its component is removed.
+
 </div>
