@@ -1,122 +1,28 @@
 ---
 name: add-gallery-example
-description: Add a new gallery example to autarkjs.org. Creates the TypeScript logic, HTML wrapper, registers the Vite entry, adds a screenshot, and updates the gallery component.
+description: Add a VitePress gallery example to autarkjs.org, including its runnable code, card metadata, data, and screenshot.
 ---
 
-# Add a New Gallery Example
+# Add a Gallery Example
 
-Each example consists of three parts:
+Gallery examples are VitePress pages, not standalone HTML files. Each example is
+implemented in `guide/gallery/exN.md`; its runnable code normally uses
+`<CodePlayground>`, and its card is registered in both gallery components.
 
-| File | Description |
-|---|---|
-| `gallery/exN.ts` | TypeScript logic (autk-db, autk-map, etc.) |
-| `gallery/exN.html` | HTML page that loads the compiled JS via `<script type="module" src="dist/exN.js">` |
-| `guide/public/imgs/exN.png` | Screenshot to appear in the gallery |
+## Steps
 
----
+1. Copy a comparable `guide/gallery/exN.md` page and update its title, description,
+   package tags, runnable code, and explanatory text.
+2. If the example needs a new static dataset, add it under `guide/public/data/` and
+   refer to it with an absolute `/data/...` URL in the code.
+3. Add a 16:9 screenshot to `guide/public/imgs/exN.png`.
+4. Add matching card metadata to both:
+   - `guide/.vitepress/theme/components/HomeGallery.vue`
+   - `guide/.vitepress/theme/components/GalleryPageGrid.vue`
+5. Run `npm run dev` and test `/gallery/exN` in the browser. Verify the card appears
+   on the home page and the gallery page.
+6. Run `npm run build` before committing.
 
-## Step by Step
-
-### 1. Create the TypeScript
-
-Create `gallery/exN.ts` with the example logic. See `gallery/ex1.ts` as a reference.
-
-### 2. Create the HTML
-
-Copy an existing example as a base:
-
-```bash
-cp gallery/ex2.html gallery/ex4.html
-```
-
-Edit the HTML and adjust:
-- The title (`<title>`)
-- The side panel content (description, example code)
-- The JS reference at the bottom: `<script type="module" src="dist/ex4.js" defer></script>`
-
-### 3. Register in vite.config.js
-
-Add the new entry in `vite.config.js`:
-
-```js
-rollupOptions: {
-  input: {
-    ex1: 'gallery/ex1.ts',
-    ex2: 'gallery/ex2.ts',
-    ex3: 'gallery/ex3.ts',
-    ex4: 'gallery/ex4.ts', // add here
-  },
-  ...
-}
-```
-
-### 4. Compile Examples and Sync
-
-```bash
-npm run examples:build
-```
-
-This compiles all `.ts` files to `gallery/dist/` and automatically copies the output to `guide/public/gallery/dist/`. The build clears the directory first, so all examples are recompiled together.
-
-> `gallery/dist/` is in `.gitignore` — compiled files are not committed. CI compiles automatically on deploy.
-
-### 5. Copy the HTML to guide/public
-
-```bash
-cp gallery/ex4.html guide/public/gallery/
-```
-
-### 6. Add Screenshot
-
-Take a screenshot of the working example and save it to:
-
-```
-guide/public/imgs/ex4.png
-```
-
-Recommended dimensions: 16:9 (e.g. 1280×720).
-
-### 7. Add to the Gallery
-
-Edit `guide/.vitepress/theme/components/HomeGallery.vue` and add the new example to the array:
-
-```ts
-const examples = [
-  // ... existing examples ...
-  {
-    href: '/gallery/ex4.html',
-    img: '/imgs/ex4.png',
-    title: 'Example Title',
-    description: 'Short description of what the example does.',
-    tags: [
-      { label: 'autk-map', color: '#0ea5e9' },
-      { label: 'autk-db', color: '#f59e0b' },
-    ],
-  },
-]
-```
-
----
-
-## Available Tag Colors
-
-| Package | Color |
-|---|---|
-| `autk-map` | `#0ea5e9` |
-| `autk-db` | `#f59e0b` |
-| `autk-compute` | `#8b5cf6` |
-| `autk-plot` | `#22c55e` |
-
----
-
-## Test Locally
-
-```bash
-npm run dev
-# visit localhost:5173/gallery/ex4.html to test the example in isolation
-# visit localhost:5173 to see the updated gallery
-```
-
-## Deploy
-
-GitHub Actions handles deployment automatically on push to the `main` branch. It runs `examples:build` internally, so just commit the source files (`.ts`, `.html`, imgs) — compiled files are generated in CI.
+Keep the runnable source and the explanation on the Markdown page consistent. If an
+Autark release affected the example, also follow `update-autark-release` before
+claiming compatibility.

@@ -11,6 +11,7 @@
     "prebuild": "node .scripts/sync-duckdb-assets.cjs",
     "dev": "vitepress dev guide",
     "build": "vitepress build guide",
+    "release:prepare": "node .scripts/prepare-autark-release.mjs",
     "preview": "vitepress preview guide"
   },
   "repository": {

@@ -27,15 +27,15 @@ Key locations:
 - `guide/.vitepress/config.ts` — VitePress config (nav, sidebar, theme)
 - `guide/.vitepress/theme/` — Custom theme with Vue components
 
-### 2. Raw HTML/CSS/JS Pages (`guide/public/`)
+### 2. Static assets (`guide/public/`)
 
-Standalone pages **not processed by VitePress** — served as static files. These include:
+Static files served by VitePress. These include gallery screenshots, datasets, logos,
+and runtime assets. The gallery examples themselves are VitePress pages in
+`guide/gallery/`, not standalone HTML files.
 
-- `guide/public/gallery/` — Gallery example pages (`ex1.html`, `ex2.html`, `ex3.html`, ...)
-  - Each example has a two-panel layout: interactive canvas on the left, source code on the right
-  - JS is loaded via `<script type="module" src="dist/exN.js">` (compiled by Vite separately)
 - `guide/public/imgs/` — Gallery screenshots and logos
-- `guide/public/styles.css` — Shared CSS used by all example pages
+- `guide/public/data/` — Data used by tutorials and live examples
+- `guide/public/assets/` — Runtime assets copied during the site build
 
 ---
 
@@ -49,14 +49,6 @@ npm run dev
 # serves both the .md docs and the static files in guide/public/
 ```
 
-For editing examples, you also need to compile the TypeScript:
-
-```bash
-npm run examples:build
-# runs: tsc && vite build && cp -r gallery/dist guide/public/gallery/dist
-# compiles gallery/exN.ts → gallery/dist/exN.js → guide/public/gallery/dist/
-```
-
 Other scripts:
 
 ```bash
@@ -66,22 +58,12 @@ npm run preview  # preview the built site locally
 
 ---
 
-## Examples build pipeline
+## Gallery examples
 
-TypeScript example sources live in `gallery/`. Vite compiles each one as a separate ES module entry point (configured in `vite.config.js`). The compiled output is copied to `guide/public/gallery/dist/` so the HTML pages can load them.
-
-`gallery/dist/` is gitignored — CI runs `examples:build` automatically on deploy.
-
----
-
-## Adding a new gallery example
-
-See [.claude/tasks/add-new-example.md](.claude/tasks/add-new-example.md) for a complete step-by-step guide on:
-- Creating the TypeScript logic
-- Creating the HTML wrapper page
-- Registering the entry in `vite.config.js`
-- Adding the gallery screenshot
-- Updating `HomeGallery.vue`
+Gallery examples are Markdown pages in `guide/gallery/`. Their runnable code is
+usually defined inline and executed by `CodePlayground.vue`; shared gallery cards
+are defined in `HomeGallery.vue` and `GalleryPageGrid.vue`. Update the page, its
+card metadata, screenshot, and any required `guide/public/data/` together.
 
 ---
 
@@ -89,10 +71,10 @@ See [.claude/tasks/add-new-example.md](.claude/tasks/add-new-example.md) for a c
 
 | File | Purpose |
 |---|---|
-| `vite.config.js` | Vite build config for compiling examples |
-| `tsconfig.json` | TypeScript config (targets `examples/`) |
-| `guide/.vitepress/config.ts` | VitePress site config (nav, sidebar) |
-| `guide/.vitepress/theme/components/HomeGallery.vue` | Gallery grid component |
-| `guide/public/styles.css` | Shared CSS for all example HTML pages |
-| `gallery/exN.ts` | TypeScript source for each example |
-| `guide/public/gallery/exN.html` | Deployed HTML wrapper for each example |
+| `package.json` | Site scripts, including `release:prepare` |
+| `guide/.vitepress/config.ts` | VitePress site config (nav, sidebar, theme) |
+| `guide/.vitepress/theme/components/CodePlayground.vue` | Runtime for interactive gallery code |
+| `guide/.vitepress/theme/components/HomeGallery.vue` | Home-page gallery cards |
+| `guide/.vitepress/theme/components/GalleryPageGrid.vue` | Full gallery cards and filters |
+| `guide/gallery/` | Gallery pages and runnable example source |
+| `guide/public/` | Static data, screenshots, and runtime assets |

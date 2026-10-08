@@ -155,6 +155,9 @@ guide/public/assets/boston-*.css
 guide/public/assets/autk-*.js
 guide/public/assets/modulepreload-polyfill-*.js
 
+# Local Autark release analysis reports
+.release/
+
 # MacOS files
 .DS_Store
 .AppleDouble
