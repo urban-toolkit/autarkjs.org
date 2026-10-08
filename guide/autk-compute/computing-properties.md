@@ -75,7 +75,8 @@ for (const layer of db.getLayersMetadata()) {
     : await db.getLayer(layer.name);
   map.loadCollection(layer.name, {
     collection,
-    type: layer.type
+    type: layer.type,
+    loadConfig: layer.type === 'roads' ? { polylinesWidth: 18 } : undefined,
   });
 }
 

@@ -48,7 +48,11 @@ onMounted(async () => {
 
     for (const layerData of db.getLayersMetadata()) {
       const geojson = await db.getLayer(layerData.name)
-      map.loadCollection(layerData.name, { collection: geojson, type: layerData.type })
+      map.loadCollection(layerData.name, {
+        collection: geojson,
+        type: layerData.type,
+        loadConfig: layerData.type === 'roads' ? { polylinesWidth: 18 } : undefined,
+      })
     }
 
     map.camera.zoom(-3, 0.45, 0.45)
