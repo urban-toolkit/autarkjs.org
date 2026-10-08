@@ -12,6 +12,24 @@ map.loadCollection("neighborhoods", { collection: geojson });
 
 map.draw();
 `
+const lifecycleCode = `
+import { AutkMap } from '@urban-toolkit/autk-map';
+
+const neighborhoods = await fetch('/data/mnt_neighs_proj.geojson').then(res => res.json());
+const map = new AutkMap(canvas, false);
+await map.init();
+map.loadCollection('neighborhoods', { collection: neighborhoods });
+map.draw();
+
+output('<button type="button">Destroy map</button><p>The floating map UI is disabled.</p>');
+const button = mount.querySelector('button');
+button.addEventListener('click', () => {
+  // Call this in your component unmount callback as well.
+  map.destroy();
+  button.disabled = true;
+  button.textContent = 'Map destroyed — click Run to create another';
+});
+`
 </script>
 
 <style scoped>
@@ -75,21 +93,15 @@ The entry point of **autk-map** is the `AutkMap` class. To create a map, you mus
 
 The optional second constructor argument controls the floating map UI. Pass `false` when your application provides its own controls:
 
-```ts
-const map = new AutkMap(canvas, false);
-await map.init();
-map.loadCollection('neighborhoods', { collection: neighborhoods });
-map.draw();
-```
+<ClientOnly>
+  <CodePlayground :code="lifecycleCode" out="dom" :auto-run="false" />
+</ClientOnly>
 
 `showUi` is a read-only property reflecting that constructor choice. Hiding the UI does not disable programmatic layer, selection, or camera controls.
 
 When removing the canvas, changing routes, or replacing the visualization, call [`destroy()`](/api/autk-map/classes/AutkMap#destroy):
 
-```ts
-// In your component's unmount/disposal callback:
-map.destroy();
-```
+The **Destroy map** button above demonstrates disposal. After destroying the map, click **Run** to create a new instance.
 
 This cancels the render loop, removes event bindings and floating UI, and releases layer/renderer GPU resources. Calling it again is safe, but a destroyed map should not be reused: create a new instance for the next mount. Also destroy the instance if initialization fails. If a component can unmount while `init()` is pending, defer final cleanup until that promise settles and do not load layers or start rendering after unmount.
 

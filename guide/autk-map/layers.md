@@ -92,6 +92,131 @@ for (const layer of db.getTablesMetadata()) {
 }
 map.draw();
 `;
+const buildingPartsCode = `
+import { AutkMap } from '@urban-toolkit/autk-map';
+import { normalizeBuildingFeature } from '@urban-toolkit/autk-core';
+
+const building = normalizeBuildingFeature({
+  type: 'Feature', id: 'building-a',
+  geometry: {
+    type: 'GeometryCollection',
+    geometries: [
+      { type: 'Polygon', coordinates: [[[0, 0], [20, 0], [20, 20], [0, 20], [0, 0]]] },
+      { type: 'Polygon', coordinates: [[[20, 0], [30, 0], [30, 20], [20, 20], [20, 0]]] },
+    ],
+  },
+  properties: {
+    height: 12,
+    parts: [{ geometryIndex: 0, height: 30 }, { geometryIndex: 1, height: 12 }],
+  },
+});
+const map = new AutkMap(canvas);
+await map.init();
+map.loadCollection('custom-buildings', {
+  collection: { type: 'FeatureCollection', features: [building] },
+  type: 'buildings',
+});
+// Frame this small, local-coordinate building rather than a city-sized view.
+map.camera.resetCamera([0, 0, 1], [0, 0, 10], [60, -80, 60]);
+map.camera.update();
+map.draw();
+console.log('Canonical building', building);
+`;
+
+const loadConfigCode = `
+import { AutkMap } from '@urban-toolkit/autk-map';
+
+const roads = {
+  type: 'FeatureCollection',
+  features: [{ type: 'Feature', properties: {}, geometry: {
+    type: 'LineString', coordinates: [[0, 0], [60, 0], [60, 60]],
+  } }],
+};
+const buildings = {
+  type: 'FeatureCollection',
+  features: [{ type: 'Feature', id: 'missing-height', properties: {}, geometry: {
+    type: 'Polygon', coordinates: [[[10, 10], [30, 10], [30, 30], [10, 30], [10, 10]]],
+  } }],
+};
+const map = new AutkMap(canvas);
+await map.init();
+map.loadCollection('wide-roads', {
+  collection: roads, type: 'roads', loadConfig: { polylinesWidth: 8 },
+});
+map.loadCollection('buildings-with-fallback', {
+  collection: buildings, type: 'buildings', loadConfig: { buildingsZeroHeight: true },
+});
+map.camera.resetCamera([0, 0, 1], [0, 0, 0], [100, -120, 120]);
+map.camera.update();
+map.draw();
+`;
+
+const updateRasterCode = `
+import { AutkDb } from '@urban-toolkit/autk-db';
+import { AutkMap } from '@urban-toolkit/autk-map';
+
+const db = new AutkDb();
+await db.init();
+await db.loadGeoTiff({
+  geotiffFileUrl: '/data/niteroi-elevation.tif',
+  coordinateFormat: 'EPSG:3395', outputTableName: 'elevation',
+});
+const raster = await db.getRaster('elevation');
+// Add a derived band with inverted heights, preserving the same grid.
+const props = raster.features[0].properties;
+props.band_2 = Array.from(props.band_1, value => 400 - value);
+const map = new AutkMap(canvas);
+await map.init();
+// Establish the origin from a vector extent before loading a null-geometry raster.
+const [west, south, east, north] = raster.bbox;
+map.loadCollection('extent', { collection: {
+  type: 'FeatureCollection', features: [{ type: 'Feature', properties: {}, geometry: {
+    type: 'Polygon', coordinates: [[[west, south], [east, south], [east, north], [west, north], [west, south]]],
+  } }],
+} });
+map.updateRenderInfo('extent', { isSkip: true });
+map.camera.resetCamera([0, 1, 0], [0, 0, 0], [0, 0, 14000]);
+map.camera.update();
+map.loadCollection('raster-view', {
+  collection: raster, type: 'raster', property: 'band_1',
+});
+map.draw();
+output('<button type="button">Switch to inverted heights</button>');
+let inverted = false;
+const button = mount.querySelector('button');
+button.addEventListener('click', () => {
+  inverted = !inverted;
+  map.updateRaster('raster-view', {
+    collection: raster, property: inverted ? 'band_2' : 'band_1',
+  });
+  button.textContent = inverted ? 'Switch to original heights' : 'Switch to inverted heights';
+});
+`;
+
+const meshCode = `
+import { AutkMap } from '@urban-toolkit/autk-map';
+import { TriangulatorBuildings } from '@urban-toolkit/autk-core';
+
+const surface = {
+  type: 'FeatureCollection', features: [{ type: 'Feature', properties: {}, geometry: {
+    type: 'Polygon', coordinates: [[[-10, -10], [50, -10], [50, 50], [-10, 50], [-10, -10]]],
+  } }],
+};
+const buildings = {
+  type: 'FeatureCollection', features: [{ type: 'Feature', id: 'mesh-building', properties: { height: 25 }, geometry: {
+    type: 'Polygon', coordinates: [[[0, 0], [30, 0], [30, 30], [0, 30], [0, 0]]],
+  } }],
+};
+const map = new AutkMap(canvas);
+await map.init();
+map.loadCollection('context', { collection: surface, type: 'surface' });
+const [geometry, components] = TriangulatorBuildings.buildMesh(buildings, map.layerManager.origin);
+map.loadMesh('building-mesh', { geometry, components, type: 'buildings' });
+map.camera.resetCamera([0, 0, 1], [0, 0, 10], [60, -80, 70]);
+map.camera.update();
+map.draw();
+console.log('Mesh chunks', geometry.length, 'Components', components);
+`;
 </script>
 
 <style scoped>
@@ -133,9 +258,9 @@ map.loadCollection(layerId, {
 `autk-map` also assumes a few basic rules about how layer data is organized and loaded:
 
 - **Projected coordinates** — `autk-map` expects projected coordinates. You may use any projected coordinate system, but all loaded layers must use the same selected system.
-- **Initial framing** — the first loaded layer defines the initial map bounding box and camera framing.
-- **Existing bounds** — if the collection already includes a `bbox`, `autk-map` uses it instead of recomputing bounds.
-- **Explicit framing bounds** — set a valid projected GeoJSON `bbox: [minX, minY, maxX, maxY]` on the first collection before loading it. There is no `map.boundingBox` property; the collection establishes the shared origin.
+- **Shared origin** — the first loaded collection's geometry establishes the origin used by subsequent layers. For a packed raster with null geometry, load a vector context or extent first, as shown below.
+- **Raster bounds** — a raster collection's projected `bbox: [minX, minY, maxX, maxY]` defines its rendering rectangle, but does not by itself establish a geometry-based origin.
+- **Camera framing** — the default flat camera is city-sized. Small custom geometries may need an explicit camera position, as shown in the building examples. There is no `map.boundingBox` property; use the [camera controls](./interactions#camera-controls).
 
 ## Physical layers
 
@@ -163,33 +288,9 @@ In v4, one logical building is represented by **one feature** whose canonical ge
 
 The example uses projected coordinates in meters, matching the other layers in the map:
 
-```ts
-import { normalizeBuildingFeature } from '@urban-toolkit/autk-core';
-
-const building = normalizeBuildingFeature({
-  type: 'Feature',
-  id: 'building-a',
-  geometry: {
-    type: 'GeometryCollection',
-    geometries: [
-      { type: 'Polygon', coordinates: [[[0, 0], [20, 0], [20, 20], [0, 20], [0, 0]]] },
-      { type: 'Polygon', coordinates: [[[20, 0], [30, 0], [30, 20], [20, 20], [20, 0]]] },
-    ],
-  },
-  properties: {
-    height: 12,
-    parts: [
-      { geometryIndex: 0, height: 30 },
-      { geometryIndex: 1, height: 12 },
-    ],
-  },
-});
-
-map.loadCollection('custom-buildings', {
-  collection: { type: 'FeatureCollection', features: [building] },
-  type: 'buildings',
-});
-```
+<ClientOnly>
+  <CodePlayground :code="buildingPartsCode" out="both" :auto-run="false" />
+</ClientOnly>
 
 Common building attributes are inherited by parts; part-specific height/level tags override the corresponding common tags. A component without part metadata uses the common attributes.
 
@@ -199,19 +300,9 @@ Common building attributes are inherited by parts; part-specific height/level ta
 
 Pass [`loadConfig`](/api/autk-map/interfaces/LoadCollectionConfig) when creating a layer:
 
-```ts
-map.loadCollection('wide-roads', {
-  collection: roads,
-  type: 'roads',
-  loadConfig: { polylinesWidth: 8 },
-});
-
-map.loadCollection('buildings-with-fallback', {
-  collection: buildings,
-  type: 'buildings',
-  loadConfig: { buildingsZeroHeight: true },
-});
-```
+<ClientOnly>
+  <CodePlayground :code="loadConfigCode" out="dom" :auto-run="false" />
+</ClientOnly>
 
 - `polylinesWidth` sets the **full visual width** of buffered `roads`/`polylines` in projected coordinate units. It is baked into the mesh at load time; changing render state does not change it. To change width, remove and reload the layer.
 - Despite its name, `buildingsZeroHeight: true` gives parts **without height metadata** a random fallback height. It does not replace explicitly zero or invalid heights. For reproducible building heights, provide height/level metadata yourself; missing-height parts are skipped by default.
@@ -252,19 +343,11 @@ Raster layers need a property path that tells the renderer which numeric value t
 
 ### Updating raster values
 
-[`updateRaster()`](/api/autk-map/classes/AutkMap#updateraster) changes the values of an existing raster layer without removing it. For a loaded multi-band GeoTIFF, switch bands like this:
+[`updateRaster()`](/api/autk-map/classes/AutkMap#updateraster) changes the values of an existing raster layer without removing it. Run the example and use the button to switch between real elevation values and a derived inverted-height band, both on the same grid. The original GeoTIFF has one band; the code creates `band_2` in memory.
 
-```ts
-const raster = await db.getRaster('multiband');
-map.loadCollection('raster-view', {
-  collection: raster,
-  type: 'raster',
-  property: 'band_1',
-});
-
-// Later, select another band present in this raster.
-map.updateRaster('raster-view', { collection: raster, property: 'band_2' });
-```
+<ClientOnly>
+  <CodePlayground :code="updateRasterCode" out="dom" :auto-run="false" />
+</ClientOnly>
 
 The property path must resolve to a flat numeric array on `collection.features[0].properties`. The color domain is recomputed using the layer's current color-map configuration. Use `updateColorMap()` to choose a palette/domain strategy, and `updateRaster()` to refresh the values. An optional `transferFunction` controls opacity; see [`UpdateRasterParams`](/api/autk-map/interfaces/UpdateRasterParams).
 
@@ -276,16 +359,9 @@ Keep the raster's extent and grid resolution unchanged: `updateRaster()` replace
 
 Load a context collection first to establish the shared origin. Every mesh XY coordinate must be relative to `map.layerManager.origin`, not an absolute projected coordinate. For example, the shared core triangulator produces compatible local-space buffers:
 
-```ts
-import { TriangulatorBuildings } from '@urban-toolkit/autk-core';
-
-map.loadCollection('context', { collection: surface, type: 'surface' });
-const [geometry, components] = TriangulatorBuildings.buildMesh(
-  buildings,
-  map.layerManager.origin,
-);
-map.loadMesh('building-mesh', { geometry, components, type: 'buildings' });
-```
+<ClientOnly>
+  <CodePlayground :code="meshCode" out="both" :auto-run="false" />
+</ClientOnly>
 
 Custom mesh generators should supply [`LayerGeometry`](/api/autk-core/interfaces/LayerGeometry) position/index buffers and [`LayerComponent`](/api/autk-core/interfaces/LayerComponent) vertex/triangle counts and source feature metadata that describe those buffers in rendering order. A component can span multiple geometry chunks; their array lengths need not match. Optional `thematic` entries must correspond one-to-one with the components so picking and colors refer to the correct parts. Calling `loadMesh()` before the origin is initialized throws.
 

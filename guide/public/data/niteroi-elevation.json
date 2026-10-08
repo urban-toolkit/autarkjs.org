@@ -1,0 +1,16 @@
+{
+  "description": "Lightweight real elevation raster for the Terrain guide playground.",
+  "source": "Mapzen Terrarium elevation tiles, via the Autark v4.0.0 gallery dataset",
+  "sourceUrl": "https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/gallery/public/data/niteroi-elevation.tif",
+  "sourceMetadataUrl": "https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/gallery/public/data/niteroi-elevation.json",
+  "sourceUrlTemplate": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png",
+  "processing": "Cropped the Autark 2134 x 1503 raster to the Praias da Baía extract extent with a 100 m margin, limited by the source bounds. Source pixel window [0, 241, 766, 1134], bilinearly resampled with geotiff 3.0.5 to 439 x 512 pixels. EPSG:3395 and Float32 heights preserved; no vertical exaggeration.",
+  "coordinateFormat": "EPSG:3395",
+  "band": "band_1",
+  "units": "meters",
+  "width": 439,
+  "height": 512,
+  "bounds": [-4801993.873331091, -2608854.82660137, -4794675.027872786, -2600371.0508024646],
+  "minHeight": 0,
+  "maxHeight": 338.12945556640625
+}

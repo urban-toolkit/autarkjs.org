@@ -110,6 +110,43 @@ const result = await db.rawQuery({
 
 console.log(result)
 `
+const centroidDistanceCode = `
+import { AutkDb } from '@urban-toolkit/autk-db';
+
+const db = new AutkDb();
+await db.init();
+
+// Two touching polygons in the projected workspace CRS (meters).
+await db.loadGeojson({
+  geojsonObject: {
+    type: 'FeatureCollection',
+    features: [{
+      type: 'Feature', id: 'district', properties: { name: 'District' },
+      geometry: { type: 'Polygon', coordinates: [[[0, 0], [1000, 0], [1000, 1000], [0, 1000], [0, 0]]] },
+    }],
+  },
+  coordinateFormat: 'EPSG:3395', outputTableName: 'districts',
+});
+await db.loadGeojson({
+  geojsonObject: {
+    type: 'FeatureCollection',
+    features: [{
+      type: 'Feature', id: 'park', properties: { name: 'Long park' },
+      geometry: { type: 'Polygon', coordinates: [[[1000, 0], [2000, 0], [2000, 1000], [1000, 1000], [1000, 0]]] },
+    }],
+  },
+  coordinateFormat: 'EPSG:3395', outputTableName: 'parks',
+});
+
+for (const useCentroid of [true, false]) {
+  await db.spatialQuery({
+    tableRootName: 'districts', tableJoinName: 'parks',
+    near: { distance: 250, useCentroid },
+  });
+  const result = await db.getLayer('districts');
+  console.log('useCentroid = ' + useCentroid, result.features[0].properties.sjoin);
+}
+`
 </script>
 
 
@@ -149,13 +186,9 @@ Once data is loaded into DuckDB, `autk-db` provides methods for spatial analysis
 
 [`near.useCentroid`](/api/autk-db/interfaces/NearConfig#usecentroid) defaults to `true`: the distance test compares the centroids of the root and join geometries. Set it to `false` to measure the minimum distance between the geometries themselves.
 
-```ts
-await db.spatialQuery({
-  tableRootName: 'districts',
-  tableJoinName: 'parks',
-  near: { distance: 250, useCentroid: false },
-});
-```
+<ClientOnly>
+  <CodePlayground :code="centroidDistanceCode" out="console" :auto-run="false" />
+</ClientOnly>
 
 For example, a long park can touch a district while their centroids are more than 250 meters apart. Geometry distance includes that park; centroid distance may exclude it. Both modes use the workspace CRS units, so choose the mode according to whether you care about centers or proximity to the actual shapes.
 

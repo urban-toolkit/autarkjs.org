@@ -52,6 +52,50 @@ chart.events.on(PlotEvent.BRUSH_X, ({ selection }) => {
   map.setHighlightedIds('neighborhoods', selection)
 })
 `
+const numericColorCode = `
+import { AutkPlot } from '@urban-toolkit/autk-plot';
+import { ColorMapDomainStrategy, ColorMapInterpolator } from '@urban-toolkit/autk-core';
+
+const neighborhoods = await fetch('/data/mnt_neighs_proj.geojson').then(res => res.json());
+const numericPlot = new AutkPlot(plot, {
+  type: 'scatterplot',
+  collection: neighborhoods,
+  attributes: { axis: ['shape_area', 'shape_leng'], color: 'shape_area' },
+  colorMapInterpolator: ColorMapInterpolator.SEQ_BLUES,
+  domainSpec: { type: ColorMapDomainStrategy.USER, params: [0, 40000000] },
+  tickFormats: ['~s', ',.0f'],
+  width: plot.clientWidth || 800, height: 400,
+});
+numericPlot.draw();
+// Apply the initial unselected color state.
+numericPlot.setSelection([]);
+`
+
+const categoricalColorCode = `
+import { AutkPlot } from '@urban-toolkit/autk-plot';
+import { ColorMapDomainStrategy, ColorMapInterpolator } from '@urban-toolkit/autk-core';
+
+const neighborhoods = await fetch('/data/mnt_neighs_proj.geojson').then(res => res.json());
+// Derived categories make the sample self-contained; use your own classifications in production.
+const categories = ['residential', 'commercial', 'mixed'];
+const categorizedNeighborhoods = {
+  ...neighborhoods,
+  features: neighborhoods.features.map((feature, index) => ({
+    ...feature, properties: { ...feature.properties, category: categories[index % categories.length] },
+  })),
+};
+const categoricalPlot = new AutkPlot(plot, {
+  type: 'scatterplot',
+  collection: categorizedNeighborhoods,
+  attributes: { axis: ['shape_area', 'shape_leng'], color: 'category' },
+  categoricalColorMapInterpolator: ColorMapInterpolator.CAT_OBSERVABLE10,
+  domainSpec: { type: ColorMapDomainStrategy.USER, params: categories },
+  width: plot.clientWidth || 800, height: 400,
+});
+categoricalPlot.draw();
+// Apply the initial unselected color state.
+categoricalPlot.setSelection([]);
+`
 </script>
 
 # autk-plot
@@ -136,20 +180,9 @@ Scatter plots and parallel coordinates require numeric axes. Bar charts expect a
 
 Choose the palette according to the **color attribute's values**, not the axis types. Numeric color values use `colorMapInterpolator`; string categories use `categoricalColorMapInterpolator`.
 
-```ts
-import { AutkPlot } from '@urban-toolkit/autk-plot';
-import { ColorMapDomainStrategy, ColorMapInterpolator } from '@urban-toolkit/autk-core';
-
-const numericPlot = new AutkPlot(div, {
-  type: 'scatterplot',
-  collection: neighborhoods,
-  attributes: { axis: ['shape_area', 'shape_leng'], color: 'shape_area' },
-  colorMapInterpolator: ColorMapInterpolator.SEQ_BLUES,
-  domainSpec: { type: ColorMapDomainStrategy.USER, params: [0, 10000000] },
-  tickFormats: ['~s', ',.0f'],
-});
-numericPlot.draw();
-```
+<ClientOnly>
+  <CodePlayground :code="numericColorCode" out="dom" :auto-run="false" :render-canvas="false" :mounts="[{ name: 'plot', height: 420 }]" />
+</ClientOnly>
 
 `~s` formats compact SI values, while `,.0f` formats integers with thousands separators. These are [D3 format strings](https://d3js.org/d3-format), not JavaScript format expressions.
 
@@ -157,16 +190,9 @@ numericPlot.draw();
 
 For a string property such as `category`, configure a categorical palette and an explicit category order:
 
-```ts
-const categoricalPlot = new AutkPlot(categoryDiv, {
-  type: 'scatterplot',
-  collection: categorizedNeighborhoods,
-  attributes: { axis: ['shape_area', 'shape_leng'], color: 'category' },
-  categoricalColorMapInterpolator: ColorMapInterpolator.CAT_OBSERVABLE10,
-  domainSpec: { type: ColorMapDomainStrategy.USER, params: ['residential', 'commercial', 'mixed'] },
-});
-categoricalPlot.draw();
-```
+<ClientOnly>
+  <CodePlayground :code="categoricalColorCode" out="dom" :auto-run="false" :render-canvas="false" :mounts="[{ name: 'plot', height: 420 }]" />
+</ClientOnly>
 
 The named properties must exist in your input collection. Use the same category domain/order across related views instead of inferring a different order from each subset. See [`PlotConfig`](/api/autk-plot/type-aliases/PlotConfig) for all options.
 

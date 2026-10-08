@@ -82,6 +82,33 @@ const res = await db.loadGeoTiff({
 
 console.log(res)
 `
+const loadJsonCode = `
+import { AutkDb } from '@urban-toolkit/autk-db';
+
+const db = new AutkDb();
+await db.init();
+
+await db.loadJson({
+  jsonObject: [
+    { id: 'sensor-a', temperature: 24, Latitude: -22.9, Longitude: -43.2 },
+    { id: 'sensor-b', temperature: 26, Latitude: -22.91, Longitude: -43.21 },
+  ],
+  outputTableName: 'sensors',
+  geometryColumns: true,
+});
+console.log('Sensor features', (await db.getLayer('sensors')).features);
+
+// A local Blob URL keeps this URL-loading example self-contained.
+const eventsUrl = URL.createObjectURL(new Blob([
+  JSON.stringify([{ id: 1, event: 'inspection' }, { id: 2, event: 'repair' }]),
+], { type: 'application/json' }));
+try {
+  await db.loadJson({ jsonFileUrl: eventsUrl, outputTableName: 'events' });
+  console.log('Event rows', await db.getTable('events'));
+} finally {
+  URL.revokeObjectURL(eventsUrl);
+}
+`
 </script>
 
 
@@ -260,25 +287,11 @@ If you plan to load OSM and additional layers in the same workspace, you **must 
 
 [`loadJson()`](/api/autk-db/classes/AutkDb#loadjson) imports an array of records into DuckDB. Use it for API responses, event lists, or other tabular JSON that is **not** a GeoJSON `FeatureCollection`.
 
-Provide either `jsonFileUrl` or `jsonObject`, not both. The examples below assume `db.init()` has completed:
+Provide either `jsonFileUrl` or `jsonObject`, not both. Run this self-contained example to import spatial sensor records from memory and plain event rows from a local Blob URL. In your application, replace the Blob URL with your own JSON endpoint.
 
-```ts
-// Load an array already available in memory.
-await db.loadJson({
-  jsonObject: [
-    { id: 'sensor-a', temperature: 24, Latitude: -22.9, Longitude: -43.2 },
-    { id: 'sensor-b', temperature: 26, Latitude: -22.91, Longitude: -43.21 },
-  ],
-  outputTableName: 'sensors',
-  geometryColumns: true,
-});
-
-// Alternatively, load a JSON array from your own URL.
-await db.loadJson({
-  jsonFileUrl: '/data/events.json',
-  outputTableName: 'events',
-});
-```
+<ClientOnly>
+  <CodePlayground :code="loadJsonCode" out="console" :auto-run="false" />
+</ClientOnly>
 
 Without `geometryColumns`, the result is a plain table: inspect it with `getTable()`. With geometry columns, it can also be exported with `getLayer()` for mapping.
 

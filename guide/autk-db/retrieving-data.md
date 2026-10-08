@@ -109,6 +109,37 @@ await db.loadGeojson({
 const bbox = await db.getBoundingBoxFromLayer('neighborhoods');
 console.log(bbox);
 `
+const rasterMapCode = `
+import { AutkDb } from '@urban-toolkit/autk-db';
+import { AutkMap } from '@urban-toolkit/autk-map';
+
+const db = new AutkDb();
+await db.init();
+await db.loadGeoTiff({
+  geotiffFileUrl: '/data/niteroi-elevation.tif',
+  coordinateFormat: 'EPSG:3395',
+  outputTableName: 'elevation',
+});
+const raster = await db.getRaster('elevation');
+const map = new AutkMap(canvas);
+await map.init();
+// A vector extent establishes the shared origin for the null-geometry raster.
+const [west, south, east, north] = raster.bbox;
+map.loadCollection('extent', { collection: {
+  type: 'FeatureCollection', features: [{ type: 'Feature', properties: {}, geometry: {
+    type: 'Polygon', coordinates: [[[west, south], [east, south], [east, north], [west, north], [west, south]]],
+  } }],
+} });
+map.updateRenderInfo('extent', { isSkip: true });
+map.camera.resetCamera([0, 1, 0], [0, 0, 0], [0, 0, 14000]);
+map.camera.update();
+map.loadCollection('elevation', {
+  collection: raster,
+  type: 'raster',
+  property: 'band_1',
+});
+map.draw();
+`
 </script>
 
 <style scoped>
@@ -245,14 +276,9 @@ Calling [`getLayer`](/api/autk-db/classes/AutkDb#getlayer) on a non-vector table
 
 [`getRaster`](/api/autk-db/classes/AutkDb#getraster) exports a loaded GeoTIFF table as a packed raster `FeatureCollection`. Pass the result to `autk-map` with `loadCollection()`, selecting the raster type and a band:
 
-```ts
-const raster = await db.getRaster('elevation');
-map.loadCollection('elevation', {
-  collection: raster,
-  type: 'raster',
-  property: 'band_1',
-});
-```
+<ClientOnly>
+  <CodePlayground :code="rasterMapCode" out="dom" :auto-run="false" />
+</ClientOnly>
 
 To replace the displayed band later, see [Updating raster values](/autk-map/layers#updating-raster-values).
 

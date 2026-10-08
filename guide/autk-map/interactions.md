@@ -70,6 +70,25 @@ map.draw();
 setTimeout(() => map.updateRenderInfo("points", { isSkip: true }), 800);
 setTimeout(() => map.updateRenderInfo("points", { isSkip: false }), 1600);
 `;
+const cameraCode = `
+import { AutkMap } from '@urban-toolkit/autk-map';
+
+const neighborhoods = await fetch('/data/mnt_neighs_proj.geojson').then(res => res.json());
+const map = new AutkMap(canvas);
+await map.init();
+map.loadCollection('neighborhoods', { collection: neighborhoods });
+map.draw();
+
+output('<button type="button" data-action="rotate">Rotate and tilt</button> <button type="button" data-action="reset">Reset camera</button>');
+mount.querySelector('[data-action="rotate"]').addEventListener('click', () => {
+  map.camera.yaw(Math.PI / 4);
+  map.camera.pitch(-0.2);
+  map.camera.update();
+});
+mount.querySelector('[data-action="reset"]').addEventListener('click', () => {
+  map.resetCamera();
+});
+`
 </script>
 
 <style scoped>
@@ -140,14 +159,11 @@ For layer-level visibility, use `updateRenderInfo()` with `isSkip`. To fully det
 
 After initializing the map and loading a layer, use `resetCamera()` to return to the default framing for the active render mode: flat-map framing or terrain bounds.
 
-```ts
-map.resetCamera();
+Run the example, then use its buttons to rotate/tilt the view or reset it. Navigation angles are expressed in radians.
 
-// Navigation angles are expressed in radians.
-map.camera.yaw(Math.PI / 4);
-map.camera.pitch(-0.2);
-map.camera.update();
-```
+<ClientOnly>
+  <CodePlayground :code="cameraCode" out="dom" :auto-run="false" />
+</ClientOnly>
 
 [`map.camera`](/api/autk-core/classes/Camera) is the shared `autk-core` camera. It also exposes translation and zoom controls. Call `camera.update()` after changing its state to rebuild the matrices. If `map.draw()` is already running, the next frame displays the new view; there is no need to start another render loop.
 

@@ -3,32 +3,65 @@ const playgroundCode = `
 import { AutkDb } from "@urban-toolkit/autk-db";
 import { AutkMap } from "@urban-toolkit/autk-map";
 
+setStatus("Loading the Niterói map context...");
 const db = new AutkDb();
 await db.init();
 
+// Use a bundled extract instead of requesting data from Overpass.
 await db.loadOsm({
-  pbfFileUrl: "/data/lower_mnt.osm.pbf",
+  pbfFileUrl: "/data/osm/niteroi_praias_baia.osm.pbf",
   queryArea: {
-    geocodeArea: "New York",
-    areas: ["Financial District"]
+    geocodeArea: "Niterói",
+    areas: ["Região Praias da Baía"]
   },
   autoLoadLayers: {
-    layers: ["surface", "parks", "water", "roads", "buildings"]
+    layers: ["surface", "parks", "water", "roads"]
   }
+});
+
+setStatus("Loading the elevation raster...");
+await db.loadGeoTiff({
+  geotiffFileUrl: "/data/niteroi-elevation.tif",
+  coordinateFormat: "EPSG:3395",
+  outputTableName: "elevation"
 });
 
 const map = new AutkMap(canvas);
 await map.init();
 
-for (const layer of db.getLayersMetadata()) {
-  const { name, type } = layer;
+for (const { name, type } of db.getLayersMetadata()) {
   const collection = await db.getLayer(name);
   map.loadCollection(name, { collection, type });
 }
 
+const elevation = await db.getRaster("elevation");
+map.enableTerrainMode(elevation, "band_1");
+map.resetCamera();
+// Start with an oblique view so the relief is easier to see.
+const center = map.camera.getLookAt();
+const distance = map.camera.getEye()[2];
+map.camera.resetCamera([0, 0, 1], center, [center[0], center[1] - distance * 0.5, distance * 0.85]);
+map.camera.update();
 map.draw();
+output('<button type="button">Switch to flat map</button>');
+let terrainEnabled = true;
+const button = mount.querySelector('button');
+button.addEventListener('click', () => {
+  terrainEnabled = !terrainEnabled;
+  if (terrainEnabled) {
+    map.enableTerrainMode(elevation, "band_1");
+  } else {
+    map.disableTerrainMode();
+  }
+  map.resetCamera();
+  if (terrainEnabled) {
+    map.camera.resetCamera([0, 0, 1], center, [center[0], center[1] - distance * 0.5, distance * 0.85]);
+    map.camera.update();
+  }
+  button.textContent = terrainEnabled ? 'Switch to flat map' : 'Switch to terrain';
+});
+clearStatus();
 `
-
 
 </script>
 
@@ -77,13 +110,7 @@ The elevation raster and the vector layers must share the same projected CRS so 
 
 `loadGeoTiff()` ingests a GeoTIFF and stores it as a compact raster table — flat in-memory band arrays plus resolution and bbox metadata. Large rasters are downsampled automatically so browser memory stays bounded. You only need to provide a URL (or `ArrayBuffer`), a table name, and, when the source is not in the workspace CRS, a `coordinateFormat`:
 
-```ts
-await db.loadGeoTiff({
-  geotiffFileUrl: "/data/niteroi-elevation.tif",
-  coordinateFormat: "EPSG:3395",
-  outputTableName: "elevation"
-});
-```
+The [live example](#live-example) below loads `/data/niteroi-elevation.tif` with `coordinateFormat: "EPSG:3395"` and `outputTableName: "elevation"`. Its complete code can be edited and executed.
 
 A GeoTIFF can carry several bands. The compact table keeps them as `band_1`, `band_2`, and so on, so a single load can feed different terrain views (for example, elevation vs. a derived surface).
 
@@ -91,10 +118,7 @@ A GeoTIFF can carry several bands. The compact table keeps them as `band_1`, `ba
 
 Once the raster table exists, `getRaster()` exports it as a packed raster `FeatureCollection` ready for rendering. `enableTerrainMode()` takes that collection and a property path pointing to the band that holds the heights:
 
-```ts
-const elevation = await db.getRaster("elevation");
-map.enableTerrainMode(elevation, "band_1");
-```
+The [live example](#live-example) exports `db.getRaster("elevation")` and passes it to `map.enableTerrainMode(elevation, "band_1")` after loading the vector context.
 
 After this call the flat render path is replaced with the terrain render path. Subsequent `draw()` calls sample the heightfield, and any layers loaded afterwards are also draped over the terrain. The terrain resources are initialized immediately, so `enableTerrainMode()` is synchronous.
 
@@ -106,72 +130,27 @@ Call `map.init()` before `enableTerrainMode()`. The heightfield is built relativ
 
 Call [`disableTerrainMode()`](/api/autk-map/classes/AutkMap#disableterrainmode) to release terrain resources and restore the flat render path. Existing layers remain loaded:
 
-```ts
-map.disableTerrainMode();
-map.resetCamera();
-```
+Use **Switch to flat map** in the [live example](#live-example) below to execute `map.disableTerrainMode()` followed by `map.resetCamera()`. The same button can re-enable terrain without reloading the data.
 
 If the render loop is already running, it continues with the flat view. To enable terrain again, call `enableTerrainMode(elevation, 'band_1')` with a valid raster collection, then `resetCamera()` to frame the terrain. There is no need to reload the vector context.
 
-## Full example
+## Live example
 
-The example below matches the [terrain layers gallery example](/gallery/) for Niterói. It loads the OSM context, ingests an elevation GeoTIFF, loads the vector layers, and finally enables terrain from `band_1`.
+Explore the hills of **Niterói's Praias da Baía region** below. The example loads a bundled OSM extract and a real elevation GeoTIFF, renders the vector context, then enables terrain from `band_1`. Both datasets are served by this site; no Overpass query or external elevation service is needed.
 
-```ts
-import { AutkDb } from "@urban-toolkit/autk-db";
-import { AutkMap } from "@urban-toolkit/autk-map";
-
-const ELEVATION_TABLE = "elevation";
-
-const db = new AutkDb();
-await db.init();
-
-// 1. Load the physical context (surface, water, roads, ...).
-await db.loadOsm({
-  queryArea: {
-    geocodeArea: "Rio de Janeiro",
-    areas: ["Niterói"]
-  },
-  autoLoadLayers: {
-    layers: ["surface", "parks", "water", "roads"]
-  }
-});
-
-// 2. Load elevation as a compact raster table.
-await db.loadGeoTiff({
-  geotiffFileUrl: "/data/niteroi-elevation.tif",
-  coordinateFormat: "EPSG:3395",
-  outputTableName: ELEVATION_TABLE
-});
-
-// 3. Load vector layers from the OSM workspace into the map.
-const map = new AutkMap(canvas);
-await map.init();
-
-for (const layer of db.getLayersMetadata()) {
-  const { name, type } = layer;
-  const collection = await db.getLayer(name);
-  map.loadCollection(name, {
-    collection,
-    type,
-    loadConfig: { buildingsZeroHeight: true }
-  });
-}
-
-// 4. Export the raster and enable terrain rendering from one band.
-const elevation = await db.getRaster(ELEVATION_TABLE);
-map.enableTerrainMode(elevation, "band_1");
-
-map.draw();
-```
-
-<!-- ## Playground
-
-The playground below loads the lower Manhattan OSM context used across the guide. A small elevation dataset for terrain mode will be wired in here shortly — for now it renders the flat context so you can experiment with the layer loading flow before enabling terrain.
+The elevation raster is a lightweight 439 × 512 crop in `EPSG:3395`, with heights in meters, derived from the [Autark gallery dataset](https://github.com/urban-toolkit/autark/tree/30159045d4c004f98140fe4bd941e84bee5088b8/gallery/public/data) sourced from [Mapzen Terrarium elevation tiles](https://registry.opendata.aws/terrain-tiles/). See [dataset metadata](/data/niteroi-elevation.json) for provenance and sampling details.
 
 <ClientOnly>
-  <CodePlayground :code="playgroundCode" out="dom" :auto-run="true" />
-</ClientOnly> -->
+  <CodePlayground :code="playgroundCode" out="dom" :auto-run="true" :canvas-height="520" />
+</ClientOnly>
+
+:::tip Explore and edit
+Drag to navigate the map and use the mouse wheel to zoom. Use **Switch to flat map** to compare both modes, or edit the code and click **Run**. The example deliberately omits buildings so the terrain and draped roads/parks are easier to inspect.
+:::
+
+:::warning Browser support
+The example requires WebGPU. If initialization fails, check the [browser support requirements](/introduction#serverless-by-design).
+:::
 
 :::tip See also
 - [`AutkMap.enableTerrainMode()`](/api/autk-map/classes/AutkMap#enableterrainmode)
