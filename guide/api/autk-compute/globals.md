@@ -4,7 +4,7 @@
 
 # @urban-toolkit/autk-compute
 
-> Version: `4.0.0`
+> Version: `4.1.0`
 
 ## Classes
 

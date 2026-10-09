@@ -20,12 +20,9 @@ await map.init()
 setStatus('Loading categorized road data...')
 const collection = await fetch('/data/mnt_roads_categorized_proj.geojson')
   .then((res) => res.json())
-// Full projected width in meters, applied while the road mesh is built.
-map.loadCollection('roads', {
-  collection,
-  type: 'polylines',
-  loadConfig: { polylinesWidth: 18 },
-})
+map.loadCollection('roads', { collection, type: 'polylines' })
+// Full projected width in meters; can be changed without rebuilding the layer.
+map.updateRenderInfo('roads', { renderInfo: { polylinesWidth: 18 } })
 
 setStatus('Applying categorical thematic colors...')
 map.updateColorMap('roads', {
@@ -69,4 +66,4 @@ Render pre-grouped road categories with a stable categorical palette. This examp
 - categorical palette via `ColorMapInterpolator.CAT_OBSERVABLE10`
 - explicit class ordering with `ColorMapDomainStrategy.USER`
 - thematic rendering from `properties.compute.highwayGroup`
-- readable road width via `loadConfig.polylinesWidth`
+- readable road width via `updateRenderInfo(..., { renderInfo: { polylinesWidth } })`

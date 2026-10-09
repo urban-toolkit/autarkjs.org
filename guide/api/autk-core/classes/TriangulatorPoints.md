@@ -6,7 +6,7 @@
 
 # Class: TriangulatorPoints
 
-Defined in: [triangulator-points.ts:31](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-points.ts#L31)
+Defined in: [triangulator-points.ts:31](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-points.ts#L31)
 
 Converts point-based GeoJSON features into packed point instances.
 
@@ -30,7 +30,7 @@ skipping unsupported features with a warning.
 
 > `static` **buildInstances**(`geojson`, `origin`): [`PointInstancesData`](../interfaces/PointInstancesData.md)
 
-Defined in: [triangulator-points.ts:62](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-points.ts#L62)
+Defined in: [triangulator-points.ts:40](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-points.ts#L40)
 
 Builds point-instance data for a feature collection.
 
@@ -57,45 +57,3 @@ Packed instance centers and per-feature component metadata.
 #### Throws
 
 Never throws. Unsupported features are skipped with a console warning.
-
-***
-
-### getPointSize()
-
-> `static` **getPointSize**(): `number`
-
-Defined in: [triangulator-points.ts:50](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-points.ts#L50)
-
-Returns the shared point-marker radius used by point rendering.
-
-#### Returns
-
-`number`
-
-***
-
-### setPointSize()
-
-> `static` **setPointSize**(`size`): `void`
-
-Defined in: [triangulator-points.ts:42](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-points.ts#L42)
-
-Sets the shared base point radius used by sprite rendering.
-
-#### Parameters
-
-##### size
-
-`number`
-
-Marker radius in local planar units.
-
-#### Returns
-
-`void`
-
-Nothing.
-
-#### Throws
-
-If `size` is not a finite positive number.

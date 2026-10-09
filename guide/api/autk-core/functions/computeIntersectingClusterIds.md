@@ -8,7 +8,7 @@
 
 > **computeIntersectingClusterIds**(`items`): `Map`\<`string`, `number`\>
 
-Defined in: [utils-geojson.ts:399](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/utils-geojson.ts#L399)
+Defined in: [utils-geojson.ts:399](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/utils-geojson.ts#L399)
 
 Computes connected components (clusters) of intersecting geometries and returns
 a mapping from feature id to cluster id. The input array must contain an

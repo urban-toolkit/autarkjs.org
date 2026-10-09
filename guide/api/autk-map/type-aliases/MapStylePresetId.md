@@ -6,8 +6,8 @@
 
 # Type Alias: MapStylePresetId
 
-> **MapStylePresetId** = `"default"` \| `"light"` \| `"google"` \| `"apple"` \| `"osm"`
+> **MapStylePresetId** = `"default"` \| `"light"` \| `"google"` \| `"apple"` \| `"osm"` \| `"poster"`
 
-Defined in: [autk-map/src/map-style.ts:20](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-style.ts#L20)
+Defined in: [autk-map/src/map-style.ts:21](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-style.ts#L21)
 
 Supported built-in style preset identifiers.

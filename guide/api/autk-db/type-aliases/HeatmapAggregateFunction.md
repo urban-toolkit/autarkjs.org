@@ -8,6 +8,6 @@
 
 > **HeatmapAggregateFunction** = `Exclude`\<[`AggregateFunction`](AggregateFunction.md), `"collect"`\>
 
-Defined in: [use-cases/build-heatmap/interfaces.ts:6](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-db/src/use-cases/build-heatmap/interfaces.ts#L6)
+Defined in: [use-cases/build-heatmap/interfaces.ts:6](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/build-heatmap/interfaces.ts#L6)
 
 Supported aggregation functions for heatmap cell values.

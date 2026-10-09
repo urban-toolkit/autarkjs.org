@@ -8,7 +8,7 @@
 
 > **BinningEventsTransformConfig** = `object`
 
-Defined in: [api.ts:145](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-plot/src/api.ts#L145)
+Defined in: [api.ts:145](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-plot/src/api.ts#L145)
 
 Binning-events preset config.
 
@@ -22,7 +22,7 @@ Use `'@transform'` in `axis[1]` to mark the output slot.
 
 > `optional` **options?**: `object`
 
-Defined in: [api.ts:147](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-plot/src/api.ts#L147)
+Defined in: [api.ts:147](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-plot/src/api.ts#L147)
 
 #### reducer?
 
@@ -54,4 +54,4 @@ Field within each event object used for non-count reducers. Defaults to `'value'
 
 > **preset**: `"binning-events"`
 
-Defined in: [api.ts:146](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-plot/src/api.ts#L146)
+Defined in: [api.ts:146](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-plot/src/api.ts#L146)

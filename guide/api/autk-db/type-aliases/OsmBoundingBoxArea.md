@@ -8,7 +8,7 @@
 
 > **OsmBoundingBoxArea** = `object`
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:56](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L56)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:56](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L56)
 
 WGS84 degrees in [west, south, east, north] order. Antimeridian crossings are unsupported.
 
@@ -18,4 +18,4 @@ WGS84 degrees in [west, south, east, north] order. Antimeridian crossings are un
 
 > **bbox**: \[`number`, `number`, `number`, `number`\]
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:56](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L56)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:56](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L56)

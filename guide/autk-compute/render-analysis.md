@@ -60,11 +60,10 @@ for (const layer of db.getLayersMetadata()) {
   const collection = layer.name === "table_osm_roads"
     ? enrichedRoads
     : await db.getLayer(layer.name);
-  map.loadCollection(layer.name, {
-    collection,
-    type: layer.type,
-    loadConfig: layer.type === 'roads' ? { polylinesWidth: 18 } : undefined,
-  });
+  map.loadCollection(layer.name, { collection, type: layer.type });
+  if (layer.type === 'roads') {
+    map.updateRenderInfo(layer.name, { renderInfo: { polylinesWidth: 18 } });
+  }
 }
 
 map.updateColorMap("table_osm_roads", {

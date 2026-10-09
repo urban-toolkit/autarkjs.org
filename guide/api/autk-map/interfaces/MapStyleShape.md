@@ -6,7 +6,7 @@
 
 # Interface: MapStyleShape
 
-Defined in: [autk-map/src/map-style.ts:38](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-style.ts#L38)
+Defined in: [autk-map/src/map-style.ts:39](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-style.ts#L39)
 
 Semantic color slots required by a map style.
 
@@ -20,7 +20,7 @@ interface.
 
 > **background**: `` `#${string}` ``
 
-Defined in: [autk-map/src/map-style.ts:39](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-style.ts#L39)
+Defined in: [autk-map/src/map-style.ts:40](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-style.ts#L40)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [autk-map/src/map-style.ts:39](https://github.com/urban-toolkit/auta
 
 > **buildings**: `` `#${string}` ``
 
-Defined in: [autk-map/src/map-style.ts:44](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-style.ts#L44)
+Defined in: [autk-map/src/map-style.ts:45](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-style.ts#L45)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [autk-map/src/map-style.ts:44](https://github.com/urban-toolkit/auta
 
 > **parks**: `` `#${string}` ``
 
-Defined in: [autk-map/src/map-style.ts:41](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-style.ts#L41)
+Defined in: [autk-map/src/map-style.ts:42](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-style.ts#L42)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [autk-map/src/map-style.ts:41](https://github.com/urban-toolkit/auta
 
 > **points**: `` `#${string}` ``
 
-Defined in: [autk-map/src/map-style.ts:45](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-style.ts#L45)
+Defined in: [autk-map/src/map-style.ts:46](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-style.ts#L46)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [autk-map/src/map-style.ts:45](https://github.com/urban-toolkit/auta
 
 > **polygons**: `` `#${string}` ``
 
-Defined in: [autk-map/src/map-style.ts:47](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-style.ts#L47)
+Defined in: [autk-map/src/map-style.ts:48](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-style.ts#L48)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [autk-map/src/map-style.ts:47](https://github.com/urban-toolkit/auta
 
 > **polylines**: `` `#${string}` ``
 
-Defined in: [autk-map/src/map-style.ts:46](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-style.ts#L46)
+Defined in: [autk-map/src/map-style.ts:47](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-style.ts#L47)
 
 ***
 
@@ -68,7 +68,7 @@ Defined in: [autk-map/src/map-style.ts:46](https://github.com/urban-toolkit/auta
 
 > **roads**: `` `#${string}` ``
 
-Defined in: [autk-map/src/map-style.ts:43](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-style.ts#L43)
+Defined in: [autk-map/src/map-style.ts:44](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-style.ts#L44)
 
 ***
 
@@ -76,7 +76,7 @@ Defined in: [autk-map/src/map-style.ts:43](https://github.com/urban-toolkit/auta
 
 > **surface**: `` `#${string}` ``
 
-Defined in: [autk-map/src/map-style.ts:40](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-style.ts#L40)
+Defined in: [autk-map/src/map-style.ts:41](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-style.ts#L41)
 
 ***
 
@@ -84,4 +84,4 @@ Defined in: [autk-map/src/map-style.ts:40](https://github.com/urban-toolkit/auta
 
 > **water**: `` `#${string}` ``
 
-Defined in: [autk-map/src/map-style.ts:42](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-style.ts#L42)
+Defined in: [autk-map/src/map-style.ts:43](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-style.ts#L43)

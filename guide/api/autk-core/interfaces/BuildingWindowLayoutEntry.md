@@ -6,7 +6,7 @@
 
 # Interface: BuildingWindowLayoutEntry
 
-Defined in: [triangulator-windows.ts:16](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L16)
+Defined in: [triangulator-windows.ts:16](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-windows.ts#L16)
 
 Metadata for one facade window, associated with its original building component.
 
@@ -16,7 +16,7 @@ Metadata for one facade window, associated with its original building component.
 
 > **buildingHeight**: `number`
 
-Defined in: [triangulator-windows.ts:29](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L29)
+Defined in: [triangulator-windows.ts:29](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-windows.ts#L29)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [triangulator-windows.ts:29](https://github.com/urban-toolkit/autark
 
 > **center**: \[`number`, `number`, `number`\]
 
-Defined in: [triangulator-windows.ts:25](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L25)
+Defined in: [triangulator-windows.ts:25](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-windows.ts#L25)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [triangulator-windows.ts:25](https://github.com/urban-toolkit/autark
 
 > **edgeIndex**: `number`
 
-Defined in: [triangulator-windows.ts:22](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L22)
+Defined in: [triangulator-windows.ts:22](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-windows.ts#L22)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [triangulator-windows.ts:22](https://github.com/urban-toolkit/autark
 
 > **floorIndex**: `number`
 
-Defined in: [triangulator-windows.ts:23](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L23)
+Defined in: [triangulator-windows.ts:23](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-windows.ts#L23)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [triangulator-windows.ts:23](https://github.com/urban-toolkit/autark
 
 > **geometryIndex**: `number`
 
-Defined in: [triangulator-windows.ts:19](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L19)
+Defined in: [triangulator-windows.ts:19](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-windows.ts#L19)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [triangulator-windows.ts:19](https://github.com/urban-toolkit/autark
 
 > **height**: `number`
 
-Defined in: [triangulator-windows.ts:28](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L28)
+Defined in: [triangulator-windows.ts:28](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-windows.ts#L28)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [triangulator-windows.ts:28](https://github.com/urban-toolkit/autark
 
 > **normal**: \[`number`, `number`, `number`\]
 
-Defined in: [triangulator-windows.ts:26](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L26)
+Defined in: [triangulator-windows.ts:26](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-windows.ts#L26)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [triangulator-windows.ts:26](https://github.com/urban-toolkit/autark
 
 > **polygonIndex**: `number`
 
-Defined in: [triangulator-windows.ts:20](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L20)
+Defined in: [triangulator-windows.ts:20](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-windows.ts#L20)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [triangulator-windows.ts:20](https://github.com/urban-toolkit/autark
 
 > **ringIndex**: `number`
 
-Defined in: [triangulator-windows.ts:21](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L21)
+Defined in: [triangulator-windows.ts:21](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-windows.ts#L21)
 
 ***
 
@@ -88,7 +88,7 @@ Defined in: [triangulator-windows.ts:21](https://github.com/urban-toolkit/autark
 
 > **sourceFeatureIndex**: `number`
 
-Defined in: [triangulator-windows.ts:18](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L18)
+Defined in: [triangulator-windows.ts:18](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-windows.ts#L18)
 
 ***
 
@@ -96,7 +96,7 @@ Defined in: [triangulator-windows.ts:18](https://github.com/urban-toolkit/autark
 
 > **width**: `number`
 
-Defined in: [triangulator-windows.ts:27](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L27)
+Defined in: [triangulator-windows.ts:27](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-windows.ts#L27)
 
 ***
 
@@ -104,7 +104,7 @@ Defined in: [triangulator-windows.ts:27](https://github.com/urban-toolkit/autark
 
 > **windowId**: `string`
 
-Defined in: [triangulator-windows.ts:17](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L17)
+Defined in: [triangulator-windows.ts:17](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-windows.ts#L17)
 
 ***
 
@@ -112,4 +112,4 @@ Defined in: [triangulator-windows.ts:17](https://github.com/urban-toolkit/autark
 
 > **windowIndex**: `number`
 
-Defined in: [triangulator-windows.ts:24](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L24)
+Defined in: [triangulator-windows.ts:24](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-windows.ts#L24)

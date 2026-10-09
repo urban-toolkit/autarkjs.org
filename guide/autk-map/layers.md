@@ -49,8 +49,14 @@ map.loadCollection("points", {
   collection: points,
   type: "points"
 });
-
+// Radius in projected units; 120 m keeps events visible at the Manhattan extent.
+map.updateRenderInfo("points", { renderInfo: { pointSize: 120 } });
 map.draw();
+
+output('<label>Point radius (meters): <input type="range" min="32" max="160" value="120" step="8" /></label>');
+mount.querySelector('input').addEventListener('input', event => {
+  map.updateRenderInfo('points', { renderInfo: { pointSize: Number(event.target.value) } });
+});
 `;
 
 const rasterLayersCode = `
@@ -140,15 +146,18 @@ const buildings = {
 };
 const map = new AutkMap(canvas);
 await map.init();
-map.loadCollection('wide-roads', {
-  collection: roads, type: 'roads', loadConfig: { polylinesWidth: 8 },
-});
+map.loadCollection('wide-roads', { collection: roads, type: 'roads' });
+map.updateRenderInfo('wide-roads', { renderInfo: { polylinesWidth: 8 } });
 map.loadCollection('buildings-with-fallback', {
   collection: buildings, type: 'buildings', loadConfig: { buildingsZeroHeight: true },
 });
 map.camera.resetCamera([0, 0, 1], [0, 0, 0], [100, -120, 120]);
 map.camera.update();
 map.draw();
+output('<label>Road width (meters): <input type="range" min="2" max="16" step="2" value="8" /></label>');
+mount.querySelector('input').addEventListener('input', event => {
+  map.updateRenderInfo('wide-roads', { renderInfo: { polylinesWidth: Number(event.target.value) } });
+});
 `;
 
 const updateRasterCode = `
@@ -253,7 +262,7 @@ map.loadCollection(layerId, {
 | `params.collection` | Source `FeatureCollection` to load. |
 | `params.type` | Optional when the geometry can be inferred for vector layers. Physical layers should usually pass `type` explicitly. |
 | `params.property` | Required for raster layers so the renderer knows which numeric value to read from each cell. |
-| `params.loadConfig` | Optional geometry settings such as road width and missing-height building fallback; see [Load-time geometry options](#load-time-geometry-options). |
+| `params.loadConfig` | Optional load-time building fallback settings; see [Layer sizing and load-time options](#layer-sizing-and-load-time-options). |
 
 `autk-map` also assumes a few basic rules about how layer data is organized and loaded:
 
@@ -296,16 +305,25 @@ Common building attributes are inherited by parts; part-specific height/level ta
 
 [`normalizeBuildingFeature()`](/api/autk-core/functions/normalizeBuildingFeature) also wraps a single polygonal or supported ring geometry in a `GeometryCollection`. It does **not** union footprints, repair geometries, clone coordinates, or combine independent features. Legacy positional `parts` metadata is accepted, but must not be mixed with indexed metadata. Duplicate/out-of-range indices, nested geometry collections, and unsupported geometries are rejected.
 
-### Load-time geometry options
+### Layer sizing and load-time options
 
-Pass [`loadConfig`](/api/autk-map/interfaces/LoadCollectionConfig) when creating a layer:
+Sizes are render state in v4.1: use `updateRenderInfo()` after loading. In the example below, the slider changes road width without removing the layer. The building's missing-height fallback remains a [`loadConfig`](/api/autk-map/interfaces/LoadCollectionConfig) option.
 
 <ClientOnly>
   <CodePlayground :code="loadConfigCode" out="dom" :auto-run="false" />
 </ClientOnly>
 
-- `polylinesWidth` sets the **full visual width** of buffered `roads`/`polylines` in projected coordinate units. It is baked into the mesh at load time; changing render state does not change it. To change width, remove and reload the layer.
-- Despite its name, `buildingsZeroHeight: true` gives parts **without height metadata** a random fallback height. It does not replace explicitly zero or invalid heights. For reproducible building heights, provide height/level metadata yourself; missing-height parts are skipped by default.
+- `updateRenderInfo(id, { renderInfo: { polylinesWidth } })` sets the **full visual width** of `roads`/`polylines` in projected coordinate units. It updates an existing layer without rebuilding geometry; road category widths remain in effect until explicitly overridden.
+- `updateRenderInfo(id, { renderInfo: { pointSize } })` sets a point layer's radius in projected coordinate units. This is per layer, so point datasets at different map extents can use different sizes.
+- `buildingsZeroHeight: true` gives parts **without height metadata** a random fallback height. It does not replace explicitly zero or invalid heights. For reproducible building heights, provide height/level metadata yourself; missing-height parts are skipped by default.
+
+:::warning Sizing migration from 4.0
+`loadConfig.polylinesWidth`, `TriangulatorPoints.setPointSize()` / `getPointSize()`, and `LayerData.pointSize` have been removed. Use per-layer `LayerRenderInfo.polylinesWidth` and `LayerRenderInfo.pointSize` through `updateRenderInfo()` instead. Flat render-state patches are also accepted. There is no `lineWidth` field.
+:::
+
+The exported [`DEFAULT_POINT_SIZE`](/api/autk-map/variables/DEFAULT_POINT_SIZE) is a **radius of 64**, and [`DEFAULT_LINE_WIDTH`](/api/autk-map/variables/DEFAULT_LINE_WIDTH) is a **full width of 12** for generic polylines. Sizes are projected-coordinate units, **not pixels**; camera transforms determine their apparent size. Point rendering no longer applies an additional zoom multiplier.
+
+Sizes must be finite positive float32 values. Invalid sizes preserve the previous setting and log a warning. Collection-based lines use butt caps, miter joins limited to four half-widths, and bevel fallback at acute turns; visible and picking passes use the same expansion. Prebuilt triangle meshes loaded through `loadMesh()` cannot be resized this way. The shared centerline utility is [`PolylineBuilder`](/api/autk-core/classes/PolylineBuilder).
 
 ## Vector layers
 

@@ -65,6 +65,7 @@ map.loadCollection("points", {
   collection: points,
   type: "points"
 });
+map.updateRenderInfo("points", { renderInfo: { pointSize: 120 } });
 map.draw();
 
 setTimeout(() => map.updateRenderInfo("points", { isSkip: true }), 800);
@@ -165,7 +166,7 @@ Run the example, then use its buttons to rotate/tilt the view or reset it. Navig
   <CodePlayground :code="cameraCode" out="dom" :auto-run="false" />
 </ClientOnly>
 
-[`map.camera`](/api/autk-core/classes/Camera) is the shared `autk-core` camera. It also exposes translation and zoom controls. Call `camera.update()` after changing its state to rebuild the matrices. If `map.draw()` is already running, the next frame displays the new view; there is no need to start another render loop.
+[`map.camera`](/api/autk-core/classes/Camera) extends the shared `autk-core` camera and exposes translation and zoom controls. With v4.1's default on-demand rendering, its navigation methods and supported map updates automatically request the next frame; there is no need to start a continuous render loop. `camera.update()` rebuilds matrices but does not itself request a frame. Prefer the navigation methods over directly mutating camera arrays.
 
 See [Initialization and lifecycle](./#initialization-and-lifecycle) for hiding the floating map interface and cleaning up a map when its component is removed.
 

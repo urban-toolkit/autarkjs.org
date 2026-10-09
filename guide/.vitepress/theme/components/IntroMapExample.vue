@@ -45,11 +45,10 @@ onMounted(async () => {
 
     for (const layer of db.getLayersMetadata()) {
       const geojson = await db.getLayer(layer.name)
-      map.loadCollection(layer.name, {
-        collection: geojson,
-        type: layer.type,
-        loadConfig: layer.type === 'roads' ? { polylinesWidth: 18 } : undefined,
-      })
+      map.loadCollection(layer.name, { collection: geojson, type: layer.type })
+      if (layer.type === 'roads') {
+        map.updateRenderInfo(layer.name, { renderInfo: { polylinesWidth: 18 } })
+      }
     }
 
     map.draw()

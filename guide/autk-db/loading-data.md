@@ -158,6 +158,10 @@ To directly fetch from the public [Overpass API](https://overpass-api.de/) and l
 * `autk-db` provides the `onProgress` callback that may be used to track the loading status.
 :::
 
+:::tip Bbox roads and water crossings
+In v4.1, standard roads loaded by a bounding box are filtered by intersection with the bbox rather than clipped against the coastal surface mask. This preserves bridges and roads over water. Intersection filtering does **not** clip road endpoints to the bbox. Named-area roads, other layers, and custom tag sets retain their surface-clipping behavior.
+:::
+
 ### Loading custom OSM tag sets
 
 With Overpass, `tagSets` can load custom layers beside the standard OSM themes. Each [`OsmTagSet`](/api/autk-db/type-aliases/OsmTagSet) declares exactly one geometry family (`points`, `polylines`, or `polygons`) and produces `{outputTableName}_{name}_{type}`. Filters in one set are combined with OR.

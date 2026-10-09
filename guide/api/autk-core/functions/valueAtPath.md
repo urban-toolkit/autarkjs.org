@@ -8,7 +8,7 @@
 
 > **valueAtPath**(`item`, `path`): `unknown`
 
-Defined in: [utils-data.ts:22](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/utils-data.ts#L22)
+Defined in: [utils-data.ts:22](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/utils-data.ts#L22)
 
 Resolves a dot-delimited property path from an unknown value.
 

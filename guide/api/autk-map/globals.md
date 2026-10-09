@@ -4,7 +4,7 @@
 
 # @urban-toolkit/autk-map
 
-> Version: `4.0.0`
+> Version: `4.1.0`
 
 ## Enumerations
 
@@ -30,6 +30,7 @@
 - [LoadCollectionConfig](interfaces/LoadCollectionConfig.md)
 - [LoadCollectionParams](interfaces/LoadCollectionParams.md)
 - [LoadMeshParams](interfaces/LoadMeshParams.md)
+- [MapDrawOptions](interfaces/MapDrawOptions.md)
 - [MapEventData](interfaces/MapEventData.md)
 - [MapStyleShape](interfaces/MapStyleShape.md)
 - [UpdateColorMapParams](interfaces/UpdateColorMapParams.md)
@@ -41,3 +42,8 @@
 
 - [MapEventRecord](type-aliases/MapEventRecord.md)
 - [MapStylePresetId](type-aliases/MapStylePresetId.md)
+
+## Variables
+
+- [DEFAULT\_LINE\_WIDTH](variables/DEFAULT_LINE_WIDTH.md)
+- [DEFAULT\_POINT\_SIZE](variables/DEFAULT_POINT_SIZE.md)

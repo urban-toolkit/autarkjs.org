@@ -6,7 +6,7 @@
 
 # Class: AutkMapUi
 
-Defined in: [autk-map/src/map-ui.ts:40](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-ui.ts#L40)
+Defined in: [autk-map/src/map-ui.ts:40](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-ui.ts#L40)
 
 Floating DOM UI controller for an `AutkMap` instance.
 
@@ -31,7 +31,7 @@ map.ui.changeActiveLayer(map.layerManager.layers[0] ?? null);
 
 > **new AutkMapUi**(`map`): `AutkMapUi`
 
-Defined in: [autk-map/src/map-ui.ts:65](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-ui.ts#L65)
+Defined in: [autk-map/src/map-ui.ts:68](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-ui.ts#L68)
 
 Creates a UI controller bound to a map instance.
 
@@ -57,7 +57,7 @@ Parent map whose canvas, layers, and update APIs are used by the UI.
 
 > **get** **activeLayer**(): [`Layer`](Layer.md) \| `null`
 
-Defined in: [autk-map/src/map-ui.ts:74](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-ui.ts#L74)
+Defined in: [autk-map/src/map-ui.ts:77](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-ui.ts#L77)
 
 Layer currently used for legend display and pick activation.
 
@@ -69,7 +69,7 @@ Layer currently used for legend display and pick activation.
 
 > **set** **activeLayer**(`layer`): `void`
 
-Defined in: [autk-map/src/map-ui.ts:76](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-ui.ts#L76)
+Defined in: [autk-map/src/map-ui.ts:79](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-ui.ts#L79)
 
 Sets the cached active layer reference used by legend synchronization.
 
@@ -91,7 +91,7 @@ Sets the cached active layer reference used by legend synchronization.
 
 > **get** **map**(): [`AutkMap`](AutkMap.md)
 
-Defined in: [autk-map/src/map-ui.ts:70](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-ui.ts#L70)
+Defined in: [autk-map/src/map-ui.ts:73](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-ui.ts#L73)
 
 Parent map reference.
 
@@ -103,7 +103,7 @@ Parent map reference.
 
 > **set** **map**(`map`): `void`
 
-Defined in: [autk-map/src/map-ui.ts:72](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-ui.ts#L72)
+Defined in: [autk-map/src/map-ui.ts:75](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-ui.ts#L75)
 
 Updates the parent map reference used by subsequent UI operations.
 
@@ -119,11 +119,26 @@ Updates the parent map reference used by subsequent UI operations.
 
 ## Methods
 
+### buildBranding()
+
+> **buildBranding**(): `void`
+
+Defined in: [autk-map/src/map-ui.ts:125](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-ui.ts#L125)
+
+Adds a faint “made with autark” watermark at the bottom right. Branding is independent of `showUi` and never
+intercepts canvas interaction. No animation loop is needed for positioning.
+
+#### Returns
+
+`void`
+
+***
+
 ### buildUi()
 
 > **buildUi**(): `void`
 
-Defined in: [autk-map/src/map-ui.ts:154](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-ui.ts#L154)
+Defined in: [autk-map/src/map-ui.ts:186](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-ui.ts#L186)
 
 Builds the map UI overlays.
 
@@ -143,7 +158,7 @@ Ensures the UI DOM structure exists for the current map.
 
 > **changeActiveLayer**(`layer`): `void`
 
-Defined in: [autk-map/src/map-ui.ts:127](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-ui.ts#L127)
+Defined in: [autk-map/src/map-ui.ts:159](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-ui.ts#L159)
 
 Activates a layer for picking and legend display.
 
@@ -176,7 +191,7 @@ Updates layer render state and refreshes the legend when activation succeeds.
 
 > **destroy**(): `void`
 
-Defined in: [autk-map/src/map-ui.ts:173](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-ui.ts#L173)
+Defined in: [autk-map/src/map-ui.ts:205](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-ui.ts#L205)
 
 Removes all UI DOM nodes, listeners, and cached UI state.
 
@@ -195,7 +210,7 @@ Detaches injected elements and clears cached element references.
 
 > **handleLayerRemoved**(`layerId`): `void`
 
-Defined in: [autk-map/src/map-ui.ts:217](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-ui.ts#L217)
+Defined in: [autk-map/src/map-ui.ts:254](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-ui.ts#L254)
 
 Clears active-layer UI state after a layer is removed from the map.
 
@@ -222,7 +237,7 @@ Synchronizes legend visibility with the remaining layer state.
 
 > **handleResize**(): `void`
 
-Defined in: [autk-map/src/map-ui.ts:89](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-ui.ts#L89)
+Defined in: [autk-map/src/map-ui.ts:92](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-ui.ts#L92)
 
 Repositions floating UI elements to match the canvas location.
 
@@ -242,7 +257,7 @@ Updates the inline position styles of any UI elements that have been built.
 
 > **refreshLayerList**(): `void`
 
-Defined in: [autk-map/src/map-ui.ts:251](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-ui.ts#L251)
+Defined in: [autk-map/src/map-ui.ts:288](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-ui.ts#L288)
 
 Rebuilds the layer list when visible layer state changes.
 
@@ -262,7 +277,7 @@ Re-renders the visible layer rows when the submenu is open.
 
 > **refreshLegend**(`layer`): `void`
 
-Defined in: [autk-map/src/map-ui.ts:234](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-ui.ts#L234)
+Defined in: [autk-map/src/map-ui.ts:271](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-ui.ts#L271)
 
 Refreshes legend state after layer render settings change.
 
@@ -290,7 +305,7 @@ Recomputes legend visibility and content for the current active layer.
 
 > **updatePerformance**(`fps`, `frameTimeMs`): `void`
 
-Defined in: [autk-map/src/map-ui.ts:200](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/map-ui.ts#L200)
+Defined in: [autk-map/src/map-ui.ts:237](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/map-ui.ts#L237)
 
 Updates the on-screen performance overlay.
 

@@ -33,11 +33,10 @@ setStatus('Rendering physical layers...')
 for (const layer of db.getLayersMetadata()) {
   const { name, type } = layer
   const collection = await db.getLayer(name)
-  map.loadCollection(name, {
-  collection,
-  type,
-  loadConfig: type === 'roads' ? { polylinesWidth: 18 } : undefined,
-})
+  map.loadCollection(name, { collection, type })
+  if (type === 'roads') {
+    map.updateRenderInfo(name, { renderInfo: { polylinesWidth: 18 } })
+  }
 }
 
 map.draw()

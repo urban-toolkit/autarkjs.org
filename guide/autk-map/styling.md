@@ -25,13 +25,16 @@ map.style.setPredefinedStyle("google");
 
 for (const layer of db.getLayersMetadata()) {
   const collection = await db.getLayer(layer.name);
-  map.loadCollection(layer.name, {
-    collection,
-    type: layer.type,
-    loadConfig: layer.type === 'roads' ? { polylinesWidth: 18 } : undefined,
-  });
+  map.loadCollection(layer.name, { collection, type: layer.type });
+  if (layer.type === 'roads') {
+    map.updateRenderInfo(layer.name, { renderInfo: { polylinesWidth: 18 } });
+  }
 }
 map.draw();
+output('<label>Style: <select><option value="google">Google</option><option value="poster">Poster</option><option value="default">Default</option></select></label>');
+mount.querySelector('select').addEventListener('change', event => {
+  map.style.setPredefinedStyle(event.target.value);
+});
 `;
 
 const opacityCode = `
@@ -58,11 +61,10 @@ await map.init();
 
 for (const layer of db.getLayersMetadata()) {
   const collection = await db.getLayer(layer.name);
-  map.loadCollection(layer.name, {
-    collection,
-    type: layer.type,
-    loadConfig: layer.type === 'roads' ? { polylinesWidth: 18 } : undefined,
-  });
+  map.loadCollection(layer.name, { collection, type: layer.type });
+  if (layer.type === 'roads') {
+    map.updateRenderInfo(layer.name, { renderInfo: { polylinesWidth: 18 } });
+  }
 }
 
 map.updateRenderInfo("table_osm_buildings", { opacity: 0.45 });
@@ -146,7 +148,7 @@ In practice, that means you usually:
 
 ## Base map styles
 
-`MapStyle` controls the default semantic colors used by the renderer. Each [`AutkMap`](/api/autk-map/classes/AutkMap) owns its own `MapStyle` instance, exposed through `map.style`, so multiple maps can use different visual treatments. Built-in presets provide quick visual baselines for the same data. The example below loads a basic lower-Manhattan OSM scene and applies the `google` preset through the map's style instance after initialization.
+`MapStyle` controls the default semantic colors used by the renderer. Each [`AutkMap`](/api/autk-map/classes/AutkMap) owns its own `MapStyle` instance, exposed through `map.style`, so multiple maps can use different visual treatments. Built-in presets provide quick visual baselines for the same data. The example below loads a basic lower-Manhattan OSM scene and starts with the `google` preset. Use its selector to try the new `poster` preset or return to the default style; the map redraws automatically.
 
 <ClientOnly>
   <CodePlayground :code="mapStyleCode" out="dom" :auto-run="true" />
@@ -159,6 +161,11 @@ Built-in presets currently include:
 - `google`
 - `apple`
 - `osm`
+- `poster`
+
+The `poster` preset uses white land, graphite roads, and pale-blue water/background. General-purpose presets derive muted generic polygon/line/point colors from their surface color, approximately 10%/20%/30% darker. This improves contrast without changing the data.
+
+Every map has a bottom-right **made with autark** text watermark, even with `showUi: false`. It is branding, not OpenStreetMap attribution; published maps using OSM still need appropriate data credits.
 
 For full control, use `map.style.setCustomStyle()` with a complete semantic color object. See [`MapStyle`](/api/autk-map/classes/MapStyle).
 
@@ -178,6 +185,8 @@ The example below uses the same OSM scene and lowers only the building opacity s
 | `isSkip` | Hides the full layer without removing it. |
 | `isPick` | Enables or disables picking for that layer. |
 | `isColorMap` | Turns thematic coloring on or off for the layer. |
+| `pointSize` | Per-layer point radius in projected units (default `64`). |
+| `polylinesWidth` | Full line/road width in projected units (generic default `12`); overrides road category widths. |
 
 ## Color-map configuration
 

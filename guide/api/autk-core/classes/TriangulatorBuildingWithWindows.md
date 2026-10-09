@@ -6,7 +6,7 @@
 
 # Class: TriangulatorBuildingWithWindows
 
-Defined in: [triangulator-windows.ts:38](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L38)
+Defined in: [triangulator-windows.ts:38](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-windows.ts#L38)
 
 Generates per-part roofs and windows while retaining one source feature identity.
 
@@ -26,7 +26,7 @@ Generates per-part roofs and windows while retaining one source feature identity
 
 > `static` **buildMesh**(`geojson`, `origin`, `floors`): \[[`LayerGeometry`](../interfaces/LayerGeometry.md)[], [`LayerComponent`](../interfaces/LayerComponent.md)[]\]
 
-Defined in: [triangulator-windows.ts:43](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L43)
+Defined in: [triangulator-windows.ts:43](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-windows.ts#L43)
 
 Triangulates flat roofs (including holes) and facade windows on original parts.
 
@@ -58,7 +58,7 @@ If building geometry or part metadata is ambiguous or unsupported.
 
 > `static` **buildWindowLayout**(`source`, `floors`): [`BuildingWindowLayoutResult`](../interfaces/BuildingWindowLayoutResult.md)
 
-Defined in: [triangulator-windows.ts:79](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L79)
+Defined in: [triangulator-windows.ts:79](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-windows.ts#L79)
 
 Places windows on original outer and courtyard rings, at each part's height/base.
 IDs include component/ring indices, avoiding collisions between parts.
@@ -87,7 +87,7 @@ If building geometry or part metadata is ambiguous or unsupported.
 
 > `static` **resolveHeight**(`feature`): `number`
 
-Defined in: [triangulator-windows.ts:125](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-windows.ts#L125)
+Defined in: [triangulator-windows.ts:125](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-windows.ts#L125)
 
 Returns the maximum effective part height, with the existing missing-height fallback.
 

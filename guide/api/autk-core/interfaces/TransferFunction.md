@@ -6,7 +6,7 @@
 
 # Interface: TransferFunction
 
-Defined in: [transfer-function.ts:17](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/transfer-function.ts#L17)
+Defined in: [transfer-function.ts:17](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/transfer-function.ts#L17)
 
 Configures how scalar values map to opacity.
 
@@ -19,7 +19,7 @@ input values are normalized against the current transfer context.
 
 > `optional` **gamma?**: `number`
 
-Defined in: [transfer-function.ts:31](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/transfer-function.ts#L31)
+Defined in: [transfer-function.ts:31](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/transfer-function.ts#L31)
 
 Curve shaping factor; values `<= 0` are clamped to a tiny positive exponent at evaluation time.
 
@@ -29,7 +29,7 @@ Curve shaping factor; values `<= 0` are clamped to a tiny positive exponent at e
 
 > `optional` **mode?**: `"near-zero"` \| `"far-zero"` \| `"linear"`
 
-Defined in: [transfer-function.ts:25](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/transfer-function.ts#L25)
+Defined in: [transfer-function.ts:25](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/transfer-function.ts#L25)
 
 Opacity mapping mode.
 
@@ -43,7 +43,7 @@ Opacity mapping mode.
 
 > `optional` **opacityMax?**: `number`
 
-Defined in: [transfer-function.ts:29](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/transfer-function.ts#L29)
+Defined in: [transfer-function.ts:29](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/transfer-function.ts#L29)
 
 Upper bound for output opacity in `[0, 1]`.
 
@@ -53,7 +53,7 @@ Upper bound for output opacity in `[0, 1]`.
 
 > `optional` **opacityMin?**: `number`
 
-Defined in: [transfer-function.ts:27](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/transfer-function.ts#L27)
+Defined in: [transfer-function.ts:27](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/transfer-function.ts#L27)
 
 Lower bound for output opacity in `[0, 1]`.
 
@@ -63,6 +63,6 @@ Lower bound for output opacity in `[0, 1]`.
 
 > `optional` **zeroCenter?**: `number`
 
-Defined in: [transfer-function.ts:33](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/transfer-function.ts#L33)
+Defined in: [transfer-function.ts:33](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/transfer-function.ts#L33)
 
 Reference center used by zero-distance modes (default `0`).

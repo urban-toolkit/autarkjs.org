@@ -12,6 +12,26 @@ map.loadCollection("neighborhoods", { collection: geojson });
 
 map.draw();
 `
+const renderModeCode = `
+import { AutkMap } from '@urban-toolkit/autk-map';
+
+const neighborhoods = await fetch('/data/mnt_neighs_proj.geojson').then(res => res.json());
+const map = new AutkMap(canvas);
+await map.init();
+map.loadCollection('neighborhoods', { collection: neighborhoods });
+map.draw(); // On demand: an idle map does not schedule continuous frames.
+
+output('<button type="button" data-mode="demand">On demand</button> <button type="button" data-mode="continuous">Continuous (30 fps)</button> <button type="button" data-action="borders">Toggle borders</button>');
+mount.querySelector('[data-mode="demand"]').addEventListener('click', () => map.draw());
+mount.querySelector('[data-mode="continuous"]').addEventListener('click', () => map.draw({ fps: 30 }));
+let borders = true;
+mount.querySelector('[data-action="borders"]').addEventListener('click', () => {
+  borders = !borders;
+  // Supported setters request a frame automatically, even in on-demand mode.
+  map.updateRenderInfo('neighborhoods', { showBorders: borders });
+});
+`
+
 const lifecycleCode = `
 import { AutkMap } from '@urban-toolkit/autk-map';
 
@@ -89,6 +109,24 @@ The entry point of **autk-map** is the `AutkMap` class. To create a map, you mus
 `autk-map` requires a browser with WebGPU support. We recommend using recent versions of **Chrome**, **Edge**, or **Safari**. See the browser support table in the [Introduction](/introduction).
 :::
 
+## Rendering mode
+
+In v4.1, `map.draw()` renders once and then renders again only when the map observes a change. Camera navigation, resize, layer loading/removal, supported render-state updates, styles, picking, and terrain changes all request the next frame automatically.
+
+Run this example and switch between on-demand rendering and a continuous 30 fps loop. **Toggle borders** demonstrates a supported update that redraws automatically in either mode:
+
+<ClientOnly>
+  <CodePlayground :code="renderModeCode" out="dom" :auto-run="false" />
+</ClientOnly>
+
+Use `map.draw(30)` or `map.draw({ fps: 30 })` for a continuous 30 fps loop; `map.draw({ onDemand: false })` uses 60 fps. Calling `draw()` again replaces the active mode. Continuous rendering is useful for animation or other work that changes every frame.
+
+Direct writes to GPU resources are not observed; call [`map.requestRender()`](/api/autk-map/classes/AutkMap#requestrender) afterward. Direct edits to cached uniforms/render state or CPU geometry also need `layer.makeLayerRenderInfoDirty()` or `layer.makeLayerDataDirty()`, respectively. These dirty marks already request a frame for attached layers. `requestRender()` alone does not upload CPU buffers or refresh cached uniforms; prefer the public update methods.
+
+:::warning Migrating from 4.0
+`map.draw()` no longer starts a continuous loop. Applications with unobserved per-frame mutations must request frames explicitly or opt into continuous rendering. Numeric FPS calls retain their previous continuous behavior.
+:::
+
 ## Initialization and lifecycle
 
 The optional second constructor argument controls the floating map UI. Pass `false` when your application provides its own controls:
@@ -97,7 +135,7 @@ The optional second constructor argument controls the floating map UI. Pass `fal
   <CodePlayground :code="lifecycleCode" out="dom" :auto-run="false" />
 </ClientOnly>
 
-`showUi` is a read-only property reflecting that constructor choice. Hiding the UI does not disable programmatic layer, selection, or camera controls.
+`showUi` is a read-only property reflecting that constructor choice. Hiding the UI does not disable programmatic layer, selection, or camera controls. Every map still includes the bottom-right text-only **made with autark** watermark; it follows canvas resizing, does not intercept input, and is removed by `destroy()`.
 
 When removing the canvas, changing routes, or replacing the visualization, call [`destroy()`](/api/autk-map/classes/AutkMap#destroy):
 

@@ -6,7 +6,7 @@
 
 # Interface: HeatmapGroupBy
 
-Defined in: [use-cases/build-heatmap/interfaces.ts:9](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-db/src/use-cases/build-heatmap/interfaces.ts#L9)
+Defined in: [use-cases/build-heatmap/interfaces.ts:9](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/build-heatmap/interfaces.ts#L9)
 
 Shared heatmap group-by item, aligned with `spatialQuery` except that `collect` is not supported.
 
@@ -16,7 +16,7 @@ Shared heatmap group-by item, aligned with `spatialQuery` except that `collect` 
 
 > `optional` **aggregateFn?**: [`HeatmapAggregateFunction`](../type-aliases/HeatmapAggregateFunction.md)
 
-Defined in: [use-cases/build-heatmap/interfaces.ts:13](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-db/src/use-cases/build-heatmap/interfaces.ts#L13)
+Defined in: [use-cases/build-heatmap/interfaces.ts:13](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/build-heatmap/interfaces.ts#L13)
 
 Aggregation function to apply on the grouped values.
 
@@ -26,7 +26,7 @@ Aggregation function to apply on the grouped values.
 
 > **column**: `string`
 
-Defined in: [use-cases/build-heatmap/interfaces.ts:11](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-db/src/use-cases/build-heatmap/interfaces.ts#L11)
+Defined in: [use-cases/build-heatmap/interfaces.ts:11](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/build-heatmap/interfaces.ts#L11)
 
 Column name to aggregate. Use `'*'` for row-level aggregations like `count`.
 
@@ -36,6 +36,6 @@ Column name to aggregate. Use `'*'` for row-level aggregations like `count`.
 
 > `optional` **normalize?**: `boolean`
 
-Defined in: [use-cases/build-heatmap/interfaces.ts:15](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-db/src/use-cases/build-heatmap/interfaces.ts#L15)
+Defined in: [use-cases/build-heatmap/interfaces.ts:15](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/build-heatmap/interfaces.ts#L15)
 
 When `true`, normalizes the aggregated value between 0 and 1.

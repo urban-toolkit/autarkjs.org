@@ -8,7 +8,7 @@
 
 > **ExecutedBinning2dTransform** = `object`
 
-Defined in: [transforms/presets/binning-2d.ts:29](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-plot/src/transforms/presets/binning-2d.ts#L29)
+Defined in: [transforms/presets/binning-2d.ts:29](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-plot/src/transforms/presets/binning-2d.ts#L29)
 
 Result produced by `runBinning2d`.
 
@@ -21,7 +21,7 @@ cell rows ready for heat matrix rendering.
 
 > **preset**: `"binning-2d"`
 
-Defined in: [transforms/presets/binning-2d.ts:31](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-plot/src/transforms/presets/binning-2d.ts#L31)
+Defined in: [transforms/presets/binning-2d.ts:31](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-plot/src/transforms/presets/binning-2d.ts#L31)
 
 Preset discriminator identifying the executed transform.
 
@@ -31,6 +31,6 @@ Preset discriminator identifying the executed transform.
 
 > **rows**: [`Binning2dCellRow`](Binning2dCellRow.md)[]
 
-Defined in: [transforms/presets/binning-2d.ts:33](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-plot/src/transforms/presets/binning-2d.ts#L33)
+Defined in: [transforms/presets/binning-2d.ts:33](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-plot/src/transforms/presets/binning-2d.ts#L33)
 
 Aggregated cell rows ready for downstream heat-matrix rendering.

@@ -12,11 +12,8 @@ await map.init();
 
 const collection = await fetch("/data/mnt_roads_categorized_proj.geojson")
   .then((res) => res.json());
-map.loadCollection("roads", {
-  collection,
-  type: "polylines",
-  loadConfig: { polylinesWidth: 18 },
-});
+map.loadCollection("roads", { collection, type: "polylines" });
+map.updateRenderInfo("roads", { renderInfo: { polylinesWidth: 18 } });
 
 map.updateColorMap("roads", {
   colorMap: {

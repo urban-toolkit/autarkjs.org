@@ -6,7 +6,7 @@
 
 # Interface: RenderViewSampling
 
-Defined in: [api.ts:35](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-compute/src/api.ts#L35)
+Defined in: [api.ts:35](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-compute/src/api.ts#L35)
 
 Controls how camera viewpoints are sampled from each derived origin.
 
@@ -16,7 +16,7 @@ Controls how camera viewpoints are sampled from each derived origin.
 
 > `optional` **azimuthOffsetDeg?**: `number`
 
-Defined in: [api.ts:40](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-compute/src/api.ts#L40)
+Defined in: [api.ts:40](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-compute/src/api.ts#L40)
 
 Starting azimuth in degrees for the first sample.
 
@@ -32,7 +32,7 @@ Starting azimuth in degrees for the first sample.
 
 > `optional` **directions?**: `number`
 
-Defined in: [api.ts:37](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-compute/src/api.ts#L37)
+Defined in: [api.ts:37](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-compute/src/api.ts#L37)
 
 Number of horizontal render directions per feature; values below 1 are clamped to 1.
 
@@ -42,7 +42,7 @@ Number of horizontal render directions per feature; values below 1 are clamped t
 
 > `optional` **pitchDeg?**: `number`
 
-Defined in: [api.ts:43](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-compute/src/api.ts#L43)
+Defined in: [api.ts:43](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-compute/src/api.ts#L43)
 
 Shared vertical pitch in degrees applied to every sample.
 

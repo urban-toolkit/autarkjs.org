@@ -6,7 +6,7 @@
 
 # Class: TriangulatorBuildings
 
-Defined in: [triangulator-buildings.ts:40](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-buildings.ts#L40)
+Defined in: [triangulator-buildings.ts:40](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-buildings.ts#L40)
 
 Builds extruded mesh geometry for OSM-style buildings.
 
@@ -39,7 +39,7 @@ const [mesh, components] = TriangulatorBuildings.buildMesh(buildings, origin);
 
 > `static` **buildMesh**(`geojson`, `origin`, `allowZeroHeightBuildings?`): \[[`LayerGeometry`](../interfaces/LayerGeometry.md)[], [`LayerComponent`](../interfaces/LayerComponent.md)[]\]
 
-Defined in: [triangulator-buildings.ts:54](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/triangulator-buildings.ts#L54)
+Defined in: [triangulator-buildings.ts:54](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/triangulator-buildings.ts#L54)
 
 Builds extruded building geometry for an OSM-style building collection.
 

@@ -8,7 +8,7 @@
 
 > **computeBoundingBox**(`source`): [`BoundingBox`](../interfaces/BoundingBox.md) \| `null`
 
-Defined in: [utils-geojson.ts:72](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-core/src/utils-geojson.ts#L72)
+Defined in: [utils-geojson.ts:72](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/utils-geojson.ts#L72)
 
 Computes the geographic bounding box of a GeoJSON collection or geometry.
 

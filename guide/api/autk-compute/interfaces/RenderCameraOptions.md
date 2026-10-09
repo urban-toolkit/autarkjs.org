@@ -6,7 +6,7 @@
 
 # Interface: RenderCameraOptions
 
-Defined in: [api.ts:74](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-compute/src/api.ts#L74)
+Defined in: [api.ts:74](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-compute/src/api.ts#L74)
 
 Optional camera controls for the render pipeline.
 
@@ -16,7 +16,7 @@ Optional camera controls for the render pipeline.
 
 > `optional` **clip?**: `object`
 
-Defined in: [api.ts:79](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-compute/src/api.ts#L79)
+Defined in: [api.ts:79](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-compute/src/api.ts#L79)
 
 Optional clipping-plane overrides.
 
@@ -50,7 +50,7 @@ Near clipping plane distance.
 
 > `optional` **fov?**: `number`
 
-Defined in: [api.ts:76](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-compute/src/api.ts#L76)
+Defined in: [api.ts:76](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-compute/src/api.ts#L76)
 
 Horizontal field of view in degrees.
 

@@ -21,6 +21,8 @@ const points = await fetch('/data/mnt_noise_proj.geojson').then((r) => r.json())
 setStatus('Rendering both layers together...')
 map.loadCollection('neighborhoods', { collection: neighborhoods })
 map.loadCollection('points', { collection: points })
+// Per-layer projected radius; keeps events visible across the Manhattan extent.
+map.updateRenderInfo('points', { renderInfo: { pointSize: 120 } })
 map.draw()
 clearStatus()
 `

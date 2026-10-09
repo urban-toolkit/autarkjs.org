@@ -6,7 +6,7 @@
 
 # Interface: RawQueryParams
 
-Defined in: [use-cases/raw-query/interfaces.ts:6](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-db/src/use-cases/raw-query/interfaces.ts#L6)
+Defined in: [use-cases/raw-query/interfaces.ts:6](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/raw-query/interfaces.ts#L6)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [use-cases/raw-query/interfaces.ts:6](https://github.com/urban-toolk
 
 > **output**: `object`
 
-Defined in: [use-cases/raw-query/interfaces.ts:8](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-db/src/use-cases/raw-query/interfaces.ts#L8)
+Defined in: [use-cases/raw-query/interfaces.ts:8](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/raw-query/interfaces.ts#L8)
 
 #### source?
 
@@ -42,4 +42,4 @@ Optional: semantic layer type of this new table
 
 > **query**: `string`
 
-Defined in: [use-cases/raw-query/interfaces.ts:7](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-db/src/use-cases/raw-query/interfaces.ts#L7)
+Defined in: [use-cases/raw-query/interfaces.ts:7](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/raw-query/interfaces.ts#L7)

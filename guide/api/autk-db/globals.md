@@ -4,7 +4,7 @@
 
 # @urban-toolkit/autk-db
 
-> Version: `4.0.0`
+> Version: `4.1.0`
 
 Public entry point for the `@urban-toolkit/autk-db` package.
 

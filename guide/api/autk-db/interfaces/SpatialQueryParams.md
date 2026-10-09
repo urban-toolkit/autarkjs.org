@@ -6,7 +6,7 @@
 
 # Interface: SpatialQueryParams
 
-Defined in: [use-cases/spatial-join/interfaces.ts:46](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-db/src/use-cases/spatial-join/interfaces.ts#L46)
+Defined in: [use-cases/spatial-join/interfaces.ts:46](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/spatial-join/interfaces.ts#L46)
 
 Parameters for a spatial join between two tables.
 
@@ -37,7 +37,7 @@ await db.spatialQuery({
 
 > `optional` **groupBy?**: `object`[]
 
-Defined in: [use-cases/spatial-join/interfaces.ts:57](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-db/src/use-cases/spatial-join/interfaces.ts#L57)
+Defined in: [use-cases/spatial-join/interfaces.ts:57](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/spatial-join/interfaces.ts#L57)
 
 Optional aggregation applied to join-side data. Keys are derived from `tableJoinName` and the aggregate function.
 
@@ -65,7 +65,7 @@ When `true`, normalizes the aggregated value between 0 and 1.
 
 > `optional` **near?**: [`NearConfig`](NearConfig.md)
 
-Defined in: [use-cases/spatial-join/interfaces.ts:55](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-db/src/use-cases/spatial-join/interfaces.ts#L55)
+Defined in: [use-cases/spatial-join/interfaces.ts:55](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/spatial-join/interfaces.ts#L55)
 
 NEAR predicate configuration. When present, the join uses `'NEAR'` instead of `'INTERSECT'`.
 Finds features within the specified distance from root geometries.
@@ -76,7 +76,7 @@ Finds features within the specified distance from root geometries.
 
 > **tableJoinName**: `string`
 
-Defined in: [use-cases/spatial-join/interfaces.ts:50](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-db/src/use-cases/spatial-join/interfaces.ts#L50)
+Defined in: [use-cases/spatial-join/interfaces.ts:50](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/spatial-join/interfaces.ts#L50)
 
 Name of the table to join against the root.
 
@@ -86,6 +86,6 @@ Name of the table to join against the root.
 
 > **tableRootName**: `string`
 
-Defined in: [use-cases/spatial-join/interfaces.ts:48](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-db/src/use-cases/spatial-join/interfaces.ts#L48)
+Defined in: [use-cases/spatial-join/interfaces.ts:48](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/spatial-join/interfaces.ts#L48)
 
 Name of the root table that will be modified in place.

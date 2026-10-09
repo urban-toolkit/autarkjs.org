@@ -41,11 +41,10 @@ await map.init()
 
 for (const layerData of db.getLayersMetadata()) {
   const geojson = layerData.name === LAYER ? buildings : await db.getLayer(layerData.name)
-  map.loadCollection(layerData.name, {
-    collection: geojson,
-    type: layerData.type,
-    loadConfig: layerData.type === 'roads' ? { polylinesWidth: 18 } : undefined,
-  })
+  map.loadCollection(layerData.name, { collection: geojson, type: layerData.type })
+  if (layerData.type === 'roads') {
+    map.updateRenderInfo(layerData.name, { renderInfo: { polylinesWidth: 18 } })
+  }
 }
 
 map.updateRenderInfo(LAYER, { isPick: true, opacity: 0.94 })

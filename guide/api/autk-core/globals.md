@@ -4,7 +4,7 @@
 
 # @urban-toolkit/autk-core
 
-> Version: `4.0.0`
+> Version: `4.1.0`
 
 ## Enumerations
 
@@ -17,6 +17,7 @@
 - [CameraMotion](classes/CameraMotion.md)
 - [ColorMap](classes/ColorMap.md)
 - [EventEmitter](classes/EventEmitter.md)
+- [PolylineBuilder](classes/PolylineBuilder.md)
 - [TriangulatorBuildings](classes/TriangulatorBuildings.md)
 - [TriangulatorBuildingWithWindows](classes/TriangulatorBuildingWithWindows.md)
 - [TriangulatorPoints](classes/TriangulatorPoints.md)
@@ -37,6 +38,7 @@
 - [LayerComponent](interfaces/LayerComponent.md)
 - [LayerGeometry](interfaces/LayerGeometry.md)
 - [PointInstancesData](interfaces/PointInstancesData.md)
+- [PolylineData](interfaces/PolylineData.md)
 - [SelectionData](interfaces/SelectionData.md)
 - [TransferContext](interfaces/TransferContext.md)
 - [TransferFunction](interfaces/TransferFunction.md)

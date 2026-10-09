@@ -120,7 +120,7 @@ Once the raster table exists, `getRaster()` exports it as a packed raster `Featu
 
 The [live example](#live-example) exports `db.getRaster("elevation")` and passes it to `map.enableTerrainMode(elevation, "band_1")` after loading the vector context.
 
-After this call the flat render path is replaced with the terrain render path. Subsequent `draw()` calls sample the heightfield, and any layers loaded afterwards are also draped over the terrain. The terrain resources are initialized immediately, so `enableTerrainMode()` is synchronous.
+After this call the flat render path is replaced with the terrain render path. Rendering samples the heightfield, and any layers loaded afterwards are also draped over the terrain. If on-demand rendering has already started, enabling terrain requests a frame automatically. The terrain resources are initialized immediately, so `enableTerrainMode()` is synchronous.
 
 :::warning Order matters
 Call `map.init()` before `enableTerrainMode()`. The heightfield is built relative to the map origin, which is only known once the map is initialized and at least one layer has been loaded to establish the spatial extent. Enabling terrain before any layer is loaded throws.
@@ -132,7 +132,7 @@ Call [`disableTerrainMode()`](/api/autk-map/classes/AutkMap#disableterrainmode) 
 
 Use **Switch to flat map** in the [live example](#live-example) below to execute `map.disableTerrainMode()` followed by `map.resetCamera()`. The same button can re-enable terrain without reloading the data.
 
-If the render loop is already running, it continues with the flat view. To enable terrain again, call `enableTerrainMode(elevation, 'band_1')` with a valid raster collection, then `resetCamera()` to frame the terrain. There is no need to reload the vector context.
+If rendering has already started, disabling terrain requests a frame with the flat view automatically; a continuous loop is not required. To enable terrain again, call `enableTerrainMode(elevation, 'band_1')` with a valid raster collection, then `resetCamera()` to frame the terrain. There is no need to reload the vector context.
 
 ## Live example
 

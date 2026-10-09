@@ -6,7 +6,7 @@
 
 # Enumeration: MapEvent
 
-Defined in: [autk-map/src/types-events.ts:14](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/types-events.ts#L14)
+Defined in: [autk-map/src/types-events.ts:14](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/types-events.ts#L14)
 
 Event names emitted by the map interaction bus.
 
@@ -16,6 +16,6 @@ Event names emitted by the map interaction bus.
 
 > **PICKING**: `"picking"`
 
-Defined in: [autk-map/src/types-events.ts:16](https://github.com/urban-toolkit/autark/blob/30159045d4c004f98140fe4bd941e84bee5088b8/autk-map/src/types-events.ts#L16)
+Defined in: [autk-map/src/types-events.ts:16](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/types-events.ts#L16)
 
 Selection payload emitted when features are picked from a layer.
