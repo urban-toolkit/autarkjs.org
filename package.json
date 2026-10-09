@@ -31,6 +31,11 @@
     "vite": "^7.1.12",
     "vitepress": "^1.6.3"
   },
+  "overrides": {
+    "vitepress": {
+      "vite": "^6.4.4"
+    }
+  },
   "dependencies": {
     "@urban-toolkit/autk": "4.1.0",
     "@urban-toolkit/autk-compute": "4.1.0",

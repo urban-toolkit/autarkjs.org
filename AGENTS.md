@@ -58,6 +58,16 @@ npm run preview  # preview the built site locally
 
 ---
 
+## Dependency security
+
+`package.json` overrides only VitePress's Vite dependency to `^6.4.4` because
+VitePress 1.6.4 still declares vulnerable Vite 5. Its Vue plugin supports Vite 6;
+the standalone Vite dependency and Autark versions are unchanged. Remove the
+override when stable VitePress declares a patched Vite version. Validate security
+updates with `npm ci`, `npm audit`, the site build, and browser playground checks.
+
+---
+
 ## Gallery examples
 
 Gallery examples are Markdown pages in `guide/gallery/`. Their runnable code is
