@@ -140,13 +140,20 @@ A map spec has an optional `style` (for example `'light'`) and a `layerRefs` arr
 | Field | Description |
 |---|---|
 | `dataRef` | Table to draw. |
+| `title` | Layer name: its id in the map and the title of its legend. Without it the id is the `dataRef`, and two layers of one map cannot share an id. |
 | `opacity` | Layer opacity, from 0 to 1. |
+| `color` | Fixed color, `'#rrggbb'`. The layer is drawn in it instead of by `getFnv`, unless `isColorMap` is `true`. |
+| `stroke` | Outline of a polygon layer: a color, `'#rrggbb'`, or `false` for none. |
+| `width` | Line width of a polylines or roads layer, in meters. |
 | `getFnv` | Property that drives the colormap. Supports dot paths such as `sjoin.count.noise` or `compute.result`. |
 | `getFnvType` | `'categorical'` or `'quantitative'`. |
 | `defaultFnv` | Value used when a feature has no value. |
 | `colorMapInterpolator` | A `ColorMapInterpolator` value, for example `ColorMapInterpolator.SEQ_REDS` or `ColorMapInterpolator.CAT_OBSERVABLE10`. |
 | `colorMapDomain`, `catchAllCategory` | For categorical data: the categories to keep, and the label for everything else. |
 | `normalization` | `{ mode: NormalizationMode.PERCENTILE, lowerPercentile, upperPercentile }` or `{ mode: NormalizationMode.MIN_MAX }`. |
+| `colorMapCenter` | Raster layers: the value at the middle of the colormap, which then reaches as far below it as above it. |
+| `colorMapReverse` | Raster layers: runs the colormap from the highest value to the lowest. |
+| `transferFunction` | Raster layers: how opaque the cells are by value (`mode`, `opacityMin`, `opacityMax`, `gamma`, `zeroCenter`). `{ opacityMin: 1, opacityMax: 1 }` makes every cell with a value opaque. |
 | `isPick` | Enables picking, so the layer can take part in linked selections. |
 
 See the [Map Layers](/grammar/examples/geojson-vis) examples.
@@ -182,6 +189,9 @@ grammar.highlightOnMap('neighborhoods', [0, 1, 2])
 grammar.setPlotSelection('neighborhoods', [0, 1, 2])
 grammar.clearHighlightOnMap('neighborhoods')
 grammar.clearHighlightOnPlot('neighborhoods')
+
+// Find the map and the layer id that draw a table
+const { map, layerId } = grammar.mapLayer('neighborhoods')
 ```
 
 See [External Interactions](/grammar/examples/interaction-external) for a working example.
