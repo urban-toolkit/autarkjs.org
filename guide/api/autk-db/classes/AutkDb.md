@@ -6,7 +6,7 @@
 
 # Class: AutkDb
 
-Defined in: [db.ts:65](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L65)
+Defined in: [db.ts:65](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L65)
 
 DuckDB-backed spatial database for loading, querying, and managing urban datasets.
 
@@ -43,7 +43,7 @@ await db.loadOsm({
 
 > **buildHeatmap**(`params`): `Promise`\<[`Table`](../type-aliases/Table.md)\>
 
-Defined in: [db.ts:952](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L952)
+Defined in: [db.ts:981](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L981)
 
 Builds a heatmap table by creating a grid internally and aggregating source values into its cells.
 
@@ -85,7 +85,7 @@ const heatmap = await db.buildHeatmap({
 
 > **getBoundingBoxFromLayer**(`layerName`): `Promise`\<`BoundingBox`\>
 
-Defined in: [db.ts:740](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L740)
+Defined in: [db.ts:769](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L769)
 
 Computes the bounding box of a layer from its geometry column.
 
@@ -120,7 +120,7 @@ console.log(bbox.minLon, bbox.maxLon);
 
 > **getCurrentWorkspace**(): `string`
 
-Defined in: [db.ts:274](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L274)
+Defined in: [db.ts:274](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L274)
 
 Returns the name of the workspace currently selected for operations.
 
@@ -148,7 +148,7 @@ console.log(db.getCurrentWorkspace()); // 'autk'
 
 > **getLayer**(`layerTableName`, `options?`): `Promise`\<`FeatureCollection`\<`Geometry`, `GeoJsonProperties`\>\>
 
-Defined in: [db.ts:693](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L693)
+Defined in: [db.ts:722](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L722)
 
 Exports a loaded layer as a GeoJSON FeatureCollection with an automatically computed bounding box.
 
@@ -189,15 +189,15 @@ map.loadCollection('buildings', { collection: buildings, type: 'buildings' });
 
 ### getLayersMetadata()
 
-> **getLayersMetadata**(): [`Table`](../type-aliases/Table.md) & `object`[]
+> **getLayersMetadata**(): ([`Table`](../type-aliases/Table.md) & `object`)[]
 
-Defined in: [db.ts:775](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L775)
+Defined in: [db.ts:804](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L804)
 
 Returns metadata for all vector layers in the current workspace.
 
 #### Returns
 
-[`Table`](../type-aliases/Table.md) & `object`[]
+([`Table`](../type-aliases/Table.md) & `object`)[]
 
 Filtered array of vector layer metadata.
 
@@ -218,7 +218,7 @@ for (const l of layers) await map.loadCollection(l.name, { collection: await db.
 
 > **getRaster**(`tableName`): `Promise`\<`FeatureCollection`\<`null`, `GeoJsonProperties`\>\>
 
-Defined in: [db.ts:669](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L669)
+Defined in: [db.ts:698](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L698)
 
 Exports a compact raster table as a packed raster FeatureCollection for rendering.
 
@@ -259,15 +259,15 @@ map.loadCollection('temperature', {
 
 ### getRastersMetadata()
 
-> **getRastersMetadata**(): [`Table`](../type-aliases/Table.md) & `object`[]
+> **getRastersMetadata**(): ([`Table`](../type-aliases/Table.md) & `object`)[]
 
-Defined in: [db.ts:787](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L787)
+Defined in: [db.ts:816](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L816)
 
 Returns metadata for all raster tables in the current workspace.
 
 #### Returns
 
-[`Table`](../type-aliases/Table.md) & `object`[]
+([`Table`](../type-aliases/Table.md) & `object`)[]
 
 Filtered array of raster table metadata.
 
@@ -281,7 +281,7 @@ If the active workspace is missing from the internal registry.
 
 > **getTable**(`tableName`): `Promise`\<[`GetTableOutput`](../type-aliases/GetTableOutput.md)\>
 
-Defined in: [db.ts:803](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L803)
+Defined in: [db.ts:832](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L832)
 
 Reads all rows from a table as plain JavaScript objects.
 
@@ -316,7 +316,7 @@ console.log(rows[0]);
 
 > **getTablesMetadata**(): [`Table`](../type-aliases/Table.md)[]
 
-Defined in: [db.ts:146](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L146)
+Defined in: [db.ts:146](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L146)
 
 Returns metadata for all tables in the current workspace.
 
@@ -345,7 +345,7 @@ console.log(tables.map((table) => table.name));
 
 > **getWorkspaceConfiguration**(): [`WorkspaceConfiguration`](../interfaces/WorkspaceConfiguration.md)
 
-Defined in: [db.ts:283](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L283)
+Defined in: [db.ts:283](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L283)
 
 Returns the CRS and precision grid used for stored vectors and spatial results in the active workspace.
 
@@ -361,7 +361,7 @@ A copy of the active workspace configuration.
 
 > **getWorkspaces**(): `string`[]
 
-Defined in: [db.ts:260](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L260)
+Defined in: [db.ts:260](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L260)
 
 Returns the names of all workspaces known to this instance.
 
@@ -390,7 +390,7 @@ console.log(names); // ['autk', 'analysis-a']
 
 > **init**(): `Promise`\<`void`\>
 
-Defined in: [db.ts:161](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L161)
+Defined in: [db.ts:161](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L161)
 
 Initializes DuckDB and the spatial extension for use by the database wrapper.
 
@@ -419,7 +419,7 @@ await db.init();
 
 > **loadCsv**(`params`): `Promise`\<[`CsvTable`](../interfaces/CsvTable.md)\>
 
-Defined in: [db.ts:518](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L518)
+Defined in: [db.ts:547](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L547)
 
 Loads a CSV file into the database, optionally creating geometry from coordinate or WKT columns.
 
@@ -459,7 +459,7 @@ const table = await db.loadCsv({
 
 > **loadGeojson**(`params`): `Promise`\<[`GeojsonTable`](../interfaces/GeojsonTable.md)\>
 
-Defined in: [db.ts:602](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L602)
+Defined in: [db.ts:631](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L631)
 
 Loads a GeoJSON FeatureCollection as a spatial layer, optionally auto-clipping to the workspace bbox when OSM data is present.
 
@@ -500,7 +500,7 @@ const neighborhoods = await db.loadGeojson({
 
 > **loadGeoTiff**(`params`): `Promise`\<[`GeotiffTable`](../interfaces/GeotiffTable.md)\>
 
-Defined in: [db.ts:632](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L632)
+Defined in: [db.ts:661](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L661)
 
 Loads a GeoTIFF raster as a compact raster table with metadata and flat in-memory band arrays.
 
@@ -539,7 +539,7 @@ const raster = await db.loadGeoTiff({
 
 > **loadJson**(`params`): `Promise`\<[`JsonTable`](../interfaces/JsonTable.md)\>
 
-Defined in: [db.ts:544](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L544)
+Defined in: [db.ts:573](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L573)
 
 Loads a JSON array into the database, optionally creating geometry from coordinate or WKT fields.
 
@@ -579,15 +579,18 @@ const table = await db.loadJson({
 
 > **loadOsm**(`params`): `Promise`\<[`OsmLoadTimings`](../interfaces/OsmLoadTimings.md)\>
 
-Defined in: [db.ts:308](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L308)
+Defined in: [db.ts:311](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L311)
 
 Loads OpenStreetMap data from the Overpass API or a PBF file and extracts thematic layers.
 
 `autoLoadLayers` is required. The raw OSM import tables are treated as temporary
 staging tables and are always dropped after the requested layers are extracted.
 Surface is always built, excluding sea when coastline reconstruction succeeds.
-It stays hidden unless requested. Other layers and typed tag sets are clipped
-to it; buildings are filtered as complete features without modifying their parts.
+Named coastlines use the geocode bbox, not only the selected areas. Requested
+water also includes bbox(areas) minus classified land, marked generated=coastline.
+Missing/invalid coastal data never generates presumed sea. Surface stays hidden
+unless requested; other layers/tag sets use it as a crop. Building parts remain
+uncut; parts not fully covered by the surface are discarded and survivors reindexed.
 
 #### Parameters
 
@@ -624,7 +627,7 @@ const timings = await db.loadOsm({
 
 > **rawQuery**\<`T`\>(`params`): `Promise`\<[`Table`](../type-aliases/Table.md) \| `T`\>
 
-Defined in: [db.ts:896](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L896)
+Defined in: [db.ts:925](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L925)
 
 Executes arbitrary SQL against the current workspace.
 
@@ -666,7 +669,7 @@ const result = await db.rawQuery({
 
 > **removeLayer**(`tableName`): `Promise`\<`void`\>
 
-Defined in: [db.ts:917](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L917)
+Defined in: [db.ts:946](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L946)
 
 Drops a table from DuckDB and unregisters it from the active workspace.
 
@@ -702,7 +705,7 @@ await db.removeLayer('osm_raw');
 
 > **setWorkspace**(`name`, `configuration?`): `Promise`\<`void`\>
 
-Defined in: [db.ts:217](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L217)
+Defined in: [db.ts:217](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L217)
 
 Switches to a workspace, creating its schema and cache entry if needed.
 
@@ -745,7 +748,7 @@ await db.loadCsv({ csvFileUrl: '/data.csv', outputTableName: 'points' });
 
 > **spatialQuery**(`params`): `Promise`\<[`Table`](../type-aliases/Table.md)\>
 
-Defined in: [db.ts:874](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L874)
+Defined in: [db.ts:903](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L903)
 
 Performs a spatial join between two tables using predicates like INTERSECT or NEAR.
 
@@ -785,7 +788,7 @@ await db.spatialQuery({
 
 > **updateTable**(`params`): `Promise`\<[`Table`](../type-aliases/Table.md)\>
 
-Defined in: [db.ts:826](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/db.ts#L826)
+Defined in: [db.ts:855](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/db.ts#L855)
 
 Updates an existing table with new data using a replace or record-level update strategy.
 

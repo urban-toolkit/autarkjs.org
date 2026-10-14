@@ -4,7 +4,7 @@
 
 # @urban-toolkit/autk-map
 
-> Version: `4.1.0`
+> Version: `4.1.1`
 
 ## Enumerations
 
@@ -33,6 +33,7 @@
 - [MapDrawOptions](interfaces/MapDrawOptions.md)
 - [MapEventData](interfaces/MapEventData.md)
 - [MapStyleShape](interfaces/MapStyleShape.md)
+- [TerrainDebugOptions](interfaces/TerrainDebugOptions.md)
 - [UpdateColorMapParams](interfaces/UpdateColorMapParams.md)
 - [UpdateRasterParams](interfaces/UpdateRasterParams.md)
 - [UpdateRenderInfoParams](interfaces/UpdateRenderInfoParams.md)

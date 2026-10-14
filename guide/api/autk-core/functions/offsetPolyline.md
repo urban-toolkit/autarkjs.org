@@ -8,7 +8,7 @@
 
 > **offsetPolyline**(`points`, `distance`): \[`number`, `number`\][]
 
-Defined in: [utils-geometry.ts:30](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/utils-geometry.ts#L30)
+Defined in: [utils-geometry.ts:30](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/utils-geometry.ts#L30)
 
 Builds a closed polygon buffer around a polyline for stroke rendering.
 

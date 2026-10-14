@@ -6,7 +6,7 @@
 
 # Interface: MapDrawOptions
 
-Defined in: [autk-map/src/api.ts:200](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/api.ts#L200)
+Defined in: [autk-map/src/api.ts:200](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-map/src/api.ts#L200)
 
 Options for starting map rendering with `AutkMap.draw`.
 
@@ -19,7 +19,7 @@ Set `onDemand: false` or provide `fps` to use a continuous loop.
 
 > `optional` **fps?**: `number`
 
-Defined in: [autk-map/src/api.ts:206](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/api.ts#L206)
+Defined in: [autk-map/src/api.ts:206](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-map/src/api.ts#L206)
 
 Target frames per second of the continuous loop (default `60`).
 
@@ -31,7 +31,7 @@ Pass `0` to render as fast as possible. Ignored when `onDemand` is `true`.
 
 > `optional` **onDemand?**: `boolean`
 
-Defined in: [autk-map/src/api.ts:216](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/api.ts#L216)
+Defined in: [autk-map/src/api.ts:216](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-map/src/api.ts#L216)
 
 Draws only when the picture changes (default `true` unless `fps` is provided).
 

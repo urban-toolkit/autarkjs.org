@@ -6,7 +6,7 @@
 
 # Class: LayerManager
 
-Defined in: [autk-map/src/layer-manager.ts:39](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/layer-manager.ts#L39)
+Defined in: [autk-map/src/layer-manager.ts:39](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-map/src/layer-manager.ts#L39)
 
 Manages all map layers as a single ordered list.
 
@@ -34,7 +34,7 @@ last.
 
 > **get** **hasOrigin**(): `boolean`
 
-Defined in: [autk-map/src/layer-manager.ts:60](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/layer-manager.ts#L60)
+Defined in: [autk-map/src/layer-manager.ts:60](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-map/src/layer-manager.ts#L60)
 
 Indicates whether the shared scene origin has been initialized.
 
@@ -50,7 +50,7 @@ Indicates whether the shared scene origin has been initialized.
 
 > **get** **layers**(): [`Layer`](Layer.md)[]
 
-Defined in: [autk-map/src/layer-manager.ts:49](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/layer-manager.ts#L49)
+Defined in: [autk-map/src/layer-manager.ts:49](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-map/src/layer-manager.ts#L49)
 
 Registered layers sorted by render z-index.
 
@@ -66,7 +66,7 @@ Registered layers sorted by render z-index.
 
 > **get** **origin**(): `number`[]
 
-Defined in: [autk-map/src/layer-manager.ts:52](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/layer-manager.ts#L52)
+Defined in: [autk-map/src/layer-manager.ts:52](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-map/src/layer-manager.ts#L52)
 
 World-space origin derived from the current bounding box center.
 
@@ -80,7 +80,7 @@ World-space origin derived from the current bounding box center.
 
 > **addLayer**(`layerInfo`, `layerRender`, `layerData`): [`Layer`](Layer.md) \| `null`
 
-Defined in: [autk-map/src/layer-manager.ts:82](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/layer-manager.ts#L82)
+Defined in: [autk-map/src/layer-manager.ts:82](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-map/src/layer-manager.ts#L82)
 
 Creates, registers, and reorders a layer based on `layerInfo.typeLayer`.
 
@@ -120,7 +120,7 @@ Never throws. Duplicate ids log an error and return `null`.
 
 > **computeZindex**(`layerType`): `number`
 
-Defined in: [autk-map/src/layer-manager.ts:146](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/layer-manager.ts#L146)
+Defined in: [autk-map/src/layer-manager.ts:146](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-map/src/layer-manager.ts#L146)
 
 Returns a preliminary z-index placeholder for a layer type.
 
@@ -148,7 +148,7 @@ Never throws.
 
 > **initializeOrigin**(`collection`): `void`
 
-Defined in: [autk-map/src/layer-manager.ts:69](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/layer-manager.ts#L69)
+Defined in: [autk-map/src/layer-manager.ts:69](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-map/src/layer-manager.ts#L69)
 
 Computes the shared scene origin from the provided collection.
 
@@ -176,7 +176,7 @@ Never throws.
 
 > **removeLayerById**(`layerId`): `void`
 
-Defined in: [autk-map/src/layer-manager.ts:115](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/layer-manager.ts#L115)
+Defined in: [autk-map/src/layer-manager.ts:115](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-map/src/layer-manager.ts#L115)
 
 Removes the layer matching `layerId` and recomputes dynamic z-order.
 
@@ -204,7 +204,7 @@ Never throws.
 
 > **searchByLayerId**(`layerId`): [`Layer`](Layer.md) \| `null`
 
-Defined in: [autk-map/src/layer-manager.ts:135](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-map/src/layer-manager.ts#L135)
+Defined in: [autk-map/src/layer-manager.ts:135](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-map/src/layer-manager.ts#L135)
 
 Returns the layer with the given `layerId`, or `null` if not found.
 

@@ -8,7 +8,7 @@
 
 > **LoadOsmParams** = `object`
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:121](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L121)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:121](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L121)
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: [use-cases/load-osm-overpass/interfaces.ts:121](https://github.com/u
 
 > **autoLoadLayers**: `object`
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:123](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L123)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:123](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L123)
 
 #### coordinateFormat?
 
@@ -36,7 +36,7 @@ Public layers to retain; may be empty for tag-only loads. Surface is always cons
 
 > `optional` **forceRefresh?**: `boolean`
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:137](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L137)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:141](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L141)
 
 When true, bypasses the cached Overpass response and fetches fresh data.
 
@@ -46,7 +46,7 @@ When true, bypasses the cached Overpass response and fetches fresh data.
 
 > `optional` **onProgress?**: [`OnLoadingProgress`](OnLoadingProgress.md)
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:139](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L139)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:143](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L143)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [use-cases/load-osm-overpass/interfaces.ts:139](https://github.com/u
 
 > `optional` **outputTableName?**: `string`
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:122](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L122)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:122](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L122)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [use-cases/load-osm-overpass/interfaces.ts:122](https://github.com/u
 
 > `optional` **pbfFileUrl?**: `string`
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:135](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L135)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:139](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L139)
 
 If provided, OSM data is loaded from this `.osm.pbf` file instead of the Overpass API.
 
@@ -72,10 +72,14 @@ If provided, OSM data is loaded from this `.osm.pbf` file instead of the Overpas
 
 > **queryArea**: [`OsmQueryArea`](OsmQueryArea.md)
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:131](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L131)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:135](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L135)
 
-Named boundaries or a WGS84 bbox. Surface excludes sea when coastline reconstruction succeeds;
-otherwise the full query area is used with a warning. Buildings retain complete original parts.
+Named boundaries or a WGS84 bbox. Named coastline collection/classification uses the geocode bbox,
+including neighboring coasts regardless of jurisdiction. Water adds bbox(areas) minus classified land;
+generated context has properties.generated = 'coastline'. Missing/invalid coastlines never imply sea.
+PBFs must cover the geocode bbox with complete coastlines; no supplemental network requests are made.
+Surface excludes sea when reconstruction succeeds; otherwise the full query area is used with a warning.
+Buildings retain complete original parts.
 
 ***
 
@@ -83,7 +87,7 @@ otherwise the full query area is used with a warning. Buildings retain complete 
 
 > `optional` **tagSets?**: [`OsmTagSet`](OsmTagSet.md)[]
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:133](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L133)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:137](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L137)
 
 Overpass-only tag-selected layers, clipped to the mandatory surface. Each set requires one geometry type.
 
@@ -93,4 +97,4 @@ Overpass-only tag-selected layers, clipped to the mandatory surface. Each set re
 
 > `optional` **workspace?**: `string`
 
-Defined in: [use-cases/load-osm-overpass/interfaces.ts:138](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L138)
+Defined in: [use-cases/load-osm-overpass/interfaces.ts:142](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L142)

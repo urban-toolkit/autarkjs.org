@@ -112,7 +112,8 @@ function dependencyMajor(range) {
 }
 
 function compatibleGrammar(version) {
-  const metadata = JSON.parse(run('npm', ['view', `${grammarPackage}@latest`, 'version', 'dependencies', '--json'], { capture: true }))
+  const result = JSON.parse(run('npm', ['view', `${grammarPackage}@latest`, 'version', 'dependencies', '--json'], { capture: true }))
+  const metadata = Array.isArray(result) ? result[0] : result
   const targetMajor = version.split('.')[0]
   const compatible = packages.every((packageName) =>
     dependencyMajor(metadata.dependencies?.[`@urban-toolkit/${packageName}`]) === targetMajor,

@@ -77,6 +77,19 @@ card metadata, screenshot, and any required `guide/public/data/` together.
 
 ---
 
+## Full-page use cases
+
+`usecases/src/` and `usecases/public/data/` are vendored from the Autark 4.1.1
+coordinated tag. `npm run usecases:build` uses the site's pinned npm packages and
+builds them into ignored `guide/public/usecases/apps/`; both `dev` and `build`
+run this first. No sibling Autark checkout is required.
+
+VitePress wrappers in `guide/usecases/live/` publish `urbane.html`, `shadows.html`,
+and `heat.html` (the upstream Niteroi app), retaining only the top navigation.
+Gallery cards reuse `HomeCaseStudies.vue`. Run `npm run test:usecases` after a
+site build to check routes, bundles, DuckDB assets, and datasets. See
+`usecases/README.md` for cross-machine review and the explicit release gate.
+
 ## Key files at a glance
 
 | File | Purpose |

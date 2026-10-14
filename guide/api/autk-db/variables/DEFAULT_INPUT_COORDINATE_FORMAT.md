@@ -8,7 +8,7 @@
 
 > `const` **DEFAULT\_INPUT\_COORDINATE\_FORMAT**: `"EPSG:4326"` = `'EPSG:4326'`
 
-Defined in: [consts.ts:13](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-db/src/consts.ts#L13)
+Defined in: [consts.ts:13](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/consts.ts#L13)
 
 Default source coordinate reference system for loaded datasets.
 

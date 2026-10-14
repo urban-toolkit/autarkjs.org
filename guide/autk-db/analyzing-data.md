@@ -171,16 +171,22 @@ Once data is loaded into DuckDB, `autk-db` provides methods for spatial analysis
 
 [`spatialQuery`](/api/autk-db/classes/AutkDb#spatialquery) performs a spatial join between two tables. The root table is always modified in place, and the joined values are written into `properties.sjoin`.
 
-1. [`tableRootName`](/api/autk-db/interfaces/SpatialQueryParams#tablerootname) and [`tableJoinName`](/api/autk-db/interfaces/SpatialQueryParams#tablejoinname) — The two tables involved in the join. The root table receives the result; the join table provides the matching features.
+1. [`tableRootName`](/api/autk-db/interfaces/SpatialQueryParams#tablerootname) and [`tableJoinName`](/api/autk-db/interfaces/SpatialQueryParams#tablejoinname) — The two tables involved in the join. The root must be a vector table and receives the result; the join table provides matching vector features or compact raster cells.
 
 2. [`near`](/api/autk-db/interfaces/SpatialQueryParams#near) — Optional `NEAR` predicate configuration. When provided, [`spatialQuery`](/api/autk-db/classes/AutkDb#spatialquery)  matches features that lie within the specified distance of the root geometries. If
  omitted, the query uses `INTERSECT` and only matches features whose geometries overlap.
 
 :::warning Units depend on projection
- `near.distance` is interpreted in the native units of the loaded geometries. For example, when the data uses `EPSG:3395`, distances are measured in meters.
+ `near.distance` is interpreted in workspace CRS units. For example, when the data uses `EPSG:3395`, distances are measured in meters.
 :::
 
 3. [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby) — Optional aggregation rules applied to the join-side data.
+
+### Raster joins
+
+In v4.1.1, a compact raster can be `tableJoinName`. Each decoded cell contributes its center transformed to the workspace CRS; joins do not compute pixel-area intersections. Numeric aggregates ignore NoData values. Reload the raster before joining if its in-memory payload is unavailable.
+
+Aggregate keys can contain dots, such as `shadows.jun`. Property paths such as `properties.sjoin.avg.shadows.jun` resolve these literal dotted keys, while fully traversable nested paths take precedence.
 
 ### Centroid distance versus geometry distance
 

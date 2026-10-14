@@ -158,9 +158,11 @@ To directly fetch from the public [Overpass API](https://overpass-api.de/) and l
 * `autk-db` provides the `onProgress` callback that may be used to track the loading status.
 :::
 
-:::tip Bbox roads and water crossings
-In v4.1, standard roads loaded by a bounding box are filtered by intersection with the bbox rather than clipped against the coastal surface mask. This preserves bridges and roads over water. Intersection filtering does **not** clip road endpoints to the bbox. Named-area roads, other layers, and custom tag sets retain their surface-clipping behavior.
+:::warning Surface filtering in v4.1.1
+All roads, including bbox loads, are cropped to the mandatory surface. Bridge and over-water segments outside that surface may be removed. Building parts are never cut into new footprints: parts not fully covered by the surface are discarded, and retained geometry/property indices are updated together.
 :::
+
+For named areas, coastline classification uses the full `geocodeArea` bounding box, including neighboring coastlines. PBF extracts must include the complete geocode boundary and coastline coverage; the loader does not fetch missing data. When classification succeeds, requested water layers can include sea context within the selected areas' bounding box, marked with `properties.generated = 'coastline'`. Missing or invalid coastline data never implies sea.
 
 ### Loading custom OSM tag sets
 
@@ -381,6 +383,8 @@ Use [`loadGeojson()`](#geojson) instead when the input already contains GeoJSON 
 </ClientOnly>
 
 By default, the input raster is expected to use `EPSG:4326`. If the GeoTIFF uses a different coordinate system, provide it through [`coordinateFormat`](/api/autk-db/interfaces/LoadGeoTiffParams#coordinateformat). For large rasters, reduce [`maxPixels`](/api/autk-db/interfaces/LoadGeoTiffParams#maxpixels) to avoid loading too many pixels into browser memory.
+
+Valid zero values are preserved when no NoData value is declared. Negative grid-axis directions are supported; rotated or sheared grids are rejected.
 
 :::tip Try changing the previous example
 Modify the previous code sample to explore more of `autk-db`. For example, try setting [`maxPixels`](/api/autk-db/interfaces/LoadGeoTiffParams#maxpixels) or use a different [`outputTableName`](/api/autk-db/interfaces/LoadGeoTiffParams#outputtablename).

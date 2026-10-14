@@ -4,7 +4,7 @@
 
 # @urban-toolkit/autk-plot
 
-> Version: `4.1.0`
+> Version: `4.1.1`
 
 ## Enumerations
 

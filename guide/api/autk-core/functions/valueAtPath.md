@@ -8,9 +8,12 @@
 
 > **valueAtPath**(`item`, `path`): `unknown`
 
-Defined in: [utils-data.ts:22](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/utils-data.ts#L22)
+Defined in: [utils-data.ts:26](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/utils-data.ts#L26)
 
-Resolves a dot-delimited property path from an unknown value.
+Resolves a dot-delimited property path, including literal dotted leaf keys.
+
+Fully traversable nested paths take precedence. If traversal fails, an own key
+may match the remaining suffix, such as `shadows.jun` in spatial-join output.
 
 ## Parameters
 
@@ -42,4 +45,5 @@ Never throws.
 ```ts
 valueAtPath({ a: { b: 42 } }, 'a.b');  // 42
 valueAtPath({ a: null }, 'a.b');       // undefined
+valueAtPath({ sjoin: { avg: { 'shadows.jun': 12 } } }, 'sjoin.avg.shadows.jun'); // 12
 ```

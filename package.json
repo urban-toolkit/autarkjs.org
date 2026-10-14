@@ -8,7 +8,10 @@
   },
   "scripts": {
     "postinstall": "node .scripts/fix-duckdb-sourcemap.cjs && node .scripts/sync-duckdb-assets.cjs",
-    "prebuild": "node .scripts/sync-duckdb-assets.cjs",
+    "prebuild": "node .scripts/sync-duckdb-assets.cjs && npm run usecases:build",
+    "predev": "npm run usecases:build",
+    "usecases:build": "vite build --config usecases/vite.config.ts",
+    "test:usecases": "node --test .scripts/test-usecases.mjs",
     "dev": "vitepress dev guide",
     "build": "vitepress build guide",
     "release:prepare": "node .scripts/prepare-autark-release.mjs",
@@ -37,12 +40,12 @@
     }
   },
   "dependencies": {
-    "@urban-toolkit/autk": "4.1.0",
-    "@urban-toolkit/autk-compute": "4.1.0",
-    "@urban-toolkit/autk-core": "4.1.0",
-    "@urban-toolkit/autk-db": "4.1.0",
-    "@urban-toolkit/autk-grammar": "4.0.0",
-    "@urban-toolkit/autk-map": "4.1.0",
-    "@urban-toolkit/autk-plot": "4.1.0"
+    "@urban-toolkit/autk": "4.1.1",
+    "@urban-toolkit/autk-compute": "4.1.1",
+    "@urban-toolkit/autk-core": "4.1.1",
+    "@urban-toolkit/autk-db": "4.1.1",
+    "@urban-toolkit/autk-grammar": "4.2.0",
+    "@urban-toolkit/autk-map": "4.1.1",
+    "@urban-toolkit/autk-plot": "4.1.1"
   }
 }

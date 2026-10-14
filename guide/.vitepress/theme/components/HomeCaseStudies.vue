@@ -38,17 +38,19 @@
         </a>
       </div>
 
-      <div class="case-actions">
-        <a href="/usecases/" class="case-button">View All Use Cases</a>
+      <div v-if="showAllLink" class="case-actions">
+        <a href="/gallery/#use-cases" class="case-button">View All Use Cases</a>
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
+withDefaults(defineProps<{ showAllLink?: boolean }>(), { showAllLink: true })
+
 const caseStudies = [
   {
-    href: '/usecases/urbane',
+    href: '/usecases/live/urbane.html',
     img: '/imgs/urbane.png',
     title: 'Urbane Remake',
     description:
@@ -61,7 +63,7 @@ const caseStudies = [
     ],
   },
   {
-    href: '/usecases/heat',
+    href: '/usecases/live/heat.html',
     img: '/imgs/heat.png',
     title: 'Land Surface Heat Analysis',
     description:
@@ -74,7 +76,7 @@ const caseStudies = [
     ],
   },
   {
-    href: '/usecases/shadows',
+    href: '/usecases/live/shadows.html',
     img: '/imgs/shadows.png',
     title: 'Urban Shadow Analysis',
     description:

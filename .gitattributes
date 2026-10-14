@@ -1,0 +1,2 @@
+# Preserve upstream CSV bytes and accept their CRLF record separators.
+usecases/public/data/*.csv -text whitespace=cr-at-eol

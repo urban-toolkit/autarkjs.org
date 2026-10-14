@@ -6,7 +6,7 @@
 
 # Interface: PolylineData
 
-Defined in: [polyline-builder.ts:5](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/polyline-builder.ts#L5)
+Defined in: [polyline-builder.ts:5](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/polyline-builder.ts#L5)
 
 Width-independent centerline data for shader-expanded polylines.
 
@@ -16,7 +16,7 @@ Width-independent centerline data for shader-expanded polylines.
 
 > **attributes**: `Float32Array`
 
-Defined in: [polyline-builder.ts:9](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/polyline-builder.ts#L9)
+Defined in: [polyline-builder.ts:9](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/polyline-builder.ts#L9)
 
 Per centerline node: previous XY and next XY. Each node owns five consecutive topology vertices.
 
@@ -26,7 +26,7 @@ Per centerline node: previous XY and next XY. Each node owns five consecutive to
 
 > **components**: [`LayerComponent`](LayerComponent.md)[]
 
-Defined in: [polyline-builder.ts:7](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/polyline-builder.ts#L7)
+Defined in: [polyline-builder.ts:7](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/polyline-builder.ts#L7)
 
 ***
 
@@ -34,4 +34,4 @@ Defined in: [polyline-builder.ts:7](https://github.com/urban-toolkit/autark/blob
 
 > **geometry**: [`LayerGeometry`](LayerGeometry.md)[]
 
-Defined in: [polyline-builder.ts:6](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-core/src/polyline-builder.ts#L6)
+Defined in: [polyline-builder.ts:6](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/polyline-builder.ts#L6)

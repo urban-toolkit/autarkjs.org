@@ -95,7 +95,7 @@ The second step does not always behave the same way for every table type:
 This distinction is important because the workspace bounding box only filters by extent, while the clipping layer may also reshape geometries depending on the table type.
 
 :::tip OSM workflows
-When loading OSM data with a `surface` layer, `autk-db` uses that surface as the workspace clipping layer. Other OSM-derived layers are then constrained against it, which helps keep the workspace aligned to the same project footprint.
+OSM loading always constructs the surface mask, even when it is not requested as a public layer. Other OSM-derived layers are constrained against it. In v4.1.1, OSM building parts must be fully covered by the surface; uncovered parts are discarded rather than cut, and retained geometry/property indices are reindexed. Roads, including bbox loads, are cropped to the surface.
 :::
 
 :::tip When to use workspaces

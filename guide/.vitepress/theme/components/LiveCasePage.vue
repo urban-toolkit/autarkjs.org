@@ -90,6 +90,11 @@ onUnmounted(() => {
 
 <style scoped>
 .live-case-shell {
+  position: fixed;
+  top: var(--vp-nav-height);
+  right: 0;
+  bottom: 0;
+  left: 0;
   width: 100%;
   height: calc(100svh - var(--vp-nav-height));
   min-height: calc(100svh - var(--vp-nav-height));
@@ -111,7 +116,9 @@ onUnmounted(() => {
 :global(.live-case-page .header-anchor),
 :global(.live-case-page .prev-next),
 :global(.live-case-page .VPDocFooter),
-:global(.live-case-page .VPFooter) {
+:global(.live-case-page .VPFooter),
+:global(.live-case-page .VPLocalNav),
+:global(.live-case-page .institutions-footer) {
   display: none !important;
 }
 

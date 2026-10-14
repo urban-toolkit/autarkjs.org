@@ -8,7 +8,7 @@
 
 > **RenderViewpointStrategy** = \{ `type`: `"centroid"`; \} \| \{ `floors`: `number`; `type`: `"building-windows"`; \}
 
-Defined in: [api.ts:49](https://github.com/urban-toolkit/autark/blob/2c8ba2bc3a76792db0e07ffa02bd5ab8613e2062/autk-compute/src/api.ts#L49)
+Defined in: [api.ts:49](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-compute/src/api.ts#L49)
 
 Selects how view origins are derived from the viewpoints collection.
 
