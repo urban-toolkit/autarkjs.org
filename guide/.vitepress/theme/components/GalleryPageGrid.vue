@@ -1,25 +1,27 @@
 <template>
   <div class="gallery-page vp-raw">
-    <h2 class="gallery-page-section-title">{{ filterLabel }}</h2>
-    <div class="gallery-page-filters">
-      <label
-        v-for="pkg in filterOptions"
-        :key="pkg.id"
-        class="gallery-page-filter"
-        :class="{ 'gallery-page-filter--active': selected.has(pkg.id) }"
-      >
-        <input
-          type="checkbox"
-          :value="pkg.id"
-          :checked="selected.has(pkg.id)"
-          @change="toggle(pkg.id)"
-        />
-        <span class="gallery-page-filter-dot" :class="pkg.className"></span>
-        <span class="gallery-page-filter-label">{{ pkg.id }}</span>
-      </label>
-    </div>
+    <template v-if="showFilters">
+      <h2 class="gallery-page-section-title">{{ filterLabel }}</h2>
+      <div class="gallery-page-filters">
+        <label
+          v-for="pkg in filterOptions"
+          :key="pkg.id"
+          class="gallery-page-filter"
+          :class="{ 'gallery-page-filter--active': selected.has(pkg.id) }"
+        >
+          <input
+            type="checkbox"
+            :value="pkg.id"
+            :checked="selected.has(pkg.id)"
+            @change="toggle(pkg.id)"
+          />
+          <span class="gallery-page-filter-dot" :class="pkg.className"></span>
+          <span class="gallery-page-filter-label">{{ pkg.id }}</span>
+        </label>
+      </div>
+    </template>
 
-    <h2 class="gallery-page-section-title">Examples</h2>
+    <h2 class="gallery-page-section-title">{{ sectionTitle }}</h2>
     <div class="gallery-page-grid">
       <a
         v-for="example in visibleExamples"
@@ -65,8 +67,12 @@ const props = withDefaults(defineProps<{
   /** Tag filters shown above the grid. Defaults to the Autark packages. */
   filters?: GalleryFilter[]
   filterLabel?: string
+  sectionTitle?: string
+  showFilters?: boolean
 }>(), {
   filterLabel: 'Filter by package',
+  sectionTitle: 'Examples',
+  showFilters: true,
 })
 
 const defaultFilters: GalleryFilter[] = [
