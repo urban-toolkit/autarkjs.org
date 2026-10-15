@@ -108,7 +108,7 @@ Every source has a `type` and, except for joins, an `outputTableName`.
 
 | Type | Main fields |
 |---|---|
-| `osm` | `queryArea: { geocodeArea, areas }` to query OpenStreetMap, or `pbfFileUrl` to read a local extract. `autoLoadLayers.layers` creates one table per layer (`surface`, `parks`, `water`, `roads`, `buildings`), named `<outputTableName>_<layer>`. |
+| `osm` | `queryArea: { geocodeArea, areas }` for named boundaries, or `queryArea: { bbox: [west, south, east, north] }` for a box in degrees (WGS84), never both; a box is the whole area, and each layer is cut to it except buildings, which are kept or dropped whole (see [OpenStreetMap](/autk-db/loading-data#openstreetmap)). The area is queried from OpenStreetMap, or read from a local extract named by `pbfFileUrl`. `autoLoadLayers.layers` creates one table per layer (`surface`, `parks`, `water`, `roads`, `buildings`), named `<outputTableName>_<layer>`. |
 | `geojson` | `geojsonFileUrl` or `geojsonObject`. Set `coordinateFormat` (for example `'EPSG:3395'`) when the data is not in WGS84. |
 | `csv` | `csvFileUrl` or `csvObject`, optional `delimiter`, and `geometryColumns: { latColumnName, longColumnName }` to build points. |
 | `json` | `jsonFileUrl` or `jsonObject`, with the same optional `geometryColumns`. |
