@@ -151,6 +151,7 @@ A map spec has an optional `style` (for example `'light'`) and a `layerRefs` arr
 | `colorMapInterpolator` | A `ColorMapInterpolator` value, for example `ColorMapInterpolator.SEQ_REDS` or `ColorMapInterpolator.CAT_OBSERVABLE10`. |
 | `colorMapDomain`, `catchAllCategory` | For categorical data: the categories to keep, and the label for everything else. |
 | `normalization` | `{ mode: NormalizationMode.PERCENTILE, lowerPercentile, upperPercentile }` or `{ mode: NormalizationMode.MIN_MAX }`. |
+| `colorMapRange` | `[low, high]`, with low less than high: the ends of the colormap, in place of the layer's own lowest and highest values, so layers and maps that share a range color the same value alike. Raster and vector layers. On a raster layer, `colorMapCenter` sits between the ends and `colorMapReverse` runs from high to low. Not with `colorMapDomain`. |
 | `colorMapCenter` | Raster layers: the value at the middle of the colormap, which then reaches as far below it as above it. |
 | `colorMapReverse` | Raster layers: runs the colormap from the highest value to the lowest. |
 | `transferFunction` | Raster layers: how opaque the cells are by value (`mode`, `opacityMin`, `opacityMax`, `gamma`, `zeroCenter`). `{ opacityMin: 1, opacityMax: 1 }` makes every cell with a value opaque. |
