@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import { useData } from 'vitepress'
 import { createHighlighter } from 'shiki'
 import { createJavaScriptRegexEngine } from '@shikijs/engine-javascript'
@@ -248,15 +248,39 @@ function clearPlaygroundStatus() {
   status.value = ''
 }
 
+/** The grammars the last run created: the next run and unmounting destroy them, which releases their maps. */
+let grammars: Array<{ destroy(): void }> = []
+let unmounted = false
+
+function destroyGrammars() {
+  const last = grammars
+  grammars = []
+  for (const grammar of last) grammar.destroy()
+}
+
+type GrammarClass = new (...args: any[]) => { destroy(): void }
+
+/** The AutkGrammar class user code sees: it records each grammar it makes. */
+function trackGrammars<T extends GrammarClass>(Grammar: T): T {
+  return class extends Grammar {
+    constructor(...args: any[]) {
+      super(...args)
+      grammars.push(this)
+    }
+  }
+}
+
 async function runCode() {
   isRunning.value = true
   error.value = null
   status.value = 'Running…'
   consoleOutput.value = []
-  clearCanvas()
-  clearMount()
 
   try {
+    destroyGrammars()
+    clearCanvas()
+    clearMount()
+
     const autkMap = await import('@urban-toolkit/autk-map')
     const autkDb = await import('@urban-toolkit/autk-db')
     const autkCore = await import('@urban-toolkit/autk-core')
@@ -264,7 +288,7 @@ async function runCode() {
     const autkPlot = await import('@urban-toolkit/autk-plot')
     const autkGrammar = props.grammar || props.spec !== undefined ? await import('@urban-toolkit/autk-grammar') : {}
 
-    const modules = {
+    const modules: Record<string, unknown> = {
       ...autkMap,
       ...autkDb,
       ...autkCore,
@@ -272,6 +296,7 @@ async function runCode() {
       ...autkPlot,
       ...autkGrammar,
     }
+    if ('AutkGrammar' in autkGrammar) modules.AutkGrammar = trackGrammars(autkGrammar.AutkGrammar)
 
     const scopeDeclarations = Object.keys(modules)
       .filter((key) => /^[$A-Z_][0-9A-Z_$]*$/i.test(key))
@@ -337,6 +362,8 @@ async function runCode() {
     status.value = ''
   } finally {
     isRunning.value = false
+    // A run that ends after the playground is gone still releases its maps.
+    if (unmounted) destroyGrammars()
   }
 }
 
@@ -366,6 +393,12 @@ onMounted(async () => {
   if (props.autoRun) {
     await runCode()
   }
+})
+
+onBeforeUnmount(() => {
+  unmounted = true
+  // A run still going destroys its grammars when it ends.
+  if (!isRunning.value) destroyGrammars()
 })
 
 watch(isDark, () => {
