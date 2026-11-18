@@ -190,17 +190,17 @@ See the [Compute](/grammar/examples/compute-function) examples, and [Compute int
 
 ### Render passes
 
-A pass with `type: 'render'` draws `layers` from each viewpoint of a table, in several directions, on the GPU, and counts what each frame shows, for a visibility or sky-view measure. The result is a copy of the viewpoints table with the measures in `compute.render`, stored as the table `outputTableName`.
+A pass with `type: 'render'` draws `layers` from each viewpoint of a table, in several directions, on the GPU, and counts what each frame shows, for a visibility or sky-view measure. The result is a new table, `outputTableName`: the viewpoints' features, with the measures in `compute.render`: `sampleCount`, the frames rendered from the feature, and `classes` or `objects`.
 
 | Field | Description |
 |---|---|
 | `outputTableName` | Name of the table that receives the result. Required. |
-| `layerType` | How the map draws the new table. Defaults to the type of the viewpoints table. |
-| `layers` | Tables drawn into the frames. Each has an `id` (letters, digits, and underscores, not starting with a digit), a `dataRef`, a `type` (`'surface'`, `'parks'`, `'water'`, `'roads'`, `'buildings'`, `'points'`, `'polygons'`, or `'polylines'`), and, for `objects` aggregation, an `objectIdProperty`: the property that holds each object's id. |
-| `viewpoints` | `dataRef`, the table whose features are the viewpoints. `strategy` places them: `{ type: 'centroid' }`, the default, or `{ type: 'building-windows', floors }` for one viewpoint per floor on a building's windows. `sampling: { directions, azimuthOffsetDeg, pitchDeg }` sets the directions sampled around each viewpoint. |
-| `aggregation` | `{ type: 'classes' }` measures the share of the frames each layer `type` covers, in `compute.render.classes.<type>`; with `includeBackground: true`, the share that shows no layer is added as `compute.render.classes.background`, or under the name in `backgroundLayerType`. `{ type: 'objects' }` records the objects seen from each viewpoint, in `compute.render.objects`. |
+| `layerType` | How the map draws the new table. Defaults to the type of the viewpoints table, or to `'points'` with the `building-windows` strategy, whose result holds one point per window. |
+| `layers` | Tables drawn into the frames. Each has an `id` (letters, digits, and underscores, not starting with a digit), a `dataRef`, a `type` (`'surface'`, `'parks'`, `'water'`, `'roads'`, `'buildings'`, `'polygons'`, or `'polylines'`; a render pass draws no points, and a run refuses any other type), and, for `objects` aggregation, an `objectIdProperty`: the property that holds each object's id. |
+| `viewpoints` | `dataRef`, the table whose features the frames are rendered from. `strategy` places the viewpoints: `{ type: 'centroid' }`, the default, one at each feature's centroid, or `{ type: 'building-windows', floors }`, windows along each building's facades, `floors` rows of them up its height. With `centroid`, `sampling: { directions, azimuthOffsetDeg, pitchDeg }` sets where each viewpoint looks: `directions` evenly spaced around the horizon (1 by default), the first `azimuthOffsetDeg` degrees counterclockwise from east, all `pitchDeg` degrees above the horizontal (both 0 by default). |
+| `aggregation` | `{ type: 'classes' }` writes the share of each feature's frame pixels that each layer `type` covers, from 0 to 1, in `compute.render.classes.<type>`; with `includeBackground: true`, the pixels no layer covers, such as the sky, count as one more class, `backgroundLayerType` (`'background'` by default). `{ type: 'objects' }` writes, for each object seen, the share of the feature's frames that show it, in `compute.render.objects`. |
 | `camera` | `{ fov, clip: { near, far } }`: the field of view of each square frame, in degrees (90 by default), and the nearest and farthest distances drawn, in planar units (1 and 5000 by default). |
-| `tileSize` | Frame size in pixels, a multiple of 8. |
+| `tileSize` | Frame size in pixels, a multiple of 8. Defaults to 64. |
 | `workspace` | [Workspace](#workspaces) of the tables the pass reads and writes. |
 
 See the [Render Pass](/grammar/examples/compute-render) example, which colors streets by the share of sky seen from them.
