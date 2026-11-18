@@ -7,6 +7,7 @@ outline: deep
 <script setup>
 const spec = `
 {
+  layout: { type: 'horizontal' },
   data: [
     {
       type: 'geojson',
@@ -58,7 +59,7 @@ Load Manhattan and the whole city into two workspaces, so the city is not cut to
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :spec="spec" :targets="{ map: ['map0', 'map1'] }" :auto-run="true" out="dom" canvas-id="map0" :mounts="[{ name: 'map1', id: 'map1', kind: 'canvas', height: 500 }]" />
+  <CodePlayground :spec="spec" :auto-run="true" out="dom" />
 </ClientOnly>
 
 ## Highlights

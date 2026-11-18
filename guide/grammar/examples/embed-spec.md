@@ -55,7 +55,7 @@ Every other example shows only its spec. This one shows the whole JavaScript fil
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground grammar :code="code" :auto-run="true" out="dom" canvas-id="map" :mounts="[{ name: 'plot', id: 'plot' }]" />
+  <CodePlayground grammar :code="code" :auto-run="true" out="dom" />
 </ClientOnly>
 
 :::tip Interaction

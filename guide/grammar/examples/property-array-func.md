@@ -79,7 +79,7 @@ Average an array property per feature on the GPU, using features defined inline 
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :spec="spec" :targets="{ db: 'tables' }" :auto-run="true" out="both" :render-canvas="false" :mounts="[{ name: 'tables', id: 'tables' }]" />
+  <CodePlayground :spec="spec" :targets="{ db: 'tables' }" :auto-run="true" out="both" :mounts="[{ name: 'tables', id: 'tables' }]" />
 </ClientOnly>
 
 ## Highlights

@@ -34,7 +34,7 @@ Load a CSV of noise complaints and turn its latitude and longitude columns into 
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :spec="spec" :targets="{ db: 'tables' }" :auto-run="true" out="both" :render-canvas="false" :mounts="[{ name: 'tables', id: 'tables' }]" />
+  <CodePlayground :spec="spec" :targets="{ db: 'tables' }" :auto-run="true" out="both" :mounts="[{ name: 'tables', id: 'tables' }]" />
 </ClientOnly>
 
 ## Highlights

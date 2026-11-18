@@ -39,7 +39,7 @@ Load a CSV and a JSON file into the same spec, creating two tables side by side 
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :spec="spec" :targets="{ db: 'tables' }" :auto-run="true" out="both" :render-canvas="false" :mounts="[{ name: 'tables', id: 'tables' }]" />
+  <CodePlayground :spec="spec" :targets="{ db: 'tables' }" :auto-run="true" out="both" :mounts="[{ name: 'tables', id: 'tables' }]" />
 </ClientOnly>
 
 ## Highlights

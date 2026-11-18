@@ -27,7 +27,7 @@ const spec = `
     mark: 'scatter',
     axis: ['shape_area', 'shape_leng'],
     title: 'Area and perimeter of each neighborhood',
-    width: 560,
+    width: 300,
     height: 460,
     events: ['click', 'brush'],
   },
@@ -49,7 +49,7 @@ A map and a scatterplot of Manhattan neighborhoods, linked by `links` and arrang
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :spec="spec" :targets="{ map: 'map', plot: 'plot' }" :auto-run="true" out="dom" canvas-id="map" :mounts="[{ name: 'plot', id: 'plot' }]" />
+  <CodePlayground :spec="spec" :auto-run="true" out="dom" />
 </ClientOnly>
 
 :::tip Interaction

@@ -38,6 +38,10 @@ const SPEC_FIXES = {
   'histogram-brush-landuse': (s) => s.replace("'/data/mnt_neighs_proj.geojson'", "'/data/mnt_neighs_proj_landuse.geojson'"),
   // Both files are WGS84; declaring EPSG:3395 made the 200 m join match everything and run out of memory.
   'temporal-events-click': (s) => s.replace(/coordinateFormat: 'EPSG:3395'/g, "coordinateFormat: 'EPSG:4326'"),
+  // The comment is about the gallery hub's console panel, which the site does not have. Beside the map, the plot has
+  // half the docs column.
+  'interaction-external': (s) => s.replace(/^ *\/\/ The console panel .*\n/m, '').replace('width: 420,', 'width: 300,'),
+  'linked-views': (s) => s.replace('width: 560,', 'width: 300,'),
 }
 
 // Grammar enums become their string values, so specs are plain data.
@@ -103,21 +107,17 @@ function targetsFor(layout) {
   }
 }
 
+// The playground draws a spec's maps and plots in panes it arranges by the spec's layout (autk-grammar's arrangeViews),
+// so a spec page names only the element that lists a data example's tables. A JavaScript page's code names its targets.
 function playgroundFor(ex) {
+  const data = ex.layout === 'data'
   const attrs = ex.javascript
     ? ['grammar', ':code="code"']
-    : [':spec="spec"', `:targets="${targetsFor(ex.layout)}"`]
-  attrs.push(':auto-run="true"')
+    : [':spec="spec"', ...(data ? [`:targets="${targetsFor('data')}"`] : [])]
+  attrs.push(':auto-run="true"', `out="${data ? 'both' : 'dom'}"`)
   const mounts = []
-  if (ex.layout === 'data') {
-    attrs.push('out="both"', ':render-canvas="false"')
-    mounts.push("{ name: 'tables', id: 'tables' }")
-  } else {
-    attrs.push('out="dom"', `canvas-id="${ex.layout === 'multi-map' ? 'map0' : 'map'}"`)
-    if (ex.layout === 'map+plot') mounts.push("{ name: 'plot', id: 'plot' }")
-    if (ex.layout === 'multi-map') mounts.push("{ name: 'map1', id: 'map1', kind: 'canvas', height: 500 }")
-    if (ex.events) mounts.push("{ name: 'events' }")
-  }
+  if (data) mounts.push("{ name: 'tables', id: 'tables' }")
+  if (ex.events) mounts.push("{ name: 'events' }")
   if (mounts.length) attrs.push(`:mounts="[${mounts.join(', ')}]"`)
   return `<CodePlayground ${attrs.join(' ')} />`
 }
