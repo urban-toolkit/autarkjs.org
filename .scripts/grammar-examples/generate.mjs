@@ -33,7 +33,13 @@ const OSM_EXTRACTS = {
   'osm-layers-api-paris': ['/data/osm/paris_center.osm.pbf'],
 }
 
+// autk-db reads only relations with a `boundary` tag from an extract, and Manhattan Island is mapped as an island, so
+// the Manhattan extract carries the borough's boundary, "Manhattan" (.scripts/build-osm-extracts.py).
+const MANHATTAN_BOROUGH = (s) => s.replace("areas: ['Manhattan Island']", "areas: ['Manhattan']")
+
 const SPEC_FIXES = {
+  'osm-layers-api-manhattan': MANHATTAN_BOROUGH,
+  'layer-opacity': MANHATTAN_BOROUGH,
   // The original spec bins `landuse` from a file that has no such column.
   'histogram-brush-landuse': (s) => s.replace("'/data/mnt_neighs_proj.geojson'", "'/data/mnt_neighs_proj_landuse.geojson'"),
   // Both files are WGS84; declaring EPSG:3395 made the 200 m join match everything and run out of memory.

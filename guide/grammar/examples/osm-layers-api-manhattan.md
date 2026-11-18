@@ -13,7 +13,7 @@ const spec = `
       pbfFileUrl: '/data/osm/manhattan.osm.pbf',
       queryArea: {
         geocodeArea: 'New York',
-        areas: ['Manhattan Island'],
+        areas: ['Manhattan'],
       },
       outputTableName: 'table_osm',
       autoLoadLayers: {
@@ -41,7 +41,7 @@ const spec = `
 
 # OSM: Manhattan
 
-Load every OpenStreetMap layer for all of Manhattan Island, the largest OSM area in the gallery.
+Load every OpenStreetMap layer for the whole borough of Manhattan, the largest OSM area in the gallery.
 
 ## Live Playground
 

@@ -122,7 +122,7 @@ export const GRAMMAR_EXAMPLES: GrammarExample[] = [
     slug: 'osm-layers-api-manhattan',
     group: 'OpenStreetMap',
     title: 'OSM: Manhattan',
-    description: 'Load every OpenStreetMap layer for all of Manhattan Island, the largest OSM area in the gallery.',
+    description: 'Load every OpenStreetMap layer for the whole borough of Manhattan, the largest OSM area in the gallery.',
     tags: ['data', 'map'],
   },
   {

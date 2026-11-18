@@ -13,7 +13,7 @@ const spec = `
       pbfFileUrl: '/data/osm/manhattan.osm.pbf',
       queryArea: {
         geocodeArea: 'New York',
-        areas: ['Manhattan Island'],
+        areas: ['Manhattan'],
       },
       outputTableName: 'table_osm',
       autoLoadLayers: {
