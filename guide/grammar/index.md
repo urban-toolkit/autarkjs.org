@@ -29,7 +29,7 @@ const spec = {
   },
 }
 
-const grammar = new AutkGrammar({ map: 'map', plot: 'plot' })
+const grammar = new AutkGrammar({ map: 'quick-start-map', plot: 'quick-start-plot' })
 await grammar.run(spec)
 `
 </script>
