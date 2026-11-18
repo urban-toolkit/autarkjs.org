@@ -26,8 +26,8 @@ const spec = `
     },
     {
       type: 'join',
-      tableRootName: 'neighborhoods',
-      tableJoinName: 'noise',
+      dataRef: 'neighborhoods',
+      joinDataRef: 'noise',
       groupBy: [{ column: 'Unique Key', aggregateFn: 'count' }],
     },
   ],
@@ -52,12 +52,12 @@ Count the noise complaints that fall inside each Manhattan neighborhood and colo
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :spec="spec" :targets="{ map: 'map' }" :auto-run="true" out="dom" canvas-id="map" />
+  <CodePlayground :spec="spec" :auto-run="true" out="dom" />
 </ClientOnly>
 
 ## Highlights
 
-- `join` data source with `tableRootName` and `tableJoinName`
+- `join` data source with `dataRef` and `joinDataRef`
 - `groupBy` with a `count` aggregate
 - results read with `getFnv: 'sjoin.count.noise'`
 

@@ -7,6 +7,7 @@ outline: deep
 <script setup>
 const spec = `
 {
+  layout: { type: 'horizontal' },
   data: [
     {
       type: 'osm',
@@ -69,7 +70,7 @@ Load Battery Park City and the Financial District as separate sources and show e
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :spec="spec" :targets="{ map: ['map0', 'map1'] }" :auto-run="true" out="dom" canvas-id="map0" :mounts="[{ name: 'map1', id: 'map1', kind: 'canvas', height: 500 }]" />
+  <CodePlayground :spec="spec" :auto-run="true" out="dom" />
 </ClientOnly>
 
 :::tip OpenStreetMap data

@@ -34,7 +34,7 @@ The smallest map spec: load Manhattan neighborhoods from GeoJSON and draw them a
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :spec="spec" :targets="{ map: 'map' }" :auto-run="true" out="dom" canvas-id="map" />
+  <CodePlayground :spec="spec" :auto-run="true" out="dom" />
 </ClientOnly>
 
 ## Highlights

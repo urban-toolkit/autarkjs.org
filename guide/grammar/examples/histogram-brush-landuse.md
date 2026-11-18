@@ -46,7 +46,7 @@ Count neighborhoods by their main land use and brush categories to find them on 
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :spec="spec" :targets="{ map: 'map', plot: 'plot' }" :auto-run="true" out="dom" canvas-id="map" :mounts="[{ name: 'plot', id: 'plot' }]" />
+  <CodePlayground :spec="spec" :auto-run="true" out="dom" />
 </ClientOnly>
 
 ## Highlights

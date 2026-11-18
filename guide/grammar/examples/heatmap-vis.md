@@ -18,7 +18,6 @@ const spec = `
       outputTableName: 'table_osm',
       autoLoadLayers: {
         layers: ['surface', 'parks', 'water', 'roads'],
-
       },
     },
     {
@@ -33,7 +32,7 @@ const spec = `
     },
     {
       type: 'heatmap',
-      tableJoinName: 'noise',
+      joinDataRef: 'noise',
       near: { distance: 1000 },
       outputTableName: 'heatmap',
       grid: { rows: 20, columns: 20 },
@@ -65,7 +64,7 @@ Aggregate noise complaints into a 20 by 20 grid and draw it as a translucent hea
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :spec="spec" :targets="{ map: 'map' }" :auto-run="true" out="dom" canvas-id="map" />
+  <CodePlayground :spec="spec" :auto-run="true" out="dom" />
 </ClientOnly>
 
 :::tip OpenStreetMap data

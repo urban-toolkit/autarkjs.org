@@ -18,7 +18,6 @@ const spec = `
       outputTableName: 'table_osm',
       autoLoadLayers: {
         layers: ['surface', 'parks', 'water', 'roads', 'buildings'],
-
       },
     },
     {
@@ -33,8 +32,8 @@ const spec = `
     },
     {
       type: 'join',
-      tableRootName: 'table_osm_roads',
-      tableJoinName: 'noise',
+      dataRef: 'table_osm_roads',
+      joinDataRef: 'noise',
       near: { distance: 1000 },
       groupBy: [{ column: 'Unique Key', aggregateFn: 'count' }],
     },
@@ -64,7 +63,7 @@ Count noise complaints near each road segment in Lower Manhattan.
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :spec="spec" :targets="{ map: 'map' }" :auto-run="true" out="dom" canvas-id="map" />
+  <CodePlayground :spec="spec" :auto-run="true" out="dom" />
 </ClientOnly>
 
 :::tip OpenStreetMap data

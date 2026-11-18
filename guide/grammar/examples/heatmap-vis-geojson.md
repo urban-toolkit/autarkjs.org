@@ -26,7 +26,7 @@ const spec = `
     },
     {
       type: 'heatmap',
-      tableJoinName: 'noise',
+      joinDataRef: 'noise',
       near: { distance: 1000 },
       outputTableName: 'heatmap',
       grid: { rows: 30, columns: 30 },
@@ -55,7 +55,7 @@ A finer 30 by 30 noise heatmap drawn over neighborhood boundaries loaded from Ge
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :spec="spec" :targets="{ map: 'map' }" :auto-run="true" out="dom" canvas-id="map" />
+  <CodePlayground :spec="spec" :auto-run="true" out="dom" />
 </ClientOnly>
 
 ## Highlights

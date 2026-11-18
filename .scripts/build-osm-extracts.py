@@ -29,8 +29,10 @@ OVERPASS_ENDPOINTS = [
 UA = {"User-Agent": "autarkjs-org-example-pbf-builder/1.0 (https://github.com/urban-toolkit/autarkjs.org)"}
 
 # key -> (Nominatim queries whose bounding boxes are merged, boundary area names = spec queryArea.areas)
+# autk-db reads only relations with a `boundary` tag from an extract. Manhattan Island is mapped as an island, so the
+# Manhattan examples name the borough's boundary, "Manhattan" (generate.mjs rewrites their area).
 AREAS = {
-    "manhattan": (["Manhattan, New York, USA"], ["Manhattan Island"]),
+    "manhattan": (["Manhattan, New York, USA"], ["Manhattan"]),
     "chicago_loop": (["Loop, Chicago, Illinois, USA", "Near South Side, Chicago, Illinois, USA"], ["Loop", "Near South Side"]),
     "niteroi_praias_baia": (["Região Praias da Baía, Niterói, Brazil"], ["Região Praias da Baía"]),
     "paris_center": (

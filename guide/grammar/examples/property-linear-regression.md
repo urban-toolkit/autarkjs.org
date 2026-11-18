@@ -58,7 +58,7 @@ const spec = `
       },
       attributeArrays: { x_values: 7, y_values: 7 },
       outputColumnName: 'predicted_value',
-      wglsFunction: \`
+      wgslFunction: \`
         let n = f32(x_values_length);
         var sum_x = 0.0;
         var sum_y = 0.0;
@@ -94,7 +94,7 @@ Fit a least-squares line to each feature's training arrays on the GPU and predic
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :spec="spec" :targets="{ db: 'tables' }" :auto-run="true" out="both" :render-canvas="false" :mounts="[{ name: 'tables', id: 'tables' }]" />
+  <CodePlayground :spec="spec" :targets="{ db: 'tables' }" :auto-run="true" out="both" :mounts="[{ name: 'tables', id: 'tables' }]" />
 </ClientOnly>
 
 ## Highlights

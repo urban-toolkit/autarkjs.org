@@ -18,7 +18,6 @@ const spec = `
       outputTableName: 'table_osm',
       autoLoadLayers: {
         layers: ['surface', 'parks', 'water', 'roads', 'buildings'],
-
       },
     },
   ],
@@ -47,7 +46,7 @@ Load OpenStreetMap layers for the Praias da Baía region of Niterói, Brazil.
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :spec="spec" :targets="{ map: 'map' }" :auto-run="true" out="dom" canvas-id="map" />
+  <CodePlayground :spec="spec" :auto-run="true" out="dom" />
 </ClientOnly>
 
 :::tip OpenStreetMap data

@@ -9,6 +9,7 @@ const code = `
 import { AutkGrammar } from '@urban-toolkit/autk-grammar'
 
 const spec = {
+  layout: { type: 'horizontal' },
   data: [
     {
       type: 'geojson',
@@ -18,15 +19,16 @@ const spec = {
     },
   ],
   map: {
-    layerRefs: [{ dataRef: 'neighborhoods', isPick: true }],
+    layerRefs: [{ dataRef: 'neighborhoods', isPick: true, selectFields: ['nta2020'] }],
   },
   plot: {
     dataRef: 'neighborhoods',
     mark: 'scatter',
     axis: ['shape_area', 'shape_leng'],
     title: 'Neighborhood Areas',
-    width: 420,
+    width: 300,
     events: ['click', 'brush'],
+    selectFields: ['nta2020'],
     mapRef: 'neighborhoods',
   },
 }
@@ -81,7 +83,7 @@ Listen to grammar selection events from your own code, and drive map highlights 
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground grammar :code="code" :auto-run="true" out="dom" canvas-id="map" :mounts="[{ name: 'plot', id: 'plot' }, { name: 'events' }]" />
+  <CodePlayground grammar :code="code" :auto-run="true" out="dom" :mounts="[{ name: 'events' }]" />
 </ClientOnly>
 
 :::tip Interaction

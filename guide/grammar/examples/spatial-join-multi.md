@@ -36,14 +36,14 @@ const spec = `
     },
     {
       type: 'join',
-      tableRootName: 'neighborhoods',
-      tableJoinName: 'noise',
+      dataRef: 'neighborhoods',
+      joinDataRef: 'noise',
       groupBy: [{ column: 'Unique Key', aggregateFn: 'count' }],
     },
     {
       type: 'join',
-      tableRootName: 'neighborhoods',
-      tableJoinName: 'parking',
+      dataRef: 'neighborhoods',
+      joinDataRef: 'parking',
       groupBy: [{ column: 'Unique Key', aggregateFn: 'count' }],
     },
   ],
@@ -68,7 +68,7 @@ Join both noise complaints and parking violations to neighborhoods in one spec.
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :spec="spec" :targets="{ map: 'map' }" :auto-run="true" out="dom" canvas-id="map" />
+  <CodePlayground :spec="spec" :auto-run="true" out="dom" />
 </ClientOnly>
 
 ## Highlights

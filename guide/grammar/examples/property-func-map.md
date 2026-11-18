@@ -18,7 +18,6 @@ const spec = `
       outputTableName: 'table_osm',
       autoLoadLayers: {
         layers: ['buildings'],
-
       },
     },
   ],
@@ -27,7 +26,7 @@ const spec = `
       dataRef: 'table_osm_buildings',
       attributes: { x: 'height', y: 'height' },
       outputColumnName: 'height_sq',
-      wglsFunction: 'return x * y;',
+      wgslFunction: 'return x * y;',
     },
   ],
   map: {
@@ -36,7 +35,7 @@ const spec = `
       {
         dataRef: 'table_osm_buildings',
         colorMapInterpolator: 'interpolateRdBu',
-        getFnv: 'height_sq',
+        getFnv: 'compute.height_sq',
       },
     ],
   },
@@ -57,7 +56,7 @@ Square the height of every OpenStreetMap building on the GPU and color the 3D bu
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :spec="spec" :targets="{ map: 'map' }" :auto-run="true" out="dom" canvas-id="map" />
+  <CodePlayground :spec="spec" :auto-run="true" out="dom" />
 </ClientOnly>
 
 :::tip OpenStreetMap data

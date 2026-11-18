@@ -13,12 +13,11 @@ const spec = `
       pbfFileUrl: '/data/osm/manhattan.osm.pbf',
       queryArea: {
         geocodeArea: 'New York',
-        areas: ['Manhattan Island'],
+        areas: ['Manhattan'],
       },
       outputTableName: 'table_osm',
       autoLoadLayers: {
         layers: ['surface', 'parks', 'water', 'roads', 'buildings'],
-
       },
     },
   ],
@@ -42,12 +41,12 @@ const spec = `
 
 # OSM: Manhattan
 
-Load every OpenStreetMap layer for all of Manhattan Island, the largest OSM area in the gallery.
+Load every OpenStreetMap layer for the whole borough of Manhattan, the largest OSM area in the gallery.
 
 ## Live Playground
 
 <ClientOnly>
-  <CodePlayground :spec="spec" :targets="{ map: 'map' }" :auto-run="true" out="dom" canvas-id="map" />
+  <CodePlayground :spec="spec" :auto-run="true" out="dom" />
 </ClientOnly>
 
 :::tip OpenStreetMap data

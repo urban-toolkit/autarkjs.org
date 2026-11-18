@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import { useData } from 'vitepress'
 import { createHighlighter } from 'shiki'
 import { createJavaScriptRegexEngine } from '@shikijs/engine-javascript'
@@ -68,6 +68,11 @@ const error = ref<string | null>(null)
 const isRunning = ref(false)
 const consoleOutput = ref<string[]>([])
 const hasDomOutput = ref(false)
+const viewsEl = ref<HTMLDivElement | null>(null)
+/** A grammar playground draws its maps and plots in panes arranged by the spec's `layout`, not on the default canvas. */
+const arrangesViews = computed(() => props.grammar || props.spec !== undefined)
+/** Starts the ids of a spec playground's view elements, so that they are unique on the page. */
+const viewIdPrefix = `playground-${Math.random().toString(36).slice(2, 8)}-`
 
 let shiki: Awaited<ReturnType<typeof createHighlighter>> | null = null
 
@@ -111,7 +116,7 @@ function getSpecCode(): string {
     const spec = (${editableFiles.value[0]?.code ?? '{}'}
     )
     setStatus('Running the spec...')
-    const grammar = new AutkGrammar(${JSON.stringify(props.targets ?? {})})
+    const grammar = new AutkGrammar(__viewTargets(spec, ${JSON.stringify(props.targets ?? {})}))
     await grammar.run(spec)
     clearStatus()
     if (!spec.map && !spec.plot) {
@@ -248,15 +253,111 @@ function clearPlaygroundStatus() {
   status.value = ''
 }
 
+/** The grammars the last run created: the next run and unmounting destroy them, which releases their maps. */
+let grammars: Array<{ destroy(): void }> = []
+let unmounted = false
+
+function destroyGrammars() {
+  const last = grammars
+  grammars = []
+  for (const grammar of last) grammar.destroy()
+}
+
+type ViewTargets = Record<string, string | string[] | undefined>
+/** autk-grammar's `arrangeViews`: where each map and plot of a spec goes, as its `layout` says. */
+type ArrangeViews = (spec: unknown) => {
+  columns: number
+  gap: number
+  panes: Array<{ kind: 'map' | 'plot', index: number, row: number, column: number }>
+}
+
+/** The targets of a spec playground's grammar: the page's own, such as `db`, and an element id for each map and plot. */
+function viewTargets(arrangeViews: ArrangeViews, spec: unknown, pageTargets: ViewTargets): ViewTargets {
+  const ids: Record<'map' | 'plot', string[]> = { map: [], plot: [] }
+  for (const pane of arrangeViews(spec).panes) ids[pane.kind][pane.index] = `${viewIdPrefix}${pane.kind}-${pane.index}`
+  return {
+    ...pageTargets,
+    ...(ids.map.length > 0 && { map: ids.map }),
+    ...(ids.plot.length > 0 && { plot: ids.plot }),
+  }
+}
+
+/**
+ * Places a pane for each map and plot of `spec` where `arrangeViews` puts it, on a grid of its columns, `gap` pixels
+ * apart, and in it the element the view's target names: a canvas for a map, a div for a plot. Each pane is positioned,
+ * since autk-map adds its controls to the canvas's parent. The panes are made at run time, so their styles are inline.
+ */
+function placeViews(arrangeViews: ArrangeViews, spec: unknown, targets: ViewTargets | undefined) {
+  const container = viewsEl.value
+  if (!container) return
+  const { columns, gap, panes } = arrangeViews(spec)
+  Object.assign(container.style, { gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`, gap: `${gap}px` })
+  const placed = new Set(Array.from(container.querySelectorAll('[data-view]'), (element) => element.id))
+  for (const pane of panes) {
+    const target = targets?.[pane.kind]
+    const id = Array.isArray(target) ? target[pane.index] : target
+    // A single plot id names one element, which holds every plot.
+    if (id === undefined || placed.has(id)) continue
+    placed.add(id)
+
+    const isMap = pane.kind === 'map'
+    const cell = document.createElement('div')
+    Object.assign(cell.style, {
+      position: 'relative',
+      minWidth: '0',
+      gridRow: `${pane.row + 1}`,
+      gridColumn: `${pane.column + 1}`,
+      ...(isMap
+        ? { height: '500px', overflow: 'hidden', background: 'var(--vp-c-bg-soft)' }
+        : { overflow: 'auto', padding: '12px', background: 'var(--vp-c-bg)' }),
+    })
+    const element = document.createElement(isMap ? 'canvas' : 'div')
+    element.id = id
+    element.dataset.view = pane.kind
+    Object.assign(element.style, { display: 'block', width: '100%', ...(isMap && { height: '100%' }) })
+    cell.appendChild(element)
+    container.appendChild(cell)
+  }
+}
+
+function clearViews() {
+  viewsEl.value?.replaceChildren()
+}
+
+type GrammarClass = new (...args: any[]) => { destroy(): void, run(spec: unknown): Promise<unknown> }
+
+/**
+ * The AutkGrammar class user code sees. It records each grammar it makes, so the next run and unmounting can destroy
+ * it, and before a run places the panes of the spec's views, in the elements the grammar's targets name.
+ */
+function trackGrammars<T extends GrammarClass>(Grammar: T, arrangeViews: ArrangeViews): T {
+  const targetsOf = new WeakMap<object, ViewTargets | undefined>()
+  return class extends Grammar {
+    constructor(...args: any[]) {
+      super(...args)
+      targetsOf.set(this, args[0])
+      grammars.push(this)
+    }
+
+    async run(spec: unknown) {
+      placeViews(arrangeViews, spec, targetsOf.get(this))
+      return super.run(spec)
+    }
+  }
+}
+
 async function runCode() {
   isRunning.value = true
   error.value = null
   status.value = 'Running…'
   consoleOutput.value = []
-  clearCanvas()
-  clearMount()
 
   try {
+    destroyGrammars()
+    clearCanvas()
+    clearViews()
+    clearMount()
+
     const autkMap = await import('@urban-toolkit/autk-map')
     const autkDb = await import('@urban-toolkit/autk-db')
     const autkCore = await import('@urban-toolkit/autk-core')
@@ -264,7 +365,7 @@ async function runCode() {
     const autkPlot = await import('@urban-toolkit/autk-plot')
     const autkGrammar = props.grammar || props.spec !== undefined ? await import('@urban-toolkit/autk-grammar') : {}
 
-    const modules = {
+    const modules: Record<string, unknown> = {
       ...autkMap,
       ...autkDb,
       ...autkCore,
@@ -272,6 +373,8 @@ async function runCode() {
       ...autkPlot,
       ...autkGrammar,
     }
+    const arrangeViews = (autkGrammar as { arrangeViews?: ArrangeViews }).arrangeViews
+    if ('AutkGrammar' in autkGrammar && arrangeViews) modules.AutkGrammar = trackGrammars(autkGrammar.AutkGrammar, arrangeViews)
 
     const scopeDeclarations = Object.keys(modules)
       .filter((key) => /^[$A-Z_][0-9A-Z_$]*$/i.test(key))
@@ -316,6 +419,7 @@ async function runCode() {
       '__clearStatus',
       '__clearMount',
       '__namedMounts',
+      '__viewTargets',
       wrapped,
     )(
       modules,
@@ -327,6 +431,7 @@ async function runCode() {
       clearPlaygroundStatus,
       clearMount,
       namedMountRefs.value,
+      (spec: unknown, pageTargets: ViewTargets) => viewTargets(arrangeViews as ArrangeViews, spec, pageTargets),
     )
 
     hasDomOutput.value = (mount.value?.childNodes.length ?? 0) > 0 || namedMounts.value.length > 0
@@ -337,6 +442,8 @@ async function runCode() {
     status.value = ''
   } finally {
     isRunning.value = false
+    // A run that ends after the playground is gone still releases its maps.
+    if (unmounted) destroyGrammars()
   }
 }
 
@@ -366,6 +473,12 @@ onMounted(async () => {
   if (props.autoRun) {
     await runCode()
   }
+})
+
+onBeforeUnmount(() => {
+  unmounted = true
+  // A run still going destroys its grammars when it ends.
+  if (!isRunning.value) destroyGrammars()
 })
 
 watch(isDark, () => {
@@ -425,7 +538,21 @@ watch(isDark, () => {
     </div>
 
     <div class="code-playground__output">
-      <div v-if="showCanvas && out !== 'console'" class="code-playground__canvas-wrap" :style="canvasHeightStyle ? { height: canvasHeightStyle } : undefined">
+      <div
+        v-if="arrangesViews && out !== 'console'"
+        class="code-playground__views-wrap"
+        :class="{ 'code-playground__views-wrap--busy': status || error }"
+      >
+        <div ref="viewsEl" class="code-playground__views" />
+        <div v-if="status || error" class="code-playground__overlay">
+          <div v-if="error" class="code-playground__error">{{ error }}</div>
+          <div v-else class="code-playground__status">
+            <div class="code-playground__spinner" />
+            {{ status }}
+          </div>
+        </div>
+      </div>
+      <div v-else-if="showCanvas && out !== 'console'" class="code-playground__canvas-wrap" :style="canvasHeightStyle ? { height: canvasHeightStyle } : undefined">
         <canvas ref="canvasEl" class="code-playground__canvas" :id="canvasId" />
         <div v-if="status || error" class="code-playground__overlay">
           <div v-if="error" class="code-playground__error">{{ error }}</div>
@@ -611,6 +738,18 @@ watch(isDark, () => {
   width: 100%;
   height: 500px;
   background: var(--vp-c-bg-soft);
+}
+
+.code-playground__views-wrap {
+  position: relative;
+}
+
+.code-playground__views-wrap--busy {
+  min-height: 120px;
+}
+
+.code-playground__views {
+  display: grid;
 }
 
 .code-playground__output-label {
