@@ -313,7 +313,7 @@ await grammar.run(spec)
 After `run()`, the grammar exposes its tables and selections to your code:
 
 ```ts
-// Tables, loaded lazily as GeoJSON FeatureCollections
+// Tables of the default workspace, loaded lazily as GeoJSON FeatureCollections
 const neighborhoods = await grammar.data['neighborhoods']
 
 // Listen to selections made on maps and plots
