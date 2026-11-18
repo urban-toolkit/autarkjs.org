@@ -331,23 +331,33 @@ grammar.destroy()
 
 `highlightOnMap` and `clearHighlightOnMap` name a map layer by the table it draws. A plot is named by its `id`, else its `dataRef`: that name is the `plotId` of its `plot:selection` events, and the one `setPlotSelection` and `clearHighlightOnPlot` take.
 
-`run()` calls `destroy()` before it starts, so running another spec on the same `AutkGrammar` releases the maps of the last run, and maps kept from `grammar.maps` or `mapLayer()` stop drawing. Use one `AutkGrammar` for each set of views that must stay on the page.
+`selectFields` on a layer or a plot, for example `selectFields: ['nta2020']`, names the columns whose values identify the selected rows, for an app that links a selection to other tables. The grammar does not read it: the events still report feature ids, and the app reads those columns from the selected rows.
+
+`destroy()` releases what the last run made: each map, with its GPU buffers, canvas context, controls, and event handlers, and the grammar's registries and caches. `run()` calls it before it starts, so running another spec on the same `AutkGrammar` releases the maps of the last run, and maps kept from `grammar.maps` or `mapLayer()` stop drawing. Use one `AutkGrammar` for each set of views that must stay on the page.
 
 See [External Interactions](/grammar/examples/interaction-external) for a working example.
 
 ### For hosts
 
-An application that runs parts of a spec itself can import the pieces `AutkGrammar` is built from:
+A host that runs parts of a spec itself, a server that loads its tables for example, can call the functions the grammar runs, and so do exactly what `AutkGrammar` does:
 
 | Export | Purpose |
 |---|---|
-| `createDataAdapter` | The adapter that loads a spec's `data` entries into an autk-db database. |
-| `createComputeAdapter` | The adapter that runs a spec's `compute` passes. |
-| `applyCamera` | Moves a map's camera as a `camera` spec says, from the view that fits its layers. |
-| `enterWorkspace` | Makes a workspace, or the default one, the one an autk-db database works in. |
-| `tableKey` | The key a table has in the grammar's caches: its name in the default workspace, `<workspace>/<name>` in another. |
+| `createDataAdapter(targets?, cache?)` | The data adapter. Its `resolveSource(db, source)` loads one `data` entry into an autk-db database, a new one when `db` is undefined, and returns it. `cache` receives each GeoJSON table and each table a join wrote. |
+| `createComputeAdapter(cache?, types?)` | The compute adapter. Its `resolveCompute(db, pass)` runs one `compute` entry on the GPU. The results are kept only in `cache`, and `types` receives the layer type of each table a pass wrote under its own `outputTableName`. |
+| `enterWorkspace(db, workspace?)` | Makes an entry's workspace, or the default one when it names none, the one autk-db works in. Every adapter calls it before it reads or writes an entry's tables. |
+| `tableKey(workspace, name)` | The key of a table in those caches: its name in the default workspace, `<workspace>/<name>` in another. |
+| `applyCamera(map, camera)` | Moves an `AutkMap`'s camera as a map's `camera` says, from the view that fits its layers. The map adapter calls it once the layers are loaded, before the map first draws. |
 
-The entry `@urban-toolkit/autk-grammar/data` exports the data adapter alone. It imports autk-db but not autk-map, autk-plot, or autk-compute, so it suits code that loads data without drawing it.
+The entry `@urban-toolkit/autk-grammar/data` exports `createDataAdapter`, `enterWorkspace`, and `tableKey`, as an ES module and a CommonJS one. Its code imports autk-db alone, never autk-map, autk-plot, autk-compute, or autk-core, so it can be imported where they cannot, such as in Node:
+
+```ts
+import { createDataAdapter } from '@urban-toolkit/autk-grammar/data'
+
+const adapter = createDataAdapter()
+let db: unknown // the AutkDb the first source creates
+for (const source of spec.data ?? []) db = await adapter.resolveSource(db, source)
+```
 
 ## Next steps
 
