@@ -37,6 +37,12 @@ export const EXAMPLES = [
     description: 'Load a CSV and a JSON file into the same spec, creating two tables side by side in the in-browser database.',
     highlights: ['several entries in the `data` array', '`csv` and `json` sources in one spec', 'every table listed as it is loaded'],
   },
+  {
+    slug: 'geotiff-raster', group: 'Loading Data', layout: 'map',
+    title: 'GeoTIFF Raster',
+    description: 'Load a GeoTIFF of summer land surface temperature in Niterói, Brazil, and draw its 2024 band over a polygon of the raster\'s extent.',
+    highlights: ['`geotiff` data source with `geotiffFileUrl`', '`maxRasterCells` and `resampleMethod` downsample the raster', '`getFnv: \'band_24\'` picks the band to draw'],
+  },
   // ── Map Layers ────────────────────────────────────────────────
   {
     slug: 'geojson-vis', group: 'Map Layers', layout: 'map',
@@ -79,6 +85,18 @@ export const EXAMPLES = [
     title: 'Layer Opacity',
     description: 'Combine OpenStreetMap layers for Manhattan with a semi-transparent GeoJSON layer of neighborhood boundaries on top.',
     highlights: ['OSM and GeoJSON sources in one spec', 'per-layer `opacity`'],
+  },
+  {
+    slug: 'map-camera', group: 'Map Layers', layout: 'map',
+    title: 'Map Camera',
+    description: 'Look at the 3D buildings of the Financial District from a tilted, turned camera instead of straight down.',
+    highlights: ['`camera` with `zoom`, `pitch`, and `bearing`', 'a `bbox` query area read from a local extract', '3D buildings seen at an angle'],
+  },
+  {
+    slug: 'points-true-size', group: 'Map Layers', layout: 'map',
+    title: 'Points at True Size',
+    description: 'Draw noise complaints in the Financial District as points 10 meters in radius on the ground, over OpenStreetMap layers.',
+    highlights: ['`pointSize: 10`, a radius in meters on the ground', 'the grammar converts meters to the map\'s planar units at the layer\'s latitude', 'a fixed `color` for the points'],
   },
   // ── OpenStreetMap ─────────────────────────────────────────────
   {
@@ -148,6 +166,12 @@ export const EXAMPLES = [
     description: 'A finer 30 by 30 noise heatmap drawn over neighborhood boundaries loaded from GeoJSON.',
     highlights: ['higher grid resolution', 'heatmap layered over a GeoJSON base'],
   },
+  {
+    slug: 'heatmap-centroids', group: 'Joins and Heatmaps', layout: 'map',
+    title: 'Heatmap: Park Access',
+    description: 'Count the parks within about 150 meters of each cell of a 30 by 30 grid at the southern tip of Manhattan, measured from the park edges rather than their centroids.',
+    highlights: ['`near.useCentroid: false` measures from each park\'s edges', '`groupBy` with `column: \'*\'` counts the parks', 'heatmap values read with `getFnv: \'count.tip_parks\'`'],
+  },
   // ── Compute ───────────────────────────────────────────────────
   {
     slug: 'compute-function', group: 'Compute', layout: 'map',
@@ -178,6 +202,18 @@ export const EXAMPLES = [
     title: 'Linear Regression',
     description: 'Fit a least-squares line to each feature\'s training arrays on the GPU and predict a value.',
     highlights: ['several array attributes in one function', 'scalar and array inputs mixed', 'one prediction per feature'],
+  },
+  {
+    slug: 'compute-output-table', group: 'Compute', layout: 'map',
+    title: 'Compute into a New Table',
+    description: 'Convert the height of every building in the Financial District from meters to feet on the GPU, writing the result into a new table that the map draws.',
+    highlights: ['`outputTableName` writes the result into a new table, and the buildings table stays as it is', '`layerType: \'polygons\'` sets how the map draws the new table', 'results read with `getFnv: \'compute.feet\'`'],
+  },
+  {
+    slug: 'compute-render', group: 'Compute', layout: 'map',
+    title: 'Render Pass',
+    description: 'From each road segment around Wall Street, render the buildings in four directions on the GPU, and color the roads by the share of sky seen from them.',
+    highlights: ['`type: \'render\'` compute pass with `layers` and `viewpoints`', '`aggregation` by classes, with the background counted as `sky`', 'results read with `getFnv: \'compute.render.classes.sky\'`'],
   },
   // ── Plots ─────────────────────────────────────────────────────
   {
@@ -253,6 +289,19 @@ export const EXAMPLES = [
     title: 'OSM: Two Neighborhoods',
     description: 'Load Battery Park City and the Financial District as separate sources and show each in its own map.',
     highlights: ['two `osm` sources with different `outputTableName`s', 'one map per source'],
+  },
+  {
+    slug: 'linked-views', group: 'Multiple Views', layout: 'map+plot',
+    title: 'Linked Views',
+    description: 'A map and a scatterplot of Manhattan neighborhoods, linked by `links` and arranged side by side by `layout`. Click or brush the plot to highlight neighborhoods on the map.',
+    highlights: ['`layout: { type: \'horizontal\' }` places the map and the plot side by side', '`id` on the map and the plot', '`links` joins the plot to a map layer named by its `title`'],
+    tip: pickTip,
+  },
+  {
+    slug: 'workspaces', group: 'Multiple Views', layout: 'multi-map',
+    title: 'Workspaces',
+    description: 'Load Manhattan and the whole city into two workspaces, so the city is not cut to the extent of Manhattan, and draw each in its own map.',
+    highlights: ['`workspace` on each data source and each map', 'the first source of a workspace sets its extent', 'WKT geometry read from a CSV with `geometryColumns.wktColumnName`'],
   },
   {
     slug: 'interaction-external', group: 'Using the Grammar', layout: 'map+plot', events: true, javascript: true,

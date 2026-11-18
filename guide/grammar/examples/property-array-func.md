@@ -54,7 +54,7 @@ const spec = `
       attributes: { values: 'measurements' },
       attributeArrays: { values: 5 },
       outputColumnName: 'avg_measurement',
-      wglsFunction: \`
+      wgslFunction: \`
         var sum = 0.0;
         for (var i = 0u; i < values_length; i++) {
           sum += values[i];

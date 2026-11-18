@@ -42,6 +42,13 @@ export const GRAMMAR_EXAMPLES: GrammarExample[] = [
     tags: ['data'],
   },
   {
+    slug: 'geotiff-raster',
+    group: 'Loading Data',
+    title: 'GeoTIFF Raster',
+    description: 'Load a GeoTIFF of summer land surface temperature in Niterói, Brazil, and draw its 2024 band over a polygon of the raster\'s extent.',
+    tags: ['data', 'map'],
+  },
+  {
     slug: 'geojson-vis',
     group: 'Map Layers',
     title: 'GeoJSON Polygons',
@@ -88,6 +95,20 @@ export const GRAMMAR_EXAMPLES: GrammarExample[] = [
     group: 'Map Layers',
     title: 'Layer Opacity',
     description: 'Combine OpenStreetMap layers for Manhattan with a semi-transparent GeoJSON layer of neighborhood boundaries on top.',
+    tags: ['data', 'map'],
+  },
+  {
+    slug: 'map-camera',
+    group: 'Map Layers',
+    title: 'Map Camera',
+    description: 'Look at the 3D buildings of the Financial District from a tilted, turned camera instead of straight down.',
+    tags: ['data', 'map'],
+  },
+  {
+    slug: 'points-true-size',
+    group: 'Map Layers',
+    title: 'Points at True Size',
+    description: 'Draw noise complaints in the Financial District as points 10 meters in radius on the ground, over OpenStreetMap layers.',
     tags: ['data', 'map'],
   },
   {
@@ -168,6 +189,13 @@ export const GRAMMAR_EXAMPLES: GrammarExample[] = [
     tags: ['data', 'map'],
   },
   {
+    slug: 'heatmap-centroids',
+    group: 'Joins and Heatmaps',
+    title: 'Heatmap: Park Access',
+    description: 'Count the parks within about 150 meters of each cell of a 30 by 30 grid at the southern tip of Manhattan, measured from the park edges rather than their centroids.',
+    tags: ['data', 'map'],
+  },
+  {
     slug: 'compute-function',
     group: 'Compute',
     title: 'GPU Compute',
@@ -201,6 +229,20 @@ export const GRAMMAR_EXAMPLES: GrammarExample[] = [
     title: 'Linear Regression',
     description: 'Fit a least-squares line to each feature\'s training arrays on the GPU and predict a value.',
     tags: ['data', 'compute'],
+  },
+  {
+    slug: 'compute-output-table',
+    group: 'Compute',
+    title: 'Compute into a New Table',
+    description: 'Convert the height of every building in the Financial District from meters to feet on the GPU, writing the result into a new table that the map draws.',
+    tags: ['data', 'compute', 'map'],
+  },
+  {
+    slug: 'compute-render',
+    group: 'Compute',
+    title: 'Render Pass',
+    description: 'From each road segment around Wall Street, render the buildings in four directions on the GPU, and color the roads by the share of sky seen from them.',
+    tags: ['data', 'compute', 'map'],
   },
   {
     slug: 'barchart-click',
@@ -277,6 +319,20 @@ export const GRAMMAR_EXAMPLES: GrammarExample[] = [
     group: 'Multiple Views',
     title: 'OSM: Two Neighborhoods',
     description: 'Load Battery Park City and the Financial District as separate sources and show each in its own map.',
+    tags: ['data', 'map'],
+  },
+  {
+    slug: 'linked-views',
+    group: 'Multiple Views',
+    title: 'Linked Views',
+    description: 'A map and a scatterplot of Manhattan neighborhoods, linked by `links` and arranged side by side by `layout`. Click or brush the plot to highlight neighborhoods on the map.',
+    tags: ['data', 'map', 'plot'],
+  },
+  {
+    slug: 'workspaces',
+    group: 'Multiple Views',
+    title: 'Workspaces',
+    description: 'Load Manhattan and the whole city into two workspaces, so the city is not cut to the extent of Manhattan, and draw each in its own map.',
     tags: ['data', 'map'],
   },
   {

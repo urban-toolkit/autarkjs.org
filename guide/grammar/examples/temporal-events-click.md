@@ -26,8 +26,8 @@ const spec = `
     },
     {
       type: 'join',
-      tableRootName: 'roads',
-      tableJoinName: 'noise',
+      dataRef: 'roads',
+      joinDataRef: 'noise',
       near: { distance: 200 },
       groupBy: [
         { column: 'key', aggregateFn: 'count' },

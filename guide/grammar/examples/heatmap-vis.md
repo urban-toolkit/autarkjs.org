@@ -18,7 +18,6 @@ const spec = `
       outputTableName: 'table_osm',
       autoLoadLayers: {
         layers: ['surface', 'parks', 'water', 'roads'],
-
       },
     },
     {
@@ -33,7 +32,7 @@ const spec = `
     },
     {
       type: 'heatmap',
-      tableJoinName: 'noise',
+      joinDataRef: 'noise',
       near: { distance: 1000 },
       outputTableName: 'heatmap',
       grid: { rows: 20, columns: 20 },

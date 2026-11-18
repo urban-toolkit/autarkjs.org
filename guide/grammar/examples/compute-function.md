@@ -33,7 +33,7 @@ const spec = `
         y: 'shape_leng',
       },
       outputColumnName: 'result',
-      wglsFunction: 'return (4.0 * 3.1415927 * x) / (y * y);',
+      wgslFunction: 'return (4.0 * 3.1415927 * x) / (y * y);',
     },
   ],
   map: {
@@ -69,7 +69,7 @@ Compute a compactness score for each neighborhood on the GPU and map the result.
 
 ## Highlights
 
-- `compute` section with a WGSL `wglsFunction`
+- `compute` section with a WGSL `wgslFunction`
 - `attributes` bind feature properties to WGSL variables
 - results read with `getFnv: 'compute.result'`
 

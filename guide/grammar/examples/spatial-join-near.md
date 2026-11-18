@@ -18,7 +18,6 @@ const spec = `
       outputTableName: 'table_osm',
       autoLoadLayers: {
         layers: ['surface', 'parks', 'water', 'roads', 'buildings'],
-
       },
     },
     {
@@ -33,8 +32,8 @@ const spec = `
     },
     {
       type: 'join',
-      tableRootName: 'table_osm_roads',
-      tableJoinName: 'noise',
+      dataRef: 'table_osm_roads',
+      joinDataRef: 'noise',
       near: { distance: 1000 },
       groupBy: [{ column: 'Unique Key', aggregateFn: 'count' }],
     },

@@ -18,7 +18,6 @@ const spec = `
       outputTableName: 'table_osm',
       autoLoadLayers: {
         layers: ['buildings'],
-
       },
     },
   ],
@@ -27,7 +26,7 @@ const spec = `
       dataRef: 'table_osm_buildings',
       attributes: { x: 'height', y: 'height' },
       outputColumnName: 'height_sq',
-      wglsFunction: 'return x * y;',
+      wgslFunction: 'return x * y;',
     },
   ],
   map: {
@@ -36,7 +35,7 @@ const spec = `
       {
         dataRef: 'table_osm_buildings',
         colorMapInterpolator: 'interpolateRdBu',
-        getFnv: 'height_sq',
+        getFnv: 'compute.height_sq',
       },
     ],
   },

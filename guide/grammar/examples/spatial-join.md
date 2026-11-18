@@ -26,8 +26,8 @@ const spec = `
     },
     {
       type: 'join',
-      tableRootName: 'neighborhoods',
-      tableJoinName: 'noise',
+      dataRef: 'neighborhoods',
+      joinDataRef: 'noise',
       groupBy: [{ column: 'Unique Key', aggregateFn: 'count' }],
     },
   ],
@@ -57,7 +57,7 @@ Count the noise complaints that fall inside each Manhattan neighborhood and colo
 
 ## Highlights
 
-- `join` data source with `tableRootName` and `tableJoinName`
+- `join` data source with `dataRef` and `joinDataRef`
 - `groupBy` with a `count` aggregate
 - results read with `getFnv: 'sjoin.count.noise'`
 
