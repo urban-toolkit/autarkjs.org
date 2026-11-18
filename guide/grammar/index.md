@@ -181,7 +181,7 @@ Each `compute` entry is a pass. Passes run in order after the data is loaded, an
 | `attributeMatrices` | `{ rows, cols }` for attributes that hold matrices. The function also receives `<name>_rows` and `<name>_cols`. |
 | `uniforms`, `uniformArrays`, `uniformMatrices` | Values shared by every feature. |
 | `wgslFunction` | Body of the WGSL function. It must `return` the result. An array of strings is joined with newlines. |
-| `outputColumnName` | Name of the new column, read on the map as `compute.<outputColumnName>`. |
+| `outputColumnName`, `outputColumns` | Name of the new column, read on the map as `compute.<outputColumnName>`, or the columns of a result of several values. |
 | `outputTableName` | Name of a new table that receives the result, so the source table stays as it is and later passes, maps, and plots can read both. Without it, the pass writes into the `dataRef` table. |
 | `layerType` | How the map draws the new table, for example `'points'`. Defaults to the type of the table it was computed from. Only used with `outputTableName`. |
 | `workspace` | [Workspace](#workspaces) of the tables the pass reads and writes. |
