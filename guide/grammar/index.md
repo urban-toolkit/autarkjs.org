@@ -76,7 +76,7 @@ npm install @urban-toolkit/autk-grammar
 Create an `AutkGrammar` with the ids of the elements it should draw into, then `await grammar.run(spec)`. The example below loads Manhattan neighborhoods, draws them on a map, and links a scatterplot to the map: brush the plot to select neighborhoods.
 
 <ClientOnly>
-  <CodePlayground grammar :code="introCode" out="dom" :auto-run="true" canvas-id="map" :mounts="[{ name: 'plot', id: 'plot' }]" />
+  <CodePlayground grammar :code="introCode" out="dom" :auto-run="true" />
 </ClientOnly>
 
 :::warning WebGPU required
@@ -96,7 +96,7 @@ A spec is a plain object. Its four main sections are optional and run in this or
 | [`links`](#links) | Array of links between plots and map layers, wired once the maps and plots are drawn. |
 | [`layout`](#layout) | How the page arranges the maps and plots. |
 
-A map or a plot can have an `id`, unique among the maps and plots of the spec. Links name the plot and the map they join by these ids. A plot without an `id` is known by its `dataRef`, so two plots of one table need ids to be told apart.
+A map or a plot can have an `id`, unique among the maps and plots of the spec. Links name the plot and the map they join by these ids. A plot without an `id` is known by its `dataRef`, so two plots of one table need ids: a run refuses two plots known by one name.
 
 The constructor receives the targets to draw into, as element ids:
 
@@ -108,13 +108,13 @@ The constructor receives the targets to draw into, as element ids:
 
 ### Layout
 
-`layout` describes how the maps and plots are arranged on the page. `AutkGrammar` does not read it: it draws into the elements you give it, and the page that creates those elements arranges them by `layout`.
+`layout` describes how the maps and plots are arranged on the page. A run does not read it: `AutkGrammar` draws into the elements you give it, and the page that creates those elements arranges them with [`arrangeViews(spec)`](#arranging-the-views), so every host arranges a spec's views alike, as the playgrounds on this site do. Each view has its own pane: the maps first, in the order of `map`, then the plots, in the order of `plot`.
 
 | Field | Description |
 |---|---|
-| `type` | `'vertical'` stacks the views, `'horizontal'` puts them side by side, and `'grid'` fills `columns` columns. Defaults to `'vertical'`. |
-| `columns` | Number of columns of a `'grid'`. Defaults to 2. |
-| `gap` | Space between the views, in pixels. |
+| `type` | `'vertical'` stacks the views, `'horizontal'` puts them side by side, and `'grid'` fills `columns` columns, row by row. Defaults to `'vertical'`. |
+| `columns` | Number of columns of a `'grid'`, a whole number. Defaults to 2. |
+| `gap` | Space between the views, in pixels. Defaults to 0. |
 
 ## Data
 
@@ -265,16 +265,16 @@ See the [Map Camera](/grammar/examples/map-camera) example.
 | `axis` | Properties for the axes. Use `'@transform'` for a value produced by `transform`. |
 | `transform` | `{ preset, options }`, with presets such as `binning-1d`, `binning-2d`, `binning-events`, and `sort`. |
 | `events` | Selections the plot emits: `'click'`, `'brush'`, `'brushX'`, `'brushY'`. |
-| `mapRef` | Table of the map layer linked to the plot. Selections in either one highlight the other. A shorthand for a link in [`links`](#links). |
+| `mapRef` | Table of the map layers linked to the plot: the plot is linked to every layer that draws it, in every map. Selections in either one highlight the other. A shorthand for [`links`](#links). |
 | `title`, `width`, `height`, `margins`, `color` | Presentation. |
 
-To draw several plots, give `plot` an array of plot specs and the constructor's `plot` target an array of ids, one `<div>` per plot, in order.
+To draw several plots, give `plot` an array of plot specs and the constructor's `plot` target an array of ids, one `<div>` per plot, in order. A plot reads only its table's properties, so it also draws a table without geometry, such as a CSV or JSON table loaded without `geometryColumns`.
 
 See the [Plots](/grammar/examples/barchart-click) examples.
 
 ### Links
 
-Each entry of `links` links a plot to a layer of a map: selecting in the plot highlights the same features on the layer, and picking on the layer selects them in the plot.
+Each entry of `links` links a plot to a layer of a map: selecting in the plot highlights the same features on the layer, and picking on the layer selects them in the plot. A run refuses a link that names no plot, map, or layer of the spec.
 
 | Field | Description |
 |---|---|
@@ -321,23 +321,25 @@ After `run()`, the grammar exposes its tables and selections to your code:
 const neighborhoods = await grammar.data['neighborhoods']
 
 // Listen to selections made on maps and plots
-grammar.interactions.on('map:picking', ({ layerId, selection }) => { /* ... */ })
+grammar.interactions.on('map:picking', ({ mapId, layerId, selection }) => { /* ... */ })
 grammar.interactions.on('plot:selection', ({ plotId, event, selection }) => { /* ... */ })
 
-// Drive selections from outside the spec
+// Drive selections from outside the spec, on every map that draws the table, or on one map
 grammar.highlightOnMap('neighborhoods', [0, 1, 2])
+grammar.highlightOnMap('neighborhoods', [0, 1, 2], 'overview')
 grammar.setPlotSelection('neighborhoods', [0, 1, 2])
 grammar.clearHighlightOnMap('neighborhoods')
 grammar.clearHighlightOnPlot('neighborhoods')
 
-// Find the map and the layer id that draw a table
+// Find the layers that draw a table: every one, in every map, or the last map's
+const layers = grammar.mapLayers('neighborhoods')
 const { map, layerId } = grammar.mapLayer('neighborhoods')
 
 // Release the maps and the grammar's state, for example before the container goes away
 grammar.destroy()
 ```
 
-`highlightOnMap` and `clearHighlightOnMap` name a map layer by the table it draws. A plot is named by its `id`, else its `dataRef`: that name is the `plotId` of its `plot:selection` events, and the one `setPlotSelection` and `clearHighlightOnPlot` take.
+The calls name map layers by the table they draw. Each reaches every map that draws the table, or only the map its last argument, `mapId`, names: a string by the map's `id`, a number by its index in `map`. A `map:picking` event's `mapId` names the map the pick was made on, so it can be passed back as it is, and its `layerId` is the picked layer's id in that map: its `title`, else its `dataRef`. A plot is named by its `id`, else its `dataRef`: that name is the `plotId` of its `plot:selection` events, and the one `setPlotSelection` and `clearHighlightOnPlot` take.
 
 `selectFields` on a layer or a plot, for example `selectFields: ['nta2020']`, names the columns whose values identify the selected rows, for an app that links a selection to other tables. The grammar does not read it: the events still report feature ids, and the app reads those columns from the selected rows.
 
@@ -347,7 +349,7 @@ See [External Interactions](/grammar/examples/interaction-external) for a workin
 
 ### For hosts
 
-A host that runs parts of a spec itself, a server that loads its tables for example, can call the functions the grammar runs, and so do exactly what `AutkGrammar` does:
+A host that runs parts of a spec itself, a server that loads its tables for example, can call the functions the grammar runs, and so do exactly what `AutkGrammar` does. A page arranges a spec's views with `arrangeViews`, as every host does:
 
 | Export | Purpose |
 |---|---|
@@ -356,6 +358,7 @@ A host that runs parts of a spec itself, a server that loads its tables for exam
 | `enterWorkspace(db, workspace?)` | Makes an entry's workspace, or the default one when it names none, the one autk-db works in. Every adapter calls it before it reads or writes an entry's tables. |
 | `tableKey(workspace, name)` | The key of a table in those caches: its name in the default workspace, `<workspace>/<name>` in another. |
 | `applyCamera(map, camera)` | Moves an `AutkMap`'s camera as a map's `camera` says, from the view that fits its layers. The map adapter calls it once the layers are loaded, before the map first draws. |
+| `arrangeViews(spec)` | Where each view of a spec goes on the page, as its `layout` says: a grid of panes, one per view (see [Arranging the views](#arranging-the-views)). It refuses a `layout` it cannot arrange, with a sentence that names the value. |
 
 The entry `@urban-toolkit/autk-grammar/data` exports `createDataAdapter`, `enterWorkspace`, and `tableKey`, as an ES module and a CommonJS one. Its code imports autk-db alone, never autk-map, autk-plot, autk-compute, or autk-core, so it can be imported where they cannot, such as in Node:
 
@@ -365,6 +368,53 @@ import { createDataAdapter } from '@urban-toolkit/autk-grammar/data'
 const adapter = createDataAdapter()
 let db: unknown // the AutkDb the first source creates
 for (const source of spec.data ?? []) db = await adapter.resolveSource(db, source)
+```
+
+#### Arranging the views
+
+`arrangeViews(spec)` returns:
+
+| Field | Value |
+|---|---|
+| `type` | `'vertical'`, `'horizontal'`, or `'grid'`: the `layout`'s, else `'vertical'`. |
+| `rows` | The rows of panes. |
+| `columns` | The columns of panes: 1 for `'vertical'`, one per view for `'horizontal'`, and `layout.columns`, else 2, for `'grid'`. |
+| `gap` | The space between neighboring panes, in pixels: `layout.gap`, else 0. |
+| `panes` | One pane per view, in the order the grammar draws the views: the maps in the order of `map`, then the plots in the order of `plot`. |
+
+Each pane has:
+
+| Field | Value |
+|---|---|
+| `kind` | `'map'` or `'plot'`, which is also the target list that names the element the view draws in. |
+| `index` | The view's position among the views of its kind: its element is entry `index` of that target list. |
+| `id` | The view's `id`, when it has one. |
+| `key` | The name the grammar knows the view by: its `id`, else a map's index or a plot's `dataRef`. A map's is the `mapId` of its `map:picking` events, a plot's the `plotId` of its `plot:selection` events. |
+| `row` | The pane's row, from 0 at the top. |
+| `column` | The pane's column, from 0 at the left. |
+
+A host makes an element for each pane, a canvas for a map and a div for a plot, places it on a grid of `rows` by `columns`, `gap` pixels apart, and names it in the targets. Each map's canvas goes in a positioned pane of its own, since autk-map adds its controls to the canvas's parent:
+
+```ts
+import { AutkGrammar, arrangeViews } from '@urban-toolkit/autk-grammar'
+
+const { rows, columns, gap, panes } = arrangeViews(spec)
+Object.assign(container.style, {
+  display: 'grid', gap: `${gap}px`,
+  gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`, gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))`,
+})
+const targets: { map: string[], plot: string[] } = { map: [], plot: [] }
+for (const pane of panes) {
+  const cell = document.createElement('div')
+  Object.assign(cell.style, { position: 'relative', gridRow: `${pane.row + 1}`, gridColumn: `${pane.column + 1}` })
+  const element = document.createElement(pane.kind === 'map' ? 'canvas' : 'div')
+  element.id = `${pane.kind}-${pane.index}`
+  Object.assign(element.style, { width: '100%', height: '100%' })
+  cell.appendChild(element)
+  container.appendChild(cell)
+  targets[pane.kind][pane.index] = element.id
+}
+await new AutkGrammar(targets).run(spec)
 ```
 
 ## Next steps
