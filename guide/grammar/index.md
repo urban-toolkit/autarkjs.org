@@ -71,10 +71,6 @@ To install `autk-grammar`, you must install its [NPM package](https://www.npmjs.
 npm install @urban-toolkit/autk-grammar
 ```
 
-:::tip Upgrading from 4.x
-Version 5.0.0 renames three keys. See [Upgrading from 4.x](#upgrading-from-4-x).
-:::
-
 ## Quick start
 
 Create an `AutkGrammar` with the ids of the elements it should draw into, then `await grammar.run(spec)`. The example below loads Manhattan neighborhoods, draws them on a map, and links a scatterplot to the map: brush the plot to select neighborhoods.
@@ -182,7 +178,7 @@ Each `compute` entry is a pass. Passes run in order after the data is loaded, an
 | `attributeArrays` | Array lengths for attributes that hold arrays. The function also receives `<name>_length`. |
 | `attributeMatrices` | `{ rows, cols }` for attributes that hold matrices. The function also receives `<name>_rows` and `<name>_cols`. |
 | `uniforms`, `uniformArrays`, `uniformMatrices` | Values shared by every feature. |
-| `wgslFunction` | Body of the WGSL function. It must `return` the result. An array of strings is joined with newlines. Named `wglsFunction` before 5.0.0. |
+| `wgslFunction` | Body of the WGSL function. It must `return` the result. An array of strings is joined with newlines. |
 | `outputColumnName` | Name of the new column, read on the map as `compute.<outputColumnName>`. |
 | `outputTableName` | Name of a new table that receives the result, so the source table stays as it is and later passes, maps, and plots can read both. Without it, the pass writes into the `dataRef` table. |
 | `layerType` | How the map draws the new table, for example `'points'`. Defaults to the type of the table it was computed from. Only used with `outputTableName`. |
@@ -320,8 +316,7 @@ const neighborhoods = await grammar.data['neighborhoods']
 grammar.interactions.on('map:picking', ({ layerId, selection }) => { /* ... */ })
 grammar.interactions.on('plot:selection', ({ plotId, event, selection }) => { /* ... */ })
 
-// Drive selections from outside the spec: a map layer is named by its table,
-// a plot by its id, else its dataRef
+// Drive selections from outside the spec
 grammar.highlightOnMap('neighborhoods', [0, 1, 2])
 grammar.setPlotSelection('neighborhoods', [0, 1, 2])
 grammar.clearHighlightOnMap('neighborhoods')
@@ -330,10 +325,13 @@ grammar.clearHighlightOnPlot('neighborhoods')
 // Find the map and the layer id that draw a table
 const { map, layerId } = grammar.mapLayer('neighborhoods')
 
-// Release the maps and the grammar's state before the page or the container goes away.
-// run() calls it first, so a new run on the same instance does not leak the old maps.
+// Release the maps and the grammar's state, for example before the container goes away
 grammar.destroy()
 ```
+
+`highlightOnMap` and `clearHighlightOnMap` name a map layer by the table it draws. A plot is named by its `id`, else its `dataRef`: that name is the `plotId` of its `plot:selection` events, and the one `setPlotSelection` and `clearHighlightOnPlot` take.
+
+`run()` calls `destroy()` before it starts, so running another spec on the same `AutkGrammar` releases the maps of the last run, and maps kept from `grammar.maps` or `mapLayer()` stop drawing. Use one `AutkGrammar` for each set of views that must stay on the page.
 
 See [External Interactions](/grammar/examples/interaction-external) for a working example.
 
@@ -350,55 +348,6 @@ An application that runs parts of a spec itself can import the pieces `AutkGramm
 | `tableKey` | The key a table has in the grammar's caches: its name in the default workspace, `<workspace>/<name>` in another. |
 
 The entry `@urban-toolkit/autk-grammar/data` exports the data adapter alone. It imports autk-db but not autk-map, autk-plot, or autk-compute, so it suits code that loads data without drawing it.
-
-## Upgrading from 4.x
-
-Version 5.0.0 renames three keys and keeps no aliases for the old names, which the grammar no longer reads. Update 4.x specs as follows:
-
-| Where | 4.x | 5.0.0 |
-|---|---|---|
-| GPU compute pass | `wglsFunction` | `wgslFunction` |
-| `join` source | `tableRootName`, `tableJoinName` | `dataRef`, `joinDataRef` |
-| `heatmap` source | `tableJoinName` | `joinDataRef` |
-
-```ts
-const spec = {
-  data: [
-    // ...the neighborhoods and noise sources
-    {
-      type: 'join',
-      tableRootName: 'neighborhoods', // [!code --]
-      tableJoinName: 'noise', // [!code --]
-      dataRef: 'neighborhoods', // [!code ++]
-      joinDataRef: 'noise', // [!code ++]
-      groupBy: [{ column: 'Unique Key', aggregateFn: 'count' }],
-    },
-    {
-      type: 'heatmap',
-      outputTableName: 'heatmap',
-      tableJoinName: 'noise', // [!code --]
-      joinDataRef: 'noise', // [!code ++]
-      near: { distance: 1000 },
-      grid: { rows: 20, columns: 20 },
-      groupBy: [{ column: 'Unique Key', aggregateFn: 'count' }],
-    },
-  ],
-  compute: [
-    {
-      dataRef: 'neighborhoods',
-      attributes: { x: 'shape_area', y: 'shape_leng' },
-      outputColumnName: 'result',
-      wglsFunction: 'return (4.0 * 3.1415927 * x) / (y * y);', // [!code --]
-      wgslFunction: 'return (4.0 * 3.1415927 * x) / (y * y);', // [!code ++]
-    },
-  ],
-}
-```
-
-Two behaviors are new as well:
-
-- `run()` now calls `destroy()` before it starts. Running a new spec on the same `AutkGrammar` releases the maps of the previous run, so maps kept from `grammar.maps` or `mapLayer()` no longer draw. Use one `AutkGrammar` for each set of views that must stay on the page.
-- A plot with an `id` is known by it, not by its `dataRef`: pass the id to `setPlotSelection` and `clearHighlightOnPlot`, and expect it as `plotId` in `plot:selection` events. A plot without an `id` is known by its `dataRef`, as in 4.x.
 
 ## Next steps
 
