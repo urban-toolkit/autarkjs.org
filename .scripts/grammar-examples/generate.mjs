@@ -13,8 +13,10 @@ const OUT = path.join(SITE, 'guide/grammar/examples')
 // Data files that live under a different name on the site.
 const URL_REWRITES = {
   '/data/mnt_pois_proj.geojson': '/data/mnt_points_test_proj.geojson',
+  '/data/niteroi_lst_verao_2001_2024.tif': '/data/temperature.tif',
 }
 // OSM sources read local extracts (built with .scripts/build-osm-extracts.py) instead of the rate-limited Overpass API.
+// A source that names its own `pbfFileUrl` keeps it; every other one takes the next extract listed for its example.
 const LOWER_MANHATTAN = '/data/lower_mnt.osm.pbf'
 const OSM_EXTRACTS = {
   'osm-layers-api': [LOWER_MANHATTAN],
@@ -47,12 +49,29 @@ const ENUMS = {}
   }
 }
 
+// Whether the object literal holding the line at `offset`, whose keys are indented by `indent`, has the key `key`.
+function objectHasKey(s, offset, indent, key) {
+  const outside = (line) => line.trim() !== '' && line.length - line.trimStart().length < indent.length
+  const isKey = (line) => line.startsWith(`${indent}${key}:`)
+  const before = s.slice(0, offset).split('\n').slice(0, -1).reverse()
+  const after = s.slice(offset).split('\n')
+  for (const lines of [before, after]) {
+    for (const line of lines) {
+      if (outside(line)) break
+      if (isKey(line)) return true
+    }
+  }
+  return false
+}
+
 function specSource(source, slug) {
   let s = fs.readFileSync(path.join(SRC, `${source}.ts`), 'utf8').replace(/\r\n/g, '\n')
   s = s.split(/^export (async )?function afterRun/m)[0]
   const marker = 'export const spec: UrbanSpec ='
   s = s.slice(s.indexOf(marker) + marker.length).trim().replace(/;\s*$/, '')
   s = s.replace(/\s+as Array<[^>]*>/gs, '')
+  // autk-db 4 has no dropOsmTable, and the grammar ignores it.
+  s = s.replace(/^ *dropOsmTable: \w+,\n/gm, '')
   s = s.replace(/\b(ColorMapInterpolator|NormalizationMode)\.(\w+)/g, (m) => {
     if (!ENUMS[m]) throw new Error(`Unknown enum ${m} in ${source}`)
     return `'${ENUMS[m]}'`
@@ -60,7 +79,8 @@ function specSource(source, slug) {
   for (const [from, to] of Object.entries(URL_REWRITES)) s = s.split(from).join(to)
   if (SPEC_FIXES[slug]) s = SPEC_FIXES[slug](s)
   const extracts = [...(OSM_EXTRACTS[slug] ?? [])]
-  s = s.replace(/^( *)type: 'osm',\n/gm, (line, indent) => {
+  s = s.replace(/^( *)type: 'osm',\n/gm, (line, indent, offset) => {
+    if (objectHasKey(s, offset, indent, 'pbfFileUrl')) return line
     const url = extracts.shift()
     if (!url) throw new Error(`No OSM extract for ${slug}`)
     return `${line}${indent}pbfFileUrl: '${url}',\n`
@@ -180,7 +200,7 @@ for (const ex of EXAMPLES) {
     '</ClientOnly>',
     '',
     ...(ex.tip ? [':::tip Interaction', ex.tip, ':::', ''] : []),
-    ...(OSM_EXTRACTS[ex.slug]
+    ...(/^ *pbfFileUrl:/m.test(spec)
       ? [':::tip OpenStreetMap data', 'This spec reads a pre-downloaded OpenStreetMap extract through `pbfFileUrl`, so it loads in seconds. Remove `pbfFileUrl` to query the Overpass API live instead, which can take several minutes because Overpass is rate-limited.', ':::', '']
       : []),
     '## Highlights',
