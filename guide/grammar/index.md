@@ -126,9 +126,9 @@ Every source has a `type` and, except for joins, an `outputTableName`. Any sourc
 | `geojson` | `geojsonFileUrl` or `geojsonObject`. Set `coordinateFormat` (for example `'EPSG:3395'`) when the data is not in WGS84. `layerType` sets how the map draws the table, for example `'polylines'` for lines or `'buildings'` for polygons; without it, the type is read from the first feature's geometry. |
 | `csv` | `csvFileUrl` or `csvObject`, optional `delimiter`, and `geometryColumns: { latColumnName, longColumnName }` to build points. |
 | `json` | `jsonFileUrl` or `jsonObject`, with the same optional `geometryColumns`. |
-| `geotiff` | `geotiffFileUrl`, loaded as a raster table: one feature, with one band per value. Set `coordinateFormat` when the file is not in WGS84 (`'EPSG:4326'`, the default). A raster with more than `maxRasterCells` cells (1,000,000 by default) is downsampled to fit, by `resampleMethod`: `'bilinear'`, the default, or `'nearest'`. On the map, `getFnv` names the band to draw, `'band_1'` by default. |
+| `geotiff` | `geotiffFileUrl`, loaded as a raster table: each band of the file's first image becomes a band of the table (`band_1`, `band_2`, ...), and the file's no-data value reads as no value. Set `coordinateFormat` when the file is not in WGS84 (`'EPSG:4326'`, the default). A raster with more than `maxRasterCells` cells (1,000,000 by default) is downsampled to fit, by `resampleMethod`: `'bilinear'`, the default, or `'nearest'`. On the map, `getFnv` names the band to draw, `'band_1'` by default. |
 | `join` | `dataRef`, the table that receives the joined columns, and `joinDataRef`, the table whose rows are joined onto it. Features intersect by default; add `near: { distance }` to match within a distance, measured from centroid to centroid unless `near.useCentroid` is `false`, which measures between the geometries themselves. `groupBy` aggregates the matches (`count`, `sum`, `avg`, `min`, `max`, `weighted`, `collect`) into `sjoin.<aggregateFn>.<table>`. |
-| `heatmap` | `joinDataRef`, the table to aggregate, `grid: { rows, columns }`, `near: { distance }`, the radius around each grid cell (with `useCentroid` as in a join), and `groupBy`. Creates a grid table whose values are read with `<aggregateFn>.<table>`. |
+| `heatmap` | `joinDataRef`, the table to aggregate, `grid: { rows, columns }`, cells over the workspace's extent, `near: { distance }`, the radius around each cell's center (with `useCentroid` as in a join), and `groupBy`, with any aggregate but `collect`, since a cell holds one value. Creates a grid table whose values are read with `<aggregateFn>.<table>`. |
 
 Data is stored in the World Mercator projection (`EPSG:3395`). Distances, such as a join's `near.distance`, are in its planar units, which are about meters: Mercator stretches distances away from the equator, so at Chicago one meter on the ground spans about 1.34 units. See [Loading Data](/grammar/examples/load-csv), [OpenStreetMap](/grammar/examples/osm-layers-api), and [Joins and Heatmaps](/grammar/examples/spatial-join) examples, [GeoTIFF Raster](/grammar/examples/geotiff-raster) for a `geotiff` source, and [Heatmap: Park Access](/grammar/examples/heatmap-centroids) for `useCentroid`.
 
@@ -199,7 +199,7 @@ A pass with `type: 'render'` draws `layers` from each viewpoint of a table, in s
 | `layers` | Tables drawn into the frames. Each has an `id` (letters, digits, and underscores, not starting with a digit), a `dataRef`, a `type` (`'surface'`, `'parks'`, `'water'`, `'roads'`, `'buildings'`, `'points'`, `'polygons'`, or `'polylines'`), and, for `objects` aggregation, an `objectIdProperty`: the property that holds each object's id. |
 | `viewpoints` | `dataRef`, the table whose features are the viewpoints. `strategy` places them: `{ type: 'centroid' }`, the default, or `{ type: 'building-windows', floors }` for one viewpoint per floor on a building's windows. `sampling: { directions, azimuthOffsetDeg, pitchDeg }` sets the directions sampled around each viewpoint. |
 | `aggregation` | `{ type: 'classes' }` measures the share of the frames each layer `type` covers, in `compute.render.classes.<type>`; with `includeBackground: true`, the share that shows no layer is added as `compute.render.classes.background`, or under the name in `backgroundLayerType`. `{ type: 'objects' }` records the objects seen from each viewpoint, in `compute.render.objects`. |
-| `camera` | `{ fov, clip: { near, far } }`: the field of view and the clip distances of the frames. |
+| `camera` | `{ fov, clip: { near, far } }`: the field of view of each square frame, in degrees (90 by default), and the nearest and farthest distances drawn, in planar units (1 and 5000 by default). |
 | `tileSize` | Frame size in pixels, a multiple of 8. |
 | `workspace` | [Workspace](#workspaces) of the tables the pass reads and writes. |
 
@@ -250,7 +250,7 @@ See the [Map Layers](/grammar/examples/geojson-vis) examples, and [Points at Tru
 |---|---|
 | `zoom` | Zoom level, 0 or more: the eye sits `10000 / 2^(zoom - 10)` planar units from the point the map looks at, so each step doubles the scale. |
 | `pitch` | Tilt from straight down, in degrees, from 0 to 90. |
-| `bearing` | Rotation around the vertical axis, in degrees, from 0 to 360. |
+| `bearing` | Compass heading the view faces, clockwise from north, in degrees from 0 to 360. |
 
 See the [Map Camera](/grammar/examples/map-camera) example.
 
