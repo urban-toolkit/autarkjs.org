@@ -116,7 +116,7 @@ export const EXAMPLES = [
     slug: 'spatial-join', group: 'Joins and Heatmaps', layout: 'map',
     title: 'Spatial Join',
     description: 'Count the noise complaints that fall inside each Manhattan neighborhood and color the neighborhoods by that count.',
-    highlights: ['`join` data source with `tableRootName` and `tableJoinName`', '`groupBy` with a `count` aggregate', 'results read with `getFnv: \'sjoin.count.noise\'`'],
+    highlights: ['`join` data source with `dataRef` and `joinDataRef`', '`groupBy` with a `count` aggregate', 'results read with `getFnv: \'sjoin.count.noise\'`'],
   },
   {
     slug: 'spatial-join-multi', group: 'Joins and Heatmaps', layout: 'map',
@@ -153,7 +153,7 @@ export const EXAMPLES = [
     slug: 'compute-function', group: 'Compute', layout: 'map',
     title: 'GPU Compute',
     description: 'Compute a compactness score for each neighborhood on the GPU and map the result.',
-    highlights: ['`compute` section with a WGSL `wglsFunction`', '`attributes` bind feature properties to WGSL variables', 'results read with `getFnv: \'compute.result\'`'],
+    highlights: ['`compute` section with a WGSL `wgslFunction`','`attributes` bind feature properties to WGSL variables', 'results read with `getFnv: \'compute.result\'`'],
   },
   {
     slug: 'compute-osm-function', group: 'Compute', layout: 'map',
