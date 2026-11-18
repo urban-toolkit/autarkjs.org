@@ -130,7 +130,7 @@ Every source has a `type` and, except for joins, an `outputTableName`. Any sourc
 | `join` | `dataRef`, the table that receives the joined columns, and `joinDataRef`, the table whose rows are joined onto it. Features intersect by default; add `near: { distance }` to match within a distance, measured from centroid to centroid unless `near.useCentroid` is `false`, which measures between the geometries themselves. `groupBy` aggregates the matches (`count`, `sum`, `avg`, `min`, `max`, `weighted`, `collect`) into `sjoin.<aggregateFn>.<table>`. |
 | `heatmap` | `joinDataRef`, the table to aggregate, `grid: { rows, columns }`, `near: { distance }`, the radius around each grid cell (with `useCentroid` as in a join), and `groupBy`. Creates a grid table whose values are read with `<aggregateFn>.<table>`. |
 
-Data is stored in the World Mercator projection (`EPSG:3395`). Distances, such as a join's `near.distance`, are in its planar units, which are about meters: Mercator stretches distances away from the equator, so at Chicago one meter on the ground spans about 1.34 units. See [Loading Data](/grammar/examples/load-csv), [OpenStreetMap](/grammar/examples/osm-layers-api), and [Joins and Heatmaps](/grammar/examples/spatial-join) examples.
+Data is stored in the World Mercator projection (`EPSG:3395`). Distances, such as a join's `near.distance`, are in its planar units, which are about meters: Mercator stretches distances away from the equator, so at Chicago one meter on the ground spans about 1.34 units. See [Loading Data](/grammar/examples/load-csv), [OpenStreetMap](/grammar/examples/osm-layers-api), and [Joins and Heatmaps](/grammar/examples/spatial-join) examples, [GeoTIFF Raster](/grammar/examples/geotiff-raster) for a `geotiff` source, and [Heatmap: Park Access](/grammar/examples/heatmap-centroids) for `useCentroid`.
 
 ### Workspaces
 
@@ -166,6 +166,8 @@ const grammar = new AutkGrammar({ map: ['map0', 'map1'] })
 await grammar.run(spec)
 ```
 
+See the [Workspaces](/grammar/examples/workspaces) example, which draws Manhattan and the whole city from two workspaces.
+
 ## Compute
 
 Each `compute` entry is a pass. Passes run in order after the data is loaded, and a pass can read a table an earlier pass wrote. A GPGPU pass, the default, runs a WGSL function on the GPU once per feature of `dataRef`.
@@ -184,7 +186,7 @@ Each `compute` entry is a pass. Passes run in order after the data is loaded, an
 | `layerType` | How the map draws the new table, for example `'points'`. Defaults to the type of the table it was computed from. Only used with `outputTableName`. |
 | `workspace` | [Workspace](#workspaces) of the tables the pass reads and writes. |
 
-See the [Compute](/grammar/examples/compute-function) examples.
+See the [Compute](/grammar/examples/compute-function) examples, and [Compute into a New Table](/grammar/examples/compute-output-table) for `outputTableName`.
 
 ### Render passes
 
@@ -200,6 +202,8 @@ A pass with `type: 'render'` draws `layers` from each viewpoint of a table, in s
 | `camera` | `{ fov, clip: { near, far } }`: the field of view and the clip distances of the frames. |
 | `tileSize` | Frame size in pixels, a multiple of 8. |
 | `workspace` | [Workspace](#workspaces) of the tables the pass reads and writes. |
+
+See the [Render Pass](/grammar/examples/compute-render) example, which colors streets by the share of sky seen from them.
 
 ## Map
 
@@ -236,7 +240,7 @@ Each layer in `layerRefs` takes:
 | `transferFunction` | Raster layers: how opaque the cells are by value (`mode`, `opacityMin`, `opacityMax`, `gamma`, `zeroCenter`). `{ opacityMin: 1, opacityMax: 1 }` makes every cell with a value opaque. |
 | `isPick` | Enables picking, so the layer can take part in linked selections. |
 
-See the [Map Layers](/grammar/examples/geojson-vis) examples.
+See the [Map Layers](/grammar/examples/geojson-vis) examples, and [Points at True Size](/grammar/examples/points-true-size) for `pointSize`.
 
 ### Camera
 
@@ -247,6 +251,8 @@ See the [Map Layers](/grammar/examples/geojson-vis) examples.
 | `zoom` | Zoom level, 0 or more: the eye sits `10000 / 2^(zoom - 10)` planar units from the point the map looks at, so each step doubles the scale. |
 | `pitch` | Tilt from straight down, in degrees, from 0 to 90. |
 | `bearing` | Rotation around the vertical axis, in degrees, from 0 to 360. |
+
+See the [Map Camera](/grammar/examples/map-camera) example.
 
 ## Plot
 
@@ -303,6 +309,8 @@ const spec = {
 const grammar = new AutkGrammar({ map: 'map', plot: 'plot' })
 await grammar.run(spec)
 ```
+
+See the [Linked Views](/grammar/examples/linked-views) example, which links a scatterplot to a map layer named by its `title`.
 
 ## Interactions
 
