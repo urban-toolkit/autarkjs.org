@@ -134,7 +134,7 @@ Every source has a `type` and, except for joins, an `outputTableName`. Any sourc
 | `join` | `dataRef`, the table that receives the joined columns, and `joinDataRef`, the table whose rows are joined onto it. Features intersect by default; add `near: { distance }` to match within a distance, measured from centroid to centroid unless `near.useCentroid` is `false`, which measures between the geometries themselves. `groupBy` aggregates the matches (`count`, `sum`, `avg`, `min`, `max`, `weighted`, `collect`) into `sjoin.<aggregateFn>.<table>`. |
 | `heatmap` | `joinDataRef`, the table to aggregate, `grid: { rows, columns }`, `near: { distance }`, the radius around each grid cell (with `useCentroid` as in a join), and `groupBy`. Creates a grid table whose values are read with `<aggregateFn>.<table>`. |
 
-Data is stored in the World Mercator projection (`EPSG:3395`). Distances, such as a join's `near.distance`, are in its planar units: about meters, though Mercator stretches them away from the equator (by about 1.34 at Chicago). See [Loading Data](/grammar/examples/load-csv), [OpenStreetMap](/grammar/examples/osm-layers-api), and [Joins and Heatmaps](/grammar/examples/spatial-join) examples.
+Data is stored in the World Mercator projection (`EPSG:3395`). Distances, such as a join's `near.distance`, are in its planar units, which are about meters: Mercator stretches distances away from the equator, so at Chicago one meter on the ground spans about 1.34 units. See [Loading Data](/grammar/examples/load-csv), [OpenStreetMap](/grammar/examples/osm-layers-api), and [Joins and Heatmaps](/grammar/examples/spatial-join) examples.
 
 ### Workspaces
 
