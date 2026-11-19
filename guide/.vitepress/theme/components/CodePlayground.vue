@@ -818,6 +818,11 @@ watch(isDark, () => {
   text-align: center !important;
 }
 
+/* autk-plot draws its axis titles inside the axis groups, whose fill is none, and leaves their color to the page. */
+.code-playground :deep(.axis-label) {
+  fill: currentColor;
+}
+
 .code-playground__console {
   border-top: 1px solid var(--vp-c-divider);
   background: var(--vp-code-block-bg);
