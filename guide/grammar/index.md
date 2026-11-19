@@ -97,7 +97,7 @@ A spec is a plain object. Its four main sections are optional and run in this or
 | [`links`](#links) | Array of links between plots and map layers, wired once the maps and plots are drawn. |
 | [`layout`](#layout) | How the page arranges the maps and plots. |
 
-A spec may also name the grammar's JSON Schema in `$schema`, by the schema's `$id`, `https://autarkjs.org/schema/autk-grammar/v1.json`. The run does not read it. The schema ships in the npm package as `build/autk-grammar-schema.json`.
+A spec kept in a JSON file may name the grammar's JSON Schema in `$schema`, so an editor checks the spec as you type. The npm package ships the schema as `build/autk-grammar-schema.json`: a spec file at the root of a project that installs autk-grammar names it as `"$schema": "./node_modules/@urban-toolkit/autk-grammar/build/autk-grammar-schema.json"`. A run does not read `$schema`.
 
 A map or a plot can have an `id`, unique among the maps and plots of the spec. Links name the plot and the map they join by these ids. A plot without an `id` is known by its `dataRef`, so two plots of one table need ids: a run refuses two plots known by one name.
 
@@ -194,7 +194,7 @@ const spec = {
 An entry of a join's or a heatmap's `groupBy` can add `normalize: true`.
 
 - A join then also writes the value rescaled from 0 to 1 across the features, under its key with `_norm` added: `sjoin.count.noise_norm` beside `sjoin.count.noise`.
-- A heatmap asks for its band's values rescaled from 0 to 1 across the cells, read as `<aggregateFn>.<table>_norm`. This needs an autk-db with [urban-toolkit/autark#132](https://github.com/urban-toolkit/autark/pull/132). autk-db 4.1.1, the one on npm and on this site, builds the band from the values as they are, under the name it has without `normalize`. A layer can also name a band by its id, `band_1`, `band_2`, and so on, one per entry of `groupBy`, in order.
+- A heatmap asks for its band's values rescaled from 0 to 1 across the cells, read as `<aggregateFn>.<table>_norm`. This needs an autk-db with [urban-toolkit/autark#132](https://github.com/urban-toolkit/autark/pull/132). autk-db 4.1.1, which this site runs, builds the band from the values as they are, under the name it has without `normalize`. A layer can also name a band by its id, `band_1`, `band_2`, and so on, one per entry of `groupBy`, in order.
 
 ```ts
 { type: 'join', dataRef: 'neighborhoods', joinDataRef: 'noise', groupBy: [{ column: 'Unique Key', aggregateFn: 'count', normalize: true }] }
