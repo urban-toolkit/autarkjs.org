@@ -52,7 +52,7 @@ Clamp a sequential colormap to the 5th and 95th percentiles of neighborhood area
 
 ## Highlights
 
-- `getFnvType: 'quantitative'`
+- `normalization` with `mode: 'percentile'`
 - `lowerPercentile` and `upperPercentile` bounds
 - sequential Reds colormap
 

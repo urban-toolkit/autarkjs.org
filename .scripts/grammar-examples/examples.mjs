@@ -78,7 +78,7 @@ export const EXAMPLES = [
     slug: 'colormap-normalization', group: 'Map Layers', layout: 'map',
     title: 'Percentile Normalization',
     description: 'Clamp a sequential colormap to the 5th and 95th percentiles of neighborhood area.',
-    highlights: ['`getFnvType: \'quantitative\'`', '`lowerPercentile` and `upperPercentile` bounds', 'sequential Reds colormap'],
+    highlights: ['`normalization` with `mode: \'percentile\'`', '`lowerPercentile` and `upperPercentile` bounds', 'sequential Reds colormap'],
   },
   {
     slug: 'layer-opacity', group: 'Map Layers', layout: 'map',
