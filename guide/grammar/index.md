@@ -58,7 +58,7 @@ await grammar.run(spec)
 - Load **OpenStreetMap**, **GeoJSON**, **CSV**, **JSON**, and **GeoTIFF** data, derive tables with **spatial joins**, **heatmaps**, and **SQL queries**, update or drop tables along the way, and keep areas apart in **workspaces**, in the coordinate system you choose.
 - Run **GPU computations** written in WGSL over feature attributes, and **render passes** that measure what can be seen from each viewpoint.
 - Draw **2D and 3D maps** with categorical, sequential, and diverging colormaps, seen from a **camera** you can tilt and turn.
-- Draw **linked plots** (bar charts, scatterplots, histograms, parallel coordinates, tables, heat matrices, and time series) that select features on the map.
+- Draw **linked plots** (bar charts, scatterplots, histograms, parallel coordinates, tables, heat matrices, and time series) that select features on the map, colored in the map's schemes, with your own axis titles and tick formats.
 - React to selections and drive highlights **from your own code**.
 
 The grammar itself is tool-agnostic: `autk-grammar` is the adapter that runs it on Autark. The source code is on [GitHub](https://github.com/urban-toolkit/autk-grammar).
@@ -351,7 +351,7 @@ An entry of `uniforms` or `uniformMatrices` can read its value from a feature of
 
 | Field | Description |
 |---|---|
-| `fromFeature.layer` | Table to read from. |
+| `fromFeature.layer` | Table to read from: as an earlier pass wrote it; else, when a GeoJSON source loaded it with its coordinates in its workspace's coordinate system, as the source gave its features, each building part with its own outline; else as autk-db keeps it, a buildings table's geometry inside a GeometryCollection. See [Passes run by a host](#passes-run-by-a-host). |
 | `fromFeature.path` | Dot path from the feature's root, for example `properties.height` or `geometry.coordinates.0`. |
 | `fromFeature.index` | Position of the feature to read. Defaults to 0. |
 | `fromFeature.iterate` | `'all'` runs the pass once per feature of `layer` and sums the outputs. `'batched'` packs every feature's value into a uniform array named after the entry (a `uniformMatrices` entry becomes each feature's bounding box, as four corners), adds a `num_features` uniform, and runs the pass once. |
@@ -449,17 +449,99 @@ See the [Map Camera](/grammar/examples/map-camera) example.
 | `id` | Name of the plot, which a [link](#links) uses as its `source`. Unique among the ids of the maps and plots. Without it, the plot is known by its `dataRef`. |
 | `dataRef` | Table to plot. |
 | `workspace` | [Workspace](#workspaces) the table is read from. |
-| `mark` | `'bar'`, `'scatter'`, `'linechart'`, `'parallel-coordinates'`, `'table'`, or `'heatmatrix'`. |
-| `axis` | Properties for the axes. Use `'@transform'` for a value produced by `transform`. |
+| `mark` | `'bar'`, `'scatter'`, `'linechart'` (or `'line'`), `'parallel-coordinates'`, `'table'`, or `'heatmatrix'`. |
+| `axis` | Properties for the axes. Use `'@transform'` for a value produced by `transform`, whose axis is titled `value` unless `axisLabels` titles it. |
 | `transform` | `{ preset, options }`, with presets such as `binning-1d`, `binning-2d`, `binning-events`, and `sort`. |
+| `color` | Column whose values color the marks. See [Plot colors](#plot-colors). |
+| `colorMapInterpolator`, `categoricalColorMapInterpolator` | Color schemes of the marks colored by numbers and of those colored by categories. See [Plot colors](#plot-colors). |
+| `colorMapRange`, `colorMapDomain`, `normalization` | Domain of the color scale, named and shaped as a map layer's. See [Plot colors](#plot-colors). |
+| `tickFormats` | d3-format specifiers of the tick labels, `[x, y]`. See [Axes](#axes). |
+| `axisLabels` | Titles of the axes, in the order of `axis`. See [Axes](#axes). |
+| `markColor`, `highlightColor` | Colors of the marks and of the selected marks, one of each for the whole page. See [Mark and highlight colors](#mark-and-highlight-colors). |
 | `events` | Selections the plot emits: `'click'`, `'brush'`, `'brushX'`, `'brushY'`. |
+| `selection` | Rows selected as the plot is drawn. See [Selected rows](#selected-rows). |
 | `mapRef` | Table of the map layers linked to the plot: the plot is linked to every layer that draws it, in every map. Selections in either one highlight the other. A shorthand for [`links`](#links). |
 | `osmElements` | `true` plots an OpenStreetMap layer table as one row per OpenStreetMap element, with its tags, `osm_type`, and `osm_id`: see [OpenStreetMap elements](#openstreetmap-elements). |
-| `title`, `width`, `height`, `margins`, `color` | Presentation. `margins` is `{ left, right, top, bottom }`. |
+| `title`, `width`, `height`, `margins` | Presentation. `margins` is `{ left, right, top, bottom }`. |
 
 To draw several plots, give `plot` an array of plot specs and the constructor's `plot` target an array of ids, one `<div>` per plot, in order. A plot reads only its table's properties, so it also draws a table without geometry, such as a CSV or JSON table loaded without `geometryColumns`.
 
 See the [Plots](/grammar/examples/barchart-click) examples.
+
+### Plot colors
+
+A plot colors its marks by the values of its `color` column: a scatter plot's points, a bar chart's bars, and the lines of parallel coordinates, which a click on an axis's title colors by that axis instead. A heat matrix colors its cells by their values, with `color: '@transform'`. Line charts and tables color no mark by value. When every value is a number, or a string that reads as one, the marks take the scheme of numbers; otherwise the values are categories, and take the scheme of categories.
+
+| Field | Description |
+|---|---|
+| `colorMapInterpolator` | Scheme of numbers: a sequential or diverging `interpolate*` scheme, `'interpolateReds'` by default. The low end of the scale takes its first color, and the high end its last. |
+| `categoricalColorMapInterpolator` | Scheme of categories: a `scheme*` scheme, `'schemeObservable10'` by default. The categories take its colors in the order they first appear, or in the order of `colorMapDomain`, and those past its last color take that one. |
+| `colorMapRange` | `[low, high]`, with low less than high: the ends of the scale of numbers, in place of the plot's own lowest and highest values. A plot colored by categories ignores it, as a layer with a categorical scheme does. Not with `colorMapDomain`. |
+| `colorMapDomain` | Categories the plot is colored over, in order: the first takes the scheme's first color, and so on. The values are read as categories, numbers too, and a mark whose value it does not name is drawn in the mark color. |
+| `normalization` | How the ends of the scale of numbers are found: `{ mode: 'minMax' }`, the default, takes the lowest and highest values, and `{ mode: 'percentile', lowerPercentile, upperPercentile }` the values at those percentiles, 2 and 98 when it gives neither, else 0 and 100 for the one it leaves out. |
+
+A run refuses a `scheme*` name in `colorMapInterpolator` and an `interpolate*` name in `categoricalColorMapInterpolator`, with a message that names the plot. `colorMapRange`, `colorMapDomain`, and `normalization` are named and shaped as a map layer's, so a plot and a layer that set the same scheme and the same range color a value alike. Parallel coordinates read them for their `color` column, and keep them for any axis a click on its title colors the lines by: under a `colorMapRange`, an axis of categories colors no line.
+
+```ts
+map: { id: 'noiseMap', layerRefs: [{ dataRef: 'noisiest', getFnv: 'complaints', colorMapInterpolator: 'interpolateReds', colorMapRange: [0, 80] }] },
+plot: { dataRef: 'noisiest', mark: 'bar', axis: ['name', 'complaints'], color: 'complaints', colorMapInterpolator: 'interpolateReds', colorMapRange: [0, 80] },
+```
+
+```ts
+plot: { dataRef: 'neighborhoods', mark: 'bar', axis: ['ntaname', 'shape_area'], color: 'landuse', categoricalColorMapInterpolator: 'schemeSet2', colorMapDomain: ['Residential', 'Mixed', 'Commercial'] }
+```
+
+```ts
+plot: { dataRef: 'neighborhoods', mark: 'scatter', axis: ['shape_area', 'shape_leng'], color: 'shape_area', colorMapInterpolator: 'interpolateViridis', normalization: { mode: 'percentile', lowerPercentile: 5, upperPercentile: 95 } }
+```
+
+See [Plot Colors](/grammar/examples/plot-colors), whose map and bar chart color the ten noisiest neighborhoods alike.
+
+### Axes
+
+**`tickFormats`** gives the d3-format specifiers of the tick labels, `[x, y]`, such as `'~s'`, `',d'`, `'.2f'`, or `'.0%'`. Without it, `['~s', '~s']`. A run refuses a list that is not two specifiers d3-format reads.
+
+| Mark | Reads |
+|---|---|
+| `scatter` | x for the x axis, and y for the y axis. |
+| `bar` | x for the labels of the x axis that read as numbers, and y for the y axis. |
+| `linechart` | x for the buckets of the x axis that read as numbers, and y for the y axis. |
+| `parallel-coordinates` | x for every axis of numbers. |
+| `heatmatrix`, `table` | Neither. |
+
+```ts
+plot: { dataRef: 'neighborhoods', mark: 'scatter', axis: ['shape_area', 'shape_leng'], tickFormats: ['.2s', ',.0f'] }
+```
+
+**`axisLabels`** titles the axes, in the order of `axis`, in place of the column names: the x and y titles of a scatter plot, a bar chart, a line chart, and a heat matrix, each axis's title of parallel coordinates, and a table's column headers. An axis without a title keeps its column's name, and an axis that holds a transform's output, `@transform`, is titled `value`. A run refuses more titles than `axis` has columns, and two titles alike, since a table finds the column to sort by its header.
+
+```ts
+plot: { dataRef: 'neighborhoods', mark: 'bar', axis: ['shape_area', '@transform'], transform: { preset: 'binning-1d' }, axisLabels: ['Area', 'Neighborhoods'] }
+```
+
+### Mark and highlight colors
+
+| Field | Description |
+|---|---|
+| `markColor` | Color of the marks that are neither colored by value nor selected, `'#rrggbb'`. autk-plot's is `#bfbfbf`. |
+| `highlightColor` | Color of the selected marks, and of a table's selected rows, `'#rrggbb'`. autk-plot's is `#5dade2`. |
+
+Both colors are page-wide. autk-plot keeps one mark color and one highlight color for the whole page, which every plot on it reads as it draws and as it shows a selection. So the plots of one spec cannot differ: a run refuses two plots that set different ones, and a plot that sets neither takes the others'. Each run that draws plots sets the colors for the page, for the plots of other specs too, and a run whose plots set neither gives back autk-plot's own: each run draws in the colors its spec gives. A run that draws no plot, such as a map-only or data-only spec, leaves them as they are.
+
+```ts
+plot: [
+  { id: 'areas', dataRef: 'neighborhoods', mark: 'bar', axis: ['ntaname', 'shape_area'], markColor: '#4e79a7', highlightColor: '#e15759' },
+  { id: 'shapes', dataRef: 'neighborhoods', mark: 'scatter', axis: ['shape_area', 'shape_leng'] }, // drawn in the same colors
+]
+```
+
+### Selected rows
+
+`selection` lists the rows a plot selects as it is drawn, by their feature ids: their positions among the rows the plot draws, from 0, as `plot:selection` events and `setPlotSelection` give them. The run applies it once the plots and their links exist, as `setPlotSelection` does: the plot draws the rows in its highlight color (a binned plot, the bins that hold them), and the layers it is linked to, by `mapRef` or `links`, highlight the same rows. No `plot:selection` event reports it. A run refuses a feature id that is not a whole number from 0, or one past the plot's last row.
+
+```ts
+plot: { dataRef: 'neighborhoods', mark: 'scatter', axis: ['shape_area', 'shape_leng'], mapRef: 'neighborhoods', selection: [0, 4] }
+```
 
 ### Links
 
@@ -528,7 +610,7 @@ const { map, layerId } = grammar.mapLayer('neighborhoods')
 grammar.destroy()
 ```
 
-The calls name map layers by the table they draw. Each reaches every map that draws the table, or only the map its last argument, `mapId`, names: a string by the map's `id`, a number by its index in `map`. A `map:picking` event's `mapId` names the map the pick was made on, so it can be passed back as it is, and its `layerId` is the picked layer's id in that map: its `title`, else its `dataRef`. A plot is named by its `id`, else its `dataRef`: that name is the `plotId` of its `plot:selection` events, and the one `setPlotSelection` and `clearHighlightOnPlot` take.
+The calls name map layers by the table they draw. Each reaches every map that draws the table, or only the map its last argument, `mapId`, names: a string by the map's `id`, a number by its index in `map`. A `map:picking` event's `mapId` names the map the pick was made on, so it can be passed back as it is, and its `layerId` is the picked layer's id in that map: its `title`, else its `dataRef`. A plot is named by its `id`, else its `dataRef`: that name is the `plotId` of its `plot:selection` events, and the one `setPlotSelection` and `clearHighlightOnPlot` take. A plot's [`selection`](#selected-rows) makes the same selection as `setPlotSelection`, as the plot is drawn.
 
 `selectFields` on a layer or a plot, for example `selectFields: ['nta2020']`, names the columns whose values identify the selected rows, for an app that links a selection to other tables. The grammar does not read it: the events still report feature ids, and the app reads those columns from the selected rows.
 
@@ -543,7 +625,7 @@ A host that runs parts of a spec itself, a server that loads its tables for exam
 | Export | Purpose |
 |---|---|
 | `createDataAdapter(targets?, cache?)` | The data adapter. Its `resolveWorkspaces(db, workspaces)` sets up a spec's `workspaces` before the first source loads, and its `resolveSource(db, source)` loads one `data` entry. Each takes an autk-db database, a new one when `db` is undefined, and returns it. `cache` receives each GeoJSON table and each table a join or an update wrote. |
-| `createComputeAdapter(cache?, types?)` | The compute adapter. Its `resolveCompute(db, pass)` runs one `compute` entry on the GPU. The results are kept only in `cache`, and `types` receives the layer type of each table a pass wrote under its own `outputTableName`. |
+| `createComputeAdapter(cache?, types?, sources?)` | The compute adapter. Its `resolveCompute(db, pass)` runs one `compute` entry on the GPU. The results are kept only in `cache`, and `types` receives the layer type of each table a pass wrote under its own `outputTableName`. `sources` is the `cache` given to `createDataAdapter`, from which a pass reads a `fromFeature` table a GeoJSON source loaded (see [Passes run by a host](#passes-run-by-a-host)). |
 | `enterWorkspace(db, workspace?)` | Makes an entry's workspace, or the default one when it names none, the one autk-db works in. Every adapter calls it before it reads or writes an entry's tables. |
 | `tableKey(workspace, name)` | The key of a table in those caches: its name in the default workspace, `<workspace>/<name>` in another. |
 | `applyCamera(map, camera)` | Moves an `AutkMap`'s camera as a map's `camera` says, from the view that fits its layers, and refuses a `pitch` that is not at least 0 and less than 90. The map adapter calls it once the layers are loaded, before the map first draws. |
@@ -558,6 +640,28 @@ const adapter = createDataAdapter()
 let db: unknown // the AutkDb the first call creates
 if (spec.workspaces) db = await adapter.resolveWorkspaces(db, spec.workspaces)
 for (const source of spec.data ?? []) db = await adapter.resolveSource(db, source)
+```
+
+`AutkGrammar.run` refuses the plot keys autk-plot cannot draw, naming the plot, before it draws any view. A page that hosts several grammars shares one plot mark color and one highlight color, which each run that draws plots sets (see [Mark and highlight colors](#mark-and-highlight-colors)).
+
+#### Passes run by a host
+
+A pass reads a `fromFeature` table as an earlier pass wrote it, from the compute adapter's `cache`. Else, when a GeoJSON source of the run loaded the table with its coordinates in its workspace's coordinate system, it reads the features as the source gave them, from `sources`. Else it reads the table as autk-db keeps it. The difference shows on a `buildings` table: autk-db keeps each of its features in its building model, with the geometry inside a GeometryCollection, so a path such as `geometry.coordinates.0` reads a building part's outline only from the source's own features. The pass's own `dataRef` is never read from `sources`: it is read as an earlier pass wrote it, else as autk-db keeps it, as a map draws it, so its result holds the rows the map draws.
+
+`AutkGrammar` hands its data adapter's cache to its compute adapter. A host that runs the passes itself does the same, so its passes read what the grammar's do: it passes the map it gave `createDataAdapter` as `sources`. The data adapter notes the coordinate system of each GeoJSON source it puts there, so a pass reads only those collections, and only when their coordinates are in the workspace's coordinate system: a source in degrees, in a workspace in World Mercator, is read from autk-db. A host that leaves `sources` out reads autk-db's copy.
+
+Take both adapters from the main entry, `@urban-toolkit/autk-grammar`. The `./data` entry is a bundle of its own, and the compute adapter cannot read the notes of a data adapter taken from it, so its passes read autk-db's copy, as without `sources`.
+
+```ts
+import { createComputeAdapter, createDataAdapter } from '@urban-toolkit/autk-grammar'
+
+const sources = new Map() // each GeoJSON source's features, as the source gave them
+const data = createDataAdapter(undefined, sources)
+const compute = createComputeAdapter(new Map(), new Map(), sources)
+let db: unknown
+if (spec.workspaces) db = await data.resolveWorkspaces(db, spec.workspaces)
+for (const source of spec.data ?? []) db = await data.resolveSource(db, source)
+for (const pass of spec.compute ?? []) db = await compute.resolveCompute(db, pass)
 ```
 
 #### Arranging the views

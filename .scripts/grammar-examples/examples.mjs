@@ -283,6 +283,13 @@ export const EXAMPLES = [
     highlights: ['`collect` aggregate keeps every joined date', '`mark: \'linechart\'` with the `binning-events` transform', 'time brushing linked to the road layer'],
     tip: pickTip,
   },
+  {
+    slug: 'plot-colors', group: 'Plots', layout: 'map+plot',
+    title: 'Plot Colors',
+    description: 'Draw the ten Manhattan neighborhoods with the most noise complaints on a map and in a bar chart side by side, both in reds over one range, so a count has one color in both. The chart titles its axes and selects the noisiest neighborhood, which the map highlights.',
+    highlights: ['`colorMapInterpolator` and `colorMapRange` on the plot, as on the map layer', '`axisLabels` titles the axes in place of the column names', '`selection: [0]` selects the first bar as the chart is drawn, and the link highlights it on the map', '`highlightColor` for the selected bar'],
+    tip: 'Click a bar to select its neighborhood: the map highlights it through the link.',
+  },
   // ── Multiple Views ────────────────────────────────────────────
   {
     slug: 'multi-map', group: 'Multiple Views', layout: 'multi-map',

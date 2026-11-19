@@ -315,6 +315,13 @@ export const GRAMMAR_EXAMPLES: GrammarExample[] = [
     tags: ['data', 'map', 'plot'],
   },
   {
+    slug: 'plot-colors',
+    group: 'Plots',
+    title: 'Plot Colors',
+    description: 'Draw the ten Manhattan neighborhoods with the most noise complaints on a map and in a bar chart side by side, both in reds over one range, so a count has one color in both. The chart titles its axes and selects the noisiest neighborhood, which the map highlights.',
+    tags: ['data', 'map', 'plot'],
+  },
+  {
     slug: 'multi-map',
     group: 'Multiple Views',
     title: 'Two Maps',
