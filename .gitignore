@@ -149,6 +149,9 @@ dist-temp/
 guide/public/usecases/
 guide/public/usecases/*.js
 
+# autk-grammar's JSON Schema, copied from the pinned package by .scripts/sync-grammar-schema.cjs
+guide/public/schema/
+
 # optional generated assets for case studies if rebuilt locally
 guide/public/assets/urbane-*.css
 guide/public/assets/boston-*.css

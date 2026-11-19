@@ -36,6 +36,7 @@ and runtime assets. The gallery examples themselves are VitePress pages in
 - `guide/public/imgs/` — Gallery screenshots and logos
 - `guide/public/data/` — Data used by tutorials and live examples
 - `guide/public/assets/` — Runtime assets copied during the site build
+- `guide/public/schema/`: autk-grammar's JSON Schema at its `$id` (`/schema/autk-grammar/v1.json`), copied from the pinned package by `.scripts/sync-grammar-schema.cjs` before each build and dev run; ignored in git
 
 ---
 

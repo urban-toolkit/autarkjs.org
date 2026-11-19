@@ -196,6 +196,13 @@ export const GRAMMAR_EXAMPLES: GrammarExample[] = [
     tags: ['data', 'map'],
   },
   {
+    slug: 'sql-source',
+    group: 'Joins and Heatmaps',
+    title: 'SQL: The Ten Noisiest Neighborhoods',
+    description: 'Count the noise complaints in each Manhattan neighborhood with a spatial join, then save the ten neighborhoods with the most complaints as a new table with a SQL query, and draw them in reds over the others.',
+    tags: ['data', 'map'],
+  },
+  {
     slug: 'compute-function',
     group: 'Compute',
     title: 'GPU Compute',
