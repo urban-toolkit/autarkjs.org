@@ -48,6 +48,7 @@ const SPEC_FIXES = {
   // half the docs column.
   'interaction-external': (s) => s.replace(/^ *\/\/ The console panel .*\n/m, '').replace('width: 420,', 'width: 300,'),
   'linked-views': (s) => s.replace('width: 560,', 'width: 300,'),
+  'plot-colors': (s) => s.replace('width: 560,', 'width: 300,'),
 }
 
 // Grammar enums become their string values, so specs are plain data.
