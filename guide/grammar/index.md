@@ -97,7 +97,7 @@ A spec is a plain object. Its four main sections are optional and run in this or
 | [`links`](#links) | Array of links between plots and map layers, wired once the maps and plots are drawn. |
 | [`layout`](#layout) | How the page arranges the maps and plots. |
 
-A spec kept in a JSON file may name the grammar's JSON Schema in `$schema`, so an editor checks the spec as you type. The npm package ships the schema as `build/autk-grammar-schema.json`: a spec file at the root of a project that installs autk-grammar names it as `"$schema": "./node_modules/@urban-toolkit/autk-grammar/build/autk-grammar-schema.json"`. A run does not read `$schema`.
+A spec kept in a JSON file may name the grammar's JSON Schema in `$schema`, so an editor checks the spec as you type. The schema is served at its `$id`, `"$schema": "https://autarkjs.org/schema/autk-grammar/v1.json"`, the version this site runs. The npm package also ships it as `build/autk-grammar-schema.json`, the version a project installs: a spec file at the root of the project names it as `"$schema": "./node_modules/@urban-toolkit/autk-grammar/build/autk-grammar-schema.json"`. A run does not read `$schema`.
 
 A map or a plot can have an `id`, unique among the maps and plots of the spec. Links name the plot and the map they join by these ids. A plot without an `id` is known by its `dataRef`, so two plots of one table need ids: a run refuses two plots known by one name.
 
