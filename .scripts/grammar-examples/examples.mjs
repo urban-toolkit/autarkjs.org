@@ -172,6 +172,12 @@ export const EXAMPLES = [
     description: 'Count the parks within about 150 meters of each cell of a 30 by 30 grid at the southern tip of Manhattan, measured from the park edges rather than their centroids.',
     highlights: ['`near.useCentroid: false` measures from each park\'s edges', '`groupBy` with `column: \'*\'` counts the parks', 'heatmap values read with `getFnv: \'count.tip_parks\'`'],
   },
+  {
+    slug: 'sql-source', group: 'Joins and Heatmaps', layout: 'map',
+    title: 'SQL: The Ten Noisiest Neighborhoods',
+    description: 'Count the noise complaints in each Manhattan neighborhood with a spatial join, then save the ten neighborhoods with the most complaints as a new table with a SQL query, and draw them in reds over the others.',
+    highlights: ['`sql` data source whose `query` reads the joined `neighborhoods` table', '`properties->>\'ntaname\'` reads a GeoJSON property as text, and `geometry` keeps each neighborhood\'s shape', '`layerType: \'polygons\'` lets the map draw the new table', 'results read with `getFnv: \'complaints\'`'],
+  },
   // ── Compute ───────────────────────────────────────────────────
   {
     slug: 'compute-function', group: 'Compute', layout: 'map',
