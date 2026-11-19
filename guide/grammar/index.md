@@ -646,9 +646,11 @@ for (const source of spec.data ?? []) db = await adapter.resolveSource(db, sourc
 
 #### Passes run by a host
 
-A pass reads a `fromFeature` table as an earlier pass wrote it, from the compute adapter's `cache`. Else, when a GeoJSON source of the run loaded the table with its coordinates in its workspace's coordinate system, it reads the features as the source gave them, from `sources`. Else it reads the table as autk-db keeps it. The difference shows on a `buildings` table: autk-db keeps each of its features in its building model, with the geometry inside a GeometryCollection, so a path such as `geometry.coordinates.0` reads a building part's outline only from the source's own features. The pass's own `dataRef` is always read as autk-db keeps it, as a map draws it, so its result holds the rows the map draws.
+A pass reads a `fromFeature` table as an earlier pass wrote it, from the compute adapter's `cache`. Else, when a GeoJSON source of the run loaded the table with its coordinates in its workspace's coordinate system, it reads the features as the source gave them, from `sources`. Else it reads the table as autk-db keeps it. The difference shows on a `buildings` table: autk-db keeps each of its features in its building model, with the geometry inside a GeometryCollection, so a path such as `geometry.coordinates.0` reads a building part's outline only from the source's own features. The pass's own `dataRef` is never read from `sources`: it is read as an earlier pass wrote it, else as autk-db keeps it, as a map draws it, so its result holds the rows the map draws.
 
 `AutkGrammar` hands its data adapter's cache to its compute adapter. A host that runs the passes itself does the same, so its passes read what the grammar's do: it passes the map it gave `createDataAdapter` as `sources`. The data adapter notes the coordinate system of each GeoJSON source it puts there, so a pass reads only those collections, and only when their coordinates are in the workspace's coordinate system: a source in degrees, in a workspace in World Mercator, is read from autk-db. A host that leaves `sources` out reads autk-db's copy.
+
+Take both adapters from the main entry, `@urban-toolkit/autk-grammar`. The `./data` entry is a bundle of its own, and the compute adapter cannot read the notes of a data adapter taken from it, so its passes read autk-db's copy, as without `sources`.
 
 ```ts
 import { createComputeAdapter, createDataAdapter } from '@urban-toolkit/autk-grammar'
