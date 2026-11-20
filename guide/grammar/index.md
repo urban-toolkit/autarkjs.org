@@ -313,7 +313,7 @@ const spec = {
     },
   ],
   compute: [{ type: 'clusters', dataRef: 'fidi_buildings', outputColumnName: 'block', outputTableName: 'fidi_blocks', writeBack: true }],
-  plot: { dataRef: 'largest_blocks', mark: 'bar', axis: ['block', 'buildings'] },
+  plot: { dataRef: 'largest_blocks', mark: 'bar', axis: ['block', 'buildings'], tickFormats: [',~f', ',~f'] },
 }
 ```
 
