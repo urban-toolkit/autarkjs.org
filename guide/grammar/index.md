@@ -56,8 +56,8 @@ await grammar.run(spec)
 **Key capabilities:**
 
 - Load **OpenStreetMap**, **GeoJSON**, **CSV**, **JSON**, and **GeoTIFF** data, derive tables with **spatial joins**, **heatmaps**, and **SQL queries**, update or drop tables along the way, and keep areas apart in **workspaces**, in the coordinate system you choose.
-- Run **GPU computations** written in WGSL over feature attributes, and **render passes** that measure what can be seen from each viewpoint.
-- Draw **2D and 3D maps** with categorical, sequential, and diverging colormaps, seen from a **camera** you can tilt and turn.
+- Run **GPU computations** written in WGSL over feature attributes, **render passes** that measure what can be seen from each viewpoint, and passes that place the **windows** of buildings and find the **clusters** of features that touch.
+- Draw **2D and 3D maps**, on a **terrain** raised from an elevation raster, with categorical, sequential, and diverging colormaps, in **styles** of your own, seen from a **camera** you can point, tilt, and turn, or take on a **tour**.
 - Draw **linked plots** (bar charts, scatterplots, histograms, parallel coordinates, tables, heat matrices, and time series) that select features on the map, colored in the map's schemes, with your own axis titles and tick formats.
 - React to selections and drive highlights **from your own code**.
 
@@ -90,7 +90,7 @@ A spec is a plain object. Its four main sections are optional and run in this or
 | Key | Purpose |
 |---|---|
 | [`data`](#data) | Array of data sources. Each one creates or changes a table in the in-browser database. |
-| [`compute`](#compute) | Array of GPU passes. Each one adds columns to a table or writes a new one. |
+| [`compute`](#compute) | Array of passes, run on the GPU or the CPU. Each one adds columns to a table or writes a new one. |
 | [`map`](#map) | One map spec, or an array of map specs for several maps. |
 | [`plot`](#plot) | One plot spec, or an array of plot specs. |
 | [`workspaces`](#workspaces) | Array of workspace settings: the coordinate system each workspace stores its tables in, and the grid their coordinates are rounded to. Applied before the first data source loads. |
@@ -129,7 +129,7 @@ Every source has a `type` and, except for `join`, `update`, and `drop` sources, 
 | `geojson` | `geojsonFileUrl` or `geojsonObject`. Set `coordinateFormat` (for example `'EPSG:3395'`) when the data is not in WGS84. `layerType` sets how the map draws the table, for example `'polylines'` for lines or `'buildings'` for polygons; without it, the type is read from the first feature's geometry. `boundingBox: { minLon, minLat, maxLon, maxLat }` keeps only the features that cross the box, cut to it (a buildings table keeps them whole); despite their names, its bounds are in the workspace's coordinate system, not in degrees. |
 | `csv` | `csvFileUrl` or `csvObject`, optional `delimiter`, and `geometryColumns: { latColumnName, longColumnName }` to build points (`geometryColumns: true` reads the `Latitude` and `Longitude` columns), or `geometryColumns: { wktColumnName }` to read each row's geometry from a column of WKT text such as `POLYGON((...))`. Either object takes a `coordinateFormat` when the coordinates are not in WGS84. |
 | `json` | `jsonFileUrl` or `jsonObject`, with the same optional `geometryColumns`. |
-| `geotiff` | `geotiffFileUrl`, loaded as a raster table: each band of the file's first image becomes a band of the table (`band_1`, `band_2`, ...), and the file's no-data value reads as no value. Set `coordinateFormat` when the file is not in WGS84 (`'EPSG:4326'`, the default). A raster with more than `maxRasterCells` cells (1,000,000 by default) is downsampled to fit, by `resampleMethod`: `'bilinear'`, the default, or `'nearest'`. On the map, `getFnv` names the band to draw, `'band_1'` by default. |
+| `geotiff` | `geotiffFileUrl`, loaded as a raster table: each band of the file's first image becomes a band of the table (`band_1`, `band_2`, ...), and the file's no-data value reads as no value. Set `coordinateFormat` when the file is not in WGS84 (`'EPSG:4326'`, the default). A raster with more than `maxRasterCells` cells (1,000,000 by default) is downsampled to fit, by `resampleMethod`: `'bilinear'`, the default, or `'nearest'`. On the map, `getFnv` names the band to draw, `'band_1'` by default, and a run refuses one that names none of the bands of a raster of several. A map's [`terrain`](#terrain) raises the ground to a band's heights. |
 | `join` | `dataRef`, the table that receives the joined columns, and `joinDataRef`, the table whose rows are joined onto it. Features intersect by default; add `near: { distance }` to match within a distance, measured from centroid to centroid unless `near.useCentroid` is `false`, which measures between the geometries themselves. `groupBy` aggregates the matches (`count`, `sum`, `avg`, `min`, `max`, `weighted`, `collect`) into `sjoin.<aggregateFn>.<table>`; see [Normalized values](#normalized-values) for `normalize`. |
 | `heatmap` | `joinDataRef`, the table to aggregate, `grid: { rows, columns }`, cells over the workspace's extent, `near: { distance }`, the radius around each cell's center (with `useCentroid` as in a join), and `groupBy`, with any aggregate but `collect`, since a cell holds one value. Creates a grid table whose values are read with `<aggregateFn>.<table>`; see [Normalized values](#normalized-values) for `normalize`. |
 | `sql` | `query`, a `SELECT` over the workspace's tables, whose rows are saved as a new table, and `layerType`, how the map draws it. See [SQL sources](#sql-sources). |
@@ -327,7 +327,9 @@ const spec = {
 
 ## Compute
 
-Each `compute` entry is a pass. Passes run in order after the data is loaded, and a pass can read a table an earlier pass wrote. A GPGPU pass, the default, runs a WGSL function on the GPU once per feature of `dataRef`.
+Each `compute` entry is a pass. Passes run in order after the data is loaded, and a pass can read a table an earlier pass wrote. A pass's `type` is `'gpgpu'`, the default, or [`'render'`](#render-passes), which run on the GPU, or [`'windows'`](#windows-passes) or [`'clusters'`](#clusters-passes), which run on the CPU. A run refuses a pass of any other `type`, with a message that names the type.
+
+A GPGPU pass runs a WGSL function on the GPU once per feature of `dataRef`:
 
 | Field | Description |
 |---|---|
@@ -380,15 +382,70 @@ A pass with `type: 'render'` draws `layers` from each viewpoint of a table, in s
 
 See the [Render Pass](/grammar/examples/compute-render) example, which colors streets by the share of sky seen from them.
 
+### Windows passes
+
+A pass with `type: 'windows'` places the windows of a buildings table in a new table, one point a window, as a render pass's `building-windows` strategy places its viewpoints: the same autk-core code, on the table read the same way, so the two hold the same points in the same order. It runs on the CPU, with no GPU.
+
+| Field | Description |
+|---|---|
+| `dataRef` | The buildings table, read as an earlier pass wrote it, else as autk-db keeps it. |
+| `floors` | Rows of windows on each facade, spread evenly up each building's height, as the `building-windows` strategy's `floors` places them. autk-core rounds it down and places at least one row. |
+| `outputTableName` | Name of the new table. Required. |
+| `layerType` | How the map draws the new table. Defaults to `'points'`. |
+| `workspace` | [Workspace](#workspaces) of the tables the pass reads and writes. |
+
+The windows are about 6 planar units apart along each facade, one row a floor, each a point `[x, y, z]` at the middle of its window, `z` its height above the ground. A building without a height is taken as 20 units high. Each window is a feature whose id is the window's own, with these properties:
+
+| Property | Value |
+|---|---|
+| `sourceFeatureIndex` | The building's row in `dataRef`. |
+| `geometryIndex`, `polygonIndex`, `ringIndex`, `edgeIndex` | Where its facade is in the building's geometry: its part, its polygon, its ring (0 the outer one), and its edge. |
+| `floorIndex`, `windowIndex` | Its floor, from 0 at the bottom, and its place along the edge. |
+| `center`, `normal` | Its middle, and the direction its facade faces. |
+| `width`, `height`, `buildingHeight` | Its size, and its building's height. |
+
+A run refuses a `floors` that is not a number, and a table in which autk-core finds no facades, such as a table of points, with a message that names the pass.
+
+```ts
+compute: [{ type: 'windows', dataRef: 'wall_st_buildings', floors: 3, outputTableName: 'wall_st_windows' }],
+map: { layerRefs: [{ dataRef: 'wall_st_surface' }, { dataRef: 'wall_st_windows', getFnv: 'buildingHeight', pointSize: 1.5 }] },
+```
+
+See the [Building Windows](/grammar/examples/building-windows) example, which colors every window around Wall Street by its building's height.
+
+### Clusters passes
+
+A pass with `type: 'clusters'` gives each row of a table the id of its cluster: rows whose geometries intersect or touch, directly or through other rows, share one. Buildings that share walls fall in one cluster, and so do roads that meet. It runs on the CPU, with no GPU.
+
+| Field | Description |
+|---|---|
+| `dataRef` | Table to compute over, read as an earlier pass wrote it, else as autk-db keeps it. |
+| `outputColumnName` | Name of the column the ids are written to, read on the map as `compute.<outputColumnName>`, as a GPGPU pass writes its result. |
+| `outputTableName` | Name of a new table that receives the rows with their ids, so the source table stays as it is. Without it, the pass writes into the `dataRef` table. |
+| `layerType` | How the map draws the new table. Defaults to the type of the table it was computed from. Only used with `outputTableName`. |
+| `workspace` | [Workspace](#workspaces) of the tables the pass reads and writes. |
+
+The ids are whole numbers from 0: the first row's cluster is 0, and each other cluster takes the next number, in the order of its first row. A row without a geometry, or with an empty one, as a GeoJSON source loads a row whose geometry is null, is in no cluster: its id is `null`. Rows are told apart by their place in the table, not by their feature ids.
+
+```ts
+compute: [{ type: 'clusters', dataRef: 'fidi_buildings', outputColumnName: 'block', outputTableName: 'fidi_blocks' }],
+map: { layerRefs: [{ dataRef: 'fidi_blocks', getFnv: 'compute.block', colorMapInterpolator: 'interpolateTurbo' }] },
+```
+
+See the [Building Clusters](/grammar/examples/building-clusters) example, which colors the buildings of the Financial District by the block of touching buildings they are in.
+
 ## Map
 
-A map spec has a `layerRefs` array, drawn in order, bottom first.
+A map spec has a `layerRefs` array, drawn in order, bottom first, apart from surface, parks, water, and roads layers, which autk-map draws below every other layer (see [Layer types](#layer-types)).
 
 | Field | Description |
 |---|---|
 | `id` | Name of the map, which a [link](#links) uses as its `target`. Unique among the ids of the maps and plots. |
-| `style` | Map style, for example `'light'`. |
-| `camera` | Where the map looks from: see [Camera](#camera). |
+| `style` | Map style: the name of one of autk-map's styles, for example `'light'`, or the colors of a style of your own. See [Map styles](#map-styles). |
+| `highlightColor`, `invalidValueColor` | Colors of the picked features and of the features whose value cannot be colored, each map its own. See [Map colors](#map-colors). |
+| `showUi` | `false` hides the map's menu of layers and its legend. See [Map controls](#map-controls). |
+| `terrain` | Raises the ground to the heights of a raster band. See [Terrain](#terrain). |
+| `camera` | Where the map looks from, and a tour the view takes: see [Camera](#camera). |
 | `workspace` | [Workspace](#workspaces) the map reads its layers' tables from. |
 | `layerRefs` | Layers to draw, with the fields below. |
 
@@ -402,8 +459,10 @@ Each layer in `layerRefs` takes:
 | `color` | Fixed color, `'#rrggbb'`. The layer is drawn in it instead of by `getFnv`, unless `isColorMap` is `true`. |
 | `stroke` | Outline of a polygon layer: a color, `'#rrggbb'`, or `false` for none. |
 | `width` | Line width of a polylines or roads layer, in the map's planar units (about meters). |
+| `widthBy` | Roads layers: the property that gives each line its own width. See [Line widths](#line-widths). |
 | `pointSize` | Radius of each point of a points layer, in meters on the ground. The grammar converts it to the map's planar units at the middle of the layer's extent, in World Mercator and Web Mercator; in another coordinate system it is read as planar units. Without it, points have autk-map's default radius of 64 planar units. |
-| `getFnv` | Property that drives the colormap. Supports dot paths such as `sjoin.count.noise` or `compute.result`. |
+| `layerType` | How the map draws the layer's table, in place of the table's own type. See [Layer types](#layer-types). |
+| `getFnv` | Property that drives the colormap. Supports dot paths such as `sjoin.count.noise` or `compute.result`. On a raster layer, the band to draw, by its id (`band_1`, ...) or its label, the first band without it; a run refuses one that names none of the bands of a raster of several. |
 | `getFnvType` | `'categorical'` or `'quantitative'`, how the grammar's deck.gl adapter reads the value. autk-grammar ignores it. |
 | `defaultFnv` | Value the grammar's deck.gl adapter uses when a feature has no value. autk-grammar ignores it. |
 | `colorMapInterpolator` | A `ColorMapInterpolator` value, for example `ColorMapInterpolator.SEQ_REDS` or `ColorMapInterpolator.CAT_OBSERVABLE10`. |
@@ -413,11 +472,15 @@ Each layer in `layerRefs` takes:
 | `colorMapCenter` | Raster layers: the value at the middle of the colormap, which then reaches as far below it as above it. |
 | `colorMapReverse` | Raster layers: runs the colormap from the highest value to the lowest. |
 | `transferFunction` | Raster layers: how opaque the cells are by value (`mode`, `opacityMin`, `opacityMax`, `gamma`, `zeroCenter`). `{ opacityMin: 1, opacityMax: 1 }` makes every cell with a value opaque. |
-| `isPick` | Enables picking, so the layer can take part in linked selections. |
+| `legend` | `true` shows this layer's color scale in the map's legend. See [Legend](#legend). |
+| `isPick` | Enables picking, so the layer can take part in linked selections. autk-map lets one layer of a map pick: the last layer that sets `isPick`, unless a link or a plot's `mapRef` makes another layer of the map pick. |
+| `pickedComps` | Features drawn as picked as the map is drawn. See [Picked features](#picked-features). |
+| `skippedComps` | Features the layer hides. See [Hidden features](#hidden-features). |
+| `buildingsZeroHeight` | Buildings layers: `true` draws the parts that have no height, each at a random height. See [Buildings without a height](#buildings-without-a-height). |
 | `isSkip` | Loads the layer into the map without drawing it. |
 | `osmElements` | `true` draws an OpenStreetMap layer table as one feature per OpenStreetMap element: see [OpenStreetMap elements](#openstreetmap-elements). |
 
-Two more layer fields, `colorMapLabels` and `pickedComps`, are read by the grammar's deck.gl adapter only; autk-grammar ignores them.
+One more layer field, `colorMapLabels`, is read by no adapter.
 
 See the [Map Layers](/grammar/examples/geojson-vis) examples, and [Points at True Size](/grammar/examples/points-true-size) for `pointSize`.
 
@@ -432,15 +495,207 @@ plot: { dataRef: 'downtown_roads', mark: 'table', axis: ['osm_id', 'highway', 'n
 
 ### Camera
 
-`camera` moves the map from the view that fits its layers, for example `camera: { pitch: 50, bearing: 30 }` to tilt and turn it. Each field is optional, and an omitted field keeps that view.
+`camera` moves the map from the view that fits its layers, or its [terrain](#terrain), for example `camera: { pitch: 50, bearing: 30 }` to tilt and turn it. Each field is optional, and an omitted field keeps that view.
 
 | Field | Description |
 |---|---|
 | `zoom` | Zoom level, 0 or more: the eye sits `10000 / 2^(zoom - 10)` planar units from the point the map looks at, so each step doubles the scale. |
 | `pitch` | Tilt from straight down, in degrees, at least 0 and less than 90. At 90 the eye would sit on the ground, edge-on to the flat layers, and the map could not pan, so a run refuses a `pitch` of 90 or more, with a message that names the map. |
 | `bearing` | Compass heading the view faces, clockwise from north, in degrees from 0 to 360. |
+| `center` | The point the view looks at, `[longitude, latitude]` in degrees. See [Camera center](#camera-center). |
+| `motion` | A tour the view takes once the map is drawn. See [Camera tours](#camera-tours). |
+
+The camera turns around the point the map looks at, `center`, or else the point the view that fits the layers looks at: the eye moves on a sphere around it, so the layers stay in view at any pitch and bearing.
 
 See the [Map Camera](/grammar/examples/map-camera) example.
+
+#### Camera center
+
+`center` is the point the view looks at, `[longitude, latitude]` in degrees (WGS84). The run puts it in the coordinate system of the map's workspace with autk-db's own transform, as autk-db puts a source's coordinates there, so it names the same place in World Mercator, the default, and in any coordinate system a [`workspaces`](#workspaces) entry sets. The eye then turns around it as `zoom`, `pitch`, and `bearing` say; with `center` alone, it looks straight down on it, from the height of the view that fits the layers. A run refuses a `center` that is not a longitude from -180 to 180 and a latitude from -90 to 90, and one the transform gives no point for.
+
+```ts
+map: {
+  camera: { center: [-74.011, 40.7069], zoom: 15, pitch: 50, bearing: 30 }, // the New York Stock Exchange
+  layerRefs: [{ dataRef: 'fidi_surface' }, { dataRef: 'fidi_buildings' }],
+}
+```
+
+#### Camera tours
+
+`motion` is a camera tour: steps the view takes one after another once the map is drawn, from the view the rest of `camera` sets. Each step is `{ type, amount, seconds }`, and its `amount` is in the unit of the camera field of the same name:
+
+| `type` | `amount` |
+|---|---|
+| `'zoom'` | Zoom levels: each halves the eye's distance from the point the view looks at, and a negative one doubles it. |
+| `'pitch'` | Degrees of tilt, away from straight down when positive. The step can also take a `pan`, which moves the point the view turns around by that many planar units during the step, toward the top of the view when positive. |
+| `'bearing'` | Degrees of heading, clockwise when positive: the view turns around the point it looks at. |
+| `'roll'` | Degrees the view turns around its line of sight, the top of the view clockwise when positive. Looking straight down, a roll turns the heading, as a `'bearing'` step does; on a tilted view, it banks the horizon. |
+
+Each step takes its `seconds`, more than 0, easing in and out, and the map draws the view at every animation frame. A drag, a scroll, or a key on the map stops the tour, and the map's own pan, tilt, and zoom take over from where the tour had the view. `run()` does not wait for the tour: `grammar.tours` holds the tour of each map, in the order of `grammar.maps`, `undefined` for a map without one, and a tour's `done` settles once its last step ends or once its `stop()` or a user's input stops it. `destroy()`, and so the next run, stops the tours of its maps.
+
+A run refuses a tour before it draws the map when a step has another `type`, no `amount`, no `seconds` greater than 0, or a `pan` on a step other than `'pitch'`. The camera's `pitch` and the tour's `'pitch'` steps add up, in order, to a tilt that stays at least 0 and less than 90 degrees, as `pitch` does. A `'pitch'` step turns the view around its side, so after a `'roll'` of a tilted view it would also turn the heading: a run refuses a `'pitch'` step of a banked view until rolls undo the bank.
+
+```ts
+map: {
+  camera: {
+    center: [-74.011, 40.7069], // the New York Stock Exchange
+    zoom: 13,
+    motion: [
+      { type: 'zoom', amount: 1.5, seconds: 2 },
+      { type: 'pitch', amount: 55, seconds: 2.5, pan: 150 },
+      { type: 'bearing', amount: 90, seconds: 4 },
+    ],
+  },
+  layerRefs: [{ dataRef: 'fidi_surface' }, { dataRef: 'fidi_roads' }, { dataRef: 'fidi_buildings' }],
+}
+```
+
+```ts
+await grammar.run(spec)
+await grammar.tours[0]?.done // the first map's tour has ended, or was stopped
+```
+
+See the [Camera Tour](/grammar/examples/camera-tour) example.
+
+### Terrain
+
+A map's `terrain` raises its ground to the heights of a raster band, through autk-map's terrain mode: the ground the raster covers rises to its heights, the map's flat layers are draped over it, and its buildings stand on it. The view fits the raster, and the map's `camera` moves from there.
+
+| Field | Description |
+|---|---|
+| `dataRef` | Raster table of the heights, in the workspace's units: a `geotiff` source of an elevation model in meters, for example. It is a table of the map's workspace. A cell without a value lies at height 0. |
+| `band` | Band of the heights, by its id (`band_1`, ...) or its label, as a raster layer's `getFnv` names one. Defaults to the first band. |
+
+A run refuses a `dataRef` that names no raster table of the map's workspace, and a `band` that names none of the bands of a raster of several.
+
+```ts
+data: [
+  { type: 'geojson', outputTableName: 'neighborhoods', geojsonFileUrl: '/data/mnt_neighs.geojson' },
+  { type: 'geotiff', outputTableName: 'elevation', geotiffFileUrl: '/data/mnt_dem.tif', coordinateFormat: 'EPSG:3857' },
+],
+map: { terrain: { dataRef: 'elevation' }, camera: { zoom: 10, pitch: 60, bearing: 30 }, layerRefs: [{ dataRef: 'neighborhoods' }] },
+```
+
+See the [Terrain](/grammar/examples/map-terrain) example, which raises Manhattan to its elevation.
+
+### Map styles
+
+A map's `style` names one of autk-map's styles, `'apple'` by default. autk-map 4.1.1, which this site runs, has `'apple'`, `'default'`, `'light'`, `'google'`, `'osm'`, and `'poster'`, and draws a name it does not know in `'apple'`. A `style` can also give the colors of a style of your own, each `'#rrggbb'`. autk-map takes a style only whole, so a run refuses one that lacks any of the nine colors:
+
+| Color | Description |
+|---|---|
+| `background` | The map's background, where no layer is drawn. |
+| `surface`, `parks`, `water`, `roads`, `buildings` | Layers of each of those types, such as the tables of an `osm` source's `autoLoadLayers`. |
+| `points`, `polylines`, `polygons` | Layers of each of those types, such as the tables of a GeoJSON source. |
+
+A layer with a `color` is drawn in it instead, and a layer colored by value in its colormap.
+
+```ts
+map: {
+  style: {
+    background: '#0b1a2a', surface: '#13263a', parks: '#1f4d3a', water: '#08121d', roads: '#4a6584',
+    buildings: '#c9a96e', points: '#f2c14e', polylines: '#7f97ad', polygons: '#2a3d52',
+  },
+  layerRefs: [{ dataRef: 'fidi_surface' }, { dataRef: 'fidi_roads' }, { dataRef: 'fidi_buildings' }],
+}
+```
+
+See the [Map Style](/grammar/examples/map-style) example, which draws the Financial District at night.
+
+### Map colors
+
+| Field | Description |
+|---|---|
+| `highlightColor` | Color of the features the map draws as picked: by the user, by a layer's `pickedComps`, by a link, or by a call such as `highlightOnMap`, `'#rrggbb'`. autk-map's is `#5dade2`. |
+| `invalidValueColor` | Color of the features of a layer colored by value whose value autk-map cannot color: one without a value, or with one that is not on the layer's scale, `'#rrggbb'`. autk-map's is `#ffffff`. |
+
+autk-map keeps both colors for each map, so each map of a spec draws in its own, unlike a plot's [mark and highlight colors](#mark-and-highlight-colors), which are the whole page's.
+
+```ts
+map: { highlightColor: '#ff7f0e', invalidValueColor: '#bfbfbf', layerRefs: [{ dataRef: 'neighborhoods', getFnv: 'shape_area', isPick: true }] }
+```
+
+### Map controls
+
+autk-map puts a menu of the map's layers at the map's top left, and a legend at its bottom right. A map with `showUi: false` has neither; its "made with autark" credit stays. Without it, or with `true`, the map shows both.
+
+```ts
+map: { showUi: false, layerRefs: [{ dataRef: 'neighborhoods', getFnv: 'shape_area' }] }
+```
+
+### Layer types
+
+A layer draws its table as the table's own type, which its source or compute pass gave it. A layer's `layerType` draws the table as another type of its kind of geometry, in that type's color of the map's style and the way autk-map draws that type:
+
+| Table | `layerType` |
+|---|---|
+| Polygons, and the surface, parks, water, and buildings tables | `'polygons'`, `'surface'`, `'parks'`, `'water'`, or `'buildings'`, which raises each feature by its height |
+| Lines, and the roads tables | `'polylines'`, or `'roads'`, which draws each line as wide as its kind of road |
+| Points | `'points'` |
+| A raster | `'raster'` |
+
+A run refuses a type of another kind of geometry, for which autk-map would draw nothing. autk-map draws surface, parks, water, and roads layers below every other layer, in that order, whatever the order of `layerRefs`.
+
+```ts
+map: {
+  layerRefs: [
+    { dataRef: 'neighborhoods', layerType: 'parks' }, // a table of polygons, in the style's parks color
+    { dataRef: 'fidi_buildings', layerType: 'polygons' }, // the footprints, flat
+  ],
+}
+```
+
+### Line widths
+
+A roads layer draws each line as wide as autk-map draws its kind of road, and `width` gives every line one width. A roads layer's `widthBy` is the dot path to each line's own width, relative to the feature's properties, in the map's planar units. A line without a positive number there keeps the width of its kind of road.
+
+autk-map draws every line of a polylines layer at one width, which wins over widths by feature, so a run refuses `widthBy` on a polylines layer: draw the table as roads, with `layerType: 'roads'`. A run also refuses `widthBy` with `width`, and a path that gives no line of the layer a width.
+
+```ts
+compute: [{ dataRef: 'fidi_roads', attributes: { lanes: 'lanes' }, outputColumnName: 'width', wgslFunction: 'return max(lanes, 1.0) * 3.5;' }],
+map: { layerRefs: [{ dataRef: 'fidi_roads', widthBy: 'compute.width' }] },
+```
+
+### Legend
+
+A map's legend shows the color scale of one layer: the last layer whose colors autk-map set, about the last layer colored by value. A layer with `legend: true` is the one it shows, and on a raster layer, whose legend autk-map hides without a scale of its own, it shows it. Picking stays as the layers' `isPick` sets it.
+
+A run refuses `legend` on two layers of a map, on a layer drawn in one color, and on a map whose `showUi` is `false`, which has no legend.
+
+```ts
+map: {
+  layerRefs: [
+    { dataRef: 'neighborhoods', title: 'Area', getFnv: 'shape_area', legend: true },
+    { dataRef: 'neighborhoods', title: 'Perimeter', getFnv: 'shape_leng', opacity: 0.5 },
+  ],
+}
+```
+
+### Picked features
+
+A layer's `pickedComps` lists the features drawn as picked as the map is drawn, in the map's highlight color, as if the user had picked them: their positions among the features the layer draws, as `map:picking` events and `highlightOnMap` give them. The run applies it once the plots and their links exist, as `highlightOnMap` does for that one layer: the layer highlights the features, and the plots linked to it select the same rows. No `map:picking` event reports it.
+
+autk-map draws picked features only on the layer of a map that picks, and lets one layer of a map pick: the last that sets `isPick`, unless a link or a plot's `mapRef` makes another layer pick. So a layer with `pickedComps` sets `isPick: true`, and a run refuses `pickedComps` on a layer without it, or on a layer that a later layer of its map, a link, or a plot's `mapRef` takes picking from. A run also refuses it on a raster layer, on a layer linked to a plot that sets `selection`, and a position that is not a whole number from 0 or is past the last feature the layer draws.
+
+```ts
+map: { layerRefs: [{ dataRef: 'neighborhoods', isPick: true, pickedComps: [0, 4] }] }
+```
+
+### Hidden features
+
+A layer's `skippedComps` lists the features it hides, by their positions among the features it draws, as `map:picking` events and `highlightOnMap` give them: a filter the map applies as it is drawn. It hides features of every layer of polygons, lines, points, or buildings. A run refuses it on a raster layer, and a position that is not a whole number from 0 or is past the last feature the layer draws. With autk-map 4.1.1, which this site runs, a hidden feature of a polygons or buildings layer can still be picked.
+
+```ts
+map: { layerRefs: [{ dataRef: 'neighborhoods', skippedComps: [2, 5] }] }
+```
+
+### Buildings without a height
+
+autk-map leaves out a building part that has no height: none of `height`, `building:height`, `levels`, and `building:levels`. A buildings layer with `buildingsZeroHeight: true` draws each such part at a random height of 3 to 7 floors of 3.4 m, from 10.2 to 23.8 m, so a city whose map data gives few heights is not left half empty. The heights are drawn again at each run. A part with one of those keys whose height is not above its minimum, such as `height: 0`, is still left out. Other layers ignore it.
+
+```ts
+map: { layerRefs: [{ dataRef: 'fidi_surface' }, { dataRef: 'fidi_buildings', buildingsZeroHeight: true }] }
+```
 
 ## Plot
 
@@ -606,6 +861,9 @@ grammar.clearHighlightOnPlot('neighborhoods')
 const layers = grammar.mapLayers('neighborhoods')
 const { map, layerId } = grammar.mapLayer('neighborhoods')
 
+// Stop the camera tour of the first map, when its camera has a motion
+grammar.tours[0]?.stop()
+
 // Release the maps and the grammar's state, for example before the container goes away
 grammar.destroy()
 ```
@@ -614,7 +872,7 @@ The calls name map layers by the table they draw. Each reaches every map that dr
 
 `selectFields` on a layer or a plot, for example `selectFields: ['nta2020']`, names the columns whose values identify the selected rows, for an app that links a selection to other tables. The grammar does not read it: the events still report feature ids, and the app reads those columns from the selected rows.
 
-`destroy()` releases what the last run made: each map, with its GPU buffers, canvas context, controls, and event handlers, and the grammar's registries and caches. `run()` calls it before it starts, so running another spec on the same `AutkGrammar` releases the maps of the last run, and maps kept from `grammar.maps` or `mapLayer()` stop drawing. Use one `AutkGrammar` for each set of views that must stay on the page.
+`destroy()` releases what the last run made: it stops each map's [camera tour](#camera-tours), and releases each map, with its GPU buffers, canvas context, controls, and event handlers, and the grammar's registries and caches. `run()` calls it before it starts, so running another spec on the same `AutkGrammar` releases the maps of the last run, and maps kept from `grammar.maps` or `mapLayer()` stop drawing. Use one `AutkGrammar` for each set of views that must stay on the page.
 
 See [External Interactions](/grammar/examples/interaction-external) for a working example.
 
@@ -625,10 +883,12 @@ A host that runs parts of a spec itself, a server that loads its tables for exam
 | Export | Purpose |
 |---|---|
 | `createDataAdapter(targets?, cache?)` | The data adapter. Its `resolveWorkspaces(db, workspaces)` sets up a spec's `workspaces` before the first source loads, and its `resolveSource(db, source)` loads one `data` entry. Each takes an autk-db database, a new one when `db` is undefined, and returns it. `cache` receives each GeoJSON table and each table a join or an update wrote. |
-| `createComputeAdapter(cache?, types?, sources?)` | The compute adapter. Its `resolveCompute(db, pass)` runs one `compute` entry on the GPU. The results are kept only in `cache`, and `types` receives the layer type of each table a pass wrote under its own `outputTableName`. `sources` is the `cache` given to `createDataAdapter`, from which a pass reads a `fromFeature` table a GeoJSON source loaded (see [Passes run by a host](#passes-run-by-a-host)). |
+| `createComputeAdapter(cache?, types?, sources?)` | The compute adapter. Its `resolveCompute(db, pass)` runs one `compute` entry, on the GPU or, for a windows or clusters pass, on the CPU, and refuses a pass of any other `type`. The results are kept only in `cache`, and `types` receives the layer type of each table a pass wrote under its own `outputTableName`. `sources` is the `cache` given to `createDataAdapter`, from which a pass reads a `fromFeature` table a GeoJSON source loaded (see [Passes run by a host](#passes-run-by-a-host)). |
 | `enterWorkspace(db, workspace?)` | Makes an entry's workspace, or the default one when it names none, the one autk-db works in. Every adapter calls it before it reads or writes an entry's tables. |
 | `tableKey(workspace, name)` | The key of a table in those caches: its name in the default workspace, `<workspace>/<name>` in another. |
-| `applyCamera(map, camera)` | Moves an `AutkMap`'s camera as a map's `camera` says, from the view that fits its layers, and refuses a `pitch` that is not at least 0 and less than 90. The map adapter calls it once the layers are loaded, before the map first draws. |
+| `applyCamera(map, camera)` | Moves an `AutkMap`'s camera as a map's `camera` says, from the view that fits its layers, and refuses a `pitch` that is not at least 0 and less than 90. The map adapter calls it once the layers are loaded, before the map first draws. It looks at a `center` that `resolveCameraCenter` put on the map, and refuses any other, so a host's later turns of a map the grammar drew keep its center. |
+| `resolveCameraCenter(db, map, center)` | Puts `center`, `[longitude, latitude]` in degrees, in the coordinate system of the workspace `db` works in, and keeps it with `map` for `applyCamera`. The map adapter calls it once the layers are loaded, with the map's workspace current; a host that builds its own map calls it after `enterWorkspace(db, workspace)`. |
+| `playCameraMotion(map, motion)` | Plays a [camera tour](#camera-tours) on an `AutkMap` from the view its camera has, and returns it as `{ done, stop() }` without waiting for it. A tour played on a map stops the one it was playing, and a drag, a scroll, or a key on the map stops it. It refuses a tour as a run does, from the map's own tilt and bank. The map adapter calls it once a map is drawn. A host that frames a map itself and turns it with `applyCamera` calls it after that turn, so the tour starts from the host's view; it also stops the tour the run played. |
 | `arrangeViews(spec)` | Where each view of a spec goes on the page, as its `layout` says: a grid of panes, one per view (see [Arranging the views](#arranging-the-views)). It refuses a `layout` it cannot arrange, with a sentence that names the value. |
 
 The entry `@urban-toolkit/autk-grammar/data` exports `createDataAdapter`, `enterWorkspace`, and `tableKey`, as an ES module and a CommonJS one. Its code imports autk-db alone, never autk-map, autk-plot, autk-compute, or autk-core, so it can be imported where they cannot, such as in Node:
@@ -650,7 +910,7 @@ A pass reads a `fromFeature` table as an earlier pass wrote it, from the compute
 
 `AutkGrammar` hands its data adapter's cache to its compute adapter. A host that runs the passes itself does the same, so its passes read what the grammar's do: it passes the map it gave `createDataAdapter` as `sources`. The data adapter notes the coordinate system of each GeoJSON source it puts there, so a pass reads only those collections, and only when their coordinates are in the workspace's coordinate system: a source in degrees, in a workspace in World Mercator, is read from autk-db. A host that leaves `sources` out reads autk-db's copy.
 
-Take both adapters from the main entry, `@urban-toolkit/autk-grammar`. The `./data` entry is a bundle of its own, and the compute adapter cannot read the notes of a data adapter taken from it, so its passes read autk-db's copy, as without `sources`.
+The data adapters of both entries, the main one and `./data`, keep their notes in one place on the page, so a host may load the tables with the data adapter of `./data` and run the passes with the compute adapter of the main entry. A host on autk-grammar 5.2.0 takes both adapters from the main entry, since there the `./data` entry keeps notes of its own, which the compute adapter cannot read, and its passes read autk-db's copy, as without `sources`.
 
 ```ts
 import { createComputeAdapter, createDataAdapter } from '@urban-toolkit/autk-grammar'
