@@ -56,7 +56,7 @@ await grammar.run(spec)
 **Key capabilities:**
 
 - Load **OpenStreetMap**, **GeoJSON**, **CSV**, **JSON**, and **GeoTIFF** data, derive tables with **spatial joins**, **heatmaps**, and **SQL queries**, update or drop tables along the way, and keep areas apart in **workspaces**, in the coordinate system you choose.
-- Run **GPU computations** written in WGSL over feature attributes, **render passes** that measure what can be seen from each viewpoint, and passes that place the **windows** of buildings and find the **clusters** of features that touch.
+- Run **GPU computations** written in WGSL over feature attributes, **render passes** that measure what can be seen from each viewpoint, and passes that place the **windows** of buildings and find the **clusters** of features that touch. A pass can keep its result in the database, for the joins, heatmaps, and SQL queries that run **after the passes**.
 - Draw **2D and 3D maps**, on a **terrain** raised from an elevation raster, with categorical, sequential, and diverging colormaps, in **styles** of your own, seen from a **camera** you can point, tilt, and turn, or take on a **tour**.
 - Draw **linked plots** (bar charts, scatterplots, histograms, parallel coordinates, tables, heat matrices, and time series) that select features on the map, colored in the map's schemes, with your own axis titles and tick formats.
 - React to selections and drive highlights **from your own code**.
@@ -85,7 +85,7 @@ Maps and computations run on WebGPU. We recommend recent versions of **Chrome**,
 
 ## Spec structure
 
-A spec is a plain object. Its four main sections are optional and run in this order, and later sections refer to tables created earlier by name. Three more keys set up the workspaces before any data loads (`workspaces`), and connect and arrange the views (`links` and `layout`).
+A spec is a plain object. Its four main sections are optional and run in this order, and later sections refer to tables created earlier by name; only a data source with [`after: 'compute'`](#sources-after-compute) runs after the compute passes. Three more keys set up the workspaces before any data loads (`workspaces`), and connect and arrange the views (`links` and `layout`).
 
 | Key | Purpose |
 |---|---|
@@ -121,7 +121,7 @@ The constructor receives the targets to draw into, as element ids:
 
 ## Data
 
-Every source has a `type` and, except for `join`, `update`, and `drop` sources, which change a table already loaded, an `outputTableName`. Any source can also name the [workspace](#workspaces) its table belongs to.
+Every source has a `type` and, except for `join`, `update`, and `drop` sources, which change a table already loaded, an `outputTableName`. Any source can also name the [workspace](#workspaces) its table belongs to, and run after the compute passes with [`after: 'compute'`](#sources-after-compute).
 
 | Type | Main fields |
 |---|---|
@@ -131,7 +131,7 @@ Every source has a `type` and, except for `join`, `update`, and `drop` sources, 
 | `json` | `jsonFileUrl` or `jsonObject`, with the same optional `geometryColumns`. |
 | `geotiff` | `geotiffFileUrl`, loaded as a raster table: each band of the file's first image becomes a band of the table (`band_1`, `band_2`, ...), and the file's no-data value reads as no value. Set `coordinateFormat` when the file is not in WGS84 (`'EPSG:4326'`, the default). A raster with more than `maxRasterCells` cells (1,000,000 by default) is downsampled to fit, by `resampleMethod`: `'bilinear'`, the default, or `'nearest'`. On the map, `getFnv` names the band to draw, `'band_1'` by default, and a run refuses one that names none of the bands of a raster of several. A map's [`terrain`](#terrain) raises the ground to a band's heights. |
 | `join` | `dataRef`, the table that receives the joined columns, and `joinDataRef`, the table whose rows are joined onto it. Features intersect by default; add `near: { distance }` to match within a distance, measured from centroid to centroid unless `near.useCentroid` is `false`, which measures between the geometries themselves. `groupBy` aggregates the matches (`count`, `sum`, `avg`, `min`, `max`, `weighted`, `collect`) into `sjoin.<aggregateFn>.<table>`; see [Normalized values](#normalized-values) for `normalize`. |
-| `heatmap` | `joinDataRef`, the table to aggregate, `grid: { rows, columns }`, cells over the workspace's extent, `near: { distance }`, the radius around each cell's center (with `useCentroid` as in a join), and `groupBy`, with any aggregate but `collect`, since a cell holds one value. Creates a grid table whose values are read with `<aggregateFn>.<table>`; see [Normalized values](#normalized-values) for `normalize`. |
+| `heatmap` | `joinDataRef`, the table to aggregate, `grid: { rows, columns }`, cells over the workspace's extent, `near: { distance }`, the radius around each cell's center (with `useCentroid` as in a join), and `groupBy`, with any aggregate but `collect`, since a cell holds one value; without `groupBy`, one band counts the rows near each cell. Creates a grid table whose values are read with `<aggregateFn>.<table>`; see [Heatmap bands](#heatmap-bands), and [Normalized values](#normalized-values) for `normalize`. |
 | `sql` | `query`, a `SELECT` over the workspace's tables, whose rows are saved as a new table, and `layerType`, how the map draws it. See [SQL sources](#sql-sources). |
 | `update` | `dataRef`, the table to change, `strategy`, `'replace'` or `'update'`, `idColumn`, and the rows, in `geojsonObject` or `jsonObject`. See [Update sources](#update-sources). |
 | `drop` | `dataRef`, the table to drop. See [Drop sources](#drop-sources). |
@@ -187,6 +187,23 @@ const spec = {
 
 ```ts
 { type: 'osm', outputTableName: 'area', pbfFileUrl: 'area-nad83.osm.pbf', queryArea: { bbox: [-74.02, 40.70, -74.00, 40.72] }, autoLoadLayers: { layers: ['roads'], coordinateFormat: 'EPSG:4269' } }
+```
+
+### Heatmap bands
+
+A heatmap's grid has one band per entry of `groupBy`, in order, each read on the map as `<aggregateFn>.<joinDataRef>`. A layer that names no band with `getFnv` draws the first.
+
+- **Without `groupBy`,** the grid has one band, which counts the rows near each cell, as `groupBy: [{ column: '*', aggregateFn: 'count' }]` does: it is read as `count.<joinDataRef>`.
+- **`count` and `weighted` bands** hold their values on every autk-db release.
+- **`avg`, `sum`, `min`, and `max` bands read 0 in every cell, for any column,** on autk-db 4.1.1, which this site runs. [urban-toolkit/autark#132](https://github.com/urban-toolkit/autark/pull/132) fixes it for Autark's next autk-db release.
+
+```ts
+data: [
+  { type: 'geojson', outputTableName: 'neighborhoods', geojsonFileUrl: '/data/mnt_neighs.geojson' },
+  { type: 'csv', outputTableName: 'noise', csvFileUrl: '/data/noise.csv', geometryColumns: { latColumnName: 'Latitude', longColumnName: 'Longitude' } },
+  { type: 'heatmap', outputTableName: 'heat', joinDataRef: 'noise', near: { distance: 1000 }, grid: { rows: 20, columns: 20 } },
+],
+map: { layerRefs: [{ dataRef: 'neighborhoods' }, { dataRef: 'heat', getFnv: 'count.noise' }] },
 ```
 
 ### Normalized values
@@ -271,6 +288,42 @@ data: [
 ],
 ```
 
+### Sources after compute
+
+A source with `after: 'compute'` runs once every compute pass has run, instead of before them, so it reads what the passes kept in autk-db with [`writeBack`](#results-kept-in-autk-db): a join or a heatmap over a pass's result, a `sql` source that queries it, an update, or a drop. Every type of source takes it. The sources with it run in the order of `data`, after all the sources without it, wherever they stand in `data`, and the maps and plots are drawn once they have run.
+
+- **A source after compute that reads a table a pass of its workspace writes without `writeBack` is refused** before anything runs, with a message that names the source, the table, and the pass, since autk-db holds that table without the pass's result. The tables a source reads are a join's `dataRef` and `joinDataRef`, a heatmap's `joinDataRef`, and an update's or a drop's `dataRef`; a `sql` source's query is not checked.
+- **A source that writes a table a pass wrote,** such as a join into it, an update, a `sql` source saved under its name, or a drop, changes autk-db's table, and the maps, the plots, and `grammar.data` then read that table: the pass's columns and the source's together.
+- **A join's or a heatmap's `groupBy` reads a compute column by its path,** `compute.<column>`. A join writes an aggregate of it under the key `<joinDataRef>.<column>`, which `getFnv` reads as a path, such as `sjoin.max.fidi_blocks.compute.block`.
+
+A run refuses an `after` other than `'compute'`, with a message that names the source.
+
+This spec gives each building of the Financial District the id of its block of touching buildings, keeps the blocks in autk-db, then counts the buildings of each block with a `sql` source after compute, and plots the ten largest blocks:
+
+```ts
+const spec = {
+  data: [
+    { type: 'osm', outputTableName: 'fidi', pbfFileUrl: '/data/lower_mnt.osm.pbf', queryArea: { bbox: [-74.015, 40.703, -74.006, 40.711] }, autoLoadLayers: { layers: ['buildings'] } },
+    {
+      type: 'sql',
+      outputTableName: 'largest_blocks',
+      query: "SELECT CAST(properties->'compute'->>'block' AS INTEGER) AS block, CAST(count(*) AS INTEGER) AS buildings FROM fidi_blocks GROUP BY block ORDER BY buildings DESC, block LIMIT 10",
+      after: 'compute',
+    },
+  ],
+  compute: [{ type: 'clusters', dataRef: 'fidi_buildings', outputColumnName: 'block', outputTableName: 'fidi_blocks', writeBack: true }],
+  plot: { dataRef: 'largest_blocks', mark: 'bar', axis: ['block', 'buildings'] },
+}
+```
+
+A join after compute into the blocks adds its columns to them, so a layer of `fidi_blocks` reads both the pass's `compute.block` and the join's `sjoin.count.noise`:
+
+```ts
+{ type: 'join', dataRef: 'fidi_blocks', joinDataRef: 'noise', near: { distance: 100 }, groupBy: [{ column: '*', aggregateFn: 'count' }], after: 'compute' }
+```
+
+See the [Compute, Then SQL: The Ten Largest Blocks](/grammar/examples/largest-blocks) example, which also draws the blocks on a map.
+
 ### Workspaces
 
 A workspace is an isolated set of tables with its own extent. The first source loaded into a workspace sets its extent and later sources are cut to it, so two areas that must not clip each other go in two workspaces. An `osm` source comes before the other sources of its workspace: autk-db refuses OpenStreetMap data loaded after a table that is not OpenStreetMap's (see [OpenStreetMap](/autk-db/loading-data#openstreetmap)). A table is found by its name inside its workspace, so two workspaces may hold tables of the same name.
@@ -327,7 +380,7 @@ const spec = {
 
 ## Compute
 
-Each `compute` entry is a pass. Passes run in order after the data is loaded, and a pass can read a table an earlier pass wrote. A pass's `type` is `'gpgpu'`, the default, or [`'render'`](#render-passes), which run on the GPU, or [`'windows'`](#windows-passes) or [`'clusters'`](#clusters-passes), which run on the CPU. A run refuses a pass of any other `type`, with a message that names the type.
+Each `compute` entry is a pass. Passes run in order once the data sources without [`after: 'compute'`](#sources-after-compute) are loaded, and a pass can read a table an earlier pass wrote. A pass's `type` is `'gpgpu'`, the default, or [`'render'`](#render-passes), which run on the GPU, or [`'windows'`](#windows-passes) or [`'clusters'`](#clusters-passes), which run on the CPU. A run refuses a pass of any other `type`, with a message that names the type.
 
 A GPGPU pass runs a WGSL function on the GPU once per feature of `dataRef`:
 
@@ -343,6 +396,7 @@ A GPGPU pass runs a WGSL function on the GPU once per feature of `dataRef`:
 | `outputColumnName`, `outputColumns` | Name of the new column, read on the map as `compute.<outputColumnName>`, or the columns of a result of several values. |
 | `outputTableName` | Name of a new table that receives the result, so the source table stays as it is and later passes, maps, and plots can read both. Without it, the pass writes into the `dataRef` table. |
 | `layerType` | How the map draws the new table, for example `'points'`. Defaults to the type of the table it was computed from. Only used with `outputTableName`. |
+| `writeBack` | `true` also keeps the result in autk-db. See [Results kept in autk-db](#results-kept-in-autk-db). |
 | `workspace` | [Workspace](#workspaces) of the tables the pass reads and writes. |
 
 See the [Compute](/grammar/examples/compute-function) examples, and [Compute into a New Table](/grammar/examples/compute-output-table) for `outputTableName`.
@@ -378,6 +432,7 @@ A pass with `type: 'render'` draws `layers` from each viewpoint of a table, in s
 | `aggregation` | `{ type: 'classes' }` writes the share of each feature's frame pixels that each layer `type` covers, from 0 to 1, in `compute.render.classes.<type>`; with `includeBackground: true`, the pixels no layer covers, such as the sky, count as one more class, `backgroundLayerType` (`'background'` by default). `{ type: 'objects' }` writes, for each object seen, the share of the feature's frames that show it, in `compute.render.objects`. |
 | `camera` | `{ fov, clip: { near, far } }`: the field of view of each square frame, in degrees (90 by default), and the nearest and farthest distances drawn, in planar units (1 and 5000 by default). |
 | `tileSize` | Frame size in pixels, a multiple of 8. Defaults to 64. |
+| `writeBack` | `true` also keeps the result in autk-db. See [Results kept in autk-db](#results-kept-in-autk-db). |
 | `workspace` | [Workspace](#workspaces) of the tables the pass reads and writes. |
 
 See the [Render Pass](/grammar/examples/compute-render) example, which colors streets by the share of sky seen from them.
@@ -392,6 +447,7 @@ A pass with `type: 'windows'` places the windows of a buildings table in a new t
 | `floors` | Rows of windows on each facade, spread evenly up each building's height, as the `building-windows` strategy's `floors` places them. autk-core rounds it down and places at least one row. |
 | `outputTableName` | Name of the new table. Required. |
 | `layerType` | How the map draws the new table. Defaults to `'points'`. |
+| `writeBack` | `true` also keeps the windows in autk-db. See [Results kept in autk-db](#results-kept-in-autk-db). |
 | `workspace` | [Workspace](#workspaces) of the tables the pass reads and writes. |
 
 The windows are about 6 planar units apart along each facade, one row a floor, each a point `[x, y, z]` at the middle of its window, `z` its height above the ground. A building without a height is taken as 20 units high. Each window is a feature whose id is the window's own, with these properties:
@@ -423,6 +479,7 @@ A pass with `type: 'clusters'` gives each row of a table the id of its cluster: 
 | `outputColumnName` | Name of the column the ids are written to, read on the map as `compute.<outputColumnName>`, as a GPGPU pass writes its result. |
 | `outputTableName` | Name of a new table that receives the rows with their ids, so the source table stays as it is. Without it, the pass writes into the `dataRef` table. |
 | `layerType` | How the map draws the new table. Defaults to the type of the table it was computed from. Only used with `outputTableName`. |
+| `writeBack` | `true` also keeps the result in autk-db. See [Results kept in autk-db](#results-kept-in-autk-db). |
 | `workspace` | [Workspace](#workspaces) of the tables the pass reads and writes. |
 
 The ids are whole numbers from 0: the first row's cluster is 0, and each other cluster takes the next number, in the order of its first row. A row without a geometry, or with an empty one, as a GeoJSON source loads a row whose geometry is null, is in no cluster: its id is `null`. Rows are told apart by their place in the table, not by their feature ids.
@@ -433,6 +490,22 @@ map: { layerRefs: [{ dataRef: 'fidi_blocks', getFnv: 'compute.block', colorMapIn
 ```
 
 See the [Building Clusters](/grammar/examples/building-clusters) example, which colors the buildings of the Financial District by the block of touching buildings they are in.
+
+### Results kept in autk-db
+
+The grammar keeps each pass's result where the maps, the plots, and the later passes read it. A pass of any type with `writeBack: true` also keeps its result in autk-db, in the pass's workspace, where autk-db's own operations read it: the [sources after compute](#sources-after-compute), such as a join, a heatmap, a `sql` source, or an update, and a host that reads autk-db after the run. The maps, the plots, and the later passes read the result as they do without it.
+
+- **As a new table,** the pass's `outputTableName`, which a render or windows pass always has: autk-db holds every row of the result, with its feature id and its properties, as a layer of the type the map draws it as. autk-db cuts each source it loads to the workspace's extent, but not a result kept this way, so the windows of a building that reaches past the extent stay.
+- **In place,** for a GPGPU or clusters pass without `outputTableName`: each row of autk-db's table takes the result's properties, matched by its feature id. The table keeps its other columns, and each building its parts. autk-db clears its records of an OpenStreetMap table's elements, as it does on any update.
+- **On the grid:** autk-db puts each coordinate on the workspace's precision grid, as it does for every table, and keeps a point's height. A polygon's ring may then start at another of its vertices.
+
+A run refuses `writeBack` on a raster, such as a heatmap's grid, and on a new table whose layer type the grammar cannot tell (set the pass's `layerType`), with a message that names the pass. It also refuses a result that autk-db does not then hold row for row, since autk-db's copy and the one the maps draw would differ.
+
+```ts
+compute: [{ type: 'clusters', dataRef: 'fidi_buildings', outputColumnName: 'block', outputTableName: 'fidi_blocks', writeBack: true }],
+```
+
+See [Sources after compute](#sources-after-compute) for a source that reads the blocks, and the [Compute, Then SQL: The Ten Largest Blocks](/grammar/examples/largest-blocks) example.
 
 ## Map
 
@@ -486,7 +559,7 @@ See the [Map Layers](/grammar/examples/geojson-vis) examples, and [Points at Tru
 
 ### OpenStreetMap elements
 
-A map layer or a plot with `osmElements: true` reads an OpenStreetMap layer table as one feature per OpenStreetMap element it was built from, rather than one per row. Each feature's properties are the element's tags, its `osm_type` (`node`, `way`, or `relation`), and its `osm_id`; in a buildings table, whose parts are elements of their own, also the `building_id` of its building. A part takes only its own tags, so a buildings layer draws only the parts whose tags give their height. A table that is not an OpenStreetMap layer, a surface, and an OpenStreetMap table an `update` source changed are read row by row, as without it.
+A map layer or a plot with `osmElements: true` reads an OpenStreetMap layer table as one feature per OpenStreetMap element it was built from, rather than one per row. Each feature's properties are the element's tags, its `osm_type` (`node`, `way`, or `relation`), and its `osm_id`; in a buildings table, whose parts are elements of their own, also the `building_id` of its building. A part takes only its own tags, so a buildings layer draws only the parts whose tags give their height. A table that is not an OpenStreetMap layer, a surface, and an OpenStreetMap table that an `update` source or a compute pass changed in place are read row by row, as without it.
 
 ```ts
 map: { layerRefs: [{ dataRef: 'downtown_roads', osmElements: true, getFnv: 'highway', colorMapInterpolator: 'schemeTableau10' }] },
@@ -882,8 +955,9 @@ A host that runs parts of a spec itself, a server that loads its tables for exam
 
 | Export | Purpose |
 |---|---|
-| `createDataAdapter(targets?, cache?)` | The data adapter. Its `resolveWorkspaces(db, workspaces)` sets up a spec's `workspaces` before the first source loads, and its `resolveSource(db, source)` loads one `data` entry. Each takes an autk-db database, a new one when `db` is undefined, and returns it. `cache` receives each GeoJSON table and each table a join or an update wrote. |
-| `createComputeAdapter(cache?, types?, sources?)` | The compute adapter. Its `resolveCompute(db, pass)` runs one `compute` entry, on the GPU or, for a windows or clusters pass, on the CPU, and refuses a pass of any other `type`. The results are kept only in `cache`, and `types` receives the layer type of each table a pass wrote under its own `outputTableName`. `sources` is the `cache` given to `createDataAdapter`, from which a pass reads a `fromFeature` table a GeoJSON source loaded (see [Passes run by a host](#passes-run-by-a-host)). |
+| `createDataAdapter(targets?, cache?, computeCache?, computeTypes?)` | The data adapter. Its `resolveWorkspaces(db, workspaces)` sets up a spec's `workspaces` before the first source loads, and its `resolveSource(db, source)` loads one `data` entry. Each takes an autk-db database, a new one when `db` is undefined, and returns it. `cache` receives each GeoJSON table and each table a join or an update wrote. `computeCache` and `computeTypes` are the compute adapter's `cache` and `types`: each table a source writes leaves them, so the maps and plots read what a [source after compute](#sources-after-compute) wrote. |
+| `createComputeAdapter(cache?, types?, sources?)` | The compute adapter. Its `resolveCompute(db, pass)` runs one `compute` entry, on the GPU or, for a windows or clusters pass, on the CPU, and refuses a pass of any other `type`. The results are kept in `cache`, and in autk-db too for a pass with [`writeBack`](#results-kept-in-autk-db); `types` receives the layer type of each table a pass wrote under its own `outputTableName`. `sources` is the `cache` given to `createDataAdapter`, from which a pass reads a `fromFeature` table a GeoJSON source loaded (see [Passes run by a host](#passes-run-by-a-host)). |
+| `dataPhases(spec)` | The entries of a spec's `data` in the order the grammar runs them: `before`, the sources it runs before the compute passes, and `after`, those it runs after them (see [Sources after compute](#sources-after-compute)). It refuses what a run refuses: an `after` other than `'compute'`, and a source after compute that reads a table a pass writes without `writeBack`. A host that loads the data on a server and runs the passes in a browser loads `before` on the server, and runs `after` in the browser once the passes have run. |
 | `enterWorkspace(db, workspace?)` | Makes an entry's workspace, or the default one when it names none, the one autk-db works in. Every adapter calls it before it reads or writes an entry's tables. |
 | `tableKey(workspace, name)` | The key of a table in those caches: its name in the default workspace, `<workspace>/<name>` in another. |
 | `applyCamera(map, camera)` | Moves an `AutkMap`'s camera as a map's `camera` says, from the view that fits its layers, and refuses a `pitch` that is not at least 0 and less than 90. The map adapter calls it once the layers are loaded, before the map first draws. It looks at a `center` that `resolveCameraCenter` put on the map, and refuses any other, so a host's later turns of a map the grammar drew keep its center. |
@@ -891,15 +965,16 @@ A host that runs parts of a spec itself, a server that loads its tables for exam
 | `playCameraMotion(map, motion)` | Plays a [camera tour](#camera-tours) on an `AutkMap` from the view its camera has, and returns it as `{ done, stop() }` without waiting for it. A tour played on a map stops the one it was playing, and a drag, a scroll, or a key on the map stops it. It refuses a tour as a run does, from the map's own tilt and bank. The map adapter calls it once a map is drawn. A host that frames a map itself and turns it with `applyCamera` calls it after that turn, so the tour starts from the host's view; it also stops the tour the run played. |
 | `arrangeViews(spec)` | Where each view of a spec goes on the page, as its `layout` says: a grid of panes, one per view (see [Arranging the views](#arranging-the-views)). It refuses a `layout` it cannot arrange, with a sentence that names the value. |
 
-The entry `@urban-toolkit/autk-grammar/data` exports `createDataAdapter`, `enterWorkspace`, and `tableKey`, as an ES module and a CommonJS one. Its code imports autk-db alone, never autk-map, autk-plot, autk-compute, or autk-core, so it can be imported where they cannot, such as in Node:
+The entry `@urban-toolkit/autk-grammar/data` exports `createDataAdapter`, `dataPhases`, `enterWorkspace`, and `tableKey`, as an ES module and a CommonJS one. Its code imports autk-db alone, never autk-map, autk-plot, autk-compute, or autk-core, so it can be imported where they cannot, such as in Node:
 
 ```ts
-import { createDataAdapter } from '@urban-toolkit/autk-grammar/data'
+import { createDataAdapter, dataPhases } from '@urban-toolkit/autk-grammar/data'
 
 const adapter = createDataAdapter()
 let db: unknown // the AutkDb the first call creates
 if (spec.workspaces) db = await adapter.resolveWorkspaces(db, spec.workspaces)
-for (const source of spec.data ?? []) db = await adapter.resolveSource(db, source)
+// The sources after compute run where the passes run, once they have.
+for (const source of dataPhases(spec).before) db = await adapter.resolveSource(db, source)
 ```
 
 `AutkGrammar.run` refuses the plot keys autk-plot cannot draw, naming the plot, before it draws any view. A page that hosts several grammars shares one plot mark color and one highlight color, which each run that draws plots sets (see [Mark and highlight colors](#mark-and-highlight-colors)).
@@ -908,20 +983,24 @@ for (const source of spec.data ?? []) db = await adapter.resolveSource(db, sourc
 
 A pass reads a `fromFeature` table as an earlier pass wrote it, from the compute adapter's `cache`. Else, when a GeoJSON source of the run loaded the table with its coordinates in its workspace's coordinate system, it reads the features as the source gave them, from `sources`. Else it reads the table as autk-db keeps it. The difference shows on a `buildings` table: autk-db keeps each of its features in its building model, with the geometry inside a GeometryCollection, so a path such as `geometry.coordinates.0` reads a building part's outline only from the source's own features. The pass's own `dataRef` is never read from `sources`: it is read as an earlier pass wrote it, else as autk-db keeps it, as a map draws it, so its result holds the rows the map draws.
 
-`AutkGrammar` hands its data adapter's cache to its compute adapter. A host that runs the passes itself does the same, so its passes read what the grammar's do: it passes the map it gave `createDataAdapter` as `sources`. The data adapter notes the coordinate system of each GeoJSON source it puts there, so a pass reads only those collections, and only when their coordinates are in the workspace's coordinate system: a source in degrees, in a workspace in World Mercator, is read from autk-db. A host that leaves `sources` out reads autk-db's copy.
+`AutkGrammar` hands its data adapter's cache to its compute adapter, and the compute adapter's `cache` and `types` to its data adapter. A host that runs the passes itself does the same, so its passes read what the grammar's do: it passes the map it gave `createDataAdapter` as `sources`. It runs the sources of `dataPhases(spec).after` once the passes have run, so a source after compute that writes a pass's table takes the pass's result out of the compute adapter's caches, and the maps and plots read autk-db's table. The data adapter notes the coordinate system of each GeoJSON source it puts there, so a pass reads only those collections, and only when their coordinates are in the workspace's coordinate system: a source in degrees, in a workspace in World Mercator, is read from autk-db. A host that leaves `sources` out reads autk-db's copy.
 
 The data adapters of both entries, the main one and `./data`, keep their notes in one place on the page, so a host may load the tables with the data adapter of `./data` and run the passes with the compute adapter of the main entry. A host on autk-grammar 5.2.0 takes both adapters from the main entry, since there the `./data` entry keeps notes of its own, which the compute adapter cannot read, and its passes read autk-db's copy, as without `sources`.
 
 ```ts
-import { createComputeAdapter, createDataAdapter } from '@urban-toolkit/autk-grammar'
+import { createComputeAdapter, createDataAdapter, dataPhases } from '@urban-toolkit/autk-grammar'
 
 const sources = new Map() // each GeoJSON source's features, as the source gave them
-const data = createDataAdapter(undefined, sources)
-const compute = createComputeAdapter(new Map(), new Map(), sources)
+const results = new Map() // each pass's result
+const types = new Map() // the layer type of each table a pass wrote under its outputTableName
+const data = createDataAdapter(undefined, sources, results, types)
+const compute = createComputeAdapter(results, types, sources)
+const { before, after } = dataPhases(spec)
 let db: unknown
 if (spec.workspaces) db = await data.resolveWorkspaces(db, spec.workspaces)
-for (const source of spec.data ?? []) db = await data.resolveSource(db, source)
+for (const source of before) db = await data.resolveSource(db, source)
 for (const pass of spec.compute ?? []) db = await compute.resolveCompute(db, pass)
+for (const source of after) db = await data.resolveSource(db, source)
 ```
 
 #### Arranging the views
