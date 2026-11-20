@@ -52,6 +52,8 @@ const spec = `
     mark: 'bar',
     axis: ['block', 'buildings'],
     axisLabels: ['Block', 'Buildings'],
+    // The y axis counts buildings, so its labels are plain numbers: autk-plot's default, SI prefixes, writes 0.5 as 500m.
+    tickFormats: [',~f', ',~f'],
   },
 }
 `
