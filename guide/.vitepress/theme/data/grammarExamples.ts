@@ -287,6 +287,13 @@ export const GRAMMAR_EXAMPLES: GrammarExample[] = [
     tags: ['data', 'compute', 'map'],
   },
   {
+    slug: 'largest-blocks',
+    group: 'Compute',
+    title: 'Compute, Then SQL: The Ten Largest Blocks',
+    description: 'Give each building of the Financial District the id of its block of touching buildings and keep the result in autk-db, then count the buildings of each block with a SQL query that runs after the pass, and chart the ten largest blocks below the map.',
+    tags: ['data', 'compute', 'map', 'plot'],
+  },
+  {
     slug: 'barchart-click',
     group: 'Plots',
     title: 'Bar Chart',

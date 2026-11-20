@@ -252,6 +252,12 @@ export const EXAMPLES = [
     description: 'Give each building of the Financial District the id of the block of touching buildings it is in, and color the buildings by it, so buildings that share walls share a color.',
     highlights: ['`type: \'clusters\'` compute pass, run on the CPU', 'buildings that touch, directly or through others, share a cluster id', 'ids written to a new table, read with `getFnv: \'compute.block\'`'],
   },
+  {
+    slug: 'largest-blocks', group: 'Compute', layout: 'map+plot',
+    title: 'Compute, Then SQL: The Ten Largest Blocks',
+    description: 'Give each building of the Financial District the id of its block of touching buildings and keep the result in autk-db, then count the buildings of each block with a SQL query that runs after the pass, and chart the ten largest blocks below the map.',
+    highlights: ['`writeBack: true` keeps the clusters pass\'s result in autk-db as the table `fidi_blocks`', '`after: \'compute\'` runs the `sql` source once the pass has run, so its query reads `fidi_blocks`', '`properties->\'compute\'->>\'block\'` reads the cluster id the pass wrote', 'the map colors the blocks by `compute.block`, and the bar chart shows the ten with the most buildings'],
+  },
   // ── Plots ─────────────────────────────────────────────────────
   {
     slug: 'barchart-click', group: 'Plots', layout: 'map+plot',
