@@ -273,7 +273,7 @@ data: [
 
 ### Workspaces
 
-A workspace is an isolated set of tables with its own extent. The first source loaded into a workspace sets its extent and later sources are cut to it, so two areas that must not clip each other go in two workspaces. A table is found by its name inside its workspace, so two workspaces may hold tables of the same name.
+A workspace is an isolated set of tables with its own extent. The first source loaded into a workspace sets its extent and later sources are cut to it, so two areas that must not clip each other go in two workspaces. An `osm` source comes before the other sources of its workspace: autk-db refuses OpenStreetMap data loaded after a table that is not OpenStreetMap's (see [OpenStreetMap](/autk-db/loading-data#openstreetmap)). A table is found by its name inside its workspace, so two workspaces may hold tables of the same name.
 
 Data sources, compute passes, maps, and plots each take an optional `workspace`; an entry without one uses the default workspace. This spec loads two neighborhoods into two workspaces, under the same table names, and draws each in its own map:
 
