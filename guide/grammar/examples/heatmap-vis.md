@@ -40,6 +40,8 @@ const spec = `
     },
   ],
   map: {
+    // Battery Park City and the Financial District, about 2.3 by 2.8 km, fill most of the view.
+    camera: { zoom: 11.2 },
     layerRefs: [
       { dataRef: 'table_osm_surface' },
       { dataRef: 'table_osm_parks' },

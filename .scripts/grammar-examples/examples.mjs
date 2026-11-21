@@ -98,6 +98,25 @@ export const EXAMPLES = [
     description: 'Draw noise complaints in the Financial District as points 10 meters in radius on the ground, over OpenStreetMap layers.',
     highlights: ['`pointSize: 10`, a radius in meters on the ground', 'the grammar converts meters to the map\'s planar units at the layer\'s latitude', 'a fixed `color` for the points'],
   },
+  {
+    slug: 'map-terrain', group: 'Map Layers', layout: 'map',
+    title: 'Terrain',
+    description: 'Raise Manhattan to its elevation, from a GeoTIFF of about 30 m cells from the USGS 3D Elevation Program, drape its neighborhoods and the elevation\'s colors over the ground, and look up the island from Midtown.',
+    highlights: ['`terrain: { dataRef: \'elevation\' }` raises the ground to the heights of a raster table', 'the flat layers are draped over the ground', 'the view fits the raster, and `camera` tilts and turns it from there'],
+  },
+  {
+    slug: 'map-style', group: 'Map Layers', layout: 'map',
+    title: 'Map Style',
+    description: 'Draw the Financial District in a night style of the spec\'s own, each type of layer in a color of its palette, without the map\'s menu and legend.',
+    highlights: ['`style` as an object of nine colors: the background and each type of layer', 'layers without a `color` take their type\'s color', '`showUi: false` hides the menu of layers and the legend'],
+  },
+  {
+    slug: 'camera-tour', group: 'Map Layers', layout: 'map',
+    title: 'Camera Tour',
+    description: 'Look straight down on the New York Stock Exchange, then move in closer, tilt toward the horizon while the view moves north, and turn a quarter clockwise to face east.',
+    highlights: ['`camera.center` is the point the view looks at, in degrees', '`camera.motion` plays its steps one after another once the map is drawn', 'a `pitch` step with a `pan` moves the view as it tilts'],
+    tip: 'The tour plays once the map is drawn. A drag, a scroll, or a key on the map stops it, and the map\'s own pan, tilt, and zoom take over from there. Run plays it again.',
+  },
   // ── OpenStreetMap ─────────────────────────────────────────────
   {
     slug: 'osm-layers-api', group: 'OpenStreetMap', layout: 'map',
@@ -220,6 +239,24 @@ export const EXAMPLES = [
     title: 'Render Pass',
     description: 'From each road segment around Wall Street, render the buildings in four directions on the GPU, and color the roads by the share of sky seen from them.',
     highlights: ['`type: \'render\'` compute pass with `layers` and `viewpoints`', '`aggregation` by classes, with the background counted as `sky`', 'results read with `getFnv: \'compute.render.classes.sky\'`'],
+  },
+  {
+    slug: 'building-windows', group: 'Compute', layout: 'map',
+    title: 'Building Windows',
+    description: 'Place the windows of every building around Wall Street, three rows on each facade, as the points of a new table, and color them by their building\'s height: seen from above, they trace the walls.',
+    highlights: ['`type: \'windows\'` compute pass with `floors`, run on the CPU', 'one point a window, placed as a render pass\'s `building-windows` viewpoints are', 'colored by the window\'s `buildingHeight`'],
+  },
+  {
+    slug: 'building-clusters', group: 'Compute', layout: 'map',
+    title: 'Building Clusters',
+    description: 'Give each building of the Financial District the id of the block of touching buildings it is in, and color the buildings by it, so buildings that share walls share a color.',
+    highlights: ['`type: \'clusters\'` compute pass, run on the CPU', 'buildings that touch, directly or through others, share a cluster id', 'ids written to a new table, read with `getFnv: \'compute.block\'`'],
+  },
+  {
+    slug: 'largest-blocks', group: 'Compute', layout: 'map+plot',
+    title: 'Compute, Then SQL: The Ten Largest Blocks',
+    description: 'Give each building of the Financial District the id of its block of touching buildings and keep the result in autk-db, then count the buildings of each block with a SQL query that runs after the pass, and chart the ten largest blocks below the map.',
+    highlights: ['`writeBack: true` keeps the clusters pass\'s result in autk-db as the table `fidi_blocks`', '`after: \'compute\'` runs the `sql` source once the pass has run, so its query reads `fidi_blocks`', '`properties->\'compute\'->>\'block\'` reads the cluster id the pass wrote', 'the map colors the blocks by `compute.block`, and the bar chart shows the ten with the most buildings'],
   },
   // ── Plots ─────────────────────────────────────────────────────
   {
