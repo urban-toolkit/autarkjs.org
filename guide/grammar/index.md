@@ -391,7 +391,7 @@ A GPGPU pass runs a WGSL function on the GPU once per feature of `dataRef`:
 | `dataRef` | Table to compute over. |
 | `attributes` | Maps WGSL variable names to feature properties, for example `{ x: 'shape_area' }`. |
 | `attributeArrays` | Array lengths for attributes that hold arrays. The function also receives `<name>_length`. |
-| `attributeMatrices` | `{ rows, cols }` for attributes that hold matrices. The function also receives `<name>_rows` and `<name>_cols`. |
+| `attributeMatrices` | `{ rows, cols }` for attributes that hold matrices. The function also receives `<name>_rows` and `<name>_cols`. An attribute that reads the geometry, such as `geometry.coordinates`, takes a MultiLineString as one line of its lines' points, in their order, and the result keeps each feature's own geometry. |
 | `uniforms`, `uniformArrays`, `uniformMatrices` | Values shared by every feature. An entry of `uniforms` or `uniformMatrices` can also read its value from a feature of a table: see [Uniforms from a feature](#uniforms-from-a-feature). |
 | `wgslFunction` | Body of the WGSL function. It must `return` the result. An array of strings is joined with newlines. |
 | `outputColumnName`, `outputColumns` | Name of the new column, read on the map as `compute.<outputColumnName>`, or the columns of a result of several values. |
@@ -408,16 +408,22 @@ An entry of `uniforms` or `uniformMatrices` can read its value from a feature of
 
 | Field | Description |
 |---|---|
-| `fromFeature.layer` | Table to read from: as an earlier pass wrote it; else, when a GeoJSON source loaded it with its coordinates in its workspace's coordinate system, as the source gave its features, each building part with its own outline; else as autk-db keeps it, a buildings table's geometry inside a GeometryCollection. See [Passes run by a host](#passes-run-by-a-host). |
+| `fromFeature.layer` | Table to read from: as an earlier pass wrote it; else, when a GeoJSON source loaded it with its coordinates in its workspace's coordinate system, as the source gave its features, each building part with its own outline; else as autk-db keeps it, a buildings table's geometry inside a GeometryCollection, which a batched entry reads polygon by polygon (below). See [Passes run by a host](#passes-run-by-a-host). |
 | `fromFeature.path` | Dot path from the feature's root, for example `properties.height` or `geometry.coordinates.0`. |
 | `fromFeature.index` | Position of the feature to read. Defaults to 0. |
-| `fromFeature.iterate` | `'all'` runs the pass once per feature of `layer` and sums the outputs. `'batched'` packs every feature's value into a uniform array named after the entry (a `uniformMatrices` entry becomes each feature's bounding box, as four corners), adds a `num_features` uniform, and runs the pass once. |
+| `fromFeature.iterate` | `'all'` runs the pass once per feature of `layer` and sums the outputs. `'batched'` packs every feature's value into a uniform array named after the entry (a `uniformMatrices` entry becomes each feature's bounding box, as four corners), adds a `num_features` uniform, and runs the pass once. An entry whose `path` reads the geometry packs each polygon as a feature of its own (below). |
 | `fromFeature.required` | With `'batched'`, leaves out the features whose `path` does not resolve to a finite value. |
 | `default` | Value used when `path` does not resolve. Without it, the entry is left out. |
 | `cols` | Number of columns, for an entry of `uniformMatrices`. |
 
 ```ts
 uniforms: { tallest: { fromFeature: { layer: 'landmarks', path: 'properties.height', index: 0 }, default: 100 } }
+```
+
+**Polygons in a batched entry.** A batched entry whose `path` starts with `geometry.` packs each polygon as a feature of its own: each polygon of a MultiPolygon, and of a GeometryCollection, with the feature's properties, beside which every other batched value of the feature repeats. autk-db keeps each feature of a `buildings` table in its building model, one GeometryCollection per building with each part's tags in `properties.parts`, so each polygon of a building read as autk-db keeps it also takes its part's tags. A path such as `geometry.coordinates.0` then reads every polygon's outer ring, from a source's own features and from autk-db's buildings alike, `num_features` counts the polygons, and `required` keeps each polygon whose own part has the value. This entry gives each polygon of a buildings table as a box:
+
+```ts
+uniformMatrices: { ring: { fromFeature: { layer: 'loop_buildings', iterate: 'batched', path: 'geometry.coordinates.0' }, cols: 2 } }
 ```
 
 ### Render passes
@@ -494,7 +500,7 @@ See the [Building Clusters](/grammar/examples/building-clusters) example, which 
 
 ### Results kept in autk-db
 
-The grammar keeps each pass's result where the maps, the plots, and the later passes read it. A pass of any type with `writeBack: true` also keeps its result in autk-db, in the pass's workspace, where autk-db's own operations read it: the [sources after compute](#sources-after-compute), such as a join, a heatmap, a `sql` source, or an update, and a host that reads autk-db after the run. The maps, the plots, and the later passes read the result as they do without it.
+The grammar keeps each pass's result where the maps, the plots, and the later passes read it. A pass of any type with `writeBack: true` also keeps its result in autk-db, in the pass's workspace, where autk-db's own operations read it: the [sources after compute](#sources-after-compute), such as a join, a heatmap, a `sql` source, or an update, and a host that reads autk-db after the run, or runs the passes on a database of its own (see [Compute steps on a host database](#compute-steps-on-a-host-database)). The maps, the plots, and the later passes read the result as they do without it.
 
 - **As a new table,** the pass's `outputTableName`, which a render or windows pass always has: autk-db holds every row of the result, with its feature id and its properties, as a layer of the type the map draws it as. autk-db cuts each source it loads to the workspace's extent, but not a result kept this way, so the windows of a building that reaches past the extent stay.
 - **In place,** for a GPGPU or clusters pass without `outputTableName`: each row of autk-db's table takes the result's properties, matched by its feature id. The table keeps its other columns, and each building its parts. autk-db clears its records of an OpenStreetMap table's elements, as it does on any update, so [`osmElements`](#openstreetmap-elements) then reads the table row by row, with the pass's columns.
@@ -931,9 +937,13 @@ grammar.setPlotSelection('neighborhoods', [0, 1, 2])
 grammar.clearHighlightOnMap('neighborhoods')
 grammar.clearHighlightOnPlot('neighborhoods')
 
-// Find the layers that draw a table: every one, in every map, or the last map's
+// Find the layers that draw a table: every one, in every map, or the last map's,
+// each with the collection the run handed autk-map for it
 const layers = grammar.mapLayers('neighborhoods')
-const { map, layerId } = grammar.mapLayer('neighborhoods')
+const { map, layerId, collection } = grammar.mapLayer('neighborhoods')
+
+// The rows the run handed a plot, in the order it draws them
+const rows = grammar.plotCollection('neighborhoods')
 
 // Stop the camera tour of the first map, when its camera has a motion
 grammar.tours[0]?.stop()
@@ -943,6 +953,8 @@ grammar.destroy()
 ```
 
 The calls name map layers by the table they draw. Each reaches every map that draws the table, or only the map its last argument, `mapId`, names: a string by the map's `id`, a number by its index in `map`. A `map:picking` event's `mapId` names the map the pick was made on, so it can be passed back as it is, and its `layerId` is the picked layer's id in that map: its `title`, else its `dataRef`. A plot is named by its `id`, else its `dataRef`: that name is the `plotId` of its `plot:selection` events, and the one `setPlotSelection` and `clearHighlightOnPlot` take. A plot's [`selection`](#selected-rows) makes the same selection as `setPlotSelection`, as the plot is drawn.
+
+A layer's `collection` is what the run handed autk-map for it: the features of its table that have a geometry, in the table's order, as the run read them (a pass's result, an OpenStreetMap table's elements, or autk-db's export), or a raster's one feature. `plotCollection(plotId)` gives the rows the run handed a plot, so the ids of its `plot:selection` events are positions in its features. Each is the collection itself, not a copy: read it, and change nothing in it.
 
 `selectFields` on a layer or a plot, for example `selectFields: ['nta2020']`, names the columns whose values identify the selected rows, for an app that links a selection to other tables. The grammar does not read it: the events still report feature ids, and the app reads those columns from the selected rows.
 
@@ -958,6 +970,9 @@ A host that runs parts of a spec itself, a server that loads its tables for exam
 |---|---|
 | `createDataAdapter(targets?, cache?, computeCache?, computeTypes?)` | The data adapter. Its `resolveWorkspaces(db, workspaces)` sets up a spec's `workspaces` before the first source loads, and its `resolveSource(db, source)` loads one `data` entry. Each takes an autk-db database, a new one when `db` is undefined, and returns it. `cache` receives each GeoJSON table and each table a join or an update wrote. `computeCache` and `computeTypes` are the compute adapter's `cache` and `types`: each table a source writes leaves them, so the maps and plots read what a [source after compute](#sources-after-compute) wrote. |
 | `createComputeAdapter(cache?, types?, sources?)` | The compute adapter. Its `resolveCompute(db, pass)` runs one `compute` entry, on the GPU or, for a windows or clusters pass, on the CPU, and refuses a pass of any other `type`. The results are kept in `cache`, and in autk-db too for a pass with [`writeBack`](#results-kept-in-autk-db); `types` receives the layer type of each table a pass wrote under its own `outputTableName`. `sources` is the `cache` given to `createDataAdapter`, from which a pass reads a `fromFeature` table a GeoJSON source loaded (see [Passes run by a host](#passes-run-by-a-host)). |
+| `createComputeSteps()` | A run's workspaces, sources, and compute passes, one call at a time, on an autk-db database the host owns: a data adapter and a compute adapter wired to one another as `AutkGrammar` wires its own, and each pass's result as the grammar holds it. See [Compute steps on a host database](#compute-steps-on-a-host-database). |
+| `AutkGrammar`'s options `wrapComputeAdapter` and `wrapDataAdapter` | A host's own adapters around the grammar's, which every run of the grammar calls instead: a check around each pass, a kind of source of its own, or a database of its own for the run. See [Host adapters around a run](#host-adapters-around-a-run). |
+| `AutkGrammar`'s `mapLayers(dataRef, mapId?)` and `plotCollection(plotId)` | What the last run handed each view: each layer's `collection`, the one autk-map was handed for it, and each plot's rows (see [Interactions](#interactions)). Each is the collection itself, not a copy; `destroy()` and the next run let them go. |
 | `dataPhases(spec)` | The entries of a spec's `data` in the order the grammar runs them: `before`, the sources it runs before the compute passes, and `after`, those it runs after them (see [Sources after compute](#sources-after-compute)). It refuses what a run refuses: an `after` other than `'compute'`, and a source after compute that reads a table a pass writes without `writeBack`. A host that loads the data on a server and runs the passes in a browser loads `before` on the server, and runs `after` in the browser once the passes have run. |
 | `enterWorkspace(db, workspace?)` | Makes an entry's workspace, or the default one when it names none, the one autk-db works in. Every adapter calls it before it reads or writes an entry's tables. |
 | `tableKey(workspace, name)` | The key of a table in those caches: its name in the default workspace, `<workspace>/<name>` in another. |
@@ -980,29 +995,79 @@ for (const source of dataPhases(spec).before) db = await adapter.resolveSource(d
 
 `AutkGrammar.run` refuses the plot keys autk-plot cannot draw, naming the plot, before it draws any view. A page that hosts several grammars shares one plot mark color and one highlight color, which each run that draws plots sets (see [Mark and highlight colors](#mark-and-highlight-colors)).
 
-#### Passes run by a host
+#### Compute steps on a host database
 
-A pass reads a `fromFeature` table as an earlier pass wrote it, from the compute adapter's `cache`. Else, when a GeoJSON source of the run loaded the table with its coordinates in its workspace's coordinate system, it reads the features as the source gave them, from `sources`. Else it reads the table as autk-db keeps it. The difference shows on a `buildings` table: autk-db keeps each of its features in its building model, with the geometry inside a GeometryCollection, so a path such as `geometry.coordinates.0` reads a building part's outline only from the source's own features. The pass's own `dataRef` is never read from `sources`: it is read as an earlier pass wrote it, else as autk-db keeps it, as a map draws it, so its result holds the rows the map draws.
-
-`AutkGrammar` hands its data adapter's cache to its compute adapter, and the compute adapter's `cache` and `types` to its data adapter. A host that runs the passes itself does the same, so its passes read what the grammar's do: it passes the map it gave `createDataAdapter` as `sources`. It runs the sources of `dataPhases(spec).after` once the passes have run, so a source after compute that writes a pass's table takes the pass's result out of the compute adapter's caches, and the maps and plots read autk-db's table. The data adapter notes the coordinate system of each GeoJSON source it puts there, so a pass reads only those collections, and only when their coordinates are in the workspace's coordinate system: a source in degrees, in a workspace in World Mercator, is read from autk-db. A host that leaves `sources` out reads autk-db's copy.
-
-The data adapters of both entries, the main one and `./data`, keep their notes in one place on the page, so a host may load the tables with the data adapter of `./data` and run the passes with the compute adapter of the main entry. A host on autk-grammar 5.2.0 takes both adapters from the main entry, since there the `./data` entry keeps notes of its own, which the compute adapter cannot read, and its passes read autk-db's copy, as without `sources`.
+`createComputeSteps()` runs a spec's workspaces, sources, and compute passes on an autk-db database the host made and owns, one call at a time, as `AutkGrammar.run` runs them, and draws no map or plot. The steps share their caches as `AutkGrammar`'s adapters do, so a host hands no cache from one adapter to another: a pass reads a `fromFeature` table as a GeoJSON source of the steps gave it, keeps its result in the host's database with [`writeBack`](#results-kept-in-autk-db), and a [source after compute](#sources-after-compute) reads it there. A host calls the steps in the order a run takes them, and can do work of its own between them, such as a check around each pass:
 
 ```ts
-import { createComputeAdapter, createDataAdapter, dataPhases } from '@urban-toolkit/autk-grammar'
+import { AutkDb } from '@urban-toolkit/autk-db'
+import { createComputeSteps, dataPhases, enterWorkspace } from '@urban-toolkit/autk-grammar'
 
-const sources = new Map() // each GeoJSON source's features, as the source gave them
-const results = new Map() // each pass's result
-const types = new Map() // the layer type of each table a pass wrote under its outputTableName
-const data = createDataAdapter(undefined, sources, results, types)
-const compute = createComputeAdapter(results, types, sources)
-const { before, after } = dataPhases(spec)
-let db: unknown
-if (spec.workspaces) db = await data.resolveWorkspaces(db, spec.workspaces)
-for (const source of before) db = await data.resolveSource(db, source)
-for (const pass of spec.compute ?? []) db = await compute.resolveCompute(db, pass)
-for (const source of after) db = await data.resolveSource(db, source)
+const db = new AutkDb()
+await db.init()
+const steps = createComputeSteps()
+const { before, after } = dataPhases(spec) // what a run refuses is refused here, before anything runs
+if (spec.workspaces) await steps.resolveWorkspaces(db, spec.workspaces)
+for (const source of before) await steps.resolveSource(db, source)
+for (const pass of spec.compute ?? []) await steps.resolveCompute(db, pass)
+for (const source of after) await steps.resolveSource(db, source)
+
+const blocks = steps.computed('fidi_blocks') // a pass's result: { collection, layerType }
+await enterWorkspace(db) // any other table is autk-db's, in the workspace it was made in
+const counts = await db.getTable('largest_blocks')
 ```
+
+| Call | Effect |
+|---|---|
+| `resolveWorkspaces(db, workspaces)` | Sets up each workspace of a spec's `workspaces`, as a run does before its first source, and leaves the default workspace current. |
+| `resolveSource(db, source)` | Loads one `data` entry into `db`, in the entry's workspace: a source before the passes, or one with `after: 'compute'` once they have run. A table it writes leaves `computed`. |
+| `resolveCompute(db, pass)` | Runs one `compute` entry on `db`, in the pass's workspace. Its result is kept for `computed` and for later passes, and with `writeBack` in `db` too. |
+| `computed(name, workspace?)` | The table as a pass left it, which maps, plots, and later passes read before autk-db's table: `collection`, the grammar's own collection rather than a copy, and `layerType`, how a map draws a table a pass wrote under its own `outputTableName`. Undefined when no pass wrote the table, or a source wrote it since: autk-db's table is then the one to read. |
+
+Each call takes the host's database and returns it, and leaves the workspace of the entry it ran current; a call without a database is refused before anything runs. One set of steps runs one spec: a new run takes `createComputeSteps()` again. Only the main entry exports it, since a pass runs on autk-compute or autk-core, which `./data` never imports.
+
+#### Host adapters around a run
+
+`new AutkGrammar(targets, options)` takes two options. Each is a function from one of the grammar's adapters to the host's own, which every run of the grammar calls instead:
+
+| Option | Effect |
+|---|---|
+| `wrapComputeAdapter(adapter)` | Returns the compute adapter every pass of every run goes through. A host that checks each pass, in GPU error scopes for example, calls the given adapter's `resolveCompute(context, pass)` inside its check, and returns what that returns. |
+| `wrapDataAdapter(adapter)` | Returns the data adapter the `workspaces` and every source of every run go through, those before compute and those after. It keeps `resolveWorkspaces`: `{ ...adapter, resolveSource }` keeps the grammar's. A host that loads a kind of source of its own, such as a raster it holds as bytes, loads it there and hands every other source to the given adapter. |
+
+Each function is called once, as the grammar is made, with the grammar's own adapter, already wired to the grammar's caches, so the maps and plots read what the host's adapters run. Each call of a data adapter takes the run's database, undefined until the workspaces or the first source make one, and returns the database the run goes on with. A function that returns an adapter without those calls is refused as the grammar is made, and a grammar made without the options runs as before.
+
+A host that keeps the run's database in hand, to read its tables or to end its worker, hands the grammar's data adapter its own database where it is given none. This one also lists the passes each run takes:
+
+```ts
+import { AutkDb } from '@urban-toolkit/autk-db'
+import { AutkGrammar } from '@urban-toolkit/autk-grammar'
+
+const db = new AutkDb()
+await db.init()
+const passes: string[] = []
+const grammar = new AutkGrammar({ map: 'map' }, {
+  wrapDataAdapter: (adapter) => ({
+    resolveWorkspaces: (context, workspaces) => adapter.resolveWorkspaces(context ?? db, workspaces),
+    resolveSource: (context, source) => adapter.resolveSource(context ?? db, source),
+  }),
+  wrapComputeAdapter: (adapter) => ({
+    resolveCompute: (context, pass) => {
+      passes.push(pass.type ?? 'gpgpu')
+      return adapter.resolveCompute(context, pass)
+    },
+  }),
+})
+await grammar.run(spec) // db holds the run's tables, whether the run ends or fails
+```
+
+#### Passes run by a host
+
+A pass reads a `fromFeature` table as an earlier pass wrote it, from the compute adapter's `cache`. Else, when a GeoJSON source of the run loaded the table with its coordinates in its workspace's coordinate system, it reads the features as the source gave them, from `sources`. Else it reads the table as autk-db keeps it. The difference shows on a `buildings` table: autk-db keeps each of its features in its building model, with the geometry inside a GeometryCollection, so an entry that reads one feature finds a building part's outline at a path such as `geometry.coordinates.0` only in the source's own features, while a batched entry reads every polygon of both (see [Uniforms from a feature](#uniforms-from-a-feature)). The pass's own `dataRef` is never read from `sources`: it is read as an earlier pass wrote it, else as autk-db keeps it, as a map draws it, so its result holds the rows the map draws.
+
+`AutkGrammar` hands its data adapter's cache to its compute adapter, and the compute adapter's `cache` and `types` to its data adapter. [`createComputeSteps()`](#compute-steps-on-a-host-database) gives a host steps wired the same way, so its passes read what the grammar's do, and a source after compute that writes a pass's table takes the pass's result out of the caches, so the maps and plots read autk-db's table. A host that builds the adapters itself hands them the same caches: the data adapter's `cache` as the compute adapter's `sources`, and the compute adapter's `cache` and `types` as the data adapter's `computeCache` and `computeTypes`. The data adapter notes the coordinate system of each GeoJSON source it puts in its cache, so a pass reads only those collections, and only when their coordinates are in the workspace's coordinate system: a source in degrees, in a workspace in World Mercator, is read from autk-db. A host that leaves `sources` out reads autk-db's copy.
+
+The data adapters of both entries, the main one and `./data`, keep their notes in one place on the page, so a host may load the tables with the data adapter of `./data` and run the passes with the compute adapter of the main entry. A host on autk-grammar 5.2.0 takes both adapters from the main entry, since there the `./data` entry keeps notes of its own, which the compute adapter cannot read, and its passes read autk-db's copy, as without `sources`.
 
 #### Arranging the views
 
