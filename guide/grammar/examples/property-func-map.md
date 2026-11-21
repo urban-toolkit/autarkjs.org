@@ -31,6 +31,9 @@ const spec = `
   ],
   map: {
     style: 'light',
+    // The buildings of Battery Park City and the Financial District, about 2.1 by 2.6 km, fill most of the view,
+    // tilted so they rise.
+    camera: { zoom: 11.4, pitch: 40 },
     layerRefs: [
       {
         dataRef: 'table_osm_buildings',
