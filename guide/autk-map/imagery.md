@@ -97,7 +97,7 @@ Anything else is a URL template with `{z}`, `{x}`, `{y}`, optional `{s}` with `s
 ```ts
 map.loadTiles('imagery', {
   source: {
-    url: 'https://tiles.example.org/{z}/{x}/{y}.png',
+    urlTemplate: 'https://tiles.example.org/{z}/{x}/{y}.png',
     attribution: { text: '© Example Maps', url: 'https://example.org/terms' },
     theme: 'original', // 'light' | 'dark' | 'original'
     maxZoom: 19,

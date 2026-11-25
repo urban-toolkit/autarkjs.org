@@ -218,6 +218,22 @@ For a string property such as `category`, configure a categorical palette and an
 
 The named properties must exist in your input collection. Use the same category domain/order across related views instead of inferring a different order from each subset. See [`PlotConfig`](/api/autk-plot/type-aliases/PlotConfig) for all options.
 
+## Filtering and top-K
+
+`filter` keeps only the source features that match every condition, before the transform runs. Each condition names a dot-path `attribute`, an operator (`==`, `!=`, `>`, `>=`, `<`, `<=`, `in`, or `not-in`), and a `value`. Ordering operators compare numbers; equality and membership compare strings. Excluded features have no image in the provenance graph, so a selection still points back to the right features.
+
+`topK` keeps only the `k` rendered rows with the highest value of `attributes.axis[1]`, after the transform runs. It is supported by the bar, pie, and donut charts, and by user plots whose rows have a label and a value. `others: true` gathers the rest into an "Others" row instead of dropping them.
+
+```ts
+new AutkPlot(div, {
+  type: 'barchart',
+  collection,
+  attributes: { axis: ['name', 'value'] },
+  filter: { attribute: 'value', op: '>', value: 0 },
+  topK: { k: 10, others: true },
+})
+```
+
 ## Margins
 
 Default margins work for most cases, but long labels or rotated tick text often need more room. Override them in the constructor:
