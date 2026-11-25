@@ -266,3 +266,4 @@ This is useful when the chart is filtered by another view or when new data arriv
 ## Next steps
 
 - [Overview](../autk-plot/) — a complete linked map + plot example.
+- [Extending](./extending) — give a registered chart the same linking and provenance.

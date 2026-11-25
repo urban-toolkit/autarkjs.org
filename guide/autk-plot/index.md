@@ -247,6 +247,7 @@ new AutkPlot(div, {
 
 ## What’s next
 
-- [Chart Types](./chart-types) — scatter plots and parallel coordinates.
-- [Transformations](./transformations) — bar charts, line charts, tables, and heat matrices with transforms.
-- [Interactivity](./interactivity) — click, brush, and programmatic selection.
+- [Chart Types](./chart-types) — the full catalog, and which charts work without a transform.
+- [Transformations](./transformations) — binning, aggregation, and the twelve presets.
+- [Interactivity](./interactivity) — click, brush, hover, and programmatic selection.
+- [Extending](./extending) — register your own chart or transform.

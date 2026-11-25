@@ -97,4 +97,5 @@ The following chart types are usually paired with a transform. Live examples for
 ## Next steps
 
 - [Transformations](./transformations) — bar charts, line charts, tables, and heat matrices with transforms.
-- [Interactivity](./interactivity) — click, brush, and programmatic selection.
+- [Interactivity](./interactivity) — click, brush, hover, and programmatic selection.
+- [Extending](./extending) — write a chart in plain D3 and register it.
