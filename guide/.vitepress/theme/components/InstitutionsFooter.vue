@@ -6,6 +6,10 @@
         <img src="/imgs/uff-light.svg" alt="UFF" class="institution-logo institution-logo--light" />
         <img src="/imgs/uff-dark.svg" alt="UFF" class="institution-logo institution-logo--dark" />
       </a>
+      <a class="institution-link" href="https://portal.fgv.br/" aria-label="Fundação Getulio Vargas (FGV)">
+        <!-- Official wordmark: https://portal.fgv.br/sites/default/files/logo.svg -->
+        <img src="/imgs/fgv.svg" alt="FGV" class="institution-logo institution-logo--fgv" />
+      </a>
       <a class="institution-link" href="https://www.nyu.edu/" aria-label="NYU">
         <img src="/imgs/nyu-light.svg" alt="NYU" class="institution-logo institution-logo--light" />
         <img src="/imgs/nyu-dark.svg" alt="NYU" class="institution-logo institution-logo--dark" />
@@ -40,7 +44,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 18px;
+  gap: clamp(6px, 2vw, 18px);
   flex-wrap: wrap;
 }
 
@@ -48,7 +52,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 72px;
+  width: clamp(56px, 18vw, 72px);
   height: 48px;
 }
 
@@ -65,6 +69,10 @@
 
 .institution-link[aria-label="University of Illinois Chicago"] .institution-logo {
   max-width: 44px;
+}
+
+.dark .institution-logo--fgv {
+  filter: brightness(0) invert(1);
 }
 
 .institution-logo--dark,

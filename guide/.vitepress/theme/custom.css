@@ -28,9 +28,25 @@ body,
 }
 
 .VPHome .VPHero {
-  min-height: auto;
-  padding-top: 108px;
-  padding-bottom: 40px;
+  display: flex;
+  min-height: calc(100svh - var(--vp-nav-height));
+  margin-top: 0;
+  padding-top: clamp(16px, 4svh, 48px);
+  padding-bottom: 0;
+}
+
+.VPHome .VPHero .container {
+  width: 100%;
+  flex-direction: column;
+}
+
+.VPHome .VPHero .institutions-footer {
+  margin-top: auto;
+  padding-inline: 0;
+}
+
+.VPHome .VPFeatures {
+  margin-top: 24px;
 }
 
 .VPFooter {
@@ -39,6 +55,8 @@ body,
 }
 
 .VPHome .VPHero .main {
+  display: flex;
+  flex-direction: column;
   width: min(100%, 920px);
   margin-inline: auto;
   text-align: center;
@@ -46,6 +64,11 @@ body,
 
 .VPHome .VPHero .heading {
   align-items: center;
+  margin-top: auto;
+}
+
+.VPHome .VPHero .hero-links {
+  margin-bottom: clamp(16px, 4svh, 40px);
 }
 
 .VPHome .VPHero .name {
@@ -73,8 +96,22 @@ body,
   justify-content: center;
 }
 
+@media (max-height: 650px) {
+  .VPHome .VPHero .text {
+    font-size: clamp(1.75rem, 4.4vw, 3.75rem);
+  }
+
+  .VPHome .VPHero .tagline {
+    padding-top: 12px;
+  }
+
+  .VPHome .VPHero .actions {
+    padding-top: 20px;
+  }
+}
+
 .VPHomeHero .actions .VPButton {
-  min-width: 140px;
+  min-width: clamp(116px, 30vw, 140px);
   justify-content: center;
 }
 

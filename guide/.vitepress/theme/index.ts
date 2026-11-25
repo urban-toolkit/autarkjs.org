@@ -1,3 +1,4 @@
+import { useData } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import { h } from 'vue'
 import './custom.css'
@@ -19,9 +20,10 @@ import type { Theme } from 'vitepress'
 export default {
   extends: DefaultTheme,
   Layout() {
+    const { frontmatter } = useData()
     return h(DefaultTheme.Layout, null, {
-      'layout-bottom': () => h(InstitutionsFooter),
-      'home-hero-actions-after': () => h(HomeHeroLinks),
+      'layout-bottom': () => frontmatter.value.layout !== 'home' ? h(InstitutionsFooter) : null,
+      'home-hero-actions-after': () => [h(HomeHeroLinks), h(InstitutionsFooter)],
       'home-features-after': () => h(HomeQuickStart),
     })
   },
