@@ -34,7 +34,7 @@ gtag('config', 'G-P6EVSF42L8');`],
     },
 
     title: 'Autark',
-    description: 'A Serverless Toolkit for Prototyping Urban Visual Analytics Systems',
+    description: 'Urban visual analytics. All in the browser.',
     base: '/',
 
     themeConfig: {
