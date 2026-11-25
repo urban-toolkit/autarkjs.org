@@ -176,8 +176,6 @@ map.draw();</code></pre>
 <style scoped>
 .home-quickstart {
   --quickstart-card-height: 660px;
-  margin-left: var(--vp-offset, calc(50% - 50vw));
-  margin-right: var(--vp-offset, calc(50% - 50vw));
   padding: 64px 24px 0;
 }
 

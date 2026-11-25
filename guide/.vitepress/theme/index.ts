@@ -22,12 +22,12 @@ export default {
     return h(DefaultTheme.Layout, null, {
       'layout-bottom': () => h(InstitutionsFooter),
       'home-hero-actions-after': () => h(HomeHeroLinks),
+      'home-features-after': () => h(HomeQuickStart),
     })
   },
   enhanceApp({ app }) {
     app.component('AutkMapExample', AutkMapExample)
     app.component('HomeGallery', HomeGallery)
-    app.component('HomeQuickStart', HomeQuickStart)
     app.component('GalleryPageGrid', GalleryPageGrid)
     app.component('HomeCaseStudies', HomeCaseStudies)
     app.component('ExamplePage', ExamplePage)
