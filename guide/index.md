@@ -3,11 +3,10 @@ layout: home
 
 hero:
   name: Autark
-  text: Urban visual analytics. All in the browser.
+  text: |-
+    Urban visual analytics.
+    All in the browser.
   tagline: Bring urban data to life with interactive maps and charts. Look at the city from new angles, make connections, and discover what traditional maps can’t tell you.
-  image:
-    src: /imgs/hero.png
-    alt: A 3D map of Lower Manhattan rendered with Autark
   actions:
     - theme: brand
       text: Get Started
