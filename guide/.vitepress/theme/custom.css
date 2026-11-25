@@ -29,7 +29,16 @@ body,
 
 .VPHome .VPHero {
   margin-top: 0;
-  padding-block: clamp(28px, 5vw, 64px) 32px;
+  padding-block: clamp(32px, 5.5vw, 72px) 40px;
+}
+
+.VPHome > .institutions-footer {
+  margin-top: auto;
+}
+
+/* The home Markdown wrapper should not absorb space below the logos. */
+.VPHome > .vp-doc {
+  margin-block: 0;
 }
 
 .VPFooter {

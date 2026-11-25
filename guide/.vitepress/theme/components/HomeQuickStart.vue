@@ -175,8 +175,9 @@ map.draw();</code></pre>
 
 <style scoped>
 .home-quickstart {
-  --quickstart-card-height: 420px;
-  padding: 36px 24px 28px;
+  --quickstart-card-height: 480px;
+  margin-block: auto;
+  padding: 48px 24px 40px;
 }
 
 .quickstart-shell {
@@ -543,7 +544,7 @@ map.draw();</code></pre>
 
 @media (max-width: 959px) {
   .home-quickstart {
-    --quickstart-card-height: 380px;
+    --quickstart-card-height: 420px;
   }
 
   .quickstart-grid {
@@ -560,8 +561,8 @@ map.draw();</code></pre>
 
 @media (max-width: 640px) {
   .home-quickstart {
-    --quickstart-card-height: 340px;
-    padding: 32px 24px 24px;
+    --quickstart-card-height: 370px;
+    padding: 40px 24px 32px;
   }
 
   .quickstart-card-header {
