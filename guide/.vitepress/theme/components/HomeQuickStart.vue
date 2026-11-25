@@ -176,11 +176,14 @@ map.draw();</code></pre>
 <style scoped>
 .home-quickstart {
   --quickstart-card-height: 480px;
-  margin-top: auto;
+  display: flex;
+  flex: 1 0 auto;
   padding: 48px 24px 20px;
 }
 
 .quickstart-shell {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: 1152px;
   margin: 0 auto;
@@ -220,6 +223,7 @@ map.draw();</code></pre>
 
 .quickstart-grid {
   display: grid;
+  flex: 1;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
 }
@@ -227,7 +231,7 @@ map.draw();</code></pre>
 .quickstart-card {
   display: flex;
   flex-direction: column;
-  height: var(--quickstart-card-height);
+  min-height: var(--quickstart-card-height);
   border: 1px solid var(--vp-c-bg-soft);
   border-radius: 12px;
   overflow: hidden;
