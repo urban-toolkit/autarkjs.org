@@ -23,23 +23,13 @@ body,
   flex: 1 0 auto;
 }
 
-.VPHome {
-  min-height: auto;
+.Layout .VPHome {
+  margin-bottom: 0;
 }
 
 .VPHome .VPHero {
   margin-top: 0;
-  padding-top: clamp(16px, 4svh, 48px);
-  padding-bottom: 0;
-}
-
-.VPHome .VPHero .container {
-  width: 100%;
-  flex-direction: column;
-}
-
-.VPHome .VPFeatures {
-  margin-top: 24px;
+  padding-block: clamp(28px, 5vw, 64px) 32px;
 }
 
 .VPFooter {
@@ -48,8 +38,6 @@ body,
 }
 
 .VPHome .VPHero .main {
-  display: flex;
-  flex-direction: column;
   width: min(100%, 920px);
   margin-inline: auto;
   text-align: center;
@@ -57,11 +45,6 @@ body,
 
 .VPHome .VPHero .heading {
   align-items: center;
-  margin-top: auto;
-}
-
-.VPHome .VPHero .hero-links {
-  margin-bottom: clamp(16px, 4svh, 40px);
 }
 
 .VPHome .VPHero .name {
@@ -87,98 +70,6 @@ body,
 
 .VPHome .VPHero .actions {
   justify-content: center;
-}
-
-@media (min-width: 960px) and (min-height: 720px) {
-  .Layout:has(.VPHome) {
-    height: 100svh;
-  }
-
-  .Layout .VPContent.is-home,
-  .Layout .VPHome {
-    flex: 1 1 0;
-    min-height: 0;
-    margin-bottom: 0;
-  }
-
-  .VPHome > :not(.home-quickstart) {
-    flex-shrink: 0;
-  }
-
-  .VPHome .VPHero {
-    padding-block: clamp(10px, 2vh, 24px) 0;
-  }
-
-  .VPHome .VPHero .name {
-    margin-bottom: 5px;
-    font-size: 1.2rem;
-  }
-
-  .VPHome .VPHero .text {
-    font-size: clamp(2rem, 3.6vw, 3.5rem);
-    white-space: normal;
-  }
-
-  .VPHome .VPHero .tagline {
-    max-width: 66ch;
-    padding-top: 8px;
-    font-size: 1rem;
-    line-height: 1.4;
-  }
-
-  .VPHome .VPHero .actions {
-    padding-top: 10px;
-  }
-
-  .VPHome .VPHero .hero-links {
-    margin-block: 8px 0;
-  }
-
-  .VPHome .VPFeatures {
-    margin-top: 14px;
-  }
-
-  .VPHome .VPFeature .box {
-    padding: 10px 14px;
-  }
-
-  .VPHome .VPFeature .details {
-    padding-top: 2px;
-    font-size: 13px;
-    line-height: 17px;
-  }
-
-  .VPHome .VPFeature .details br + br {
-    display: none;
-  }
-
-  .Layout .VPHome .institutions-footer {
-    margin-top: auto;
-    padding-block: 4px;
-    gap: 2px;
-  }
-
-  .Layout .VPHome .institution-link {
-    height: 36px;
-  }
-
-  .Layout .VPHome .institution-logo {
-    max-height: 32px;
-  }
-
-  .Layout:has(.VPHome) .VPFooter {
-    padding-block: 4px !important;
-  }
-
-  .Layout:has(.VPHome) .VPFooter :is(.message, .copyright) {
-    display: inline;
-    font-size: 12px;
-    line-height: 18px;
-  }
-
-  .Layout:has(.VPHome) .VPFooter .message {
-    margin-right: 8px;
-  }
 }
 
 .VPHomeHero .actions .VPButton {

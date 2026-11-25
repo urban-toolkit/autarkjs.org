@@ -176,19 +176,18 @@ map.draw();</code></pre>
 <style scoped>
 .home-quickstart {
   --quickstart-card-height: 420px;
-  padding: 64px 24px 0;
+  padding: 36px 24px 28px;
 }
 
 .quickstart-shell {
   width: 100%;
   max-width: 1152px;
   margin: 0 auto;
-  padding-top: 24px;
 }
 
 .quickstart-header {
   text-align: center;
-  margin-bottom: 36px;
+  margin-bottom: 24px;
 }
 
 .section-title {
@@ -542,64 +541,6 @@ map.draw();</code></pre>
   }
 }
 
-@media (min-width: 960px) and (min-height: 720px) {
-  .home-quickstart {
-    display: flex;
-    flex: 1;
-    min-height: 155px;
-    max-height: 290px;
-    padding-top: 12px;
-    padding-bottom: 8px;
-  }
-
-  .quickstart-shell {
-    display: flex;
-    flex-direction: column;
-    padding-top: 0;
-  }
-
-  .quickstart-header {
-    margin-bottom: 8px;
-  }
-
-  .section-title {
-    font-size: 1.25rem;
-  }
-
-  .section-divider {
-    display: none;
-  }
-
-  .section-description {
-    margin-top: 2px;
-    font-size: 0.875rem;
-    line-height: 1.4;
-  }
-
-  .quickstart-grid {
-    flex: 1;
-    min-height: 0;
-    gap: 12px;
-  }
-
-  .quickstart-card {
-    height: auto;
-    min-height: 0;
-  }
-
-  .quickstart-card-header {
-    padding: 6px 12px;
-  }
-
-  .home-terminal-bar {
-    padding: 4px 10px;
-  }
-
-  .home-terminal-panel {
-    padding: 8px 12px;
-  }
-}
-
 @media (max-width: 959px) {
   .home-quickstart {
     --quickstart-card-height: 380px;
@@ -620,7 +561,7 @@ map.draw();</code></pre>
 @media (max-width: 640px) {
   .home-quickstart {
     --quickstart-card-height: 340px;
-    padding: 64px 24px 16px;
+    padding: 32px 24px 24px;
   }
 
   .quickstart-card-header {
