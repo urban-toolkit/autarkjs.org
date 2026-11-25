@@ -173,6 +173,32 @@ const result = await compute.gpgpuPipeline({
 });
 ```
 
+## Geometry
+
+A feature's geometry can be bound as a typed, topology-aware input. Use the value `'geometry'` and read it through node and point accessors in WGSL:
+
+```ts
+variableMapping: { road: 'geometry', height: 'properties.height' },
+wgslBody: `
+  for (var n = road.index; n < road.next; n++) {
+    let line = road_node(n);
+    if (line.kind != 3u) { continue; } // LineString
+    for (var i = line.pointStart; i + 1u < line.pointEnd; i++) {
+      let a = road_points[i].xy;
+      let b = road_points[i + 1u].xy;
+      // Use a and b, two consecutive points of the same LineString.
+    }
+  }
+  return height;
+`,
+```
+
+Autark infers the binding for every GeoJSON geometry type, so do not add the geometry name to `attributeArrays` or `attributeMatrices`. Each node is one component of the geometry: `line.kind` distinguishes it (for example `3u` for `LineString`), and `pointStart`/`pointEnd` delimit its slice of `road_points`. Shared endpoints between separate parts are not reported as an edge, which is what you want for a shadow or length analysis that must not invent a connection.
+
+:::warning Migrating from 4.x
+Replace a `geometry.coordinates` mapping with `'geometry'`, and remove its array or matrix configuration. The old matrix binding is rejected instead of silently producing zeros. A mapping to `'properties.geometry'` still reads a property, not the feature geometry.
+:::
+
 ## Arrays, matrices, and uniforms
 
 The pipeline also supports richer inputs when a single scalar per feature is not enough.
@@ -185,7 +211,7 @@ The pipeline also supports richer inputs when a single scalar per feature is not
 | `uniformArrays` | Global constant arrays |
 | `uniformMatrices` | Global read-only storage matrices |
 
-`uniformArrays` and `uniformMatrices` are read-only global storage buffers in v4, not mutable function-local copies. Access arrays as `name[index]` with `name_length`; access a row-major matrix as `name[row * name_cols + col]` with `name_rows` and `name_cols`. Each global array or matrix consumes a storage binding, so a dispatch that exceeds the device binding limit rejects before GPU resources are created. GPU validation, memory, and internal errors now reject `gpgpuPipeline()` with the GPU error message instead of silently returning zeroed output.
+`uniformArrays` and `uniformMatrices` are read-only global storage arrays and matrices, not mutable function-local copies. Access arrays as `name[index]` with `name_length`; access a row-major matrix as `name[row * name_cols + col]` with `name_rows` and `name_cols`. Each global array or matrix consumes a storage binding, so a dispatch that exceeds the device binding limit rejects before GPU resources are created. GPU validation, memory, and internal errors now reject `gpgpuPipeline()` with the GPU error message instead of silently returning zeroed output.
 
 ### Arrays
 
@@ -243,6 +269,8 @@ This example follows the same pattern as the gallery OSM compute example. It loa
 ## Notes
 
 - The input collection is not mutated; a new collection is returned.
+- The same mapped path can resolve dotted join keys such as `sjoin.avg.lst.band_1`, as well as `properties.sjoin.avg['lst.band_1']`.
+- A GPU validation, memory, or internal error rejects the pipeline with the GPU's own message instead of returning zeroed output.
 - Missing numeric values fall back to `0` in the pipeline.
 - GPU dispatch overhead can outweigh the gains for very small datasets.
 - `AutkComputeEngine` is the main public API. `ComputeGpgpu` is the lower-level class used internally and in some gallery examples.

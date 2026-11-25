@@ -147,23 +147,37 @@ chart.events.on(PlotEvent.CLICK, ({ selection }) => {
 ```
 
 ::: tip Same indices everywhere
-Because [`autk-map`](../autk-map/) also refers to features by their position in the loaded collection, a selection produced by a plot can be passed directly to `map.setHighlightedIds(..., selection)` and vice-versa.
+Because [`autk-map`](../autk-map/) also refers to features by their position in the loaded collection, a selection produced by a plot can be passed directly to `map.setSelection(..., selection)` and vice-versa. An aggregated mark carries the **shares** of the features it covers, so a bar that represents 40% of a feature sends that fraction on, not an all-or-nothing id.
 :::
 
 ## Supported events
 
 | Event | Trigger | Available on |
 |---|---|---|
-| `PlotEvent.CLICK` | Click a mark | Bar chart, table |
+| `PlotEvent.CLICK` | Click a mark | Bar chart, table, box plot, heat matrix, timeline |
+| `PlotEvent.HOVER` | Point at a mark | Every plot |
 | `PlotEvent.BRUSH` | Drag a 2D brush | Scatter plot, heat matrix |
 | `PlotEvent.BRUSH_X` | Brush horizontally | Bar chart (binned), parallel coordinates |
 | `PlotEvent.BRUSH_Y` | Brush vertically | Parallel coordinates |
 
-Every event payload contains a `selection` array with the source feature indices (positions in the input `collection.features`).
+Every event payload contains a `selection` array with the source feature indices (positions in the input `collection.features`). Brush events also carry an `extent`, and aggregated marks include `shares` with the fraction of each feature they cover.
 
 ::: warning Enable the event you need
 Events are only emitted if they are requested through the `events` array in the plot config. Some plots also emit them by default depending on type, but it is safest to declare them explicitly.
 :::
+
+## Hover
+
+Enable `PlotEvent.HOVER` to color hovered marks temporarily with the map's hover color. Hover never changes the selection, and leaving the mark restores its normal or selected color. When hover clears, the payload is `{ selection: [], datum: null }`.
+
+Hover also comes from other views: `plot.setHover(selection)` highlights source features without selecting them, and `plot.setHover([])` clears it. In an aggregated plot, only the hovered feature is drawn as a part of its mark, which is how a map hover highlights plot marks.
+
+```ts
+map.updateRenderInfo('neighborhoods', { isHover: true })
+map.events.on(MapEvent.HOVER, ({ selection, source }) => {
+  if (source === 'pointer') chart.setHover(selection)
+})
+```
 
 ## Click
 
@@ -197,6 +211,18 @@ Scatter plots and heat matrices support rectangular 2D brushes. The event fires 
   <CodePlayground :code="heatBrushCode" out="both" :auto-run="true" :render-canvas="false" :mounts="[{ name: 'plot', height: 420 }]" />
 </ClientOnly>
 
+## Brush extents
+
+Brush events include an `extent` alongside `selection`. An active brush always reports `extent.pixels` in the brush group's local SVG coordinates; a cleared brush reports `extent: null`, even if another brush still contributes to the selection.
+
+Where axis scales exist, `extent.data` gives numeric `range` values (low to high) or categorical `keys` in axis order. Bar brushes report overlapping category bands; line and area brushes report raw bucket keys inside the interval, independent of the displayed tick labels, and a gap can return `keys: []`. Parallel coordinates also report the brushed field in `extent.dimension`.
+
+```ts
+chart.events.on(PlotEvent.BRUSH, ({ selection, extent }) => {
+  console.log(extent?.data?.range, selection.length)
+})
+```
+
 ## Axis brushes
 
 Parallel coordinates support per-axis brushes. `BRUSH_Y` is emitted when the user brushes along any Y axis, and the current `selection` is the intersection of all active brushes.
@@ -207,10 +233,12 @@ Parallel coordinates support per-axis brushes. `BRUSH_Y` is emitted when the use
 
 ## Programmatic selection
 
-You can highlight features from code with `setSelection`. This is the main mechanism for linked views: a map picking event becomes a chart highlight, and a chart brush becomes a map highlight.
+You can highlight features from code with `setSelection`. This is the main mechanism for linked views: a map click becomes a chart highlight, and a chart brush becomes a map selection.
 
 ```typescript
 plot.setSelection([0, 3, 7]);
+// Optional second argument: the share of each feature covered in the emitting view.
+plot.setSelection([0, 3, 7], [0.5, 1, 0.25]);
 ```
 
 To clear the selection, pass an empty array:
@@ -220,8 +248,10 @@ plot.setSelection([]);
 ```
 
 ::: tip Inspect the current selection
-`plot.selection` returns the active selection as an array of source feature indices.
+`plot.selection` returns the active selection as an array of source feature indices, and `plot.provenance` exposes the relation graph of the current draw, from source features to marks. In an aggregated view, an aggregated mark highlights only the part produced by the selected features, and a mark selected there sends each covered feature's share.
 :::
+
+A mark can show a selection from another view in three modes: `boolean` (the whole mark), `subset` (the default: the mark redrawn with the value of the selected subset through its own encoding), or a custom preset (`glyph`, `trace`, `members`, or a function). For a plain D3 chart, the channel of the subset render is inferred from the geometry of its marks; when no channel is proven, a preset stands in. `provenance: { highlight: 'boolean' }` gives any plot the whole-mark highlight.
 
 ## Updating data
 

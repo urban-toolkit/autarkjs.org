@@ -83,7 +83,8 @@ const res = await db.buildHeatmap({
             column: '*',
             aggregateFn: 'count'
         }
-    ]
+    ],
+    smoothingSigma: 1.5
 });
 
 console.log(res)
@@ -125,7 +126,7 @@ await db.loadGeojson({
       geometry: { type: 'Polygon', coordinates: [[[0, 0], [1000, 0], [1000, 1000], [0, 1000], [0, 0]]] },
     }],
   },
-  coordinateFormat: 'EPSG:3395', outputTableName: 'districts',
+  sourceCrs: 'EPSG:3395', outputTableName: 'districts',
 });
 await db.loadGeojson({
   geojsonObject: {
@@ -135,7 +136,7 @@ await db.loadGeojson({
       geometry: { type: 'Polygon', coordinates: [[[1000, 0], [2000, 0], [2000, 1000], [1000, 1000], [1000, 0]]] },
     }],
   },
-  coordinateFormat: 'EPSG:3395', outputTableName: 'parks',
+  sourceCrs: 'EPSG:3395', outputTableName: 'parks',
 });
 
 for (const useCentroid of [true, false]) {
@@ -184,7 +185,7 @@ Once data is loaded into DuckDB, `autk-db` provides methods for spatial analysis
 
 ### Raster joins
 
-In v4.1.1, a compact raster can be `tableJoinName`. Each decoded cell contributes its center transformed to the workspace CRS; joins do not compute pixel-area intersections. Numeric aggregates ignore NoData values. Reload the raster before joining if its in-memory payload is unavailable.
+A compact raster can be `tableJoinName`. Each decoded cell contributes its center transformed to the workspace CRS; joins do not compute pixel-area intersections. Numeric aggregates ignore NoData values. Reload the raster before joining if its in-memory payload is unavailable.
 
 Aggregate keys can contain dots, such as `shadows.jun`. Property paths such as `properties.sjoin.avg.shadows.jun` resolve these literal dotted keys, while fully traversable nested paths take precedence.
 
@@ -405,6 +406,16 @@ When `normalize: true` is set, the aggregated value is normalized between 0 and 
     </tr>
   </tbody>
 </table>
+
+### Smoothing
+
+`buildHeatmap` aggregates each band independently. A band with `normalize: true` is rescaled to 0–1 across the grid and its label gains `_norm`. Bands keep positional IDs (`band_1`, `band_2`, …) in `groupBy` order; use the returned `bands` metadata when selecting by label.
+
+`smoothingSigma` applies a Gaussian blur to every band **after** aggregation and normalization. It is measured in grid cells, from `0` (no smoothing, the default) to `32`. Smoothed values may be fractional, including counts, so a count heatmap with a sigma above zero no longer reports integers. Use a higher sigma on a finer grid to keep the same physical smoothing distance.
+
+The example above sets `smoothingSigma: 1.5`. Lower it to `0` to compare the raw aggregation.
+
+When counting with `groupBy`, `column: '*'` counts matched rows, while a named column counts only non-null values. A heatmap reads each count into its own band.
 
 ## Raw SQL {#raw-sql}
 

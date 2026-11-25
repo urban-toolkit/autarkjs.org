@@ -36,7 +36,7 @@ const lifecycleCode = `
 import { AutkMap } from '@urban-toolkit/autk-map';
 
 const neighborhoods = await fetch('/data/mnt_neighs_proj.geojson').then(res => res.json());
-const map = new AutkMap(canvas, false);
+const map = new AutkMap(canvas, { showUi: false });
 await map.init();
 map.loadCollection('neighborhoods', { collection: neighborhoods });
 map.draw();
@@ -76,7 +76,7 @@ button.addEventListener('click', () => {
 - Render **2D and 3D geospatial layers** directly from [GeoJSON](https://geojson.org/) in the browser.
 - Support [OpenStreetMap](https://www.openstreetmap.org/) layers such as **surface**, **parks**, **water**, **roads**, and **buildings**.
 - Display **thematic data** using configurable color maps.
-- Handle **interactive exploration** through picking, highlighting, and filtering features.
+- Handle **interactive exploration** through clicking, hovering, highlighting, and filtering features.
 - Integrate directly with [`autk-db`](/autk-db/), [`autk-compute`](/autk-compute/), and [`autk-plot`](/autk-plot/).
 
 ## Package installation
@@ -98,7 +98,7 @@ npm install @urban-toolkit/autk
 The entry point of **autk-map** is the `AutkMap` class. To create a map, you must pass to the constructor a HTML canvas as paramenter. After instantiating the map, you must await `init()`, load one or more layers, and finally call `draw()`.
 
 :::tip Coordinate system
-`autk-map` expects data in projected coordinates. Any projected CRS may be used. For example, the default [`autk-db` workspace](/autk-db/workspaces) uses [`EPSG:3395`](/api/autk-db/variables/DEFAULT_WORKSPACE_COORDINATE_FORMAT), also known as **World Mercator**.
+Each map has one workspace CRS, set in the constructor and shared by every layer, imagery and terrain source. It defaults to [`EPSG:3395`](/api/autk-db/variables/DEFAULT_WORKSPACE_CRS) (World Mercator), the same default as `autk-db`. Pass `{ crs }` to use another horizontal CRS. Data loaded with `sourceCrs` is reprojected on load; data without it is assumed to already be in the workspace CRS. See [Coordinate systems](/introduction#coordinate-systems).
 :::
 
 <ClientOnly>
@@ -111,7 +111,7 @@ The entry point of **autk-map** is the `AutkMap` class. To create a map, you mus
 
 ## Rendering mode
 
-In v4.1, `map.draw()` renders once and then renders again only when the map observes a change. Camera navigation, resize, layer loading/removal, supported render-state updates, styles, picking, and terrain changes all request the next frame automatically.
+`map.draw()` renders once and then renders again only when the map observes a change. Camera navigation, resize, layer loading/removal, supported render-state updates, styles, clicking, hovering, and terrain changes all request the next frame automatically.
 
 Run this example and switch between on-demand rendering and a continuous 30 fps loop. **Toggle borders** demonstrates a supported update that redraws automatically in either mode:
 
@@ -129,13 +129,13 @@ Direct writes to GPU resources are not observed; call [`map.requestRender()`](/a
 
 ## Initialization and lifecycle
 
-The optional second constructor argument controls the floating map UI. Pass `false` when your application provides its own controls:
+The optional second constructor argument is an options object: `{ showUi, crs }`. Pass `showUi: false` when your application provides its own controls:
 
 <ClientOnly>
   <CodePlayground :code="lifecycleCode" out="dom" :auto-run="false" />
 </ClientOnly>
 
-`showUi` is a read-only property reflecting that constructor choice. Hiding the UI does not disable programmatic layer, selection, or camera controls. Every map still includes the bottom-right text-only **made with autark** watermark; it follows canvas resizing, does not intercept input, and is removed by `destroy()`.
+`showUi` is a read-only property reflecting that constructor choice. Hiding the UI does not disable programmatic layer, selection, or camera controls. Every map still includes a bottom-left credit strip, even with `showUi: false`: a text-only **Made with Autark** link, plus the attribution of any visible tile imagery. The strip follows canvas resizing, and only its links intercept pointer events; `destroy()` removes it.
 
 When removing the canvas, changing routes, or replacing the visualization, call [`destroy()`](/api/autk-map/classes/AutkMap#destroy):
 
@@ -151,9 +151,10 @@ Autark is built over some core concepts, that guides data data loading, renderin
 
 - **Layer ids** — each layer is identified by an unique string id. This id must be used when the user wants to update rendering properties such as the layer's thematic data, rendering state, etc. See [Layers data](./layers) for details.
 - **Layer types** — each layer has a type that can be either a physical type or a generic type. Physical types such as `surface`, `parks`, `water`, `roads`, and `buildings` are used to build the map context, while generic types such as `points`, `polylines`, `polygons`, and `raster` support custom datasets. See [Layers data](./layers).
-- **Render state** — each layer has render state controlling properties such as opacity, visibility, picking, and whether thematic coloring is active. These properties can be updated dynamically without reloading the layer. See [Styling](./styling).
+- **Render state** — each layer has render state controlling properties such as opacity, visibility, clicking, hovering, point size, line width, borders, and whether thematic coloring is active. These properties can be updated dynamically without reloading the layer. See [Styling](./styling).
 - **Thematic data** — thematic data rendering maps numeric or categorical feature attributes to colors. In practice, you configure a color map, point to a property path, and enable thematic display for the layer. See [Thematic data](./thematic).
-- **Interactions** — interactions let users explore layers through picking, highlighting, filtering, and visibility control without changing the underlying data. See [Interactions](./interactions).
-- **Terrain data** — terrain mode replaces the flat ground plane with a heightfield built from an elevation raster, draping the loaded layers over real topography. See [Terrain data](./terrain).
+- **Interactions** — interactions let users explore layers through clicking, hovering, highlighting, filtering, and visibility control without changing the underlying data. See [Interactions](./interactions).
+- **Terrain data** — terrain mode replaces the flat ground plane with a heightfield built from an elevation raster or streamed elevation tiles, draping the loaded layers over real topography. See [Terrain data](./terrain).
+- **Imagery** — a tile basemap can sit under the vector layers, either alone or combined with terrain. See [Imagery](./imagery).
 
 </div>

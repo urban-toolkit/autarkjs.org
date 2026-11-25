@@ -19,21 +19,25 @@ The default workspace is `"autk"` and is created automatically on `init()`.
 
 ## Default workspace coordinate system
 
-Autark stores workspace geometries in the default workspace coordinate reference system [`EPSG:3395`](/api/autk-db/variables/DEFAULT_WORKSPACE_COORDINATE_FORMAT), also known as **World Mercator**.
+Autark stores workspace geometries in the workspace coordinate reference system, [`crs`](/api/autk-db/interfaces/WorkspaceConfiguration), which defaults to [`EPSG:3395`](/api/autk-db/variables/DEFAULT_WORKSPACE_CRS) (World Mercator, meters).
 
-This means spatial tables inside a workspace are normalized to a projected CRS so filtering, clipping, joins, and distance-based operations can run against a consistent coordinate system.
+Spatial tables are normalized to a projected CRS so filtering, clipping, joins, and distance-based operations run against a consistent coordinate system. Every loader accepts a top-level `sourceCrs` for the incoming data and transforms it into this workspace CRS; the loader default is `EPSG:4326`.
 
-When you load OSM data, you can override the source coordinate format through `autoLoadLayers.coordinateFormat`, but the workspace itself still uses its own projected working CRS for stored geometry.
+The default workspace also uses a `0.01` precision grid in its CRS units. Vector imports, updates, and spatial results are normalized to that grid, so byte-identical coordinate round trips and polygon ring order are not guaranteed. Inspect the active configuration with `db.getWorkspaceConfiguration()`.
 
-In v4, the default workspace also uses a `0.01` precision grid in its CRS units. Vector imports, updates, and spatial results are normalized to that grid, so byte-identical coordinate round trips and polygon ring order are not guaranteed. Inspect the active configuration with `db.getWorkspaceConfiguration()`.
-
-For a non-default CRS, set the CRS and an appropriate positive `precisionGrid` together while the workspace is empty. The precision is measured in the workspace CRS units; for example, geographic degrees need a much smaller grid than metric `EPSG:3395`. Autark does not allow changing either setting after the workspace has populated spatial data.
+For a non-default CRS, set `crs` and an appropriate positive `precisionGrid` together while the workspace is empty. The precision is measured in the workspace CRS units; for example, geographic degrees need a much smaller grid than metric `EPSG:3395`. Autark refuses to change either setting after the workspace has tables, because existing geometries cannot be silently reprojected.
 
 ```ts
 await db.setWorkspace('geographic', {
-  coordinateFormat: 'EPSG:4326',
+  crs: 'EPSG:4326',
   precisionGrid: 1e-7,
 });
+```
+
+The map keeps its own workspace CRS, set once in the constructor. When using a custom database workspace, pass the same value to the map, or the two coordinate systems silently diverge:
+
+```ts
+const map = new AutkMap(canvas, { crs: 'EPSG:4326' });
 ```
 
 ## Switching workspaces
@@ -95,7 +99,7 @@ The second step does not always behave the same way for every table type:
 This distinction is important because the workspace bounding box only filters by extent, while the clipping layer may also reshape geometries depending on the table type.
 
 :::tip OSM workflows
-OSM loading always constructs the surface mask, even when it is not requested as a public layer. Other OSM-derived layers are constrained against it. In v4.1.1, OSM building parts must be fully covered by the surface; uncovered parts are discarded rather than cut, and retained geometry/property indices are reindexed. Roads, including bbox loads, are cropped to the surface.
+OSM loading always constructs the surface mask, even when it is not requested as a public layer. Other OSM-derived layers are constrained against it. OSM building parts must be fully covered by the surface; uncovered parts are discarded rather than cut, and retained geometry/property indices are reindexed. Roads, including bbox loads, are cropped to the surface. Load OSM from a local `.osm.pbf` when you need reproducible results without depending on the Overpass service.
 :::
 
 :::tip When to use workspaces

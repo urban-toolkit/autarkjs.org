@@ -120,10 +120,19 @@ Most presets require you to mark where the computed result should appear:
 | Preset | Purpose | Output channel | Typical chart |
 |---|---|---|---|
 | `sort` | Reorder rows by a column | none | Bar chart, table |
-| `binning-1d` | Group a numeric attribute into bins | `axis[1]` | Bar chart |
+| `binning-1d` | Group a numeric attribute into bins | `axis[1]` | Bar chart, histogram |
 | `binning-2d` | Group two numeric attributes into a grid | `color` | Heat matrix |
-| `binning-events` | Bucket event arrays by time | `axis[1]` | Line chart, bar chart |
+| `binning-hex` | Group two numeric attributes into hexagons | `color` | Hexbin |
+| `binning-events` | Bucket event arrays by time | `axis[1]` | Line chart, calendar |
 | `reduce-series` | Reduce series arrays by timestamp | `axis[1]` | Line chart |
+| `box-stats` | Compute quartiles and whiskers | `axis[1]` | Box plot, violin |
+| `density` | Estimate a kernel density | `axis[1]` | Density plot |
+| `cumulative` | Accumulate a numeric column | `axis[1]` | Pareto, ECDF |
+| `flows` | Turn source/target columns into links | `color` | Sankey, chord |
+| `hierarchy` | Build a parent/child tree | none | Treemap, sunburst |
+| `fold` | Reshape several columns into long rows | `color` | Stacked bar, area chart |
+
+All twelve presets are registered through the same public API as user-defined transforms, and `registered` runs one you added yourself. See [Extending autk-plot](./extending).
 
 ## Bar chart
 
@@ -169,8 +178,12 @@ A heat matrix requires `binning-2d`. Two numeric attributes define the grid, and
 
 Supported reducers are `count`, `sum`, `avg`, `min`, and `max`. For `binning-events`, `resolution` can be `hour`, `day`, `weekday`, `monthday`, `month`, or `year` (default: `month`). `weekday` groups by day of the week, and `monthday` groups by day of the month, rather than by a complete calendar date. `week`, `minute`, and `second` are not supported.
 
+`binning-1d` keeps empty numeric ranges (value `0`, no ids), so a histogram does not skip gaps. An internal edge belongs to the bin it opens, and the maximum belongs to the final bin. Missing and non-finite numeric values go into an `unknown` bin after the numeric ranges, and bins stay readable as fractions of a feature when a selection covers part of a bin.
+
+Axis labels use SI prefixes from one up and decimals under one, so `0.5` does not become `500m`. Set `ticks.x.format` or `ticks.y.format` only when you want a different convention.
+
 ::: tip Transform results are ephemeral
-The original `collection` is not modified. The transform produces an internal derived table used only for rendering. Call `updateCollection` if you need to change the source data.
+The original `collection` is not modified. The transform produces an internal derived table used only for rendering, plus the provenance relations that let a selection travel between aggregated and raw views. Call `updateCollection` if you need to change the source data.
 :::
 
 ## Next steps

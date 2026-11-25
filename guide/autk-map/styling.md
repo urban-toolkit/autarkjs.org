@@ -31,7 +31,7 @@ for (const layer of db.getLayersMetadata()) {
   }
 }
 map.draw();
-output('<label>Style: <select><option value="google">Google</option><option value="poster">Poster</option><option value="default">Default</option></select></label>');
+output('<label>Style: <select><option value="google">Google</option><option value="apple">Apple</option><option value="light">Light</option><option value="dark">Dark</option><option value="osm">OSM</option><option value="default">Default</option></select></label>');
 mount.querySelector('select').addEventListener('change', event => {
   map.style.setPredefinedStyle(event.target.value);
 });
@@ -127,7 +127,7 @@ map.draw();
 
 Styling in `autk-map` happens at two levels. First, `MapStyle` defines the semantic base colors used by the renderer for physical and generic layers. Second, per-layer render settings such as opacity, visibility, and thematic display are applied with `updateRenderInfo()` and `updateColorMap()`.
 
-In v4, polygon borders can be toggled without rebuilding the layer geometry:
+Polygon borders can be toggled without rebuilding the layer geometry:
 
 ```ts
 map.updateRenderInfo('neighborhoods', { showBorders: false });
@@ -143,29 +143,20 @@ In practice, that means you usually:
 | Part | Description |
 |---|---|
 | `MapStyle` | Per-map semantic color system (accessed via `map.style`) for `surface`, `parks`, `water`, `roads`, `buildings`, and generic vector types. |
-| `updateRenderInfo()` | Per-layer render state such as `opacity`, `isSkip`, `isPick`, and `isColorMap`. |
+| `updateRenderInfo()` | Per-layer render state such as `opacity`, `isSkip`, `isClick`, `isHover`, `pointSize`, `polylinesWidth`, and `isColorMap`. |
 | `updateColorMap()` | Palette and domain configuration used when thematic rendering is enabled. |
 
 ## Base map styles
 
-`MapStyle` controls the default semantic colors used by the renderer. Each [`AutkMap`](/api/autk-map/classes/AutkMap) owns its own `MapStyle` instance, exposed through `map.style`, so multiple maps can use different visual treatments. Built-in presets provide quick visual baselines for the same data. The example below loads a basic lower-Manhattan OSM scene and starts with the `google` preset. Use its selector to try the new `poster` preset or return to the default style; the map redraws automatically.
+`MapStyle` controls the default semantic colors used by the renderer. Each [`AutkMap`](/api/autk-map/classes/AutkMap) owns its own `MapStyle` instance, exposed through `map.style`, so multiple maps can use different visual treatments. Built-in presets provide quick visual baselines for the same data. The example below loads a basic lower-Manhattan OSM scene and starts with the `google` preset. Use its selector to try the other presets; the map redraws automatically.
 
 <ClientOnly>
   <CodePlayground :code="mapStyleCode" out="dom" :auto-run="true" />
 </ClientOnly>
 
-Built-in presets currently include:
+Built-in presets are `apple`, `default`, `light`, `google`, `osm`, and `dark`. The retired `poster` name falls back to `apple`. General-purpose presets derive muted generic polygon/line/point colors from their surface color, approximately 10%/20%/30% darker, which improves contrast without changing the data.
 
-- `default`
-- `light`
-- `google`
-- `apple`
-- `osm`
-- `poster`
-
-The `poster` preset uses white land, graphite roads, and pale-blue water/background. General-purpose presets derive muted generic polygon/line/point colors from their surface color, approximately 10%/20%/30% darker. This improves contrast without changing the data.
-
-Every map has a bottom-right **made with autark** text watermark, even with `showUi: false`. It is branding, not OpenStreetMap attribution; published maps using OSM still need appropriate data credits.
+Every map has a bottom-left credit strip, even with `showUi: false`: a **Made with Autark** link plus the attribution of any visible tile imagery. It is branding, not OpenStreetMap attribution; published maps using OSM still need appropriate data credits.
 
 For full control, use `map.style.setCustomStyle()` with a complete semantic color object. See [`MapStyle`](/api/autk-map/classes/MapStyle).
 
@@ -183,8 +174,10 @@ The example below uses the same OSM scene and lowers only the building opacity s
 |---|---|
 | `opacity` | Layer opacity from `0` to `1`. |
 | `isSkip` | Hides the full layer without removing it. |
-| `isPick` | Enables or disables picking for that layer. |
+| `isClick` | Enables or disables click selection for that layer. |
+| `isHover` | Enables or disables pointer hover for that layer. |
 | `isColorMap` | Turns thematic coloring on or off for the layer. |
+| `showBorders` | Shows or hides polygon outlines without rebuilding geometry. |
 | `pointSize` | Per-layer point radius in projected units (default `64`). |
 | `polylinesWidth` | Full line/road width in projected units (generic default `12`); overrides road category widths. |
 
@@ -203,7 +196,7 @@ Sequential palettes are typically used for one-directional numeric values such a
 For the full thematic workflow, continue to [Thematic data](./thematic).
 
 :::tip Layer controls in the hamburger menu
-The currently selected `isPick` layer and the thematic-data display can also be activated from the hamburger menu in the map UI.
+With the default `showUi`, the hamburger menu cycles the interaction layer through **Interaction only**, **Hover**, **Click**, and **Hover + Click**, and activates thematic display. Legends stay at the bottom right and move above the credits when space is tight.
 :::
 
 </div>

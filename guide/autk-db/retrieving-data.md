@@ -117,7 +117,7 @@ const db = new AutkDb();
 await db.init();
 await db.loadGeoTiff({
   geotiffFileUrl: '/data/niteroi-elevation.tif',
-  coordinateFormat: 'EPSG:3395',
+  sourceCrs: 'EPSG:3395',
   outputTableName: 'elevation',
 });
 const raster = await db.getRaster('elevation');
@@ -253,6 +253,18 @@ The returned `FeatureCollection` includes a `bbox` property. The bounding box is
 Calling [`getLayer`](/api/autk-db/classes/AutkDb#getlayer) on a non-vector table throws an error. Use [`getLayersMetadata`](#get-layer-metadata) to inspect the available vector tables, and use [`getRaster`](#get-raster-tables) for raster tables.
 :::
 
+#### Export individual OSM elements
+
+By default, OSM buildings come back consolidated: one feature per building, with its parts in a `GeometryCollection`. Pass `{ osmElements: true }` when an analysis needs one feature per retained OSM element instead:
+
+```ts
+const buildings = await db.getLayer('table_osm_buildings', { osmElements: true })
+// Feature.id: 'way/201' or 'relation/201'
+// Properties: source tags, osm_type, numeric osm_id, and building_id for buildings
+```
+
+Each element keeps its own component geometry, so two touching house ways export separately and share a `building_id`. The mode is only available when the layer still carries OSM provenance; user `updateTable` calls invalidate it for the whole layer, so reload the OSM data to restore it. Geometries are the stored, reprojected, precision-normalized and clipped ones, not raw OSM coordinates.
+
 #### List of `getLayer` parameters
 
 <table>
@@ -268,6 +280,11 @@ Calling [`getLayer`](/api/autk-db/classes/AutkDb#getlayer) on a non-vector table
       <td><code>layerTableName</code></td>
       <td><code>string</code></td>
       <td>Layer table name.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/interfaces/GetLayerOptions#osmelements"><code>osmElements</code></a></td>
+      <td><code>boolean</code></td>
+      <td>Export one feature per retained OSM element.</td>
     </tr>
   </tbody>
 </table>

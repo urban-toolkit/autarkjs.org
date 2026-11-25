@@ -91,14 +91,14 @@ map.updateRenderInfo('roads', { isColorMap: true });
 
 Use this pattern for sky exposure, visible green share, water visibility, and similar metrics.
 
-## Picking → focused render analysis
+## Click selection → focused render analysis
 
 Interactive workflows often start with a picked feature and then launch a targeted render analysis.
 
 A common pattern is:
 
-1. enable picking on buildings;
-2. listen for `MapEvent.PICKING`;
+1. enable clicking on buildings with `isClick: true`;
+2. listen for `MapEvent.CLICK`;
 3. derive viewpoints from the selected building;
 4. run `renderPipeline()` for that local scene;
 5. update a thematic overlay, mesh, or linked panel.

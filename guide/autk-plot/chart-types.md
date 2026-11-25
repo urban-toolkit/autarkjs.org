@@ -46,7 +46,19 @@ const chart = new AutkPlot(plot, {
 
 # Chart Types
 
-`AutkPlot` supports six chart types through a single `type` discriminator. This page shows the two types that work directly on the input GeoJSON without a transform. The remaining types are most useful with a pre-render transform and are covered in [Transformations](./transformations).
+`AutkPlot` supports more than twenty chart types through a single `type` discriminator. This page shows the two types that work directly on the input GeoJSON without a transform; the remaining types are most useful with a pre-render transform and are covered in [Transformations](./transformations).
+
+| Family | Types |
+| --- | --- |
+| Relationships | `scatterplot`, `bubble`, `hexbin`, `parallel-coordinates`, `chord` |
+| Comparisons | `barchart`, `stackedbar`, `linechart`, `areachart`, `pareto` |
+| Distributions | `histogram` via `binning-1d`, `boxplot`, `violin`, `density`, `ecdf` |
+| Time | `calendar`, `linechart` with `binning-events` |
+| Composition | `pie`, `donut`, `treemap`, `sunburst`, `waffle`, `sankey` |
+| Inspection | `table`, `heatmatrix` |
+| Custom | `registered` |
+
+Charts without `events` are static: they render, show tooltips, and display selections coming from other views, but they do not select, sort, or recolor on their own. Add the events a chart should emit to make it interactive.
 
 ## Scatter plot
 

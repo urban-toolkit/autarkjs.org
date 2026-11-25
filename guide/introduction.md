@@ -69,6 +69,34 @@ All Autark packages run in the browser without a backend. Data is fetched direct
 :::
 
 
+## Coordinate systems
+
+Two names carry coordinates across Autark, and they never mean the same thing:
+
+| Name | Where it appears | Meaning |
+| --- | --- | --- |
+| `crs` | `new AutkMap(canvas, { crs })`, `db.setWorkspace(name, { crs })` | The **workspace** coordinate system: where tables are stored and where the map draws. |
+| `sourceCrs` | `loadGeojson`, `loadCsv`, `loadJson`, `loadGeoTiff`, `loadOsm`, `map.loadCollection` | The coordinate system of the **incoming** data, transformed into the workspace on load. |
+
+Both database and map default to `DEFAULT_WORKSPACE_CRS` (`EPSG:3395`, World Mercator in meters), and every database loader defaults `sourceCrs` to `EPSG:4326`. A map layer without `sourceCrs` is assumed to already be in the workspace CRS, so pass `sourceCrs` for raw longitude/latitude GeoJSON:
+
+```ts
+import { DEFAULT_WORKSPACE_CRS } from '@urban-toolkit/autk-core'
+
+const map = new AutkMap(canvas, { crs: DEFAULT_WORKSPACE_CRS })
+map.loadCollection('neighborhoods', { collection, sourceCrs: 'EPSG:4326' })
+```
+
+Keep the database and the map on the same CRS, otherwise features land in the wrong place. Data exported by `db.getLayer()` is already projected, so load it **without** `sourceCrs`. Any horizontal CRS known to [Proj4js](https://github.com/proj4js/proj4js) works; register custom definitions first:
+
+```ts
+import { registerCrs } from '@urban-toolkit/autk-core'
+
+registerCrs('MY:UTM23S', '+proj=utm +zone=23 +south +datum=WGS84 +units=m +no_defs')
+```
+
+Reprojection is horizontal only: it does not densify geometry, resample rasters, or convert vertical datums. Terrain works in projected, linear coordinates, so a geographic workspace cannot display it.
+
 ## Minimal Example
 
 The **interactive playground** below loads OpenStreetMap data for the Financial District in New York and renders it as a full 3D city map — with surface, parks, water and roads. 
@@ -76,7 +104,7 @@ The **interactive playground** below loads OpenStreetMap data for the Financial 
 <script setup>
 const introCode = `
 import { AutkDb } from "@urban-toolkit/autk-db";
-import { AutkMap, MapStyle } from "@urban-toolkit/autk-map";
+import { AutkMap } from "@urban-toolkit/autk-map";
 
 const db = new AutkDb();
 await db.init();
@@ -88,11 +116,11 @@ await db.loadOsm({
     areas: ["Battery Park City", "Financial District"],
   },
   autoLoadLayers: {
-    layers: ["surface", "parks", "water", "roads"],
+    layers: ["surface", "parks", "water", "roads", "buildings"],
   }
 });
 
-const map = new AutkMap(canvas);
+const map = new AutkMap(canvas, { showUi: false });
 await map.init();
 
 for (const layerData of db.getLayersMetadata()) {
@@ -100,6 +128,7 @@ for (const layerData of db.getLayersMetadata()) {
   map.loadCollection(layerData.name, { collection: geojson, type: layerData.type });
 }
 
+map.fitBounds();
 map.draw();
 `
 </script>
@@ -109,10 +138,10 @@ map.draw();
 </ClientOnly>
 
 :::tip Make changes to the examples
-Try to add `"buildings"` to the `layers` list and click **Run** to test changes.
+Try to remove `"buildings"` from the `layers` list and click **Run** to test changes.
 :::
 
-:::info The `canvas` 
-The `canvas` argument used in the autk-map constructor must be a reference to a DOM node containing a HTML canvas.
+:::info The `canvas`
+The `canvas` argument used in the autk-map constructor must be a reference to a DOM node containing a HTML canvas. The second argument is an options object; `showUi: false` hides the built-in layer menu, and `crs` sets the workspace coordinate system.
 :::
 </div>

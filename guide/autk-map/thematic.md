@@ -212,7 +212,8 @@ In `autk-map`, the usual workflow is:
 
 | Part | Description |
 |---|---|
-| `interpolator` | A color scheme from `ColorMapInterpolator` (categorical, sequential, or diverging). |
+| `interpolator` | A named color scheme from `ColorMapInterpolator` (categorical, sequential, or diverging). |
+| `colors` | A custom hex palette with an explicit `type: 'sequential' | 'diverging' | 'categorical'`, instead of `interpolator`. |
 | `domainSpec` | How the renderer maps raw values to colors (`MIN_MAX`, `PERCENTILE`, or `USER`). |
 | `property` | Dot-path to the feature property that supplies the value or class. It can reach an intrinsic attribute or any urban data joined into the feature. |
 
@@ -224,7 +225,25 @@ Categorical palettes assign one color per class. Use them for class labels such 
   <CodePlayground :code="categoricalCode" out="dom" :auto-run="true" />
 </ClientOnly>
 
-The `USER` domain lists the exact classes to encode, in the order they should appear in the legend. Anything outside the list falls back to the last color.
+The `USER` domain lists the exact classes to encode, in the order they should appear in the legend. Anything outside the list falls back to the last color. Set a categorical domain **before** `updateThematic()` so colors stay stable across data updates; without an explicit domain, categories follow first-seen order. A short palette reuses its last color for the remaining categories, which still appear in the legend.
+
+## Custom palettes
+
+Named interpolators are convenient, but you can supply your own colors with `type` and `colors`. Sequential palettes are ramps of two or more stops; diverging palettes use three stops at the low value, reference value, and high value; categorical palettes follow domain order.
+
+```ts
+map.updateColorMap('neighborhoods', {
+  colorMap: {
+    type: 'diverging',
+    colors: ['#b2182b', '#f7f7f7', '#2166ac'],
+    domainSpec: { type: ColorMapDomainStrategy.USER, params: [-20, 0, 50] },
+  },
+})
+```
+
+For an asymmetric diverging domain, pass `[low, reference, high]`. Categorical rasters map values by their position in the domain rather than by numeric magnitude, sample with nearest-neighbor, and draw NoData or out-of-domain cells as transparent.
+
+Color-coded RGB GeoTIFFs can be decoded into classes on the map: call `updateColorMap()` with a `USER` domain of class names and one distinct source color per name. The map decodes the original RGB values, not the stretched display colors; unmatched pixels become transparent with a warning, and later palette updates recolor the classes without decoding again. To query the classes in `autk-db`, use `loadGeoTiff({ categoricalRgb: palette, … })` instead.
 
 ## Diverging attributes
 

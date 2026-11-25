@@ -22,7 +22,7 @@ await db.loadOsm({
 setStatus("Loading the elevation raster...");
 await db.loadGeoTiff({
   geotiffFileUrl: "/data/niteroi-elevation.tif",
-  coordinateFormat: "EPSG:3395",
+  sourceCrs: "EPSG:3395",
   outputTableName: "elevation"
 });
 
@@ -35,7 +35,7 @@ for (const { name, type } of db.getLayersMetadata()) {
 }
 
 const elevation = await db.getRaster("elevation");
-map.enableTerrainMode(elevation, "band_1");
+await map.loadTerrain({ source: { collection: elevation, property: "band_1" } });
 map.resetCamera();
 // Start with an oblique view so the relief is easier to see.
 const center = map.camera.getLookAt();
@@ -46,12 +46,12 @@ map.draw();
 output('<button type="button">Switch to flat map</button>');
 let terrainEnabled = true;
 const button = mount.querySelector('button');
-button.addEventListener('click', () => {
+button.addEventListener('click', async () => {
   terrainEnabled = !terrainEnabled;
   if (terrainEnabled) {
-    map.enableTerrainMode(elevation, "band_1");
+    await map.loadTerrain({ source: { collection: elevation, property: "band_1" } });
   } else {
-    map.disableTerrainMode();
+    map.removeTerrain();
   }
   map.resetCamera();
   if (terrainEnabled) {
@@ -63,6 +63,29 @@ button.addEventListener('click', () => {
 clearStatus();
 `
 
+const streamedCode = `
+import { AutkMap, TILE_SOURCES, TERRAIN_TILE_SOURCES } from "@urban-toolkit/autk-map";
+
+const map = new AutkMap(canvas, { showUi: false });
+await map.init();
+
+// Streamed elevation needs a starting view; there is no vector layer to set the origin.
+map.setView({ center: { latitude: 46.6863, longitude: 7.8632 }, zoom: 12 });
+await map.loadTerrain({
+  source: TERRAIN_TILE_SOURCES.awsTerrarium,
+  levels: 6,
+  windowSize: 512,
+});
+map.loadTiles("imagery", { source: TILE_SOURCES.osmLight });
+map.draw();
+output('<button type="button">Remove terrain</button>');
+const button = mount.querySelector('button');
+button.addEventListener('click', () => {
+  map.removeTerrain();
+  map.draw();
+  button.disabled = true;
+});
+`
 </script>
 
 <style scoped>
@@ -80,19 +103,23 @@ clearStatus();
 
 # Terrain data
 
-By default `autk-map` renders the map on a flat ground plane. **Terrain mode** replaces that plane with a heightfield built from an elevation raster, so buildings, roads, parks, and water drape over real topography instead of floating on a flat surface. This is useful whenever the relief itself carries information — hillside neighborhoods, visibility over ridges, or simply a more faithful urban context.
+By default `autk-map` renders the map on a flat ground plane. **Terrain mode** replaces that plane with a heightfield, so buildings, roads, parks, and water drape over real topography instead of floating on a flat surface. This is useful whenever the relief itself carries information — hillside neighborhoods, visibility over ridges, or simply a more faithful urban context.
 
-Terrain is driven by a single raster band. The elevation values are converted to a local-space heightfield aligned with the map origin, and the standard layer render path is swapped for the terrain render path. All existing layers, thematic coloring, and interactions keep working; they are just sampled against the heightfield.
+Terrain comes from one of two sources: a **fixed raster** band, already loaded through `autk-db`, or **streamed elevation tiles** from a provider. Both use `map.loadTerrain()` and are removed with `map.removeTerrain()`. All existing layers, thematic coloring, and interactions keep working; they are just sampled against the heightfield.
 
-## Workflow
+:::tip Coordinate system
+Terrain needs projected, linear coordinates, so a geographic workspace (`EPSG:4326` or similar) cannot display it. Elevation in meters is converted to the workspace's linear units. The raster and the vector layers must share the map's workspace CRS; pass `sourceCrs` to `loadGeoTiff()` when the file uses another one. The map CRS itself is fixed in the constructor and cannot change later.
+:::
 
-Terrain requires three ingredients: a vector context to render, an elevation raster to sample, and the map in an initialized state. The typical sequence is:
+## Fixed elevation raster
 
-1. **Load the physical context** with `autk-db.loadOsm()` so the standard layers (`surface`, `parks`, `water`, `roads`, `buildings`) are available.
-2. **Load elevation** with `autk-db.loadGeoTiff()`. The GeoTIFF is stored as a compact raster table whose bands can be exported on demand.
-3. **Initialize the map** and load the vector layers with `AutkMap.loadCollection()`, the same as in [Layers data](./layers).
-4. **Export the raster** with `autk-db.getRaster()`, which returns a packed raster `FeatureCollection` containing flat band arrays (`band_1`, `band_2`, ...) and resolution metadata.
-5. **Enable terrain** with `AutkMap.enableTerrainMode()`, passing the raster collection and the dot-path of the band to use as height.
+The typical sequence is:
+
+1. **Load the physical context** with `autk-db.loadOsm()`, so the standard layers (`surface`, `parks`, `water`, `roads`, `buildings`) are available.
+2. **Load elevation** with `autk-db.loadGeoTiff()`. The GeoTIFF is stored as a compact raster table whose bands are exported on demand.
+3. **Initialize the map** and load the vector layers with `AutkMap.loadCollection()`, as in [Layers data](./layers).
+4. **Export the raster** with `autk-db.getRaster()`, which returns a packed raster `FeatureCollection` with flat band arrays (`band_1`, `band_2`, …) and resolution metadata.
+5. **Load terrain** with `map.loadTerrain({ source: { collection, property } })`, naming the band that holds the heights.
 
 | Step | Call | Purpose |
 |---|---|---|
@@ -100,43 +127,62 @@ Terrain requires three ingredients: a vector context to render, an elevation ras
 | 2 | `db.loadGeoTiff(...)` | Ingest an elevation GeoTIFF as a raster table. |
 | 3 | `map.loadCollection(...)` | Push each vector layer onto the map. |
 | 4 | `db.getRaster(tableName)` | Export the raster as a renderable feature collection. |
-| 5 | `map.enableTerrainMode(fc, "band_1")` | Swap the flat plane for a heightfield. |
+| 5 | `map.loadTerrain({ source: { collection, property: 'band_1' } })` | Build the heightfield. |
 
-:::tip Coordinate system
-The elevation raster and the vector layers must share the same projected CRS so the heightfield aligns with the map origin. The default `autk-db` workspace uses [`EPSG:3395`](/api/autk-db/variables/DEFAULT_WORKSPACE_COORDINATE_FORMAT) (World Mercator). Pass `coordinateFormat` to `loadGeoTiff()` when the source GeoTIFF is in a different CRS so it is reprojected on load.
-:::
+A normalized raster from `db.getLayer()` or `db.getRaster()` works the same way. The raster is already in the workspace CRS and can initialize an empty map from its bounds, so no vector layer is required first.
 
-## Loading the elevation raster
+## Streamed elevation tiles
 
-`loadGeoTiff()` ingests a GeoTIFF and stores it as a compact raster table — flat in-memory band arrays plus resolution and bbox metadata. Large rasters are downsampled automatically so browser memory stays bounded. You only need to provide a URL (or `ArrayBuffer`), a table name, and, when the source is not in the workspace CRS, a `coordinateFormat`:
+Instead of a local raster, `loadTerrain` can stream elevation from a provider. `TERRAIN_TILE_SOURCES.awsTerrarium` (Mapzen Terrarium on AWS) is bundled. A custom source is a tile URL plus `encoding: 'terrarium' | 'mapbox'`; Mapbox terrain-RGB needs your own access token in the URL, so it is not bundled. A streamed terrain map needs a starting view, because there is no vector layer to establish the origin:
 
-The [live example](#live-example) below loads `/data/niteroi-elevation.tif` with `coordinateFormat: "EPSG:3395"` and `outputTableName: "elevation"`. Its complete code can be edited and executed.
+```ts
+map.setView({ center: { latitude: 46.6863, longitude: 7.8632 }, zoom: 12 })
+await map.loadTerrain({ source: TERRAIN_TILE_SOURCES.awsTerrarium })
+```
 
-A GeoTIFF can carry several bands. The compact table keeps them as `band_1`, `band_2`, and so on, so a single load can feed different terrain views (for example, elevation vs. a derived surface).
+<ClientOnly>
+  <CodePlayground :code="streamedCode" out="dom" :auto-run="false" :canvas-height="520" />
+</ClientOnly>
 
-## Enabling terrain
+| Option | Default | Purpose |
+|---|---|---|
+| `levels` | 6 | Clipmap levels to compose. |
+| `windowSize` | 512 | Sample window per level. |
+| `composeBudgetMs` | 4 | CPU budget checked between four-row batches. |
+| `overlaySize` | 2048 | Drape target for imagery and 2D layers (64–4096). A 4× MSAA overlay at 2048 is roughly 185 MB, against roughly 740 MB at 4096. |
 
-Once the raster table exists, `getRaster()` exports it as a packed raster `FeatureCollection` ready for rendering. `enableTerrainMode()` takes that collection and a property path pointing to the band that holds the heights:
+Terrain options are validated before any request starts. `idle` means no requests, retries, or composition remain; `complete` separately reports height coverage, and `failedTiles` reports current failures. A scene can be idle with partial coverage instead of loading forever, and missing elevation uses coarser data or zero.
 
-The [live example](#live-example) exports `db.getRaster("elevation")` and passes it to `map.enableTerrainMode(elevation, "band_1")` after loading the vector context.
+Imagery is independent: load it before or after terrain, hide it with `updateRenderInfo`, and `removeTerrain()` keeps the imagery, data, and camera. See [Imagery](./imagery).
 
-After this call the flat render path is replaced with the terrain render path. Rendering samples the heightfield, and any layers loaded afterwards are also draped over the terrain. If on-demand rendering has already started, enabling terrain requests a frame automatically. The terrain resources are initialized immediately, so `enableTerrainMode()` is synchronous.
+## Elevation validation
 
-:::warning Order matters
-Call `map.init()` before `enableTerrainMode()`. The heightfield is built relative to the map origin, which is only known once the map is initialized and at least one layer has been loaded to establish the spatial extent. Enabling terrain before any layer is loaded throws.
-:::
+Validation is enabled by default for every region, with or without imagery. It uses physical sample spacing, local variation, coherent-feature checks, and validated coarser references before replacing isolated spikes or pits. Negative elevations are kept, and unconfirmed features are not flattened.
+
+```ts
+await map.loadTerrain({
+  source: TERRAIN_TILE_SOURCES.awsTerrarium,
+  validation: { minDeviation: 100, maxSlope: 8, madMultiplier: 8 },
+})
+map.getTerrainValidationStats() // checked, rejected, corrected, unresolved
+```
+
+Pass `validation: false` to keep raw source heights. Errors shared across scales cannot be detected reliably without an independent source.
 
 ## Returning to the flat map
 
-Call [`disableTerrainMode()`](/api/autk-map/classes/AutkMap#disableterrainmode) to release terrain resources and restore the flat render path. Existing layers remain loaded:
+Call `map.removeTerrain()` to release the terrain resources and restore the flat render path. Existing layers stay loaded, and a new frame is requested automatically:
 
-Use **Switch to flat map** in the [live example](#live-example) below to execute `map.disableTerrainMode()` followed by `map.resetCamera()`. The same button can re-enable terrain without reloading the data.
+```ts
+map.removeTerrain()
+map.resetCamera()
+```
 
-If rendering has already started, disabling terrain requests a frame with the flat view automatically; a continuous loop is not required. To enable terrain again, call `enableTerrainMode(elevation, 'band_1')` with a valid raster collection, then `resetCamera()` to frame the terrain. There is no need to reload the vector context.
+To enable terrain again, call `loadTerrain()` with a valid source and then `resetCamera()`; there is no need to reload the vector context. Calling `loadTerrain()` again replaces the elevation only after the new setup succeeds.
 
 ## Live example
 
-Explore the hills of **Niterói's Praias da Baía region** below. The example loads a bundled OSM extract and a real elevation GeoTIFF, renders the vector context, then enables terrain from `band_1`. Both datasets are served by this site; no Overpass query or external elevation service is needed.
+Explore the hills of **Niterói's Praias da Baía region** below. The example loads a bundled OSM extract and a real elevation GeoTIFF, renders the vector context, then builds terrain from `band_1`. Both datasets are served by this site; no Overpass query or external elevation service is needed.
 
 The elevation raster is a lightweight 439 × 512 crop in `EPSG:3395`, with heights in meters, derived from the [Autark gallery dataset](https://github.com/urban-toolkit/autark/tree/30159045d4c004f98140fe4bd941e84bee5088b8/gallery/public/data) sourced from [Mapzen Terrarium elevation tiles](https://registry.opendata.aws/terrain-tiles/). See [dataset metadata](/data/niteroi-elevation.json) for provenance and sampling details.
 
@@ -153,7 +199,8 @@ The example requires WebGPU. If initialization fails, check the [browser support
 :::
 
 :::tip See also
-- [`AutkMap.enableTerrainMode()`](/api/autk-map/classes/AutkMap#enableterrainmode)
+- [`AutkMap.loadTerrain()`](/api/autk-map/classes/AutkMap#loadterrain)
+- [`AutkMap.removeTerrain()`](/api/autk-map/classes/AutkMap#removeterrain)
 - [`AutkDb.loadGeoTiff()`](/api/autk-db/classes/AutkDb#loadgeotiff)
 - [`AutkDb.getRaster()`](/api/autk-db/classes/AutkDb#getraster)
 :::

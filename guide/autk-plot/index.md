@@ -16,7 +16,7 @@ setStatus('Initializing map...')
 const map = new AutkMap(canvas)
 await map.init()
 map.loadCollection('neighborhoods', { collection: geojson })
-map.updateRenderInfo('neighborhoods', { isPick: true })
+map.updateRenderInfo('neighborhoods', { isClick: true, isHover: true })
 map.draw()
 
 setStatus('Initializing chart...')
@@ -35,21 +35,33 @@ const chart = new AutkPlot(plot, {
   width: plot.clientWidth || 900,
   height: 420,
   margins: { left: 56, right: 20, top: 50, bottom: 64 },
-  events: [PlotEvent.CLICK, PlotEvent.BRUSH_X],
+  events: [PlotEvent.CLICK, PlotEvent.BRUSH_X, PlotEvent.HOVER],
 })
 
 clearStatus()
 
-map.events.on(MapEvent.PICKING, ({ selection }) => {
+// Map → plot: keep the map selection mirrored in the chart.
+map.events.on(MapEvent.CLICK, ({ selection }) => {
   chart.setSelection(selection)
 })
 
+// Map → plot: hover is transient and never changes the selection.
+map.events.on(MapEvent.HOVER, ({ selection, source }) => {
+  if (source === 'pointer') chart.setHover(selection)
+})
+
+// Plot → map: click and brush share the same component ids.
 chart.events.on(PlotEvent.CLICK, ({ selection }) => {
-  map.setHighlightedIds('neighborhoods', selection)
+  map.setSelection('neighborhoods', selection)
 })
 
 chart.events.on(PlotEvent.BRUSH_X, ({ selection }) => {
-  map.setHighlightedIds('neighborhoods', selection)
+  map.setSelection('neighborhoods', selection)
+})
+
+// Plot → map: hovering a bar previews its neighborhoods.
+chart.events.on(PlotEvent.HOVER, ({ selection }) => {
+  map.setHover('neighborhoods', selection)
 })
 `
 const numericColorCode = `
@@ -61,9 +73,13 @@ const numericPlot = new AutkPlot(plot, {
   type: 'scatterplot',
   collection: neighborhoods,
   attributes: { axis: ['shape_area', 'shape_leng'], color: 'shape_area' },
-  colorMapInterpolator: ColorMapInterpolator.SEQ_BLUES,
-  domainSpec: { type: ColorMapDomainStrategy.USER, params: [0, 40000000] },
-  tickFormats: ['~s', ',.0f'],
+  style: {
+    colorMap: {
+      interpolator: ColorMapInterpolator.SEQ_BLUES,
+      domainSpec: { type: ColorMapDomainStrategy.USER, params: [0, 40000000] },
+    },
+  },
+  ticks: { x: { format: '~s' }, y: { format: ',.0f' } },
   width: plot.clientWidth || 800, height: 400,
 });
 numericPlot.draw();
@@ -88,8 +104,12 @@ const categoricalPlot = new AutkPlot(plot, {
   type: 'scatterplot',
   collection: categorizedNeighborhoods,
   attributes: { axis: ['shape_area', 'shape_leng'], color: 'category' },
-  categoricalColorMapInterpolator: ColorMapInterpolator.CAT_OBSERVABLE10,
-  domainSpec: { type: ColorMapDomainStrategy.USER, params: categories },
+  style: {
+    colorMap: {
+      interpolator: ColorMapInterpolator.CAT_OBSERVABLE10,
+      domainSpec: { type: ColorMapDomainStrategy.USER, params: categories },
+    },
+  },
   width: plot.clientWidth || 800, height: 400,
 });
 categoricalPlot.draw();
@@ -104,15 +124,16 @@ categoricalPlot.setSelection([]);
 
 `autk-plot` is a D3-based chart library that takes a GeoJSON `FeatureCollection` as input and turns `feature.properties` into interactive charts. Because it shares the same data model as [`autk-db`](../autk-db/) and [`autk-map`](../autk-map/), it is straightforward to build coordinated visualizations where charts and maps selection stay in sync.
 
-The library is also extensible. It exposes base classes such as [`PlotBaseData`](../api/autk-plot/classes/PlotBaseData.md), [`PlotBaseInteractive`](../api/autk-plot/classes/PlotBaseInteractive.md), and [`PlotStyle`](../api/autk-plot/classes/PlotStyle.md), so custom plot types can reuse the same GeoJSON input, event model, and selection mechanism.
+The library is also extensible. Built-in plots and transforms are registered with the same public functions available to you, so a custom chart reuses the GeoJSON input, event model, selection mechanism, and provenance tracking. See [Extending autk-plot](./extending).
 
 ## What it covers
 
 - **Overview**: a complete map + plot linked example using a bar chart with a binning transform.
-- **Chart types**: scatter plots and parallel coordinates work directly on raw GeoJSON properties.
+- **Chart types**: the full catalog, from scatter plots and parallel coordinates to box plots, sankey, and maps of relationships.
 - **Transformations**: bar charts, line charts, tables, and heat matrices combined with sorting, binning, and aggregation.
-- **Interactivity**: click, brush, and programmatic selection.
-- **Linked views**: react to map picking and drive map highlights from the chart.
+- **Interactivity**: click, brush, hover, and programmatic selection, with brush extents and proportional shares.
+- **Linked views**: react to map clicking and hovering, and drive map selection and hover from the chart.
+- **Extending**: register your own D3 chart or transform with the same API as the built-ins.
 
 ## Installation
 
@@ -167,10 +188,11 @@ The example below loads the same neighborhood layer into a map and a histogram. 
 | `width` / `height` | `number` | Canvas size in pixels. |
 | `events` | `PlotEvent[]` | Events the plot should emit. |
 | `transform` | `object` | Optional pre-render transform such as sorting or binning. |
-| `domainSpec` | `ColorMapDomainSpec` | Numeric range or explicit categories used for color encoding. |
-| `colorMapInterpolator` | `ColorMapInterpolator` | Palette for numeric color values. |
-| `categoricalColorMapInterpolator` | `ColorMapInterpolator` | Palette for string color values; defaults to `CAT_OBSERVABLE10`. |
-| `tickFormats` | `string[]` | D3 number-format strings, one per axis. |
+| `style` | `object` | Per-plot appearance: `radius`, `barPadding`, `columnFormats`, and `colorMap` for both numeric and categorical values. |
+| `ticks` | `object` | Axis tick counts and D3 format strings: `ticks.x`, `ticks.y`, and `ticks.dimensions` for parallel coordinates. |
+| `filter` | `object` | Keeps only rows meeting one or more conditions (`==`, `!=`, `>`, `>=`, `<`, `<=`, `in`, `not-in`). |
+| `topK` | `object` | Keeps the `k` largest rows, optionally gathering the rest in an “Others” row. |
+| `provenance` | `object` | `{ path: true }` shows how far a selection reaches at each stage; `{ highlight }` picks `boolean`, `subset`, or a custom preset. |
 
 ::: warning Categorical vs numeric axes
 Scatter plots and parallel coordinates require numeric axes. Bar charts expect a categorical first axis and a numeric second axis.
@@ -178,13 +200,13 @@ Scatter plots and parallel coordinates require numeric axes. Bar charts expect a
 
 ## Colors and axis formatting
 
-Choose the palette according to the **color attribute's values**, not the axis types. Numeric color values use `colorMapInterpolator`; string categories use `categoricalColorMapInterpolator`.
+The color scale lives in [`style.colorMap`](/api/autk-plot/type-aliases/PlotConfig), which accepts the same object as `map.updateColorMap(layerId, { colorMap })`. Named interpolators handle numeric ramps and categorical schemes alike; `domainSpec` decides where the values fall. The chart reads the field from `attributes.color`, so there is no separate numeric or categorical palette option.
 
 <ClientOnly>
   <CodePlayground :code="numericColorCode" out="dom" :auto-run="false" :render-canvas="false" :mounts="[{ name: 'plot', height: 420 }]" />
 </ClientOnly>
 
-`~s` formats compact SI values, while `,.0f` formats integers with thousands separators. These are [D3 format strings](https://d3js.org/d3-format), not JavaScript format expressions.
+`ticks: { x: { format: '~s' }, y: { format: ',.0f' } }` formats axis labels: `~s` gives compact SI values and `,.0f` integers with thousands separators. These are [D3 format strings](https://d3js.org/d3-format), not JavaScript format expressions. Add `count` to request about a number of ticks; D3 may adjust it to keep tick values round. Table columns use `style.columnFormats`, and parallel coordinates use `ticks.dimensions`.
 
 `MIN_MAX` derives a numeric range from the data; `PERCENTILE` can limit it to percentile bounds such as `params: [5, 95]`. `USER` accepts explicit numeric bounds or category strings. Share the same numeric domain and interpolator across charts (or a thematic map) to keep equal values the same color.
 

@@ -154,8 +154,8 @@ gtag('config', 'G-P6EVSF42L8');`],
                     },
                     {
                         text: 'Variables', collapsed: true, items: [
-                            { text: 'DEFAULT_INPUT_COORDINATE_FORMAT', link: '/api/autk-db/variables/DEFAULT_INPUT_COORDINATE_FORMAT' },
-                            { text: 'DEFAULT_WORKSPACE_COORDINATE_FORMAT', link: '/api/autk-db/variables/DEFAULT_WORKSPACE_COORDINATE_FORMAT' },
+                            { text: 'DEFAULT_SOURCE_CRS', link: '/api/autk-db/variables/DEFAULT_SOURCE_CRS' },
+                            { text: 'DEFAULT_WORKSPACE_CRS', link: '/api/autk-db/variables/DEFAULT_WORKSPACE_CRS' },
                             { text: 'DEFAULT_WORKSPACE_NAME', link: '/api/autk-db/variables/DEFAULT_WORKSPACE_NAME' },
                             { text: 'DEFAULT_WORKSPACE_PRECISION_GRID', link: '/api/autk-db/variables/DEFAULT_WORKSPACE_PRECISION_GRID' },
                             { text: 'EXCLUDED_BUILDING_VALUES', link: '/api/autk-db/variables/EXCLUDED_BUILDING_VALUES' },
@@ -254,6 +254,7 @@ gtag('config', 'G-P6EVSF42L8');`],
                     {
                         text: 'Variables', collapsed: true, items: [
                             { text: 'DEFAULT_COLORMAP_RESOLUTION', link: '/api/autk-core/variables/DEFAULT_COLORMAP_RESOLUTION' },
+                            { text: 'DEFAULT_WORKSPACE_CRS', link: '/api/autk-core/variables/DEFAULT_WORKSPACE_CRS' },
                             { text: 'DEFAULT_TRANSFER_FUNCTION', link: '/api/autk-core/variables/DEFAULT_TRANSFER_FUNCTION' },
                             { text: 'LAYER_TYPE_VALUES', link: '/api/autk-core/variables/LAYER_TYPE_VALUES' },
                             { text: 'OSM_BASE_LAYER_ORDER', link: '/api/autk-core/variables/OSM_BASE_LAYER_ORDER' },
@@ -306,6 +307,8 @@ gtag('config', 'G-P6EVSF42L8');`],
                         text: 'Variables', collapsed: true, items: [
                             { text: 'DEFAULT_LINE_WIDTH', link: '/api/autk-map/variables/DEFAULT_LINE_WIDTH' },
                             { text: 'DEFAULT_POINT_SIZE', link: '/api/autk-map/variables/DEFAULT_POINT_SIZE' },
+                            { text: 'TILE_SOURCES', link: '/api/autk-map/variables/TILE_SOURCES' },
+                            { text: 'TERRAIN_TILE_SOURCES', link: '/api/autk-map/variables/TERRAIN_TILE_SOURCES' },
                         ]
                     },
                     {
@@ -427,6 +430,7 @@ gtag('config', 'G-P6EVSF42L8');`],
                     items: [
                         { text: 'Overview', link: '/autk-map/' },
                         { text: 'Layers Data', link: '/autk-map/layers' },
+                        { text: 'Imagery', link: '/autk-map/imagery' },
                         { text: 'Terrain Data', link: '/autk-map/terrain' },
                         { text: 'Thematic Data', link: '/autk-map/thematic' },
                         { text: 'Interactions', link: '/autk-map/interactions' },
@@ -451,6 +455,7 @@ gtag('config', 'G-P6EVSF42L8');`],
                         { text: 'Chart Types', link: '/autk-plot/chart-types' },
                         { text: 'Transformations', link: '/autk-plot/transformations' },
                         { text: 'Interactivity', link: '/autk-plot/interactivity' },
+                        { text: 'Extending', link: '/autk-plot/extending' },
                     ],
                 },
                 {

@@ -77,7 +77,7 @@ await db.init();
 const res = await db.loadGeoTiff({
     geotiffFileUrl: '/data/temperature.tif',
     outputTableName: 'temperature',
-    coordinateFormat: 'EPSG:4326'
+    sourceCrs: 'EPSG:4326'
 });
 
 console.log(res)
@@ -143,7 +143,7 @@ To directly fetch from the public [Overpass API](https://overpass-api.de/) and l
    - **Named area** — provide `geocodeArea` and a list of administrative boundary names in `areas`. `geocodeArea` defines the search scope and avoids naming ambiguities; use exact OSM boundary relation names rather than informal place names.
    - **Bounding box** — provide `bbox: [west, south, east, north]` in WGS84 (`EPSG:4326`). All four values must be finite geographic coordinates, with `west < east` and `south < north`; antimeridian-crossing boxes are not supported.
 
-2. [`autoLoadLayers`](/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers) — List of data layers to automatically extract from raw OSM data. The valid osm layer values in Autark are `buildings`, `roads`, `surface`, `parks`, and `water`. The optional [`coordinateFormat`](/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers) specifies the source CRS of the OSM coordinates before they are transformed into the workspace CRS. In v4, `surface` is always built as the workspace clipping mask, even when it is omitted from `layers`; include it when you also want it returned as a public layer.
+2. [`autoLoadLayers`](/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers) — List of data layers to automatically extract from raw OSM data. The valid osm layer values in Autark are `buildings`, `roads`, `surface`, `parks`, and `water`. Pass `sourceCrs` at the top level of `loadOsm` when the extract is not in `EPSG:4326`. The `surface` layer is always built as the workspace clipping mask, even when it is omitted from `layers`; include it when you also want it returned as a public layer.
 
 3. [`outputTableName`](/api/autk-db/type-aliases/LoadOsmParams#outputtablename) — Optional parameter used to define the base name for the produced tables. Each automatically loaded layer is stored as `{outputTableName}_{layer}`. It defaults to `table_osm`. For example, if `layers: ['surface', 'roads']`, the resulting tables are `table_osm_surface`, and `table_osm_roads`.
 
@@ -153,12 +153,12 @@ To directly fetch from the public [Overpass API](https://overpass-api.de/) and l
 </ClientOnly>
 
 :::danger Overpass API limits
-* Fetching large areas is slow and may fail. Be aware that the public Overpass API servers can reject queries when they're busy or out of slots. Keep areas small and use specific `geocodeArea` + `areas` for the best results.
+The public Overpass servers are heavily loaded and some reject third-party use. Fetching large areas is slow and may fail, and transient failures are retried with backoff. Keep areas small and prefer a local PBF for production. To use a self-hosted or commercial instance, pass [`overpassEndpoint`](/api/autk-db/type-aliases/LoadOsmParams#overpassendpoint), for example `overpassEndpoint: 'https://overpass.example.org/api/'`. Malformed queries are not retried.
 
-* `autk-db` provides the `onProgress` callback that may be used to track the loading status.
+`autk-db` provides the `onProgress` callback that may be used to track the loading status.
 :::
 
-:::warning Surface filtering in v4.1.1
+:::warning Surface filtering
 All roads, including bbox loads, are cropped to the mandatory surface. Bridge and over-water segments outside that surface may be removed. Building parts are never cut into new footprints: parts not fully covered by the surface are discarded, and retained geometry/property indices are updated together.
 :::
 
@@ -182,7 +182,7 @@ await db.loadOsm({
 const cafes = await db.getLayer('table_osm_cafes_points', { osmElements: true });
 ```
 
-`tagSets` are not supported with `pbfFileUrl`; use the Overpass workflow for these custom layers.
+Tag sets work with either source. With `pbfFileUrl`, the streaming reader selects matching nodes, ways, and multipolygon relations locally, so the file must contain the required objects. Up to eight sets are allowed, each with a unique lowercase name and 1–64 filters. Tag layers are also clipped to the surface, so a set with no surviving features produces no table.
 
 ### Using static `.pbf` files
 
@@ -244,20 +244,17 @@ To load from a PBF file, provide the [`pbfFileUrl`](/api/autk-db/type-aliases/Lo
         <div style="display:flex; align-items:stretch;">
           <div style="width:120px; display:flex; align-items:center;"><a href="/api/autk-db/type-aliases/LoadOsmParams#autoloadlayers"><code>autoLoadLayers</code></a></div>
           <div style="width:140px; border-left:1px solid var(--vp-c-divider); padding-left:12px; display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
-            <code style="display:inline-block; line-height:1;">coordinateFormat</code>
             <code style="display:inline-block; line-height:1;">layers</code>
           </div>
         </div>
       </td>
       <td>
         <div style="display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
-          <code style="display:inline-block; line-height:1;">string</code>
           <code style="display:inline-block; line-height:1;">LayerType[]</code>
         </div>
       </td>
       <td>
         <div style="display:flex; flex-direction:column; gap:6px;">
-          <span>Source CRS.</span>
           <span>Layer names.</span>
         </div>
       </td>
@@ -266,6 +263,21 @@ To load from a PBF file, provide the [`pbfFileUrl`](/api/autk-db/type-aliases/Lo
       <td><a href="/api/autk-db/type-aliases/LoadOsmParams#pbffileurl"><code>pbfFileUrl</code></a></td>
       <td><code>string</code></td>
       <td>Optional PBF URL.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/type-aliases/LoadOsmParams#sourcecrs"><code>sourceCrs</code></a></td>
+      <td><code>string</code></td>
+      <td>CRS of the OSM data. Defaults to <code>EPSG:4326</code>.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/type-aliases/LoadOsmParams#overpassendpoint"><code>overpassEndpoint</code></a></td>
+      <td><code>string</code></td>
+      <td>Alternate Overpass API base URL.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/autk-db/type-aliases/LoadOsmParams#tagsets"><code>tagSets</code></a></td>
+      <td><code>OsmTagSet[]</code></td>
+      <td>Custom tag-selected layers, up to eight.</td>
     </tr>
     <tr>
       <td><a href="/api/autk-db/type-aliases/LoadOsmParams#forcerefresh"><code>forceRefresh</code></a></td>
@@ -308,7 +320,7 @@ Without `geometryColumns`, the result is a plain table: inspect it with `getTabl
 | `geometryColumns` | Omit for a plain table; use `true` for `Latitude`/`Longitude` in `EPSG:4326`, or an object for custom fields. |
 | `workspace` | Optional destination workspace. |
 
-For custom coordinate fields, use `geometryColumns: { latColumnName: 'lat', longColumnName: 'lon', coordinateFormat: 'EPSG:4326' }`. For WKT, use `{ wktColumnName: 'shape', coordinateFormat: 'EPSG:4326' }`. Coordinates are transformed into the workspace CRS.
+For custom coordinate fields, use `geometryColumns: { latColumnName: 'lat', longColumnName: 'lon' }`, and for WKT use `{ wktColumnName: 'shape' }`. Coordinates are transformed into the workspace CRS. `sourceCrs` is a top-level loader option, not part of `geometryColumns`: `loadJson({ …, geometryColumns: { wktColumnName: 'shape' }, sourceCrs: 'EPSG:4326' })`.
 
 Use [`loadGeojson()`](#geojson) instead when the input already contains GeoJSON features and geometries. See [`LoadJsonParams`](/api/autk-db/interfaces/LoadJsonParams) for the full contract.
 
@@ -320,9 +332,9 @@ Use [`loadGeojson()`](#geojson) instead when the input already contains GeoJSON 
   <CodePlayground :code="loadGeojsonCode" out="console" :auto-run="true" />
 </ClientOnly>
 
- By default, the input coordinates are expected to be in latitude/longitude, that is, it uses the `EPSG:4326` system. If the loaded GeoJSON uses a different coordinates system,its coodinate system must be provided using the [`coordinateFormat`](/api/autk-db/interfaces/LoadGeojsonParams#coordinateformat) attribute. 
- 
- Also, you must use [`layerType`](/api/autk-db/interfaces/LoadGeojsonParams#layertype) define the type of the loaded layer. If no type is provided, it will be authomatically inference performed by `autk-db`.
+By default, the input coordinates are expected to be longitude/latitude (`EPSG:4326`). If the loaded GeoJSON uses another coordinate system, provide it through the top-level [`sourceCrs`](/api/autk-db/interfaces/LoadGeojsonParams#sourcecrs) option.
+
+Use [`layerType`](/api/autk-db/interfaces/LoadGeojsonParams#layertype) to declare the type of the loaded layer. If no type is provided, `autk-db` infers it.
 
 #### List of `loadGeojson` parameters
 
@@ -351,7 +363,7 @@ Use [`loadGeojson()`](#geojson) instead when the input already contains GeoJSON 
       <td>Output table name.</td>
     </tr>
     <tr>
-      <td><a href="/api/autk-db/interfaces/LoadGeojsonParams#coordinateformat"><code>coordinateFormat</code></a></td>
+      <td><a href="/api/autk-db/interfaces/LoadGeojsonParams#sourcecrs"><code>sourceCrs</code></a></td>
       <td><code>string</code></td>
       <td>Source CRS.</td>
     </tr>
@@ -382,12 +394,14 @@ Use [`loadGeojson()`](#geojson) instead when the input already contains GeoJSON 
   <CodePlayground :code="loadGeoTiffCode" out="console" :auto-run="true" />
 </ClientOnly>
 
-By default, the input raster is expected to use `EPSG:4326`. If the GeoTIFF uses a different coordinate system, provide it through [`coordinateFormat`](/api/autk-db/interfaces/LoadGeoTiffParams#coordinateformat). For large rasters, reduce [`maxPixels`](/api/autk-db/interfaces/LoadGeoTiffParams#maxpixels) to avoid loading too many pixels into browser memory.
+By default, the input raster is expected to use `EPSG:4326`. If the GeoTIFF uses a different coordinate system, provide it through the top-level [`sourceCrs`](/api/autk-db/interfaces/LoadGeoTiffParams#sourcecrs). Rasters larger than [`maxRasterCells`](/api/autk-db/interfaces/LoadGeoTiffParams#maxrastercells) (one million by default) are downsampled with `resampleMethod`, `'bilinear'` by default. Lower the limit to save browser memory, or raise it to keep detail.
+
+Color-coded RGB GeoTIFFs can be imported as classes instead of numbers: pass `categoricalRgb` with one distinct hex color per class name. The import matches exact RGB values, uses nearest-neighbor downsampling, and returns category names in the raster band metadata. Unmatched colors become NoData.
 
 Valid zero values are preserved when no NoData value is declared. Negative grid-axis directions are supported; rotated or sheared grids are rejected.
 
 :::tip Try changing the previous example
-Modify the previous code sample to explore more of `autk-db`. For example, try setting [`maxPixels`](/api/autk-db/interfaces/LoadGeoTiffParams#maxpixels) or use a different [`outputTableName`](/api/autk-db/interfaces/LoadGeoTiffParams#outputtablename).
+Modify the previous code sample to explore more of `autk-db`. For example, try setting [`maxRasterCells`](/api/autk-db/interfaces/LoadGeoTiffParams#maxrastercells) or use a different [`outputTableName`](/api/autk-db/interfaces/LoadGeoTiffParams#outputtablename).
 :::
 
 #### List of `loadGeoTiff` parameters
@@ -417,14 +431,14 @@ Modify the previous code sample to explore more of `autk-db`. For example, try s
       <td>Output table name.</td>
     </tr>
     <tr>
-      <td><a href="/api/autk-db/interfaces/LoadGeoTiffParams#coordinateformat"><code>coordinateFormat</code></a></td>
+      <td><a href="/api/autk-db/interfaces/LoadGeoTiffParams#sourcecrs"><code>sourceCrs</code></a></td>
       <td><code>string</code></td>
       <td>Source CRS.</td>
     </tr>
     <tr>
-      <td><a href="/api/autk-db/interfaces/LoadGeoTiffParams#maxpixels"><code>maxPixels</code></a></td>
+      <td><a href="/api/autk-db/interfaces/LoadGeoTiffParams#maxrastercells"><code>maxRasterCells</code></a></td>
       <td><code>number</code></td>
-      <td>Pixel limit.</td>
+      <td>Cell limit before downsampling.</td>
     </tr>
     <tr>
       <td><a href="/api/autk-db/interfaces/LoadGeoTiffParams#workspace"><code>workspace</code></a></td>
@@ -443,7 +457,18 @@ Modify the previous code sample to explore more of `autk-db`. For example, try s
   <CodePlayground :code="loadCsvCode" out="console" :auto-run="true" />
 </ClientOnly>
 
-By default, [`geometryColumns`](/api/autk-db/interfaces/LoadCsvParams#geometrycolumns): `true` expects `Latitude` and `Longitude` columns in `EPSG:4326`. For columns with different names or with [`WKT`](https://libgeos.org/specifications/wkt/) geometry, provide them using the [`geometryColumns`](/api/autk-db/interfaces/LoadCsvParams#geometrycolumns) object. For tab-separated files, set [`delimiter`](/api/autk-db/interfaces/LoadCsvParams#delimiter): `'\t'`.
+By default, [`geometryColumns`](/api/autk-db/interfaces/LoadCsvParams#geometrycolumns): `true` expects `Latitude` and `Longitude` columns. For columns with different names or with [`WKT`](https://libgeos.org/specifications/wkt/) geometry, provide them using the `geometryColumns` object. For tab-separated files, set [`delimiter`](/api/autk-db/interfaces/LoadCsvParams#delimiter): `'\t'`.
+
+The coordinate system is a top-level loader option, not part of `geometryColumns`. It defaults to `EPSG:4326`, so pass `sourceCrs` for a projected CSV:
+
+```ts
+await db.loadCsv({
+  csvFileUrl: '/data/parcels.csv',
+  outputTableName: 'parcels',
+  geometryColumns: { wktColumnName: 'shape' },
+  sourceCrs: 'EPSG:3395',
+});
+```
 
 #### List of `loadCsv` parameters
 
@@ -485,14 +510,12 @@ By default, [`geometryColumns`](/api/autk-db/interfaces/LoadCsvParams#geometryco
             <code style="display:inline-block; line-height:1;">latColumnName</code>
             <code style="display:inline-block; line-height:1;">longColumnName</code>
             <code style="display:inline-block; line-height:1;">wktColumnName</code>
-            <code style="display:inline-block; line-height:1;">coordinateFormat</code>
           </div>
         </div>
       </td>
       <td>
         <div style="display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
           <code style="display:inline-block; line-height:1;">true</code>
-          <code style="display:inline-block; line-height:1;">string</code>
           <code style="display:inline-block; line-height:1;">string</code>
           <code style="display:inline-block; line-height:1;">string</code>
           <code style="display:inline-block; line-height:1;">string</code>
@@ -504,7 +527,6 @@ By default, [`geometryColumns`](/api/autk-db/interfaces/LoadCsvParams#geometryco
           <span>Latitude column.</span>
           <span>Longitude column.</span>
           <span>WKT column.</span>
-          <span>Source CRS.</span>
         </div>
       </td>
     </tr>

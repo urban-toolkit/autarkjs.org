@@ -168,7 +168,7 @@ const db = new AutkDb();
 await db.init();
 await db.loadGeoTiff({
   geotiffFileUrl: '/data/niteroi-elevation.tif',
-  coordinateFormat: 'EPSG:3395', outputTableName: 'elevation',
+  sourceCrs: 'EPSG:3395', outputTableName: 'elevation',
 });
 const raster = await db.getRaster('elevation');
 // Add a derived band with inverted heights, preserving the same grid.
@@ -258,7 +258,7 @@ map.loadCollection(layerId, {
 
 | Part | Description |
 |---|---|
-| `layerId` | Unique layer identifier used later to update thematic data, visibility, picking, and other rendering properties. |
+| `layerId` | Unique layer identifier used later to update thematic data, visibility, clicking, hovering, and other rendering properties. |
 | `params.collection` | Source `FeatureCollection` to load. |
 | `params.type` | Optional when the geometry can be inferred for vector layers. Physical layers should usually pass `type` explicitly. |
 | `params.property` | Required for raster layers so the renderer knows which numeric value to read from each cell. |
@@ -266,10 +266,11 @@ map.loadCollection(layerId, {
 
 `autk-map` also assumes a few basic rules about how layer data is organized and loaded:
 
-- **Projected coordinates** — `autk-map` expects projected coordinates. You may use any projected coordinate system, but all loaded layers must use the same selected system.
-- **Shared origin** — the first loaded collection's geometry establishes the origin used by subsequent layers. For a packed raster with null geometry, load a vector context or extent first, as shown below.
-- **Raster bounds** — a raster collection's projected `bbox: [minX, minY, maxX, maxY]` defines its rendering rectangle, but does not by itself establish a geometry-based origin.
-- **Camera framing** — the default flat camera is city-sized. Small custom geometries may need an explicit camera position, as shown in the building examples. There is no `map.boundingBox` property; use the [camera controls](./interactions#camera-controls).
+- **Workspace coordinates** — one map draws in one workspace CRS, chosen in the constructor. Pass `sourceCrs` on a collection that is not already in that CRS; without it, coordinates are assumed to be in the workspace CRS and are never guessed.
+- **Shared origin** — the first loaded collection's geometry, `setView()`, imagery, or terrain establishes the origin used by subsequent layers. For a packed raster with null geometry, its `bbox` can establish the origin, and `map.fitBounds()` frames it afterwards.
+- **Raster bounds** — a raster collection's projected `bbox: [minX, minY, maxX, maxY]` defines its rendering rectangle.
+- **Camera framing** — loading layers does not move the camera. Call `map.fitBounds()` to frame the first collection, or `map.setView({ center, zoom })`. There is no `map.boundingBox` property; see the [camera controls](./interactions#camera-controls).
+- **2D order** — tiles draw first, then `surface`, `parks`, `water`, `roads`, then other 2D layers in load order. Use `setLayerOrder(ids)` to restack them; buildings are drawn separately in 3D. `LayerInfo.zIndex` no longer exists.
 
 ## Physical layers
 
@@ -293,7 +294,7 @@ Physical layers are used to build the map context, but they are not restricted t
 
 ### Building geometry and parts
 
-In v4, one logical building is represented by **one feature** whose canonical geometry is a `GeometryCollection`. Coordinates live only in `geometry.geometries`; `properties.parts` stores attributes, not duplicate coordinates. Each part's `geometryIndex` identifies the corresponding component geometry.
+One logical building is represented by **one feature** whose canonical geometry is a `GeometryCollection`. Coordinates live only in `geometry.geometries`; `properties.parts` stores attributes, not duplicate coordinates. Each part's `geometryIndex` identifies the corresponding component geometry.
 
 The example uses projected coordinates in meters, matching the other layers in the map:
 
@@ -303,11 +304,11 @@ The example uses projected coordinates in meters, matching the other layers in t
 
 Common building attributes are inherited by parts; part-specific height/level tags override the corresponding common tags. A component without part metadata uses the common attributes.
 
-[`normalizeBuildingFeature()`](/api/autk-core/functions/normalizeBuildingFeature) also wraps a single polygonal or supported ring geometry in a `GeometryCollection`. It does **not** union footprints, repair geometries, clone coordinates, or combine independent features. Legacy positional `parts` metadata is accepted, but must not be mixed with indexed metadata. Duplicate/out-of-range indices, nested geometry collections, and unsupported geometries are rejected.
+[`normalizeBuildingFeature()`](/api/autk-core/functions/normalizeBuildingFeature) also wraps a single polygonal or supported ring geometry in a `GeometryCollection`. It does **not** union footprints, repair geometries, clone coordinates, or combine independent features. Each part must carry its `geometryIndex`; positional metadata is no longer inferred and is rejected when it cannot be indexed. Duplicate/out-of-range indices, nested geometry collections, and unsupported geometries are rejected.
 
 ### Layer sizing and load-time options
 
-Sizes are render state in v4.1: use `updateRenderInfo()` after loading. In the example below, the slider changes road width without removing the layer. The building's missing-height fallback remains a [`loadConfig`](/api/autk-map/interfaces/LoadCollectionConfig) option.
+Sizes are render state: use `updateRenderInfo()` after loading. In the example below, the slider changes road width without removing the layer. The building's missing-height fallback remains a [`loadConfig`](/api/autk-map/interfaces/LoadCollectionConfig) option.
 
 <ClientOnly>
   <CodePlayground :code="loadConfigCode" out="dom" :auto-run="false" />
@@ -317,7 +318,7 @@ Sizes are render state in v4.1: use `updateRenderInfo()` after loading. In the e
 - `updateRenderInfo(id, { renderInfo: { pointSize } })` sets a point layer's radius in projected coordinate units. This is per layer, so point datasets at different map extents can use different sizes.
 - `buildingsZeroHeight: true` gives parts **without height metadata** a random fallback height. It does not replace explicitly zero or invalid heights. For reproducible building heights, provide height/level metadata yourself; missing-height parts are skipped by default.
 
-:::warning Sizing migration from 4.0
+:::warning Sizing migration from 4.x
 `loadConfig.polylinesWidth`, `TriangulatorPoints.setPointSize()` / `getPointSize()`, and `LayerData.pointSize` have been removed. Use per-layer `LayerRenderInfo.polylinesWidth` and `LayerRenderInfo.pointSize` through `updateRenderInfo()` instead. Flat render-state patches are also accepted. There is no `lineWidth` field.
 :::
 
@@ -370,6 +371,23 @@ Raster layers need a property path that tells the renderer which numeric value t
 The property path must resolve to a flat numeric array on `collection.features[0].properties`. The color domain is recomputed using the layer's current color-map configuration. Use `updateColorMap()` to choose a palette/domain strategy, and `updateRaster()` to refresh the values. An optional `transferFunction` controls opacity; see [`UpdateRasterParams`](/api/autk-map/interfaces/UpdateRasterParams).
 
 Keep the raster's extent and grid resolution unchanged: `updateRaster()` replaces values, not the layer geometry. Remove and reload the layer if its grid changes. Missing/non-raster layers are ignored; invalid payloads are reported in the console.
+
+### True-color RGB rasters
+
+Satellite and aerial imagery stores red, green, and blue in separate bands that should be drawn as they are. Pass the three band paths instead of one:
+
+```ts
+map.loadCollection('imagery', {
+  collection,
+  type: 'raster',
+  property: ['band_1', 'band_2', 'band_3'],
+  loadConfig: { rgbRange: [0, 3000] }, // optional: values mapped to 0 and 255
+})
+```
+
+Values already in 0–255 are shown unchanged. Other data, such as reflectance up to 10000, is stretched using the smallest and largest channel values of complete, finite pixels unless `rgbRange` is given; normalized imagery in 0–1 needs `rgbRange: [0, 1]`. A pixel with a non-finite value in any band stays transparent. Each band must contain exactly `rasterResX * rasterResY` samples: mismatched dimensions or invalid ranges log a warning and leave the image unchanged.
+
+Switching to RGB suppresses the scalar domain, legend, and palette control, and the color map no longer applies. `map.updateRaster('imagery', { collection, property: ['band_4', 'band_3', 'band_2'] })` changes bands without reloading, and switching back to one band restores the scalar legend preference. Raster layers from color-coded GeoTIFFs can instead be decoded into classes with a custom categorical palette; see [Thematic data](./thematic#custom-palettes).
 
 ## Prebuilt 3D meshes
 

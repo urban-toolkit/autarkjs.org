@@ -198,9 +198,9 @@ viewpoints: {
 }
 ```
 
-This strategy is used by the gallery view-score example to evaluate visibility from many windows on a selected building. It returns one derived point feature per window, **not** one result feature per original building. Each point has a window ID and metadata such as `sourceFeatureIndex`, `geometryIndex`, and `floorIndex` in its properties.
+This strategy is used by the gallery view-score example to evaluate visibility from many windows on a selected building. It returns one derived point feature per window, **not** one result feature per original building. Each point has a `windowId` and metadata such as `sourceFeatureIndex`, `geometryIndex`, and `floorIndex` in its properties.
 
-Use `sourceFeatureIndex` to associate a window with `buildings.features[sourceFeatureIndex]`, and `geometryIndex` to identify its original building component. Aggregate the window metrics yourself if you need a single score per building. Do not pass window feature indices directly as building selection indices.
+Use `sourceFeatureIndex` to associate a window with `buildings.features[sourceFeatureIndex]`, and `geometryIndex` to identify its original building component. Aggregate the window metrics yourself if you need a single score per building. Do not pass window feature indices directly as building selection indices; `windowId` is the key to join results back to their windows.
 
 Window cameras are oriented from the facade layout; the centroid strategy's `sampling` controls are not applied to `building-windows`.
 
