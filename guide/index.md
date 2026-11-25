@@ -6,7 +6,7 @@ hero:
   text: |-
     Urban visual analytics.
     All in the browser.
-  tagline: Bring urban data to life with interactive maps and charts. Look at the city from new angles, make connections, and discover what traditional maps can’t tell you.
+  tagline: Bring urban data to life with interactive maps and charts, and see the places that matter to you from a new angle.
   actions:
     - theme: brand
       text: Get Started
