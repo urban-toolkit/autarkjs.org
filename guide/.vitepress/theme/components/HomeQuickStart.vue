@@ -40,7 +40,7 @@ onMounted(async () => {
       },
     })
 
-    const map = new AutkMap(canvas.value)
+    const map = new AutkMap(canvas.value, { showUi: false })
     status.value = 'Initializing map…'
     await map.init()
 
@@ -131,7 +131,7 @@ onMounted(async () => {
 
 <span class="token-class">MapStyle</span>.setPredefinedStyle(<span class="token-string">"apple"</span>);
 
-<span class="token-keyword">const</span> map = <span class="token-keyword">new</span> <span class="token-class">AutkMap</span>(canvas);
+<span class="token-keyword">const</span> map = <span class="token-keyword">new</span> <span class="token-class">AutkMap</span>(canvas, { showUi: false });
 <span class="token-keyword">await</span> map.init();
 map.draw();</code></pre>
               </div>
@@ -176,8 +176,8 @@ map.draw();</code></pre>
 <style scoped>
 .home-quickstart {
   --quickstart-card-height: 480px;
-  margin-block: auto;
-  padding: 48px 24px 40px;
+  margin-top: auto;
+  padding: 48px 24px 20px;
 }
 
 .quickstart-shell {
@@ -467,10 +467,11 @@ map.draw();</code></pre>
 
 .quickstart-preview-hints {
   position: absolute;
-  bottom: 12px;
+  top: 12px;
   left: 12px;
   right: 12px;
   display: flex;
+  pointer-events: none;
   flex-wrap: wrap;
   justify-content: center;
   gap: 8px 16px;
@@ -562,7 +563,7 @@ map.draw();</code></pre>
 @media (max-width: 640px) {
   .home-quickstart {
     --quickstart-card-height: 370px;
-    padding: 40px 24px 32px;
+    padding: 40px 24px 16px;
   }
 
   .quickstart-card-header {
