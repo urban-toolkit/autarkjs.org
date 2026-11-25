@@ -6,6 +6,8 @@ Base: [relatório de impacto](autark-v5-site-update.md), comparando o site 4.1.1
 
 ## A. Candidato local e compatibilidade
 
+**A1 concluída:** [resultado, integridades e reprodução](autark-v5-a1/README.md). A2 permanece aberta.
+
 | Tarefa | Execução | Aceite e verificação | Spec |
 | --- | --- | --- | --- |
 | **A1 — Reproduzir a v5 sem npm público** | Escolher SHA com o mantenedor. Em checkout temporário do monorepo, compilar e empacotar `autk` + os cinco módulos. Instalar os seis tarballs no checkout descartável do site, com versões inequivocamente distintas do 4.1.1 quando necessário. Registrar SHA, versões de Node/npm, integridades e comandos. Não versionar `file:`, symlinks ou lockfile experimental. | `make build` e `npm run pack:packages` na toolchain upstream; `npm ls --all` no consumidor confirma quais versões cada fluxo carrega; um teste de navegador com DuckDB/WebGPU carrega WASM e workers dos artefatos locais. Repetir consumo no Node 22 do deploy; se falhar, registrar a incompatibilidade em vez de mudar CI por conta própria. A1 não exige que todo o site antigo já execute com v5. | Curta |
