@@ -23,8 +23,8 @@ export default {
     const { frontmatter } = useData()
     return h(DefaultTheme.Layout, null, {
       'layout-bottom': () => frontmatter.value.layout !== 'home' ? h(InstitutionsFooter) : null,
-      'home-hero-actions-after': () => [h(HomeHeroLinks), h(InstitutionsFooter)],
-      'home-features-after': () => h(HomeQuickStart),
+      'home-hero-actions-after': () => h(HomeHeroLinks),
+      'home-features-after': () => [h(HomeQuickStart), h(InstitutionsFooter)],
     })
   },
   enhanceApp({ app }) {

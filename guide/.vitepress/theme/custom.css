@@ -28,8 +28,6 @@ body,
 }
 
 .VPHome .VPHero {
-  display: flex;
-  min-height: calc(100svh - var(--vp-nav-height));
   margin-top: 0;
   padding-top: clamp(16px, 4svh, 48px);
   padding-bottom: 0;
@@ -38,11 +36,6 @@ body,
 .VPHome .VPHero .container {
   width: 100%;
   flex-direction: column;
-}
-
-.VPHome .VPHero .institutions-footer {
-  margin-top: auto;
-  padding-inline: 0;
 }
 
 .VPHome .VPFeatures {
@@ -96,17 +89,95 @@ body,
   justify-content: center;
 }
 
-@media (max-height: 650px) {
+@media (min-width: 960px) and (min-height: 720px) {
+  .Layout:has(.VPHome) {
+    height: 100svh;
+  }
+
+  .Layout .VPContent.is-home,
+  .Layout .VPHome {
+    flex: 1 1 0;
+    min-height: 0;
+    margin-bottom: 0;
+  }
+
+  .VPHome > :not(.home-quickstart) {
+    flex-shrink: 0;
+  }
+
+  .VPHome .VPHero {
+    padding-block: clamp(10px, 2vh, 24px) 0;
+  }
+
+  .VPHome .VPHero .name {
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+  }
+
   .VPHome .VPHero .text {
-    font-size: clamp(1.75rem, 4.4vw, 3.75rem);
+    font-size: clamp(2rem, 3.6vw, 3.5rem);
+    white-space: normal;
   }
 
   .VPHome .VPHero .tagline {
-    padding-top: 12px;
+    max-width: 66ch;
+    padding-top: 8px;
+    font-size: 1rem;
+    line-height: 1.4;
   }
 
   .VPHome .VPHero .actions {
-    padding-top: 20px;
+    padding-top: 10px;
+  }
+
+  .VPHome .VPHero .hero-links {
+    margin-block: 8px 0;
+  }
+
+  .VPHome .VPFeatures {
+    margin-top: 14px;
+  }
+
+  .VPHome .VPFeature .box {
+    padding: 10px 14px;
+  }
+
+  .VPHome .VPFeature .details {
+    padding-top: 2px;
+    font-size: 13px;
+    line-height: 17px;
+  }
+
+  .VPHome .VPFeature .details br + br {
+    display: none;
+  }
+
+  .Layout .VPHome .institutions-footer {
+    margin-top: auto;
+    padding-block: 4px;
+    gap: 2px;
+  }
+
+  .Layout .VPHome .institution-link {
+    height: 36px;
+  }
+
+  .Layout .VPHome .institution-logo {
+    max-height: 32px;
+  }
+
+  .Layout:has(.VPHome) .VPFooter {
+    padding-block: 4px !important;
+  }
+
+  .Layout:has(.VPHome) .VPFooter :is(.message, .copyright) {
+    display: inline;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .Layout:has(.VPHome) .VPFooter .message {
+    margin-right: 8px;
   }
 }
 
