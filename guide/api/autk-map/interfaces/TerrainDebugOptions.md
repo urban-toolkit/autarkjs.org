@@ -6,7 +6,7 @@
 
 # Interface: TerrainDebugOptions
 
-Defined in: [autk-map/src/renderer-terrain.ts:82](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-map/src/renderer-terrain.ts#L82)
+Defined in: [autk-map/src/renderer-terrain.ts:88](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer-terrain.ts#L88)
 
 Runtime debug options for terrain rendering.
 
@@ -16,7 +16,7 @@ Runtime debug options for terrain rendering.
 
 > `optional` **enableCulling?**: `boolean`
 
-Defined in: [autk-map/src/renderer-terrain.ts:86](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-map/src/renderer-terrain.ts#L86)
+Defined in: [autk-map/src/renderer-terrain.ts:92](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer-terrain.ts#L92)
 
 Enable frustum culling when selecting terrain blocks.
 
@@ -26,7 +26,7 @@ Enable frustum culling when selecting terrain blocks.
 
 > `optional` **freezeLod?**: `boolean`
 
-Defined in: [autk-map/src/renderer-terrain.ts:88](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-map/src/renderer-terrain.ts#L88)
+Defined in: [autk-map/src/renderer-terrain.ts:94](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer-terrain.ts#L94)
 
 Reuse the previous LOD block selection instead of recomputing it.
 
@@ -36,6 +36,6 @@ Reuse the previous LOD block selection instead of recomputing it.
 
 > `optional` **showMesh?**: `boolean`
 
-Defined in: [autk-map/src/renderer-terrain.ts:84](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-map/src/renderer-terrain.ts#L84)
+Defined in: [autk-map/src/renderer-terrain.ts:90](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer-terrain.ts#L90)
 
 Draw patch wireframe lines on top of filled terrain.

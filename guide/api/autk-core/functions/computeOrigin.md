@@ -8,9 +8,13 @@
 
 > **computeOrigin**(`geojson`): \[`number`, `number`\]
 
-Defined in: [utils-geojson.ts:52](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/utils-geojson.ts#L52)
+Defined in: [utils-geojson.ts:82](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/utils-geojson.ts#L82)
 
 Computes a spatial origin from a feature collection's bounding-box center.
+
+The box comes from the feature geometries. Collections without geometry,
+such as a GeoTIFF-derived raster whose features carry `geometry: null`, fall
+back to their declared GeoJSON `bbox`.
 
 ## Parameters
 
@@ -24,7 +28,7 @@ Feature collection to summarize.
 
 \[`number`, `number`\]
 
-The `[longitude, latitude]` center, or `[0, 0]` when no usable geometry is present.
+The `[longitude, latitude]` center, or `[0, 0]` when neither geometry nor a declared `bbox` is present.
 
 ## Throws
 

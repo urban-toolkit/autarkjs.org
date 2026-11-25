@@ -8,9 +8,10 @@
 
 > **run**(`rows`, `config`, `columns`): [`ExecutedPlotTransform`](../type-aliases/ExecutedPlotTransform.md)
 
-Defined in: [transforms/index.ts:61](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-plot/src/transforms/index.ts#L61)
+Defined in: [transforms/index.ts:100](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/index.ts#L100)
 
-Runs a plot transform config through the preset pipeline.
+Runs the transform of a plot configuration: the registered definition named
+by `preset` (or by `name`, for `preset: 'registered'`), built-in or user.
 
 ## Parameters
 
@@ -24,23 +25,23 @@ Input rows to transform.
 
 [`PlotTransformConfig`](../type-aliases/PlotTransformConfig.md)
 
-Transform configuration selecting the preset runner.
+Transform configuration naming the transform and its options.
 
 ### columns
 
 `string`[]
 
-Ordered source columns passed to the chosen preset.
+Ordered source columns passed to the transform.
 
 ## Returns
 
 [`ExecutedPlotTransform`](../type-aliases/ExecutedPlotTransform.md)
 
-Executed transform payload tagged with its preset discriminator.
+Rows and provenance of the transform, tagged with its preset.
 
 ## Throws
 
-Never throws. Falls through to the last preset when unrecognized.
+If no transform is registered under the name, or its output is malformed.
 
 ## Example
 

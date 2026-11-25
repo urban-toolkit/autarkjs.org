@@ -4,11 +4,17 @@
 
 [@urban-toolkit/autk-compute](../globals.md) / GpgpuPipelineParams
 
-# Interface: GpgpuPipelineParams
+# Interface: GpgpuPipelineParams\<G\>
 
-Defined in: [api.ts:132](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-compute/src/api.ts#L132)
+Defined in: [api.ts:132](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-compute/src/api.ts#L132)
 
 Parameters for the GPGPU pipeline.
+
+## Type Parameters
+
+### G
+
+`G` *extends* `Geometry` \| `null` = `Geometry`
 
 ## Properties
 
@@ -16,7 +22,7 @@ Parameters for the GPGPU pipeline.
 
 > `optional` **attributeArrays?**: `Record`\<`string`, `number`\>
 
-Defined in: [api.ts:140](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-compute/src/api.ts#L140)
+Defined in: [api.ts:140](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-compute/src/api.ts#L140)
 
 Per-feature fixed-length arrays keyed by WGSL variable name.
 
@@ -26,7 +32,7 @@ Per-feature fixed-length arrays keyed by WGSL variable name.
 
 > `optional` **attributeMatrices?**: `Record`\<`string`, \{ `cols`: `number`; `rows`: `number` \| `"auto"`; \}\>
 
-Defined in: [api.ts:143](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-compute/src/api.ts#L143)
+Defined in: [api.ts:143](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-compute/src/api.ts#L143)
 
 Per-feature matrices keyed by WGSL variable name.
 
@@ -34,9 +40,9 @@ Per-feature matrices keyed by WGSL variable name.
 
 ### collection
 
-> **collection**: `FeatureCollection`
+> **collection**: `FeatureCollection`\<`G`\>
 
-Defined in: [api.ts:134](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-compute/src/api.ts#L134)
+Defined in: [api.ts:134](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-compute/src/api.ts#L134)
 
 GeoJSON FeatureCollection to process.
 
@@ -46,7 +52,7 @@ GeoJSON FeatureCollection to process.
 
 > `optional` **outputColumns?**: `string`[]
 
-Defined in: [api.ts:161](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-compute/src/api.ts#L161)
+Defined in: [api.ts:161](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-compute/src/api.ts#L161)
 
 Output column names for array or vector results.
 
@@ -56,7 +62,7 @@ Output column names for array or vector results.
 
 > `optional` **resultField?**: `string`
 
-Defined in: [api.ts:158](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-compute/src/api.ts#L158)
+Defined in: [api.ts:158](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-compute/src/api.ts#L158)
 
 Name of the single output field written when the shader returns one value.
 
@@ -66,7 +72,7 @@ Name of the single output field written when the shader returns one value.
 
 > `optional` **uniformArrays?**: `Record`\<`string`, `number`[]\>
 
-Defined in: [api.ts:149](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-compute/src/api.ts#L149)
+Defined in: [api.ts:149](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-compute/src/api.ts#L149)
 
 Global read-only arrays backed by storage buffers; WGSL accesses name[index] and name_length (u32).
 
@@ -76,7 +82,7 @@ Global read-only arrays backed by storage buffers; WGSL accesses name[index] and
 
 > `optional` **uniformMatrices?**: `Record`\<`string`, \{ `cols`: `number`; `data`: `number`[][]; \}\>
 
-Defined in: [api.ts:152](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-compute/src/api.ts#L152)
+Defined in: [api.ts:152](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-compute/src/api.ts#L152)
 
 Global read-only, row-major storage matrices; WGSL accesses name[row * name_cols + col], name_rows/name_cols (u32).
 
@@ -86,7 +92,7 @@ Global read-only, row-major storage matrices; WGSL accesses name[row * name_cols
 
 > `optional` **uniforms?**: `Record`\<`string`, `number`\>
 
-Defined in: [api.ts:146](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-compute/src/api.ts#L146)
+Defined in: [api.ts:146](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-compute/src/api.ts#L146)
 
 Global scalar constants shared across the dispatch, backed by uniform buffers.
 
@@ -96,9 +102,9 @@ Global scalar constants shared across the dispatch, backed by uniform buffers.
 
 > **variableMapping**: `Record`\<`string`, `string`\>
 
-Defined in: [api.ts:137](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-compute/src/api.ts#L137)
+Defined in: [api.ts:137](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-compute/src/api.ts#L137)
 
-Maps WGSL variable names to feature property dot-paths.
+Maps WGSL names to feature paths. Use `geometry` to bind GeoJSON positions and topology automatically.
 
 ***
 
@@ -106,6 +112,6 @@ Maps WGSL variable names to feature property dot-paths.
 
 > **wgslBody**: `string`
 
-Defined in: [api.ts:155](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-compute/src/api.ts#L155)
+Defined in: [api.ts:155](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-compute/src/api.ts#L155)
 
 WGSL function body inserted into the generated `compute_value` function.

@@ -6,7 +6,7 @@
 
 # Interface: JsonWktGeometryColumns
 
-Defined in: [use-cases/load-json/interfaces.ts:34](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-json/interfaces.ts#L34)
+Defined in: [autk-db/src/use-cases/load-json/interfaces.ts:32](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-json/interfaces.ts#L32)
 
 Describes how to build geometry from a single WKT JSON field.
 
@@ -18,20 +18,10 @@ const columns: JsonWktGeometryColumns = { wktColumnName: 'geom' };
 
 ## Properties
 
-### coordinateFormat?
-
-> `optional` **coordinateFormat?**: `string`
-
-Defined in: [use-cases/load-json/interfaces.ts:38](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-json/interfaces.ts#L38)
-
-CRS of the source WKT geometry before it is transformed into the workspace CRS.
-
-***
-
 ### wktColumnName
 
 > **wktColumnName**: `string`
 
-Defined in: [use-cases/load-json/interfaces.ts:36](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-json/interfaces.ts#L36)
+Defined in: [autk-db/src/use-cases/load-json/interfaces.ts:34](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-json/interfaces.ts#L34)
 
 Name of the field that stores WKT geometry text such as `POINT(...)` or `POLYGON(...)`.

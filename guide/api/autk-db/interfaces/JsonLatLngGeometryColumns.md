@@ -6,7 +6,7 @@
 
 # Interface: JsonLatLngGeometryColumns
 
-Defined in: [use-cases/load-json/interfaces.ts:19](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-json/interfaces.ts#L19)
+Defined in: [autk-db/src/use-cases/load-json/interfaces.ts:19](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-json/interfaces.ts#L19)
 
 Describes how to build point geometry from explicit latitude and longitude JSON fields.
 
@@ -18,21 +18,11 @@ const columns: JsonLatLngGeometryColumns = { latColumnName: 'lat', longColumnNam
 
 ## Properties
 
-### coordinateFormat?
-
-> `optional` **coordinateFormat?**: `string`
-
-Defined in: [use-cases/load-json/interfaces.ts:25](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-json/interfaces.ts#L25)
-
-CRS of the source coordinate fields before they are transformed into the workspace CRS.
-
-***
-
 ### latColumnName
 
 > **latColumnName**: `string`
 
-Defined in: [use-cases/load-json/interfaces.ts:21](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-json/interfaces.ts#L21)
+Defined in: [autk-db/src/use-cases/load-json/interfaces.ts:21](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-json/interfaces.ts#L21)
 
 Name of the field that stores latitude values used to create point geometries.
 
@@ -42,6 +32,6 @@ Name of the field that stores latitude values used to create point geometries.
 
 > **longColumnName**: `string`
 
-Defined in: [use-cases/load-json/interfaces.ts:23](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-json/interfaces.ts#L23)
+Defined in: [autk-db/src/use-cases/load-json/interfaces.ts:23](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-json/interfaces.ts#L23)
 
 Name of the field that stores longitude values used to create point geometries.

@@ -4,7 +4,7 @@
 
 # @urban-toolkit/autk-core
 
-> Version: `4.1.1`
+> Version: `5.0.0`
 
 ## Enumerations
 
@@ -32,6 +32,10 @@
 - [BuildingWindowLayoutEntry](interfaces/BuildingWindowLayoutEntry.md)
 - [BuildingWindowLayoutResult](interfaces/BuildingWindowLayoutResult.md)
 - [CameraData](interfaces/CameraData.md)
+- [CameraState](interfaces/CameraState.md)
+- [ElevationAssessment](interfaces/ElevationAssessment.md)
+- [ElevationValidationOptions](interfaces/ElevationValidationOptions.md)
+- [ElevationValidationStats](interfaces/ElevationValidationStats.md)
 - [Heightfield](interfaces/Heightfield.md)
 - [LayerBorder](interfaces/LayerBorder.md)
 - [LayerBorderComponent](interfaces/LayerBorderComponent.md)
@@ -46,17 +50,21 @@
 
 ## Type Aliases
 
+- [CameraProjection](type-aliases/CameraProjection.md)
 - [CategoricalDomain](type-aliases/CategoricalDomain.md)
 - [ColorHEX](type-aliases/ColorHEX.md)
 - [ColorMapConfig](type-aliases/ColorMapConfig.md)
 - [ColorMapDomainSpec](type-aliases/ColorMapDomainSpec.md)
+- [ColorMapOptions](type-aliases/ColorMapOptions.md)
 - [ColorRGB](type-aliases/ColorRGB.md)
 - [ColorTEX](type-aliases/ColorTEX.md)
+- [CustomColorPalette](type-aliases/CustomColorPalette.md)
 - [DivergingDomain](type-aliases/DivergingDomain.md)
 - [EventListener](type-aliases/EventListener.md)
 - [LayerType](type-aliases/LayerType.md)
 - [RequiredTransferFunction](type-aliases/RequiredTransferFunction.md)
 - [ResolvedDomain](type-aliases/ResolvedDomain.md)
+- [ResolvedElevationValidation](type-aliases/ResolvedElevationValidation.md)
 - [SequentialDomain](type-aliases/SequentialDomain.md)
 - [TypedArray](type-aliases/TypedArray.md)
 - [TypedArrayConstructor](type-aliases/TypedArrayConstructor.md)
@@ -65,22 +73,49 @@
 
 - [DEFAULT\_COLORMAP\_RESOLUTION](variables/DEFAULT_COLORMAP_RESOLUTION.md)
 - [DEFAULT\_TRANSFER\_FUNCTION](variables/DEFAULT_TRANSFER_FUNCTION.md)
+- [DEFAULT\_WORKSPACE\_CRS](variables/DEFAULT_WORKSPACE_CRS.md)
+- [EARTH\_RADIUS](variables/EARTH_RADIUS.md)
 - [LAYER\_TYPE\_VALUES](variables/LAYER_TYPE_VALUES.md)
 - [OSM\_BASE\_LAYER\_ORDER](variables/OSM_BASE_LAYER_ORDER.md)
+- [WEB\_MERCATOR\_EXTENT](variables/WEB_MERCATOR_EXTENT.md)
+- [WEB\_MERCATOR\_MAX\_LAT](variables/WEB_MERCATOR_MAX_LAT.md)
 
 ## Functions
 
+- [assessElevationSample](functions/assessElevationSample.md)
+- [bilerp](functions/bilerp.md)
 - [buildTransferContext](functions/buildTransferContext.md)
+- [clamp](functions/clamp.md)
+- [clampLatitude](functions/clampLatitude.md)
 - [computeAlphaByte](functions/computeAlphaByte.md)
 - [computeBoundingBox](functions/computeBoundingBox.md)
 - [computeGeometryCentroid](functions/computeGeometryCentroid.md)
 - [computeIntersectingClusterIds](functions/computeIntersectingClusterIds.md)
 - [computeOrigin](functions/computeOrigin.md)
+- [createCoordinateTransform](functions/createCoordinateTransform.md)
+- [crsMetresPerUnit](functions/crsMetresPerUnit.md)
+- [crsScaleAt](functions/crsScaleAt.md)
+- [crsToLonLat](functions/crsToLonLat.md)
 - [heightfieldFromRaster](functions/heightfieldFromRaster.md)
 - [isFeatureCollection](functions/isFeatureCollection.md)
 - [isLayerType](functions/isLayerType.md)
 - [isNumericLike](functions/isNumericLike.md)
+- [isPotentialElevationOutlier](functions/isPotentialElevationOutlier.md)
+- [isSupportedCrs](functions/isSupportedCrs.md)
+- [latToMercatorY](functions/latToMercatorY.md)
+- [lonLatToCrs](functions/lonLatToCrs.md)
 - [mapGeometryTypeToLayerType](functions/mapGeometryTypeToLayerType.md)
+- [mercatorYToLat](functions/mercatorYToLat.md)
+- [nextPowerOfTwo](functions/nextPowerOfTwo.md)
 - [normalizeBuildingFeature](functions/normalizeBuildingFeature.md)
 - [offsetPolyline](functions/offsetPolyline.md)
+- [registerCrs](functions/registerCrs.md)
+- [replaceElevationDiscontinuity](functions/replaceElevationDiscontinuity.md)
+- [replaceElevationOutlier](functions/replaceElevationOutlier.md)
+- [reprojectBounds](functions/reprojectBounds.md)
+- [reprojectFeatureCollection](functions/reprojectFeatureCollection.md)
+- [reprojectPosition](functions/reprojectPosition.md)
+- [resolveCollectionBounds](functions/resolveCollectionBounds.md)
+- [resolveElevationValidation](functions/resolveElevationValidation.md)
+- [validateElevationGrid](functions/validateElevationGrid.md)
 - [valueAtPath](functions/valueAtPath.md)

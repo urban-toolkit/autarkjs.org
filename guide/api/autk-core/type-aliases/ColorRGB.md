@@ -8,7 +8,7 @@
 
 > **ColorRGB** = `object`
 
-Defined in: [types-colormap.ts:175](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/types-colormap.ts#L175)
+Defined in: [types-colormap.ts:186](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L186)
 
 RGBA color representation used by sampling and map styling APIs.
 
@@ -18,7 +18,7 @@ RGBA color representation used by sampling and map styling APIs.
 
 > **alpha**: `number`
 
-Defined in: [types-colormap.ts:183](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/types-colormap.ts#L183)
+Defined in: [types-colormap.ts:194](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L194)
 
 Alpha channel value, typically normalized to the 0-1 range.
 
@@ -28,7 +28,7 @@ Alpha channel value, typically normalized to the 0-1 range.
 
 > **b**: `number`
 
-Defined in: [types-colormap.ts:181](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/types-colormap.ts#L181)
+Defined in: [types-colormap.ts:192](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L192)
 
 Blue channel value.
 
@@ -38,7 +38,7 @@ Blue channel value.
 
 > **g**: `number`
 
-Defined in: [types-colormap.ts:179](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/types-colormap.ts#L179)
+Defined in: [types-colormap.ts:190](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L190)
 
 Green channel value.
 
@@ -48,6 +48,6 @@ Green channel value.
 
 > **r**: `number`
 
-Defined in: [types-colormap.ts:177](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/types-colormap.ts#L177)
+Defined in: [types-colormap.ts:188](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L188)
 
 Red channel value.

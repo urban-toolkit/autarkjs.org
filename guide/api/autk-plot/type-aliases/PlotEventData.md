@@ -6,10 +6,27 @@
 
 # Type Alias: PlotEventData
 
-> **PlotEventData** = `SelectionData`
+> **PlotEventData** = `SelectionData` & `object`
 
-Defined in: [types-events.ts:33](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-plot/src/types-events.ts#L33)
+Defined in: [types-events.ts:39](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/types-events.ts#L39)
 
 Payload emitted by all plot interaction events.
 
-Reuses the shared `SelectionData` shape from `autk-core`.
+Extends the shared `SelectionData` shape from `autk-core`, so consumers that
+only read `selection` (e.g. `AutkMap`) keep working.
+
+## Type Declaration
+
+### extent?
+
+> `optional` **extent?**: [`BrushExtent`](BrushExtent.md) \| `null`
+
+Present on brush events; `null` means the emitting brush was cleared.
+
+### shares?
+
+> `optional` **shares?**: [`FeatureShare`](FeatureShare.md)[]
+
+Share of each selected feature covered by the selected marks. Present when
+the plot aggregates rows, so a receiving one-to-one plot can draw only
+that part of each feature's mark.

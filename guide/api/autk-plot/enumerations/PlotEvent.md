@@ -6,7 +6,7 @@
 
 # Enumeration: PlotEvent
 
-Defined in: [types-events.ts:9](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-plot/src/types-events.ts#L9)
+Defined in: [types-events.ts:12](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/types-events.ts#L12)
 
 Interaction events emitted by plot instances.
 
@@ -19,7 +19,7 @@ feature ids represented by currently selected marks.
 
 > **BRUSH**: `"brush"`
 
-Defined in: [types-events.ts:17](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-plot/src/types-events.ts#L17)
+Defined in: [types-events.ts:22](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/types-events.ts#L22)
 
 Emitted after 2D rectangular brush interactions.
 
@@ -29,7 +29,7 @@ Emitted after 2D rectangular brush interactions.
 
 > **BRUSH\_X**: `"brushX"`
 
-Defined in: [types-events.ts:25](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-plot/src/types-events.ts#L25)
+Defined in: [types-events.ts:30](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/types-events.ts#L30)
 
 Emitted after horizontal brush interactions.
 
@@ -39,7 +39,7 @@ Emitted after horizontal brush interactions.
 
 > **BRUSH\_Y**: `"brushY"`
 
-Defined in: [types-events.ts:21](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-plot/src/types-events.ts#L21)
+Defined in: [types-events.ts:26](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/types-events.ts#L26)
 
 Emitted after vertical brush interactions.
 
@@ -49,6 +49,16 @@ Emitted after vertical brush interactions.
 
 > **CLICK**: `"click"`
 
-Defined in: [types-events.ts:13](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-plot/src/types-events.ts#L13)
+Defined in: [types-events.ts:16](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/types-events.ts#L16)
 
 Emitted after click-based selection updates.
+
+***
+
+### HOVER
+
+> **HOVER**: `"hover"`
+
+Defined in: [types-events.ts:18](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/types-events.ts#L18)
+
+Emitted when the mouse enters or leaves a mark.

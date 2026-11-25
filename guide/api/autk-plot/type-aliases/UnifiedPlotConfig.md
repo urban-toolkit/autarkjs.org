@@ -8,11 +8,11 @@
 
 > **UnifiedPlotConfig** = `Omit`\<[`PlotConfig`](PlotConfig.md), `"div"`\> & `object`
 
-Defined in: [api.ts:85](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-plot/src/api.ts#L85)
+Defined in: [api.ts:179](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L179)
 
 Configuration passed to `AutkPlot`. Identical to `PlotConfig` minus `div`,
 which is supplied as a separate constructor argument, plus a `type` discriminant
-that selects the plot implementation.
+that selects the plot.
 
 ## Type Declaration
 
@@ -20,4 +20,4 @@ that selects the plot implementation.
 
 > **type**: [`PlotType`](PlotType.md)
 
-Selects which plot implementation to instantiate.
+Name of the plot to draw.

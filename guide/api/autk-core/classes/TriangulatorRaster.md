@@ -6,11 +6,11 @@
 
 # Class: TriangulatorRaster
 
-Defined in: [triangulator-raster.ts:24](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/triangulator-raster.ts#L24)
+Defined in: [triangulator-raster.ts:25](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/triangulator-raster.ts#L25)
 
 Builds textured mesh geometry for GeoTIFF raster layers.
 
-`TriangulatorRaster` turns the source collection `bbox` into a single quad in
+`TriangulatorRaster` turns the resolved collection bounds into a single quad in
 local XY space. The four corners are shifted by the supplied origin so the
 raster aligns with the rest of the layer stack, and the quad is emitted with
 UVs spanning `[0, 1]` to match normalized texture coordinates.
@@ -31,7 +31,7 @@ UVs spanning `[0, 1]` to match normalized texture coordinates.
 
 > `static` **buildMesh**(`geotiff`, `origin`): \[[`LayerGeometry`](../interfaces/LayerGeometry.md)[], [`LayerComponent`](../interfaces/LayerComponent.md)[]\]
 
-Defined in: [triangulator-raster.ts:35](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/triangulator-raster.ts#L35)
+Defined in: [triangulator-raster.ts:36](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/triangulator-raster.ts#L36)
 
 Builds a single textured quad covering the raster bounding box.
 
@@ -41,7 +41,7 @@ Builds a single textured quad covering the raster bounding box.
 
 `FeatureCollection`\<`Geometry` \| `null`\>
 
-Raster feature collection whose `bbox` defines the quad extent.
+Raster collection whose geometry bounds or declared 2D/3D `bbox` define the quad extent.
 
 ##### origin
 
@@ -57,7 +57,7 @@ A tuple of quad geometry and matching component metadata.
 
 #### Throws
 
-Never throws. When `bbox` is missing, returns empty arrays with a console warning.
+Never throws. When usable bounds are missing, returns empty arrays with a console warning.
 
 #### Example
 

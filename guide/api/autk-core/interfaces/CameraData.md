@@ -6,9 +6,11 @@
 
 # Interface: CameraData
 
-Defined in: [camera.ts:16](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L16)
+Defined in: [camera.ts:21](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L21)
 
-Initial camera state used to seed or reset a `Camera` instance.
+## Extended by
+
+- [`CameraState`](CameraState.md)
 
 ## Properties
 
@@ -16,7 +18,7 @@ Initial camera state used to seed or reset a `Camera` instance.
 
 > **eye**: `number`[]
 
-Defined in: [camera.ts:20](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L20)
+Defined in: [camera.ts:25](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L25)
 
 Initial eye (camera) position in world space.
 
@@ -26,7 +28,7 @@ Initial eye (camera) position in world space.
 
 > **lookAt**: `number`[]
 
-Defined in: [camera.ts:22](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L22)
+Defined in: [camera.ts:27](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L27)
 
 Point the camera looks at in world space.
 
@@ -36,6 +38,6 @@ Point the camera looks at in world space.
 
 > **up**: `number`[]
 
-Defined in: [camera.ts:18](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L18)
+Defined in: [camera.ts:23](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L23)
 
 World-space up vector.

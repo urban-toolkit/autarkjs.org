@@ -8,7 +8,7 @@
 
 > **AggregateFunction** = `"sum"` \| `"avg"` \| `"count"` \| `"min"` \| `"max"` \| `"weighted"` \| `"collect"`
 
-Defined in: [use-cases/spatial-join/interfaces.ts:9](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/spatial-join/interfaces.ts#L9)
+Defined in: [autk-db/src/use-cases/spatial-join/interfaces.ts:9](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/spatial-join/interfaces.ts#L9)
 
 Supported aggregation functions for spatial join results.
 

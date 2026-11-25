@@ -6,21 +6,17 @@
 
 # Interface: LoadGeoTiffParams
 
-Defined in: [use-cases/load-geotiff/interfaces.ts:1](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-geotiff/interfaces.ts#L1)
+Defined in: [autk-db/src/use-cases/load-geotiff/interfaces.ts:10](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-geotiff/interfaces.ts#L10)
 
 ## Properties
 
-### coordinateFormat?
+### categoricalRgb?
 
-> `optional` **coordinateFormat?**: `string`
+> `optional` **categoricalRgb?**: `CategoricalRgbPalette`
 
-Defined in: [use-cases/load-geotiff/interfaces.ts:15](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-geotiff/interfaces.ts#L15)
+Defined in: [autk-db/src/use-cases/load-geotiff/interfaces.ts:37](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-geotiff/interfaces.ts#L37)
 
-CRS of the input GeoTIFF file (source).
-
-Defaults to `EPSG:4326` (lat/lng) when omitted.
-The raster extent metadata will be transformed from this CRS to the workspace CRS.
-If the raster is not in `EPSG:4326`, pass the correct CRS explicitly.
+Decode a three-band RGB GeoTIFF into one scalar band of named classes.
 
 ***
 
@@ -28,7 +24,7 @@ If the raster is not in `EPSG:4326`, pass the correct CRS explicitly.
 
 > `optional` **geotiffArrayBuffer?**: `ArrayBuffer`
 
-Defined in: [use-cases/load-geotiff/interfaces.ts:5](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-geotiff/interfaces.ts#L5)
+Defined in: [autk-db/src/use-cases/load-geotiff/interfaces.ts:14](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-geotiff/interfaces.ts#L14)
 
 Raw ArrayBuffer of an already-fetched GeoTIFF file.
 
@@ -38,19 +34,9 @@ Raw ArrayBuffer of an already-fetched GeoTIFF file.
 
 > `optional` **geotiffFileUrl?**: `string`
 
-Defined in: [use-cases/load-geotiff/interfaces.ts:3](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-geotiff/interfaces.ts#L3)
+Defined in: [autk-db/src/use-cases/load-geotiff/interfaces.ts:12](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-geotiff/interfaces.ts#L12)
 
 URL of the GeoTIFF file to fetch and load.
-
-***
-
-### maxPixels?
-
-> `optional` **maxPixels?**: `number`
-
-Defined in: [use-cases/load-geotiff/interfaces.ts:25](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-geotiff/interfaces.ts#L25)
-
-Deprecated alias for `maxRasterCells`.
 
 ***
 
@@ -58,7 +44,7 @@ Deprecated alias for `maxRasterCells`.
 
 > `optional` **maxRasterCells?**: `number`
 
-Defined in: [use-cases/load-geotiff/interfaces.ts:21](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-geotiff/interfaces.ts#L21)
+Defined in: [autk-db/src/use-cases/load-geotiff/interfaces.ts:30](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-geotiff/interfaces.ts#L30)
 
 Maximum number of raster cells to decode into memory.
 Larger rasters are downsampled to fit this limit.
@@ -70,7 +56,7 @@ Defaults to 1 000 000.
 
 > **outputTableName**: `string`
 
-Defined in: [use-cases/load-geotiff/interfaces.ts:7](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-geotiff/interfaces.ts#L7)
+Defined in: [autk-db/src/use-cases/load-geotiff/interfaces.ts:16](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-geotiff/interfaces.ts#L16)
 
 Name of the output DuckDB table.
 
@@ -80,10 +66,24 @@ Name of the output DuckDB table.
 
 > `optional` **resampleMethod?**: `"nearest"` \| `"bilinear"`
 
-Defined in: [use-cases/load-geotiff/interfaces.ts:30](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-geotiff/interfaces.ts#L30)
+Defined in: [autk-db/src/use-cases/load-geotiff/interfaces.ts:35](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-geotiff/interfaces.ts#L35)
 
 Resampling method used when downsampling large rasters.
-Defaults to `'bilinear'`.
+Defaults to `'bilinear'`. Categorical RGB imports always use nearest-neighbor.
+
+***
+
+### sourceCrs?
+
+> `optional` **sourceCrs?**: `string`
+
+Defined in: [autk-db/src/use-cases/load-geotiff/interfaces.ts:24](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-geotiff/interfaces.ts#L24)
+
+CRS of the input GeoTIFF file (source).
+
+Defaults to `EPSG:4326` (lat/lng) when omitted.
+The raster extent metadata will be transformed from this CRS to the workspace CRS.
+If the raster is not in `EPSG:4326`, pass the correct CRS explicitly.
 
 ***
 
@@ -91,4 +91,4 @@ Defaults to `'bilinear'`.
 
 > `optional` **workspace?**: `string`
 
-Defined in: [use-cases/load-geotiff/interfaces.ts:31](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-geotiff/interfaces.ts#L31)
+Defined in: [autk-db/src/use-cases/load-geotiff/interfaces.ts:38](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-geotiff/interfaces.ts#L38)

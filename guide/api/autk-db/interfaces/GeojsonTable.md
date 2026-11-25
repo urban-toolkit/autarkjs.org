@@ -6,7 +6,7 @@
 
 # Interface: GeojsonTable
 
-Defined in: [interfaces.ts:91](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/interfaces.ts#L91)
+Defined in: [autk-db/src/interfaces.ts:93](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/interfaces.ts#L93)
 
 GeoJSON import with a known layer type inferred during loading.
 
@@ -22,7 +22,7 @@ Allows downstream code to treat loaded GeoJSON as a renderable layer immediately
 
 > `optional` **bands?**: [`RasterBandMetadata`](RasterBandMetadata.md)[]
 
-Defined in: [interfaces.ts:59](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/interfaces.ts#L59)
+Defined in: [autk-db/src/interfaces.ts:61](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/interfaces.ts#L61)
 
 Optional raster band metadata when the table stores raster data.
 
@@ -36,7 +36,7 @@ Optional raster band metadata when the table stores raster data.
 
 > `optional` **boundingBox?**: `BoundingBox`
 
-Defined in: [interfaces.ts:57](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/interfaces.ts#L57)
+Defined in: [autk-db/src/interfaces.ts:59](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/interfaces.ts#L59)
 
 Cached layer extent when the table contains geometry data.
 
@@ -50,7 +50,7 @@ Cached layer extent when the table contains geometry data.
 
 > **columns**: [`Column`](Column.md)[]
 
-Defined in: [interfaces.ts:55](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/interfaces.ts#L55)
+Defined in: [autk-db/src/interfaces.ts:57](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/interfaces.ts#L57)
 
 Flat schema information returned by DuckDB.
 
@@ -64,7 +64,7 @@ Flat schema information returned by DuckDB.
 
 > **name**: `string`
 
-Defined in: [interfaces.ts:53](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/interfaces.ts#L53)
+Defined in: [autk-db/src/interfaces.ts:55](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/interfaces.ts#L55)
 
 Unique table name within the active workspace.
 
@@ -78,7 +78,7 @@ Unique table name within the active workspace.
 
 > **source**: `"geojson"`
 
-Defined in: [interfaces.ts:93](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/interfaces.ts#L93)
+Defined in: [autk-db/src/interfaces.ts:95](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/interfaces.ts#L95)
 
 Marks the table as originating from the GeoJSON loader.
 
@@ -92,6 +92,6 @@ Marks the table as originating from the GeoJSON loader.
 
 > **type**: `LayerType`
 
-Defined in: [interfaces.ts:95](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/interfaces.ts#L95)
+Defined in: [autk-db/src/interfaces.ts:97](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/interfaces.ts#L97)
 
 Geometry category inferred from the imported GeoJSON features.

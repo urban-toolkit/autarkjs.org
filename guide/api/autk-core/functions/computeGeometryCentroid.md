@@ -8,7 +8,7 @@
 
 > **computeGeometryCentroid**(`geometry`): \[`number`, `number`, `number`\] \| `null`
 
-Defined in: [utils-geojson.ts:117](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/utils-geojson.ts#L117)
+Defined in: [utils-geojson.ts:147](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/utils-geojson.ts#L147)
 
 Computes a geometry-aware weighted centroid for any GeoJSON geometry type.
 

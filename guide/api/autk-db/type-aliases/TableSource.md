@@ -8,7 +8,7 @@
 
 > **TableSource** = `"osm"` \| `"geojson"` \| `"csv"` \| `"json"` \| `"geotiff"` \| `"user"`
 
-Defined in: [interfaces.ts:18](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/interfaces.ts#L18)
+Defined in: [autk-db/src/interfaces.ts:18](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/interfaces.ts#L18)
 
 Supported origins for tables registered in the database workspace.
 

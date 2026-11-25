@@ -6,7 +6,7 @@
 
 # Interface: LoadGeojsonParams
 
-Defined in: [use-cases/load-geojson/interfaces.ts:7](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-geojson/interfaces.ts#L7)
+Defined in: [autk-db/src/use-cases/load-geojson/interfaces.ts:7](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-geojson/interfaces.ts#L7)
 
 Parameters for loading a GeoJSON FeatureCollection into DuckDB as a spatial layer.
 
@@ -16,19 +16,9 @@ Parameters for loading a GeoJSON FeatureCollection into DuckDB as a spatial laye
 
 > `optional` **boundingBox?**: `BoundingBox`
 
-Defined in: [use-cases/load-geojson/interfaces.ts:17](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-geojson/interfaces.ts#L17)
+Defined in: [autk-db/src/use-cases/load-geojson/interfaces.ts:17](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-geojson/interfaces.ts#L17)
 
 Optional bounding box to clip or intersect geometries during import.
-
-***
-
-### coordinateFormat?
-
-> `optional` **coordinateFormat?**: `string`
-
-Defined in: [use-cases/load-geojson/interfaces.ts:15](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-geojson/interfaces.ts#L15)
-
-CRS of the input GeoJSON data (source). Defaults to EPSG:4326.
 
 ***
 
@@ -36,7 +26,7 @@ CRS of the input GeoJSON data (source). Defaults to EPSG:4326.
 
 > `optional` **geojsonFileUrl?**: `string`
 
-Defined in: [use-cases/load-geojson/interfaces.ts:9](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-geojson/interfaces.ts#L9)
+Defined in: [autk-db/src/use-cases/load-geojson/interfaces.ts:9](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-geojson/interfaces.ts#L9)
 
 URL pointing to a GeoJSON FeatureCollection file.
 
@@ -46,7 +36,7 @@ URL pointing to a GeoJSON FeatureCollection file.
 
 > `optional` **geojsonObject?**: `FeatureCollection`\<`Geometry`, `GeoJsonProperties`\>
 
-Defined in: [use-cases/load-geojson/interfaces.ts:11](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-geojson/interfaces.ts#L11)
+Defined in: [autk-db/src/use-cases/load-geojson/interfaces.ts:11](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-geojson/interfaces.ts#L11)
 
 In-memory GeoJSON FeatureCollection object.
 
@@ -56,7 +46,7 @@ In-memory GeoJSON FeatureCollection object.
 
 > `optional` **layerType?**: `LayerType`
 
-Defined in: [use-cases/load-geojson/interfaces.ts:23](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-geojson/interfaces.ts#L23)
+Defined in: [autk-db/src/use-cases/load-geojson/interfaces.ts:23](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-geojson/interfaces.ts#L23)
 
 Explicitly set the layer type. If omitted, the type is auto-detected from the first feature's geometry.
 
@@ -66,9 +56,19 @@ Explicitly set the layer type. If omitted, the type is auto-detected from the fi
 
 > **outputTableName**: `string`
 
-Defined in: [use-cases/load-geojson/interfaces.ts:13](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-geojson/interfaces.ts#L13)
+Defined in: [autk-db/src/use-cases/load-geojson/interfaces.ts:13](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-geojson/interfaces.ts#L13)
 
 Desired output table name to create in DuckDB.
+
+***
+
+### sourceCrs?
+
+> `optional` **sourceCrs?**: `string`
+
+Defined in: [autk-db/src/use-cases/load-geojson/interfaces.ts:15](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-geojson/interfaces.ts#L15)
+
+CRS of the input GeoJSON data. Defaults to EPSG:4326.
 
 ***
 
@@ -76,6 +76,6 @@ Desired output table name to create in DuckDB.
 
 > `optional` **workspace?**: `string`
 
-Defined in: [use-cases/load-geojson/interfaces.ts:19](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/use-cases/load-geojson/interfaces.ts#L19)
+Defined in: [autk-db/src/use-cases/load-geojson/interfaces.ts:19](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-geojson/interfaces.ts#L19)
 
 Optional workspace (schema) name. Defaults to `autk` when omitted.

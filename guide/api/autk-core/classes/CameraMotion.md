@@ -6,7 +6,7 @@
 
 # Class: CameraMotion
 
-Defined in: [camera-motion.ts:61](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera-motion.ts#L61)
+Defined in: [camera-motion.ts:63](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera-motion.ts#L63)
 
 Fluent builder for sequential camera animations.
 
@@ -19,6 +19,8 @@ Pitch, yaw, and zoom are applied relative to the scene center, defined as
 the intersection of the camera's forward ray with the ground plane at `z = 0`.
 Roll keeps the eye position and look-at target fixed while rotating the up
 vector around the forward axis. All steps use ease-in-out interpolation.
+A camera set orthographic with `setProjection` keeps its scale through
+pitch, yaw and roll, and a zoom scales it by its factor.
 
 ## Example
 
@@ -46,7 +48,7 @@ await new CameraMotion()
 
 > **pitch**(`degrees`, `durationSec`, `pan?`): `this`
 
-Defined in: [camera-motion.ts:106](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera-motion.ts#L106)
+Defined in: [camera-motion.ts:108](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera-motion.ts#L108)
 
 Pitches the camera around its right axis, keeping the scene center anchored.
 
@@ -92,7 +94,7 @@ new CameraMotion().pitch(-45, 2.5, 2000).play(camera);
 
 > **play**(`camera`): `Promise`\<`void`\>
 
-Defined in: [camera-motion.ts:152](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera-motion.ts#L152)
+Defined in: [camera-motion.ts:154](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera-motion.ts#L154)
 
 Executes all queued motion steps sequentially against a camera.
 
@@ -128,7 +130,7 @@ await new CameraMotion().zoomOut(2, 3).yaw(90, 2).play(camera);
 
 > **roll**(`degrees`, `durationSec`): `this`
 
-Defined in: [camera-motion.ts:136](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera-motion.ts#L136)
+Defined in: [camera-motion.ts:138](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera-motion.ts#L138)
 
 Rolls the camera around its forward axis, preserving eye and look-at.
 
@@ -168,7 +170,7 @@ new CameraMotion().roll(15, 1).play(camera);
 
 > **yaw**(`degrees`, `durationSec`): `this`
 
-Defined in: [camera-motion.ts:121](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera-motion.ts#L121)
+Defined in: [camera-motion.ts:123](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera-motion.ts#L123)
 
 Yaws the camera around the world Z axis, keeping distance to center.
 
@@ -208,7 +210,7 @@ new CameraMotion().yaw(90, 3).play(camera);
 
 > **zoomIn**(`factor`, `durationSec`): `this`
 
-Defined in: [camera-motion.ts:90](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera-motion.ts#L90)
+Defined in: [camera-motion.ts:92](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera-motion.ts#L92)
 
 Zooms the camera in multiplicatively over a duration.
 
@@ -248,7 +250,7 @@ new CameraMotion().zoomIn(1.5, 2).play(camera);
 
 > **zoomOut**(`factor`, `durationSec`): `this`
 
-Defined in: [camera-motion.ts:75](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera-motion.ts#L75)
+Defined in: [camera-motion.ts:77](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera-motion.ts#L77)
 
 Zooms the camera out multiplicatively over a duration.
 

@@ -8,7 +8,7 @@
 
 > **ReduceSeriesTransformConfig** = `object`
 
-Defined in: [api.ts:167](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-plot/src/api.ts#L167)
+Defined in: [api.ts:261](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L261)
 
 Reduce-series preset config.
 
@@ -23,7 +23,7 @@ Unlike `binning-events`, timestamps are used as-is with no resolution bucketing.
 
 > `optional` **options?**: `object`
 
-Defined in: [api.ts:169](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-plot/src/api.ts#L169)
+Defined in: [api.ts:263](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L263)
 
 #### reducer?
 
@@ -49,4 +49,4 @@ Field within each series point that holds the numeric value. Defaults to `'value
 
 > **preset**: `"reduce-series"`
 
-Defined in: [api.ts:168](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-plot/src/api.ts#L168)
+Defined in: [api.ts:262](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L262)

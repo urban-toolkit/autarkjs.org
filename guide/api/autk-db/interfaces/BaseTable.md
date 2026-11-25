@@ -6,7 +6,7 @@
 
 # Interface: BaseTable
 
-Defined in: [interfaces.ts:49](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/interfaces.ts#L49)
+Defined in: [autk-db/src/interfaces.ts:51](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/interfaces.ts#L51)
 
 Shared metadata stored for every table tracked by the workspace.
 
@@ -28,7 +28,7 @@ Provides the common contract used by all table variants regardless of source or 
 
 > `optional` **bands?**: [`RasterBandMetadata`](RasterBandMetadata.md)[]
 
-Defined in: [interfaces.ts:59](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/interfaces.ts#L59)
+Defined in: [autk-db/src/interfaces.ts:61](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/interfaces.ts#L61)
 
 Optional raster band metadata when the table stores raster data.
 
@@ -38,7 +38,7 @@ Optional raster band metadata when the table stores raster data.
 
 > `optional` **boundingBox?**: `BoundingBox`
 
-Defined in: [interfaces.ts:57](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/interfaces.ts#L57)
+Defined in: [autk-db/src/interfaces.ts:59](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/interfaces.ts#L59)
 
 Cached layer extent when the table contains geometry data.
 
@@ -48,7 +48,7 @@ Cached layer extent when the table contains geometry data.
 
 > **columns**: [`Column`](Column.md)[]
 
-Defined in: [interfaces.ts:55](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/interfaces.ts#L55)
+Defined in: [autk-db/src/interfaces.ts:57](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/interfaces.ts#L57)
 
 Flat schema information returned by DuckDB.
 
@@ -58,7 +58,7 @@ Flat schema information returned by DuckDB.
 
 > **name**: `string`
 
-Defined in: [interfaces.ts:53](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/interfaces.ts#L53)
+Defined in: [autk-db/src/interfaces.ts:55](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/interfaces.ts#L55)
 
 Unique table name within the active workspace.
 
@@ -68,6 +68,6 @@ Unique table name within the active workspace.
 
 > **source**: [`TableSource`](../type-aliases/TableSource.md)
 
-Defined in: [interfaces.ts:51](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-db/src/interfaces.ts#L51)
+Defined in: [autk-db/src/interfaces.ts:53](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/interfaces.ts#L53)
 
 Declares how the table entered the database.

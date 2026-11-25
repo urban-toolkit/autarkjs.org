@@ -6,7 +6,7 @@
 
 # Class: Camera
 
-Defined in: [camera.ts:59](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L59)
+Defined in: [camera.ts:86](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L86)
 
 Interactive 3-DOF camera for orbit-style navigation.
 
@@ -30,7 +30,7 @@ camera.update();
 
 > **new Camera**(`params?`): `Camera`
 
-Defined in: [camera.ts:96](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L96)
+Defined in: [camera.ts:135](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L135)
 
 Creates a camera with the provided initial state.
 
@@ -63,7 +63,7 @@ const custom = new Camera({ eye: [0, 0, 500], lookAt: [0, 0, 0], up: [0, 1, 0] }
 
 > **getEye**(): \[`number`, `number`, `number`\]
 
-Defined in: [camera.ts:136](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L136)
+Defined in: [camera.ts:181](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L181)
 
 #### Returns
 
@@ -75,7 +75,9 @@ Defined in: [camera.ts:136](https://github.com/urban-toolkit/autark/blob/1faf032
 
 > **getFar**(): `number`
 
-Defined in: [camera.ts:156](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L156)
+Defined in: [camera.ts:216](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L216)
+
+Returns the active far distance for navigation, or the configured minimum in fixed-bounds mode.
 
 #### Returns
 
@@ -87,7 +89,7 @@ Defined in: [camera.ts:156](https://github.com/urban-toolkit/autark/blob/1faf032
 
 > **getFovyRadians**(): `number`
 
-Defined in: [camera.ts:148](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L148)
+Defined in: [camera.ts:207](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L207)
 
 #### Returns
 
@@ -95,15 +97,120 @@ Defined in: [camera.ts:148](https://github.com/urban-toolkit/autark/blob/1faf032
 
 ***
 
+### getGroundFootprint()
+
+> **getGroundFootprint**(`reach`): \[`number`, `number`\][]
+
+Defined in: [camera.ts:320](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L320)
+
+The ground the camera can see within a distance, as a convex polygon.
+
+Each side of the view pyramid is a plane through the eye; on the ground it
+is a half-plane. The visible ground is the square of half-side `reach`
+around the point below the eye, cut by those four half-planes. Unlike the
+ground hits of the four corner rays, this also covers what the interior
+of the screen sees near the horizon, where a corner ray points above the
+ground. An orthographic view sees a parallelogram of ground, between the
+ground points of its corners.
+
+#### Parameters
+
+##### reach
+
+`number`
+
+Farthest ground distance from the point below the eye, in world units.
+
+#### Returns
+
+\[`number`, `number`\][]
+
+Polygon vertices `[x, y]`, or an empty array when no ground is visible.
+
+#### Throws
+
+Never throws.
+
+#### Example
+
+```ts
+const polygon = camera.getGroundFootprint(50000);
+```
+
+***
+
+### getGroundPoint()
+
+> **getGroundPoint**(`x`, `y`, `maxDistance`): \[`number`, `number`\]
+
+Defined in: [camera.ts:284](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L284)
+
+Finds where the ray through a screen position meets the ground plane (`z = 0`).
+
+A ray that points away from the ground, or is parallel to it, has no hit;
+a hit farther than `maxDistance` is too far to be useful. In both cases the
+point `maxDistance` along the ray is returned instead. An orthographic
+ray starts on the plane of the eye, and its hit may lie behind that plane;
+a hit more than `maxDistance` behind it gives the point `maxDistance` behind it.
+
+#### Parameters
+
+##### x
+
+`number`
+
+Normalized screen X (0–1, left to right).
+
+##### y
+
+`number`
+
+Normalized screen Y (0–1, bottom to top).
+
+##### maxDistance
+
+`number`
+
+Farthest distance along the ray, in world units.
+
+#### Returns
+
+\[`number`, `number`\]
+
+The ground point `[x, y]`.
+
+#### Throws
+
+Never throws.
+
+#### Example
+
+```ts
+const [gx, gy] = camera.getGroundPoint(0.5, 0.5, 50000); // what the view centre looks at
+```
+
+***
+
 ### getLookAt()
 
 > **getLookAt**(): \[`number`, `number`, `number`\]
 
-Defined in: [camera.ts:140](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L140)
+Defined in: [camera.ts:194](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L194)
+
+Returns the point the camera looks at.
+
+`resetCamera(getUp(), getLookAt(), getEye())` keeps the view, in
+perspective and in an orthographic view set with [setProjection](#setprojection).
 
 #### Returns
 
 \[`number`, `number`, `number`\]
+
+The point `[x, y, z]` in world space.
+
+#### Throws
+
+Never throws.
 
 ***
 
@@ -111,7 +218,7 @@ Defined in: [camera.ts:140](https://github.com/urban-toolkit/autark/blob/1faf032
 
 > **getModelViewMatrix**(): `mat4`
 
-Defined in: [camera.ts:195](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L195)
+Defined in: [camera.ts:477](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L477)
 
 Returns the current view (model-view) matrix.
 
@@ -138,7 +245,7 @@ const view = camera.getModelViewMatrix();
 
 > **getNear**(): `number`
 
-Defined in: [camera.ts:152](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L152)
+Defined in: [camera.ts:211](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L211)
 
 #### Returns
 
@@ -146,11 +253,32 @@ Defined in: [camera.ts:152](https://github.com/urban-toolkit/autark/blob/1faf032
 
 ***
 
+### getProjection()
+
+> **getProjection**(): [`CameraProjection`](../type-aliases/CameraProjection.md)
+
+Defined in: [camera.ts:432](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L432)
+
+Returns the current projection.
+
+#### Returns
+
+[`CameraProjection`](../type-aliases/CameraProjection.md)
+
+`'orthographic'` once [setProjection](#setprojection) chose it, or while the
+bounds of [setOrthographicBounds](#setorthographicbounds) hold; otherwise `'perspective'`.
+
+#### Throws
+
+Never throws.
+
+***
+
 ### getProjectionMatrix()
 
 > **getProjectionMatrix**(): `mat4`
 
-Defined in: [camera.ts:132](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L132)
+Defined in: [camera.ts:177](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L177)
 
 Returns the current projection matrix.
 
@@ -177,7 +305,7 @@ const proj = camera.getProjectionMatrix();
 
 > **getUp**(): \[`number`, `number`, `number`\]
 
-Defined in: [camera.ts:144](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L144)
+Defined in: [camera.ts:203](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L203)
 
 #### Returns
 
@@ -189,7 +317,7 @@ Defined in: [camera.ts:144](https://github.com/urban-toolkit/autark/blob/1faf032
 
 > **getViewportHeight**(): `number`
 
-Defined in: [camera.ts:160](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L160)
+Defined in: [camera.ts:235](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L235)
 
 #### Returns
 
@@ -201,7 +329,7 @@ Defined in: [camera.ts:160](https://github.com/urban-toolkit/autark/blob/1faf032
 
 > **getViewportWidth**(): `number`
 
-Defined in: [camera.ts:164](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L164)
+Defined in: [camera.ts:239](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L239)
 
 #### Returns
 
@@ -213,7 +341,7 @@ Defined in: [camera.ts:164](https://github.com/urban-toolkit/autark/blob/1faf032
 
 > **getViewProjectionMatrix**(): `Float32Array`
 
-Defined in: [camera.ts:168](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L168)
+Defined in: [camera.ts:243](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L243)
 
 #### Returns
 
@@ -225,7 +353,16 @@ Defined in: [camera.ts:168](https://github.com/urban-toolkit/autark/blob/1faf032
 
 > **getWorldRayDirection**(`x`, `y`): \[`number`, `number`, `number`\]
 
-Defined in: [camera.ts:172](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L172)
+Defined in: [camera.ts:262](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L262)
+
+Returns the direction of the ray through a screen position, in world space.
+
+In perspective, the ray starts at the eye ([getEye](#geteye)). In an
+orthographic view, every ray has the view direction, and the ray through
+a screen position starts at that position on the plane of the eye, not at
+the eye: unproject the position with the inverse of
+[getViewProjectionMatrix](#getviewprojectionmatrix) to find a point on it, or use
+[getGroundPoint](#getgroundpoint) for where it meets the ground.
 
 #### Parameters
 
@@ -233,13 +370,23 @@ Defined in: [camera.ts:172](https://github.com/urban-toolkit/autark/blob/1faf032
 
 `number`
 
+Normalized screen X, from 0 at the left to 1 at the right.
+
 ##### y
 
 `number`
 
+Normalized screen Y, from 0 at the bottom to 1 at the top.
+
 #### Returns
 
 \[`number`, `number`, `number`\]
+
+The unit direction `[x, y, z]`.
+
+#### Throws
+
+Never throws.
 
 ***
 
@@ -247,7 +394,7 @@ Defined in: [camera.ts:172](https://github.com/urban-toolkit/autark/blob/1faf032
 
 > **getZoomScale**(): `number`
 
-Defined in: [camera.ts:302](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L302)
+Defined in: [camera.ts:600](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L600)
 
 Returns a scalar proportional to the current map zoom for marker sizing.
 
@@ -265,7 +412,7 @@ normalized eye-direction vector.
 
 > **pitch**(`delta`): `void`
 
-Defined in: [camera.ts:282](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L282)
+Defined in: [camera.ts:580](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L580)
 
 Tilts the camera up or down (elevation angle).
 
@@ -296,11 +443,14 @@ camera.update();
 
 ### resetCamera()
 
-> **resetCamera**(`wUp`, `wLookAt`, `wEye`): `void`
+> **resetCamera**(`wUp`, `wLookAt`, `wEye`, `far?`, `near?`): `void`
 
-Defined in: [camera.ts:111](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L111)
+Defined in: [camera.ts:155](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L155)
 
 Resets the camera to a new position, orientation, and default projection.
+
+The projection set by [setProjection](#setprojection) is kept; the bounds set by
+[setOrthographicBounds](#setorthographicbounds) end.
 
 #### Parameters
 
@@ -321,6 +471,18 @@ Point to look at in world space.
 `number`[]
 
 Eye position in world space.
+
+##### far?
+
+`number` = `5e5`
+
+Minimum far clipping distance for navigable views; defaults to 500,000 world units.
+
+##### near?
+
+`number` = `1`
+
+Near clipping distance; defaults to 1 world unit. Explicit small-unit views may use a smaller value.
 
 #### Returns
 
@@ -343,7 +505,7 @@ camera.update();
 
 > **resize**(`width`, `height`): `void`
 
-Defined in: [camera.ts:210](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L210)
+Defined in: [camera.ts:492](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L492)
 
 Updates viewport size and recomputes matrices in one call.
 
@@ -379,29 +541,19 @@ camera.resize(1920, 1080);  // calls update() internally
 
 ***
 
-### setOrthographicBounds()
+### restoreState()
 
-> **setOrthographicBounds**(`left`, `right`, `bottom`, `top`): `void`
+> **restoreState**(`state`): `void`
 
-Defined in: [camera.ts:177](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L177)
+Defined in: [camera.ts:453](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L453)
+
+Restores a snapshot from [saveState](#savestate), using the receiving camera's viewport.
 
 #### Parameters
 
-##### left
+##### state
 
-`number`
-
-##### right
-
-`number`
-
-##### bottom
-
-`number`
-
-##### top
-
-`number`
+[`CameraState`](../interfaces/CameraState.md)
 
 #### Returns
 
@@ -409,11 +561,126 @@ Defined in: [camera.ts:177](https://github.com/urban-toolkit/autark/blob/1faf032
 
 ***
 
+### saveState()
+
+> **saveState**(): [`CameraState`](../interfaces/CameraState.md)
+
+Defined in: [camera.ts:437](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L437)
+
+Captures the pose, projection, framing, and clipping range as JSON-serializable data.
+
+#### Returns
+
+[`CameraState`](../interfaces/CameraState.md)
+
+***
+
+### setOrthographicBounds()
+
+> **setOrthographicBounds**(`left`, `right`, `bottom`, `top`): `void`
+
+Defined in: [camera.ts:374](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L374)
+
+Switches the camera to a top-down orthographic projection over a rectangle of ground.
+
+The camera keeps these bounds until [resetCamera](#resetcamera) or
+`setProjection('perspective')` is called: [resize](#resize) and [update](#update) keep the
+projection, and the ground and ray helpers follow the bounds. World `z`
+from -10 to 90 is inside the depth range. Ordinary 2D layers remain on the
+common ground plane and use drawing order. For a view that follows the
+eye, use [setProjection](#setprojection).
+
+#### Parameters
+
+##### left
+
+`number`
+
+World X at the left edge.
+
+##### right
+
+`number`
+
+World X at the right edge.
+
+##### bottom
+
+`number`
+
+World Y at the bottom edge.
+
+##### top
+
+`number`
+
+World Y at the top edge.
+
+#### Returns
+
+`void`
+
+#### Throws
+
+Never throws.
+
+#### Example
+
+```ts
+camera.setOrthographicBounds(0, 1000, 0, 800);
+```
+
+***
+
+### setProjection()
+
+> **setProjection**(`projection`): `void`
+
+Defined in: [camera.ts:416](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L416)
+
+Sets the projection the camera keeps until it is set again.
+
+An orthographic camera looks along the same line as the perspective one,
+with parallel rays, and at the point it looks at it shows what the
+perspective camera shows there. So switching keeps the scale there, and
+zoom, pan, tilt and [resetCamera](#resetcamera) work as in perspective. It draws
+everything within the far distance, in front of the eye or behind it.
+
+Setting the projection [getProjection](#getprojection) already reports changes
+nothing that is drawn. While the bounds of [setOrthographicBounds](#setorthographicbounds)
+hold, the camera is orthographic: `setProjection('orthographic')` keeps
+them, and the camera stays orthographic after [resetCamera](#resetcamera) ends
+them; `setProjection('perspective')` ends them.
+
+#### Parameters
+
+##### projection
+
+[`CameraProjection`](../type-aliases/CameraProjection.md)
+
+`'perspective'`, the default, or `'orthographic'`.
+
+#### Returns
+
+`void`
+
+#### Throws
+
+Never throws.
+
+#### Example
+
+```ts
+camera.setProjection('orthographic');
+```
+
+***
+
 ### translate()
 
 > **translate**(`dx`, `dy`): `void`
 
-Defined in: [camera.ts:245](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L245)
+Defined in: [camera.ts:543](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L543)
 
 Pans the camera in screen space, scaled by the current view distance.
 
@@ -452,7 +719,7 @@ camera.update();
 
 > **update**(): `void`
 
-Defined in: [camera.ts:316](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L316)
+Defined in: [camera.ts:614](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L614)
 
 Rebuilds view and projection matrices from the current camera state.
 
@@ -479,7 +746,7 @@ camera.update();  // rebuild matrices after navigation change
 
 > **yaw**(`delta`): `void`
 
-Defined in: [camera.ts:267](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L267)
+Defined in: [camera.ts:565](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L565)
 
 Rotates the camera around the world Z-axis (compass bearing).
 
@@ -512,7 +779,7 @@ camera.update();
 
 > **zoom**(`delta`, `x`, `y`): `void`
 
-Defined in: [camera.ts:227](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L227)
+Defined in: [camera.ts:509](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L509)
 
 Zooms the camera at the cursor position, preserving it in world space.
 
@@ -557,7 +824,7 @@ camera.update();
 
 > `static` **buildViewProjection**(`p`): `Float32Array`
 
-Defined in: [camera.ts:338](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/camera.ts#L338)
+Defined in: [camera.ts:647](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L647)
 
 Builds a stateless view-projection matrix from explicit parameters.
 

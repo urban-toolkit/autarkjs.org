@@ -8,12 +8,9 @@
 
 > **ExecutedBinning2dTransform** = `object`
 
-Defined in: [transforms/presets/binning-2d.ts:29](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-plot/src/transforms/presets/binning-2d.ts#L29)
+Defined in: [transforms/presets/binning-2d.ts:23](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/binning-2d.ts#L23)
 
 Result produced by `runBinning2d`.
-
-Carries the fixed attribute tuple `['x', 'y', 'value']` and the aggregated
-cell rows ready for heat matrix rendering.
 
 ## Properties
 
@@ -21,9 +18,19 @@ cell rows ready for heat matrix rendering.
 
 > **preset**: `"binning-2d"`
 
-Defined in: [transforms/presets/binning-2d.ts:31](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-plot/src/transforms/presets/binning-2d.ts#L31)
+Defined in: [transforms/presets/binning-2d.ts:25](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/binning-2d.ts#L25)
 
 Preset discriminator identifying the executed transform.
+
+***
+
+### provenance
+
+> **provenance**: [`TransformProvenance`](TransformProvenance.md)
+
+Defined in: [transforms/presets/binning-2d.ts:29](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/binning-2d.ts#L29)
+
+Provenance `D0 features → D1 cells → D2 aggregates`, aligned with `rows`.
 
 ***
 
@@ -31,6 +38,6 @@ Preset discriminator identifying the executed transform.
 
 > **rows**: [`Binning2dCellRow`](Binning2dCellRow.md)[]
 
-Defined in: [transforms/presets/binning-2d.ts:33](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-plot/src/transforms/presets/binning-2d.ts#L33)
+Defined in: [transforms/presets/binning-2d.ts:27](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/binning-2d.ts#L27)
 
 Aggregated cell rows ready for downstream heat-matrix rendering.

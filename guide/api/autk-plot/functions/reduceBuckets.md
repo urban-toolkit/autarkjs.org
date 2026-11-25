@@ -8,7 +8,7 @@
 
 > **reduceBuckets**(`options`): [`ReducedBucket`](../type-aliases/ReducedBucket.md)[]
 
-Defined in: [transforms/kernel.ts:39](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-plot/src/transforms/kernel.ts#L39)
+Defined in: [transforms/kernel.ts:63](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/kernel.ts#L63)
 
 Groups rows into keyed buckets and reduces each bucket to a single value.
 
@@ -16,31 +16,9 @@ Groups rows into keyed buckets and reduces each bucket to a single value.
 
 ### options
 
+`ReduceBucketsOptions`
+
 Aggregation configuration with `rows`, `bucketOf`, `valueOf`, and `reducer`.
-
-#### bucketOf
-
-(`row`) => `string` \| `null`
-
-Assigns a bucket key to each row; return `null` to skip the row.
-
-#### reducer
-
-[`TransformReducer`](../type-aliases/TransformReducer.md)
-
-Aggregation strategy applied within each bucket.
-
-#### rows
-
-[`Row`](../type-aliases/Row.md)[]
-
-Input rows to aggregate.
-
-#### valueOf?
-
-(`row`) => `number` \| `null`
-
-Optional numeric extractor used for non-count reducers.
 
 ## Returns
 
@@ -50,7 +28,8 @@ Reduced buckets with merged `autkIds` for selection linking.
 
 ## Throws
 
-Never throws. Rows with null keys or non-finite values are skipped.
+If the reducer is not one of count, sum, avg, min, max. Rows with null keys or non-finite
+values are skipped.
 
 ## Example
 

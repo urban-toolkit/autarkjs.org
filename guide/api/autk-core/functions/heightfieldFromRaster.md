@@ -6,9 +6,9 @@
 
 # Function: heightfieldFromRaster()
 
-> **heightfieldFromRaster**(`collection`, `property`, `origin`): [`Heightfield`](../interfaces/Heightfield.md)
+> **heightfieldFromRaster**(`collection`, `property`, `origin`, `preserveNoData?`): [`Heightfield`](../interfaces/Heightfield.md)
 
-Defined in: [heightfield.ts:58](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-core/src/heightfield.ts#L58)
+Defined in: [heightfield.ts:59](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/heightfield.ts#L59)
 
 Builds a local-space heightfield from a raster feature collection.
 
@@ -34,6 +34,12 @@ Dot-path to the raster band values in the first feature properties.
 readonly `number`[]
 
 World-space origin to subtract from the raster bbox.
+
+### preserveNoData?
+
+`boolean` = `false`
+
+Preserve missing samples as NaN until terrain validation can repair them.
 
 ## Returns
 

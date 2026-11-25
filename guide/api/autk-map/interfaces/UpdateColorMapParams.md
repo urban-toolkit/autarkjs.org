@@ -6,7 +6,7 @@
 
 # Interface: UpdateColorMapParams
 
-Defined in: [autk-map/src/api.ts:174](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-map/src/api.ts#L174)
+Defined in: [autk-map/src/api.ts:316](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/api.ts#L316)
 
 Parameters for patching a layer's color-map configuration.
 
@@ -17,8 +17,8 @@ existing color-map state rather than replacing the full configuration.
 
 ### colorMap
 
-> **colorMap**: `Partial`\<`ColorMapConfig`\>
+> **colorMap**: `ColorMapOptions`
 
-Defined in: [autk-map/src/api.ts:178](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-map/src/api.ts#L178)
+Defined in: [autk-map/src/api.ts:320](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/api.ts#L320)
 
 Partial color-map patch merged with the existing layer color-map state.

@@ -6,7 +6,7 @@
 
 # Class: AutkComputeEngine
 
-Defined in: [compute.ts:41](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-compute/src/compute.ts#L41)
+Defined in: [compute.ts:41](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-compute/src/compute.ts#L41)
 
 Main compute engine for GPGPU analysis and render sampling.
 
@@ -35,23 +35,29 @@ await compute.gpgpuPipeline(params);
 
 ### gpgpuPipeline()
 
-> **gpgpuPipeline**(`params`): `Promise`\<`FeatureCollection`\<`Geometry`, `GeoJsonProperties`\>\>
+> **gpgpuPipeline**\<`G`\>(`params`): `Promise`\<`FeatureCollection`\<`G`, `GeoJsonProperties`\>\>
 
-Defined in: [compute.ts:63](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-compute/src/compute.ts#L63)
+Defined in: [compute.ts:63](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-compute/src/compute.ts#L63)
 
 Runs the GPGPU pipeline and writes results to `feature.properties.compute`.
+
+#### Type Parameters
+
+##### G
+
+`G` *extends* `Geometry` \| `null`
 
 #### Parameters
 
 ##### params
 
-[`GpgpuPipelineParams`](../interfaces/GpgpuPipelineParams.md)
+[`GpgpuPipelineParams`](../interfaces/GpgpuPipelineParams.md)\<`G`\>
 
 Pipeline parameters.
 
 #### Returns
 
-`Promise`\<`FeatureCollection`\<`Geometry`, `GeoJsonProperties`\>\>
+`Promise`\<`FeatureCollection`\<`G`, `GeoJsonProperties`\>\>
 
 Promise resolving to the input collection with computed values attached.
 
@@ -81,7 +87,7 @@ const result = await engine.gpgpuPipeline({
 
 > **renderPipeline**(`params`): `Promise`\<`FeatureCollection`\<`Geometry`, `GeoJsonProperties`\>\>
 
-Defined in: [compute.ts:81](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-compute/src/compute.ts#L81)
+Defined in: [compute.ts:81](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-compute/src/compute.ts#L81)
 
 Runs the render pipeline and writes metrics to `feature.properties.compute.render`.
 

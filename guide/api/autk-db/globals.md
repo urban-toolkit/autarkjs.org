@@ -4,7 +4,7 @@
 
 # @urban-toolkit/autk-db
 
-> Version: `4.1.1`
+> Version: `5.0.0`
 
 Public entry point for the `@urban-toolkit/autk-db` package.
 
@@ -81,8 +81,8 @@ console.log(isVectorTable({ source: 'geojson', name: 'roads', columns: [], type:
 
 ## Variables
 
-- [DEFAULT\_INPUT\_COORDINATE\_FORMAT](variables/DEFAULT_INPUT_COORDINATE_FORMAT.md)
-- [DEFAULT\_WORKSPACE\_COORDINATE\_FORMAT](variables/DEFAULT_WORKSPACE_COORDINATE_FORMAT.md)
+- [DEFAULT\_SOURCE\_CRS](variables/DEFAULT_SOURCE_CRS.md)
+- [DEFAULT\_WORKSPACE\_CRS](variables/DEFAULT_WORKSPACE_CRS.md)
 - [DEFAULT\_WORKSPACE\_NAME](variables/DEFAULT_WORKSPACE_NAME.md)
 - [DEFAULT\_WORKSPACE\_PRECISION\_GRID](variables/DEFAULT_WORKSPACE_PRECISION_GRID.md)
 - [EXCLUDED\_BUILDING\_VALUES](variables/EXCLUDED_BUILDING_VALUES.md)

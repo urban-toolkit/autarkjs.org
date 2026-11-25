@@ -8,12 +8,9 @@
 
 > **ExecutedSortTransform** = `object`
 
-Defined in: [transforms/presets/sort.ts:22](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-plot/src/transforms/presets/sort.ts#L22)
+Defined in: [transforms/presets/sort.ts:20](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/sort.ts#L20)
 
 Result produced by `runSort`.
-
-Contains the `sort` preset tag plus rows carrying their original `autkIds`
-for downstream selection linking.
 
 ## Properties
 
@@ -21,9 +18,19 @@ for downstream selection linking.
 
 > **preset**: `"sort"`
 
-Defined in: [transforms/presets/sort.ts:24](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-plot/src/transforms/presets/sort.ts#L24)
+Defined in: [transforms/presets/sort.ts:22](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/sort.ts#L22)
 
 Preset discriminator identifying the executed transform.
+
+***
+
+### provenance
+
+> **provenance**: [`TransformProvenance`](TransformProvenance.md)
+
+Defined in: [transforms/presets/sort.ts:26](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/sort.ts#L26)
+
+Provenance `D0 features → D1 rows` (one-to-one), aligned with `rows`.
 
 ***
 
@@ -31,6 +38,6 @@ Preset discriminator identifying the executed transform.
 
 > **rows**: [`AutkDatum`](AutkDatum.md)[]
 
-Defined in: [transforms/presets/sort.ts:26](https://github.com/urban-toolkit/autark/blob/1faf032b4fe83189246b9966c0ef324f5821c731/autk-plot/src/transforms/presets/sort.ts#L26)
+Defined in: [transforms/presets/sort.ts:24](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/sort.ts#L24)
 
 Sorted rows preserving their original `autkIds` provenance.
