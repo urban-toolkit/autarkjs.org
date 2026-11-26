@@ -1,10 +1,21 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const canvas = ref<HTMLCanvasElement | null>(null)
 const status = ref('Initializing…')
 const error = ref('')
 const activeTab = ref<'install' | 'example'>('install')
+
+// After the install command has had a moment, show what the toolkit produces.
+let tabTimer: ReturnType<typeof setTimeout> | undefined
+function focusTab(tab: 'install' | 'example') {
+  clearTimeout(tabTimer)
+  activeTab.value = tab
+}
+onMounted(() => {
+  tabTimer = setTimeout(() => { activeTab.value = 'example' }, 4000)
+})
+onUnmounted(() => clearTimeout(tabTimer))
 
 const phaseLabels: Record<string, string> = {
   'querying-osm-server': 'Scanning PBF data…',
@@ -93,7 +104,7 @@ onMounted(async () => {
                   class="home-terminal-tab"
                   :class="{ 'home-terminal-tab--active': activeTab === 'install' }"
                   :aria-selected="activeTab === 'install'"
-                  @click="activeTab = 'install'"
+                  @click="focusTab('install')"
                 >
                   install.sh
                 </button>
@@ -102,7 +113,7 @@ onMounted(async () => {
                   class="home-terminal-tab"
                   :class="{ 'home-terminal-tab--active': activeTab === 'example' }"
                   :aria-selected="activeTab === 'example'"
-                  @click="activeTab = 'example'"
+                  @click="focusTab('example')"
                 >
                   minimal-example.ts
                 </button>
@@ -110,7 +121,8 @@ onMounted(async () => {
             </div>
 
             <div class="home-terminal-body">
-              <div v-show="activeTab === 'install'" class="home-terminal-panel home-terminal-panel--install">
+              <Transition name="home-tab" mode="out-in">
+              <div v-if="activeTab === 'install'" key="install" class="home-terminal-panel home-terminal-panel--install">
                 <a class="home-terminal-link" href="https://www.npmjs.com/package/@urban-toolkit/autk" aria-label="Install @urban-toolkit/autk from npm">
                   <span class="home-terminal-prompt">$</span>
                   <span class="home-terminal-command" aria-hidden="true">npm install @urban-toolkit/autk</span>
@@ -118,8 +130,9 @@ onMounted(async () => {
                 </a>
               </div>
 
-              <div v-show="activeTab === 'example'" class="home-terminal-panel home-terminal-panel--example">
-                <pre class="home-terminal-code"><code><span class="token-keyword">import</span> { <span class="token-class">AutkDb</span>, <span class="token-class">AutkMap</span>, <span class="token-class">MapStyle</span> } <span class="token-keyword">from</span> <span class="token-string">"@urban-toolkit/autk"</span>;
+              <div v-else key="example" class="home-terminal-panel home-terminal-panel--example">
+                <pre class="home-terminal-code"><code><span class="token-keyword">import</span> { <span class="token-class">AutkDb</span> } <span class="token-keyword">from</span> <span class="token-string">"@urban-toolkit/autk-db"</span>;
+<span class="token-keyword">import</span> { <span class="token-class">AutkMap</span> } <span class="token-keyword">from</span> <span class="token-string">"@urban-toolkit/autk-map"</span>;
 
 <span class="token-keyword">const</span> db = <span class="token-keyword">new</span> <span class="token-class">AutkDb</span>();
 <span class="token-keyword">await</span> db.init();
@@ -135,12 +148,18 @@ onMounted(async () => {
   },
 });
 
-<span class="token-class">MapStyle</span>.setPredefinedStyle(<span class="token-string">"apple"</span>);
-
 <span class="token-keyword">const</span> map = <span class="token-keyword">new</span> <span class="token-class">AutkMap</span>(canvas, { showUi: false });
 <span class="token-keyword">await</span> map.init();
+map.style.setPredefinedStyle(<span class="token-string">"apple"</span>);
+
+<span class="token-keyword">for</span> (<span class="token-keyword">const</span> layer <span class="token-keyword">of</span> db.getLayersMetadata()) {
+  <span class="token-keyword">const</span> collection = <span class="token-keyword">await</span> db.getLayer(layer.name);
+  map.loadCollection(layer.name, { collection, type: layer.type });
+}
+
 map.draw();</code></pre>
               </div>
+              </Transition>
             </div>
           </div>
 
@@ -342,6 +361,34 @@ map.draw();</code></pre>
   inset: 0;
   overflow: auto;
   padding: 22px;
+}
+
+/* The install command gives way to the example after a few seconds. */
+.home-tab-enter-active,
+.home-tab-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.home-tab-enter-from {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.home-tab-leave-to {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-tab-enter-active,
+  .home-tab-leave-active {
+    transition: none;
+  }
+
+  .home-tab-enter-from,
+  .home-tab-leave-to {
+    transform: none;
+  }
 }
 
 .home-terminal-link {
