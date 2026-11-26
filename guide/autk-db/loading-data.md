@@ -39,6 +39,31 @@ const res = await db.loadOsm({
 console.log(res)
 `
 
+const tagSetsCode = `
+import { AutkDb } from "@urban-toolkit/autk-db";
+
+const db = new AutkDb();
+await db.init();
+
+// Tag sets work with a local extract as well as with Overpass.
+await db.loadOsm({
+  pbfFileUrl: '/data/lower_mnt.osm.pbf',
+  queryArea: { bbox: [-74.019, 40.700, -74.003, 40.714] },
+  autoLoadLayers: { layers: [] },
+  tagSets: [
+    { name: 'cafes', type: 'points', tags: [{ key: 'amenity', value: 'cafe' }] },
+    { name: 'schools', type: 'polygons', tags: [{ key: 'amenity', value: 'school' }] },
+  ],
+});
+
+const tables = db.getTablesMetadata().map((table) => table.name);
+console.log('Tables', tables);
+for (const name of tables.filter((name) => /_(cafes|schools)_/.test(name))) {
+  const layer = await db.getLayer(name);
+  console.log(name, layer.features.length, 'features', layer.features[0]?.properties);
+}
+`
+
 const loadGeojsonCode = `
 import { AutkDb } from "@urban-toolkit/autk-db";
 
@@ -149,7 +174,7 @@ To directly fetch from the public [Overpass API](https://overpass-api.de/) and l
 
 
 <ClientOnly>
-  <CodePlayground :code="fetchOsmCode" out="console" :auto-run="true" />
+  <CodePlayground :code="fetchOsmCode" out="console" :auto-run="false" />
 </ClientOnly>
 
 :::danger Overpass API limits
@@ -163,26 +188,6 @@ All roads, including bbox loads, are cropped to the mandatory surface. Bridge an
 :::
 
 For named areas, coastline classification uses the full `geocodeArea` bounding box, including neighboring coastlines. PBF extracts must include the complete geocode boundary and coastline coverage; the loader does not fetch missing data. When classification succeeds, requested water layers can include sea context within the selected areas' bounding box, marked with `properties.generated = 'coastline'`. Missing or invalid coastline data never implies sea.
-
-### Loading custom OSM tag sets
-
-With Overpass, `tagSets` can load custom layers beside the standard OSM themes. Each [`OsmTagSet`](/api/autk-db/type-aliases/OsmTagSet) declares exactly one geometry family (`points`, `polylines`, or `polygons`) and produces `{outputTableName}_{name}_{type}`. Filters in one set are combined with OR.
-
-```ts
-await db.loadOsm({
-  queryArea: { bbox: [-74.019, 40.700, -74.003, 40.714] },
-  autoLoadLayers: { layers: [] },
-  tagSets: [{
-    name: 'cafes',
-    type: 'points',
-    tags: [{ key: 'amenity', value: 'cafe' }],
-  }],
-});
-
-const cafes = await db.getLayer('table_osm_cafes_points', { osmElements: true });
-```
-
-Tag sets work with either source. With `pbfFileUrl`, the streaming reader selects matching nodes, ways, and multipolygon relations locally, so the file must contain the required objects. Up to eight sets are allowed, each with a unique lowercase name and 1–64 filters. Tag layers are also clipped to the surface, so a set with no surviving features produces no table.
 
 ### Using static `.pbf` files
 
@@ -199,6 +204,16 @@ To load from a PBF file, provide the [`pbfFileUrl`](/api/autk-db/type-aliases/Lo
 
 * Very large files may also take long to process, but the process runs etirely in the browser and no API limits apply. To reduce the loading time, crop the `.pbf` file first using [Osmium](https://osmcode.org/osmium-tool/) as a pre-processing step: `osmium extract --strategy=smart -b <minLon>,<minLat>,<maxLon>,<maxLat> <input.osm.pbf> -o <output.osm.pbf>`. 
 :::
+
+### Loading custom OSM tag sets
+
+With either source, `tagSets` can load custom layers beside the standard OSM themes. Each [`OsmTagSet`](/api/autk-db/type-aliases/OsmTagSet) declares exactly one geometry family (`points`, `polylines`, or `polygons`) and produces `{outputTableName}_{name}_{type}`. Filters in one set are combined with OR.
+
+<ClientOnly>
+  <CodePlayground :code="tagSetsCode" out="console" :auto-run="true" />
+</ClientOnly>
+
+Tag sets work with either source. With `pbfFileUrl`, the streaming reader selects matching nodes, ways, and multipolygon relations locally, so the file must contain the required objects. Up to eight sets are allowed, each with a unique lowercase name and 1–64 filters. Tag layers are also clipped to the surface, so a set with no surviving features produces no table.
 
 ### List of `loadOsm` parameters
 
