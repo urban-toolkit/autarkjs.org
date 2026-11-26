@@ -54,8 +54,8 @@ test('the tutorial datasets are published unchanged', async () => {
   }
 })
 
-test('the learn page presents both tracks', async () => {
-  const html = await readFile(`${dist}/learn/index.html`, 'utf8')
+test('the introduction points to the guide and the tutorial', async () => {
+  const html = await readFile(`${dist}/introduction.html`, 'utf8')
   assert.ok(html.includes('href="/tutorial/"'))
-  assert.ok(html.includes('href="/introduction"'))
+  assert.ok(html.includes('href="/autk-db/"'))
 })

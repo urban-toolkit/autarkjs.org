@@ -159,6 +159,23 @@ map.draw();
 Try to remove `"buildings"` from the `layers` list and click **Run** to test changes.
 :::
 
+## Where to go next
+
+<div class="learn-tracks">
+  <a class="learn-track" href="/tutorial/">
+    <span class="learn-track-kicker">Tutorial</span>
+    <span class="learn-track-title">Run a city end to end</span>
+    <span class="learn-track-text">Five chapters, from raw formats to a GPU analysis. Edit the cells and run them.</span>
+    <span class="learn-track-link">Start the tutorial →</span>
+  </a>
+  <a class="learn-track" href="/autk-db/">
+    <span class="learn-track-kicker">Guide</span>
+    <span class="learn-track-title">Look up how a package works</span>
+    <span class="learn-track-text">Reference pages for autk-db, autk-map, autk-plot, and autk-compute, with runnable examples.</span>
+    <span class="learn-track-link">Open the guide →</span>
+  </a>
+</div>
+
 :::info The `canvas`
 The `canvas` argument used in the autk-map constructor must be a reference to a DOM node containing a HTML canvas. The second argument is an options object; `showUi: false` hides the built-in layer menu, and `crs` sets the workspace coordinate system.
 :::

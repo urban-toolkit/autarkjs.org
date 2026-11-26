@@ -13,13 +13,6 @@ const tutorialChapters = [
 
 const guideSections = [
     {
-        text: 'Getting Started',
-        items: [
-            { text: 'Introduction', link: '/introduction' },
-            { text: 'Tutorial', link: '/tutorial/' },
-        ],
-    },
-    {
         text: 'autk-db',
         collapsed: false,
         items: [
@@ -68,8 +61,9 @@ const guideSections = [
 ]
 
 const learnSidebar = [
-    { text: 'Guide', collapsed: true, items: guideSections },
-    { text: 'Tutorial', collapsed: false, items: tutorialChapters },
+    { text: 'Getting started', items: [{ text: 'Introduction', link: '/introduction' }] },
+    { text: 'Guide', collapsed: false, items: guideSections.filter((section) => section.text !== 'Getting Started') },
+    { text: 'Tutorial', collapsed: true, items: tutorialChapters },
 ]
 
 export default defineConfig({
@@ -118,8 +112,8 @@ gtag('config', 'G-P6EVSF42L8');`],
             {
                 text: 'Learn',
                 items: [
-                    { text: 'Overview', link: '/learn/' },
-                    { text: 'Guide', link: '/introduction' },
+                    { text: 'Getting started', link: '/introduction' },
+                    { text: 'Guide', link: '/autk-db/' },
                     { text: 'Tutorial', link: '/tutorial/' },
                 ],
             },
@@ -483,11 +477,10 @@ gtag('config', 'G-P6EVSF42L8');`],
                 ],
             }],
 
-            // Guide pages keep their own sections.
-            '/': guideSections,
+            // Every page under Learn uses one sidebar.
+            '/': learnSidebar,
 
-            // Learn and Tutorial share one sidebar: the guide, then the course.
-            '/learn/': learnSidebar,
+            // The whole Learn area shares one sidebar.
             '/tutorial/': learnSidebar,
 
             '/gallery/': [

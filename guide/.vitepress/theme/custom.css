@@ -422,3 +422,17 @@ body,
   color: var(--vp-c-brand-1);
   font-weight: 600;
 }
+
+.vp-doc a.learn-track,
+.vp-doc a.learn-track:hover {
+  text-decoration: none;
+}
+
+.learn-track-title {
+  color: var(--vp-c-text-1);
+}
+
+.learn-track-text {
+  color: var(--vp-c-text-2);
+  text-decoration: none;
+}
