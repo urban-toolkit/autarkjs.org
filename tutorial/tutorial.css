@@ -255,6 +255,18 @@ details[open] > summary.xml-line::before { content: "▾"; }
 
 /* Embedded in the site: the VitePress page owns navigation and the theme. */
 html.embed .site-header { display: none; }
-/* The site sidebar already lists the chapters; the in-page list would leave the shell. */
-html.embed .series-nav { display: none; }
-html.embed .layout { padding-top: 24px; }
+/* The site sidebar already lists the chapters, and the site provides the page title. */
+html.embed .series-nav,
+html.embed .toc-title { display: none; }
+/* Mirror the guide: content on the left, "On this page" at the top right. */
+html.embed .layout {
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 48px;
+  padding-top: 24px;
+}
+html.embed main { grid-column: 1; grid-row: 1; }
+html.embed nav.toc { grid-column: 2; grid-row: 1; top: 88px; }
+
+@media (max-width: 860px) {
+  html.embed .layout { display: block; }
+}
