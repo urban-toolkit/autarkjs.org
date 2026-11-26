@@ -6,7 +6,7 @@ outline: false
 
 # Gallery
 
-Explore working examples built with **Autark**. Each example runs entirely in your browser: load data, move the camera, select features, brush a chart, or run a GPU analysis. The code is part of the page, so you can read exactly what produced the result.
+One toolkit, endless ways to look at a city. Start with a dataset, fly through a neighborhood, brush a chart, run an analysis on the GPU — every example runs in your browser, with the code laid out beside the result.
 
 <GalleryCatalog />
 

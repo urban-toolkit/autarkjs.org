@@ -8,8 +8,8 @@
   },
   "scripts": {
     "postinstall": "node .scripts/fix-duckdb-sourcemap.cjs && node .scripts/sync-duckdb-assets.cjs",
-    "prebuild": "node .scripts/sync-duckdb-assets.cjs && node .scripts/sync-grammar-schema.cjs && npm run usecases:build && npm run gallery:build",
-    "predev": "node .scripts/sync-grammar-schema.cjs && npm run usecases:build && npm run gallery:build",
+    "prebuild": "node .scripts/sync-duckdb-assets.cjs && node .scripts/sync-grammar-schema.cjs && npm run usecases:build && npm run gallery:assets && npm run gallery:build",
+    "predev": "node .scripts/sync-grammar-schema.cjs && npm run usecases:build && npm run gallery:assets && npm run gallery:build",
     "usecases:build": "vite build --config usecases/vite.config.ts",
     "test:usecases": "node --test .scripts/test-usecases.mjs",
     "dev": "vitepress dev guide",
@@ -20,7 +20,8 @@
     "gallery:dev": "vite --config gallery/vite.config.ts",
     "test:gallery": "node --test .scripts/test-gallery.mjs",
     "gallery:shots": "node .scripts/capture-gallery.mjs guide/public/imgs/gallery",
-    "gallery:pages": "node .scripts/generate-gallery-pages.mjs"
+    "gallery:pages": "node .scripts/generate-gallery-pages.mjs",
+    "gallery:assets": "node .scripts/sync-gallery-assets.mjs"
   },
   "repository": {
     "type": "git",

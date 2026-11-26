@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Autark — Adjust layer render properties</title>
+  <script type="module" crossorigin src="/gallery/apps/assets/autk-map-layer-opacity-4ggES2um.js"></script>
+  <link rel="modulepreload" crossorigin href="/gallery/apps/assets/catalog-qdo7_FhJ.js">
+  <link rel="modulepreload" crossorigin href="/gallery/apps/assets/autk-map-XjFGJkPl.js">
+  <link rel="modulepreload" crossorigin href="/gallery/apps/assets/browser-COK1kcTq.js">
+  <link rel="stylesheet" crossorigin href="/gallery/apps/assets/autk-map-Ci9-FCMU.css">
+</head>
+
+<body class="gallery-example">
+    <a class="skip-link" href="#main">Skip to example</a>
+    <header class="site-header">
+        <nav class="navigation" aria-label="Main navigation">
+            <a class="wordmark" href="../../index.html">Autark<span>Gallery</span></a>
+            <a class="guide-link" href="https://autarkjs.org/autk-map/">Map guide <span aria-hidden="true">↗</span></a>
+        </nav>
+    </header>
+    <main id="main" class="example-main">
+        <a class="back-link" href="../../index.html"><span aria-hidden="true">←</span> All examples</a>
+        <section class="introduction" aria-labelledby="example-title">
+            <p class="eyebrow">autk-map <span aria-hidden="true">/</span> Layer styling</p>
+            <h1 id="example-title">Adjust layer render properties</h1>
+            <p class="description">Change how individual map layers look without reloading their data.</p>
+        </section>
+        <section class="map-panel" aria-label="Layer opacity map area">
+            <div class="panel-header"><h2>Salzburg</h2><p id="map-status" class="map-status" role="status" data-example-status>Loading map…</p></div>
+            <div class="opacity-toolbar" role="group" aria-label="Layer appearance">
+                <div class="opacity-slider">
+                    <label for="opacity">Building opacity</label>
+                    <output id="opacity-value" for="opacity" aria-hidden="true">75%</output>
+                    <input id="opacity" type="range" min="0" max="1" step="0.01" value="0.75" disabled />
+                </div>
+                <div class="opacity-slider">
+                    <label for="district-opacity">District opacity</label>
+                    <output id="district-opacity-value" for="district-opacity" aria-hidden="true">30%</output>
+                    <input id="district-opacity" type="range" min="0" max="1" step="0.01" value="0.30" disabled />
+                </div>
+                <label class="opacity-border"><input id="show-borders" type="checkbox" checked disabled /> Show district borders</label>
+            </div>
+            <div class="map-stage" aria-busy="true">
+                <canvas aria-describedby="map-help" aria-label="Salzburg map with adjustable layer opacity and district borders"></canvas>
+            </div>
+            <div class="panel-footer" id="map-help"><span>Drag to pan · Shift-drag to tilt · Scroll to zoom</span></div>
+        </section>
+        <footer class="page-footer">
+            Made with Autark · District boundaries: <a href="https://data.stadt-salzburg.at/geodaten/wfs">Stadt Salzburg</a>
+            (<a href="https://creativecommons.org/licenses/by/3.0/at/">CC BY 3.0 AT</a>, grouped and cropped)
+        </footer>
+    </main>
+</body>
+
+</html>

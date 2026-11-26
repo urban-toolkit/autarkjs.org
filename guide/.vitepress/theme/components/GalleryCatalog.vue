@@ -1,11 +1,5 @@
 <template>
   <div class="gallery-catalog vp-raw">
-    <p class="gallery-catalog-note">
-      Each card opens the live example in the browser. The examples mirror the
-      <a href="https://github.com/urban-toolkit/autark/tree/{{ manifest.commit }}/gallery">Autark gallery</a>
-      at <code>{{ manifest.short }}</code>, so the site and the toolkit stay in step.
-    </p>
-
     <section v-for="section in sections" :key="section.id" class="gallery-catalog-section">
       <h2 :id="section.id">{{ section.title }}</h2>
       <p class="gallery-catalog-description">{{ section.description }}</p>
@@ -47,12 +41,6 @@
 
 <script setup lang="ts">
 import { examples, modules, sections, type SectionId } from '../../../../gallery/catalog'
-import manifestFile from '../../../../gallery/manifest.json'
-
-const manifest = {
-  ...manifestFile,
-  short: manifestFile.commit.slice(0, 7),
-}
 
 function bySection(section: SectionId) {
   return examples.filter((example) => example.section === section)
@@ -69,13 +57,6 @@ function hideImage(event: Event) {
 </script>
 
 <style scoped>
-.gallery-catalog-note {
-  margin: 0 0 32px;
-  color: var(--vp-c-text-2);
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
 .gallery-catalog-section + .gallery-catalog-section {
   margin-top: 56px;
 }

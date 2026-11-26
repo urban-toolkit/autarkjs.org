@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Autark — Load layers in mixed CRSs</title>
+  <script type="module" crossorigin src="/gallery/apps/assets/autk-map-standalone-geographic-geojson-vis-Bw3R2Apf.js"></script>
+  <link rel="modulepreload" crossorigin href="/gallery/apps/assets/catalog-qdo7_FhJ.js">
+  <link rel="modulepreload" crossorigin href="/gallery/apps/assets/autk-map-XjFGJkPl.js">
+  <link rel="modulepreload" crossorigin href="/gallery/apps/assets/autk-core-CnHUIRZw.js">
+  <link rel="stylesheet" crossorigin href="/gallery/apps/assets/autk-map-Ci9-FCMU.css">
+</head>
+
+<body class="gallery-example">
+    <a class="skip-link" href="#main">Skip to example</a>
+    <header class="site-header">
+        <nav class="navigation" aria-label="Main navigation">
+            <a class="wordmark" href="../../index.html">Autark<span>Gallery</span></a>
+            <a class="guide-link" href="https://autarkjs.org/autk-map/">Map guide <span aria-hidden="true">↗</span></a>
+        </nav>
+    </header>
+    <main id="main" class="example-main">
+        <a class="back-link" href="../../index.html"><span aria-hidden="true">←</span> All examples</a>
+        <section class="introduction" aria-labelledby="example-title">
+            <p class="eyebrow">autk-map <span aria-hidden="true">/</span> Data loading</p>
+            <h1 id="example-title">Load layers in mixed CRSs</h1>
+            <p class="description">Data arrives in longitude/latitude; the map projects it into the workspace CRS you choose.</p>
+        </section>
+        <div id="app" class="example-workspace">
+            <section class="map-panel" aria-label="Chicago community areas map">
+                <div class="panel-header"><h2 id="map-title">Chicago community areas</h2><p id="map-status" class="map-status" role="status" data-example-status>Loading map…</p></div>
+                <div class="map-stage" aria-busy="true"><canvas aria-describedby="map-help" aria-label="Chicago community areas in the selected coordinate system"></canvas></div>
+                <div class="panel-footer" id="map-help"><span>Drag to pan · Shift-drag to tilt · Scroll to zoom</span></div>
+            </section>
+            <aside class="details-panel" aria-labelledby="crs-title">
+                <div class="panel-header"><h2 id="crs-title">Coordinate system</h2></div>
+                <div class="details-body">
+                    <p class="selection-label">Projected workspace</p>
+                    <h3 id="crs-name">World Mercator</h3>
+                    <p class="selection-help">The input collection keeps its longitude/latitude coordinates; the map converts them when it loads the layer.</p>
+                    <dl class="metric-list">
+                        <div><dt>EPSG code</dt><dd id="crs-code">3395</dd></div>
+                        <div><dt>Projection</dt><dd id="crs-projection">Mercator</dd></div>
+                        <div><dt>Units</dt><dd id="crs-units">metres</dd></div>
+                        <div><dt>Axis order</dt><dd id="crs-axes">easting, northing</dd></div>
+                        <div><dt>Center x</dt><dd id="crs-center-x">—</dd></div>
+                        <div><dt>Center y</dt><dd id="crs-center-y">—</dd></div>
+                    </dl>
+                </div>
+                <p class="data-note data-note-centered" id="crs-status">Geographic center —</p>
+            </aside>
+        </div>
+        <footer class="page-footer">Made with Autark · Rendered in your browser</footer>
+    </main>
+</body>
+
+</html>

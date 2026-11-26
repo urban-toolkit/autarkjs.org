@@ -170,3 +170,5 @@ guide/public/assets/modulepreload-polyfill-*.js
 # Python cache
 __pycache__/
 *.pyc
+# Gallery apps are committed; their datasets and DuckDB runtime are copied at build time.
+guide/public/gallery/apps/data/
