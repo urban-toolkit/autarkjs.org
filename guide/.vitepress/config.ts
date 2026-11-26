@@ -62,7 +62,7 @@ const guideSections = [
 
 const learnSidebar = [
     { text: 'Getting started', items: [{ text: 'Introduction', link: '/introduction' }] },
-    { text: 'Guide', collapsed: false, items: guideSections.filter((section) => section.text !== 'Getting Started') },
+    { text: 'User Guide', collapsed: false, items: guideSections.filter((section) => section.text !== 'Getting Started') },
     { text: 'Tutorial', collapsed: true, items: tutorialChapters },
 ]
 
@@ -113,7 +113,7 @@ gtag('config', 'G-P6EVSF42L8');`],
                 text: 'Learn',
                 items: [
                     { text: 'Getting started', link: '/introduction' },
-                    { text: 'Guide', link: '/autk-db/' },
+                    { text: 'User Guide', link: '/autk-db/' },
                     { text: 'Tutorial', link: '/tutorial/' },
                 ],
             },

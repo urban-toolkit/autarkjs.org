@@ -169,10 +169,10 @@ Try to remove `"buildings"` from the `layers` list and click **Run** to test cha
     <span class="learn-track-link">Start the tutorial →</span>
   </a>
   <a class="learn-track" href="/autk-db/">
-    <span class="learn-track-kicker">Guide</span>
+    <span class="learn-track-kicker">User Guide</span>
     <span class="learn-track-title">Look up how a package works</span>
     <span class="learn-track-text">Reference pages for autk-db, autk-map, autk-plot, and autk-compute, with runnable examples.</span>
-    <span class="learn-track-link">Open the guide →</span>
+    <span class="learn-track-link">Open the User Guide →</span>
   </a>
 </div>
 

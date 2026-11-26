@@ -65,8 +65,11 @@ test('the tutorial datasets are published unchanged', async () => {
   }
 })
 
-test('the introduction points to the guide and the tutorial', async () => {
+test('the introduction links to the User Guide and Tutorial', async () => {
   const html = await readFile(`${dist}/introduction.html`, 'utf8')
   assert.ok(html.includes('href="/tutorial/"'))
   assert.ok(html.includes('href="/autk-db/"'))
+  assert.match(html, /<span[^>]*>User Guide<\/span>/, 'Learn menu label')
+  assert.match(html, /<h2[^>]*>User Guide<\/h2>/, 'sidebar label')
+  assert.match(html, /class="learn-track-kicker"[^>]*>User Guide<\/span>/, 'Getting started card label')
 })

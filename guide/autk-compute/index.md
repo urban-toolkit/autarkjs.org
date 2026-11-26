@@ -103,7 +103,7 @@ Use `autk-compute` when you need **per-feature GPU processing** or **view-based 
 3. Send the result to `autk-map` for thematic rendering or interaction
 4. Optionally write the enriched data back into `autk-db`
 
-## Guide
+## User Guide {#guide}
 
 - [Property computation](./computing-properties) — derive per-feature values from attributes
 - [Render analysis](./render-analysis) — compute visibility-style metrics from sampled viewpoints
