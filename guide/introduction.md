@@ -13,7 +13,13 @@
 
 # Introduction
 
-Autark provides a client-side platform for implementing urban visual analytics software. It supports loading, storing, querying, joining, and exporting physical and thematic urban data using standard formats such as OpenStreetMap, GeoJSON, and GeoTIFF. By using GPU acceleration, Autark enables the implementation of algorithms for sophisticated urban analyses, such as shadow and visibility analysis, as well as classic machine learning algorithms such as regression and clustering. Finally, it provides a collection of interactive plots and a 3D map for visualizing urban data.
+Autark is a serverless toolkit for urban visual analytics: the data, the maps, the charts, and the computing all live in the browser.
+
+Start with what a city already publishes. Load OpenStreetMap extracts or Overpass queries, GeoJSON, CSV, JSON, and GeoTIFF imagery; keep each project in its own workspace and coordinate system; then query, spatially join, aggregate, and export it with SQL backed by DuckDB — no server, no upload, no round trip.
+
+Then look at it. Autark draws 2D and 3D maps with WebGPU — buildings, roads, terrain, streamed imagery, rasters, and thematic layers — and runs analyses over the scene itself: sky exposure, shadows, visibility, view scores, and any metric you can write in WGSL, including regression-style models. Interactive D3 charts stay linked to the map, so a click, a hover, or a brush travels both ways.
+
+From a single street to a whole city, from a raw dataset to an insight: one toolkit, one browser tab.
 
 ## Packages
 
