@@ -186,7 +186,7 @@ gtag('config', 'G-P6EVSF42L8');`],
                 })),
             ],
             '/api/autk-db/': [{
-                text: 'autk-db API Reference',
+                text: 'autk-db',
                 items: [
                     { text: 'All Exports', link: '/api/autk-db/globals' },
                     {
@@ -278,7 +278,7 @@ gtag('config', 'G-P6EVSF42L8');`],
             }],
 
             '/api/autk-core/': [{
-                text: 'autk-core API Reference',
+                text: 'autk-core',
                 items: [
                     { text: 'All Exports', link: '/api/autk-core/globals' },
                     {
@@ -371,7 +371,7 @@ gtag('config', 'G-P6EVSF42L8');`],
             }],
 
             '/api/autk-map/': [{
-                text: 'autk-map API Reference',
+                text: 'autk-map',
                 items: [
                     { text: 'All Exports', link: '/api/autk-map/globals' },
                     {
@@ -428,7 +428,7 @@ gtag('config', 'G-P6EVSF42L8');`],
             }],
 
             '/api/autk-plot/': [{
-                text: 'autk-plot API Reference',
+                text: 'autk-plot',
                 items: [
                     { text: 'All Exports', link: '/api/autk-plot/globals' },
                     {
@@ -486,7 +486,7 @@ gtag('config', 'G-P6EVSF42L8');`],
             }],
 
             '/api/autk-compute/': [{
-                text: 'autk-compute API Reference',
+                text: 'autk-compute',
                 items: [
                     { text: 'All Exports', link: '/api/autk-compute/globals' },
                     {
