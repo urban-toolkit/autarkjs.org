@@ -20,7 +20,7 @@ onMounted(async () => {
 
   try {
     const { AutkDb } = await import('@urban-toolkit/autk-db')
-    const { AutkMap } = await import('@urban-toolkit/autk-map')
+    const { AutkMap, MapEvent } = await import('@urban-toolkit/autk-map')
 
     const db = new AutkDb()
     status.value = 'Initializing database…'
@@ -40,7 +40,11 @@ onMounted(async () => {
       },
     })
 
-    const map = new AutkMap(canvas.value, { showUi: false })
+    // Autark 5 takes an options object; 4.x took a boolean. Both hide the menu.
+    // Drop the fallback once the site pins Autark 5.
+    const map = 'HOVER' in MapEvent
+      ? new AutkMap(canvas.value, { showUi: false })
+      : new (AutkMap as any)(canvas.value, false)
     status.value = 'Initializing map…'
     await map.init()
 
