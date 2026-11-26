@@ -4,8 +4,8 @@ layout: home
 hero:
   name: Autark
   text: |-
-    Urban visual analytics.
-    All in the browser.
+    Urban visual analytics
+    All in the browser
   tagline: Bring urban data to life with interactive maps and charts, and see the places that matter to you from new angles.
   actions:
     - theme: brand
