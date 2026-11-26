@@ -32,9 +32,8 @@ for (const entry of entries) {
   const frontmatter = [
     '---',
     `title: ${JSON.stringify(entry.title)}`,
-    'aside: false',
-    'outline: false',
-    'pageClass: app-embed-page',
+    'layout: page',
+    'pageClass: gallery-example-page',
     'editLink: false',
     '---',
     '',

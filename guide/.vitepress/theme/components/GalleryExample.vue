@@ -4,6 +4,7 @@
     class="gallery-example-frame"
     :src="embedSrc"
     :title="title"
+    :style="{ height: `${frameHeight}px` }"
     allow="fullscreen"
     loading="eager"
   ></iframe>
@@ -40,18 +41,33 @@ function syncTheme() {
   root.style.colorScheme = isDark.value ? 'dark' : 'light'
 }
 
+/** The example reports its content height, so the frame never shows an empty band. */
+const frameHeight = ref(640)
 let stopWatching: (() => void) | null = null
+
+function onMessage(event: MessageEvent) {
+  if (event.source !== frame()?.contentWindow) return
+  if (event.data?.type !== 'autk-gallery-height') return
+  const height = Number(event.data.height)
+  if (Number.isFinite(height)) frameHeight.value = Math.min(2600, Math.max(520, Math.ceil(height) + 2))
+}
 
 onMounted(() => {
   const iframe = frame()
   if (!iframe) return
-  const onLoad = () => syncTheme()
+  const onLoad = () => {
+    syncTheme()
+    // The example may finish loading before this component listens for messages.
+    iframe.contentWindow?.postMessage({ type: 'autk-gallery-measure' }, '*')
+  }
   iframe.addEventListener('load', onLoad)
+  window.addEventListener('message', onMessage)
   syncTheme()
   stopWatching = watch(isDark, syncTheme, { flush: 'post' }) as unknown as () => void
 })
 
 onUnmounted(() => {
+  window.removeEventListener('message', onMessage)
   stopWatching?.()
 })
 </script>
@@ -60,7 +76,8 @@ onUnmounted(() => {
 .gallery-example-frame {
   display: block;
   width: 100%;
-  min-height: 0;
+  min-height: 520px;
+  max-height: 2600px;
   border: 0;
   background: var(--vp-c-bg);
 }
