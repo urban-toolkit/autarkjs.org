@@ -1,6 +1,8 @@
 ---
 title: Tutorial
 outline: deep
+package: tutorial
+eyebrow: Overview
 ---
 
 # Urban analytics with Autark

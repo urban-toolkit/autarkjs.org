@@ -8,5 +8,5 @@ import { useData } from 'vitepress'
 
 const { frontmatter } = useData()
 const packageName = computed(() => frontmatter.value.package as string | undefined)
-const pageTitle = computed(() => (frontmatter.value.title as string | undefined) ?? '')
+const pageTitle = computed(() => (frontmatter.value.eyebrow ?? frontmatter.value.title ?? '') as string)
 </script>
