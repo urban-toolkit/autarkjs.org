@@ -5,8 +5,8 @@ import { test } from 'node:test'
 
 /**
  * Structural checks for the mirrored tutorial, run against the built site.
- * They prove each chapter is published, embedded in the site shell, and served
- * with its own data; the notebook cells themselves are covered by browser checks.
+ * They prove each chapter uses the Guide layout and publishes the original
+ * notebook cells and their data; execution is covered by browser checks.
  */
 const dist = resolve('guide/.vitepress/dist')
 const chapters = [
@@ -24,11 +24,22 @@ test('the tutorial landing lists every chapter', async () => {
 })
 
 for (const [slug, app] of chapters) {
-  test(`${slug} embeds its chapter inside the site shell`, async () => {
+  test(`${slug} uses the native Guide layout and headings`, async () => {
     const html = await readFile(`${dist}/tutorial/${slug}.html`, 'utf8')
-    assert.ok(html.includes(`/tutorial/apps/${app}.html?embed=1`), `${slug} frame source`)
-    assert.match(html, /VPNav/, 'site navigation stays visible')
-    assert.match(html, /tutorial-chapter/)
+    const source = await readFile(`tutorial/${app}.html`, 'utf8')
+    assert.match(html, /class="VPDoc has-sidebar has-aside/)
+    assert.match(html, /class="VPDocAsideOutline/)
+    assert.match(html, /class="guide-eyebrow"/)
+    assert.equal((html.match(/ id="intro"/g) ?? []).length, 1)
+    assert.match(html, /<h1 id="intro"/)
+    for (const [, anchor] of source.matchAll(/<section id="([\w-]+)">\s*<h2>/g)) {
+      assert.ok(html.includes(`<h2 id="${anchor}">`), `preserve #${anchor} deep link`)
+      assert.ok(html.includes(`class="header-anchor" href="#${anchor}"`), `link to #${anchor}`)
+    }
+    assert.doesNotMatch(html, /<iframe|app-embed-page|class="series-nav"/)
+    assert.equal((html.match(/<figure class="example"/g) ?? []).length,
+      (source.match(/<figure class="example"/g) ?? []).length, 'all notebook cells are present')
+    assert.doesNotMatch(html, /(?:src|href)="(?:data\/|index\.html)/)
   })
 
   test(`${app}.html is published with bundled assets`, async () => {

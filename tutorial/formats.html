@@ -29,7 +29,7 @@
   </ol>
 </nav>
 
-<main>
+<main class="tutorial-notebook">
 <section id="intro">
   <p class="meta">Autark tutorial · notebook 02</p>
   <div class="series-nav">
@@ -114,24 +114,17 @@
       </g><use href="#axes"/></g></svg>
   </div>
   <p>Each cell holds one or more values. A single-band raster may store elevation; a multi-band raster may store several spectral bands of satellite imagery.</p>
-  <div class="geom" id="raster-values"></div>
-  <script>
-    // A 4x4 single-band raster, drawn with plain DOM calls (values are made up).
-    (() => {
-      const vals = [[.03,.12,.21,.31],[.15,.26,.41,.55],[.22,.34,.5,.63],[.29,.44,.61,.86]];
-      const ns = "http://www.w3.org/2000/svg", svg = document.createElementNS(ns, "svg");
-      svg.setAttribute("width", 140); svg.setAttribute("height", 140); svg.setAttribute("role", "img");
-      svg.setAttribute("aria-label", "A single-band raster whose cell values darken toward the bottom right");
-      const g = document.createElementNS(ns, "g"); g.setAttribute("transform", "translate(20,20)"); svg.append(g);
-      vals.forEach((row, r) => row.forEach((v, c) => {
-        const rect = document.createElementNS(ns, "rect");
-        for (const [k, x] of Object.entries({x: c * 25, y: r * 25, width: 25, height: 25, stroke: "#333", fill: `hsl(0 0% ${100 - v * 85}%)`})) rect.setAttribute(k, x);
-        g.append(rect);
-      }));
-      g.insertAdjacentHTML("beforeend", '<use href="#axes"/>');
-      document.getElementById("raster-values").append(svg);
-    })();
-  </script>
+  <div class="geom">
+    <svg width="140" height="140" role="img" aria-label="A single-band raster whose cell values darken toward the bottom right">
+      <g transform="translate(20,20)" stroke="#333">
+        <rect x="0" y="0" width="25" height="25" fill="hsl(0 0% 97.45%)"/><rect x="25" y="0" width="25" height="25" fill="hsl(0 0% 89.8%)"/><rect x="50" y="0" width="25" height="25" fill="hsl(0 0% 82.15%)"/><rect x="75" y="0" width="25" height="25" fill="hsl(0 0% 73.65%)"/>
+        <rect x="0" y="25" width="25" height="25" fill="hsl(0 0% 87.25%)"/><rect x="25" y="25" width="25" height="25" fill="hsl(0 0% 77.9%)"/><rect x="50" y="25" width="25" height="25" fill="hsl(0 0% 65.15%)"/><rect x="75" y="25" width="25" height="25" fill="hsl(0 0% 53.25%)"/>
+        <rect x="0" y="50" width="25" height="25" fill="hsl(0 0% 81.3%)"/><rect x="25" y="50" width="25" height="25" fill="hsl(0 0% 71.1%)"/><rect x="50" y="50" width="25" height="25" fill="hsl(0 0% 57.5%)"/><rect x="75" y="50" width="25" height="25" fill="hsl(0 0% 46.45%)"/>
+        <rect x="0" y="75" width="25" height="25" fill="hsl(0 0% 75.35%)"/><rect x="25" y="75" width="25" height="25" fill="hsl(0 0% 62.6%)"/><rect x="50" y="75" width="25" height="25" fill="hsl(0 0% 48.15%)"/><rect x="75" y="75" width="25" height="25" fill="hsl(0 0% 26.9%)"/>
+        <use href="#axes"/>
+      </g>
+    </svg>
+  </div>
 </section>
 
 <section id="formats">
@@ -144,7 +137,7 @@
   <figure class="example" data-title="3.1 · Read a GeoJSON file">
   <script type="text/plain">
     // d3.json fetches and parses; the return value of a cell is displayed below it.
-    const geojson = await d3.json("data/formats/example.geojson");
+    const geojson = await d3.json(dataUrl("formats/example.geojson"));
     return geojson;
   </script>
   </figure>
@@ -153,13 +146,13 @@
   <p><a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text</a> is a human-readable text format for geometry only; it carries no attributes. A WKT object is a geometry type keyword followed by coordinates in parentheses: a <code>POINT</code> has one coordinate pair, a <code>LINESTRING</code> a sequence of pairs, and a <code>POLYGON</code> one exterior ring and optionally interior rings (holes).</p>
   <figure class="example" data-title="3.2 · Read a WKT file">
   <script type="text/plain">
-    return await d3.text("data/formats/example.wkt");
+    return await d3.text(dataUrl("formats/example.wkt"));
   </script>
   </figure>
   <p>Because WKT has no properties, it is usually paired with a tabular format: attributes in CSV columns and the geometry in a dedicated WKT column. This is how many open data portals publish geometry.</p>
   <figure class="example" data-title="3.2 · CSV with a WKT column">
   <script type="text/plain">
-    const rows = await d3.csv("data/formats/example.csv");
+    const rows = await d3.csv(dataUrl("formats/example.csv"));
     table(rows);
   </script>
   </figure>
@@ -169,7 +162,7 @@
   <figure class="example" data-title="3.3 · Read GeoTIFF metadata">
   <script type="text/plain">
     // GeoTIFF is supplied by the runner from the installed geotiff package.
-    const buffer = await d3.buffer("data/formats/example.tif");
+    const buffer = await d3.buffer(dataUrl("formats/example.tif"));
     const tiff = await GeoTIFF.fromArrayBuffer(buffer);
     const image = await tiff.getImage();
     return {
@@ -192,7 +185,7 @@
   <p>OSM is commonly distributed as <strong>OSM XML</strong> (text, readable, good for small files) and <strong>PBF</strong> (the same information in compact binary). A small XML example:</p>
   <figure class="example" data-title="4.1 · An OSM XML file">
   <script type="text/plain">
-    const text = await d3.text("data/formats/example.osm");
+    const text = await d3.text(dataUrl("formats/example.osm"));
     const xml = new DOMParser().parseFromString(text, "application/xml");
     out.append(xmlView(xml));
   </script>

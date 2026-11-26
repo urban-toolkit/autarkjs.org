@@ -19,7 +19,7 @@
   </ol>
 </nav>
 
-<main>
+<main class="tutorial-notebook">
 <section id="intro">
   <p class="meta">Autark tutorial · notebook 05</p>
   <div class="series-nav">
@@ -67,7 +67,7 @@
   <p>A plot starts from a GeoJSON <code>FeatureCollection</code>. We use the neighborhoods of Manhattan. Inspecting one feature shows its properties; two of them, <code>shape_leng</code> (perimeter) and <code>shape_area</code> (area), are enough for a scatter plot.</p>
   <figure class="example" data-title="1.3 · Load the neighborhoods">
   <script type="text/plain">
-    const neighs = await d3.json("data/shared/mnt_neighs.geojson");
+    const neighs = await d3.json(dataUrl("shared/mnt_neighs.geojson"));
     ctx.neighs = neighs;
     return {
       features: neighs.features.length,

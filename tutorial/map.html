@@ -22,7 +22,7 @@
   </ol>
 </nav>
 
-<main>
+<main class="tutorial-notebook">
 <section id="intro">
   <p class="meta">Autark tutorial · notebook 04</p>
   <div class="series-nav">
@@ -58,13 +58,13 @@
     // D3 normally produces screen pixels (Y down). This configuration produces
     // Web Mercator meters (Y north), matching autk-map's coordinate convention.
     const project = d3.geoMercator().scale(6378137).translate([0, 0]).reflectY(true);
-    ctx.neighborhoods = await d3.json("data/shared/mnt_neighs.geojson");
+    ctx.neighborhoods = await d3.json(dataUrl("shared/mnt_neighs.geojson"));
     for (const feature of ctx.neighborhoods.features) {
       // This dataset contains MultiPolygons; preserve every polygon, ring, and hole.
       feature.geometry.coordinates = feature.geometry.coordinates.map(polygon =>
         polygon.map(ring => ring.map(coordinate => project(coordinate))));
     }
-    const rows = await d3.csv("data/map/mnt_noise.csv", d3.autoType);
+    const rows = await d3.csv(dataUrl("map/mnt_noise.csv"), d3.autoType);
     // Project the points with the same CRS as the neighborhood polygons.
     ctx.noise = {
       type: "FeatureCollection",
@@ -224,9 +224,9 @@
 
     const db = new AutkDb();
     await db.init();
-    await db.loadGeojson({geojsonFileUrl: new URL("data/shared/mnt_neighs.geojson", location.href).href, outputTableName: "neighborhood"});
+    await db.loadGeojson({geojsonFileUrl: dataUrl("shared/mnt_neighs.geojson"), outputTableName: "neighborhood"});
     await db.loadCsv({
-      csvFileUrl: new URL("data/map/mnt_noise.csv", location.href).href,
+      csvFileUrl: dataUrl("map/mnt_noise.csv"),
       outputTableName: "noise",
       geometryColumns: true,
     });
@@ -352,7 +352,7 @@
     const db = ctx.osmDb;
 
     await db.loadCsv({
-      csvFileUrl: new URL("data/map/mnt_noise.csv", location.href).href,
+      csvFileUrl: dataUrl("map/mnt_noise.csv"),
       outputTableName: "noise",
       geometryColumns: true,
     });

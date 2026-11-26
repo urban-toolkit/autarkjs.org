@@ -20,10 +20,6 @@ const LIVE_TIMEOUT_MS = 15000;
 const PROBE_TIMEOUT_MS = 4000;
 const CACHE_NAME = "autark-tutorial-overpass-v1";
 const CACHE_TTL_MS = 7 * 24 * 3600 * 1000;
-// Use a file as the base: Vite normalizes directory asset URLs and drops their trailing slash.
-// Built pages live under /tutorial/apps/, so recordings resolve from the page.
-const RECORDINGS = new URL("data/osm/manifest.json", globalThis.location?.href ?? import.meta.url);
-
 // The query text a request carries: autk-db sends "data=<urlencoded query>", a plain fetch may send either.
 export function queryOf(body) {
   const text = String(body ?? "");
@@ -58,7 +54,7 @@ async function cachePut(key, response) {
   } catch { /* Cache storage may be unavailable or full. */ }
 }
 
-export async function withFallback(fn, {note = () => {}} = {}) {
+export async function withFallback(fn, {note = () => {}, recordings = new URL("data/osm/manifest.json", location.href)} = {}) {
   const mode = new URLSearchParams(globalThis.location?.search ?? "").get("overpass") || "";
   const originalFetch = window.fetch;
   const realFetch = originalFetch.bind(window);
@@ -108,7 +104,7 @@ export async function withFallback(fn, {note = () => {}} = {}) {
       useBundled = true;           // stay offline for the rest of this cell
       announce(reason);
     }
-    const saved = await realFetch(new URL(`${key}.${isXml(query) ? "xml" : "json"}.gz`, RECORDINGS).href).catch(() => null);
+    const saved = await realFetch(new URL(`${key}.${isXml(query) ? "xml" : "json"}.gz`, recordings).href).catch(() => null);
     if (!saved?.ok) throw new Error(`Overpass is unavailable (${reason}) and no recording exists for this query (${key}). Edited queries need the live server.`);
     // Vite serves .gz assets with Content-Encoding: gzip, which fetch already decodes.
     const body = saved.headers.get("Content-Encoding") === "gzip"

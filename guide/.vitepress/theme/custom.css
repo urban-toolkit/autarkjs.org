@@ -266,54 +266,6 @@ body,
   }
 }
 
-/* Embedded app pages (gallery examples and tutorial chapters) share one shell:
-   site nav + sidebar, then the frame filling the rest of the viewport. */
-.Layout.app-embed-page {
-  height: 100svh;
-  overflow: hidden;
-}
-
-.Layout.app-embed-page .VPContent {
-  margin-top: var(--vp-nav-height);
-  padding-top: 0;
-  padding-right: 0;
-  height: calc(100svh - var(--vp-nav-height));
-  overflow: hidden;
-}
-
-.Layout.app-embed-page .VPDoc,
-.Layout.app-embed-page .VPDoc .container,
-.Layout.app-embed-page .VPDoc .content,
-.Layout.app-embed-page .VPDoc .content-container,
-.Layout.app-embed-page .VPDoc .main {
-  height: 100%;
-  max-width: none;
-  padding: 0 !important;
-  margin: 0;
-}
-
-.Layout.app-embed-page .VPDocAside,
-.Layout.app-embed-page .VPDocFooter,
-.Layout.app-embed-page .VPFooter {
-  display: none;
-}
-
-.Layout.app-embed-page .tutorial-chapter {
-  height: calc(100svh - var(--vp-nav-height));
-  min-height: 0;
-}
-
-/* The tutorial column starts where a Guide page's column starts. */
-.Layout.app-embed-page .tutorial-chapter {
-  margin-left: 64px;
-}
-
-@media (min-width: 1440px) {
-  .Layout.app-embed-page .tutorial-chapter {
-    margin-left: 112px;
-  }
-}
-
 /* Package overview: the npm version sits beside the package name. */
 .package-title {
   display: flex;

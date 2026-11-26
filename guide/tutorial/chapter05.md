@@ -1,9 +1,17 @@
 ---
 title: GPU computing
-aside: false
-outline: false
-pageClass: app-embed-page
+package: tutorial
+eyebrow: Chapter 05
 editLink: false
+next:
+  text: Tutorial overview
+  link: /tutorial/
 ---
 
-<TutorialChapter src="/tutorial/apps/compute.html" title='GPU computing' />
+<script setup>
+import source from '../../tutorial/compute.html?raw'
+</script>
+
+# GPU computing with Autark Compute {#intro}
+
+<TutorialChapter chapter="compute.html" :source="source" />

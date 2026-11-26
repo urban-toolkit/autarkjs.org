@@ -4,9 +4,20 @@ Runnable SIBGRAPI 2026 notebooks and the extra Urbane application, adapted from
 [ctsilva/autark-tutorial](https://github.com/ctsilva/autark-tutorial) at commit
 `4d5a6e37962f0fb343bd5a7f7d8d504fc88b730d`.
 
-## Run
+## On autarkjs.org
 
-Use the repository's documented Node.js/npm versions. From the repository root:
+Run `npm run dev` from the site repository and open `/tutorial/`. The five
+chapters use the same VitePress document layout as the Guide: sidebar, sticky
+outline, headings, and browser scrolling. The site chapter pages in
+`guide/tutorial/` reuse the notebook HTML and mount the shared cell runner in
+`notebook.js`; edit cell source and chapter prose in `tutorial/*.html`. Use
+`dataUrl()` in cells to resolve paths relative to `tutorial/data/` in both builds.
+`npm run build` also publishes the standalone notebooks. Run
+`npm run test:tutorial` against the built site.
+
+## Run in the upstream Autark checkout
+
+Use the upstream repository's documented Node.js/npm versions. From the repository root:
 
 ```sh
 npm ci                   # once, or after dependency changes

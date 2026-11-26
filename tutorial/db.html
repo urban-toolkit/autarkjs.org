@@ -20,7 +20,7 @@
   </ol>
 </nav>
 
-<main>
+<main class="tutorial-notebook">
 <section id="intro">
   <p class="meta">Autark tutorial · notebook 03</p>
   <div class="series-nav">
@@ -118,7 +118,7 @@
     const {db} = ctx;
     if (!db) throw new Error("Run cell 1.1 first.");
     await db.setWorkspace("nyc");
-    const mnt = await d3.json("data/db/mnt.geojson");
+    const mnt = await d3.json(dataUrl("db/mnt.geojson"));
     ctx.geojson = await db.loadGeojson({
       geojsonObject: mnt,
       outputTableName: "neighs_json",
@@ -142,7 +142,7 @@
     const {db} = ctx;
     if (!db) throw new Error("Run cell 1.1 first.");
     await db.setWorkspace("nyc");
-    const text = await d3.text("data/db/mnt.csv");
+    const text = await d3.text(dataUrl("db/mnt.csv"));
     const data = d3.csvParseRows(text);
     ctx.csv = await db.loadCsv({
       csvObject: data,
@@ -168,7 +168,7 @@
     const {db} = ctx;
     if (!db) throw new Error("Run cell 1.1 first.");
     await db.setWorkspace("nyc");
-    const buffer = await d3.buffer("data/db/elevation.tif");
+    const buffer = await d3.buffer(dataUrl("db/elevation.tif"));
     ctx.rasterTable = await db.loadGeoTiff({
       geotiffArrayBuffer: buffer,
       outputTableName: "terrain",

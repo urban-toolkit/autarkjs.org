@@ -1,59 +1,67 @@
 <template>
-  <iframe
-    ref="iframeEl"
-    class="tutorial-chapter"
-    :src="embedSrc"
-    :title="title"
-    loading="eager"
-  ></iframe>
+  <!-- Only vendored tutorial HTML is passed to this component. -->
+  <div ref="notebookEl" class="tutorial-notebook tutorial-doc" v-html="content"></div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
-import { useData } from 'vitepress'
+import { onMounted, onUnmounted, ref } from 'vue'
+import { withBase } from 'vitepress'
+import '../../../../tutorial/notebook.css'
 
-const props = defineProps<{
-  /** Built chapter page, relative to the site root. */
-  src: string
-  title: string
-}>()
+const props = defineProps<{ source: string; chapter: string }>()
+const notebookEl = ref<HTMLElement | null>(null)
+const assets = withBase('/tutorial/apps/')
 
-const iframeEl = ref<HTMLIFrameElement | null>(null)
-const { isDark } = useData()
-// Only the first load needs the theme in the URL; later toggles are class updates,
-// so switching the site theme never reloads a chapter and loses edited cells.
-const initialTheme = isDark.value ? 'dark' : 'light'
-const embedSrc = computed(() => `${props.src}?embed=1&theme=${initialTheme}`)
+// Keep the notebook source shared with the standalone build. VitePress owns the
+// header, outline and chapter navigation; the original section IDs stay linkable.
+const body = props.source.match(/<main class="tutorial-notebook">([\s\S]+)<\/main>/)?.[1]
+if (!body) throw new Error(`Missing notebook content for ${props.chapter}`)
+const defs = props.source.match(/<svg[^>]*>\s*<defs>[\s\S]*?<\/defs>\s*<\/svg>/)?.[0] ?? ''
+const content = defs + body
+  .replace(/<section id="intro">[\s\S]*?<h1>[^<]*<\/h1>/, '<section>')
+  .replace(/<div class="next-page">[^\n]*<\/div>/, '')
+  .replace(/<section id="([\w-]+)">\s*<h2>([\s\S]*?)<\/h2>/g, (_, id, heading) =>
+    `<section><h2 id="${id}">${heading.replace(/<span class="num">(\d+)<\/span>/, '$1. ')}<a class="header-anchor" href="#${id}" aria-label="Permalink" tabindex="-1"></a></h2>`)
+  .replace(/src="data\//g, `src="${assets}data/`)
+  .replace(/href="index\.html#authors"/g, `href="${withBase('/tutorial/')}#credits"`)
+  .replace(/href="index\.html#run"/g, `href="${withBase('/tutorial/')}#what-you-need"`)
 
-/** The chapter is same-origin, so its palette follows the site's theme. */
-function syncTheme() {
-  const root = iframeEl.value?.contentDocument?.documentElement
-  if (!root) return
-  root.classList.toggle('dark', isDark.value)
-  root.style.colorScheme = isDark.value ? 'dark' : 'light'
-}
-
-let stopWatching: (() => void) | null = null
-
-onMounted(() => {
-  const iframe = iframeEl.value
-  if (!iframe) return
-  const onLoad = () => syncTheme()
-  iframe.addEventListener('load', onLoad)
-  syncTheme()
-  stopWatching = watch(isDark, syncTheme, { flush: 'post' }) as unknown as () => void
+let dispose: (() => void) | undefined
+onMounted(async () => {
+  const root = notebookEl.value!
+  const { mountNotebook } = await import('../../../../tutorial/notebook.js')
+  if (notebookEl.value === root) dispose = mountNotebook(root, props.chapter, new URL(assets, location.href))
 })
-
-onUnmounted(() => stopWatching?.())
+onUnmounted(() => dispose?.())
 </script>
 
-<style scoped>
-.tutorial-chapter {
-  display: block;
-  width: 100%;
-  height: calc(100svh - var(--vp-nav-height));
-  min-height: 560px;
-  border: 0;
-  background: var(--vp-c-bg);
+<style>
+.tutorial-doc {
+  --ink: var(--vp-c-text-1);
+  --ink-2: var(--vp-c-text-2);
+  --muted: var(--vp-c-text-2);
+  --paper: var(--vp-c-bg);
+  --paper-2: var(--vp-c-bg-soft);
+  --rule: var(--vp-c-divider);
+  --accent: var(--vp-c-brand-1);
+  --accent-soft: var(--vp-c-brand-soft);
+  --code-bg: var(--vp-code-block-bg);
+  --success: var(--vp-c-green-1);
+  --danger: var(--vp-c-danger-1);
+  --shadow: var(--vp-shadow-1);
+  --mono: var(--vp-font-family-mono);
+}
+
+.vp-doc .tutorial-doc pre:has(> code) {
+  margin: 16px 0;
+  padding: 16px 20px;
+  overflow: auto;
+  background: var(--vp-code-block-bg);
+}
+
+.vp-doc .tutorial-doc pre > code {
+  padding: 0;
+  color: inherit;
+  background: none;
 }
 </style>

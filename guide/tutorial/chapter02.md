@@ -1,9 +1,14 @@
 ---
 title: Urban data management
-aside: false
-outline: false
-pageClass: app-embed-page
+package: tutorial
+eyebrow: Chapter 02
 editLink: false
 ---
 
-<TutorialChapter src="/tutorial/apps/db.html" title='Urban data management' />
+<script setup>
+import source from '../../tutorial/db.html?raw'
+</script>
+
+# Urban data management with Autark DB {#intro}
+
+<TutorialChapter chapter="db.html" :source="source" />

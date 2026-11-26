@@ -1,9 +1,14 @@
 ---
 title: Abstract data visualization
-aside: false
-outline: false
-pageClass: app-embed-page
+package: tutorial
+eyebrow: Chapter 04
 editLink: false
 ---
 
-<TutorialChapter src="/tutorial/apps/plot.html" title='Abstract data visualization' />
+<script setup>
+import source from '../../tutorial/plot.html?raw'
+</script>
+
+# Abstract data visualization with Autark Plot {#intro}
+
+<TutorialChapter chapter="plot.html" :source="source" />

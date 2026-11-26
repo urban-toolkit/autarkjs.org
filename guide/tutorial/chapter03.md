@@ -1,9 +1,14 @@
 ---
 title: Geographical data visualization
-aside: false
-outline: false
-pageClass: app-embed-page
+package: tutorial
+eyebrow: Chapter 03
 editLink: false
 ---
 
-<TutorialChapter src="/tutorial/apps/map.html" title='Geographical data visualization' />
+<script setup>
+import source from '../../tutorial/map.html?raw'
+</script>
+
+# Geographical data visualization with Autark Map {#intro}
+
+<TutorialChapter chapter="map.html" :source="source" />

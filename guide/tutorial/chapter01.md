@@ -1,9 +1,14 @@
 ---
 title: Urban data formats and sources
-aside: false
-outline: false
-pageClass: app-embed-page
+package: tutorial
+eyebrow: Chapter 01
 editLink: false
 ---
 
-<TutorialChapter src="/tutorial/apps/formats.html" title='Urban data formats and sources' />
+<script setup>
+import source from '../../tutorial/formats.html?raw'
+</script>
+
+# Urban data formats and sources {#intro}
+
+<TutorialChapter chapter="formats.html" :source="source" />

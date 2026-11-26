@@ -1,0 +1,89 @@
+/* Notebook widgets shared by the Guide layout and the standalone tutorial. */
+.tutorial-notebook {
+  aside.note, aside.py, aside.warn, .exercise { margin: 24px 0; padding: 16px 20px; border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: 6px; background: var(--paper-2); font-size: 14px; line-height: 1.75; }
+  aside.note::before, aside.py::before, aside.warn::before, .exercise::before { display: block; margin-bottom: 6px; font-weight: 650; }
+  aside.note::before { content: "Good to know"; }
+  aside.py { border-left-color: #d49b35; }
+  aside.py::before { content: "If you know Python"; }
+  aside.warn { border-left-color: var(--danger); }
+  aside.warn::before { content: "Heads up"; color: var(--danger); }
+  .exercise { border-left-color: var(--success); }
+  .exercise::before { content: "Try it yourself"; color: var(--success); }
+  figure.example { margin: 24px 0 32px; overflow: hidden; border: 1px solid var(--rule); border-radius: 10px; background: var(--paper); box-shadow: var(--shadow); }
+  figure.example figcaption { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; padding: 12px 16px; border-bottom: 1px solid var(--rule); background: var(--paper-2); font-size: 13px; font-weight: 600; line-height: 1.6; }
+  figure.example .mode { color: var(--muted); font-size: 11px; font-weight: 400; }
+  figure.example .editor .cm-editor { max-height: 34rem; background: var(--code-bg); }
+  figure.example .editor .cm-editor.cm-focused { outline: 2px solid var(--accent); outline-offset: -2px; }
+  figure.example .editor .cm-scroller { padding: 12px 0; font: 13px/1.7 var(--mono); }
+  figure.example .editor .cm-content { padding: 0 8px; caret-color: var(--ink); }
+  figure.example .editor .cm-line { padding: 0 12px; }
+  figure.example .editor .cm-activeLine { background: var(--accent-soft); }
+  figure.example .editor .cm-selectionBackground, figure.example .editor .cm-focused .cm-selectionBackground { background: var(--accent-soft) !important; }
+  figure.example .editor .cm-matchingBracket { outline: 1px solid var(--accent); background: var(--accent-soft); }
+  figure.example .bar { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; padding: 10px 12px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); font-size: 12px; }
+  figure.example button { min-height: 30px; padding: 4px 12px; border: 1px solid var(--rule); border-radius: 5px; background: var(--paper-2); color: var(--ink-2); font-size: 12px; font-weight: 500; cursor: pointer; }
+  figure.example button.run { border-color: #5672cd; background: #5672cd; color: #fff; }
+  figure.example button:hover { color: var(--accent); border-color: var(--accent); }
+  figure.example button.run:hover { background: #3a5ccc; color: #fff; }
+  figure.example button:disabled { opacity: .5; cursor: default; }
+  figure.example .hint { margin-left: auto; color: var(--muted); font-size: 11px; }
+  figure.example .saved, figure.example .state { color: var(--muted); font-size: 11px; }
+  figure.example .state.ok { color: var(--success); }
+  figure.example .state.run, figure.example .saved { color: var(--accent); }
+  figure.example .out { min-height: 72px; padding: 16px; overflow-x: auto; font-size: 14px; line-height: 1.6; }
+  figure.example .out:empty::before { content: "Run this example to see the result."; color: var(--muted); font-size: 13px; }
+  /* Visualization palettes belong to the examples, not to the documentation theme. */
+  figure.example .out:has(canvas, svg) { color-scheme: light; color: #3c3c43; background: #fff; }
+  figure.example .out .status { margin: 0 0 8px; color: var(--muted); font-size: 13px; }
+  figure.example .out pre.val { max-height: 24rem; margin: 0; padding: 16px; font-size: 12px; overflow: auto; }
+  figure.example .out pre.err { margin: 0; padding: 12px 16px; border-color: var(--danger); color: var(--danger); white-space: pre-wrap; }
+  figure.example .out table { border-collapse: collapse; font-size: 12px; }
+  figure.example .out th, figure.example .out td { padding: 6px 12px; border-bottom: 1px solid var(--rule); text-align: left; white-space: nowrap; }
+  figure.example .out th { position: sticky; top: 0; background: var(--paper-2); color: var(--ink-2); font-weight: 600; }
+  figure.example .out .tbl { max-height: 22rem; overflow: auto; border: 1px solid var(--rule); border-radius: 6px; }
+  figure.example .out .more { margin: 8px 0 0; color: var(--muted); font-size: 12px; }
+  figure.example .out img, .fig { max-width: 100%; }
+  .fig { border: 1px solid var(--rule); border-radius: 8px; }
+  .plotgrid { display: grid; gap: 24px; }
+  details.solution { margin: 24px 0; padding: 16px 20px; border: 1px solid var(--rule); border-radius: 8px; }
+  details.solution summary { color: var(--accent); cursor: pointer; font-weight: 600; }
+  .geom { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; margin: 16px 0 24px; }
+  .geom svg { background: #fff; border: 1px solid var(--rule); border-radius: 8px; }
+  .xml { font: 12px/1.7 var(--mono); }
+  .xml-node { margin-left: 1em; }
+  .xml-children { margin-left: 1.5em; padding-left: .75em; border-left: 1px solid var(--rule); }
+  .xml-line { white-space: nowrap; }
+  .xml-tag { color: var(--accent); }
+  .xml-attr, .xml-text { color: var(--ink-2); }
+  .xml-value { color: var(--success); }
+  summary.xml-line { list-style: none; cursor: pointer; }
+  summary.xml-line::-webkit-details-marker { display: none; }
+  summary.xml-line::before { content: "▸"; display: inline-block; width: 1em; color: var(--muted); }
+  details[open] > summary.xml-line::before { content: "▾"; }
+
+  /* GitHub-style code colors, with readable counterparts in dark mode. */
+  .tok-keyword, .tok-operatorKeyword, .tok-modifier, .tok-controlKeyword, .tok-definitionKeyword { color: #cf222e; }
+  .tok-string, .tok-string2, .tok-regexp { color: #0a3069; }
+  .tok-number, .tok-bool, .tok-null, .tok-atom, .tok-propertyName { color: #0550ae; }
+  .tok-comment, .tok-lineComment, .tok-blockComment { color: #6e7781; font-style: normal; }
+  .tok-variableName { color: #24292f; }
+  .tok-variableName.tok-definition, .tok-function, .tok-typeName, .tok-className { color: #8250df; }
+  .tok-operator, .tok-punctuation, .tok-bracket { color: #24292f; }
+  .dark & :is(.tok-keyword, .tok-operatorKeyword, .tok-modifier, .tok-controlKeyword, .tok-definitionKeyword) { color: #ff7b72; }
+  .dark & :is(.tok-string, .tok-string2, .tok-regexp) { color: #a5d6ff; }
+  .dark & :is(.tok-number, .tok-bool, .tok-null, .tok-atom, .tok-propertyName) { color: #79c0ff; }
+  .dark & :is(.tok-comment, .tok-lineComment, .tok-blockComment) { color: #8b949e; }
+  .dark & :is(.tok-variableName, .tok-operator, .tok-punctuation, .tok-bracket) { color: #e6edf3; }
+  .dark & :is(.tok-variableName.tok-definition, .tok-function, .tok-typeName, .tok-className) { color: #d2a8ff; }
+
+  @media (max-width: 1100px) {
+    figure.example .hint { display: none; }
+  }
+  @media (max-width: 600px) {
+    figure.example .mode { width: 100%; }
+    figure.example .bar { gap: 6px; }
+    figure.example button { min-height: 34px; padding: 4px 10px; }
+    figure.example .out { padding: 12px; }
+    figure.example .editor .cm-line { padding: 0 6px; }
+  }
+}
