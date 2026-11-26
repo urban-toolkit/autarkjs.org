@@ -1,29 +1,13 @@
 <template>
-  <div class="gallery-example-shell">
-    <div class="gallery-example-meta">
-      <p class="gallery-example-eyebrow">{{ section }}</p>
-      <p class="gallery-example-description">{{ description }}</p>
-      <p class="gallery-example-links">
-        <span
-          v-for="module in modules"
-          :key="module.label"
-          class="gallery-example-module"
-          :style="{ '--module-color': module.color }"
-        >{{ module.label }}</span>
-        <a :href="standalone" target="_blank" rel="noopener">Open standalone ↗</a>
-      </p>
-    </div>
-
-    <iframe
-      ref="iframeEl"
-      class="gallery-example-frame"
-      :src="embedSrc"
-      :title="title"
-      :style="{ height: `${frameHeight}px` }"
-      allow="fullscreen"
-      loading="eager"
-    ></iframe>
-  </div>
+  <iframe
+    ref="iframeEl"
+    class="gallery-example-frame"
+    :src="embedSrc"
+    :title="title"
+    :style="{ height: `${frameHeight}px` }"
+    allow="fullscreen"
+    loading="eager"
+  ></iframe>
 </template>
 
 <script setup lang="ts">
@@ -34,14 +18,10 @@ const props = defineProps<{
   /** Built example page, relative to the site root. */
   src: string
   title: string
-  description: string
-  section: string
-  modules: { label: string; color: string }[]
 }>()
 
 const iframeEl = ref<HTMLIFrameElement | null>(null)
 const { isDark } = useData()
-const standalone = props.src
 const embedSrc = computed(() => `${props.src}?embed=1`)
 
 function frame() {
@@ -69,7 +49,7 @@ function onMessage(event: MessageEvent) {
   if (event.source !== frame()?.contentWindow) return
   if (event.data?.type !== 'autk-gallery-height') return
   const height = Number(event.data.height)
-  if (Number.isFinite(height)) frameHeight.value = Math.min(1200, Math.max(520, Math.ceil(height) + 2))
+  if (Number.isFinite(height)) frameHeight.value = Math.min(2600, Math.max(520, Math.ceil(height) + 2))
 }
 
 onMounted(() => {
@@ -93,55 +73,12 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.gallery-example-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 6px 16px;
-  padding: 0 0 16px;
-}
-
-.gallery-example-eyebrow {
-  margin: 0;
-  color: var(--vp-c-brand-1);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.gallery-example-description {
-  flex: 1 1 420px;
-  margin: 0;
-  color: var(--vp-c-text-2);
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
-.gallery-example-links {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-  margin: 0;
-  font-size: 0.8rem;
-}
-
-.gallery-example-module {
-  padding: 1px 8px;
-  border: 1px solid color-mix(in srgb, var(--module-color) 55%, transparent);
-  border-radius: 999px;
-  color: var(--module-color);
-  font-weight: 600;
-}
-
 .gallery-example-frame {
   display: block;
   width: 100%;
   min-height: 520px;
-  max-height: 1200px;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 12px;
+  max-height: 2600px;
+  border: 0;
   background: var(--vp-c-bg);
 }
 </style>

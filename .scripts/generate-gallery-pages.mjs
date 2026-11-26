@@ -33,21 +33,14 @@ for (const entry of entries) {
     '---',
     `title: ${JSON.stringify(entry.title)}`,
     'layout: page',
-    "pageClass: gallery-example-page",
+    'pageClass: gallery-example-page',
     'editLink: false',
     '---',
     '',
-    `<GalleryExample`,
-    `  src="/gallery/apps/${entry.path}"`,
-    `  title=${JSON.stringify(entry.title)}`,
-    `  description=${JSON.stringify(entry.description)}`,
-    `  section=${JSON.stringify(sections[entry.section] ?? entry.section)}`,
-    `  :modules='${JSON.stringify(entry.modules)}'`,
-    `/>`,
-    '',
-    `[Back to the gallery](/gallery/)`,
+    `<GalleryExample src="/gallery/apps/${entry.path}" title=${JSON.stringify(entry.title)} />`,
     '',
   ].join('\n')
+
   await writeFile(`${pages}/${slug}.md`, frontmatter)
 }
 

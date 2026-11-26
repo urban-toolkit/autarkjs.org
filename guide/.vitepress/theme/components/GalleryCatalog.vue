@@ -25,7 +25,6 @@
               loading="lazy"
               @error="hideImage"
             />
-            <span class="gallery-catalog-id">{{ example.id }}</span>
           </span>
 
           <span class="gallery-catalog-body">
@@ -133,18 +132,6 @@ function hideImage(event: Event) {
   display: block;
 }
 
-.gallery-catalog-id {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  padding: 2px 8px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--vp-c-bg) 80%, transparent);
-  color: var(--vp-c-text-2);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
 
 .gallery-catalog-body {
   display: flex;

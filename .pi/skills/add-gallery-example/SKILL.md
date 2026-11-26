@@ -38,16 +38,18 @@ in the Autark repository, not here.
    node .scripts/capture-gallery.mjs guide/public/imgs/gallery <ID>
    ```
 
-5. Check `/gallery/` and `/gallery/examples/<id>` in a browser: the card, the
-   embedded workspace, the sidebar entry, dark mode, and mobile widths.
+5. Check `/gallery/` and `/gallery/examples/<id>` in a browser: the card, the full
+   embedded content (title, controls, API in focus, related examples), the sidebar
+   entry, dark mode, and mobile widths.
 6. Run `npm run test:gallery` and `npm run test:usecases`.
 
 ## Rules
 
 - Do not copy an example into `guide/gallery/ex*.md`; that older catalog is being
   retired and is not linked from the gallery.
-- Do not add a second title or description in the app page: the VitePress page owns
-  them, and `?embed=1` hides the gallery's own header, introduction, and footer.
+- Keep the example's own title, description, "API in focus", and related links: they
+  are part of the page. `?embed=1` hides only the gallery's top navigation and back
+  link, because the site already provides them.
 - Keep edits to the vendored app limited to `vite.config.ts`, the embed hook in
   `src/example.ts`, and `example.css`. Prefer fixing the upstream source.
 - Data comes from `gallery/public/data/`; never fetch `main` during a build.

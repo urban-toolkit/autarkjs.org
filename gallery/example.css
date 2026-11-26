@@ -364,13 +364,9 @@ button, input, select { font: inherit; }
 
 /* Embedded in the site: the VitePress page owns the navigation, title, and footer. */
 html.gallery-embed .site-header,
-html.gallery-embed .introduction,
 html.gallery-embed .back-link,
-html.gallery-embed .page-footer,
-html.gallery-embed .example-learning,
-html.gallery-embed .service-notice,
 html.gallery-embed .skip-link { display: none !important; }
-html.gallery-embed main.example-main { max-width: none; margin: 0; padding: 0; }
+html.gallery-embed main.example-main { max-width: none; margin: 0; padding: 24px 0 0; }
 html.gallery-embed body.gallery-example { background: var(--vp-c-bg, #fff); }
 html.gallery-embed .workspace { margin: 0; }
 html.gallery-embed main.example-main { padding-bottom: 0; }

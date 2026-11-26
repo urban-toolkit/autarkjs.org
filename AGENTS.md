@@ -80,10 +80,13 @@ upstream example requires no hand-written route.
 - `npm run gallery:build` builds the app; `predev`/`prebuild` run it too. Until the
   site pins Autark 5, `.scripts/gallery-gate.mjs` skips it with a warning.
 - `npm run gallery:pages` rewrites `guide/gallery/examples/*.md` from the catalog.
-  Each page embeds its example with `<GalleryExample>` and the `?embed=1` flag, so
-  the gallery's own header and footer stay hidden.
+  Each page hosts its example with `<GalleryExample>` and the `?embed=1` flag. Embed
+  mode hides only the app's own top navigation and back link, so its title,
+  controls, "API in focus" section, and related examples stay visible inside the page.
 - `npm run gallery:shots` recaptures the card illustrations from a preview. The
   capture hides the page chrome, so cards show only the map and its side panel.
+- Sidebar entries and cards use the example names from the catalog; the `D01`/`I01`
+  identifiers stay in the catalog for maintenance, not in the UI.
 - `guide/.vitepress/theme/components/GalleryCatalog.vue` renders the cards from the
   vendored catalog; the sidebar groups come from the same source.
 

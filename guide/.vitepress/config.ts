@@ -474,7 +474,7 @@ gtag('config', 'G-P6EVSF42L8');`],
                     items: galleryExamples
                         .filter((example) => example.section === section.id)
                         .map((example) => ({
-                            text: `${example.id} · ${example.title}`,
+                            text: example.title,
                             link: `/gallery/examples/${example.id.toLowerCase()}`,
                         })),
                 })),
