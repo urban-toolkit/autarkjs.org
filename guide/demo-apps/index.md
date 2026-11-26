@@ -6,7 +6,7 @@ outline: false
 
 # Demo Apps
 
-Explore how Autark’s maps, charts, database, and GPU analytics work together in full applications. Each app opens in a full-screen workspace.
+Explore cities through end-to-end applications built with Autark. Compare urban heat, see how building shadows change, or explore Manhattan from the neighborhood down to individual buildings.
 
 <GalleryCatalog demo-apps />
 

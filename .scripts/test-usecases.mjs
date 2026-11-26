@@ -48,7 +48,10 @@ test('Gallery and Demo Apps share the Examples menu and sidebar', async () => {
     assert.match(nav, /href="\/demo-apps\/"[^>]*><!--\[--><span[^>]*>Demo Apps<\/span>/)
     const sidebar = html.match(/<nav[^>]+id="VPSidebarNav"[^>]*>[\s\S]*?<\/nav>/)?.[0]
     assert.ok(sidebar, `${route} sidebar`)
-    for (const href of ['/gallery/', '/gallery/examples/d01.html', '/demo-apps/', '/usecases/live/heat.html']) {
+    for (const href of ['/gallery/', '/demo-apps/']) {
+      assert.ok(sidebar.match(new RegExp(`href="${href}"[^>]*><!--\\[--><p[^>]*>Overview</p>`)), `${route}: ${href} Overview link`)
+    }
+    for (const href of ['/gallery/examples/d01.html', '/usecases/live/heat.html']) {
       assert.ok(sidebar.includes(`href="${href}"`), `${route}: ${href}`)
     }
   }
@@ -57,6 +60,8 @@ test('Gallery and Demo Apps share the Examples menu and sidebar', async () => {
 test('Demo Apps uses Gallery-style cards linking to the existing live URLs', async () => {
   const demo = await readFile(`${dist}/demo-apps/index.html`, 'utf8')
   const gallery = await readFile(`${dist}/gallery/index.html`, 'utf8')
+  assert.match(demo, /<h2 id="full-applications"[^>]*>Full applications<\/h2>/)
+  assert.match(demo, /class="gallery-catalog-description"/)
   for (const slug of ['urbane', 'shadows', 'heat']) {
     const card = new RegExp(`href="/usecases/live/${slug}\\.html" class="gallery-catalog-card"`)
     assert.match(demo, card, slug)

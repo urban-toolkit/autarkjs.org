@@ -1,8 +1,8 @@
 <template>
   <div class="gallery-catalog vp-raw">
     <section v-for="section in catalog" :key="section.id" class="gallery-catalog-section">
-      <h2 v-if="section.title" :id="section.id">{{ section.title }}</h2>
-      <p v-if="section.description" class="gallery-catalog-description">{{ section.description }}</p>
+      <h2 :id="section.id">{{ section.title }}</h2>
+      <p class="gallery-catalog-description">{{ section.description }}</p>
 
       <div class="gallery-catalog-grid">
         <a
@@ -54,7 +54,12 @@ const gallery = sections.map(section => ({
   })),
 }))
 const catalog = computed(() => props.demoApps
-  ? [{ id: 'demo-apps', title: '', description: '', cards: demoApps }]
+  ? [{
+      id: 'full-applications',
+      title: 'Full applications',
+      description: 'Open a full-screen workspace with linked maps and charts for Manhattan, Niterói, or Chicago.',
+      cards: demoApps,
+    }]
   : gallery)
 
 /** A missing screenshot leaves the card's accent panel instead of a broken icon. */

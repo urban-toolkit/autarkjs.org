@@ -70,24 +70,28 @@ const learnSidebar = [
 const examplesSidebar = [
     {
         text: 'Gallery',
-        link: '/gallery/',
         collapsed: false,
-        items: gallerySections.map((section) => ({
-            text: section.title,
-            collapsed: true,
-            items: galleryExamples
-                .filter((example) => example.section === section.id)
-                .map((example) => ({
-                    text: example.title,
-                    link: `/gallery/examples/${example.id.toLowerCase()}`,
-                })),
-        })),
+        items: [
+            { text: 'Overview', link: '/gallery/' },
+            ...gallerySections.map((section) => ({
+                text: section.title,
+                collapsed: true,
+                items: galleryExamples
+                    .filter((example) => example.section === section.id)
+                    .map((example) => ({
+                        text: example.title,
+                        link: `/gallery/examples/${example.id.toLowerCase()}`,
+                    })),
+            })),
+        ],
     },
     {
         text: 'Demo Apps',
-        link: '/demo-apps/',
         collapsed: false,
-        items: demoApps.map(({ title, href }) => ({ text: title, link: href })),
+        items: [
+            { text: 'Overview', link: '/demo-apps/' },
+            ...demoApps.map(({ title, href }) => ({ text: title, link: href })),
+        ],
     },
 ]
 
