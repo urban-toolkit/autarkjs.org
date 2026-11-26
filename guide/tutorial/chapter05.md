@@ -2,7 +2,7 @@
 title: GPU computing
 aside: false
 outline: false
-pageClass: tutorial-chapter-page
+pageClass: app-embed-page
 editLink: false
 ---
 

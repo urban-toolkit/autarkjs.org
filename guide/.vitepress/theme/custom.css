@@ -245,42 +245,42 @@ body,
   text-align: justify;
 }
 
-/* Gallery examples: the workspace needs the width the docs column does not give it. */
-.gallery-example-page .VPPage {
-  flex: 1 1 auto;
-  width: 100%;
-  min-width: 0;
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 20px 32px 40px;
+/* Embedded app pages (gallery examples and tutorial chapters) share one shell:
+   site nav + sidebar, then the frame filling the rest of the viewport. */
+.Layout.app-embed-page {
+  height: 100svh;
+  overflow: hidden;
 }
 
-.gallery-example-page .VPPage > .vp-doc {
+.Layout.app-embed-page .VPContent {
+  margin-top: var(--vp-nav-height);
+  padding-top: 0;
+  padding-right: 0;
+  height: calc(100svh - var(--vp-nav-height));
+  overflow: hidden;
+}
+
+.Layout.app-embed-page .VPDoc,
+.Layout.app-embed-page .VPDoc .container,
+.Layout.app-embed-page .VPDoc .content,
+.Layout.app-embed-page .VPDoc .content-container,
+.Layout.app-embed-page .VPDoc .main {
+  height: 100%;
   max-width: none;
-  padding: 0;
+  padding: 0 !important;
+  margin: 0;
 }
 
-@media (max-width: 700px) {
-  .gallery-example-page .VPPage {
-    padding: 12px 16px 24px;
-  }
+.Layout.app-embed-page .VPDocAside,
+.Layout.app-embed-page .VPDocFooter,
+.Layout.app-embed-page .VPFooter {
+  display: none;
 }
 
-/* Package cards: the npm version sits beside the package name. */
-.VPHome .VPFeature .title {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 4px 10px;
-}
-
-.VPHome .VPFeature .feature-badge {
-  display: inline-flex;
-  line-height: 0;
-}
-
-.VPHome .VPFeature .feature-badge img {
-  height: 20px;
+.Layout.app-embed-page .gallery-example-frame,
+.Layout.app-embed-page .tutorial-chapter {
+  height: calc(100svh - var(--vp-nav-height));
+  min-height: 0;
 }
 
 /* Package overview: the npm version sits beside the package name. */
@@ -347,42 +347,6 @@ body,
 
 .vp-doc hr {
   margin: 28px 0;
-}
-
-/* Tutorial chapters: the frame fills the space under the nav, edge to edge. */
-.Layout.tutorial-chapter-page {
-  height: 100svh;
-  overflow: hidden;
-}
-
-.Layout.tutorial-chapter-page .VPContent {
-  margin-top: var(--vp-nav-height);
-  padding-top: 0;
-  padding-right: 0;
-  height: calc(100svh - var(--vp-nav-height));
-  overflow: hidden;
-}
-
-.Layout.tutorial-chapter-page .VPDoc,
-.Layout.tutorial-chapter-page .VPDoc .container,
-.Layout.tutorial-chapter-page .VPDoc .content,
-.Layout.tutorial-chapter-page .VPDoc .content-container,
-.Layout.tutorial-chapter-page .VPDoc .main {
-  height: 100%;
-  max-width: none;
-  padding: 0 !important;
-  margin: 0;
-}
-
-.Layout.tutorial-chapter-page .VPDocAside,
-.Layout.tutorial-chapter-page .VPDocFooter,
-.Layout.tutorial-chapter-page .VPFooter {
-  display: none;
-}
-
-.Layout.tutorial-chapter-page .tutorial-chapter {
-  height: calc(100svh - var(--vp-nav-height));
-  min-height: 0;
 }
 
 /* Learn landing: two tracks side by side. */

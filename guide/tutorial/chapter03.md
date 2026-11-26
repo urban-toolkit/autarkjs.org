@@ -2,7 +2,7 @@
 title: Geographical data visualization
 aside: false
 outline: false
-pageClass: tutorial-chapter-page
+pageClass: app-embed-page
 editLink: false
 ---
 
