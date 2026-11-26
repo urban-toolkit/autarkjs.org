@@ -100,7 +100,7 @@ Use `autk-compute` when you need **per-feature GPU processing** or **view-based 
 
 ## Guide
 
-- [Property computation](./computing-properties) — compute new per-feature values from existing attributes
+- [Property computation](./computing-properties) — derive per-feature values from attributes
 - [Render analysis](./render-analysis) — compute visibility-style metrics from sampled viewpoints
 - [Patterns](./patterns) — combine `autk-compute` with `autk-db`, `autk-map`, and interactive workflows
 

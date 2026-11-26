@@ -131,7 +131,7 @@ The library is also extensible. Built-in plots and transforms are registered wit
 - **Link views** both ways: click, hover, or brush in a chart and the map follows, with the share each feature contributes.
 - Read **brush extents** (pixels, numeric ranges, or category keys) and keep selections honest across aggregated and raw views through provenance.
 - Style with **custom color maps**, axis tick counts and formats, column formats, and margins; charts can also render statically.
-- **Extend it**: register your own D3 chart or transform with the same API the built-ins use.
+- **Extend it:** register your own D3 chart or transform with the same API.
 
 ## Installation
 
@@ -214,7 +214,7 @@ For a string property such as `category`, configure a categorical palette and an
   <CodePlayground :code="categoricalColorCode" out="dom" :auto-run="false" :render-canvas="false" :mounts="[{ name: 'plot', height: 420 }]" />
 </ClientOnly>
 
-The named properties must exist in your input collection. Use the same category domain/order across related views instead of inferring a different order from each subset. See [`PlotConfig`](/api/autk-plot/type-aliases/PlotConfig) for all options.
+The named properties must exist in your collection. Reuse the same category domain in related views. See [`PlotConfig`](/api/autk-plot/type-aliases/PlotConfig) for all options.
 
 ## Filtering and top-K
 

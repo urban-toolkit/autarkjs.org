@@ -104,14 +104,14 @@ Each map has one workspace CRS, set in the constructor and shared by every layer
 </ClientOnly>
 
 :::warning WebGPU required
-`autk-map` requires a browser with WebGPU support. We recommend using recent versions of **Chrome**, **Edge**, or **Safari**. See the browser support table in the [Introduction](/introduction).
+`autk-map` requires WebGPU. Use a recent **Chrome**, **Edge**, or **Safari**. See the browser support table in the [Introduction](/introduction).
 :::
 
 ## Rendering mode
 
-`map.draw()` renders once and then renders again only when the map observes a change. Camera navigation, resize, layer loading/removal, supported render-state updates, styles, clicking, hovering, and terrain changes all request the next frame automatically.
+`map.draw()` renders once, then again only when something changes. Camera moves, resizes, layer loads, render-state updates, styles, clicking, hovering, and terrain changes each request the next frame.
 
-Run this example and switch between on-demand rendering and a continuous 30 fps loop. **Toggle borders** demonstrates a supported update that redraws automatically in either mode:
+Run it to switch between on-demand rendering and a continuous 30 fps loop. **Toggle borders** redraws automatically in either mode:
 
 <ClientOnly>
   <CodePlayground :code="renderModeCode" out="dom" :auto-run="false" />
@@ -135,7 +135,7 @@ The optional second constructor argument is an options object: `{ showUi, crs }`
 
 `showUi` is a read-only property reflecting that constructor choice. Hiding the UI does not disable programmatic layer, selection, or camera controls. Every map still includes a bottom-left credit strip, even with `showUi: false`: a text-only **Made with Autark** link, plus the attribution of any visible tile imagery. The strip follows canvas resizing, and only its links intercept pointer events; `destroy()` removes it.
 
-When removing the canvas, changing routes, or replacing the visualization, call [`destroy()`](/api/autk-map/classes/AutkMap#destroy):
+When removing the canvas or leaving the page, call [`destroy()`](/api/autk-map/classes/AutkMap#destroy):
 
 The **Destroy map** button above demonstrates disposal. After destroying the map, click **Run** to create a new instance.
 
@@ -145,14 +145,16 @@ For navigation and resetting the view, see [Camera controls](./interactions#came
 
 ## Core concepts
 
-Autark is built over some core concepts, that guides data data loading, rendering and interactions. Next you can find a brief description of each concept and a reference to their detailed description in this guide.
+Autark rests on a few core concepts.
 
-- **Layer ids** — each layer is identified by an unique string id. This id must be used when the user wants to update rendering properties such as the layer's thematic data, rendering state, etc. See [Layers data](./layers) for details.
-- **Layer types** — each layer has a type that can be either a physical type or a generic type. Physical types such as `surface`, `parks`, `water`, `roads`, and `buildings` are used to build the map context, while generic types such as `points`, `polylines`, `polygons`, and `raster` support custom datasets. See [Layers data](./layers).
-- **Render state** — each layer has render state controlling properties such as opacity, visibility, clicking, hovering, point size, line width, borders, and whether thematic coloring is active. These properties can be updated dynamically without reloading the layer. See [Styling](./styling).
-- **Thematic data** — thematic data rendering maps numeric or categorical feature attributes to colors. In practice, you configure a color map, point to a property path, and enable thematic display for the layer. See [Thematic data](./thematic).
-- **Interactions** — interactions let users explore layers through clicking, hovering, highlighting, filtering, and visibility control without changing the underlying data. See [Interactions](./interactions).
-- **Terrain data** — terrain mode replaces the flat ground plane with a heightfield built from an elevation raster or streamed elevation tiles, draping the loaded layers over real topography. See [Terrain data](./terrain).
-- **Imagery** — a tile basemap can sit under the vector layers, either alone or combined with terrain. See [Imagery](./imagery).
+- **Layer ids** — a unique string identifies each layer, and later updates to thematic data or render state address it by that id.
+- **Layer types** — physical types such as `surface`, `parks`, `water`, `roads`, and `buildings` build the map context; generic types such as `points`, `polylines`, `polygons`, and `raster` carry custom datasets.
+- **Render state** — opacity, visibility, clicking, hovering, point size, line width, borders, and thematic coloring live in each layer's render state and change without reloading it.
+- **Thematic data** — a color map and a property path turn attributes into colors.
+- **Interactions** — clicking, hovering, selecting, and skipping explore a layer without changing its data.
+- **Terrain data** — a heightfield from an elevation raster or streamed tiles drapes the loaded layers over real topography.
+- **Imagery** — a tile basemap can sit under the vector layers.
+
+Each concept has its own page: [Layers data](./layers), [Styling](./styling), [Thematic data](./thematic), [Interactions](./interactions), [Terrain data](./terrain), and [Imagery](./imagery).
 
 </div>
