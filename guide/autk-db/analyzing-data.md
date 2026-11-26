@@ -157,12 +157,11 @@ await db.loadGeojson({
   sourceCrs: 'EPSG:3395', outputTableName: 'parks',
 });
 
-await db.spatialQuery({
+const res = await db.spatialQuery({
   tableRootName: 'districts', tableJoinName: 'parks',
   near: { distance: 250 },
 });
-const result = await db.getLayer('districts');
-console.log(result.features[0].properties.sjoin);
+console.log(res);
 `
 </script>
 
