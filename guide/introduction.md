@@ -90,7 +90,8 @@ Two names carry coordinates across Autark, and they never mean the same thing:
 | Name | Where it appears | Meaning |
 | --- | --- | --- |
 | `crs` | `new AutkMap(canvas, { crs })`, `db.setWorkspace(name, { crs })` | The **workspace** coordinate system: where tables are stored and where the map draws. |
-| `sourceCrs` | `loadGeojson`, `loadCsv`, `loadJson`, `loadGeoTiff`, `loadOsm`, `map.loadCollection` | The coordinate system of the **incoming** data, transformed into the workspace on load. |
+| `sourceCrs` | `db.loadGeojson`, `db.loadCsv`, `db.loadJson`, `db.loadGeoTiff`, `db.loadOsm` | The coordinate system of the **incoming** data, transformed into the workspace on load. |
+| `sourceCrs` | `map.loadCollection` | The same option for a layer drawn straight on a map. |
 
 </div>
 
