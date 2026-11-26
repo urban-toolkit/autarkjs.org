@@ -8,8 +8,8 @@
   },
   "scripts": {
     "postinstall": "node .scripts/fix-duckdb-sourcemap.cjs && node .scripts/sync-duckdb-assets.cjs",
-    "prebuild": "node .scripts/sync-duckdb-assets.cjs && node .scripts/sync-grammar-schema.cjs && npm run usecases:build && npm run gallery:assets && npm run gallery:build",
-    "predev": "node .scripts/sync-grammar-schema.cjs && npm run usecases:build && npm run gallery:assets && npm run gallery:build",
+    "prebuild": "node .scripts/sync-duckdb-assets.cjs && node .scripts/sync-grammar-schema.cjs && npm run usecases:build && npm run gallery:assets && npm run gallery:build && npm run tutorial:build",
+    "predev": "node .scripts/sync-grammar-schema.cjs && npm run usecases:build && npm run gallery:assets && npm run gallery:build && npm run tutorial:build",
     "usecases:build": "vite build --config usecases/vite.config.ts",
     "test:usecases": "node --test .scripts/test-usecases.mjs",
     "dev": "vitepress dev guide",
@@ -22,7 +22,10 @@
     "gallery:shots": "node .scripts/capture-gallery.mjs guide/public/imgs/gallery",
     "gallery:pages": "node .scripts/generate-gallery-pages.mjs",
     "gallery:assets": "node .scripts/sync-gallery-assets.mjs",
-    "api:polish": "node .scripts/polish-api-docs.mjs"
+    "api:polish": "node .scripts/polish-api-docs.mjs",
+    "tutorial:build": "vite build --config tutorial/vite.config.ts",
+    "tutorial:dev": "vite --config tutorial/vite.config.ts",
+    "test:tutorial": "node --test .scripts/test-tutorial.mjs"
   },
   "repository": {
     "type": "git",

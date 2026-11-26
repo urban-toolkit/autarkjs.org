@@ -172,3 +172,6 @@ __pycache__/
 *.pyc
 # Gallery apps are committed; their datasets and DuckDB runtime are copied at build time.
 guide/public/gallery/apps/data/
+
+# Tutorial chapters are built from the vendored source.
+guide/public/tutorial/

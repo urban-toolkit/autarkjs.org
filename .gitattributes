@@ -6,3 +6,5 @@ gallery/public/data/*.csv -text whitespace=cr-at-eol
 guide/public/gallery/apps/assets/*.js -text -diff
 guide/public/gallery/apps/assets/*.css -text -diff
 guide/public/gallery/apps/*.html -text
+# Preserve tutorial CSV bytes.
+tutorial/data/**/*.csv -text whitespace=cr-at-eol
