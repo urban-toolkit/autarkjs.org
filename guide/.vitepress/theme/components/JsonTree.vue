@@ -6,10 +6,12 @@ const props = defineProps<{
   depth?: number
   label?: string
   index?: number
+  /** Start expanded. Useful for a document's example output; consoles stay collapsed. */
+  open?: boolean
 }>()
 
 const currentDepth = props.depth ?? 0
-const collapsed = ref(true)
+const collapsed = ref(!props.open)
 
 const value = props.value
 const isArray = Array.isArray(value)
@@ -59,7 +61,7 @@ function previewValue(v: unknown): string {
         <span class="json-tree__bracket">{</span>
         <div class="json-tree__children">
           <div v-for="(val, key) in value as Record<string, unknown>" :key="key" class="json-tree__entry">
-            <JsonTree :value="val" :depth="currentDepth + 1" :label="key" />
+            <JsonTree :value="val" :depth="currentDepth + 1" :label="key" :open="open" />
           </div>
         </div>
         <span class="json-tree__bracket">}</span>
@@ -68,7 +70,7 @@ function previewValue(v: unknown): string {
         <span class="json-tree__bracket">[</span>
         <div class="json-tree__children">
           <div v-for="(item, idx) in value as unknown[]" :key="idx" class="json-tree__entry">
-            <JsonTree :value="item" :depth="currentDepth + 1" :index="idx" />
+            <JsonTree :value="item" :depth="currentDepth + 1" :index="idx" :open="open" />
           </div>
         </div>
         <span class="json-tree__bracket">]</span>

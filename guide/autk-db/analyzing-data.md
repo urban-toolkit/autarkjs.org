@@ -90,6 +90,24 @@ const res = await db.buildHeatmap({
 console.log(res)
 `
 
+const matchesSample = {
+  properties: {
+    sjoin: {
+      matches: [
+        { id: 1, properties: { key: 1, date: '03/31/2025 11:17:00 PM' } },
+      ],
+    },
+  },
+}
+
+const groupedSample = {
+  properties: {
+    sjoin: {
+      count: { noise: 42 },
+    },
+  },
+}
+
 const rawQueryCode = `
 import { AutkDb } from "@urban-toolkit/autk-db";
 
@@ -139,14 +157,12 @@ await db.loadGeojson({
   sourceCrs: 'EPSG:3395', outputTableName: 'parks',
 });
 
-for (const useCentroid of [true, false]) {
-  await db.spatialQuery({
-    tableRootName: 'districts', tableJoinName: 'parks',
-    near: { distance: 250, useCentroid },
-  });
-  const result = await db.getLayer('districts');
-  console.log('useCentroid = ' + useCentroid, result.features[0].properties.sjoin);
-}
+await db.spatialQuery({
+  tableRootName: 'districts', tableJoinName: 'parks',
+  near: { distance: 250 },
+});
+const result = await db.getLayer('districts');
+console.log(result.features[0].properties.sjoin);
 `
 </script>
 
@@ -205,17 +221,7 @@ For example, a long park can touch a district while their centroids are more tha
 
 Without `groupBy`, each root feature remains a single row. Matches are written to `properties.sjoin.matches` as an array of `{ id?, properties }` entries, so the root geometry is never duplicated. For example, matches from the `noise` table look like:
 
-```json
-{
-  "properties": {
-    "sjoin": {
-      "matches": [
-        { "id": 1, "properties": { "key": 1, "date": "03/31/2025 11:17:00 PM" } }
-      ]
-    }
-  }
-}
-```
+<JsonTree :value="matchesSample" open />
 
 No match produces an empty `matches` array. When you need a scalar value for thematic rendering or charting, use `groupBy` to aggregate the matches.
 ### The [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby) output
@@ -228,15 +234,7 @@ Grouping summarizes the matched features instead of returning one join result pe
 
 When [`groupBy`](/api/autk-db/interfaces/SpatialQueryParams#groupby) is used, the matched features are aggregated before being written under `properties.sjoin.<aggregateFn>.<key>`. As a result, the spatial query returns a single summarized row for each root feature.
 
-```json
-{
-  "properties": {
-    "sjoin": {
-      "count": { "noise": 42 }
-    }
-  }
-}
-```
+<JsonTree :value="groupedSample" open />
 
 :::tip Normalization
 When `normalize: true` is set, the aggregated value is normalized between 0 and 1.
