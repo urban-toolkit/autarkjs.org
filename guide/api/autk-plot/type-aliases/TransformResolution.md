@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / TransformResolution
-
 # Type Alias: TransformResolution
 
 > **TransformResolution** = `"hour"` \| `"day"` \| `"weekday"` \| `"monthday"` \| `"month"` \| `"year"`

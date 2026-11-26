@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / EARTH\_RADIUS
-
 # Variable: EARTH\_RADIUS
 
 > `const` **EARTH\_RADIUS**: `6378137` = `6378137`

@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / Row
-
 # Type Alias: Row
 
 > **Row** = `object`

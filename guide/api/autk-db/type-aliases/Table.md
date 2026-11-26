@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-db**](../index.md)
-
-***
-
-[@urban-toolkit/autk-db](../globals.md) / Table
-
 # Type Alias: Table
 
 > **Table** = [`OsmTable`](../interfaces/OsmTable.md) \| [`OsmLayerTable`](../interfaces/OsmLayerTable.md) \| [`CsvTable`](../interfaces/CsvTable.md) \| [`JsonTable`](../interfaces/JsonTable.md) \| [`GeojsonTable`](../interfaces/GeojsonTable.md) \| [`GeotiffTable`](../interfaces/GeotiffTable.md) \| [`UserTable`](../interfaces/UserTable.md)

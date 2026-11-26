@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / PlotType
-
 # Type Alias: PlotType
 
 > **PlotType** = `"scatterplot"` \| `"barchart"` \| `"parallel-coordinates"` \| `"table"` \| `"linechart"` \| `"heatmatrix"` \| `"boxplot"` \| `"sankey"` \| `"pie"` \| `"donut"` \| `"areachart"` \| `"bubble"` \| `"hexbin"` \| `"calendar"` \| `"waffle"` \| `"stackedbar"` \| `"treemap"` \| `"sunburst"` \| `"radar"` \| `"ecdf"` \| `"pareto"` \| `"chord"` \| `"density"` \| `"violin"` \| `"registered"`

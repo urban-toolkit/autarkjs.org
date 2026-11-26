@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-db**](../index.md)
-
-***
-
-[@urban-toolkit/autk-db](../globals.md) / DEFAULT\_WORKSPACE\_NAME
-
 # Variable: DEFAULT\_WORKSPACE\_NAME
 
 > `const` **DEFAULT\_WORKSPACE\_NAME**: `"autk"` = `'autk'`

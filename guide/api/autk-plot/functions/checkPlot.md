@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / checkPlot
-
 # Function: checkPlot()
 
 > **checkPlot**(`definition`, `div`, `config`): [`ContractReport`](../type-aliases/ContractReport.md) & `object`

@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-map**](../index.md)
-
-***
-
-[@urban-toolkit/autk-map](../globals.md) / MapBounds
-
 # Type Alias: MapBounds
 
 > **MapBounds** = \[`minX`: `number`, `minY`: `number`, `maxX`: `number`, `maxY`: `number`\]

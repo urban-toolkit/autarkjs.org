@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-db**](../index.md)
-
-***
-
-[@urban-toolkit/autk-db](../globals.md) / DEFAULT\_SOURCE\_CRS
-
 # Variable: DEFAULT\_SOURCE\_CRS
 
 > `const` **DEFAULT\_SOURCE\_CRS**: `"EPSG:4326"` = `'EPSG:4326'`

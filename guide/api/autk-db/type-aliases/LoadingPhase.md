@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-db**](../index.md)
-
-***
-
-[@urban-toolkit/autk-db](../globals.md) / LoadingPhase
-
 # Type Alias: LoadingPhase
 
 > **LoadingPhase** = `"querying-osm-server"` \| `"downloading-osm-data"` \| `"processing-osm-data"` \| `"processing-boundaries"`

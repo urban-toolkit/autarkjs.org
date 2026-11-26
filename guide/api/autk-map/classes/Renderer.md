@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-map**](../index.md)
-
-***
-
-[@urban-toolkit/autk-map](../globals.md) / Renderer
-
 # Class: Renderer
 
 Defined in: [autk-map/src/renderer.ts:25](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L25)

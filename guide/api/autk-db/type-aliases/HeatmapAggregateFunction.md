@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-db**](../index.md)
-
-***
-
-[@urban-toolkit/autk-db](../globals.md) / HeatmapAggregateFunction
-
 # Type Alias: HeatmapAggregateFunction
 
 > **HeatmapAggregateFunction** = `Exclude`\<[`AggregateFunction`](AggregateFunction.md), `"collect"`\>

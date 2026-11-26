@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / replaceElevationOutlier
-
 # Function: replaceElevationOutlier()
 
 > **replaceElevationOutlier**(`value`, `assessment`, `coarse?`): `number`

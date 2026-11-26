@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-compute**](../index.md)
-
-***
-
-[@urban-toolkit/autk-compute](../globals.md) / RenderAggregation
-
 # Type Alias: RenderAggregation
 
 > **RenderAggregation** = \{ `backgroundLayerType?`: `string`; `includeBackground?`: `boolean`; `type`: `"classes"`; \} \| \{ `type`: `"objects"`; \}

@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / normalizeBuildingFeature
-
 # Function: normalizeBuildingFeature()
 
 > **normalizeBuildingFeature**(`feature`): `Feature`\<`GeometryCollection`\<`Geometry`\>\>

@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / resolveElevationValidation
-
 # Function: resolveElevationValidation()
 
 > **resolveElevationValidation**(`options?`): `Readonly`\<`Required`\<[`ElevationValidationOptions`](../interfaces/ElevationValidationOptions.md)\>\> \| `undefined`

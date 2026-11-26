@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / unregisterPlot
-
 # Function: unregisterPlot()
 
 > **unregisterPlot**(`name`): `boolean`

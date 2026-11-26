@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-map**](../index.md)
-
-***
-
-[@urban-toolkit/autk-map](../globals.md) / ElevationValidationStats
-
 # Interface: ElevationValidationStats
 
 Defined in: autk-core/dist/elevation-validation.d.ts:10

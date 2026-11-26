@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / DEFAULT\_TRANSFER\_FUNCTION
-
 # Variable: DEFAULT\_TRANSFER\_FUNCTION
 
 > `const` **DEFAULT\_TRANSFER\_FUNCTION**: [`RequiredTransferFunction`](../type-aliases/RequiredTransferFunction.md)

@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-db**](../index.md)
-
-***
-
-[@urban-toolkit/autk-db](../globals.md) / JsonDefaultLatLngGeometryColumns
-
 # Type Alias: JsonDefaultLatLngGeometryColumns
 
 > **JsonDefaultLatLngGeometryColumns** = `true`

@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-map**](../index.md)
-
-***
-
-[@urban-toolkit/autk-map](../globals.md) / TileAttribution
-
 # Type Alias: TileAttribution
 
 > **TileAttribution** = `string` \| [`TileCredit`](../interfaces/TileCredit.md) \| `ReadonlyArray`\<`string` \| [`TileCredit`](../interfaces/TileCredit.md)\>

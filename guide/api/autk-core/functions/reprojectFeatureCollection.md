@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / reprojectFeatureCollection
-
 # Function: reprojectFeatureCollection()
 
 > **reprojectFeatureCollection**(`collection`, `sourceCrs`, `targetCrs`): `FeatureCollection`\<`Geometry` \| `null`\>

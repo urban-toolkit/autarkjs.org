@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / ExecutedPlotTransform
-
 # Type Alias: ExecutedPlotTransform
 
 > **ExecutedPlotTransform** = [`ExecutedBinning1dTransform`](ExecutedBinning1dTransform.md) \| [`ExecutedBinning2dTransform`](ExecutedBinning2dTransform.md) \| [`ExecutedSortTransform`](ExecutedSortTransform.md) \| [`ExecutedBinningEventsTransform`](ExecutedBinningEventsTransform.md) \| [`ExecutedReduceSeriesTransform`](ExecutedReduceSeriesTransform.md) \| [`ExecutedBoxStatsTransform`](ExecutedBoxStatsTransform.md) \| [`ExecutedFlowsTransform`](ExecutedFlowsTransform.md) \| [`ExecutedBinningHexTransform`](ExecutedBinningHexTransform.md) \| [`ExecutedHierarchyTransform`](ExecutedHierarchyTransform.md) \| [`ExecutedCumulativeTransform`](ExecutedCumulativeTransform.md) \| [`ExecutedFoldTransform`](ExecutedFoldTransform.md) \| [`ExecutedDensityTransform`](ExecutedDensityTransform.md) \| [`ExecutedRegisteredTransform`](ExecutedRegisteredTransform.md)

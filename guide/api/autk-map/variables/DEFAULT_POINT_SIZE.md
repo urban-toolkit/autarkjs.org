@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-map**](../index.md)
-
-***
-
-[@urban-toolkit/autk-map](../globals.md) / DEFAULT\_POINT\_SIZE
-
 # Variable: DEFAULT\_POINT\_SIZE
 
 > `const` **DEFAULT\_POINT\_SIZE**: `64` = `64`

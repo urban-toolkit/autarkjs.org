@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-db**](../index.md)
-
-***
-
-[@urban-toolkit/autk-db](../globals.md) / isBoundingBoxArea
-
 # Function: isBoundingBoxArea()
 
 > **isBoundingBoxArea**(`area`): `area is OsmBoundingBoxArea`

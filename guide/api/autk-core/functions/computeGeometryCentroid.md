@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / computeGeometryCentroid
-
 # Function: computeGeometryCentroid()
 
 > **computeGeometryCentroid**(`geometry`): \[`number`, `number`, `number`\] \| `null`

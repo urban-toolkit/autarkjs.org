@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-compute**](../index.md)
-
-***
-
-[@urban-toolkit/autk-compute](../globals.md) / RenderViewpointStrategy
-
 # Type Alias: RenderViewpointStrategy
 
 > **RenderViewpointStrategy** = \{ `type`: `"centroid"`; \} \| \{ `floors`: `number`; `type`: `"building-windows"`; \}

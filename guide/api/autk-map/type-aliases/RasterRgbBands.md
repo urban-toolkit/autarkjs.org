@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-map**](../index.md)
-
-***
-
-[@urban-toolkit/autk-map](../globals.md) / RasterRgbBands
-
 # Type Alias: RasterRgbBands
 
 > **RasterRgbBands** = \[`red`: `string`, `green`: `string`, `blue`: `string`\]

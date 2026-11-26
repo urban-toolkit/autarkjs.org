@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / CameraProjection
-
 # Type Alias: CameraProjection
 
 > **CameraProjection** = `"perspective"` \| `"orthographic"`

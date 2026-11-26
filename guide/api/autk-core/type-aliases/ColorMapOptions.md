@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / ColorMapOptions
-
 # Type Alias: ColorMapOptions
 
 > **ColorMapOptions** = `object` & \{ `colors?`: `never`; `interpolator`: [`ColorMapInterpolator`](../enumerations/ColorMapInterpolator.md); `type?`: `never`; \} \| [`CustomColorPalette`](CustomColorPalette.md) & `object` \| \{ `colors?`: `never`; `interpolator?`: `never`; `type?`: `never`; \}

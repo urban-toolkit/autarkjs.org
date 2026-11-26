@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-map**](../index.md)
-
-***
-
-[@urban-toolkit/autk-map](../globals.md) / DEFAULT\_LINE\_WIDTH
-
 # Variable: DEFAULT\_LINE\_WIDTH
 
 > `const` **DEFAULT\_LINE\_WIDTH**: `12` = `12`

@@ -21,7 +21,8 @@
     "test:gallery": "node --test .scripts/test-gallery.mjs",
     "gallery:shots": "node .scripts/capture-gallery.mjs guide/public/imgs/gallery",
     "gallery:pages": "node .scripts/generate-gallery-pages.mjs",
-    "gallery:assets": "node .scripts/sync-gallery-assets.mjs"
+    "gallery:assets": "node .scripts/sync-gallery-assets.mjs",
+    "api:polish": "node .scripts/polish-api-docs.mjs"
   },
   "repository": {
     "type": "git",

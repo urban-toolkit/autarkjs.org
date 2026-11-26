@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-db**](../index.md)
-
-***
-
-[@urban-toolkit/autk-db](../globals.md) / WATER\_NATURAL\_VALUES
-
 # Variable: WATER\_NATURAL\_VALUES
 
 > `const` **WATER\_NATURAL\_VALUES**: readonly \[`"water"`, `"wetland"`, `"strait"`, `"spring"`\]

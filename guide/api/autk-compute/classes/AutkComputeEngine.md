@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-compute**](../index.md)
-
-***
-
-[@urban-toolkit/autk-compute](../globals.md) / AutkComputeEngine
-
 # Class: AutkComputeEngine
 
 Defined in: [compute.ts:41](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-compute/src/compute.ts#L41)

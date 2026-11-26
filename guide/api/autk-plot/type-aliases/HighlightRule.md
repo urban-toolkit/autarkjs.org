@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / HighlightRule
-
 # Type Alias: HighlightRule
 
 > **HighlightRule** = \{ `mode`: `"boolean"`; \} \| \{ `anchor?`: `"start"` \| `"end"` \| `"center"`; `axis?`: `"x"` \| `"y"` \| `"radial"`; `baseline?`: `number`; `channel`: [`SubsetChannel`](SubsetChannel.md); `mode`: `"subset"`; `shape?`: `"flow"` \| `"ribbon"`; \} \| \{ `axis?`: `"x"` \| `"y"`; `mode`: `"custom"`; `preset`: [`CustomPreset`](CustomPreset.md); `scale?`: \{ `a`: `number`; `fields`: \[`string`, `string`\]; `k`: `number`; \}; \}

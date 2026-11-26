@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-map**](../index.md)
-
-***
-
-[@urban-toolkit/autk-map](../globals.md) / MapEventRecord
-
 # Type Alias: MapEventRecord
 
 > **MapEventRecord** = `Record`\<[`MapEvent`](../enumerations/MapEvent.md), [`MapEventData`](../interfaces/MapEventData.md)\>

@@ -1,8 +1,4 @@
-[**@urban-toolkit/autk-core**](index.md)
-
-***
-
-# @urban-toolkit/autk-core
+# autk-core
 
 > Version: `5.0.0`
 

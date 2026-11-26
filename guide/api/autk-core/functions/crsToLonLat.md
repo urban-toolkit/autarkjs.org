@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / crsToLonLat
-
 # Function: crsToLonLat()
 
 > **crsToLonLat**(`crs`, `x`, `y`): \[`number`, `number`\]

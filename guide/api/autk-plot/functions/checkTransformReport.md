@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / checkTransformReport
-
 # Function: checkTransformReport()
 
 > **checkTransformReport**(`definition`, `collection`, `options?`, `columns?`): [`ContractReport`](../type-aliases/ContractReport.md)

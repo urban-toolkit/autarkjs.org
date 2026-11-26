@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / TypedArray
-
 # Type Alias: TypedArray
 
 > **TypedArray** = `Float32Array` \| `Float64Array` \| `Int8Array` \| `Int16Array` \| `Int32Array` \| `Uint8Array` \| `Uint8ClampedArray` \| `Uint16Array` \| `Uint32Array`

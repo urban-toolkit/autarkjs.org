@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / ProvenanceCardinality
-
 # Type Alias: ProvenanceCardinality
 
 > **ProvenanceCardinality** = `"1:1"` \| `"N:1"` \| `"1:N"` \| `"N:N"` \| `"empty"`

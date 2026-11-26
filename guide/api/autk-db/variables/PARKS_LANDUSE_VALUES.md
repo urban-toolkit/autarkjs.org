@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-db**](../index.md)
-
-***
-
-[@urban-toolkit/autk-db](../globals.md) / PARKS\_LANDUSE\_VALUES
-
 # Variable: PARKS\_LANDUSE\_VALUES
 
 > `const` **PARKS\_LANDUSE\_VALUES**: readonly \[`"wood"`, `"grass"`, `"forest"`, `"orchard"`, `"village_green"`, `"vineyard"`, `"cemetery"`, `"meadow"`\]

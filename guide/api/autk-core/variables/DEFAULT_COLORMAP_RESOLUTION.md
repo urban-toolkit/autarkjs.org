@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / DEFAULT\_COLORMAP\_RESOLUTION
-
 # Variable: DEFAULT\_COLORMAP\_RESOLUTION
 
 > `const` **DEFAULT\_COLORMAP\_RESOLUTION**: `256` = `256`

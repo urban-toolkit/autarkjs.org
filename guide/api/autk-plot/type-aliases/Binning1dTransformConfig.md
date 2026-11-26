@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / Binning1dTransformConfig
-
 # Type Alias: Binning1dTransformConfig
 
 > **Binning1dTransformConfig** = `object`

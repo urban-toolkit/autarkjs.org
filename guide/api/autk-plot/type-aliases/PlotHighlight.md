@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / PlotHighlight
-
 # Type Alias: PlotHighlight
 
 > **PlotHighlight** = `"boolean"` \| `"subset"` \| `Exclude`\<[`CustomPreset`](CustomPreset.md), `"members"`\> \| `Partial`\<`Record`\<[`MarkKind`](MarkKind.md), [`HighlightRule`](HighlightRule.md)\>\> \| ((`context`) => `void`)

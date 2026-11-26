@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-map**](../index.md)
-
-***
-
-[@urban-toolkit/autk-map](../globals.md) / DemEncoding
-
 # Type Alias: DemEncoding
 
 > **DemEncoding** = `"terrarium"` \| `"mapbox"`

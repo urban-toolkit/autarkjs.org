@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / checkProvenance
-
 # Function: checkProvenance()
 
 > **checkProvenance**(`featureCount`, `rows`, `provenance`, `valueField?`): `string`[]

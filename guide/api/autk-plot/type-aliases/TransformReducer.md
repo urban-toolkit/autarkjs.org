@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / TransformReducer
-
 # Type Alias: TransformReducer
 
 > **TransformReducer** = `"count"` \| `"sum"` \| `"avg"` \| `"min"` \| `"max"`

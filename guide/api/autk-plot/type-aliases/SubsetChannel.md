@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / SubsetChannel
-
 # Type Alias: SubsetChannel
 
 > **SubsetChannel** = `"length"` \| `"position"` \| `"band"` \| `"angle"` \| `"width"` \| `"area"` \| `"units"`

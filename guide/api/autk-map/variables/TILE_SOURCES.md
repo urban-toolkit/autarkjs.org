@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-map**](../index.md)
-
-***
-
-[@urban-toolkit/autk-map](../globals.md) / TILE\_SOURCES
-
 # Variable: TILE\_SOURCES
 
 > `const` **TILE\_SOURCES**: `object`

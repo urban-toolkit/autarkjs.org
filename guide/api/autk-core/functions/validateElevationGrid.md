@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / validateElevationGrid
-
 # Function: validateElevationGrid()
 
 > **validateElevationGrid**(`data`, `width`, `height`, `spacing`, `options`): `object`

@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-db**](../index.md)
-
-***
-
-[@urban-toolkit/autk-db](../globals.md) / isVectorTable
-
 # Function: isVectorTable()
 
 > **isVectorTable**(`table`): table is OsmLayerTable \| GeojsonTable \| CsvTable & \{ type: "background" \| "surface" \| "parks" \| "water" \| "roads" \| "buildings" \| "points" \| "polygons" \| "polylines" \| "tiles" \} \| UserTable & \{ type: "background" \| "surface" \| "parks" \| "water" \| "roads" \| "buildings" \| "points" \| "polygons" \| "polylines" \| "tiles" \}

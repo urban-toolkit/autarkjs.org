@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / offsetPolyline
-
 # Function: offsetPolyline()
 
 > **offsetPolyline**(`points`, `distance`): \[`number`, `number`\][]

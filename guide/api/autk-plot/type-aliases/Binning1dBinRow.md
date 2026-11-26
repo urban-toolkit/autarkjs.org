@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / Binning1dBinRow
-
 # Type Alias: Binning1dBinRow
 
 > **Binning1dBinRow** = `object`

@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / ExecutedBinning2dTransform
-
 # Type Alias: ExecutedBinning2dTransform
 
 > **ExecutedBinning2dTransform** = `object`

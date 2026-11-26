@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / WEB\_MERCATOR\_EXTENT
-
 # Variable: WEB\_MERCATOR\_EXTENT
 
 > `const` **WEB\_MERCATOR\_EXTENT**: `number`

@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / resolveCollectionBounds
-
 # Function: resolveCollectionBounds()
 
 > **resolveCollectionBounds**(`collection`): [`BoundingBox`](../interfaces/BoundingBox.md) \| `null`

@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-db**](../index.md)
-
-***
-
-[@urban-toolkit/autk-db](../globals.md) / DEFAULT\_WORKSPACE\_PRECISION\_GRID
-
 # Variable: DEFAULT\_WORKSPACE\_PRECISION\_GRID
 
 > `const` **DEFAULT\_WORKSPACE\_PRECISION\_GRID**: `0.01` = `0.01`

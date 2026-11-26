@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / reprojectBounds
-
 # Function: reprojectBounds()
 
 > **reprojectBounds**(`bounds`, `sourceCrs`, `targetCrs`): \[`number`, `number`, `number`, `number`\]

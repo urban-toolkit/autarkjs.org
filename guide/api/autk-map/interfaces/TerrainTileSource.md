@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-map**](../index.md)
-
-***
-
-[@urban-toolkit/autk-map](../globals.md) / TerrainTileSource
-
 # Interface: TerrainTileSource
 
 Defined in: [autk-map/src/terrain-tile-source.ts:12](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/terrain-tile-source.ts#L12)

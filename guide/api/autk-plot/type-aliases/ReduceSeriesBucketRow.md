@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / ReduceSeriesBucketRow
-
 # Type Alias: ReduceSeriesBucketRow
 
 > **ReduceSeriesBucketRow** = `object`

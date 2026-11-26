@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / heightfieldFromRaster
-
 # Function: heightfieldFromRaster()
 
 > **heightfieldFromRaster**(`collection`, `property`, `origin`, `preserveNoData?`): [`Heightfield`](../interfaces/Heightfield.md)

@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / LAYER\_TYPE\_VALUES
-
 # Variable: LAYER\_TYPE\_VALUES
 
 > `const` **LAYER\_TYPE\_VALUES**: readonly [`LayerType`](../type-aliases/LayerType.md)[]

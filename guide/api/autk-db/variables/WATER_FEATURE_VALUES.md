@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-db**](../index.md)
-
-***
-
-[@urban-toolkit/autk-db](../globals.md) / WATER\_FEATURE\_VALUES
-
 # Variable: WATER\_FEATURE\_VALUES
 
 > `const` **WATER\_FEATURE\_VALUES**: readonly \[`"pond"`, `"reservoir"`, `"lagoon"`, `"stream_pool"`, `"lake"`, `"pool"`, `"canal"`, `"river"`\]

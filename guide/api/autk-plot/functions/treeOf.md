@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / treeOf
-
 # Function: treeOf()
 
 > **treeOf**(`rows`): `HierarchyNode`\<[`TreeDatum`](../type-aliases/TreeDatum.md)\>

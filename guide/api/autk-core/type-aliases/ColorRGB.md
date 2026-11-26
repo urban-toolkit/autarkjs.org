@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / ColorRGB
-
 # Type Alias: ColorRGB
 
 > **ColorRGB** = `object`

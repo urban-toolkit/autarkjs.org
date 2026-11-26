@@ -1,8 +1,4 @@
-[**@urban-toolkit/autk-plot**](index.md)
-
-***
-
-# @urban-toolkit/autk-plot
+# autk-plot
 
 > Version: `5.0.0`
 

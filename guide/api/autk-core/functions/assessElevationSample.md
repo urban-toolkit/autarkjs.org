@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / assessElevationSample
-
 # Function: assessElevationSample()
 
 > **assessElevationSample**(`value`, `ring`, `spacing`, `options`): [`ElevationAssessment`](../interfaces/ElevationAssessment.md) \| `undefined`

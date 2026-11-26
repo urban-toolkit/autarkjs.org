@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / MarkKind
-
 # Type Alias: MarkKind
 
 > **MarkKind** = `"rect"` \| `"point"` \| `"sector"` \| `"stroke"` \| `"shape"` \| `"html"`

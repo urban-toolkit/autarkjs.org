@@ -1,8 +1,4 @@
-[**@urban-toolkit/autk-db**](index.md)
-
-***
-
-# @urban-toolkit/autk-db
+# autk-db
 
 > Version: `5.0.0`
 

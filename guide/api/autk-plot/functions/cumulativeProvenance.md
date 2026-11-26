@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / cumulativeProvenance
-
 # Function: cumulativeProvenance()
 
 > **cumulativeProvenance**(`options`): [`TransformProvenance`](../type-aliases/TransformProvenance.md)

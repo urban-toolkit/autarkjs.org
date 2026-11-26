@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / buildTransferContext
-
 # Function: buildTransferContext()
 
 > **buildTransferContext**(`values`, `config?`): [`TransferContext`](../interfaces/TransferContext.md)

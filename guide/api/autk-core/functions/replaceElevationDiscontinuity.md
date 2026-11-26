@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / replaceElevationDiscontinuity
-
 # Function: replaceElevationDiscontinuity()
 
 > **replaceElevationDiscontinuity**(`value`, `coarse`, `neighbors`, `spacing`, `options`): `number`

@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / BrushAxisExtent
-
 # Type Alias: BrushAxisExtent
 
 > **BrushAxisExtent** = \{ `kind`: `"numeric"`; `range`: \[`number`, `number`\]; \} \| \{ `keys`: `string`[]; `kind`: `"categorical"`; \}

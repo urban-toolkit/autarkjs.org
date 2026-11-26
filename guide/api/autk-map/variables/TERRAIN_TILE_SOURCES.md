@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-map**](../index.md)
-
-***
-
-[@urban-toolkit/autk-map](../globals.md) / TERRAIN\_TILE\_SOURCES
-
 # Variable: TERRAIN\_TILE\_SOURCES
 
 > `const` **TERRAIN\_TILE\_SOURCES**: `object`

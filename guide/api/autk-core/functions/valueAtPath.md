@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / valueAtPath
-
 # Function: valueAtPath()
 
 > **valueAtPath**(`item`, `path`): `unknown`

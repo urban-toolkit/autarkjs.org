@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-db**](../index.md)
-
-***
-
-[@urban-toolkit/autk-db](../globals.md) / EXCLUDED\_BUILDING\_VALUES
-
 # Variable: EXCLUDED\_BUILDING\_VALUES
 
 > `const` **EXCLUDED\_BUILDING\_VALUES**: readonly \[`"shed"`, `"garage"`, `"garages"`, `"carport"`, `"hut"`, `"kiosk"`, `"toilets"`, `"service"`, `"transformer_tower"`, `"sty"`, `"container"`\]

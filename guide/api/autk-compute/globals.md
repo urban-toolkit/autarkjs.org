@@ -1,8 +1,4 @@
-[**@urban-toolkit/autk-compute**](index.md)
-
-***
-
-# @urban-toolkit/autk-compute
+# autk-compute
 
 > Version: `5.0.0`
 

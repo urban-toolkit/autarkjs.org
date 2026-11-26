@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-map**](../index.md)
-
-***
-
-[@urban-toolkit/autk-map](../globals.md) / MapStylePresetId
-
 # Type Alias: MapStylePresetId
 
 > **MapStylePresetId** = `"default"` \| `"light"` \| `"google"` \| `"apple"` \| `"osm"` \| `"dark"`

@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-map**](../index.md)
-
-***
-
-[@urban-toolkit/autk-map](../globals.md) / TileTheme
-
 # Type Alias: TileTheme
 
 > **TileTheme** = `"original"` \| `"light"` \| `"dark"`

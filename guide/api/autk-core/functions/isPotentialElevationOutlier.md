@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / isPotentialElevationOutlier
-
 # Function: isPotentialElevationOutlier()
 
 > **isPotentialElevationOutlier**(`value`, `a`, `b`, `c`, `d`, `tolerance`): `boolean`

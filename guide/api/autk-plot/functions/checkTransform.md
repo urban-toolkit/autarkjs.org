@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / checkTransform
-
 # Function: checkTransform()
 
 > **checkTransform**(`definition`, `collection`, `options?`, `columns?`): `string`[]

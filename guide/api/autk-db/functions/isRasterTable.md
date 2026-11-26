@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-db**](../index.md)
-
-***
-
-[@urban-toolkit/autk-db](../globals.md) / isRasterTable
-
 # Function: isRasterTable()
 
 > **isRasterTable**(`table`): table is GeotiffTable \| UserTable & \{ type: "raster" \}

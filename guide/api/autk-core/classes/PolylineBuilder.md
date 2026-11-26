@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / PolylineBuilder
-
 # Class: PolylineBuilder
 
 Defined in: [polyline-builder.ts:13](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/polyline-builder.ts#L13)

@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / EventListener
-
 # Type Alias: EventListener\<T\>
 
 > **EventListener**\<`T`\> = (`event`) => `void`

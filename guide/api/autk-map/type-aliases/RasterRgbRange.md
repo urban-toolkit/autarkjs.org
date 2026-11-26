@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-map**](../index.md)
-
-***
-
-[@urban-toolkit/autk-map](../globals.md) / RasterRgbRange
-
 # Type Alias: RasterRgbRange
 
 > **RasterRgbRange** = \[`min`: `number`, `max`: `number`\]

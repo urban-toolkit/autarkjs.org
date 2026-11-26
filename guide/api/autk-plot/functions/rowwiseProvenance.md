@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / rowwiseProvenance
-
 # Function: rowwiseProvenance()
 
 > **rowwiseProvenance**(`rows`): [`TransformProvenance`](../type-aliases/TransformProvenance.md)

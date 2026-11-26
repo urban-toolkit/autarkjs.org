@@ -1,8 +1,4 @@
-[**@urban-toolkit/autk-map**](index.md)
-
-***
-
-# @urban-toolkit/autk-map
+# autk-map
 
 > Version: `5.0.0`
 

@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-db**](../index.md)
-
-***
-
-[@urban-toolkit/autk-db](../globals.md) / PARKS\_LEISURE\_VALUES
-
 # Variable: PARKS\_LEISURE\_VALUES
 
 > `const` **PARKS\_LEISURE\_VALUES**: readonly \[`"dog_park"`, `"park"`, `"playground"`, `"recreation_ground"`\]

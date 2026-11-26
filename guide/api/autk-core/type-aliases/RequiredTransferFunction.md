@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / RequiredTransferFunction
-
 # Type Alias: RequiredTransferFunction
 
 > **RequiredTransferFunction** = `Required`\<[`TransferFunction`](../interfaces/TransferFunction.md)\>

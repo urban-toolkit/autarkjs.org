@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / cardinality
-
 # Function: cardinality()
 
 > **cardinality**(`relation`): [`ProvenanceCardinality`](../type-aliases/ProvenanceCardinality.md)

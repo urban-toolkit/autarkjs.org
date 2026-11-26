@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / compose
-
 # Function: compose()
 
 > **compose**(`first`, `second`): [`ProvenancePair`](../type-aliases/ProvenancePair.md)[]

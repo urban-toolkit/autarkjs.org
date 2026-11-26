@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / TriangulatorPolylines
-
 # Class: TriangulatorPolylines
 
 Defined in: [triangulator-polylines.ts:17](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/triangulator-polylines.ts#L17)

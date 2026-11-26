@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-db**](../index.md)
-
-***
-
-[@urban-toolkit/autk-db](../globals.md) / OsmQueryArea
-
 # Type Alias: OsmQueryArea
 
 > **OsmQueryArea** = [`OsmNamedArea`](OsmNamedArea.md) \| [`OsmBoundingBoxArea`](OsmBoundingBoxArea.md)

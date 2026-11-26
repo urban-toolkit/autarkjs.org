@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / isSupportedCrs
-
 # Function: isSupportedCrs()
 
 > **isSupportedCrs**(`value`): `value is string`

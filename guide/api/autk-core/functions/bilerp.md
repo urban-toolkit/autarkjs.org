@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / bilerp
-
 # Function: bilerp()
 
 > **bilerp**(`a`, `b`, `c`, `d`, `u`, `v`): `number`

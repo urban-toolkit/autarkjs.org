@@ -306,3 +306,45 @@ body,
 .vp-doc td {
   text-wrap: pretty;
 }
+
+/* API reference: TypeDoc signatures, source notes, and long code lines. */
+.vp-doc blockquote {
+  margin: 12px 0;
+  padding: 10px 14px;
+  border-left: 3px solid var(--vp-c-brand-1);
+  border-radius: 0 8px 8px 0;
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.vp-doc blockquote p {
+  margin: 0;
+  font-size: inherit;
+}
+
+/* "Defined in: path#Lnn" is a source note, not prose. */
+.vp-doc p:has(> a[href*="/blob/"]) {
+  margin: 6px 0 16px;
+  color: var(--vp-c-text-3);
+  font-size: 0.78rem;
+}
+
+.vp-doc pre {
+  border-radius: 10px;
+}
+
+.vp-doc pre::-webkit-scrollbar {
+  height: 8px;
+}
+
+.vp-doc pre::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: var(--vp-c-divider);
+}
+
+.vp-doc hr {
+  margin: 28px 0;
+}

@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / registerPlot
-
 # Function: registerPlot()
 
 > **registerPlot**(`definition`): `void`

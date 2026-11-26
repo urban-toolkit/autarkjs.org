@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-map**](../index.md)
-
-***
-
-[@urban-toolkit/autk-map](../globals.md) / TooltipProvider
-
 # Type Alias: TooltipProvider
 
 > **TooltipProvider** = (`id`) => `string` \| `HTMLElement` \| `null`

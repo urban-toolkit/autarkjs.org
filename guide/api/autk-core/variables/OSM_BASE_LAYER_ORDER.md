@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / OSM\_BASE\_LAYER\_ORDER
-
 # Variable: OSM\_BASE\_LAYER\_ORDER
 
 > `const` **OSM\_BASE\_LAYER\_ORDER**: readonly [`LayerType`](../type-aliases/LayerType.md)[]

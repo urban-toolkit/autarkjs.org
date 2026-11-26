@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / FlowRow
-
 # Type Alias: FlowRow
 
 > **FlowRow** = [`FlowNodeRow`](FlowNodeRow.md) \| [`FlowLinkRow`](FlowLinkRow.md)

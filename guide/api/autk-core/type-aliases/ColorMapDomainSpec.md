@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-core**](../index.md)
-
-***
-
-[@urban-toolkit/autk-core](../globals.md) / ColorMapDomainSpec
-
 # Type Alias: ColorMapDomainSpec
 
 > **ColorMapDomainSpec** = \{ `params`: `number`[] \| `string`[]; `type`: [`USER`](../enumerations/ColorMapDomainStrategy.md#user); \} \| \{ `type`: [`MIN_MAX`](../enumerations/ColorMapDomainStrategy.md#min_max); \} \| \{ `params?`: \[`number`, `number`\]; `type`: [`PERCENTILE`](../enumerations/ColorMapDomainStrategy.md#percentile); \}

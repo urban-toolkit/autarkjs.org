@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / PlotEventRecord
-
 # Type Alias: PlotEventRecord
 
 > **PlotEventRecord** = `object` & `Record`\<[`BRUSH`](../enumerations/PlotEvent.md#brush) \| [`BRUSH_X`](../enumerations/PlotEvent.md#brush_x) \| [`BRUSH_Y`](../enumerations/PlotEvent.md#brush_y), [`PlotEventData`](PlotEventData.md) & `object`\>

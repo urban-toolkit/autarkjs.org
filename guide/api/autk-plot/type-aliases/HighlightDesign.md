@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / HighlightDesign
-
 # Type Alias: HighlightDesign
 
 > **HighlightDesign** = [`HighlightRule`](HighlightRule.md) & `object`

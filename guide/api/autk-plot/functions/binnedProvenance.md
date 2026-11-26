@@ -1,9 +1,3 @@
-[**@urban-toolkit/autk-plot**](../index.md)
-
-***
-
-[@urban-toolkit/autk-plot](../globals.md) / binnedProvenance
-
 # Function: binnedProvenance()
 
 > **binnedProvenance**(`options`): [`TransformProvenance`](../type-aliases/TransformProvenance.md)

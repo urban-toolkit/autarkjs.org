@@ -55,6 +55,18 @@ See [All Exports](globals.md) for the full API listing.
 
 Update generated Markdown links from `README.md` to `index.md`.
 
+## Trim the generated header
+
+TypeDoc repeats a linked package name, a rule, and a breadcrumb at the top of
+every page. After importing a reference, run:
+
+```bash
+npm run api:polish
+```
+
+It removes that repeated header and shortens the globals heading to the package
+name, leaving the page title as the first element.
+
 ## Required review and validation
 
 1. Compare the generated API files with `git diff` and update the API sidebar in
