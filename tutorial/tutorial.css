@@ -270,3 +270,24 @@ html.embed nav.toc { grid-column: 2; grid-row: 1; top: 88px; }
 @media (max-width: 860px) {
   html.embed .layout { display: block; }
 }
+
+/* The outline mirrors the guide: no rule, no disclosure control, same type size. */
+html.embed nav.toc,
+html.embed nav.toc ol a,
+html.embed .page-outline > summary {
+  font-size: 14px !important;
+}
+html.embed .page-outline {
+  border-top: 0;
+  padding-top: 0;
+}
+html.embed .page-outline > summary {
+  list-style: none;
+  pointer-events: none;
+}
+html.embed .page-outline > summary::-webkit-details-marker {
+  display: none;
+}
+html.embed .page-outline > summary::after {
+  content: none;
+}

@@ -59,8 +59,9 @@ if (toc) {
   outline.append(summary, toc.querySelector('ol'));
   toc.replaceChildren(label, chapters, outline);
   const narrow = matchMedia('(max-width: 860px)');
-  outline.open = !narrow.matches;
-  narrow.addEventListener('change', () => { outline.open = !narrow.matches; });
+  // The site's pages always show the outline, so the embedded chapter does too.
+  outline.open = embedded || !narrow.matches;
+  if (!embedded) narrow.addEventListener('change', () => { outline.open = !narrow.matches; });
 
   const links = [...outline.querySelectorAll('a[href^="#"]')];
   const byId = new Map(links.map(link => [link.hash.slice(1), link]));

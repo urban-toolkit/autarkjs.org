@@ -358,6 +358,7 @@ body,
 .Layout.tutorial-chapter-page .VPContent {
   margin-top: var(--vp-nav-height);
   padding-top: 0;
+  padding-right: 0;
   height: calc(100svh - var(--vp-nav-height));
   overflow: hidden;
 }
