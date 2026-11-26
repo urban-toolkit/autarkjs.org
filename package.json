@@ -26,6 +26,7 @@
     "tutorial:build": "vite build --config tutorial/vite.config.ts",
     "tutorial:dev": "vite --config tutorial/vite.config.ts",
     "test:tutorial": "node --test .scripts/test-tutorial.mjs",
+    "test:tutorial:browser": "node .scripts/test-tutorial-browser.mjs",
     "test:playground": "node .scripts/test-playground-browser.mjs"
   },
   "repository": {

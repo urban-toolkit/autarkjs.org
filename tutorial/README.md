@@ -14,7 +14,10 @@ chapter context and output helpers to the [shared playground](../playground/READ
 Edit cell source and chapter prose in `tutorial/*.html`. Use
 `dataUrl()` in cells to resolve paths relative to `tutorial/data/` in both builds.
 `npm run build` also publishes the standalone notebooks. Run
-`npm run test:tutorial` against the built site.
+`npm run test:tutorial` for publication checks. With `npm run preview` running,
+`npm run test:tutorial:browser` executes every cell in Chrome with WebGPU and
+uses bundled Overpass recordings. Set `PLAYGROUND_URL` for a different server
+and `CHROME_BIN` for a nonstandard Chrome executable.
 
 ## Run in the upstream Autark checkout
 
@@ -37,9 +40,10 @@ The runner supplies `autk`, `d3`, and `GeoTIFF` from Vite-resolved package impor
 because executable cell strings are not processed by Vite. Edits persist in
 `localStorage`; **Reset** restores the original cell.
 
-Maps expect projected coordinates in meters. The map notebook's data cell projects
-the raw neighborhood polygons and noise points to EPSG:3857 using D3. Data returned
-by `autk-db` is already projected to its workspace CRS; do not project it again.
+The map notebook passes raw WGS 84 neighborhoods and noise points to
+`loadCollection()` with `sourceCrs: "EPSG:4326"`. Data returned by `autk-db` is
+already projected to its workspace CRS. Use the same CRS for the map and load
+those layers without a `sourceCrs` override.
 
 Maps, compute examples, and `urbane.html` require a WebGPU-enabled browser and GPU
 adapter. Urbane parses its local OSM extract and can take a minute or more to load;

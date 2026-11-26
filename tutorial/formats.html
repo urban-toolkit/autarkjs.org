@@ -48,7 +48,8 @@
 <section id="vector">
   <h2><span class="num">1</span>Vector data</h2>
   <p>Urban datasets that represent features such as parks, roads and buildings are usually in <strong>vector format</strong>. Vector data uses coordinates and geometry (points, lines, polygons) to describe complex structures.</p>
-  <p>The coordinates of a geometry depend on a <strong>coordinate system</strong>. Urban datasets use either a geodetic system (defined over the Earth's surface) or a projected one. With a geodetic system the coordinates are <strong>2D</strong> (longitude, latitude) or <strong>3D</strong> (longitude, latitude, elevation).</p>
+  <p>A <strong>coordinate reference system</strong> (CRS) tells you how to interpret a position. WGS 84 GeoJSON (<code>EPSG:4326</code>) stores <code>[longitude, latitude]</code> in degrees, with optional elevation. A projected CRS such as World Mercator (<code>EPSG:3395</code>) uses planar coordinates in meters. A degree is not a meter: project your source data before using planar distances or areas.</p>
+  <aside class="note">In Autark 5, <code>sourceCrs</code> describes the incoming coordinates. The database or map <strong>workspace CRS</strong> describes the coordinates used internally. The next chapters show how to declare both without manually rewriting the input.</aside>
   <p>In the drawings below, the origin is the top-left corner of the drawing area. The first coordinate grows from left to right (red axis) and the second from top to bottom (green axis).</p>
   <div class="geom"><svg width="110" height="110" role="img" aria-label="Coordinate axes"><g transform="translate(5,5)"><use href="#axes"/></g></svg></div>
 

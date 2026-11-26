@@ -35,7 +35,7 @@
   <p class="lede">Load OpenStreetMap, GeoJSON, CSV with WKT and GeoTIFF into a spatial database that runs entirely in the browser, then query it with SQL and spatial joins.</p>
 
   <h3>How to use this page</h3>
-  <p>The examples are cells of one notebook. They <strong>share state</strong> through <code>ctx</code>: the first cell creates the database and stores it as <code>ctx.db</code>, and later cells reuse it. Run them in order, or press <strong>Run all above ▶▶</strong> on any cell to run everything up to it. Edits to the code are saved in this browser.</p>
+  <p>The examples are cells of one notebook. They <strong>share state</strong> through <code>ctx</code>: the first cell creates the database and stores it as <code>ctx.db</code>, and later cells reuse it. Run them in order, or press <strong>Run all above</strong> on any cell to run everything up to it. Edits to the code are saved in this browser.</p>
   <aside class="note">The first cell loads DuckDB (about 35 MB, from the local Autark build), so it takes a moment. The spatial extension may require network access on first use. The OpenStreetMap cell in section 2.1 asks the public Overpass server and, if that is busy or unreachable, falls back to a copy of the same answers recorded in <code>data/osm/</code>, so the OSM examples do not depend on the live Overpass server (add <code>?overpass=offline</code> to the URL to skip the live server). The SQL, spatial-join and heatmap cells in 3 and 4 use the OSM tables created in 2.1. The pages must be served over http (see <a href="index.html#run">Running it</a>); they do not work from a file:// URL.</aside>
 </section>
 
@@ -61,20 +61,20 @@
 
   <h3>1.2 Workspaces</h3>
   <p>A workspace is an isolated database context for organizing geospatial tables. A table created in one workspace is not visible in another, which helps when handling several cities or independent analysis scenarios without name conflicts. After initialization there is one workspace, named <code>"autk"</code>.</p>
-  <p>Geometries in a workspace use the coordinate reference system <strong>EPSG:3395</strong> (World Mercator), so data from different sources ends up in one consistent projected system.</p>
+  <p>Autark 5 defaults to <strong>EPSG:3395</strong> (World Mercator) and snaps vector geometry to a <code>0.01</code> precision grid in workspace units. All spatial inputs are converted to the workspace CRS. Distances such as the heatmap radius below are in projected meters; use a local CRS when accurate ground distances or areas matter.</p>
   <figure class="example" data-title="1.2 · The current workspace" data-needs="1.1">
   <script type="text/plain">
     if (!ctx.db) throw new Error("Run cell 1.1 first.");
-    return ctx.db.getCurrentWorkspace();
+    return {name: ctx.db.getCurrentWorkspace(), ...ctx.db.getWorkspaceConfiguration()};
   </script>
   </figure>
-  <p><code>setWorkspace()</code> changes the current workspace, creating it if it does not exist. Giving each city its own workspace is a natural way to organize data.</p>
+  <p><code>setWorkspace()</code> selects or creates a workspace. To configure a workspace, pass both <code>crs</code> and <code>precisionGrid</code> before loading tables. The remaining cells reuse this workspace and omit the options when switching back to it.</p>
   <figure class="example" data-title="1.2 · Switch workspace" data-needs="1.1">
   <script type="text/plain">
     const {db} = ctx;
     if (!db) throw new Error("Run cell 1.1 first.");
-    await db.setWorkspace("nyc");
-    return {workspaces: db.getWorkspaces(), current: db.getCurrentWorkspace()};
+    await db.setWorkspace("nyc", {crs: "EPSG:3395", precisionGrid: 0.01});
+    return {workspaces: db.getWorkspaces(), current: db.getCurrentWorkspace(), ...db.getWorkspaceConfiguration()};
   </script>
   </figure>
 </section>
@@ -100,6 +100,7 @@
       queryArea: {
         bbox: [-74.0225, 40.7040, -74.0120, 40.7185],
       },
+      outputTableName: "table_osm",
       autoLoadLayers: {
         layers: ["surface", "parks", "water"],
       },
@@ -112,7 +113,7 @@
   </figure>
 
   <h3>2.2 GeoJSON data</h3>
-  <p><code>loadGeojson()</code> stores a GeoJSON <code>FeatureCollection</code> as a named table; <code>outputTableName</code> names it. The GeoJSON can come as a file URL or as an in-memory object. Afterwards, <code>getLayer()</code> reads a named table of the current workspace back as GeoJSON.</p>
+  <p><code>loadGeojson()</code> stores a GeoJSON <code>FeatureCollection</code> as a named table; <code>outputTableName</code> names it. The GeoJSON can come as a file URL or as an in-memory object. <code>sourceCrs</code> is a top-level loader option and defaults to <code>EPSG:4326</code>. When you read the table with <code>getLayer()</code>, the coordinates are already in the workspace CRS, not longitude and latitude.</p>
   <figure class="example" data-title="2.2 · Load GeoJSON" data-needs="1.1">
   <script type="text/plain">
     const {db} = ctx;
@@ -122,8 +123,14 @@
     ctx.geojson = await db.loadGeojson({
       geojsonObject: mnt,
       outputTableName: "neighs_json",
+      sourceCrs: "EPSG:4326",
     });
-    return ctx.geojson;
+    const projected = await db.getLayer("neighs_json");
+    return {
+      sourceDegrees: mnt.features[0].geometry.coordinates[0][0],
+      workspaceMeters: projected.features[0].geometry.coordinates[0][0],
+      workspaceCrs: db.getWorkspaceConfiguration().crs,
+    };
   </script>
   </figure>
   <figure class="example" data-title="2.2 · Read the layer back" data-needs="2.2">
@@ -148,6 +155,7 @@
       csvObject: data,
       outputTableName: "neighs_wkt",
       geometryColumns: {wktColumnName: "wkt"},
+      sourceCrs: "EPSG:4326",
     });
     return ctx.csv;
   </script>
@@ -162,7 +170,7 @@
   </figure>
 
   <h3>2.4 GeoTIFF data</h3>
-  <p><code>loadGeoTiff()</code> stores a raster as a named table; pass the file contents as an <code>ArrayBuffer</code>. Here <code>elevation.tif</code> becomes the raster table <code>terrain</code>. <code>getRaster()</code> reads it back as a raster <code>FeatureCollection</code> for rendering or analysis.</p>
+  <p><code>loadGeoTiff()</code> stores an elevation raster as a named table. Pass the file contents as an <code>ArrayBuffer</code>, declare its <code>sourceCrs</code>, and set a <code>maxRasterCells</code> budget to trade resolution for browser memory. Try lowering the budget and compare the dimensions returned by <code>getRaster()</code>. It returns a packed collection: values live in band arrays, not in one polygon per pixel.</p>
   <figure class="example" data-title="2.4 · Load a GeoTIFF" data-needs="1.1">
   <script type="text/plain">
     const {db} = ctx;
@@ -172,6 +180,9 @@
     ctx.rasterTable = await db.loadGeoTiff({
       geotiffArrayBuffer: buffer,
       outputTableName: "terrain",
+      sourceCrs: "EPSG:4326",
+      maxRasterCells: 12000,
+      resampleMethod: "bilinear",
     });
     return ctx.rasterTable;
   </script>
@@ -181,7 +192,9 @@
     const {db} = ctx;
     if (!ctx.rasterTable) throw new Error("Run cell 2.4 first.");
     await db.setWorkspace("nyc");
-    return await db.getRaster("terrain");
+    const raster = await db.getRaster("terrain");
+    const {rasterResX, rasterResY, bands} = raster.features[0].properties;
+    return {width: rasterResX, height: rasterResY, cells: rasterResX * rasterResY, bands, bounds: raster.bbox};
   </script>
   </figure>
 </section>
@@ -191,7 +204,7 @@
   <p>Analytical queries use <code>rawQuery()</code>, which runs SQL directly on the tables of the current workspace. Because DuckDB manages the data in the browser, the familiar patterns of filtering, grouping and aggregation work without leaving the page. They support <strong>OLAP-style</strong> workflows, in which datasets are summarized across dimensions and measures. The examples query the park layer loaded in 2.1.</p>
 
   <h3>3.1 Filtering data</h3>
-  <p>A filter keeps the records that satisfy a condition. This query reads <code>table_osm_parks</code> and keeps parks whose area exceeds a threshold, returning a few descriptive attributes.</p>
+  <p>A filter keeps only the rows that satisfy a condition. This query creates <code>large_parks</code> with a few descriptive attributes and keeps the <code>geometry</code> column so it can be read back as a spatial layer. The area is planar in the workspace projection.</p>
   <figure class="example" data-title="3.1 · Filter" data-needs="2.1">
   <script type="text/plain">
     const {db} = ctx;
@@ -203,7 +216,8 @@
         json_extract_string(properties, '$.name')    AS name,
         json_extract_string(properties, '$.leisure') AS leisure,
         json_extract_string(properties, '$.landuse') AS landuse,
-        ROUND(ST_Area(geometry)) AS area_m2
+        ROUND(ST_Area(geometry)) AS area_m2,
+        geometry
       FROM table_osm_parks
       WHERE geometry IS NOT NULL
         AND ST_Area(geometry) > 1000
@@ -211,15 +225,17 @@
       LIMIT 10
     `;
 
-    return await db.rawQuery({
+    await db.rawQuery({
       query: sqlFilter,
       output: {
         type: "CREATE_TABLE",
         tableName: "large_parks",
         source: "user",
-        tableType: "polygon",
+        tableType: "polygons",
       },
     });
+    const parks = await db.getLayer("large_parks");
+    table(parks.features.map(feature => feature.properties));
   </script>
   </figure>
   <p><code>rawQuery()</code> has different output modes through <code>output</code>. With <code>RETURN_OBJECT</code> the result comes back as an array of JavaScript objects, handy for inspection, summaries and intermediate results. With <code>CREATE_TABLE</code> the result is stored as a new table in the current workspace, named by <code>tableName</code>; optional <code>source</code> and <code>tableType</code> metadata let it be treated as a new dataset for later retrieval or visualization.</p>
@@ -256,7 +272,7 @@
 <section id="spatial">
   <h2><span class="num">4</span>Spatial queries</h2>
   <h3>4.1 Spatial join</h3>
-  <p><code>spatialQuery()</code> performs a spatial join between two tables already in the current workspace. It takes a <strong>root table</strong> and a <strong>join table</strong> and enriches the root table with information derived from the spatial relationship of their geometries. That answers questions such as how many nearby features surround each polygon, or how values from one layer aggregate into another. Here we count nearby park features around each surface geometry.</p>
+  <p><code>spatialQuery()</code> performs a spatial join between two tables already in the current workspace. It takes a <strong>root table</strong> and a <strong>join table</strong> and enriches the root table with information derived from the spatial relationship of their geometries. That answers questions such as how many nearby features surround each polygon, or how values from one layer aggregate into another. Here we count park features within 200 projected meters of each surface geometry.</p>
   <figure class="example" data-title="4.1 · Spatial join" data-needs="2.1">
   <script type="text/plain">
     const {db} = ctx;
@@ -265,13 +281,8 @@
     ctx.spatialJoin = await db.spatialQuery({
       tableRootName: "table_osm_surface",
       tableJoinName: "table_osm_parks",
-      groupBy: [
-        {
-          column: "*",
-          aggregateFn: "count",
-          normalize: true,
-        },
-      ],
+      near: {distance: 200},
+      groupBy: [{column: "*", aggregateFn: "count"}],
     });
     return ctx.spatialJoin;
   </script>
@@ -287,26 +298,23 @@
   </figure>
 
   <h3>4.2 Heatmaps</h3>
-  <p><code>buildHeatmap()</code> builds a regular grid over the workspace extent and aggregates values from a source table into its cells using a spatial proximity rule. Below, each cell of a 40×40 grid stores the number of park features within 200 m, giving a compact raster that can be retrieved with <code>getRaster()</code> for visualization and analysis.</p>
+  <p><code>buildHeatmap()</code> builds a grid over the workspace extent. Here each cell counts nearby parks within 200 projected meters. Autark 5 can smooth the resulting band with a Gaussian filter: <code>smoothingSigma</code> is measured in <em>grid cells</em>, not meters. Smoothing turns counts into a continuous surface, so use the unsmoothed values when you need literal counts.</p>
   <figure class="example" data-title="4.2 · Build a heatmap" data-needs="2.1">
   <script type="text/plain">
     const {db} = ctx;
     if (!ctx.osm) throw new Error("Run cell 2.1 first.");
     await db.setWorkspace("nyc");
-    ctx.parksHeatmap = await db.buildHeatmap({
+    const config = {
       tableJoinName: "table_osm_parks",
       near: {distance: 200},
-      outputTableName: "parks_heatmap",
-      groupBy: [
-        {
-          column: "*",
-          aggregateFn: "count",
-          normalize: true,
-        },
-      ],
+      groupBy: [{column: "*", aggregateFn: "count"}],
       grid: {rows: 40, columns: 40},
+    };
+    const counts = await db.buildHeatmap({...config, outputTableName: "parks_counts"});
+    ctx.parksHeatmap = await db.buildHeatmap({
+      ...config, outputTableName: "parks_heatmap", smoothingSigma: 1.5,
     });
-    return ctx.parksHeatmap;
+    return {counts: counts.name, smoothed: ctx.parksHeatmap.name};
   </script>
   </figure>
   <figure class="example" data-title="4.2 · Read the heatmap raster" data-needs="4.2">
@@ -314,7 +322,14 @@
     const {db} = ctx;
     if (!ctx.parksHeatmap) throw new Error("Run cell 4.2 first.");
     await db.setWorkspace("nyc");
-    return await db.getRaster("parks_heatmap");
+    const [raw, smooth] = await Promise.all([
+      db.getRaster("parks_counts"), db.getRaster("parks_heatmap"),
+    ]);
+    const counts = raw.features[0].properties.band_1;
+    const smoothed = smooth.features[0].properties.band_1;
+    const changed = Array.from(counts, (count, i) => ({cell: i, count, smoothed: smoothed[i]}))
+      .filter(row => Number.isFinite(row.count) && Number.isFinite(row.smoothed) && row.count !== row.smoothed);
+    return {cells: counts.length, changedCells: changed.length, examples: changed.slice(0, 5)};
   </script>
   </figure>
   <div class="next-page">Next: <a href="map.html">04 · Geographical data visualization with Autark Map →</a></div>

@@ -34,7 +34,7 @@
   <p class="lede">D3-based charts that read feature properties directly, and that emit and receive selections so several views stay linked.</p>
   <p>Autark is a modular toolkit for building urban visual analytics applications in the browser. Its modules share a common data model, so data retrieved from a spatial database, processed by a computation pipeline, displayed on a map and explored through charts stays connected throughout an application.</p>
   <p>This page introduces <strong><code>autk-plot</code></strong>, the module for abstract data visualizations: reusable charts for distributions, relationships, categories and temporal patterns. Charts are not isolated outputs; they emit selections and react to selections produced by other charts or by an <code>autk-map</code> view. We introduce the data model, create a first chart, transform feature attributes into aggregated chart data, and connect several plots through interaction events.</p>
-  <aside class="note">Cells share state through <code>ctx</code>; run them in order or use <strong>Run all above ▶▶</strong>. This page needs no network connection and no WebGPU.</aside>
+  <aside class="note">Cells share state through <code>ctx</code>; run them in order or use <strong>Run all above</strong>. This chapter uses bundled data and does not require WebGPU.</aside>
 </section>
 
 <section id="basics">
@@ -54,7 +54,7 @@
   <h3>1.2 The feature-centric model</h3>
   <p>Autark takes the <strong>geographical feature</strong> as the atomic unit of the toolkit. Many urban visual analytics systems get complicated because data and interaction operate at different levels of abstraction: a database returns rows, a renderer consumes buffers, a user interaction produces a pixel coordinate or a brush box. Autark collapses these levels into one principle: <strong>all modules operate on features</strong>.</p>
   <img class="fig" src="data/plot/feature.png" width="600" alt="A feature is a geometry, a set of named attributes and an identifier">
-  <p>A <strong>feature</strong> is a triple <code>f = (g, A, id)</code> where <code>g</code> is the geometry, <code>A</code> the set of named attributes and <code>id</code> the unique identifier. A <strong>collection</strong> is <code>C = {f1, f2, ..., fn}</code> and a <strong>selection</strong> is a subset of feature identifiers <code>S</code> drawn from that collection. This is why the same objects flow across modules:</p>
+  <p>A feature has geometry, properties, and an optional GeoJSON <code>id</code>. A selection in Autark uses <strong>positions in the source <code>collection.features</code> array</strong>, not the GeoJSON IDs. This is why the same objects flow across modules:</p>
   <ul>
     <li><code>autk-db</code> returns a feature collection;</li>
     <li><code>autk-map</code> renders feature geometries;</li>
@@ -68,6 +68,10 @@
   <figure class="example" data-title="1.3 · Load the neighborhoods">
   <script type="text/plain">
     const neighs = await d3.json(dataUrl("shared/mnt_neighs.geojson"));
+    for (const {properties} of neighs.features) {
+      properties.shape_leng = Number(properties.shape_leng);
+      properties.shape_area = Number(properties.shape_area);
+    }
     ctx.neighs = neighs;
     return {
       features: neighs.features.length,
@@ -75,7 +79,7 @@
     };
   </script>
   </figure>
-  <p>To create a chart use the <code>AutkPlot</code> constructor with two arguments: an HTML container that determines where the chart is rendered, and a configuration object. <code>type</code> picks the chart (<code>"scatterplot"</code>), <code>collection</code> supplies the features, <code>attributes.axis</code> maps property names to the x and y axes, <code>labels</code> gives readable axis labels and a title, and <code>width</code> and <code>height</code> are in pixels.</p>
+  <p>To create a chart use the <code>AutkPlot</code> constructor with two arguments: an HTML container that determines where the chart is rendered, and a configuration object. <code>type</code> picks the chart (<code>"scatterplot"</code>), <code>collection</code> supplies the features, <code>attributes.axis</code> maps property names to the x and y axes, <code>labels</code> gives readable axis labels and a title, and <code>height</code> is in pixels. Set <code>width: "auto"</code> to fit the container. Autark 5 uses <code>ticks.x.format</code> and <code>ticks.y.format</code> for tick labels; <code>"~s"</code> is a compact D3 number format.</p>
   <figure class="example" data-title="1.3 · A scatter plot" data-needs="1.3">
   <script type="text/plain">
     if (!ctx.neighs) throw new Error("Run the previous cell first.");
@@ -94,9 +98,10 @@
         axis: ["Perimeter", "Area"],
         title: "Perimeter vs Area",
       },
-      width: 800,
+      width: "auto",
       height: 420,
-      margins: {left: 25, right: 20, top: 50, bottom: 64},
+      ticks: {x: {format: "~s"}, y: {format: "~s"}},
+      margins: {left: 56, right: 20, top: 50, bottom: 64},
     });
   </script>
   </figure>
@@ -126,11 +131,12 @@
       },
       transform: {
         preset: "binning-1d",
-        options: {bins: 12, reducer: "count"},
+        options: {bins: 8, reducer: "count"},
       },
-      width: 800,
+      width: "auto",
       height: 420,
-      margins: {left: 25, right: 20, top: 50, bottom: 64},
+      ticks: {y: {format: ",.0f"}},
+      margins: {left: 56, right: 20, top: 50, bottom: 64},
     });
   </script>
   </figure>
@@ -143,16 +149,14 @@
   <p>Enable the interactions a plot needs through its <code>events</code> option:</p>
   <ul>
     <li><code>PlotEvent.CLICK</code>: emitted when the user clicks a mark.</li>
+    <li><code>PlotEvent.HOVER</code>: emitted when the pointer enters or leaves a mark; it does not change the selection.</li>
     <li><code>PlotEvent.BRUSH</code>: emitted while drawing a rectangle selection.</li>
     <li><code>PlotEvent.BRUSH_X</code>: emitted when brushing horizontally.</li>
     <li><code>PlotEvent.BRUSH_Y</code>: emitted when brushing vertically.</li>
   </ul>
   <h3>3.2 Linked visualizations</h3>
-  <p>Register a callback with <code>plot.events.on(event, callback)</code>. The callback receives an object with <code>selection</code>, an array of indices of features in the original GeoJSON collection:</p>
-<pre><code>p01.events.on(PlotEvent.BRUSH, ({selection}) => {
-  console.log(selection);
-});</code></pre>
-  <p>Because both plots below use the same neighborhood collection, a selection generated by one plot can be applied directly to the other with <code>setSelection()</code>. Brush the scatter plot to select neighborhoods, or click a bar, and the other view highlights the same features.</p>
+  <p>Both charts use the same neighborhood collection, so a selection from one chart can be passed to the other with <code>setSelection()</code>. Drag a rectangle over the scatter plot to see the number of selected neighborhoods and the brush ranges in data units. Click a histogram bar to select the features it represents. When a mark represents fractions of source features, pass the event’s optional <code>shares</code> through as well.</p>
+  <p>Hover over a histogram bar to preview the matching points with <code>setHover()</code>. Move away and the preview clears without changing the current selection.</p>
   <figure class="example" data-title="3.2 · Two linked plots" data-needs="1.3">
   <script type="text/plain">
     if (!ctx.neighs) throw new Error("Run cell 1.3 first.");
@@ -164,7 +168,10 @@
     const scatterDiv = document.createElement("div");
     const barDiv = document.createElement("div");
     grid.append(scatterDiv, barDiv);
-    out.append(grid);
+    const status = document.createElement("p");
+    status.className = "status";
+    status.textContent = "Brush the scatter plot or click a bar.";
+    out.append(status, grid);
 
     const p01 = new AutkPlot(scatterDiv, {
       type: "scatterplot",
@@ -174,9 +181,10 @@
         axis: ["Perimeter", "Area"],
         title: "Brush points to select neighborhoods",
       },
-      width: 640,
+      width: "auto",
       height: 360,
-      margins: {left: 25, right: 10, top: 50, bottom: 70},
+      ticks: {x: {format: "~s"}, y: {format: "~s"}},
+      margins: {left: 56, right: 10, top: 50, bottom: 70},
       events: [PlotEvent.BRUSH],
     });
 
@@ -190,21 +198,29 @@
       },
       transform: {
         preset: "binning-1d",
-        options: {bins: 12, reducer: "count"},
+        options: {bins: 8, reducer: "count"},
       },
-      width: 640,
+      width: "auto",
       height: 360,
-      margins: {left: 25, right: 10, top: 50, bottom: 70},
-      events: [PlotEvent.CLICK],
+      ticks: {y: {format: ",.0f"}},
+      margins: {left: 56, right: 10, top: 50, bottom: 70},
+      events: [PlotEvent.CLICK, PlotEvent.HOVER],
     });
 
-    // The link: a selection in one plot is applied to the other.
-    p01.events.on(PlotEvent.BRUSH, ({selection}) => {
+    p01.events.on(PlotEvent.BRUSH, ({selection, extent}) => {
       p02.setSelection(selection);
+      const format = d3.format("~s");
+      const x = extent?.data?.x?.range?.map(format).join("–");
+      const y = extent?.data?.y?.range?.map(format).join("–");
+      status.textContent = x && y
+        ? `${selection.length} selected · perimeter ${x} · area ${y}`
+        : `${selection.length} selected`;
     });
-    p02.events.on(PlotEvent.CLICK, ({selection}) => {
-      p01.setSelection(selection);
+    p02.events.on(PlotEvent.CLICK, ({selection, shares}) => {
+      p01.setSelection(selection, shares);
+      status.textContent = `${selection.length} selected`;
     });
+    p02.events.on(PlotEvent.HOVER, ({selection}) => p01.setHover(selection));
   </script>
   </figure>
   <div class="next-page">Next: <a href="compute.html">06 · GPU computing with Autark Compute →</a></div>

@@ -32,13 +32,13 @@
   </div>
   <h1>GPU computing with Autark Compute</h1>
   <p class="lede">Custom analysis that runs on the GPU in your browser and attaches its results to the GeoJSON features it describes.</p>
-  <aside class="warn">Autark Compute needs <strong>WebGPU</strong>. It is on by default in Chrome and Edge 113+; Firefox needs Nightly with WebGPU enabled. Section 3 asks the public Overpass server for OpenStreetMap data and falls back to a bundled copy if it cannot be reached. Cells share state through <code>ctx</code>; run them in order or use <strong>Run all above ▶▶</strong>.</aside>
+  <aside class="warn">Autark Compute needs <strong>WebGPU</strong> and a supported GPU adapter. Section 3 queries Overpass and can use the bundled recording with <code>?overpass=offline</code>. Cells share state through <code>ctx</code>; run them in order or use <strong>Run all above</strong>.</aside>
 </section>
 
 <section id="basics">
   <h2><span class="num">1</span>Autark Compute</h2>
   <p>Urban analysis often starts with a question about individual features: How compact is this building footprint? What score should we give this street? How much sky is visible from a location? <strong>Autark Compute</strong> (<code>autk-compute</code>) runs custom analysis on the GPU, directly in the browser, and attaches the results to GeoJSON features.</p>
-  <p>This page introduces two workflows: deriving attributes with <code>ComputeGpgpu</code> (the <code>gpgpuPipeline()</code> workflow) and estimating visibility with <code>ComputeRender</code> (<code>renderPipeline()</code>). We start with a small, inspectable dataset. The example is designed for learning; at this scale GPU overhead can outweigh its benefits.</p>
+  <p>This page uses <code>AutkComputeEngine</code> for two workflows: deriving attributes with <code>gpgpuPipeline()</code> and estimating visibility with <code>renderPipeline()</code>. We start with a small dataset so you can check the results by hand. At this scale GPU overhead can outweigh its benefits.</p>
 
   <h3>1.1 Feature-centric model and GeoJSON data</h3>
   <p>A GeoJSON <code>Feature</code> combines a geometry with a <code>properties</code> object, and a <code>FeatureCollection</code> groups features. Autark keeps analysis results attached to the feature they describe: a compactness value belongs to a building, and a visibility result belongs to the feature used as a viewpoint.</p>
@@ -57,8 +57,8 @@
   <h3>1.2 GPU computation and render analysis</h3>
   <div class="table-wrap"><table class="fields">
     <tr><th>Pipeline</th><th>Input</th><th>Analysis</th><th>Result location</th></tr>
-    <tr><td><code>ComputeGpgpu</code></td><td>Feature attributes and a WGSL function</td><td>Computes values independently for each feature</td><td><code>properties.compute</code></td></tr>
-    <tr><td><code>ComputeRender</code></td><td>Scene layers and viewpoints</td><td>Renders sampled views and aggregates visible content</td><td><code>properties.compute.render</code> on the viewpoints</td></tr>
+    <tr><td><code>gpgpuPipeline()</code></td><td>Feature attributes or geometry and a WGSL function</td><td>Computes values independently for each feature</td><td><code>properties.compute</code></td></tr>
+    <tr><td><code>renderPipeline()</code></td><td>Scene layers and viewpoints</td><td>Renders sampled views and aggregates visible content</td><td><code>properties.compute.render</code> on the viewpoints</td></tr>
   </table></div>
   <p>Use <code>autk-db</code> for filtering, grouping, joins and operations that are naturally SQL. Use <code>autk-compute</code> for custom per-feature GPU formulas or view-based analysis.</p>
 
@@ -76,8 +76,8 @@
     if (!ctx.sampleBuildings) throw new Error("Run the previous cell first.");
     const {compute} = autk;
 
-    const gpgpu = new compute.ComputeGpgpu();
-    const floorAreas = await gpgpu.run({
+    const engine = new compute.AutkComputeEngine();
+    const floorAreas = await engine.gpgpuPipeline({
       collection: ctx.sampleBuildings,
       variableMapping: {area: "area", floors: "floors"},
       resultField: "floorArea",
@@ -132,8 +132,8 @@
     if (!ctx.sampleBuildings) throw new Error("Run cell 1.3 first.");
     const {compute} = autk;
 
-    const gpgpu = new compute.ComputeGpgpu();
-    const buildingMetrics = await gpgpu.run({
+    const engine = new compute.AutkComputeEngine();
+    const buildingMetrics = await engine.gpgpuPipeline({
       collection: ctx.sampleBuildings,
       variableMapping: {area: "area", floors: "floors"},
       outputColumns: ["floorArea", "footprintPerFloor"],
@@ -164,8 +164,8 @@
     if (!ctx.sampleBuildings) throw new Error("Run cell 1.3 first.");
     const {compute} = autk;
 
-    const gpgpu = new compute.ComputeGpgpu();
-    const compactBuildings = await gpgpu.run({
+    const engine = new compute.AutkComputeEngine();
+    const compactBuildings = await engine.gpgpuPipeline({
       collection: ctx.sampleBuildings,
       variableMapping: {area: "area", perimeter: "perimeter"},
       resultField: "compactness",
@@ -183,6 +183,40 @@
     })));
   </script>
   </figure>
+
+  <h3>2.6 Measuring a multipart road</h3>
+  <p>Autark 5 can pass feature geometry to WGSL through a topology-aware binding. Map <code>road</code> to <code>"geometry"</code>, not <code>"geometry.coordinates"</code> as an attribute matrix. Each <code>LineString</code> node has its own point range, so a <code>MultiLineString</code> does not gain a false segment between parts.</p>
+  <p>Run this example with two disjoint line segments in projected meters. Their lengths are 3 m and 4 m. The result should be 7 m, regardless of the gap between them. Try moving the second segment without changing its length.</p>
+  <figure class="example" data-title="2.6 · Measure a multipart road" data-needs="WebGPU">
+  <script type="text/plain">
+    const collection = {
+      type: "FeatureCollection",
+      features: [{
+        type: "Feature",
+        geometry: {type: "MultiLineString", coordinates: [[[0, 0], [3, 0]], [[100, 0], [100, 4]]]},
+        properties: {},
+      }],
+    };
+    const engine = new autk.compute.AutkComputeEngine();
+    const measured = await engine.gpgpuPipeline({
+      collection,
+      variableMapping: {road: "geometry"},
+      resultField: "lengthMeters",
+      wgslBody: `
+        var total = 0.0;
+        for (var n = road.index; n < road.next; n++) {
+          let line = road_node(n);
+          if (line.kind != 3u) { continue; } // LineString
+          for (var i = line.pointStart; i + 1u < line.pointEnd; i++) {
+            total += distance(road_points[i].xy, road_points[i + 1u].xy);
+          }
+        }
+        return total;
+      `,
+    });
+    return measured.features[0].properties.compute;
+  </script>
+  </figure>
 </section>
 
 <section id="render">
@@ -192,7 +226,7 @@
 
   <h3>3.2 Defining the scene and viewpoints</h3>
   <p>A render analysis begins with the scene: a list of <code>FeatureCollection</code> objects the pipeline can draw. Here the scene is the buildings of Battery Park City and the Financial District in New York City (a bounding box around them), and the viewpoints are the roads there. After loading the data with <code>autk-db</code>, <code>getLayer()</code> returns the building and road layers.</p>
-  <aside class="note">The original notebook loaded a prepared OSM extract (<code>lower_mnt.osm.pbf</code>) so it ran without a network. That file is not part of this repository, so this cell asks the Overpass API for the same two areas. If the public server is busy or unreachable, the cell uses the copy of the same answers recorded in <code>data/osm/</code>, so it also works offline (add <code>?overpass=offline</code> to the URL to skip the live server). <code>loadOsm()</code> also accepts <code>pbfFileUrl</code> if you have an extract.</aside>
+  <aside class="note">The scene and viewpoint layers come from the same database workspace, so their coordinates already share a projected CRS. This example queries Overpass; add <code>?overpass=offline</code> to use the bundled OSM recording instead. The browser may still need to fetch the DuckDB spatial extension.</aside>
   <figure class="example" data-title="3.2 · Load buildings and roads">
   <script type="text/plain">
     const {db: dbm} = autk;
@@ -218,8 +252,8 @@
   </script>
   </figure>
   <p>The buildings become the scene. The pipeline also needs a <code>viewpoints</code> collection, which fixes where each camera goes. Each road feature is sampled at its centerline midpoint, which becomes the camera location, and <code>sampling.directions</code> sets the viewing directions. With one direction the output is a fast first-pass exposure estimate for every road feature.</p>
-<pre><code>const layers = [{id: "buildings", collection: pbfBuildings, type: "buildings"}];
-const viewpoints = {collection: pbfRoads, sampling: {directions: 1}};</code></pre>
+<pre><code>const layers = [{id: "buildings", collection: ctx.skyBuildings, type: "buildings"}];
+const viewpoints = {collection: ctx.skyRoads, sampling: {directions: 1}};</code></pre>
 
   <h3>3.3 Aggregating render results</h3>
   <p>Next, choose how the rendered pixels are aggregated. This choice decides the metric returned for each viewpoint, such as the visible share of a class or the set of visible objects.</p>
@@ -233,7 +267,7 @@ const viewpoints = {collection: pbfRoads, sampling: {directions: 1}};</code></pr
   <p>The sky component is at <code>properties.compute.render.classes.sky</code>. Object aggregation writes to <code>properties.compute.render.objects</code>. Inspect the output before choosing fields for a table or color scale, and during validation keep a missing result distinct from a measured zero.</p>
 
   <h3>3.4 Example: measuring sky exposure</h3>
-  <p>We now have what a render analysis needs: a scene built from the buildings and a set of viewpoints sampled from the roads. The cell runs <code>ComputeRender</code> with the <code>layers</code>, <code>viewpoints</code> and <code>aggregation</code> options above, using class aggregation with sky as the background layer.</p>
+  <p>We now have what a render analysis needs: a scene built from the buildings and a set of viewpoints sampled from the roads. The cell runs <code>renderPipeline()</code> with the <code>layers</code>, <code>viewpoints</code> and <code>aggregation</code> options above, using class aggregation with sky as the background layer.</p>
   <figure class="example" data-title="3.4 · Sky exposure per road" data-needs="3.2, WebGPU">
   <script type="text/plain">
     if (!ctx.skyBuildings) throw new Error("Run cell 3.2 first.");
@@ -243,8 +277,8 @@ const viewpoints = {collection: pbfRoads, sampling: {directions: 1}};</code></pr
     const viewpoints = {collection: ctx.skyRoads, sampling: {directions: 1}};
     const aggregation = {type: "classes", includeBackground: true, backgroundLayerType: "sky"};
 
-    const render = new compute.ComputeRender();
-    const roadsWithSky = await render.run({layers, viewpoints, aggregation, tileSize: 64});
+    const engine = new compute.AutkComputeEngine();
+    const roadsWithSky = await engine.renderPipeline({layers, viewpoints, aggregation, tileSize: 64});
     ctx.roadsWithSky = roadsWithSky;
 
     // Each feature now carries properties.compute.render.classes; `sky` is the fraction of sampled
@@ -264,7 +298,8 @@ const viewpoints = {collection: pbfRoads, sampling: {directions: 1}};</code></pr
     table(rows);
   </script>
   </figure>
-  <div class="next-page">That is the end of the notebooks included so far. Back to the <a href="index.html">overview</a>.</div>
+  <p>Autark 5 can use building windows as viewpoints too. See the User Guide’s <a href="/autk-compute/render-analysis.html">render analysis</a> chapter for window IDs and how to match each result to its source building.</p>
+  <div class="next-page">Back to the <a href="index.html">overview</a>.</div>
 </section>
 
 <section id="credits">
