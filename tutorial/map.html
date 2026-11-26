@@ -86,7 +86,7 @@
     <li><code>map.fitBounds()</code> frames the first layer. Loading a layer sets the scene origin but does not fit its extent.</li>
     <li><code>map.draw()</code> starts rendering. By default the map draws once and then only when something changes.</li>
   </ol>
-  <figure class="example" data-title="1.1 · The first map" data-needs="0.2">
+  <figure class="example" data-output="visual" data-title="1.1 · The first map" data-needs="0.2">
   <script type="text/plain">
     if (!ctx.neighborhoods) throw new Error("Run the data cell first.");
     const {AutkMap} = autk.map;
@@ -148,7 +148,7 @@
     <tr><td><code>raster</code></td><td>grid</td><td>needs <code>property</code> (Section 4)</td></tr>
   </table></div>
   <p><strong>Stacking.</strong> Layers have a default draw order. Use <code>setLayerOrder()</code> to restack visible 2D layers, bottom first. Buildings are drawn separately in 3D. In the cell below, try reversing the order of the neighborhood polygons and noise points.</p>
-  <figure class="example" data-title="2.1 · Several layers" data-needs="0.2">
+  <figure class="example" data-output="visual" data-title="2.1 · Several layers" data-needs="0.2">
   <script type="text/plain">
     if (!ctx.neighborhoods) throw new Error("Run the data cell first.");
     const {AutkMap} = autk.map;
@@ -176,7 +176,7 @@
   <p>Autark also supports OpenStreetMap natively. <code>autk-db</code> fetches the data for an area and builds the base layers of a city map: surface, parks, water, roads and buildings. Under the hood it queries the Overpass API and converts the answer into the feature-centric model, so every building, street or park becomes a feature of a <code>FeatureCollection</code>, exactly like the ones loaded from files. That is what makes the two sources interchangeable: the map does not care whether a collection came from OSM or from a file, and both are loaded with the same <code>loadCollection()</code> call.</p>
   <p>The loop below is the usual pattern. <code>getLayersMetadata()</code> lists the layers in the database with their names and types, and each one goes to the map under that type.</p>
   <aside class="note">This cell queries Overpass for a bounding box around Battery Park City and the Financial District. If Overpass cannot answer, it uses the bundled recording. Add <code>?overpass=offline</code> to the URL to skip the live query. For loading your own offline OSM extract, see <a href="/autk-db/loading-data.html#using-static-pbf-files">Loading PBF files</a>.</aside>
-  <figure class="example" data-title="3.1 · OSM base map">
+  <figure class="example" data-output="visual" data-title="3.1 · OSM base map">
   <script type="text/plain">
     const {db: dbm, map: mapm} = autk;
     const db = new dbm.AutkDb();
@@ -217,7 +217,7 @@
   <h2><span class="num">4</span>Raster layers</h2>
   <p>Raster layers represent gridded data such as temperature or density. <code>autk-map</code> renders a raster layer from a <code>FeatureCollection</code> whose cell values are stored in feature properties, together with a <strong>property path</strong> that tells the renderer which band to read. GeoTIFF files can be loaded with <code>autk-db</code>, and so can the heatmaps it builds with <code>buildHeatmap()</code>.</p>
   <p>The example counts noise events within 700 projected meters of each grid cell and smooths the resulting band before rendering. Use <code>getRaster()</code> to read the band and <code>setLayerOrder()</code> to choose what appears above it. A <code>PERCENTILE</code> color domain keeps extreme values from dominating the display.</p>
-  <figure class="example" data-title="4.1 · Noise heatmap">
+  <figure class="example" data-output="visual" data-title="4.1 · Noise heatmap">
   <script type="text/plain">
     const {AutkDb} = autk.db, {AutkMap} = autk.map, {ColorMapDomainStrategy} = autk.core;
 
@@ -274,7 +274,7 @@
 
   <h3>5.1 Categorical attributes</h3>
   <p>Categorical palettes assign one color per class; use them for labels such as road types. It helps to first fold the raw values into a small, ordered set of groups so the palette domain stays stable. Here the roads of the OSM base map are grouped into <code>primary</code>, <code>secondary</code> and <code>other</code> under <code>properties.compute.highwayGroup</code>, and the <code>USER</code> domain fixes the order of the classes.</p>
-  <figure class="example" data-title="5.1 · Road classes" data-needs="3.1">
+  <figure class="example" data-output="visual" data-title="5.1 · Road classes" data-needs="3.1">
   <script type="text/plain">
     if (!ctx.osmDb) throw new Error("Run cell 3.1 first.");
     const {AutkMap} = autk.map, {ColorMapInterpolator, ColorMapDomainStrategy} = autk.core;
@@ -314,7 +314,7 @@
 
   <h3>5.2 Ordered numeric attributes</h3>
   <p>A sequential palette suits positive values such as area. A diverging palette is more useful when a midpoint has meaning, for example zero change. Here the <code>PERCENTILE</code> domain limits the effect of outliers. Convert the source <code>shape_area</code> strings to numbers without modifying the collection shared by other cells.</p>
-  <figure class="example" data-title="5.2 · Neighborhood area" data-needs="0.2">
+  <figure class="example" data-output="visual" data-title="5.2 · Neighborhood area" data-needs="0.2">
   <script type="text/plain">
     if (!ctx.neighborhoods) throw new Error("Run the data cell first.");
     const {AutkMap} = autk.map, {ColorMapInterpolator, ColorMapDomainStrategy} = autk.core;
@@ -347,7 +347,7 @@
 
   <h3>5.3 Spatial joins</h3>
   <p>A spatial join attaches an aggregate from a second table to each feature of a base layer. A common use is counting point events, such as noise complaints, inside a buffer around each polygon or line. The cell below joins the noise events to the OSM buildings of the area, counting events within 1000 m of each building. The result is stored under <code>properties.sjoin.count.noise</code>, a property path <code>autk-map</code> reads directly, so the buildings are colored by the number of nearby complaints.</p>
-  <figure class="example" data-title="5.3 · Noise near buildings" data-needs="3.1">
+  <figure class="example" data-output="visual" data-title="5.3 · Noise near buildings" data-needs="3.1">
   <script type="text/plain">
     if (!ctx.osmDb) throw new Error("Run cell 3.1 first.");
     const {AutkMap} = autk.map;
@@ -396,7 +396,7 @@
     <li><strong>Layer visibility</strong>: show, hide or fully remove a layer (<code>isSkip</code> in <code>updateRenderInfo()</code>, <code>removeLayer()</code>).</li>
   </ul>
   <p>In Autark 5, <code>isClick</code> enables selection on double-click (<code>MapEvent.CLICK</code>) and <code>isHover</code> enables a separate, transient highlight (<code>MapEvent.HOVER</code>). Hover over a neighborhood to see its name, then double-click and move away: the selected neighborhood stays highlighted. The event’s <code>selection</code> contains indices in the source collection, the same convention used by <code>autk-plot</code>.</p>
-  <figure class="example" data-title="6.1 · Picking, highlight and skip" data-needs="0.2">
+  <figure class="example" data-output="visual" data-title="6.1 · Picking, highlight and skip" data-needs="0.2">
   <script type="text/plain">
     if (!ctx.neighborhoods) throw new Error("Run the data cell first.");
     const {AutkMap, MapEvent} = autk.map;

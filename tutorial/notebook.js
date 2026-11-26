@@ -66,7 +66,7 @@ export function table(rows, {limit = 50} = {}) {
     const tr = body.insertRow();
     for (const c of cols) tr.insertCell().textContent = cell(r[c]);
   }
-  const box = document.createElement("div"); box.className = "tbl"; box.append(t); wrap.append(box);
+  wrap.append(t);
   if (rows.length > limit) { const m = document.createElement("p"); m.className = "more"; m.textContent = `Showing ${limit} of ${rows.length} rows.`; wrap.append(m); }
   return wrap;
 }
@@ -103,13 +103,15 @@ function setup(figure, index, notebook) {
   const title = figure.dataset.title || `Example ${index + 1}`;
   const needs = figure.dataset.needs ? `<span class="needs">needs: ${figure.dataset.needs}</span>` : "";
 
+  figure.classList.add("playground-card");
   figure.innerHTML = `
-    <figcaption><span>${title}</span><span class="mode">JavaScript · ${needs || "standalone"}</span></figcaption>
+    <figcaption class="playground-card__caption"><span>${title}</span><span class="playground-card__meta mode">JavaScript · ${needs || "standalone"}</span></figcaption>
     <div class="editor"></div>
-    <div class="state" role="status" hidden></div>
-    <div class="out" aria-live="polite"></div>`;
+    <div class="playground-card__output playground-card__visual out" tabindex="0" role="region" aria-label="Playground output" aria-live="polite"></div>
+    <div class="playground-card__state state" role="status"></div>`;
 
   const outEl = figure.querySelector(".out");
+  outEl.classList.toggle("playground-card__output--tall", figure.dataset.output === "visual");
   const state = figure.querySelector(".state");
   let disposed = false;
 
@@ -117,8 +119,8 @@ function setup(figure, index, notebook) {
     if (disposed) return;
     editor.setBusy(true);
     outEl.replaceChildren();
-    state.hidden = false;
-    state.className = "state run"; state.textContent = "Running…";
+    outEl.scrollTo(0, 0);
+    state.className = "playground-card__state state run"; state.textContent = "Running…";
     const show = v => { const n = render(v); if (n) outEl.append(n); };
     const t0 = performance.now();
     try {
@@ -130,12 +132,12 @@ function setup(figure, index, notebook) {
         console: captureConsole(show),
       });
       show(result);
-      state.className = "state ok"; state.textContent = `done in ${((performance.now() - t0) / 1000).toFixed(1)} s`;
+      state.className = "playground-card__state state ok"; state.textContent = `Done in ${((performance.now() - t0) / 1000).toFixed(1)} s`;
       return true;
     } catch (e) {
       outEl.append(pre("err", e && e.stack ? `${e.name}: ${e.message}` : String(e)));
       console.error(e);
-      state.className = "state"; state.textContent = "error";
+      state.className = "playground-card__state state error"; state.textContent = "Run failed";
       return false;
     } finally {
       if (!disposed) editor.setBusy(false);

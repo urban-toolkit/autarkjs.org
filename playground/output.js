@@ -7,6 +7,7 @@ export function renderTextOutput(text, plainTag = 'pre') {
     } catch { /* Invalid JSON is plain text. */ }
   }
   const plain = document.createElement(plainTag)
+  plain.className = 'playground-card__text'
   plain.textContent = text
   return plain
 }

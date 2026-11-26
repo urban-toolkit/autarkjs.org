@@ -4,6 +4,7 @@ import { useData } from 'vitepress'
 import { captureConsole, executeSource, formatValue } from '../../../../playground/runtime.js'
 import type { mountPlaygroundEditor } from '../../../../playground/editor.js'
 import { renderTextOutput } from '../../../../playground/output.js'
+import '../../../../playground/card.css'
 import '../../../../playground/editor.css'
 import '../../../../playground/output.css'
 
@@ -53,6 +54,7 @@ const showCanvas = computed(() => props.renderCanvas)
 const out = computed(() => props.out ?? 'both')
 const canvasHeightStyle = computed(() => props.canvasHeight ? `${props.canvasHeight}px` : undefined)
 const namedMounts = computed(() => props.mounts ?? [])
+const tallOutput = computed(() => out.value !== 'console' && (showCanvas.value || namedMounts.value.length > 0 || arrangesViews.value))
 const { page } = useData()
 const editorEl = ref<HTMLElement | null>(null)
 let editor: ReturnType<typeof mountPlaygroundEditor> | undefined
@@ -62,6 +64,7 @@ const namedMountRefs = ref<Record<string, HTMLElement | null>>({})
 const status = ref('')
 const error = ref<string | null>(null)
 const isRunning = ref(false)
+const outputEl = ref<HTMLDivElement | null>(null)
 const consoleEl = ref<HTMLDivElement | null>(null)
 const hasConsoleOutput = ref(false)
 const hasDomOutput = ref(false)
@@ -267,6 +270,7 @@ function trackGrammars<T extends GrammarClass>(Grammar: T, arrangeViews: Arrange
 async function runCode() {
   if (!editor || isRunning.value || unmounted) return
   const sources = editor.getSources()
+  const started = performance.now()
   isRunning.value = true
   editor.setBusy(true)
   error.value = null
@@ -279,6 +283,7 @@ async function runCode() {
     clearCanvas()
     clearViews()
     clearMount()
+    outputEl.value?.scrollTo(0, 0)
 
     const autkMap = await import('@urban-toolkit/autk-map')
     const autkDb = await import('@urban-toolkit/autk-db')
@@ -341,11 +346,11 @@ async function runCode() {
     }
 
     hasDomOutput.value = (mount.value?.childNodes.length ?? 0) > 0 || namedMounts.value.length > 0
-    status.value = ''
+    status.value = `Done in ${((performance.now() - started) / 1000).toFixed(1)} s`
   } catch (e: any) {
     error.value = e?.message ?? String(e)
     appendConsole(error.value)
-    status.value = ''
+    status.value = 'Run failed'
   } finally {
     isRunning.value = false
     editor?.setBusy(false)
@@ -381,39 +386,31 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="code-playground">
-    <div class="code-playground__label">{{ spec !== undefined ? 'Live Spec' : 'Live Code' }}</div>
+  <div class="code-playground playground-card">
+    <div class="playground-card__caption">
+      {{ spec !== undefined ? 'Live Spec' : 'Live Code' }}
+      <span class="playground-card__meta">{{ spec !== undefined ? 'Autark Grammar' : 'JavaScript' }}</span>
+    </div>
     <div ref="editorEl" class="code-playground__editor" />
 
-    <div class="code-playground__output" aria-live="polite">
-      <div v-if="error && out === 'dom' && !arrangesViews && !showCanvas" class="code-playground__error">{{ error }}</div>
-      <div
-        v-if="arrangesViews && out !== 'console'"
-        class="code-playground__views-wrap"
-        :class="{ 'code-playground__views-wrap--busy': status || error }"
-      >
-        <div ref="viewsEl" class="code-playground__views" />
-        <div v-if="status || error" class="code-playground__overlay">
-          <div v-if="error" class="code-playground__error">{{ error }}</div>
-          <div v-else class="code-playground__status">
-            <div class="code-playground__spinner" />
-            {{ status }}
-          </div>
-        </div>
-      </div>
-      <div v-else-if="showCanvas && out !== 'console'" class="code-playground__canvas-wrap" :style="canvasHeightStyle ? { height: canvasHeightStyle } : undefined">
+    <div
+      ref="outputEl"
+      class="code-playground__output playground-card__output"
+      :class="{ 'playground-card__output--tall': tallOutput }"
+      :style="tallOutput && canvasHeightStyle ? { '--playground-output-height': `max(35rem, calc(${canvasHeightStyle} + 32px))` } : undefined"
+      tabindex="0"
+      role="region"
+      aria-label="Playground output"
+      aria-live="polite"
+    >
+      <pre v-if="error && out === 'dom'" class="code-playground__error">{{ error }}</pre>
+      <div v-if="arrangesViews && out !== 'console'" ref="viewsEl" class="code-playground__views playground-card__visual" />
+      <div v-else-if="showCanvas && out !== 'console'" class="code-playground__canvas-wrap playground-card__visual" :style="canvasHeightStyle ? { height: canvasHeightStyle } : undefined">
         <canvas ref="canvasEl" class="code-playground__canvas" :id="canvasId" />
-        <div v-if="status || error" class="code-playground__overlay">
-          <div v-if="error" class="code-playground__error">{{ error }}</div>
-          <div v-else class="code-playground__status">
-            <div class="code-playground__spinner" />
-            {{ status }}
-          </div>
-        </div>
       </div>
 
-      <div ref="mount" class="code-playground__dom-output" :class="{ 'code-playground__dom-output--active': hasDomOutput }" />
-      <div v-if="namedMounts.length > 0" class="code-playground__named-mounts">
+      <div ref="mount" class="code-playground__dom-output playground-card__visual" />
+      <div v-if="namedMounts.length > 0" class="code-playground__named-mounts playground-card__visual">
         <component
           :is="namedMount.kind ?? 'div'"
           v-for="namedMount in namedMounts"
@@ -426,37 +423,22 @@ onBeforeUnmount(() => {
         />
       </div>
 
-      <div v-if="out !== 'dom'" class="code-playground__console">
-        <div class="code-playground__console-label">Console Output</div>
-        <div class="code-playground__console-lines">
-          <span v-if="!hasConsoleOutput && !hasDomOutput" class="code-playground__console-placeholder">Output will appear here…</span>
-          <div ref="consoleEl" class="code-playground__console-entries" />
-        </div>
+      <span v-if="!status && !isRunning && !hasConsoleOutput && !hasDomOutput" class="playground-card__placeholder">
+        Run this example to see the result.
+      </span>
+      <div v-if="out !== 'dom'" class="code-playground__console-lines" :class="{ 'code-playground__console-lines--combined': out === 'both' }">
+        <div ref="consoleEl" class="code-playground__console-entries" />
       </div>
+    </div>
+    <div class="playground-card__state" :class="error ? 'error' : isRunning ? 'run' : 'ok'" role="status">
+      {{ status || (isRunning ? 'Running…' : '') }}
     </div>
   </div>
 </template>
 
 <style scoped>
 .code-playground {
-  position: relative;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--vp-code-block-bg);
-}
-
-.code-playground__label {
-  border-bottom: 1px solid var(--vp-c-divider);
-  color: var(--vp-c-text-2);
-  font-size: 12px;
-  font-weight: 600;
-  padding: 8px 12px;
-  text-transform: uppercase;
-}
-
-.code-playground__editor {
-  border-bottom: 1px solid var(--vp-c-divider);
+  margin: 24px 0 32px;
 }
 
 .code-playground__canvas-wrap {
@@ -466,26 +448,8 @@ onBeforeUnmount(() => {
   background: var(--vp-c-bg-soft);
 }
 
-.code-playground__views-wrap {
-  position: relative;
-}
-
-.code-playground__views-wrap--busy {
-  min-height: 120px;
-}
-
 .code-playground__views {
   display: grid;
-}
-
-.code-playground__output-label {
-  border-bottom: 1px solid var(--vp-c-divider);
-  border-top: 1px solid var(--vp-c-divider);
-  color: var(--vp-c-text-2);
-  font-size: 12px;
-  font-weight: 600;
-  padding: 6px 12px;
-  text-transform: uppercase;
 }
 
 .code-playground__canvas {
@@ -502,22 +466,13 @@ onBeforeUnmount(() => {
   display: none;
 }
 
-.code-playground__dom-output--active {
-  border-top: 1px solid var(--vp-c-divider);
-  background: var(--vp-c-bg);
-  padding: 12px;
-}
-
-.code-playground__dom-output--active :deep(*) {
-  box-sizing: border-box;
-}
-
 .code-playground__named-mounts {
   display: grid;
   gap: 12px;
-  padding: 12px;
-  border-top: 1px solid var(--vp-c-divider);
-  background: var(--vp-c-bg);
+}
+
+.code-playground__named-mounts:not(:first-child) {
+  margin-top: 12px;
 }
 
 .code-playground__named-mount {
@@ -549,36 +504,10 @@ onBeforeUnmount(() => {
   fill: currentColor;
 }
 
-.code-playground__console {
+.code-playground__console-lines--combined:has(.code-playground__console-entries:not(:empty)) {
+  margin-top: 12px;
+  padding-top: 12px;
   border-top: 1px solid var(--vp-c-divider);
-  background: var(--vp-code-block-bg);
-  max-height: 250px;
-  display: flex;
-  flex-direction: column;
-}
-
-.code-playground__console-label {
-  border-bottom: 1px solid var(--vp-c-divider);
-  color: var(--vp-c-text-2);
-  font-size: 12px;
-  font-weight: 600;
-  padding: 6px 12px;
-  text-transform: uppercase;
-  flex-shrink: 0;
-}
-
-.code-playground__console-lines {
-  overflow-y: auto;
-  padding: 8px 12px;
-  font-family: var(--vp-font-family-mono);
-  font-size: var(--vp-code-font-size);
-  line-height: 1.6;
-  flex: 1;
-}
-
-.code-playground__console-placeholder {
-  color: var(--vp-c-text-3);
-  font-style: italic;
 }
 
 .code-playground__console-entries > :deep(*) {
@@ -588,48 +517,12 @@ onBeforeUnmount(() => {
   white-space: pre-wrap;
 }
 
-.code-playground__overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-}
-
-.code-playground__status {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  color: var(--vp-c-text-1);
-  font-size: 0.9rem;
-  font-family: monospace;
-  background: color-mix(in srgb, var(--vp-c-bg) 82%, transparent);
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
-  padding: 10px 14px;
-}
-
-.code-playground__spinner {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-  border: 2px solid color-mix(in srgb, var(--vp-c-text-2) 25%, transparent);
-  border-top-color: var(--vp-c-text-1);
-  border-radius: 50%;
-  animation: autk-spin 0.8s linear infinite;
-}
-
 .code-playground__error {
+  margin: 0 0 12px;
   color: var(--vp-c-danger-1);
-  font-family: monospace;
-  font-size: 0.85rem;
-  text-align: center;
-  max-width: 90%;
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.875rem;
   white-space: pre-wrap;
-}
-
-@keyframes autk-spin {
-  to { transform: rotate(360deg); }
+  overflow-wrap: anywhere;
 }
 </style>

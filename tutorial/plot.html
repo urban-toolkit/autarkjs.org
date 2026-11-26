@@ -80,7 +80,7 @@
   </script>
   </figure>
   <p>To create a chart use the <code>AutkPlot</code> constructor with two arguments: an HTML container that determines where the chart is rendered, and a configuration object. <code>type</code> picks the chart (<code>"scatterplot"</code>), <code>collection</code> supplies the features, <code>attributes.axis</code> maps property names to the x and y axes, <code>labels</code> gives readable axis labels and a title, and <code>height</code> is in pixels. Set <code>width: "auto"</code> to fit the container. Autark 5 uses <code>ticks.x.format</code> and <code>ticks.y.format</code> for tick labels; <code>"~s"</code> is a compact D3 number format.</p>
-  <figure class="example" data-title="1.3 · A scatter plot" data-needs="1.3">
+  <figure class="example" data-output="visual" data-title="1.3 · A scatter plot" data-needs="1.3">
   <script type="text/plain">
     if (!ctx.neighs) throw new Error("Run the previous cell first.");
     const {AutkPlot} = autk.plot;
@@ -113,7 +113,7 @@
   <h3>2.1 The <code>@transform</code> placeholder</h3>
   <p>The <code>@transform</code> placeholder tells the plot where the output of a transformation goes in the chart configuration. A transform computes new values, and those must be connected to one of the chart's visual channels. Instead of naming a property of the original collection, write <code>@transform</code> to say that this channel receives the derived result.</p>
   <p>With <code>binning-1d</code>, the transform produces an aggregated value for each bin, so <code>@transform</code> goes in <code>attributes.axis[1]</code>, where the bar height reads those computed values.</p>
-  <figure class="example" data-title="2.1 · A histogram with binning-1d" data-needs="1.3">
+  <figure class="example" data-output="visual" data-title="2.1 · A histogram with binning-1d" data-needs="1.3">
   <script type="text/plain">
     if (!ctx.neighs) throw new Error("Run cell 1.3 first.");
     const {AutkPlot} = autk.plot;
@@ -157,7 +157,7 @@
   <h3>3.2 Linked visualizations</h3>
   <p>Both charts use the same neighborhood collection, so a selection from one chart can be passed to the other with <code>setSelection()</code>. Drag a rectangle over the scatter plot to see the number of selected neighborhoods and the brush ranges in data units. Click a histogram bar to select the features it represents. When a mark represents fractions of source features, pass the event’s optional <code>shares</code> through as well.</p>
   <p>Hover over a histogram bar to preview the matching points with <code>setHover()</code>. Move away and the preview clears without changing the current selection.</p>
-  <figure class="example" data-title="3.2 · Two linked plots" data-needs="1.3">
+  <figure class="example" data-output="visual" data-title="3.2 · Two linked plots" data-needs="1.3">
   <script type="text/plain">
     if (!ctx.neighs) throw new Error("Run cell 1.3 first.");
     const {AutkPlot, PlotEvent} = autk.plot;

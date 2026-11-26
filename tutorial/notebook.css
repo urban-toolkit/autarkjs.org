@@ -9,24 +9,12 @@
   aside.warn::before { content: "Heads up"; color: var(--danger); }
   .exercise { border-left-color: var(--success); }
   .exercise::before { content: "Try it yourself"; color: var(--success); }
-  figure.example { margin: 24px 0 32px; overflow: hidden; border: 1px solid var(--rule); border-radius: 10px; background: var(--paper); box-shadow: var(--shadow); }
-  figure.example figcaption { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; padding: 12px 16px; border-bottom: 1px solid var(--rule); background: var(--paper-2); font-size: 13px; font-weight: 600; line-height: 1.6; }
-  figure.example .mode { color: var(--muted); font-size: 11px; font-weight: 400; }
-  figure.example > .state { padding: 4px 16px; color: var(--muted); font-size: 11px; border-bottom: 1px solid var(--rule); }
-  figure.example > .state.ok { color: var(--success); }
-  figure.example > .state.run { color: var(--accent); }
-  figure.example .out { min-height: 72px; padding: 16px; overflow-x: auto; font-size: 14px; line-height: 1.6; }
-  figure.example .out:empty::before { content: "Run this example to see the result."; color: var(--muted); font-size: 13px; }
-  /* Visualization palettes belong to the examples, not to the documentation theme. */
-  figure.example .out:has(canvas, svg) { color-scheme: light; color: #3c3c43; background: #fff; }
+  figure.example { margin: 24px 0 32px; }
   figure.example .out .status { margin: 0 0 8px; color: var(--muted); font-size: 13px; }
-  figure.example .out > .val { max-height: 24rem; margin: 0; padding: 8px 16px; overflow: auto; }
-  figure.example .out pre.val { padding: 16px; font-size: 12px; }
   figure.example .out pre.err { margin: 0; padding: 12px 16px; border-color: var(--danger); color: var(--danger); white-space: pre-wrap; }
   figure.example .out table { border-collapse: collapse; font-size: 12px; }
   figure.example .out th, figure.example .out td { padding: 6px 12px; border-bottom: 1px solid var(--rule); text-align: left; white-space: nowrap; }
   figure.example .out th { position: sticky; top: 0; background: var(--paper-2); color: var(--ink-2); font-weight: 600; }
-  figure.example .out .tbl { max-height: 22rem; overflow: auto; border: 1px solid var(--rule); border-radius: 6px; }
   figure.example .out .more { margin: 8px 0 0; color: var(--muted); font-size: 12px; }
   figure.example .out img, .fig { max-width: 100%; }
   .fig { border: 1px solid var(--rule); border-radius: 8px; }
@@ -49,6 +37,5 @@
 
   @media (max-width: 600px) {
     figure.example .mode { width: 100%; }
-    figure.example .out { padding: 12px; }
   }
 }
