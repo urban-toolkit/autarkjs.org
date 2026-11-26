@@ -46,7 +46,7 @@ const db = new AutkDb();
 await db.init();
 
 // Tag sets work with a local extract as well as with Overpass.
-await db.loadOsm({
+const res = await db.loadOsm({
   pbfFileUrl: '/data/lower_mnt.osm.pbf',
   queryArea: { bbox: [-74.019, 40.700, -74.003, 40.714] },
   autoLoadLayers: { layers: [] },
@@ -55,13 +55,7 @@ await db.loadOsm({
     { name: 'schools', type: 'polygons', tags: [{ key: 'amenity', value: 'school' }] },
   ],
 });
-
-const tables = db.getTablesMetadata().map((table) => table.name);
-console.log('Tables', tables);
-for (const name of tables.filter((name) => /_(cafes|schools)_/.test(name))) {
-  const layer = await db.getLayer(name);
-  console.log(name, layer.features.length, 'features', layer.features[0]?.properties);
-}
+console.log(res);
 `
 
 const loadGeojsonCode = `
@@ -113,7 +107,7 @@ import { AutkDb } from '@urban-toolkit/autk-db';
 const db = new AutkDb();
 await db.init();
 
-await db.loadJson({
+const sensors = await db.loadJson({
   jsonObject: [
     { id: 'sensor-a', temperature: 24, Latitude: -22.9, Longitude: -43.2 },
     { id: 'sensor-b', temperature: 26, Latitude: -22.91, Longitude: -43.21 },
@@ -121,14 +115,14 @@ await db.loadJson({
   outputTableName: 'sensors',
   geometryColumns: true,
 });
-console.log('Sensor features', (await db.getLayer('sensors')).features);
+console.log(sensors);
 
 // The same loader accepts a URL instead of an in-memory array.
-await db.loadJson({
+const events = await db.loadJson({
   jsonFileUrl: '/data/events.json',
   outputTableName: 'events',
 });
-console.log('Event rows', await db.getTable('events'));
+console.log(events);
 `
 </script>
 
