@@ -25,6 +25,14 @@ export default {
     const { frontmatter } = useData()
     return h(DefaultTheme.Layout, null, {
       'layout-bottom': () => frontmatter.value.layout !== 'home' ? h(InstitutionsFooter) : null,
+      'home-hero-info-before': () => h('img', {
+        src: '/favicon.svg',
+        alt: '',
+        class: 'home-hero-mark',
+        width: 72,
+        height: 72,
+        'aria-hidden': 'true',
+      }),
       'home-hero-actions-after': () => h(HomeHeroLinks),
       'home-features-after': () => [h(HomeQuickStart), h(InstitutionsFooter)],
     })

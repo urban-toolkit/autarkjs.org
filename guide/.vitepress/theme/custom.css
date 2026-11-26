@@ -52,6 +52,13 @@ body,
   align-items: center;
 }
 
+.VPHome .VPHero .home-hero-mark {
+  display: block;
+  width: clamp(76px, 7vw, 100px);
+  height: auto;
+  margin: 0 auto clamp(8px, 1.4vh, 14px);
+}
+
 .VPHome .VPHero .name {
   margin-bottom: 16px;
   font-size: clamp(1.25rem, 2.5vw, 1.75rem);
