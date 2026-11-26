@@ -1,6 +1,6 @@
 # Learn: Guide + Tutorial in one place
 
-Plan for publishing the Autark tutorial on autarkjs.org, without turning the Guide into a course. No code has been changed yet.
+Plan for publishing the Autark tutorial on autarkjs.org, without turning the Guide into a course. **Status: implemented** — see the "Implementation notes" section at the end.
 
 ## 1. Information architecture
 
@@ -82,3 +82,12 @@ Suggested order: L1 → L2 (prove one chapter) → L3 → L4/L5 → L6.
 1. Chapter URLs: `/tutorial/formats` (my pick) or `/tutorial/01-formats`?
 2. Landing page content: keep the upstream abstract verbatim, or rewrite for the site?
 3. Should `/tutorial/` appear in the home *Learn* block as a card, or as a single link?
+
+## 6. Implementation notes
+
+- Chapters live at `/tutorial/chapter01` … `chapter05`, mapping to `formats`, `db`, `map`, `plot`, and `compute`.
+- `/learn/` presents the two tracks; the `Learn` menu offers Overview, Guide, and Tutorial.
+- On `/learn/` and `/tutorial/*`, the sidebar shows a collapsed **Guide** group above an open **Tutorial** group.
+- The tutorial is vendored in `tutorial/` and built into the ignored `guide/public/tutorial/apps/`; nothing is committed from its build.
+- Embed mode hides the tutorial header, theme toggle, and chapter list; the iframe fills the viewport below the site nav and scrolls internally.
+- Urbane remains in the Gallery; the tutorial landing links to it.

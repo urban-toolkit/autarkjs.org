@@ -2,6 +2,76 @@ import { defineConfig } from 'vitepress'
 import { GRAMMAR_EXAMPLES, GRAMMAR_EXAMPLE_GROUPS } from './theme/data/grammarExamples'
 import { examples as galleryExamples, sections as gallerySections } from '../../gallery/catalog'
 
+const tutorialChapters = [
+    { text: 'Overview', link: '/tutorial/' },
+    { text: 'Urban data formats and sources', link: '/tutorial/chapter01' },
+    { text: 'Urban data management', link: '/tutorial/chapter02' },
+    { text: 'Geographical data visualization', link: '/tutorial/chapter03' },
+    { text: 'Abstract data visualization', link: '/tutorial/chapter04' },
+    { text: 'GPU computing', link: '/tutorial/chapter05' },
+]
+
+const guideSections = [
+    {
+        text: 'Getting Started',
+        items: [
+            { text: 'Introduction', link: '/introduction' },
+            { text: 'Tutorial', link: '/tutorial/' },
+        ],
+    },
+    {
+        text: 'autk-db',
+        collapsed: false,
+        items: [
+            { text: 'Overview', link: '/autk-db/' },
+            { text: 'Loading Data', link: '/autk-db/loading-data' },
+            { text: 'Analyzing Data', link: '/autk-db/analyzing-data' },
+            { text: 'Retrieving Data', link: '/autk-db/retrieving-data' },
+            { text: 'Updating Tables', link: '/autk-db/updating-tables' },
+            { text: 'Workspaces', link: '/autk-db/workspaces' },
+        ],
+    },
+    {
+        text: 'autk-map',
+        collapsed: false,
+        items: [
+            { text: 'Overview', link: '/autk-map/' },
+            { text: 'Layers Data', link: '/autk-map/layers' },
+            { text: 'Imagery', link: '/autk-map/imagery' },
+            { text: 'Terrain Data', link: '/autk-map/terrain' },
+            { text: 'Thematic Data', link: '/autk-map/thematic' },
+            { text: 'Interactions', link: '/autk-map/interactions' },
+            { text: 'Styling', link: '/autk-map/styling' },
+        ],
+    },
+    {
+        text: 'autk-compute',
+        collapsed: false,
+        items: [
+            { text: 'Overview', link: '/autk-compute/' },
+            { text: 'Property Computation', link: '/autk-compute/computing-properties' },
+            { text: 'Render Analysis', link: '/autk-compute/render-analysis' },
+            { text: 'Patterns', link: '/autk-compute/patterns' },
+        ],
+    },
+    {
+        text: 'autk-plot',
+        collapsed: false,
+        items: [
+            { text: 'Overview', link: '/autk-plot/' },
+            { text: 'Chart Types', link: '/autk-plot/chart-types' },
+            { text: 'Transformations', link: '/autk-plot/transformations' },
+            { text: 'Interactivity', link: '/autk-plot/interactivity' },
+            { text: 'Extending', link: '/autk-plot/extending' },
+        ],
+    },
+]
+
+const learnSidebar = [
+    { text: 'Guide', collapsed: true, items: guideSections },
+    { text: 'Tutorial', collapsed: false, items: tutorialChapters },
+]
+
 export default defineConfig({
     head: [
         ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
@@ -45,7 +115,14 @@ gtag('config', 'G-P6EVSF42L8');`],
         },
 
         nav: [
-            { text: 'Guide', link: '/introduction' },
+            {
+                text: 'Learn',
+                items: [
+                    { text: 'Overview', link: '/learn/' },
+                    { text: 'Guide', link: '/introduction' },
+                    { text: 'Tutorial', link: '/tutorial/' },
+                ],
+            },
             { text: 'Gallery', link: '/gallery/' },
             {
                 text: 'API Reference',
@@ -406,61 +483,12 @@ gtag('config', 'G-P6EVSF42L8');`],
                 ],
             }],
 
-            // resto continua normal
-            '/': [
-                {
-                    text: 'Getting Started',
-                    items: [{ text: 'Introduction', link: '/introduction' }],
-                },
-                {
-                    text: 'autk-db',
-                    collapsed: false,
-                    items: [
-                        { text: 'Overview', link: '/autk-db/' },
-                        { text: 'Loading Data', link: '/autk-db/loading-data' },
-                        { text: 'Analyzing Data', link: '/autk-db/analyzing-data' },
-                        { text: 'Retrieving Data', link: '/autk-db/retrieving-data' },
-                        { text: 'Updating Tables', link: '/autk-db/updating-tables' },
-                        { text: 'Workspaces', link: '/autk-db/workspaces' },
-                    ],
-                },
-                {
-                    text: 'autk-map',
-                    collapsed: false,
-                    items: [
-                        { text: 'Overview', link: '/autk-map/' },
-                        { text: 'Layers Data', link: '/autk-map/layers' },
-                        { text: 'Imagery', link: '/autk-map/imagery' },
-                        { text: 'Terrain Data', link: '/autk-map/terrain' },
-                        { text: 'Thematic Data', link: '/autk-map/thematic' },
-                        { text: 'Interactions', link: '/autk-map/interactions' },
-                        { text: 'Styling', link: '/autk-map/styling' },
-                    ],
-                },
-                {
-                    text: 'autk-compute',
-                    collapsed: false,
-                    items: [
-                        { text: 'Overview', link: '/autk-compute/' },
-                        { text: 'Property Computation', link: '/autk-compute/computing-properties' },
-                        { text: 'Render Analysis', link: '/autk-compute/render-analysis' },
-                        { text: 'Patterns', link: '/autk-compute/patterns' },
-                    ],
-                },
-                {
-                    text: 'autk-plot',
-                    collapsed: false,
-                    items: [
-                        { text: 'Overview', link: '/autk-plot/' },
-                        { text: 'Chart Types', link: '/autk-plot/chart-types' },
-                        { text: 'Transformations', link: '/autk-plot/transformations' },
-                        { text: 'Interactivity', link: '/autk-plot/interactivity' },
-                        { text: 'Extending', link: '/autk-plot/extending' },
-                    ],
-                },
-                {
-                },
-            ],
+            // Guide pages keep their own sections.
+            '/': guideSections,
+
+            // Learn and Tutorial share one sidebar: the guide, then the course.
+            '/learn/': learnSidebar,
+            '/tutorial/': learnSidebar,
 
             '/gallery/': [
                 {

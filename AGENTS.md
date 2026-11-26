@@ -93,6 +93,30 @@ updates with `npm ci`, `npm audit`, the site build, and browser playground check
 
 ---
 
+## Learn area and the tutorial
+
+`/learn/` presents the two tracks; the top bar reaches them through the **Learn**
+menu. `guide/tutorial/` holds one page per chapter (`chapter01` … `chapter05`)
+that embeds the tutorial app with `<TutorialChapter>` and `?embed=1`.
+
+The tutorial is vendored like the gallery, from `../autark/tutorial` into
+`tutorial/`, and built by `tutorial/vite.config.ts` into the ignored
+`guide/public/tutorial/apps/` under `/tutorial/apps/`. Its own header, theme
+toggle, and chapter list are hidden in embed mode; the VitePress sidebar
+navigates instead.
+
+- `npm run tutorial:build` builds the chapters; `predev`/`prebuild` run it too.
+- `npm run test:tutorial` checks the built chapters and datasets.
+- Datasets live in `tutorial/data/`; the cells fetch them relative to the page,
+  and the Overpass fallback resolves recordings from the page URL.
+- Urbane is **not** part of the tutorial build; the Gallery keeps
+  `/usecases/live/urbane.html`, and the tutorial links there.
+
+When syncing, copy the upstream source (keeping the site `vite.config.ts`, the
+`embed` hook in `shell.js`, the `data/osm` URL in `overpass-fallback.js`, and the
+embed rules in `tutorial.css`), update the manifest, rebuild, and rerun
+`npm run build && npm run test:tutorial`.
+
 ## Gallery examples
 
 The gallery mirrors the upstream Autark gallery instead of maintaining a second
@@ -145,5 +169,6 @@ site build to check routes, bundles, DuckDB assets, and datasets. See
 | `guide/.vitepress/theme/components/HomeGallery.vue` | Home-page gallery cards |
 | `guide/.vitepress/theme/components/GalleryPageGrid.vue` | Full gallery cards and filters |
 | `guide/gallery/` | Gallery pages; `examples/` embeds the mirrored apps |
+| `tutorial/` | Vendored Autark tutorial app and its datasets |
 | `gallery/` | Vendored upstream gallery app and its catalog |
 | `guide/public/` | Static data, screenshots, and runtime assets |

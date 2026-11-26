@@ -9,6 +9,7 @@ import HomeQuickStart from './components/HomeQuickStart.vue'
 import GalleryPageGrid from './components/GalleryPageGrid.vue'
 import GalleryCatalog from './components/GalleryCatalog.vue'
 import GalleryExample from './components/GalleryExample.vue'
+import TutorialChapter from './components/TutorialChapter.vue'
 import HomeHeroLinks from './components/HomeHeroLinks.vue'
 import InstitutionsFooter from './components/InstitutionsFooter.vue'
 import ExamplePage from './components/ExamplePage.vue'
@@ -43,6 +44,7 @@ export default {
     app.component('GalleryPageGrid', GalleryPageGrid)
     app.component('GalleryCatalog', GalleryCatalog)
     app.component('GalleryExample', GalleryExample)
+    app.component('TutorialChapter', TutorialChapter)
     app.component('HomeCaseStudies', HomeCaseStudies)
     app.component('ExamplePage', ExamplePage)
     app.component('LiveCasePage', LiveCasePage)
