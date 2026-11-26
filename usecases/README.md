@@ -29,7 +29,9 @@ with the navigation-only wrappers:
 - `/usecases/live/shadows.html`
 - `/usecases/live/heat.html`
 
-The wrappers keep only the site's top navigation above a viewport-filling iframe.
+Find these apps under **Examples → Demo Apps** (`/demo-apps/`). The index shares
+its sidebar with Gallery. The live wrappers keep only the site's top navigation
+above a viewport-filling iframe.
 Use a WebGPU-capable desktop browser on localhost or HTTPS. Imports and GPU
 computation can take several minutes. Test initial rendering, map picking,
 chart brushing, thematic/year controls, and Urbane neighborhood drill-down.

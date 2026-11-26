@@ -11,7 +11,7 @@
 
       <div class="case-grid">
         <a
-          v-for="item in featuredCaseStudies"
+          v-for="item in demoApps"
           :key="item.href"
           :href="item.href"
           class="case-card"
@@ -19,11 +19,11 @@
           <div class="case-image">
             <div class="case-tags case-tags--overlay">
               <span
-                v-for="tag in item.tags"
-                :key="tag.label"
-                :class="['case-tag', tag.className]"
+                v-for="tag in item.modules"
+                :key="tag"
+                :class="['case-tag', `case-tag--${tag.slice(5)}`]"
               >
-                {{ tag.label }}
+                {{ tag }}
               </span>
             </div>
 
@@ -39,58 +39,16 @@
       </div>
 
       <div v-if="showAllLink" class="case-actions">
-        <a href="/gallery/#use-cases" class="case-button">View All Use Cases</a>
+        <a href="/demo-apps/" class="case-button">View Demo Apps</a>
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
+import { demoApps } from '../data/demoApps'
+
 withDefaults(defineProps<{ showAllLink?: boolean }>(), { showAllLink: true })
-
-const caseStudies = [
-  {
-    href: '/usecases/live/urbane.html',
-    img: '/imgs/urbane.png',
-    title: 'Urbane Remake',
-    description:
-      'Multi-resolution exploration of Manhattan combining OSM data, thematic datasets, choropleth maps, and linked views.',
-    tags: [
-      { label: 'autk-db', className: 'case-tag--db' },
-      { label: 'autk-map', className: 'case-tag--map' },
-      { label: 'autk-plot', className: 'case-tag--plot' },
-      { label: 'autk-compute', className: 'case-tag--compute' },
-    ],
-  },
-  {
-    href: '/usecases/live/heat.html',
-    img: '/imgs/heat.png',
-    title: 'Land Surface Heat Analysis',
-    description:
-      'Maps land surface temperature trends across Niterói road segments using GPU-computed regressions and linked scatter plots.',
-    tags: [
-      { label: 'autk-db', className: 'case-tag--db' },
-      { label: 'autk-map', className: 'case-tag--map' },
-      { label: 'autk-plot', className: 'case-tag--plot' },
-      { label: 'autk-compute', className: 'case-tag--compute' },
-    ],
-  },
-  {
-    href: '/usecases/live/shadows.html',
-    img: '/imgs/shadows.png',
-    title: 'Urban Shadow Analysis',
-    description:
-      'Visualizes accumulated building shadows across the Chicago Loop for three seasonal markers, with a linked histogram.',
-    tags: [
-      { label: 'autk-db', className: 'case-tag--db' },
-      { label: 'autk-map', className: 'case-tag--map' },
-      { label: 'autk-plot', className: 'case-tag--plot' },
-      { label: 'autk-compute', className: 'case-tag--compute' },
-    ],
-  },
-]
-
-const featuredCaseStudies = caseStudies.slice(0, 6)
 </script>
 
 <style scoped>

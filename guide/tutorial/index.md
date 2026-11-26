@@ -25,7 +25,7 @@ A recent **Chrome**, **Edge**, or **Safari**. The Map and Compute chapters need 
 | [Abstract data visualization](./chapter04) | Link a scatter plot and histogram with brush ranges, selections, and hover in `autk-plot`. |
 | [GPU computing](./chapter05) | Measure multipart road geometry with WGSL and estimate sky exposure with `autk-compute`. |
 
-When you finish, continue in the [Gallery](/gallery/): its Urbane case runs a full multi-resolution analysis on the same ideas.
+When you finish, try [Urbane in Demo Apps](/demo-apps/): it applies the same ideas to a multi-resolution analysis of Manhattan.
 
 ## Credits
 

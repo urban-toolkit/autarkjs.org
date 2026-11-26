@@ -155,8 +155,10 @@ run this first. No sibling Autark checkout is required.
 
 VitePress wrappers in `guide/usecases/live/` publish `urbane.html`, `shadows.html`,
 and `heat.html` (the upstream Niteroi app), retaining only the top navigation.
-Gallery cards reuse `HomeCaseStudies.vue`. Run `npm run test:usecases` after a
-site build to check routes, bundles, DuckDB assets, and datasets. See
+The Examples menu and sidebar link to Gallery (`/gallery/`) and Demo Apps
+(`/demo-apps/`). Both indexes use `GalleryCatalog.vue`; the demo app metadata
+lives in `guide/.vitepress/theme/data/demoApps.ts`. Run `npm run test:usecases`
+after a site build to check navigation, routes, bundles, DuckDB assets, and datasets. See
 `usecases/README.md` for cross-machine review and the explicit release gate.
 
 ## Key files at a glance

@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { demoApps } from './theme/data/demoApps'
 import { GRAMMAR_EXAMPLES, GRAMMAR_EXAMPLE_GROUPS } from './theme/data/grammarExamples'
 import { examples as galleryExamples, sections as gallerySections } from '../../gallery/catalog'
 
@@ -66,6 +67,30 @@ const learnSidebar = [
     { text: 'Tutorial', collapsed: true, items: tutorialChapters },
 ]
 
+const examplesSidebar = [
+    {
+        text: 'Gallery',
+        link: '/gallery/',
+        collapsed: false,
+        items: gallerySections.map((section) => ({
+            text: section.title,
+            collapsed: true,
+            items: galleryExamples
+                .filter((example) => example.section === section.id)
+                .map((example) => ({
+                    text: example.title,
+                    link: `/gallery/examples/${example.id.toLowerCase()}`,
+                })),
+        })),
+    },
+    {
+        text: 'Demo Apps',
+        link: '/demo-apps/',
+        collapsed: false,
+        items: demoApps.map(({ title, href }) => ({ text: title, link: href })),
+    },
+]
+
 export default defineConfig({
     head: [
         ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
@@ -117,7 +142,14 @@ gtag('config', 'G-P6EVSF42L8');`],
                     { text: 'Tutorial', link: '/tutorial/' },
                 ],
             },
-            { text: 'Gallery', link: '/gallery/' },
+            {
+                text: 'Examples',
+                activeMatch: '^/(gallery|demo-apps|usecases)/',
+                items: [
+                    { text: 'Gallery', link: '/gallery/' },
+                    { text: 'Demo Apps', link: '/demo-apps/' },
+                ],
+            },
             {
                 text: 'API Reference',
                 items: [
@@ -483,22 +515,8 @@ gtag('config', 'G-P6EVSF42L8');`],
             // The whole Learn area shares one sidebar.
             '/tutorial/': learnSidebar,
 
-            '/gallery/': [
-                {
-                    text: 'Gallery',
-                    items: [{ text: 'All examples', link: '/gallery/' }],
-                },
-                ...gallerySections.map((section) => ({
-                    text: section.title,
-                    collapsed: false,
-                    items: galleryExamples
-                        .filter((example) => example.section === section.id)
-                        .map((example) => ({
-                            text: example.title,
-                            link: `/gallery/examples/${example.id.toLowerCase()}`,
-                        })),
-                })),
-            ],
+            '/gallery/': examplesSidebar,
+            '/demo-apps/': examplesSidebar,
         },
 
         socialLinks: [

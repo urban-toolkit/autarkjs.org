@@ -1,20 +1,20 @@
 <template>
   <div class="gallery-catalog vp-raw">
-    <section v-for="section in sections" :key="section.id" class="gallery-catalog-section">
-      <h2 :id="section.id">{{ section.title }}</h2>
-      <p class="gallery-catalog-description">{{ section.description }}</p>
+    <section v-for="section in catalog" :key="section.id" class="gallery-catalog-section">
+      <h2 v-if="section.title" :id="section.id">{{ section.title }}</h2>
+      <p v-if="section.description" class="gallery-catalog-description">{{ section.description }}</p>
 
       <div class="gallery-catalog-grid">
         <a
-          v-for="example in bySection(section.id)"
-          :key="example.id"
-          :href="href(example)"
+          v-for="example in section.cards"
+          :key="example.href"
+          :href="example.href"
           class="gallery-catalog-card"
           :title="example.title"
         >
           <span class="gallery-catalog-image">
             <img
-              :src="`/imgs/gallery/${example.id}.png`"
+              :src="example.img"
               :alt="example.title"
               loading="lazy"
               @error="hideImage"
@@ -40,15 +40,22 @@
 </template>
 
 <script setup lang="ts">
-import { examples, modules, sections, type SectionId } from '../../../../gallery/catalog'
+import { computed } from 'vue'
+import { examples, modules, sections } from '../../../../gallery/catalog'
+import { demoApps } from '../data/demoApps'
 
-function bySection(section: SectionId) {
-  return examples.filter((example) => example.section === section)
-}
-
-function href(example: { id: string }) {
-  return `/gallery/examples/${example.id.toLowerCase()}`
-}
+const props = defineProps<{ demoApps?: boolean }>()
+const gallery = sections.map(section => ({
+  ...section,
+  cards: examples.filter(example => example.section === section.id).map(example => ({
+    ...example,
+    href: `/gallery/examples/${example.id.toLowerCase()}`,
+    img: `/imgs/gallery/${example.id}.png`,
+  })),
+}))
+const catalog = computed(() => props.demoApps
+  ? [{ id: 'demo-apps', title: '', description: '', cards: demoApps }]
+  : gallery)
 
 /** A missing screenshot leaves the card's accent panel instead of a broken icon. */
 function hideImage(event: Event) {
@@ -76,7 +83,7 @@ function hideImage(event: Event) {
 
 .gallery-catalog-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
   gap: 20px;
 }
 
