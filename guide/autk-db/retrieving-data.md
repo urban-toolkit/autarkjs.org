@@ -1,3 +1,8 @@
+---
+package: autk-db
+title: Retrieving data
+---
+
 <script setup>
 const getTablesMetadataCode = `
 import { AutkDb } from "@urban-toolkit/autk-db";

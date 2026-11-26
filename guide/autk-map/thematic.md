@@ -1,3 +1,8 @@
+---
+package: autk-map
+title: Thematic data
+---
+
 <script setup>
 const categoricalCode = `
 import {

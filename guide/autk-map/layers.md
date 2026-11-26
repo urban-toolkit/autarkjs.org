@@ -1,3 +1,8 @@
+---
+package: autk-map
+title: Layers data
+---
+
 <script setup>
 const physicalLayersCode = `
 import { AutkDb } from "@urban-toolkit/autk-db";

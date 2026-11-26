@@ -1,3 +1,8 @@
+---
+package: autk-map
+title: Imagery
+---
+
 <script setup>
 const tilesCode = `
 import { AutkMap, TILE_SOURCES } from '@urban-toolkit/autk-map';

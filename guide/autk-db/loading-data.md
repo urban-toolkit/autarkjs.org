@@ -1,3 +1,8 @@
+---
+package: autk-db
+title: Loading data
+---
+
 <script setup>
 const fetchOsmCode = `
 import { AutkDb } from "@urban-toolkit/autk-db";

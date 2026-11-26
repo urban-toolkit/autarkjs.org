@@ -1,3 +1,8 @@
+---
+package: autk-compute
+title: Patterns
+---
+
 # Patterns
 
 This page shows the most common ways to combine `autk-compute` with `autk-db`, `autk-map`, and interactive analysis workflows.

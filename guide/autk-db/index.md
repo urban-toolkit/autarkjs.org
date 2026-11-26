@@ -1,3 +1,8 @@
+---
+package: autk-db
+title: Overview
+---
+
 <script setup>
 const introCode = `
 import { AutkDb } from "@urban-toolkit/autk-db";

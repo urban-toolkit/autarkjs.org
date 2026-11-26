@@ -1,3 +1,8 @@
+---
+package: autk-map
+title: Interactions
+---
+
 <script setup>
 const pickingCode = `
 import { AutkMap, MapEvent } from "@urban-toolkit/autk-map";

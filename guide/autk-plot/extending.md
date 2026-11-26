@@ -1,3 +1,8 @@
+---
+package: autk-plot
+title: Extending
+---
+
 <script setup>
 const registeredPlotCode = `
 import * as d3 from 'd3';

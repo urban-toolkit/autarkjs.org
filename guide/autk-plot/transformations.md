@@ -1,7 +1,8 @@
 ---
-title: Transformations
 aside: true
 outline: deep
+package: autk-plot
+title: Transformations
 ---
 
 <script setup>

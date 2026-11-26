@@ -1,3 +1,8 @@
+---
+package: autk-db
+title: Analyzing data
+---
+
 <script setup>
 const spatialQueryCode = `
 import { AutkDb } from "@urban-toolkit/autk-db";

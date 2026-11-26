@@ -1,3 +1,8 @@
+---
+package: autk-map
+title: Overview
+---
+
 <script setup>
 const introCode = `
 import { AutkMap } from "@urban-toolkit/autk-map";

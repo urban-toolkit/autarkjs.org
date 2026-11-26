@@ -1,7 +1,8 @@
 ---
-title: Interactivity
 aside: true
 outline: deep
+package: autk-plot
+title: Interactivity
 ---
 
 <script setup>

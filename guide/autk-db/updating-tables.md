@@ -1,3 +1,8 @@
+---
+package: autk-db
+title: Updating tables
+---
+
 <script setup>
 const replaceLayerCode = `
 import { AutkDb } from "@urban-toolkit/autk-db";

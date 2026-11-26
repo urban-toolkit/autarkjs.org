@@ -1,3 +1,8 @@
+---
+package: autk-map
+title: Terrain data
+---
+
 <script setup>
 const playgroundCode = `
 import { AutkDb } from "@urban-toolkit/autk-db";

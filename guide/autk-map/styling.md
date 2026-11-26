@@ -1,3 +1,8 @@
+---
+package: autk-map
+title: Styling
+---
+
 <script setup>
 const mapStyleCode = `
 import { AutkDb } from "@urban-toolkit/autk-db";

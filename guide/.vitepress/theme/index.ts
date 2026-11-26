@@ -10,6 +10,7 @@ import GalleryPageGrid from './components/GalleryPageGrid.vue'
 import GalleryCatalog from './components/GalleryCatalog.vue'
 import GalleryExample from './components/GalleryExample.vue'
 import TutorialChapter from './components/TutorialChapter.vue'
+import GuideEyebrow from './components/GuideEyebrow.vue'
 import HomeHeroLinks from './components/HomeHeroLinks.vue'
 import InstitutionsFooter from './components/InstitutionsFooter.vue'
 import ExamplePage from './components/ExamplePage.vue'
@@ -26,6 +27,7 @@ export default {
     const { frontmatter } = useData()
     return h(DefaultTheme.Layout, null, {
       'layout-bottom': () => frontmatter.value.layout !== 'home' ? h(InstitutionsFooter) : null,
+      'doc-before': () => h(GuideEyebrow),
       'home-hero-info-before': () => h('img', {
         src: '/favicon.svg',
         alt: '',

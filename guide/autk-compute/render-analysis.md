@@ -1,3 +1,8 @@
+---
+package: autk-compute
+title: Render analysis
+---
+
 <script setup>
 const skyExposureCode = `
 import { AutkComputeEngine } from "@urban-toolkit/autk-compute";

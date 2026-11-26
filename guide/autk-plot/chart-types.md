@@ -1,7 +1,8 @@
 ---
-title: Chart Types
 aside: true
 outline: deep
+package: autk-plot
+title: Chart types
 ---
 
 <script setup>

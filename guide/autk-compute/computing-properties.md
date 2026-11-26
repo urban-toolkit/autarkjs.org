@@ -1,3 +1,8 @@
+---
+package: autk-compute
+title: Property computation
+---
+
 <script setup>
 const compactnessCode = `
 import { AutkComputeEngine } from "@urban-toolkit/autk-compute";

@@ -1,7 +1,8 @@
 ---
-title: autk-plot
 aside: true
 outline: deep
+package: autk-plot
+title: Overview
 ---
 
 <script setup>
