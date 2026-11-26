@@ -107,17 +107,6 @@ import { AutkDb } from '@urban-toolkit/autk-db';
 const db = new AutkDb();
 await db.init();
 
-const sensors = await db.loadJson({
-  jsonObject: [
-    { id: 'sensor-a', temperature: 24, Latitude: -22.9, Longitude: -43.2 },
-    { id: 'sensor-b', temperature: 26, Latitude: -22.91, Longitude: -43.21 },
-  ],
-  outputTableName: 'sensors',
-  geometryColumns: true,
-});
-console.log(sensors);
-
-// The same loader accepts a URL instead of an in-memory array.
 const events = await db.loadJson({
   jsonFileUrl: '/data/events.json',
   outputTableName: 'events',
@@ -310,7 +299,7 @@ If you plan to load OSM and additional layers in the same workspace, you **must 
 
 [`loadJson()`](/api/autk-db/classes/AutkDb#loadjson) imports an array of records into DuckDB. Use it for API responses, event lists, or other tabular JSON that is **not** a GeoJSON `FeatureCollection`.
 
-Provide either `jsonFileUrl` or `jsonObject`, not both. The example below imports spatial sensor records from memory and plain event rows from a bundled JSON file.
+Provide either `jsonFileUrl` or `jsonObject`, not both. The example below imports plain event rows from a bundled JSON file.
 
 <ClientOnly>
   <CodePlayground :code="loadJsonCode" out="console" :auto-run="false" />
