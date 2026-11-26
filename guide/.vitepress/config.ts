@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { GRAMMAR_EXAMPLES, GRAMMAR_EXAMPLE_GROUPS } from './theme/data/grammarExamples'
+import { examples as galleryExamples, sections as gallerySections } from '../../gallery/catalog'
 
 export default defineConfig({
     head: [
@@ -459,25 +460,24 @@ gtag('config', 'G-P6EVSF42L8');`],
                     ],
                 },
                 {
-                    text: 'Gallery',
-                    collapsed: false,
-                    items: [
-                        { text: 'GeoJSON Layer', link: '/gallery/ex1' },
-                        { text: 'Categorical Data', link: '/gallery/ex2' },
-                        { text: 'OSM Layers', link: '/gallery/ex3' },
-                        { text: 'Linked Views', link: '/gallery/ex4' },
-                        { text: 'GPU Computation', link: '/gallery/ex5' },
-                        { text: 'Layer Overlay', link: '/gallery/ex6' },
-                        { text: '3D Picking', link: '/gallery/ex7' },
-                        { text: 'Scatterplot', link: '/gallery/ex8' },
-                        { text: 'Bar Chart', link: '/gallery/ex9' },
-                        { text: 'Spatial Join', link: '/gallery/ex10' },
-                        { text: 'Parallel Coords', link: '/gallery/ex11' },
-                        { text: 'Sky Exposure', link: '/gallery/ex15' },
-                        { text: 'Visibility', link: '/gallery/ex16' },
-                        { text: 'View Score', link: '/gallery/ex17' },
-                    ],
                 },
+            ],
+
+            '/gallery/': [
+                {
+                    text: 'Gallery',
+                    items: [{ text: 'All examples', link: '/gallery/' }],
+                },
+                ...gallerySections.map((section) => ({
+                    text: section.title,
+                    collapsed: false,
+                    items: galleryExamples
+                        .filter((example) => example.section === section.id)
+                        .map((example) => ({
+                            text: `${example.id} · ${example.title}`,
+                            link: `/gallery/examples/${example.id.toLowerCase()}`,
+                        })),
+                })),
             ],
         },
 

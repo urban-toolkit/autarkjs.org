@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Autark — Load raster layers</title>
+    <link rel="stylesheet" href="../../example.css" />
+</head>
+
+<body class="gallery-example">
+    <a class="skip-link" href="#main">Skip to example</a>
+    <header class="site-header">
+        <nav class="navigation" aria-label="Main navigation">
+            <a class="wordmark" href="../../index.html">Autark<span>Gallery</span></a>
+            <a class="guide-link" href="https://autarkjs.org/autk-map/">Map guide <span aria-hidden="true">↗</span></a>
+        </nav>
+    </header>
+    <main id="main" class="example-main">
+        <a class="back-link" href="../../index.html"><span aria-hidden="true">←</span> All examples</a>
+        <section class="introduction" aria-labelledby="example-title">
+            <p class="eyebrow">autk-map <span aria-hidden="true">/</span> Raster layers</p>
+            <h1 id="example-title">Load raster layers</h1>
+            <p class="description">Compare a population heatmap and a CORINE land-cover raster for the same area in Lisbon.</p>
+        </section>
+    <div id="app">
+
+        <section class="map-panel" aria-label="GeoTIFF raster map area">
+            <div class="panel-header"><h2 id="map-title">Lisbon population, 2020</h2><p id="map-status" class="map-status" role="status" data-example-status>Loading map…</p></div>
+            <div class="opacity-toolbar">
+                <div class="opacity-slider">
+                    <label for="raster-opacity">Raster opacity</label>
+                    <output id="raster-opacity-value" for="raster-opacity" aria-hidden="true">78%</output>
+                    <input id="raster-opacity" type="range" min="0" max="1" step="0.01" value="0.78" disabled />
+                </div>
+            </div>
+            <div class="map-stage" aria-busy="true"><canvas aria-describedby="map-help" aria-labelledby="map-title"> </canvas></div>
+            <div class="panel-footer" id="map-help"><span>Estimated people per grid cell · Darker red means more residents</span></div>
+        </section>
+    </div>
+        <footer class="page-footer">
+            Data: <a href="https://hub.worldpop.org/Global1_2000-2020">WorldPop, Portugal 2020</a> (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, cropped to Lisbon) ·
+            <a href="https://land.copernicus.eu/en/products/corine-land-cover/clc2018">Copernicus Land Monitoring Service / EEA: CORINE Land Cover 2018</a> (rendered class colors, cropped to Lisbon).
+        </footer>
+    </main>
+</body>
+<script type="module" src="/src/autk-map/geotiff-vis.ts"></script>
+
+</html>

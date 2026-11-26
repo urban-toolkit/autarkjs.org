@@ -6,12 +6,14 @@ outline: false
 
 # Gallery
 
-Explore interactive examples built with **Autark**. Each example shows how **autk-db**, **autk-map**, **autk-plot**, and **autk-compute** combine to create browser-based spatial applications.
+Explore working examples built with **Autark**. Each example runs entirely in your browser: load data, move the camera, select features, brush a chart, or run a GPU analysis. The code is part of the page, so you can read exactly what produced the result.
 
-<GalleryPageGrid />
+<GalleryCatalog />
+
+## Use cases
 
 <GalleryPageGrid
-  section-title="Use Cases"
+  section-title="Full applications"
   :show-filters="false"
   :examples="[
     {
@@ -31,9 +33,13 @@ Explore interactive examples built with **Autark**. Each example shows how **aut
     {
       href: '/usecases/live/shadows.html',
       img: '/imgs/shadows.png',
-      title: 'Urban Shadow Analysis',
+      title: 'Shadow minutes across the Chicago Loop',
       description: 'Building-shadow analysis across the Chicago Loop.',
       tags: ['autk-db', 'autk-map', 'autk-plot', 'autk-compute'],
     },
   ]"
 />
+
+::: tip These examples need WebGPU
+The gallery uses `autk-map` and, in the analytics section, `autk-compute`. Open it in a recent **Chrome**, **Edge**, or **Safari** with WebGPU enabled. Examples that use imagery or elevation stream tiles from third-party providers, which can be slow or unavailable; the data-loading and plot examples run from files bundled with this site.
+:::

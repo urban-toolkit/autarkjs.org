@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Learn Autark through task-guided examples for loading data, basic map features, imagery and terrain, plots, and analytics." />
+    <title>Gallery — Autark</title>
+    <link rel="stylesheet" href="./index.css" />
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to examples</a>
+    <header class="site-header"><nav class="navigation" aria-label="Main navigation">
+        <a class="wordmark" href="./index.html">Autark<span>Gallery</span></a>
+        <div class="nav-links"><a href="https://autarkjs.org/introduction.html">Guide ↗</a><a href="https://github.com/urban-toolkit/autark">GitHub ↗</a></div>
+    </nav></header>
+    <main id="main">
+        <header class="introduction"><p class="eyebrow">THE AUTARK GALLERY</p><h1>Learn by building.</h1><p class="description">Choose a task. Explore a working example. See the code that makes it happen.</p></header>
+        <div class="browse-tools">
+            <div class="filters" role="group" aria-label="Filter by module">
+                <button type="button" data-filter="all" aria-pressed="true">All examples</button>
+                <button type="button" data-filter="autk-map" aria-pressed="false"><span class="module-dot" style="--module-color:#0ea5e9" aria-hidden="true"></span>autk-map</button>
+                <button type="button" data-filter="autk-db" aria-pressed="false"><span class="module-dot" style="--module-color:#f59e0b" aria-hidden="true"></span>autk-db</button>
+                <button type="button" data-filter="autk-compute" aria-pressed="false"><span class="module-dot" style="--module-color:#10b981" aria-hidden="true"></span>autk-compute</button>
+                <button type="button" data-filter="autk-plot" aria-pressed="false"><span class="module-dot" style="--module-color:#8b5cf6" aria-hidden="true"></span>autk-plot</button>
+            </div>
+            <div class="search-field"><label for="example-search">Search examples</label><input id="example-search" type="search" placeholder="Search tasks, formats, or modules…" /></div>
+        </div>
+        <nav class="section-links" aria-label="Example sections"></nav>
+        <p id="result-count" class="result-count" role="status" aria-live="polite"></p>
+        <div id="examples"></div>
+        <section class="empty-state" hidden><h2>No matching examples</h2><p>Try a different search or module.</p><button type="button" id="reset-filters">Reset filters</button></section>
+        <noscript><p>Enable JavaScript to browse the examples, or visit the <a href="https://autarkjs.org/introduction.html">getting started guide</a>.</p></noscript>
+        <footer class="page-footer"><span>Made with Autark · Runs in your browser</span><a href="https://autarkjs.org/">About Autark ↗</a></footer>
+    </main>
+    <script type="module" src="./index.ts"></script>
+</body>
+</html>

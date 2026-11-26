@@ -237,3 +237,21 @@ body,
 .vp-doc li {
   text-align: justify;
 }
+
+/* Gallery examples: the workspace needs the width the docs column does not give it. */
+.gallery-example-page .VPPage {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 20px 32px 40px;
+}
+
+.gallery-example-page .VPPage > .vp-doc {
+  max-width: none;
+  padding: 0;
+}
+
+@media (max-width: 700px) {
+  .gallery-example-page .VPPage {
+    padding: 12px 16px 24px;
+  }
+}

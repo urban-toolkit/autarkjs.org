@@ -1,0 +1,41 @@
+import { AutkDb } from '@urban-toolkit/autk-db';
+import { AutkMap } from '@urban-toolkit/autk-map';
+import { exampleVariant, onExampleDispose, runExample } from '../example';
+
+const BASE_URL = (import.meta as any).env.BASE_URL;
+const BBOX: [number, number, number, number] = [7.405, 43.720, 7.445, 43.7525];
+const db = new AutkDb();
+let databaseReady = false;
+
+/** Queries Monaco by bounding box, named boundary, or custom tags from a bundled extract. */
+async function main(): Promise<void> {
+    const mode = exampleVariant('PBF query', { bbox: 'Bounding box', place: 'Named place', tags: 'Custom tag filters' });
+    if (!databaseReady) { await db.init(); databaseReady = true; }
+    await db.setWorkspace(`monaco_${mode}`);
+    if (!db.getLayersMetadata().length) {
+        await db.loadOsm({
+            pbfFileUrl: `${BASE_URL}data/monaco.osm.pbf`,
+            queryArea: mode === 'bbox' ? { bbox: BBOX }
+                : { geocodeArea: 'Monaco', areas: ['Monaco'] },
+            autoLoadLayers: { layers: mode === 'tags'
+                ? ['surface', 'parks', 'water', 'roads']
+                : ['surface', 'parks', 'water', 'roads', 'buildings'] },
+            ...(mode === 'tags' ? { tagSets: [
+                { name: 'cafes', type: 'points' as const, tags: [{ key: 'amenity', value: 'cafe' }] },
+            ] } : {}),
+        });
+    }
+
+    const map = new AutkMap(document.querySelector<HTMLCanvasElement>('canvas')!);
+    onExampleDispose(() => map.destroy());
+    await map.init();
+    for (const layer of db.getLayersMetadata()) {
+        map.loadCollection(layer.name, { collection: await db.getLayer(layer.name), type: layer.type,
+            loadConfig: { buildingsZeroHeight: true } });
+    }
+    if (mode === 'tags') map.updateRenderInfo('table_osm_cafes_points', { pointSize: 20 });
+    map.setView({ center: { latitude: 43.738, longitude: 7.424 }, zoom: 14 });
+    map.ui.setAttribution([{ text: '© OpenStreetMap', url: 'https://www.openstreetmap.org/copyright' }]);
+    map.draw();
+}
+void runExample(main);

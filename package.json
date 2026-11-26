@@ -8,14 +8,19 @@
   },
   "scripts": {
     "postinstall": "node .scripts/fix-duckdb-sourcemap.cjs && node .scripts/sync-duckdb-assets.cjs",
-    "prebuild": "node .scripts/sync-duckdb-assets.cjs && node .scripts/sync-grammar-schema.cjs && npm run usecases:build",
-    "predev": "node .scripts/sync-grammar-schema.cjs && npm run usecases:build",
+    "prebuild": "node .scripts/sync-duckdb-assets.cjs && node .scripts/sync-grammar-schema.cjs && npm run usecases:build && npm run gallery:build",
+    "predev": "node .scripts/sync-grammar-schema.cjs && npm run usecases:build && npm run gallery:build",
     "usecases:build": "vite build --config usecases/vite.config.ts",
     "test:usecases": "node --test .scripts/test-usecases.mjs",
     "dev": "vitepress dev guide",
     "build": "vitepress build guide",
     "release:prepare": "node .scripts/prepare-autark-release.mjs",
-    "preview": "vitepress preview guide"
+    "preview": "vitepress preview guide",
+    "gallery:build": "node .scripts/gallery-gate.mjs || vite build --config gallery/vite.config.ts",
+    "gallery:dev": "vite --config gallery/vite.config.ts",
+    "test:gallery": "node --test .scripts/test-gallery.mjs",
+    "gallery:shots": "node .scripts/capture-gallery.mjs guide/public/imgs/gallery",
+    "gallery:pages": "node .scripts/generate-gallery-pages.mjs"
   },
   "repository": {
     "type": "git",
@@ -30,6 +35,7 @@
   },
   "homepage": "https://github.com/urban-toolkit/autarkjs.org#readme",
   "devDependencies": {
+    "playwright-core": "^1.65.1",
     "typescript": "^5.9.3",
     "vite": "^7.1.12",
     "vitepress": "^1.6.3"
@@ -46,6 +52,7 @@
     "@urban-toolkit/autk-db": "4.1.1",
     "@urban-toolkit/autk-grammar": "5.6.0",
     "@urban-toolkit/autk-map": "4.1.1",
-    "@urban-toolkit/autk-plot": "4.1.1"
+    "@urban-toolkit/autk-plot": "4.1.1",
+    "highlight.js": "^11.12.0"
   }
 }

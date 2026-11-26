@@ -30,8 +30,8 @@ Key locations:
 ### 2. Static assets (`guide/public/`)
 
 Static files served by VitePress. These include gallery screenshots, datasets, logos,
-and runtime assets. The gallery examples themselves are VitePress pages in
-`guide/gallery/`, not standalone HTML files.
+and runtime assets. Gallery examples are VitePress pages in `guide/gallery/examples/`
+that embed the mirrored application from `gallery/` (see below).
 
 - `guide/public/imgs/` — Gallery screenshots and logos
 - `guide/public/data/` — Data used by tutorials and live examples
@@ -71,10 +71,27 @@ updates with `npm ci`, `npm audit`, the site build, and browser playground check
 
 ## Gallery examples
 
-Gallery examples are Markdown pages in `guide/gallery/`. Their runnable code is
-usually defined inline and executed by `CodePlayground.vue`; shared gallery cards
-are defined in `HomeGallery.vue` and `GalleryPageGrid.vue`. Update the page, its
-card metadata, screenshot, and any required `guide/public/data/` together.
+The gallery mirrors the upstream Autark gallery instead of maintaining a second
+catalog. `gallery/` is vendored from a recorded commit (`gallery/manifest.json`)
+and built by `gallery/vite.config.ts` into the ignored
+`guide/public/gallery/apps/`. Page entries come from `gallery/catalog.ts`, so a new
+upstream example requires no hand-written route.
+
+- `npm run gallery:build` builds the app; `predev`/`prebuild` run it too. Until the
+  site pins Autark 5, `.scripts/gallery-gate.mjs` skips it with a warning.
+- `npm run gallery:pages` rewrites `guide/gallery/examples/*.md` from the catalog.
+  Each page embeds its example with `<GalleryExample>` and the `?embed=1` flag, so
+  the gallery's own header and footer stay hidden.
+- `npm run gallery:shots` recaptures the card illustrations from a preview. The
+  capture hides the page chrome, so cards show only the map and its side panel.
+- `guide/.vitepress/theme/components/GalleryCatalog.vue` renders the cards from the
+  vendored catalog; the sidebar groups come from the same source.
+
+Sync `gallery/` from an Autark commit, update `gallery/manifest.json`, then run
+`gallery:build`, `gallery:pages`, `npm run build`, `npm run test:gallery`, and
+`gallery:shots`. Never fetch `main` during a site build. When editing the vendored
+app, keep the diff limited to documented files (`vite.config.ts`, embed hooks in
+`src/example.ts` and `example.css`) and prefer an upstream fix.
 
 ---
 
@@ -100,5 +117,6 @@ site build to check routes, bundles, DuckDB assets, and datasets. See
 | `guide/.vitepress/theme/components/CodePlayground.vue` | Runtime for interactive gallery code |
 | `guide/.vitepress/theme/components/HomeGallery.vue` | Home-page gallery cards |
 | `guide/.vitepress/theme/components/GalleryPageGrid.vue` | Full gallery cards and filters |
-| `guide/gallery/` | Gallery pages and runnable example source |
+| `guide/gallery/` | Gallery pages; `examples/` embeds the mirrored apps |
+| `gallery/` | Vendored upstream gallery app and its catalog |
 | `guide/public/` | Static data, screenshots, and runtime assets |

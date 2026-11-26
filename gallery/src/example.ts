@@ -1,0 +1,217 @@
+import { examples, modules, sections, externalServices } from '../catalog';
+import { exampleCode } from '../code';
+import { exampleSource } from '../source';
+import { highlightTypeScript } from '../highlight';
+
+const example = examples.find(item => location.pathname.endsWith(`/${item.path}`));
+
+// Embedded in the site's gallery page: the host provides navigation, title, and footer.
+if (new URLSearchParams(location.search).has('embed')) {
+    document.documentElement.classList.add('gallery-embed');
+    // Let the host size the frame to the example instead of guessing a fixed height.
+    const reportHeight = () => {
+        const height = Math.ceil(document.documentElement.getBoundingClientRect().height);
+        parent.postMessage({ type: 'autk-gallery-height', height }, '*');
+    };
+    new ResizeObserver(reportHeight).observe(document.body);
+    addEventListener('load', reportHeight);
+    addEventListener('message', (event) => {
+        if (event.data?.type === 'autk-gallery-measure') reportHeight();
+    });
+    reportHeight();
+}
+const cleanups = new Set<() => void>();
+let initializer: (() => Promise<void>) | undefined;
+let preserveInitialStatus = false;
+let initializing = false;
+let changingVariant = false;
+
+/** Release the previous view before an in-page variant change, or when leaving the page. */
+export function onExampleDispose(cleanup: () => void): void {
+    cleanups.add(cleanup);
+}
+window.addEventListener('pagehide', () => { for (const cleanup of cleanups) cleanup(); cleanups.clear(); }, { once: true });
+
+if (example) {
+    const section = sections.find(item => item.id === example.section)!;
+    document.title = `Autark — ${example.title}`;
+    const introduction = document.querySelector<HTMLElement>('.introduction');
+    if (introduction) {
+        introduction.querySelector('h1')!.textContent = example.title;
+        introduction.querySelector('.description')!.textContent = example.description;
+        introduction.querySelector('.eyebrow')!.textContent = section.title;
+        const labels = document.createElement('div'); labels.className = 'example-modules';
+        for (const id of example.modules) {
+            const label = document.createElement('span'); label.className = 'example-module';
+            label.style.setProperty('--module-color', modules[id].color); label.textContent = modules[id].label; labels.append(label);
+        }
+        introduction.append(labels);
+    }
+    const back = document.querySelector<HTMLAnchorElement>('.back-link');
+    if (back) {
+        const url = new URL('../../index.html', location.href);
+        try { const saved = sessionStorage.getItem('autark-gallery-browse'); if (saved) { const restored = new URL(`index.html${saved}`, url); url.search = restored.search; url.hash = restored.hash; } } catch { /* The unfiltered gallery remains accessible. */ }
+        back.href = url.href;
+    }
+    const main = document.querySelector('main')!;
+    const services = externalServices(example);
+    if (services.length) {
+        const notice = document.createElement('p'); notice.className = 'service-notice';
+        notice.textContent = `Internet required · This example accesses ${services.join('; ')}. Some resources may already be cached in your browser.`;
+        introduction?.append(notice);
+    }
+    const learning = document.createElement('section'); learning.className = 'example-learning';
+    const title = document.createElement('h2'); title.textContent = 'API in focus';
+    const context = document.createElement('p'); context.textContent = 'The exact calls for this feature. The minimal runnable example below is a self-contained page and may simplify the live demo.';
+    const pre = document.createElement('pre'); pre.className = 'task-code';
+    const code = document.createElement('code'); pre.append(code);
+    const details = document.createElement('details'); details.className = 'example-source';
+    const summary = document.createElement('summary'); summary.textContent = 'Minimal runnable example';
+    const full = document.createElement('pre'); const content = document.createElement('code');
+    full.append(content); details.append(summary, full);
+    const currentState = () => {
+        const state = Object.fromEntries(new URLSearchParams(location.search));
+        document.querySelectorAll<HTMLInputElement | HTMLSelectElement>('input[id], select[id], select[data-variant-parameter]').forEach(control => {
+            const key = control.dataset.variantParameter || control.id;
+            state[key] = control instanceof HTMLInputElement && control.type === 'checkbox' ? String(control.checked) : control.value;
+        });
+        return state;
+    };
+    const refresh = () => {
+        const state = currentState();
+        code.innerHTML = highlightTypeScript(exampleCode(example.id, state));
+        if (details.dataset.loaded) content.innerHTML = highlightTypeScript(exampleSource(example.id, state));
+    };
+    document.addEventListener('change', refresh);
+    document.addEventListener('input', refresh);
+    document.addEventListener('example-ready', refresh);
+    refresh();
+    learning.append(title, context, pre);
+    details.addEventListener('toggle', () => {
+        if (!details.open) return;
+        details.dataset.loaded = 'true';
+        content.innerHTML = highlightTypeScript(exampleSource(example.id, currentState()));
+    });
+    learning.append(details);
+    const related = examples.filter(item => item.section === example.section && item.id !== example.id).slice(0, 3);
+    if (related.length) {
+        const heading = document.createElement('h2'); heading.textContent = 'Related examples'; learning.append(heading);
+        const list = document.createElement('ul');
+        for (const item of related) { const li = document.createElement('li'); const link = document.createElement('a'); link.href = new URL(`../../${item.path}`, location.href).href; link.textContent = item.title; li.append(link); list.append(li); }
+        learning.append(list);
+    }
+    main.insertBefore(learning, main.querySelector('.page-footer'));
+}
+
+/** Variant selects and in-panel choice buttons share the loading lock. */
+function setExampleControlsDisabled(disabled: boolean): void {
+    document.querySelectorAll<HTMLButtonElement | HTMLSelectElement>('select[data-variant-parameter], fieldset.choice-group button')
+        .forEach(control => { control.disabled = disabled; });
+}
+
+/** Rebuilds the example in place after a control changes its input. */
+function rerunExample(): void {
+    if (!initializer || changingVariant) return;
+    changingVariant = true;
+    for (const cleanup of cleanups) cleanup();
+    cleanups.clear();
+    void runExample(initializer, preserveInitialStatus).finally(() => { changingVariant = false; });
+}
+
+/** A variant control updates the current example, never navigates or reloads the document. */
+export function exampleVariant(label: string, choices: Record<string, string>, parameter = 'variant'): string {
+    const value = new URL(location.href).searchParams.get(parameter);
+    const selected = value && Object.prototype.hasOwnProperty.call(choices, value) ? value : Object.keys(choices)[0]!;
+    const existing = [...document.querySelectorAll<HTMLSelectElement>('select[data-variant-parameter]')].find(control => control.dataset.variantParameter === parameter);
+    if (existing) { existing.value = selected; return selected; }
+    const controls = document.createElement('div'); controls.className = 'controls';
+    const field = document.createElement('label'); field.textContent = label;
+    const select = document.createElement('select'); select.setAttribute('aria-label', label);
+    select.dataset.variantParameter = parameter; select.disabled = initializing;
+    for (const [key, text] of Object.entries(choices)) { const option = document.createElement('option'); option.value = key; option.textContent = text; select.append(option); }
+    select.value = selected;
+    select.addEventListener('change', () => {
+        const url = new URL(location.href); url.searchParams.set(parameter, select.value);
+        history.replaceState(null, '', url);
+        rerunExample();
+    });
+    field.append(select); controls.append(field); document.querySelector('.introduction')!.after(controls);
+    return selected;
+}
+
+/** A compact button group, for choices that belong inside a details panel. */
+export function exampleChoices(label: string, choices: Record<string, string>, parameter = 'variant'): string {
+    const value = new URL(location.href).searchParams.get(parameter);
+    const selected = value && Object.prototype.hasOwnProperty.call(choices, value) ? value : Object.keys(choices)[0]!;
+    const existing = document.querySelector<HTMLElement>(`fieldset.choice-group[data-choice-parameter="${parameter}"]`);
+    if (existing) {
+        existing.querySelectorAll<HTMLButtonElement>('button').forEach(button => {
+            button.setAttribute('aria-pressed', String(button.dataset.choice === selected));
+            button.disabled = initializing;
+        });
+        return selected;
+    }
+    const fieldset = document.createElement('fieldset'); fieldset.className = 'choice-group';
+    fieldset.dataset.choiceParameter = parameter;
+    const legend = document.createElement('legend'); legend.textContent = label; fieldset.append(legend);
+    const group = document.createElement('div'); group.setAttribute('role', 'group'); group.setAttribute('aria-label', label);
+    for (const [key, text] of Object.entries(choices)) {
+        const button = document.createElement('button');
+        button.type = 'button'; button.textContent = text; button.dataset.choice = key;
+        button.setAttribute('aria-pressed', String(key === selected));
+        button.addEventListener('click', () => {
+            if (button.getAttribute('aria-pressed') === 'true') return;
+            const url = new URL(location.href); url.searchParams.set(parameter, key);
+            history.replaceState(null, '', url);
+            rerunExample();
+        });
+        group.append(button);
+    }
+    fieldset.append(group);
+    document.querySelector('.details-body')?.prepend(fieldset);
+    return selected;
+}
+
+/** Keep the map bars synchronized with the example's actual initialization promise. */
+export function setExampleState(state: 'loading' | 'ready' | 'error', message?: string): void {
+    document.querySelectorAll<HTMLElement>('[data-example-status]').forEach(status => {
+        status.dataset.state = state;
+        if (message !== undefined) status.textContent = message;
+    });
+    document.querySelectorAll<HTMLElement>('.map-stage').forEach(stage => stage.setAttribute('aria-busy', String(state === 'loading')));
+}
+
+export async function runExample(initialize: () => Promise<void>, preserveStatus = false): Promise<void> {
+    if (!initializer) { initializer = initialize; preserveInitialStatus = preserveStatus; }
+    initializing = true;
+    setExampleControlsDisabled(true);
+    setExampleState('loading', 'Loading map and data…');
+    try {
+        await initialize();
+        fitExamplePlots();
+        setExampleState('ready', preserveStatus ? undefined : 'Interactive map');
+    } catch (error) {
+        setExampleState('error', `Unable to load this example. ${error instanceof Error ? error.message : String(error)}`);
+        console.error('Unable to initialize the gallery example:', error);
+    } finally {
+        initializing = false;
+        setExampleControlsDisabled(false);
+        document.dispatchEvent(new Event('example-ready'));
+    }
+}
+
+/** Preserve SVG coordinates for brushing while allowing charts to fit their side panels. */
+function fitExamplePlots(): void {
+    document.querySelectorAll<HTMLElement>('#plotBody').forEach(body => {
+        const fit = () => {
+            body.querySelectorAll<SVGSVGElement>(':scope > svg').forEach(svg => {
+                const width = Number(svg.getAttribute('width')), height = Number(svg.getAttribute('height'));
+                if (width > 0 && height > 0) { svg.setAttribute('viewBox', `0 0 ${width} ${height}`); svg.style.width = '100%'; svg.style.height = 'auto'; }
+            });
+        };
+        fit();
+        const observer = new MutationObserver(fit);
+        observer.observe(body, { childList: true, subtree: true });
+        onExampleDispose(() => observer.disconnect());
+    });
+}

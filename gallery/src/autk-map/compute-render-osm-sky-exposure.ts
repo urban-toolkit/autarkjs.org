@@ -1,0 +1,113 @@
+import { runExample } from '../example';
+import { ComputeRender } from '@urban-toolkit/autk-compute';
+import { ColorMapDomainStrategy } from '@urban-toolkit/autk-core';
+import { AutkDb } from '@urban-toolkit/autk-db';
+import { AutkMap } from '@urban-toolkit/autk-map';
+import { FeatureCollection, GeoJsonProperties, Geometry } from 'geojson';
+
+export class ComputeRenderOsmSkyExposure {
+    protected map!: AutkMap;
+    protected db!: AutkDb;
+
+    protected roadsWithSky!: FeatureCollection<Geometry, GeoJsonProperties>;
+
+    public async loadDb(): Promise<void> {
+        this.db = new AutkDb();
+        await this.db.init();
+
+        await this.db.loadOsm({
+            pbfFileUrl: `${(import.meta as any).env.BASE_URL}data/lower_mnt.osm.pbf`,
+            queryArea: { bbox: [-74.019, 40.700, -74.003, 40.714] },
+            outputTableName: 'table_osm',
+            autoLoadLayers: {
+                layers: ['surface', 'parks', 'water', 'roads', 'buildings'] as Array<
+                    'surface' | 'parks' | 'water' | 'roads' | 'buildings'
+                >,
+            },
+        });        
+    }
+
+    public async loadCompute(): Promise<void> {
+        const roadsGeoJson = await this.db.getLayer('table_osm_roads');
+        const buildingsGeoJson = await this.db.getLayer('table_osm_buildings');
+
+        const render = new ComputeRender();
+        const roadsWithSkyClasses = await render.run({
+            layers: [{
+                id: 'table_osm_buildings',
+                collection: buildingsGeoJson,
+                type: 'buildings',
+            }],
+            viewpoints: {
+                collection: roadsGeoJson,
+                sampling: { directions: 1 },
+            },
+            aggregation: { type: 'classes', includeBackground: true, backgroundLayerType: 'sky' },
+            tileSize: 64,
+        });
+
+        this.roadsWithSky = {
+            ...roadsWithSkyClasses,
+            features: roadsWithSkyClasses.features.map((road) => ({
+                ...road,
+                properties: {
+                    ...road.properties,
+                    compute: {
+                        ...(road.properties?.compute ?? {}),
+                        skyViewFactor: Number(((road.properties as any)?.compute?.render?.classes ?? {}).sky ?? 0),
+                    },
+                },
+            })),
+        };
+    }
+
+    public async loadMap(canvas: HTMLCanvasElement): Promise<void> {
+        this.map = new AutkMap(canvas);
+        await this.map.init();
+        await this.loadLayers();
+
+        this.map.updateColorMap('table_osm_roads', {
+            colorMap: {
+                domainSpec: { type: ColorMapDomainStrategy.PERCENTILE, params: [5, 95] },
+            },
+        });
+
+        this.map.updateThematic('table_osm_roads', {
+            collection: this.roadsWithSky,
+            property: 'properties.compute.skyViewFactor',
+        });
+
+        this.map.updateRenderInfo('table_osm_roads', { isColorMap: true });
+        this.map.updateRenderInfo('table_osm_buildings', { opacity: 0.85, isClick: false });
+
+        this.map.fitBounds();
+        this.map.draw();
+    }
+
+    protected async loadLayers(): Promise<void> {
+        for (const layerData of this.db.getLayersMetadata()) {
+            const geojson = layerData.name === 'table_osm_roads'
+                ? this.roadsWithSky
+                : await this.db.getLayer(layerData.name);
+            this.map.loadCollection(layerData.name, { collection: geojson, type: layerData.type });
+            console.log(`Loading layer: ${layerData.name} of type ${layerData.type}`);
+        }
+    }
+
+    public async run(canvas: HTMLCanvasElement): Promise<void> {
+        await this.loadDb();
+        await this.loadCompute();
+        await this.loadMap(canvas);
+    }    
+}
+
+async function main() {
+    const canvas = document.querySelector('canvas');
+    if (!canvas) {
+        throw new Error('No canvas found');
+    }
+
+    const example = new ComputeRenderOsmSkyExposure();
+    await example.run(canvas);
+}
+void runExample(main);
