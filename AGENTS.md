@@ -59,6 +59,30 @@ npm run preview  # preview the built site locally
 
 ---
 
+## Local Autark packages (temporary)
+
+Until Autark 5.0.0 is published to npm, the site depends on the six tarballs in
+`vendor/autark-5.0.0/`:
+
+```json
+"@urban-toolkit/autk": "file:vendor/autark-5.0.0/urban-toolkit-autk-5.0.0.tgz"
+```
+
+They were packed from the reviewed candidate commit recorded in
+`vendor/autark-5.0.0/manifest.json`. `npm ci` installs them like any other
+dependency, so a fresh clone and CI need no sibling checkout.
+
+When 5.0.0 is published, switch back to the registry and remove the vendored files:
+
+```bash
+npm run release:prepare -- --version 5.0.0
+rm -rf vendor/autark-5.0.0
+```
+
+Replace the `file:` entries with exact registry versions if `release:prepare`
+does not do it, then reinstall, rebuild the gallery, and rerun `npm run build`,
+`npm run test:gallery`, and `npm run test:usecases`.
+
 ## Dependency security
 
 `package.json` overrides only VitePress's Vite dependency to `^6.4.4` because

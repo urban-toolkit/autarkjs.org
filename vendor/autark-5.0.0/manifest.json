@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "commit": "7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460",
+  "runId": null,
+  "runAttempt": null,
+  "packages": [
+    {
+      "dir": "autk-core",
+      "name": "@urban-toolkit/autk-core",
+      "version": "5.0.0",
+      "filename": "urban-toolkit-autk-core-5.0.0.tgz",
+      "integrity": "sha512-Ofpzev23j47uLuMBctpATvAF00H0a6byeizppMf+CjrDU5+EH0cyjRGxV09oTAmvyUMaIGbdinGCTsCuNd0dsQ=="
+    },
+    {
+      "dir": "autk-map",
+      "name": "@urban-toolkit/autk-map",
+      "version": "5.0.0",
+      "filename": "urban-toolkit-autk-map-5.0.0.tgz",
+      "integrity": "sha512-NkNCIpviOlLK4Ce1Ezw0ZfvJ/CDJdfzCKOsR0IAsuu688YTfPJ/W3TGOJ6+IfwJU90TaAh2VJU2fbpRVG6l/rw=="
+    },
+    {
+      "dir": "autk-db",
+      "name": "@urban-toolkit/autk-db",
+      "version": "5.0.0",
+      "filename": "urban-toolkit-autk-db-5.0.0.tgz",
+      "integrity": "sha512-QGpSVMzHlmzUN8MyxZIDyDagTpSaLZB/oBZQfb4Gv9jQCq087X3cGzvfa8UdD6G5IRTvc3GUx6Zwzpn8bGBqXg=="
+    },
+    {
+      "dir": "autk-plot",
+      "name": "@urban-toolkit/autk-plot",
+      "version": "5.0.0",
+      "filename": "urban-toolkit-autk-plot-5.0.0.tgz",
+      "integrity": "sha512-bf6yFC43OMW5JgfhjWfE/BJxR9zaeZ/bmx4G4FFSlrc1mNzrwVz/wfCzSSyxkUZMOmpcuQNnFfsi9zXi5+lQZA=="
+    },
+    {
+      "dir": "autk-compute",
+      "name": "@urban-toolkit/autk-compute",
+      "version": "5.0.0",
+      "filename": "urban-toolkit-autk-compute-5.0.0.tgz",
+      "integrity": "sha512-2tYOOTQIlPHcem6Xp0Tnvp1oMnW9mjM6fLTELOapUABxmNMeL2VocSiikYcTasMD3dhqrdyl8O9UaJr+U30qUQ=="
+    },
+    {
+      "dir": "autk",
+      "name": "@urban-toolkit/autk",
+      "version": "5.0.0",
+      "filename": "urban-toolkit-autk-5.0.0.tgz",
+      "integrity": "sha512-EqcONI8OxmS3zwZ95ARPt9B8he+KVFNLkWhZC/1x4AkCZ/+OAUXRpMQ90HQFqrDx/YI2YRIh52hT8Hzo4RYgQw=="
+    }
+  ]
+}

@@ -47,13 +47,13 @@
     }
   },
   "dependencies": {
-    "@urban-toolkit/autk": "4.1.1",
-    "@urban-toolkit/autk-compute": "4.1.1",
-    "@urban-toolkit/autk-core": "4.1.1",
-    "@urban-toolkit/autk-db": "4.1.1",
+    "@urban-toolkit/autk": "file:vendor/autark-5.0.0/urban-toolkit-autk-5.0.0.tgz",
+    "@urban-toolkit/autk-compute": "file:vendor/autark-5.0.0/urban-toolkit-autk-compute-5.0.0.tgz",
+    "@urban-toolkit/autk-core": "file:vendor/autark-5.0.0/urban-toolkit-autk-core-5.0.0.tgz",
+    "@urban-toolkit/autk-db": "file:vendor/autark-5.0.0/urban-toolkit-autk-db-5.0.0.tgz",
     "@urban-toolkit/autk-grammar": "5.6.0",
-    "@urban-toolkit/autk-map": "4.1.1",
-    "@urban-toolkit/autk-plot": "4.1.1",
+    "@urban-toolkit/autk-map": "file:vendor/autark-5.0.0/urban-toolkit-autk-map-5.0.0.tgz",
+    "@urban-toolkit/autk-plot": "file:vendor/autark-5.0.0/urban-toolkit-autk-plot-5.0.0.tgz",
     "highlight.js": "^11.12.0"
   }
 }
