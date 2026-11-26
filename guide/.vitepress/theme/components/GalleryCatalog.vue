@@ -4,7 +4,7 @@
       <h2 :id="section.id">{{ section.title }}</h2>
       <p class="gallery-catalog-description">{{ section.description }}</p>
 
-      <div class="gallery-catalog-grid">
+      <div class="gallery-catalog-grid" :class="{ 'gallery-catalog-grid--single-column': props.demoApps }">
         <a
           v-for="example in section.cards"
           :key="example.href"
@@ -90,6 +90,27 @@ function hideImage(event: Event) {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
   gap: 20px;
+}
+
+.gallery-catalog-grid--single-column {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.gallery-catalog-grid--single-column .gallery-catalog-card {
+  flex-direction: row;
+  align-items: center;
+  padding-left: 12px;
+}
+
+.gallery-catalog-grid--single-column .gallery-catalog-image {
+  flex: 0 0 clamp(88px, 30%, 192px);
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.gallery-catalog-grid--single-column .gallery-catalog-body {
+  min-width: 0;
+  padding: 12px;
 }
 
 .gallery-catalog-card {
