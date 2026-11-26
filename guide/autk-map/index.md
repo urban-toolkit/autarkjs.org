@@ -76,8 +76,6 @@ button.addEventListener('click', () => {
 - Color layers by attribute with **sequential, diverging, or categorical** maps, legends, and custom palettes.
 - Explore with **click, hover, tooltips, selection, and skipping**, all using the same feature ids as charts.
 - Add **satellite or street imagery**, **streamed elevation**, and true-color **RGB rasters** to the scene.
-- Frame data with `fitBounds()` or `setView()`, switch between perspective and orthographic views, and save or restore camera state.
-- Render **on demand**: redraw when something changes instead of running a loop.
 
 ## Package installation
 

@@ -11,7 +11,9 @@
 - Choose **viewpoints** (centroids, building windows) and **aggregation** (classes or objects) per run.
 - Write results into `properties.compute`, ready for a thematic map, a chart, or another database table.
 
-The package supports **two complementary pipelines**:
+## The two pipelines
+
+The package supports two complementary pipelines:
 
 | Pipeline | What it does | Typical output |
 |---|---|---|
@@ -20,18 +22,23 @@ The package supports **two complementary pipelines**:
 
 In a typical workflow, `autk-db` loads the data, `autk-compute` derives new metrics, and `autk-map` or `autk-plot` displays the result.
 
-## When to use autk-compute
+## Package installation
 
-Use `autk-compute` when you need **per-feature GPU processing** or **view-based analysis**. For simple filtering, grouping, joins, and aggregations, `autk-db` is usually the better first choice.
+To install `autk-compute`, use its [npm package](https://www.npmjs.com/package/@urban-toolkit/autk-compute):
 
-| Scenario | Best tool |
-|---|---|
-| SQL filtering, grouping, counting, spatial joins | `autk-db` |
-| Simple arithmetic already easy to express in SQL | `autk-db` |
-| Custom per-feature formulas over many features | `autk-compute.gpgpuPipeline()` |
-| Visibility, sky exposure, view quality, line-of-sight style metrics | `autk-compute.renderPipeline()` |
+```bash
+npm install @urban-toolkit/autk-compute
+```
 
-## Main entry point
+You can also install the full toolkit:
+
+```bash
+npm install @urban-toolkit/autk
+```
+
+## Initialization
+
+The entry point is the `AutkComputeEngine` class. Create an instance and call the pipeline you need:
 
 ```ts
 import { AutkComputeEngine } from '@urban-toolkit/autk-compute';
@@ -72,6 +79,17 @@ const result = await compute.renderPipeline({
   aggregation: { type: 'classes', includeBackground: true, backgroundLayerType: 'sky' },
 });
 ```
+
+## When to use autk-compute
+
+Use `autk-compute` when you need **per-feature GPU processing** or **view-based analysis**. For simple filtering, grouping, joins, and aggregations, `autk-db` is usually the better first choice.
+
+| Scenario | Best tool |
+|---|---|
+| SQL filtering, grouping, counting, spatial joins | `autk-db` |
+| Simple arithmetic already easy to express in SQL | `autk-db` |
+| Custom per-feature formulas over many features | `autk-compute.gpgpuPipeline()` |
+| Visibility, sky exposure, view quality, line-of-sight style metrics | `autk-compute.renderPipeline()` |
 
 ## Common workflow
 

@@ -299,3 +299,10 @@ body,
 .package-title .pkg-badge img {
   height: 24px;
 }
+
+/* Avoid one- or two-word last lines in prose and lists. */
+.vp-doc p,
+.vp-doc li,
+.vp-doc td {
+  text-wrap: pretty;
+}
