@@ -137,24 +137,14 @@ await db.init();
 
 // Two touching polygons in the projected workspace CRS (meters).
 await db.loadGeojson({
-  geojsonObject: {
-    type: 'FeatureCollection',
-    features: [{
-      type: 'Feature', id: 'district', properties: { name: 'District' },
-      geometry: { type: 'Polygon', coordinates: [[[0, 0], [1000, 0], [1000, 1000], [0, 1000], [0, 0]]] },
-    }],
-  },
-  sourceCrs: 'EPSG:3395', outputTableName: 'districts',
+  geojsonFileUrl: '/data/district.geojson',
+  sourceCrs: 'EPSG:3395',
+  outputTableName: 'districts',
 });
 await db.loadGeojson({
-  geojsonObject: {
-    type: 'FeatureCollection',
-    features: [{
-      type: 'Feature', id: 'park', properties: { name: 'Long park' },
-      geometry: { type: 'Polygon', coordinates: [[[1000, 0], [2000, 0], [2000, 1000], [1000, 1000], [1000, 0]]] },
-    }],
-  },
-  sourceCrs: 'EPSG:3395', outputTableName: 'parks',
+  geojsonFileUrl: '/data/long-park.geojson',
+  sourceCrs: 'EPSG:3395',
+  outputTableName: 'parks',
 });
 
 const res = await db.spatialQuery({

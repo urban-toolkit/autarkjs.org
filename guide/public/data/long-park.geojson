@@ -1,0 +1,14 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "park",
+      "properties": { "name": "Long park" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[1000, 0], [2000, 0], [2000, 1000], [1000, 1000], [1000, 0]]]
+      }
+    }
+  ]
+}
