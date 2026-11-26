@@ -16,17 +16,17 @@ hero:
       link: /gallery/
 
 features:
-  - title: autk-db
-    details: 'Query urban data in the browser: OSM, GeoJSON, GeoTIFF, and CSV.<br><br><a href="https://www.npmjs.com/package/@urban-toolkit/autk-db"><img alt="autk-db npm version" src="https://img.shields.io/npm/v/@urban-toolkit/autk-db?color=f59e0b&logo=npm&labelColor=111827"></a>'
+  - title: 'autk-db <a class="feature-badge" href="https://www.npmjs.com/package/@urban-toolkit/autk-db"><img alt="autk-db npm version" src="https://img.shields.io/npm/v/@urban-toolkit/autk-db?color=f59e0b&logo=npm&labelColor=111827"></a>'
+    details: 'Query data in the browser: OSM, GeoJSON, GeoTIFF, and CSV.'
     link: /autk-db/
-  - title: autk-map
-    details: 'Draw 2D and 3D maps with WebGPU, no tile server required.<br><br><a href="https://www.npmjs.com/package/@urban-toolkit/autk-map"><img alt="autk-map npm version" src="https://img.shields.io/npm/v/@urban-toolkit/autk-map?color=0ea5e9&logo=npm&labelColor=111827"></a>'
+  - title: 'autk-map <a class="feature-badge" href="https://www.npmjs.com/package/@urban-toolkit/autk-map"><img alt="autk-map npm version" src="https://img.shields.io/npm/v/@urban-toolkit/autk-map?color=0ea5e9&logo=npm&labelColor=111827"></a>'
+    details: 'Draw 2D and 3D maps with WebGPU, no tile server required.'
     link: /autk-map/
-  - title: autk-compute
-    details: 'Run GPU analyses on GeoJSON features, without a backend.<br><br><a href="https://www.npmjs.com/package/@urban-toolkit/autk-compute"><img alt="autk-compute npm version" src="https://img.shields.io/npm/v/@urban-toolkit/autk-compute?color=10b981&logo=npm&labelColor=111827"></a>'
+  - title: 'autk-compute <a class="feature-badge" href="https://www.npmjs.com/package/@urban-toolkit/autk-compute"><img alt="autk-compute npm version" src="https://img.shields.io/npm/v/@urban-toolkit/autk-compute?color=10b981&logo=npm&labelColor=111827"></a>'
+    details: 'Run GPU analyses on GeoJSON features, without a backend.'
     link: /autk-compute/
-  - title: autk-plot
-    details: 'Build D3.js charts linked directly to the map.<br><br><a href="https://www.npmjs.com/package/@urban-toolkit/autk-plot"><img alt="autk-plot npm version" src="https://img.shields.io/npm/v/@urban-toolkit/autk-plot?color=8b5cf6&logo=npm&labelColor=111827"></a>'
+  - title: 'autk-plot <a class="feature-badge" href="https://www.npmjs.com/package/@urban-toolkit/autk-plot"><img alt="autk-plot npm version" src="https://img.shields.io/npm/v/@urban-toolkit/autk-plot?color=8b5cf6&logo=npm&labelColor=111827"></a>'
+    details: 'Build D3.js charts linked directly to the map.'
     link: /autk-plot/
 ---
 
