@@ -26,8 +26,10 @@ if (!embedded) document.body.prepend(header);
 
 const themeButton = embedded ? null : header.querySelector('.theme-toggle');
 const systemTheme = matchMedia('(prefers-color-scheme: dark)');
+const urlTheme = new URLSearchParams(location.search).get('theme');
 let theme;
-try { theme = localStorage.getItem('autark-tutorial:theme'); } catch { /* Storage is optional. */ }
+if (embedded && (urlTheme === 'dark' || urlTheme === 'light')) theme = urlTheme;
+else try { theme = localStorage.getItem('autark-tutorial:theme'); } catch { /* Storage is optional. */ }
 const updateTheme = () => {
   const dark = theme === 'dark' || (theme !== 'light' && systemTheme.matches);
   document.documentElement.classList.toggle('dark', dark);

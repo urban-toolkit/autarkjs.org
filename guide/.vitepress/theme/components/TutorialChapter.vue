@@ -20,7 +20,10 @@ const props = defineProps<{
 
 const iframeEl = ref<HTMLIFrameElement | null>(null)
 const { isDark } = useData()
-const embedSrc = computed(() => `${props.src}?embed=1`)
+// Only the first load needs the theme in the URL; later toggles are class updates,
+// so switching the site theme never reloads a chapter and loses edited cells.
+const initialTheme = isDark.value ? 'dark' : 'light'
+const embedSrc = computed(() => `${props.src}?embed=1&theme=${initialTheme}`)
 
 /** The chapter is same-origin, so its palette follows the site's theme. */
 function syncTheme() {
