@@ -71,11 +71,13 @@ button.addEventListener('click', () => {
 
 **Key capabilities:**
 
-- Render **2D and 3D geospatial layers** directly from [GeoJSON](https://geojson.org/) in the browser.
-- Support [OpenStreetMap](https://www.openstreetmap.org/) layers such as **surface**, **parks**, **water**, **roads**, and **buildings**.
-- Display **thematic data** using configurable color maps.
-- Handle **interactive exploration** through clicking, hovering, highlighting, and filtering features.
-- Integrate directly with [`autk-db`](/autk-db/), [`autk-compute`](/autk-compute/), and [`autk-plot`](/autk-plot/).
+- Render **2D and 3D layers** with WebGPU: buildings, roads, parks, water, surface, points, lines, polygons, and rasters.
+- Load [GeoJSON](https://geojson.org/) in any coordinate system and reproject it into the map's **workspace CRS**.
+- Color layers by attribute with **sequential, diverging, or categorical** maps, legends, and custom palettes.
+- Explore with **click, hover, tooltips, selection, and skipping**, all using the same feature ids as charts.
+- Add **satellite or street imagery**, **streamed elevation**, and true-color **RGB rasters** to the scene.
+- Frame data with `fitBounds()` or `setView()`, switch between perspective and orthographic views, and save or restore camera state.
+- Render **on demand**: redraw when something changes instead of running a loop.
 
 ## Package installation
 

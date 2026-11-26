@@ -53,9 +53,12 @@ console.log(geojson)
 
 **Key capabilities:**
 
-- Load data from [OpenStreetMap](https://www.openstreetmap.org/) (using [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API) or previously downloaded `.pbf` files, e.g. from [Geofabrik](https://download.geofabrik.de/)), **CSV**, **JSON**, **GeoJSON**, and **GeoTIFF**.
-- Run **spatial operations** and **custom SQL** queries inside the browser.
-- Export processed data for `autk-map`, `autk-compute`, `autk-plot` or any software.
+- Load [OpenStreetMap](https://www.openstreetmap.org/) from the [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API) or a local `.pbf` extract, plus **GeoJSON**, **CSV**, **JSON** (coordinates or WKT), and **GeoTIFF** imagery, including color-coded rasters.
+- Keep each project in its own **workspace**, with its own coordinate system and precision grid, and reproject incoming data on load.
+- Query and combine tables with **DuckDB SQL**: spatial joins, distance predicates, aggregation, and joins against compact rasters.
+- Build **heatmaps** with independent bands, normalization, and Gaussian smoothing.
+- Select custom **OSM tag sets** and export individual OSM elements when their provenance is intact.
+- Export any table as GeoJSON for `autk-map`, `autk-plot`, `autk-compute`, or another tool.
 
 ## Package installation
 

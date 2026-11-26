@@ -124,14 +124,14 @@ categoricalPlot.setSelection([]);
 
 The library is also extensible. Built-in plots and transforms are registered with the same public functions available to you, so a custom chart reuses the GeoJSON input, event model, selection mechanism, and provenance tracking. See [Extending autk-plot](./extending).
 
-## What it covers
+**Key capabilities:**
 
-- **Overview**: a complete map + plot linked example using a bar chart with a binning transform.
-- **Chart types**: the full catalog, from scatter plots and parallel coordinates to box plots, sankey, and maps of relationships.
-- **Transformations**: bar charts, line charts, tables, and heat matrices combined with sorting, binning, and aggregation.
-- **Interactivity**: click, brush, hover, and programmatic selection, with brush extents and proportional shares.
-- **Linked views**: react to map clicking and hovering, and drive map selection and hover from the chart.
-- **Extending**: register your own D3 chart or transform with the same API as the built-ins.
+- Draw one of **24 chart types** from a single constructor: scatter, bubble, hexbin, parallel coordinates, bar, stacked bar, line, area, box, violin, density, ECDF, calendar, heat matrix, table, pie, donut, treemap, sunburst, waffle, sankey, radar, chord, and Pareto.
+- Prepare data with **12 transform presets** — binning, box stats, density, flows, hierarchy, fold, and more — with reducers, time resolutions, filters, and top-K.
+- **Link views** both ways: click, hover, or brush in a chart and the map follows, with the share each feature contributes.
+- Read **brush extents** (pixels, numeric ranges, or category keys) and keep selections honest across aggregated and raw views through provenance.
+- Style with **custom color maps**, axis tick counts and formats, column formats, and margins; charts can also render statically.
+- **Extend it**: register your own D3 chart or transform with the same API the built-ins use.
 
 ## Installation
 

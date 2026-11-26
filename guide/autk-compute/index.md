@@ -2,6 +2,15 @@
 
 `autk-compute` is Autark's GPU analysis module. It runs computations in the browser on GeoJSON feature collections, and stores the results in `feature.properties.compute`.
 
+**Key capabilities:**
+
+- Run **custom WGSL** over every feature in parallel, with scalars, per-feature arrays, matrices, and global uniforms as inputs.
+- Bind each feature's **geometry** — points, lines, polygons, and their components — and read it topologically, so edges are never invented between separate parts.
+- Derive one or several **result columns** per feature with a single dispatch.
+- Analyze a **scene**, not just attributes: sky exposure, shadows, visibility, view scores, and any visibility-style rule you write.
+- Choose **viewpoints** (centroids, building windows) and **aggregation** (classes or objects) per run.
+- Write results into `properties.compute`, ready for a thematic map, a chart, or another database table.
+
 The package supports **two complementary pipelines**:
 
 | Pipeline | What it does | Typical output |
