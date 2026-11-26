@@ -136,7 +136,6 @@ onMounted(async () => {
 
 <span class="token-keyword">const</span> db = <span class="token-keyword">new</span> <span class="token-class">AutkDb</span>();
 <span class="token-keyword">await</span> db.init();
-
 <span class="token-keyword">await</span> db.loadOsm({
   pbfFileUrl: <span class="token-string">"/data/lower_mnt.osm.pbf"</span>,
   queryArea: {
@@ -144,19 +143,17 @@ onMounted(async () => {
     areas: [<span class="token-string">"Battery Park City"</span>, <span class="token-string">"Financial District"</span>],
   },
   autoLoadLayers: {
-    layers: [<span class="token-string">"surface"</span>, <span class="token-string">"parks"</span>, <span class="token-string">"water"</span>, <span class="token-string">"roads"</span>, <span class="token-string">"buildings"</span>],
+    layers: [<span class="token-string">"surface"</span>, <span class="token-string">"parks"</span>, <span class="token-string">"water"</span>, <span class="token-string">"roads"</span>],
   },
 });
 
 <span class="token-keyword">const</span> map = <span class="token-keyword">new</span> <span class="token-class">AutkMap</span>(canvas, { showUi: false });
 <span class="token-keyword">await</span> map.init();
 map.style.setPredefinedStyle(<span class="token-string">"apple"</span>);
-
 <span class="token-keyword">for</span> (<span class="token-keyword">const</span> layer <span class="token-keyword">of</span> db.getLayersMetadata()) {
   <span class="token-keyword">const</span> collection = <span class="token-keyword">await</span> db.getLayer(layer.name);
   map.loadCollection(layer.name, { collection, type: layer.type });
 }
-
 map.draw();</code></pre>
               </div>
               </Transition>
@@ -200,7 +197,7 @@ map.draw();</code></pre>
 
 <style scoped>
 .home-quickstart {
-  --quickstart-card-height: 480px;
+  --quickstart-card-height: 660px;
   display: flex;
   flex: 1 0 auto;
   padding: 48px 24px 20px;
@@ -360,7 +357,7 @@ map.draw();</code></pre>
   position: absolute;
   inset: 0;
   overflow: auto;
-  padding: 22px;
+  padding: 16px 18px;
 }
 
 /* The install command gives way to the example after a few seconds. */
@@ -438,8 +435,8 @@ map.draw();</code></pre>
 .home-terminal-code {
   margin: 0;
   color: var(--vp-c-text-1);
-  font-size: 0.84rem;
-  line-height: 1.68;
+  font-size: 0.8rem;
+  line-height: 1.55;
   white-space: pre-wrap;
   word-break: break-word;
 }
@@ -600,13 +597,24 @@ map.draw();</code></pre>
   }
 }
 
-@media (max-width: 959px) {
-  .home-quickstart {
-    --quickstart-card-height: 420px;
-  }
-
+/* Two narrow columns wrap the example; stack them until the cards are wide. */
+@media (max-width: 1100px) {
   .quickstart-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 959px) {
+  .home-quickstart {
+    --quickstart-card-height: 610px;
+  }
+}
+
+/* Two narrower columns wrap more, so let the code shrink a touch there. */
+@media (max-width: 1200px) {
+  .home-terminal-code {
+    font-size: 0.78rem;
+    line-height: 1.5;
   }
 }
 
