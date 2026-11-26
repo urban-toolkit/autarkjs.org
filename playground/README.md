@@ -3,7 +3,8 @@
 `editor.js` mounts the site’s CodeMirror editor and toolbar. It handles file tabs,
 Run, Reset, Copy, the keyboard shortcut, and browser-local edits. An example can
 also supply Run all above. `runtime.js` executes JavaScript with host-supplied
-bindings, captures console messages, and formats structured output. Syntax
+bindings and captures console messages. `output.js` renders objects and arrays
+as collapsed trees. Expand one branch at a time; plain text stays plain. Syntax
 highlighting recognizes TypeScript, but the runner does not compile it.
 
 - `guide/.vitepress/theme/components/CodePlayground.vue` adds the User Guide and

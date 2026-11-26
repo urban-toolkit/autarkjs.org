@@ -3,8 +3,9 @@ import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useData } from 'vitepress'
 import { captureConsole, executeSource, formatValue } from '../../../../playground/runtime.js'
 import type { mountPlaygroundEditor } from '../../../../playground/editor.js'
+import { renderTextOutput } from '../../../../playground/output.js'
 import '../../../../playground/editor.css'
-import JsonTree from './JsonTree.vue'
+import '../../../../playground/output.css'
 
 type PlaygroundFile = {
   label: string
@@ -61,7 +62,8 @@ const namedMountRefs = ref<Record<string, HTMLElement | null>>({})
 const status = ref('')
 const error = ref<string | null>(null)
 const isRunning = ref(false)
-const consoleOutput = ref<string[]>([])
+const consoleEl = ref<HTMLDivElement | null>(null)
+const hasConsoleOutput = ref(false)
 const hasDomOutput = ref(false)
 const viewsEl = ref<HTMLDivElement | null>(null)
 /** A grammar playground draws its maps and plots in panes arranged by the spec's `layout`, not on the default canvas. */
@@ -118,18 +120,10 @@ function getUserCode(sources: string[]): string {
     .trim()
 }
 
-function isJson(str: string): boolean {
-  const trimmed = str.trim()
-  return (trimmed.startsWith('{') && trimmed.endsWith('}')) ||
-         (trimmed.startsWith('[') && trimmed.endsWith(']'))
-}
-
-function parseJson(str: string): unknown {
-  try {
-    return JSON.parse(str)
-  } catch {
-    return str
-  }
+function appendConsole(value: unknown) {
+  if (!consoleEl.value) return
+  consoleEl.value.append(renderTextOutput(formatValue(value), 'span'))
+  hasConsoleOutput.value = true
 }
 
 function clearCanvas() {
@@ -277,7 +271,8 @@ async function runCode() {
   editor.setBusy(true)
   error.value = null
   status.value = 'Running…'
-  consoleOutput.value = []
+  consoleEl.value?.replaceChildren()
+  hasConsoleOutput.value = false
 
   try {
     destroyGrammars()
@@ -331,7 +326,7 @@ async function runCode() {
       __modules: modules,
       __canvas: canvasEl.value,
       __mount: mount.value,
-      __console: captureConsole((value: unknown) => consoleOutput.value.push(formatValue(value))),
+      __console: captureConsole(appendConsole),
       __setMountHtml: setMountHtml,
       __setStatus: setPlaygroundStatus,
       __clearStatus: clearPlaygroundStatus,
@@ -341,19 +336,15 @@ async function runCode() {
     })
     if (result instanceof Node) mount.value?.append(result)
     else if (result !== undefined) {
-      if (out.value !== 'dom') consoleOutput.value.push(formatValue(result))
-      else if (mount.value) {
-        const value = document.createElement('pre')
-        value.textContent = formatValue(result)
-        mount.value.append(value)
-      }
+      if (out.value !== 'dom') appendConsole(result)
+      else mount.value?.append(renderTextOutput(formatValue(result)))
     }
 
     hasDomOutput.value = (mount.value?.childNodes.length ?? 0) > 0 || namedMounts.value.length > 0
     status.value = ''
   } catch (e: any) {
     error.value = e?.message ?? String(e)
-    consoleOutput.value.push(e?.message ?? String(e))
+    appendConsole(error.value)
     status.value = ''
   } finally {
     isRunning.value = false
@@ -438,19 +429,8 @@ onBeforeUnmount(() => {
       <div v-if="out !== 'dom'" class="code-playground__console">
         <div class="code-playground__console-label">Console Output</div>
         <div class="code-playground__console-lines">
-          <template v-if="consoleOutput.length === 0 && !hasDomOutput">
-            <span class="code-playground__console-placeholder">Output will appear here…</span>
-          </template>
-          <template v-else>
-            <div
-              v-for="(line, i) in consoleOutput"
-              :key="i"
-              class="code-playground__console-line"
-            >
-              <JsonTree v-if="isJson(line)" :value="parseJson(line)" />
-              <span v-else v-text="line" />
-            </div>
-          </template>
+          <span v-if="!hasConsoleOutput && !hasDomOutput" class="code-playground__console-placeholder">Output will appear here…</span>
+          <div ref="consoleEl" class="code-playground__console-entries" />
         </div>
       </div>
     </div>
@@ -601,7 +581,8 @@ onBeforeUnmount(() => {
   font-style: italic;
 }
 
-.code-playground__console-line {
+.code-playground__console-entries > :deep(*) {
+  display: block;
   color: var(--vp-c-text-1);
   word-break: break-word;
   white-space: pre-wrap;

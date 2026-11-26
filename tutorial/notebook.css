@@ -20,7 +20,8 @@
   /* Visualization palettes belong to the examples, not to the documentation theme. */
   figure.example .out:has(canvas, svg) { color-scheme: light; color: #3c3c43; background: #fff; }
   figure.example .out .status { margin: 0 0 8px; color: var(--muted); font-size: 13px; }
-  figure.example .out pre.val { max-height: 24rem; margin: 0; padding: 16px; font-size: 12px; overflow: auto; }
+  figure.example .out > .val { max-height: 24rem; margin: 0; padding: 8px 16px; overflow: auto; }
+  figure.example .out pre.val { padding: 16px; font-size: 12px; }
   figure.example .out pre.err { margin: 0; padding: 12px 16px; border-color: var(--danger); color: var(--danger); white-space: pre-wrap; }
   figure.example .out table { border-collapse: collapse; font-size: 12px; }
   figure.example .out th, figure.example .out td { padding: 6px 12px; border-bottom: 1px solid var(--rule); text-align: left; white-space: nowrap; }

@@ -31,22 +31,32 @@ try {
       }
     }
 
-    const value = async title => JSON.parse(await outputs.get(title).locator('pre.val').innerText())
+    const value = async (title, ...path) => {
+      let branch = outputs.get(title).locator(':scope > details')
+      for (const [index, key] of path.entries()) {
+        if (await branch.getAttribute('open') === null) await branch.locator(':scope > summary').click()
+        const label = page.getByText(typeof key === 'number' ? String(key) : JSON.stringify(key), { exact: true })
+        const children = branch.locator(':scope > .playground-tree__children')
+        if (index === path.length - 1) {
+          const leaf = children.locator(':scope > .playground-tree__leaf').filter({ has: label })
+          return JSON.parse(await leaf.locator('.playground-tree__value').innerText())
+        }
+        branch = children.locator(':scope > details').filter({ has: page.locator('summary').filter({ has: label }) })
+      }
+    }
     if (chapter === '02') {
-      const workspace = await value('1.2 · Switch workspace')
-      assert.equal(workspace.crs, 'EPSG:3395')
-      assert.equal(workspace.precisionGrid, 0.01)
-      const projected = await value('2.2 · Load GeoJSON')
-      assert.ok(Math.abs(projected.sourceDegrees[0]) < 180 && Math.abs(projected.workspaceMeters[0]) > 1000000)
-      assert.ok((await value('2.4 · Read the raster back')).cells <= 12000)
-      const heatmap = await value('4.2 · Read the heatmap raster')
-      assert.equal(heatmap.cells, 1600)
-      assert.ok(heatmap.changedCells > 0, 'Gaussian smoothing changes the band')
-      assert.ok(heatmap.examples.every(row => Number.isInteger(row.count)))
+      assert.equal(await value('1.2 · Switch workspace', 'crs'), 'EPSG:3395')
+      assert.equal(await value('1.2 · Switch workspace', 'precisionGrid'), 0.01)
+      assert.ok(Math.abs(await value('2.2 · Load GeoJSON', 'sourceDegrees', 0)) < 180)
+      assert.ok(Math.abs(await value('2.2 · Load GeoJSON', 'workspaceMeters', 0)) > 1000000)
+      assert.ok(await value('2.4 · Read the raster back', 'cells') <= 12000)
+      assert.equal(await value('4.2 · Read the heatmap raster', 'cells'), 1600)
+      assert.ok(await value('4.2 · Read the heatmap raster', 'changedCells') > 0, 'Gaussian smoothing changes the band')
+      assert.ok(Number.isInteger(await value('4.2 · Read the heatmap raster', 'examples', 0, 'count')))
     }
     if (chapter === '03') {
       assert.match(await outputs.get('0.1 · WebGPU check').innerText(), /WebGPU is available/)
-      assert.ok(Math.abs((await value('0.2 · Load neighborhoods and noise events')).firstNoiseLocation[0]) < 180)
+      assert.ok(Math.abs(await value('0.2 · Load neighborhoods and noise events', 'firstNoiseLocation', 0)) < 180)
       await outputs.get('1.1 · The first map').locator('canvas').first().waitFor()
       await outputs.get('4.1 · Noise heatmap').locator('canvas').first().waitFor()
     }
@@ -63,8 +73,8 @@ try {
       await linked.getByText(/\d+ selected · perimeter .* · area /).waitFor()
     }
     if (chapter === '05') {
-      assert.equal((await value('2.6 · Measure a multipart road')).lengthMeters, 7)
-      const { sky } = await value('3.4 · Sky exposure per road')
+      assert.equal(await value('2.6 · Measure a multipart road', 'lengthMeters'), 7)
+      const sky = await value('3.4 · Sky exposure per road', 'sky')
       assert.ok(sky >= 0 && sky <= 1, 'sky exposure is a finite fraction')
     }
     assert.deepEqual(errors, [], `Chapter ${chapter} browser errors`)

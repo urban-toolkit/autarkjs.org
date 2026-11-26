@@ -1,4 +1,5 @@
 @import '../playground/editor.css';
+@import '../playground/output.css';
 @import './notebook.css';
 
 /* Autark's VitePress palette and documentation rhythm, without a framework dependency. */

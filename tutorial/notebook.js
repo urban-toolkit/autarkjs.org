@@ -16,6 +16,7 @@ import * as autk from "@urban-toolkit/autk";
 import * as GeoTIFF from "geotiff";
 import {mountPlaygroundEditor, highlightStatic} from "../playground/editor.js";
 import {captureConsole, executeSource, formatValue} from "../playground/runtime.js";
+import {renderTextOutput} from "../playground/output.js";
 import {withFallback as withOverpassFallback} from "./overpass-fallback.js";
 
 // Serialize execution even across chapter navigation; Overpass temporarily wraps fetch.
@@ -48,9 +49,9 @@ function trim(v, depth = 0) {
 export function render(v) {
   if (v instanceof Node) return v;
   if (v === undefined) return null;
-  if (typeof v === "string") return pre("val", v);
-  if (typeof v === "number" || typeof v === "boolean" || v === null) return pre("val", String(v));
-  return pre("val", formatValue(trim(v)));
+  const output = renderTextOutput(formatValue(trim(v)));
+  output.classList.add("val");
+  return output;
 }
 
 export function table(rows, {limit = 50} = {}) {
