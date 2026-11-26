@@ -349,25 +349,39 @@ body,
   margin: 28px 0;
 }
 
-/* Tutorial chapters: the frame is the page, so drop the docs column chrome. */
-.tutorial-chapter-page .VPDoc {
-  padding: 0;
+/* Tutorial chapters: the frame fills the space under the nav, edge to edge. */
+.Layout.tutorial-chapter-page {
+  height: 100svh;
+  overflow: hidden;
 }
 
-.tutorial-chapter-page .VPDoc .container {
+.Layout.tutorial-chapter-page .VPContent {
+  margin-top: var(--vp-nav-height);
+  padding-top: 0;
+  height: calc(100svh - var(--vp-nav-height));
+  overflow: hidden;
+}
+
+.Layout.tutorial-chapter-page .VPDoc,
+.Layout.tutorial-chapter-page .VPDoc .container,
+.Layout.tutorial-chapter-page .VPDoc .content,
+.Layout.tutorial-chapter-page .VPDoc .content-container,
+.Layout.tutorial-chapter-page .VPDoc .main {
+  height: 100%;
   max-width: none;
+  padding: 0 !important;
+  margin: 0;
 }
 
-.tutorial-chapter-page .VPDoc .content {
-  padding: 0;
-}
-
-.tutorial-chapter-page .VPDoc .content-container {
-  max-width: none;
-}
-
-.tutorial-chapter-page .VPDocAside {
+.Layout.tutorial-chapter-page .VPDocAside,
+.Layout.tutorial-chapter-page .VPDocFooter,
+.Layout.tutorial-chapter-page .VPFooter {
   display: none;
+}
+
+.Layout.tutorial-chapter-page .tutorial-chapter {
+  height: calc(100svh - var(--vp-nav-height));
+  min-height: 0;
 }
 
 /* Learn landing: two tracks side by side. */

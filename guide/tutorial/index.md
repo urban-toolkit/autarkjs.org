@@ -1,7 +1,6 @@
 ---
 title: Tutorial
-aside: false
-outline: false
+outline: deep
 ---
 
 # Urban analytics with Autark
