@@ -254,6 +254,10 @@ details[open] > summary.xml-line::before { content: "▾"; }
 }
 
 /* Embedded in the site: the VitePress page owns navigation and the theme. */
+html.embed {
+  --accent: var(--vp-c-brand-1, #3451b2);
+  --muted: var(--vp-c-text-2, #67676c);
+}
 html.embed .site-header { display: none; }
 /* The site sidebar already lists the chapters, and the site provides the page title. */
 html.embed .series-nav,
@@ -266,7 +270,28 @@ html.embed .layout {
   gap: 48px;
   max-width: none;
   margin: 0;
-  padding: 24px 0 48px;
+  padding: 32px 32px 48px;
+}
+
+html.embed .meta,
+html.embed .eyebrow {
+  margin: 0 0 12px;
+  font-size: 11px;
+  line-height: normal;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+html.embed h1 {
+  margin: 0 0 16px;
+  font-size: 38px;
+  line-height: 1.18;
+}
+html.embed .description,
+html.embed .lede {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--muted);
 }
 
 html.embed main { grid-column: 1; grid-row: 1; }
