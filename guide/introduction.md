@@ -13,13 +13,13 @@
 
 # Introduction
 
-Autark is a serverless toolkit for urban visual analytics: the data, the maps, the charts, and the computing all live in the browser.
+Autark is a serverless toolkit for urban visual analytics. Maps, charts, data, and computation all live in the browser—no server, no uploads, no round trips.
 
-Start with what a city already publishes. Load OpenStreetMap extracts or Overpass queries, GeoJSON, CSV, JSON, and GeoTIFF imagery; keep each project in its own workspace and coordinate system; then query, spatially join, aggregate, and export it with SQL backed by DuckDB — no server, no upload, no round trip.
+Start with what the city already publishes: OpenStreetMap extracts and Overpass queries, GeoJSON, CSV, JSON, and GeoTIFF imagery. Give each project its own workspace and coordinate system, then use DuckDB-powered SQL to query, spatially join, aggregate, and export.
 
-Then look at it. Autark draws 2D and 3D maps with WebGPU — buildings, roads, terrain, streamed imagery, rasters, and thematic layers — and runs analyses over the scene itself: sky exposure, shadows, visibility, view scores, and any metric you can write in WGSL, including regression-style models. Interactive D3 charts stay linked to the map, so a click, a hover, or a brush travels both ways.
+Then bring it to life. Explore buildings, roads, terrain, imagery, rasters, and thematic layers in 2D and 3D maps powered by WebGPU. Analyze the scene itself: sky exposure, shadows, visibility, view scores, regression-style models, or any metric you can write in WGSL. Linked D3 charts keep the conversation going—a click, hover, or brush moves between chart and map.
 
-From a single street to a whole city, from a raw dataset to an insight: one toolkit, one browser tab.
+The city is your dataset. The browser is your lab. One street or an entire city. Raw data to insight. One browser tab.
 
 ## Packages
 
