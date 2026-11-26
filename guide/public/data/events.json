@@ -1,0 +1,4 @@
+[
+  { "id": 1, "event": "inspection", "date": "2026-03-02" },
+  { "id": 2, "event": "repair", "date": "2026-03-09" }
+]
