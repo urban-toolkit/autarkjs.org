@@ -391,10 +391,17 @@ async function runCode() {
         ${namedMountDeclarations}
         const canvas = __canvas;
         const mount = __mount;
+        const emit = (type, args) => {
+          // One entry per argument, so an object or array stays parseable and
+          // renders as a collapsible tree instead of being glued to a label.
+          for (const value of args) {
+            __appendConsole(type, typeof value === 'string' ? value : JSON.stringify(value, null, 2) ?? String(value));
+          }
+        };
         const console = {
-          log: (...args) => __appendConsole('log', args.map(a => typeof a === 'string' ? a : JSON.stringify(a, null, 2)).join(' ')),
-          error: (...args) => __appendConsole('error', args.map(a => typeof a === 'string' ? a : JSON.stringify(a, null, 2)).join(' ')),
-          warn: (...args) => __appendConsole('warn', args.map(a => typeof a === 'string' ? a : JSON.stringify(a, null, 2)).join(' ')),
+          log: (...args) => emit('log', args),
+          error: (...args) => emit('error', args),
+          warn: (...args) => emit('warn', args),
         };
         const output = (html) => __setMountHtml(html);
         const setStatus = (message) => __setStatus(message);
