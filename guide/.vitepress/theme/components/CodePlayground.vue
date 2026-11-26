@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useData } from 'vitepress'
-import { createHighlighter } from 'shiki'
-import { createJavaScriptRegexEngine } from '@shikijs/engine-javascript'
+import { captureConsole, executeSource, formatValue } from '../../../../playground/runtime.js'
+import type { mountPlaygroundEditor } from '../../../../playground/editor.js'
+import '../../../../playground/editor.css'
 import JsonTree from './JsonTree.vue'
-
-let shikiSingleton: Awaited<ReturnType<typeof createHighlighter>> | null = null
-let shikiSingletonPromise: Promise<Awaited<ReturnType<typeof createHighlighter>>> | null = null
 
 type PlaygroundFile = {
   label: string
@@ -23,7 +21,7 @@ type PlaygroundMount = {
 }
 
 const props = withDefaults(defineProps<{
-  /** The TypeScript source code to display and execute. */
+  /** Executable JavaScript, displayed with TypeScript highlighting. */
   code?: string
   /** Optional tabbed source files shown in the editor and concatenated for execution. */
   files?: PlaygroundFile[]
@@ -54,12 +52,9 @@ const showCanvas = computed(() => props.renderCanvas)
 const out = computed(() => props.out ?? 'both')
 const canvasHeightStyle = computed(() => props.canvasHeight ? `${props.canvasHeight}px` : undefined)
 const namedMounts = computed(() => props.mounts ?? [])
-const { isDark } = useData()
-
-const defaultFiles = ref<PlaygroundFile[]>([])
-const editableFiles = ref<PlaygroundFile[]>([])
-const activeFileIndex = ref(0)
-const highlightedCode = ref('')
+const { page } = useData()
+const editorEl = ref<HTMLElement | null>(null)
+let editor: ReturnType<typeof mountPlaygroundEditor> | undefined
 const canvasEl = ref<HTMLCanvasElement | null>(null)
 const mount = ref<HTMLDivElement | null>(null)
 const namedMountRefs = ref<Record<string, HTMLElement | null>>({})
@@ -73,18 +68,6 @@ const viewsEl = ref<HTMLDivElement | null>(null)
 const arrangesViews = computed(() => props.grammar || props.spec !== undefined)
 /** Starts the ids of a spec playground's view elements, so that they are unique on the page. */
 const viewIdPrefix = `playground-${Math.random().toString(36).slice(2, 8)}-`
-
-let shiki: Awaited<ReturnType<typeof createHighlighter>> | null = null
-
-const hasTabs = computed(() => editableFiles.value.length > 1)
-const activeFile = computed(() => editableFiles.value[activeFileIndex.value] ?? null)
-const editableCode = computed({
-  get: () => activeFile.value?.code ?? '',
-  set: (value: string) => {
-    const file = editableFiles.value[activeFileIndex.value]
-    if (file) file.code = value
-  },
-})
 
 function normalizeCode(src: string): string {
   const lines = src.split('\n')
@@ -111,9 +94,9 @@ function buildInitialFiles(): PlaygroundFile[] {
 }
 
 /** Wraps the edited spec in the code that runs it. Specs without a map or plot print their tables. */
-function getSpecCode(): string {
+function getSpecCode(source: string): string {
   return `
-    const spec = (${editableFiles.value[0]?.code ?? '{}'}
+    const spec = (${source}
     )
     setStatus('Running the spec...')
     const grammar = new AutkGrammar(__viewTargets(spec, ${JSON.stringify(props.targets ?? {})}))
@@ -129,10 +112,8 @@ function getSpecCode(): string {
   `
 }
 
-function getUserCode(): string {
-  return editableFiles.value
-    .map((file) => file.code)
-    .join('\n\n')
+function getUserCode(sources: string[]): string {
+  return sources.join('\n\n')
     .replace(/import\s*{[^}]*}\s*from\s*["'][^"']*["']\s*;?/g, '')
     .trim()
 }
@@ -148,63 +129,6 @@ function parseJson(str: string): unknown {
     return JSON.parse(str)
   } catch {
     return str
-  }
-}
-
-function escapeHtml(s: string): string {
-  return s
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-}
-
-function highlight(src: string): string {
-  if (!shiki) return escapeHtml(src)
-  const tokens = shiki.codeToTokens(src, {
-    lang: 'typescript',
-    theme: isDark.value ? 'github-dark' : 'github-light',
-  })
-  return tokens.tokens
-    .map((line) => {
-      const spans = line
-        .map((t) => {
-          const style = t.color ? `color:${t.color}` : ''
-          const fontStyle = t.fontStyle ?? 0
-          const classes: string[] = []
-          if (fontStyle & 1) classes.push('italic')
-          if (fontStyle & 2) classes.push('bold')
-          if (fontStyle & 4) classes.push('underline')
-          const cls = classes.length ? ` class="${classes.join(' ')}"` : ''
-          return style
-            ? `<span${cls} style="${style}">${escapeHtml(t.content)}</span>`
-            : `<span${cls}>${escapeHtml(t.content)}</span>`
-        })
-        .join('')
-      return `<span class="line">${spans || ' '}</span>`
-    })
-    .join('')
-}
-
-async function updateHighlight() {
-  highlightedCode.value = highlight(editableCode.value)
-}
-
-function setActiveFile(index: number) {
-  activeFileIndex.value = index
-  updateHighlight()
-}
-
-function onTabKey(e: KeyboardEvent) {
-  if (e.key === 'Tab') {
-    e.preventDefault()
-    const ta = e.target as HTMLTextAreaElement
-    const start = ta.selectionStart
-    const end = ta.selectionEnd
-    editableCode.value = editableCode.value.substring(0, start) + '  ' + editableCode.value.substring(end)
-    requestAnimationFrame(() => {
-      ta.selectionStart = ta.selectionEnd = start + 2
-    })
-    updateHighlight()
   }
 }
 
@@ -347,7 +271,10 @@ function trackGrammars<T extends GrammarClass>(Grammar: T, arrangeViews: Arrange
 }
 
 async function runCode() {
+  if (!editor || isRunning.value || unmounted) return
+  const sources = editor.getSources()
   isRunning.value = true
+  editor.setBusy(true)
   error.value = null
   status.value = 'Running…'
   consoleOutput.value = []
@@ -381,7 +308,7 @@ async function runCode() {
       .map((key) => `const ${key} = __modules.${key};`)
       .join('\n')
 
-    const userCode = props.spec !== undefined ? getSpecCode() : getUserCode()
+    const userCode = props.spec !== undefined ? getSpecCode(sources[0]) : getUserCode(sources)
 
     const namedMountDeclarations = getNamedMountScopeDeclarations()
 
@@ -391,18 +318,7 @@ async function runCode() {
         ${namedMountDeclarations}
         const canvas = __canvas;
         const mount = __mount;
-        const emit = (type, args) => {
-          // One entry per argument, so an object or array stays parseable and
-          // renders as a collapsible tree instead of being glued to a label.
-          for (const value of args) {
-            __appendConsole(type, typeof value === 'string' ? value : JSON.stringify(value, null, 2) ?? String(value));
-          }
-        };
-        const console = {
-          log: (...args) => emit('log', args),
-          error: (...args) => emit('error', args),
-          warn: (...args) => emit('warn', args),
-        };
+        const console = __console;
         const output = (html) => __setMountHtml(html);
         const setStatus = (message) => __setStatus(message);
         const clearStatus = () => __clearStatus();
@@ -411,35 +327,27 @@ async function runCode() {
       })()
     `
 
-    const AsyncFunction = Object.getPrototypeOf(async function () { }).constructor
-    const appendConsole = (_type: 'log' | 'error' | 'warn', message: string) => {
-      consoleOutput.value = [...consoleOutput.value, message]
+    const result = await executeSource(wrapped, {
+      __modules: modules,
+      __canvas: canvasEl.value,
+      __mount: mount.value,
+      __console: captureConsole((value: unknown) => consoleOutput.value.push(formatValue(value))),
+      __setMountHtml: setMountHtml,
+      __setStatus: setPlaygroundStatus,
+      __clearStatus: clearPlaygroundStatus,
+      __clearMount: clearMount,
+      __namedMounts: namedMountRefs.value,
+      __viewTargets: (spec: unknown, pageTargets: ViewTargets) => viewTargets(arrangeViews as ArrangeViews, spec, pageTargets),
+    })
+    if (result instanceof Node) mount.value?.append(result)
+    else if (result !== undefined) {
+      if (out.value !== 'dom') consoleOutput.value.push(formatValue(result))
+      else if (mount.value) {
+        const value = document.createElement('pre')
+        value.textContent = formatValue(result)
+        mount.value.append(value)
+      }
     }
-
-    await new AsyncFunction(
-      '__modules',
-      '__canvas',
-      '__mount',
-      '__appendConsole',
-      '__setMountHtml',
-      '__setStatus',
-      '__clearStatus',
-      '__clearMount',
-      '__namedMounts',
-      '__viewTargets',
-      wrapped,
-    )(
-      modules,
-      canvasEl.value,
-      mount.value,
-      appendConsole,
-      setMountHtml,
-      setPlaygroundStatus,
-      clearPlaygroundStatus,
-      clearMount,
-      namedMountRefs.value,
-      (spec: unknown, pageTargets: ViewTargets) => viewTargets(arrangeViews as ArrangeViews, spec, pageTargets),
-    )
 
     hasDomOutput.value = (mount.value?.childNodes.length ?? 0) > 0 || namedMounts.value.length > 0
     status.value = ''
@@ -449,102 +357,45 @@ async function runCode() {
     status.value = ''
   } finally {
     isRunning.value = false
+    editor?.setBusy(false)
     // A run that ends after the playground is gone still releases its maps.
     if (unmounted) destroyGrammars()
   }
 }
 
-function resetCode() {
-  editableFiles.value = defaultFiles.value.map((file) => ({ ...file }))
-  activeFileIndex.value = 0
-  updateHighlight()
-}
-
 onMounted(async () => {
-  defaultFiles.value = buildInitialFiles()
-  editableFiles.value = defaultFiles.value.map((file) => ({ ...file }))
-
-  if (!shikiSingletonPromise) {
-    const jsEngine = createJavaScriptRegexEngine()
-    shikiSingletonPromise = createHighlighter({
-      themes: ['github-dark', 'github-light'],
-      langs: ['typescript'],
-      engine: jsEngine,
-    })
-  }
-
-  shikiSingleton = await shikiSingletonPromise
-  shiki = shikiSingleton
-  updateHighlight()
-
-  if (props.autoRun) {
-    await runCode()
-  }
+  const root = editorEl.value
+  if (!root) return
+  const siblings = (root.closest('.vp-doc') ?? document).querySelectorAll('.code-playground__editor')
+  const key = `autark-playground:${page.value.relativePath}:${Array.from(siblings).indexOf(root)}`
+  const { mountPlaygroundEditor } = await import('../../../../playground/editor.js')
+  if (unmounted) return
+  editor = mountPlaygroundEditor(root, {
+    files: buildInitialFiles(),
+    title: props.spec !== undefined ? 'Live Spec' : 'Live Code',
+    storageKey: key,
+    onRun: runCode,
+  })
+  // Restore edits without executing them on page load; Run opts in to execution.
+  if (props.autoRun && !editor.hasEdits()) await runCode()
 })
 
 onBeforeUnmount(() => {
   unmounted = true
+  editor?.destroy()
+  editor = undefined
   // A run still going destroys its grammars when it ends.
   if (!isRunning.value) destroyGrammars()
-})
-
-watch(isDark, () => {
-  updateHighlight()
 })
 </script>
 
 <template>
-  <div class="code-playground" aria-live="polite">
+  <div class="code-playground">
     <div class="code-playground__label">{{ spec !== undefined ? 'Live Spec' : 'Live Code' }}</div>
+    <div ref="editorEl" class="code-playground__editor" />
 
-    <div class="code-playground__editor">
-      <div v-if="hasTabs" class="code-playground__file-tabs" role="tablist" aria-label="Code files">
-        <button
-          v-for="(file, index) in editableFiles"
-          :key="file.label"
-          type="button"
-          class="code-playground__file-tab"
-          :class="{ 'code-playground__file-tab--active': index === activeFileIndex }"
-          :aria-selected="index === activeFileIndex"
-          @click="setActiveFile(index)"
-        >
-          {{ file.label }}
-        </button>
-      </div>
-
-      <div class="code-playground__code-wrap">
-        <div
-          class="code-playground__highlight"
-          aria-hidden="true"
-          v-html="highlightedCode"
-        />
-        <textarea
-          v-model="editableCode"
-          class="code-playground__textarea"
-          spellcheck="false"
-          @input="updateHighlight"
-          @keydown="onTabKey"
-        />
-      </div>
-
-      <div class="code-playground__toolbar">
-        <button
-          class="code-playground__btn code-playground__btn--run"
-          :disabled="isRunning"
-          @click="runCode"
-        >
-          {{ isRunning ? 'Running…' : '▶ Run' }}
-        </button>
-        <button
-          class="code-playground__btn code-playground__btn--reset"
-          @click="resetCode"
-        >
-          ↺ Reset
-        </button>
-      </div>
-    </div>
-
-    <div class="code-playground__output">
+    <div class="code-playground__output" aria-live="polite">
+      <div v-if="error && out === 'dom' && !arrangesViews && !showCanvas" class="code-playground__error">{{ error }}</div>
       <div
         v-if="arrangesViews && out !== 'console'"
         class="code-playground__views-wrap"
@@ -626,118 +477,6 @@ watch(isDark, () => {
 
 .code-playground__editor {
   border-bottom: 1px solid var(--vp-c-divider);
-}
-
-.code-playground__file-tabs {
-  display: flex;
-  gap: 8px;
-  padding: 8px 12px 0;
-  background: var(--vp-c-bg-soft);
-  border-bottom: 1px solid var(--vp-c-divider);
-}
-
-.code-playground__file-tab {
-  border: 1px solid var(--vp-c-divider);
-  border-bottom: none;
-  border-radius: 8px 8px 0 0;
-  background: transparent;
-  color: var(--vp-c-text-2);
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 7px 12px;
-}
-
-.code-playground__file-tab--active {
-  background: var(--vp-code-block-bg);
-  color: var(--vp-c-text-1);
-}
-
-.code-playground__toolbar {
-  display: flex;
-  gap: 8px;
-  padding: 8px 12px;
-  background: var(--vp-c-bg-soft);
-}
-
-.code-playground__btn {
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 4px 12px;
-  transition: background-color 0.15s;
-}
-
-.code-playground__btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.code-playground__btn--run {
-  background: var(--vp-c-brand-1);
-  color: #fff;
-}
-
-.code-playground__btn--run:hover:not(:disabled) {
-  background: var(--vp-c-brand-2);
-}
-
-.code-playground__btn--reset {
-  background: var(--vp-c-default-3);
-  color: var(--vp-c-text-1);
-}
-
-.code-playground__btn--reset:hover {
-  background: var(--vp-c-default-2);
-}
-
-.code-playground__code-wrap {
-  display: grid;
-  max-height: 800px;
-  overflow: auto;
-}
-
-.code-playground__highlight,
-.code-playground__textarea {
-  grid-area: 1 / 1;
-  margin: 0;
-  padding: 12px;
-  font-family: var(--vp-font-family-mono);
-  font-size: var(--vp-code-font-size);
-  line-height: 21px;
-  tab-size: 2;
-  -moz-tab-size: 2;
-  white-space: pre;
-  border: none;
-  background: transparent;
-  overflow-wrap: normal;
-  word-wrap: normal;
-}
-
-.code-playground__highlight {
-  pointer-events: none;
-}
-
-:deep(.code-playground__highlight span[style]) {
-  background: none !important;
-}
-
-:deep(.code-playground__highlight .line) {
-  display: block;
-}
-
-.code-playground__textarea {
-  color: transparent;
-  caret-color: var(--vp-c-text-1);
-  outline: none;
-  resize: none;
-  -webkit-text-fill-color: transparent;
-}
-
-.code-playground__textarea::selection {
-  background: rgba(96, 165, 250, 0.25);
 }
 
 .code-playground__canvas-wrap {

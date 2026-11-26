@@ -9,8 +9,9 @@ Runnable SIBGRAPI 2026 notebooks and the extra Urbane application, adapted from
 Run `npm run dev` from the site repository and open `/tutorial/`. The five
 chapters use the same VitePress document layout as the Guide: sidebar, sticky
 outline, headings, and browser scrolling. The site chapter pages in
-`guide/tutorial/` reuse the notebook HTML and mount the shared cell runner in
-`notebook.js`; edit cell source and chapter prose in `tutorial/*.html`. Use
+`guide/tutorial/` reuse the notebook HTML and mount `notebook.js`, which adds
+chapter context and output helpers to the [shared playground](../playground/README.md).
+Edit cell source and chapter prose in `tutorial/*.html`. Use
 `dataUrl()` in cells to resolve paths relative to `tutorial/data/` in both builds.
 `npm run build` also publishes the standalone notebooks. Run
 `npm run test:tutorial` against the built site.
@@ -52,8 +53,8 @@ and documentation-style chapter navigation. The header's appearance switch suppo
 light/dark themes, follows the system preference until changed, and saves the choice
 locally when storage is available. On narrow screens the in-page outline collapses
 without hiding chapter navigation. Charts and maps retain their own visualization
-palettes. The shared shell and stylesheet live entirely inside `tutorial/`, with no
-new UI dependencies, remote fonts, or runtime assets from the website.
+palettes. The standalone shell and notebook output styles live in `tutorial/`;
+the editor and its styles come from `playground/`.
 
 ## Data and dependencies
 
@@ -69,10 +70,9 @@ an outage. Edited queries without a matching recording need the live server.
 DuckDB extensions may require network access on first use, so this is **not a
 promise of fully offline operation**.
 
-Autark, DuckDB, D3, and GeoTIFF are not vendored. The only retained third-party
-bundle is `vendor/codemirror.js`, the upstream editor/highlighter, to preserve the
-editing experience without adding npm dependencies. Its license notices are in
-`vendor/LICENSE.txt`.
+Autark, DuckDB, D3, and GeoTIFF are not part of the vendored tutorial.
+The playground uses the tutorial's original CodeMirror bundle at
+`playground/vendor/codemirror.js`; license notices live beside it.
 
 ## Verification
 

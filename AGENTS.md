@@ -165,7 +165,8 @@ site build to check routes, bundles, DuckDB assets, and datasets. See
 |---|---|
 | `package.json` | Site scripts, including `release:prepare` |
 | `guide/.vitepress/config.ts` | VitePress site config (nav, sidebar, theme) |
-| `guide/.vitepress/theme/components/CodePlayground.vue` | Runtime for interactive gallery code |
+| `playground/` | Shared editor, controls, persistence, and runner for editable site examples |
+| `guide/.vitepress/theme/components/CodePlayground.vue` | User Guide and Grammar playground adapter |
 | `guide/.vitepress/theme/components/HomeGallery.vue` | Home-page gallery cards |
 | `guide/.vitepress/theme/components/GalleryPageGrid.vue` | Full gallery cards and filters |
 | `guide/gallery/` | Gallery pages; `examples/` embeds the mirrored apps |

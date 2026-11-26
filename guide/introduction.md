@@ -156,7 +156,7 @@ map.draw();
 </ClientOnly>
 
 :::tip Make changes to the examples
-Try to remove `"buildings"` from the `layers` list and click **Run** to test changes.
+Try removing `"buildings"` from the `layers` list, then click **Run** or press **⌘/Ctrl + Enter**. Edits are saved in this browser. Use **Copy** to copy the current file or **Reset** to restore the original.
 :::
 
 ## Where to go next

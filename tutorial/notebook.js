@@ -14,17 +14,12 @@
 import * as d3 from "d3";
 import * as autk from "@urban-toolkit/autk";
 import * as GeoTIFF from "geotiff";
-import {createEditor, highlightStatic} from "./vendor/codemirror.js";
+import {mountPlaygroundEditor, highlightStatic} from "../playground/editor.js";
+import {captureConsole, executeSource, formatValue} from "../playground/runtime.js";
 import {withFallback as withOverpassFallback} from "./overpass-fallback.js";
 
-const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
 // Serialize execution even across chapter navigation; Overpass temporarily wraps fetch.
 let queue = Promise.resolve();
-const store = {
-  get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
-  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* Storage may be disabled or full. */ } },
-  remove(k) { try { localStorage.removeItem(k); } catch { /* Storage may be disabled. */ } },
-};
 
 function dedent(text) {
   const lines = text.replace(/^\n+/, "").replace(/\s+$/, "").split("\n");
@@ -35,20 +30,6 @@ function dedent(text) {
 // ---------- rendering values ----------
 function note(text) { const p = document.createElement("p"); p.className = "status"; p.textContent = text; return p; }
 function pre(cls, text) { const p = document.createElement("pre"); p.className = cls; p.textContent = text; return p; }
-
-function stringify(v) {
-  const seen = new WeakSet();
-  const s = JSON.stringify(v, (k, x) => {
-    if (typeof x === "bigint") return Number(x);
-    if (x instanceof Map) return Object.fromEntries(x);
-    if (x instanceof Set) return [...x];
-    if (ArrayBuffer.isView(x) && !(x instanceof DataView)) return `${x.constructor.name}(${x.length})`;
-    if (x instanceof ArrayBuffer) return `ArrayBuffer(${x.byteLength})`;
-    if (x && typeof x === "object") { if (seen.has(x)) return "[circular]"; seen.add(x); }
-    return x;
-  }, 2);
-  return s;
-}
 
 // Long arrays and FeatureCollections are trimmed so the page stays responsive.
 function trim(v, depth = 0) {
@@ -69,7 +50,7 @@ export function render(v) {
   if (v === undefined) return null;
   if (typeof v === "string") return pre("val", v);
   if (typeof v === "number" || typeof v === "boolean" || v === null) return pre("val", String(v));
-  return pre("val", stringify(trim(v)) ?? String(v));
+  return pre("val", formatValue(trim(v)));
 }
 
 export function table(rows, {limit = 50} = {}) {
@@ -124,46 +105,29 @@ function setup(figure, index, notebook) {
   figure.innerHTML = `
     <figcaption><span>${title}</span><span class="mode">JavaScript · ${needs || "standalone"}</span></figcaption>
     <div class="editor"></div>
-    <div class="bar"><button class="run">Run ▶</button>${index > 0 ? '<button class="all" title="Run every example above this one first, in order">Run all above ▶▶</button>' : ""}
-      <button class="reset">Reset</button><button class="copy">Copy</button>
-      <span class="state"></span><span class="saved" hidden>edited · saved in this browser</span>
-      <span class="hint">⌘/Ctrl + Enter to run</span></div>
+    <div class="state" role="status" hidden></div>
     <div class="out" aria-live="polite"></div>`;
 
   const outEl = figure.querySelector(".out");
   const state = figure.querySelector(".state");
-  const saved = figure.querySelector(".saved");
-  const key = `autark-tutorial:${page}:${title}`;
-  const edit = store.get(key);
-  const start = edit && edit.original === original ? edit.code : original;
-  if (start === original && edit) store.remove(key);
-  saved.hidden = start === original;
-
-  let timer, editor, disposed = false;
-  const save = () => {
-    timer = undefined;
-    const code = editor.get();
-    if (code === original) store.remove(key); else store.set(key, {original, code});
-    saved.hidden = code === original;
-  };
-  const onChange = () => {
-    clearTimeout(timer);
-    timer = setTimeout(save, 400);
-  };
-  // Mod-Enter (⌘ or Ctrl + Enter) runs the cell; `run` is defined below.
-  editor = createEditor(figure.querySelector(".editor"), start, {onChange, onRun: () => run(), label: `${title} source code`});
+  let disposed = false;
 
   const exec = async () => {
     if (disposed) return;
+    editor.setBusy(true);
     outEl.replaceChildren();
-    state.className = "state run"; state.textContent = "running…";
+    state.hidden = false;
+    state.className = "state run"; state.textContent = "Running…";
     const show = v => { const n = render(v); if (n) outEl.append(n); };
     const t0 = performance.now();
     try {
-      const fn = new AsyncFunction("ctx", "out", "show", "table", "xmlView", "withFallback", "d3", "autk", "GeoTIFF", "dataUrl", editor.get());
-      const result = await fn(ctx, outEl, show, rows => outEl.append(table(rows)), xmlView, fn => withOverpassFallback(fn, {
-        note: m => outEl.append(note(m)), recordings: dataUrl("osm/manifest.json"),
-      }), d3, autk, GeoTIFF, dataUrl);
+      const result = await executeSource(editor.getSources()[0], {
+        ctx, out: outEl, show, table: rows => outEl.append(table(rows)), xmlView,
+        withFallback: fn => withOverpassFallback(fn, {
+          note: m => outEl.append(note(m)), recordings: dataUrl("osm/manifest.json"),
+        }), d3, autk, GeoTIFF, dataUrl,
+        console: captureConsole(show),
+      });
       show(result);
       state.className = "state ok"; state.textContent = `done in ${((performance.now() - t0) / 1000).toFixed(1)} s`;
       return true;
@@ -172,24 +136,22 @@ function setup(figure, index, notebook) {
       console.error(e);
       state.className = "state"; state.textContent = "error";
       return false;
+    } finally {
+      if (!disposed) editor.setBusy(false);
     }
   };
   const run = () => (queue = queue.then(exec));
-  figure.querySelector(".run").addEventListener("click", run);
-  figure.querySelector(".all")?.addEventListener("click", async () => {
-    for (let i = 0; i <= index; i++) cells[i].enqueue();
-  });
-  figure.querySelector(".reset").addEventListener("click", () => {
-    clearTimeout(timer); editor.set(original); store.remove(key); saved.hidden = true;
-  });
-  figure.querySelector(".copy").addEventListener("click", async e => {
-    const b = e.currentTarget, label = b.textContent;
-    try { await navigator.clipboard.writeText(editor.get()); b.textContent = "Copied"; } catch { b.textContent = "Copy failed"; }
-    setTimeout(() => (b.textContent = label), 1200);
+  const editor = mountPlaygroundEditor(figure.querySelector(".editor"), {
+    files: [{label: "example.js", code: original}],
+    title,
+    storageKey: `autark-tutorial:${page}:${title}`,
+    onRun: run,
+    onRunAll: index > 0 ? () => {
+      for (let i = 0; i <= index; i++) cells[i].enqueue();
+    } : undefined,
   });
   cells.push({enqueue: run, dispose() {
     disposed = true;
-    if (timer !== undefined) { clearTimeout(timer); save(); }
     editor.destroy();
   }});
 }

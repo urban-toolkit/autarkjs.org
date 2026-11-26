@@ -1,0 +1,78 @@
+.playground-editor {
+  --playground-bg: var(--vp-code-block-bg, var(--code-bg, #f6f6f7));
+  --playground-panel: var(--vp-c-bg-soft, var(--paper-2, #f6f6f7));
+  --playground-border: var(--vp-c-divider, var(--rule, #e2e2e3));
+  --playground-text: var(--vp-c-text-1, var(--ink, #3c3c43));
+  --playground-muted: var(--vp-c-text-2, var(--muted, #67676c));
+  --playground-focus: var(--vp-c-brand-1, var(--accent, #3451b2));
+  --playground-selection: var(--vp-c-brand-soft, var(--accent-soft, #646cff1a));
+  background: var(--playground-bg);
+  color: var(--playground-text);
+  min-width: 0;
+}
+
+.playground-editor [hidden] { display: none !important; }
+.playground-editor .cm-editor { max-height: 34rem; background: var(--playground-bg); }
+.playground-editor .cm-editor.cm-focused { outline: 2px solid var(--playground-focus); outline-offset: -2px; }
+.playground-editor .cm-scroller { padding: 12px 0; font: 13px/1.65 var(--vp-font-family-mono, var(--mono, monospace)); }
+.playground-editor .cm-content { padding: 0 8px; caret-color: var(--playground-text); }
+.playground-editor .cm-line { padding: 0 10px; }
+.playground-editor .cm-activeLine { background: var(--playground-selection); }
+.playground-editor .cm-selectionBackground,
+.playground-editor .cm-editor.cm-focused .cm-selectionBackground,
+.playground-editor .cm-content ::selection { background: var(--playground-selection) !important; }
+.playground-editor .cm-matchingBracket { outline: 1px solid var(--playground-focus); }
+
+.playground-tabs, .playground-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  background: var(--playground-panel);
+  font-size: 12px;
+}
+.playground-tabs { padding: 6px 12px 0; border-bottom: 1px solid var(--playground-border); }
+.playground-toolbar { padding: 8px 12px; border-top: 1px solid var(--playground-border); }
+.playground-editor button {
+  border: 1px solid var(--playground-border);
+  border-radius: 5px;
+  padding: 4px 12px;
+  min-height: 30px;
+  background: var(--playground-panel);
+  color: var(--playground-text);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  cursor: pointer;
+}
+.playground-editor button:disabled { opacity: .6; cursor: default; }
+.playground-editor button:focus-visible { outline: 2px solid var(--playground-focus); outline-offset: 2px; }
+.playground-editor button:hover:not(:disabled) { border-color: var(--playground-focus); }
+.playground-editor button.run { background: #465fc4; border-color: #465fc4; color: #fff; }
+.playground-editor button.run:hover:not(:disabled) { background: #3451b2; }
+.playground-tabs [role="tab"] { border-bottom: 0; border-radius: 5px 5px 0 0; color: var(--playground-muted); }
+.playground-tabs [aria-selected="true"] { background: var(--playground-bg); color: var(--playground-text); }
+.playground-shortcut { margin-left: auto; }
+.playground-edits, .playground-shortcut { color: var(--playground-muted); font-size: 11px; }
+
+@media (max-width: 600px) {
+  .playground-editor button { min-height: 34px; }
+  .playground-shortcut { display: none; }
+}
+
+/* Shared syntax colors for CodeMirror and the Tutorial's static snippets. */
+:where(.playground-editor, .tutorial-notebook) {
+  .tok-keyword, .tok-operatorKeyword, .tok-modifier, .tok-controlKeyword, .tok-definitionKeyword { color: #cf222e; }
+  .tok-string, .tok-string2, .tok-regexp { color: #0a3069; }
+  .tok-number, .tok-bool, .tok-null, .tok-atom, .tok-propertyName { color: #0550ae; }
+  .tok-comment, .tok-lineComment, .tok-blockComment { color: #6e7781; font-style: normal; }
+  .tok-variableName, .tok-operator, .tok-punctuation, .tok-bracket { color: #24292f; }
+  .tok-variableName.tok-definition, .tok-function, .tok-typeName, .tok-className { color: #8250df; }
+  .dark & :is(.tok-keyword, .tok-operatorKeyword, .tok-modifier, .tok-controlKeyword, .tok-definitionKeyword) { color: #ff7b72; }
+  .dark & :is(.tok-string, .tok-string2, .tok-regexp) { color: #a5d6ff; }
+  .dark & :is(.tok-number, .tok-bool, .tok-null, .tok-atom, .tok-propertyName) { color: #79c0ff; }
+  .dark & :is(.tok-comment, .tok-lineComment, .tok-blockComment) { color: #8b949e; }
+  .dark & :is(.tok-variableName, .tok-operator, .tok-punctuation, .tok-bracket) { color: #e6edf3; }
+  .dark & :is(.tok-variableName.tok-definition, .tok-function, .tok-typeName, .tok-className) { color: #d2a8ff; }
+}
