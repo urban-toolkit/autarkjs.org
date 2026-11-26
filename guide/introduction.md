@@ -90,8 +90,7 @@ Two names carry coordinates across Autark, and they never mean the same thing:
 | Name | Where it appears | Meaning |
 | --- | --- | --- |
 | `crs` | `new AutkMap(canvas, { crs })`, `db.setWorkspace(name, { crs })` | The **workspace** coordinate system: where tables are stored and where the map draws. |
-| `sourceCrs` | `db.loadGeojson`, `db.loadCsv`, `db.loadJson`, `db.loadGeoTiff`, `db.loadOsm` | The coordinate system of the **incoming** data, transformed into the workspace on load. |
-| `sourceCrs` | `map.loadCollection` | The same option for a layer drawn straight on a map. |
+| `sourceCrs` | `db.loadGeojson`, `db.loadCsv`, `db.loadJson`, `db.loadGeoTiff`, `db.loadOsm`, `map.loadCollection` | The coordinate system of the **incoming** data, transformed into the workspace on load. |
 
 </div>
 
@@ -103,6 +102,8 @@ import { DEFAULT_WORKSPACE_CRS } from '@urban-toolkit/autk-core'
 const map = new AutkMap(canvas, { crs: DEFAULT_WORKSPACE_CRS })
 map.loadCollection('neighborhoods', { collection, sourceCrs: 'EPSG:4326' })
 ```
+
+On the map, only `map.loadCollection` takes `sourceCrs`, and only for vector layers: a raster collection must already use the workspace CRS. Imagery and terrain have no CRS option of their own, and `map.loadMesh` expects workspace coordinates; the constructor's `crs` is the single source of truth for all of them.
 
 Keep the database and the map on the same CRS, otherwise features land in the wrong place. Data exported by `db.getLayer()` is already projected, so load it **without** `sourceCrs`. Any horizontal CRS known to [Proj4js](https://github.com/proj4js/proj4js) works; register custom definitions first:
 
