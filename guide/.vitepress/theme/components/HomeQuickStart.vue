@@ -59,9 +59,8 @@ onMounted(async () => {
     }
 
     map.camera.zoom(-3, 0.45, 0.45)
-    // Nudge the framing up: positive dy moves the camera north, showing a
-    // little more of the city above the Financial District.
-    map.camera.translate(0, 0.09)
+    // Nudge the framing up and east: positive dy moves north, positive dx east.
+    map.camera.translate(0.04, 0.09)
     map.camera.update()
     map.draw()
     status.value = ''
