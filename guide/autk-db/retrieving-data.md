@@ -143,7 +143,7 @@ map.draw();
 </script>
 
 <style scoped>
-.introduction-page :is(p, li, td, th, .custom-block p, .custom-block li, h1, h2, h3, h4, h5, h6) {
+.introduction-page :is(p, li, .custom-block p, .custom-block li, h1, h2, h3, h4, h5, h6) {
   text-align: justify;
 }
 

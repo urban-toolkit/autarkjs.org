@@ -1,11 +1,17 @@
 <style scoped>
-.introduction-page :is(p, li, td, th, .custom-block p, .custom-block li, h1, h2, h3, h4, h5, h6) {
+.introduction-page :is(p, li, .custom-block p, .custom-block li, h1, h2, h3, h4, h5, h6) {
   text-align: justify;
 }
 
 .introduction-page table th:first-child,
 .introduction-page table td:first-child {
   width: 35%;
+}
+
+/* The CRS table only names two values, so its first column stays narrow. */
+.introduction-page .coordinate-table table th:first-child,
+.introduction-page .coordinate-table table td:first-child {
+  width: 14%;
 }
 </style>
 
@@ -79,10 +85,14 @@ All Autark packages run in the browser without a backend. Data is fetched direct
 
 Two names carry coordinates across Autark, and they never mean the same thing:
 
+<div class="coordinate-table">
+
 | Name | Where it appears | Meaning |
 | --- | --- | --- |
 | `crs` | `new AutkMap(canvas, { crs })`, `db.setWorkspace(name, { crs })` | The **workspace** coordinate system: where tables are stored and where the map draws. |
 | `sourceCrs` | `loadGeojson`, `loadCsv`, `loadJson`, `loadGeoTiff`, `loadOsm`, `map.loadCollection` | The coordinate system of the **incoming** data, transformed into the workspace on load. |
+
+</div>
 
 Both database and map default to `DEFAULT_WORKSPACE_CRS` (`EPSG:3395`, World Mercator in meters), and every database loader defaults `sourceCrs` to `EPSG:4326`. A map layer without `sourceCrs` is assumed to already be in the workspace CRS, so pass `sourceCrs` for raw longitude/latitude GeoJSON:
 

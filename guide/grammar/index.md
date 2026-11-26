@@ -35,7 +35,7 @@ await grammar.run(spec)
 </script>
 
 <style scoped>
-.package-page :is(p, li, td, th, .custom-block p, .custom-block li, h1, h2, h3, h4, h5, h6) {
+.package-page :is(p, li, .custom-block p, .custom-block li, h1, h2, h3, h4, h5, h6) {
   text-align: justify;
 }
 
