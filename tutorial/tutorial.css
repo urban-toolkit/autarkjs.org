@@ -260,18 +260,30 @@ html.embed .series-nav,
 html.embed .toc-title { display: none; }
 /* Mirror the guide: content on the left, "On this page" at the top right. */
 html.embed .layout {
-  /* Match the guide's reading column instead of stretching to the frame. */
+  /* The page positions the frame; inside it, only the reading column and outline. */
   grid-template-columns: minmax(0, 688px) 220px;
-  justify-content: center;
+  justify-content: start;
   gap: 48px;
-  max-width: 956px;
+  max-width: none;
+  margin: 0;
   padding: 24px 0 48px;
 }
+
 html.embed main { grid-column: 1; grid-row: 1; }
 html.embed nav.toc { grid-column: 2; grid-row: 1; top: 88px; }
 
-@media (max-width: 860px) {
-  html.embed .layout { display: block; }
+/* Frame-width breakpoints: the guide switches columns at the same points. */
+@media (min-width: 1050px) {
+  html.embed .layout { gap: 112px; }
+}
+
+@media (max-width: 815px) {
+  html.embed .layout {
+    display: block;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  html.embed nav.toc { display: none; }
 }
 
 /* The outline mirrors the guide: no rule, no disclosure control, same type size. */
