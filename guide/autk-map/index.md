@@ -65,9 +65,7 @@ button.addEventListener('click', () => {
 
 <div class="package-page">
 
-# autk-map
-
-[![npm version](https://img.shields.io/npm/v/@urban-toolkit/autk-map?color=0ea5e9&logo=npm&labelColor=111827)](https://www.npmjs.com/package/@urban-toolkit/autk-map)
+<h1 id="autk-map" class="package-title">autk-map <a class="pkg-badge" href="https://www.npmjs.com/package/@urban-toolkit/autk-map"><img alt="autk-map npm version" src="https://img.shields.io/npm/v/@urban-toolkit/autk-map?color=0ea5e9&logo=npm&labelColor=111827"></a></h1>
 
 `autk-map` is a geospatial data renderer powered by [WebGPU](https://webgpu.org/). It can handle [GeoJSON](https://geojson.org/), semantic [OpenStreetMap](https://www.openstreetmap.org/) layer types, and can display thematic values without a tile server.
 

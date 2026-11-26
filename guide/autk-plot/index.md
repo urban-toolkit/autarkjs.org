@@ -118,9 +118,7 @@ categoricalPlot.setSelection([]);
 `
 </script>
 
-# autk-plot
-
-[![npm version](https://img.shields.io/npm/v/@urban-toolkit/autk-plot?color=8b5cf6&logo=npm&labelColor=111827)](https://www.npmjs.com/package/@urban-toolkit/autk-plot)
+<h1 id="autk-plot" class="package-title">autk-plot <a class="pkg-badge" href="https://www.npmjs.com/package/@urban-toolkit/autk-plot"><img alt="autk-plot npm version" src="https://img.shields.io/npm/v/@urban-toolkit/autk-plot?color=8b5cf6&logo=npm&labelColor=111827"></a></h1>
 
 `autk-plot` is a D3-based chart library that takes a GeoJSON `FeatureCollection` as input and turns `feature.properties` into interactive charts. Because it shares the same data model as [`autk-db`](../autk-db/) and [`autk-map`](../autk-map/), it is straightforward to build coordinated visualizations where charts and maps selection stay in sync.
 

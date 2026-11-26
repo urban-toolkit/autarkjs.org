@@ -282,3 +282,20 @@ body,
 .VPHome .VPFeature .feature-badge img {
   height: 20px;
 }
+
+/* Package overview: the npm version sits beside the package name. */
+.package-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.package-title .pkg-badge {
+  display: inline-flex;
+  line-height: 0;
+}
+
+.package-title .pkg-badge img {
+  height: 24px;
+}

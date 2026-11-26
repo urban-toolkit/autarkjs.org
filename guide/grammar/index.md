@@ -47,9 +47,7 @@ await grammar.run(spec)
 
 <div class="package-page">
 
-# autk-grammar
-
-[![npm version](https://img.shields.io/npm/v/@urban-toolkit/autk-grammar?color=f43f5e&logo=npm&labelColor=111827)](https://www.npmjs.com/package/@urban-toolkit/autk-grammar)
+<h1 id="autk-grammar" class="package-title">autk-grammar <a class="pkg-badge" href="https://www.npmjs.com/package/@urban-toolkit/autk-grammar"><img alt="autk-grammar npm version" src="https://img.shields.io/npm/v/@urban-toolkit/autk-grammar?color=f43f5e&logo=npm&labelColor=111827"></a></h1>
 
 `autk-grammar` lets you build an urban visual analytics application from a single declarative **spec**. Instead of calling [`autk-db`](/autk-db/), [`autk-compute`](/autk-compute/), [`autk-map`](/autk-map/), and [`autk-plot`](/autk-plot/) yourself, you describe the data to load, the computations to run, and the maps and plots to draw, and the grammar wires them together, including linked selections between maps and plots.
 

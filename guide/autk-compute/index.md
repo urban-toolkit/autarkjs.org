@@ -1,6 +1,4 @@
-# autk-compute
-
-[![npm version](https://img.shields.io/npm/v/@urban-toolkit/autk-compute?color=10b981&logo=npm&labelColor=111827)](https://www.npmjs.com/package/@urban-toolkit/autk-compute)
+<h1 id="autk-compute" class="package-title">autk-compute <a class="pkg-badge" href="https://www.npmjs.com/package/@urban-toolkit/autk-compute"><img alt="autk-compute npm version" src="https://img.shields.io/npm/v/@urban-toolkit/autk-compute?color=10b981&logo=npm&labelColor=111827"></a></h1>
 
 `autk-compute` is Autark's GPU analysis module. It runs computations in the browser on GeoJSON feature collections, and stores the results in `feature.properties.compute`.
 
