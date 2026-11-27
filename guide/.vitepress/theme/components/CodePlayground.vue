@@ -405,6 +405,9 @@ onBeforeUnmount(() => {
       aria-label="Playground output"
       aria-live="polite"
     >
+      <span v-if="!status && !isRunning && !hasConsoleOutput && !hasDomOutput" class="playground-card__placeholder">
+        Run this example to see the result.
+      </span>
       <pre v-if="error && out === 'dom'" class="code-playground__error">{{ error }}</pre>
       <div v-if="arrangesViews && out !== 'console'" ref="viewsEl" class="code-playground__views playground-card__visual" />
       <div v-else-if="showCanvas && out !== 'console'" class="code-playground__canvas-wrap playground-card__visual" :style="canvasHeightStyle ? { height: canvasHeightStyle } : undefined">
@@ -425,9 +428,6 @@ onBeforeUnmount(() => {
         />
       </div>
 
-      <span v-if="!status && !isRunning && !hasConsoleOutput && !hasDomOutput" class="playground-card__placeholder">
-        Run this example to see the result.
-      </span>
       <div v-if="out !== 'dom'" class="code-playground__console-lines" :class="{ 'code-playground__console-lines--combined': out === 'both' }">
         <div ref="consoleEl" class="code-playground__console-entries" />
       </div>

@@ -71,6 +71,7 @@
 .playground-card__output:empty::before { content: 'Run this example to see the result.'; }
 .playground-card__output:empty::before,
 .playground-card__placeholder {
+  display: block;
   color: var(--vp-c-text-2, var(--muted));
   font-size: 13px;
 }

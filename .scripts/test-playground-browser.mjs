@@ -11,6 +11,23 @@ try {
   const page = await context.newPage()
   const errors = []
   page.on('pageerror', error => errors.push(error.message))
+  for (const [route, index] of [['/autk-map/', 1], ['/autk-plot/extending.html', 0]]) {
+    await page.goto(`${base}${route}`)
+    const output = page.locator('.code-playground').nth(index).locator('.playground-card__output')
+    await output.locator('.playground-card__placeholder').waitFor()
+    for (const width of [1440, 390]) {
+      await page.setViewportSize({ width, height: 960 })
+      const offsets = await output.locator('.playground-card__placeholder').evaluate(element => {
+        const output = element.closest('.playground-card__output')
+        const message = element.getBoundingClientRect()
+        const bounds = output.getBoundingClientRect()
+        const style = getComputedStyle(output)
+        return [message.top - bounds.top - parseFloat(style.paddingTop), message.left - bounds.left - parseFloat(style.paddingLeft)]
+      })
+      assert.ok(offsets.every(offset => Math.abs(offset) <= 1), `${route}: initial message is top-left at ${width}px`)
+    }
+  }
+  await page.setViewportSize({ width: 1440, height: 960 })
   await page.goto(`${base}/autk-db/`)
   const guide = page.locator('.code-playground').first()
   const editor = guide.locator('.cm-content')
@@ -39,6 +56,7 @@ try {
   await editor.waitFor()
   assert.equal(await editor.innerText(), code)
   assert.ok(await guide.getByText('Run this example to see the result.').isVisible(), 'restored edits do not auto-run')
+  assert.equal(await guide.locator('.playground-card__placeholder').evaluate(el => el.getBoundingClientRect().top - el.parentElement.getBoundingClientRect().top), 16, 'console initial message uses the same top padding')
   await guide.getByRole('button', { name: 'Reset', exact: true }).click()
   assert.notEqual(await editor.innerText(), code)
 

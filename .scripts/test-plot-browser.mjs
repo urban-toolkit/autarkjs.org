@@ -39,6 +39,14 @@ try {
   await page.goto(`${base}/autk-plot/extending.html`)
   const registered = page.locator('.code-playground').first()
   await registered.locator('.cm-content').waitFor()
+  const initialPosition = await registered.locator('.playground-card__placeholder').evaluate(element => {
+    const output = element.closest('.playground-card__output')
+    const message = element.getBoundingClientRect()
+    const bounds = output.getBoundingClientRect()
+    const style = getComputedStyle(output)
+    return [message.top - bounds.top - parseFloat(style.paddingTop), message.left - bounds.left - parseFloat(style.paddingLeft)]
+  })
+  assert.ok(initialPosition.every(offset => Math.abs(offset) <= 1), 'initial message starts at the output padding, before empty chart mounts')
   for (let run = 0; run < 3; run++) {
     if (run === 2) {
       const source = await registered.locator('.cm-content').innerText()
