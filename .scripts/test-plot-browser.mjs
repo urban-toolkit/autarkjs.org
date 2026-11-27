@@ -61,6 +61,12 @@ try {
       await frame.locator('#taxi-hours-status').getByText(/07:00|08:00|09:00/).waitFor()
     }
     if (id === 'p12') {
+      await page.waitForFunction(() => {
+        const doc = document.querySelector('iframe.gallery-example-frame').contentDocument
+        const map = doc.querySelector('.map-panel').getBoundingClientRect()
+        const charts = doc.querySelector('.taxi-analysis').getBoundingClientRect()
+        return Math.abs(map.top - charts.top) <= 1 && Math.abs(map.bottom - charts.bottom) <= 1
+      }, undefined, { timeout: 5000 })
       await frame.locator('#taxi-hourly rect.autkMark').filter({ visible: true }).first().click()
       await frame.locator('#taxi-sample-status').getByText(/selected/).waitFor()
     }

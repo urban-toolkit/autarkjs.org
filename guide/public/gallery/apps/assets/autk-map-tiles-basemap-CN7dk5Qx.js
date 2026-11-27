@@ -1,1 +1,0 @@
-import"./catalog-BUTThS0V.js";import{r as o}from"./example-CdaOFTPR.js";import{T as a}from"./tiles-example-BuGVWWDr.js";import"./autk-map-CJsrhmnP.js";import"./autk-core-CnHUIRZw.js";async function n(){const r=document.querySelector("canvas");if(!r)throw new Error("No canvas found");await new a().run(r)}o(n,!0);

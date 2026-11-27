@@ -377,6 +377,13 @@ html.gallery-embed main.example-main { padding-bottom: 0; }
 /* Keep each map's rounded card; only the outer layout container is borderless. */
 html.gallery-embed #app { border: 0; border-radius: 0; }
 
+/* Let the route map fill the full height of the adjacent chart stack. */
+@media (min-width: 901px) {
+    html.gallery-embed .taxi-route #app.taxi-workspace { align-items: stretch; }
+    html.gallery-embed .taxi-route .taxi-workspace > .map-panel { display: flex; flex-direction: column; align-self: stretch; }
+    html.gallery-embed .taxi-route .map-stage { flex: 1 1 auto; min-height: 300px; }
+}
+
 /*
  * Embedded theme bridge. The gallery has a light palette of its own; inside the
  * site it borrows the VitePress tokens so dark mode stays readable.
