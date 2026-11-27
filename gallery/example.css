@@ -374,8 +374,8 @@ html.gallery-embed .description { max-width: none; margin: 0; font-size: 16px; l
 html.gallery-embed body.gallery-example { background: var(--vp-c-bg, #fff); }
 html.gallery-embed .workspace { margin: 0; }
 html.gallery-embed main.example-main { padding-bottom: 0; }
-html.gallery-embed .workspace > * { border-radius: 0; }
-html.gallery-embed .map-panel, html.gallery-embed #app { border: 0; border-radius: 0; }
+/* Keep each map's rounded card; only the outer layout container is borderless. */
+html.gallery-embed #app { border: 0; border-radius: 0; }
 
 /*
  * Embedded theme bridge. The gallery has a light palette of its own; inside the

@@ -19,6 +19,7 @@
     "gallery:build": "node .scripts/gallery-gate.mjs || vite build --config gallery/vite.config.ts",
     "gallery:dev": "vite --config gallery/vite.config.ts",
     "test:gallery": "node --test .scripts/test-gallery.mjs",
+    "test:gallery:layout": "node .scripts/test-gallery-layout-browser.mjs",
     "gallery:shots": "node .scripts/capture-gallery.mjs guide/public/imgs/gallery",
     "gallery:pages": "node .scripts/generate-gallery-pages.mjs",
     "gallery:assets": "node .scripts/sync-gallery-assets.mjs",

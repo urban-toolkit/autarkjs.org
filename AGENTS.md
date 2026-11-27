@@ -131,6 +131,9 @@ upstream example requires no hand-written route.
   Each page hosts its example with `<GalleryExample>` and the `?embed=1` flag. Embed
   mode hides only the app's own top navigation and back link, so its title,
   controls, "API in focus" section, and related examples stay visible inside the page.
+- `npm run test:gallery:layout` checks every built map panel's rounded border and
+  clipping in standalone/embed mode, light/dark themes, and desktop/mobile widths
+  against a running preview (`PLAYGROUND_URL` overrides the URL).
 - `npm run gallery:shots` recaptures the card illustrations from a preview. The
   capture hides the page chrome, so cards show only the map and its side panel.
 - Sidebar entries and cards use the example names from the catalog; the `D01`/`I01`
