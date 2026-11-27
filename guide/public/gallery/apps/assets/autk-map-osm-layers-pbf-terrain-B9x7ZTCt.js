@@ -1,0 +1,1 @@
+import"./catalog-BUTThS0V.js";import"./example-CdaOFTPR.js";import{s as r}from"./osm-layers-pbf-basemap-BhqyvlDC.js";import"./autk-map-CJsrhmnP.js";import"./browser-COK1kcTq.js";r({terrain:!0});

@@ -38,6 +38,11 @@ try {
               overflow: style.overflow,
             }
           }))
+          const backgrounds = await page.locator('#app, .workspace, .taxi-analysis').evaluateAll(elements =>
+            elements.map(element => getComputedStyle(element).backgroundColor))
+          for (const background of backgrounds) {
+            assert.equal(background, 'rgba(0, 0, 0, 0)', `${path}: panel gaps stay transparent (embedded=${embedded}, dark=${dark}, width=${width})`)
+          }
           assert.ok(panels.length > 0, path)
           for (const panel of panels) {
             const label = `${path}: embedded=${embedded}, dark=${dark}, width=${width}`

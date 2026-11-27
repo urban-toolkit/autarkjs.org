@@ -397,7 +397,6 @@ html.gallery-embed body.gallery-example {
 html.gallery-embed .gallery-example button,
 html.gallery-embed .gallery-example select,
 html.gallery-embed .gallery-example input:not([type="range"]):not([type="checkbox"]),
-html.gallery-embed .gallery-example #app,
 html.gallery-embed .gallery-example .map,
 html.gallery-embed .gallery-example .map-panel,
 html.gallery-embed .gallery-example .details-panel,
