@@ -42,6 +42,53 @@ chart.events.on(PlotEvent.BRUSH, ({ selection }) => {
   console.log(selection.length + ' neighborhoods brushed');
 });
 `
+
+const registeredTransformCode = `
+import { AutkPlot, PlotEvent, binnedProvenance, collectBuckets, indexedBins, registerTransform, unregisterTransform } from '@urban-toolkit/autk-plot'
+
+const names = ['Chelsea', 'Chinatown', 'Harlem', 'Hamilton Heights', 'Inwood']
+const collection = {
+  type: 'FeatureCollection',
+  features: names.map(name => ({
+    type: 'Feature', geometry: null, properties: { name },
+  })),
+}
+
+// Replace our definition when rerunning this editable example.
+unregisterTransform('by-initial')
+registerTransform({
+  name: 'by-initial',
+  shape: 'category-value', // { label, value } rows
+  run(rows, options, columns) {
+    const buckets = collectBuckets({
+      rows,
+      reducer: 'count',
+      bucketOf: row => String(row[columns[0]] ?? '').charAt(0) || null,
+    })
+    const keys = buckets.map(bucket => bucket.key)
+    return {
+      rows: buckets.map(bucket => ({ label: bucket.key, value: bucket.value, autkIds: bucket.autkIds })),
+      provenance: binnedProvenance({
+        rows, buckets, bins: indexedBins(keys, keys, 'initials'),
+        binLabel: 'initials', rowKeys: keys, reducer: 'count',
+      }),
+    }
+  },
+})
+
+const chart = new AutkPlot(plot, {
+  type: 'barchart', collection,
+  attributes: { axis: ['name', '@transform'] },
+  transform: { preset: 'registered', name: 'by-initial' },
+  labels: { axis: ['Initial', 'Neighborhood count'], title: 'Neighborhoods by initial' },
+  width: 'auto', height: 360,
+  ticks: { y: { format: 'd', count: 2 } },
+  events: [PlotEvent.CLICK],
+})
+chart.events.on(PlotEvent.CLICK, ({ selection }) => {
+  console.log(selection.map(index => names[index]).join(', '))
+})
+`
 </script>
 
 <style scoped>
@@ -92,36 +139,11 @@ To support statistics, call `setAnnotationObservations?.({ axes: ['x', 'y'], row
 
 A transform turns one row per feature into the rows a chart draws, with their provenance. It returns `rows` plus the relation graph that lets selections travel in both directions.
 
-```ts
-import { binnedProvenance, collectBuckets, indexedBins, registerTransform } from '@urban-toolkit/autk-plot'
+This example groups five neighborhood names by their initial and counts each group. Click **C** to see Chelsea and Chinatown in the console: the aggregated bar still selects the original source features. Edit the names or the grouping function, then click **Run**.
 
-registerTransform({
-  name: 'by-initial',
-  shape: 'category-value', // { label, value } rows
-  run(rows, options, columns) {
-    const buckets = collectBuckets({
-      rows,
-      reducer: 'count',
-      bucketOf: row => String(row[columns[0]] ?? '').charAt(0) || null,
-    })
-    const keys = buckets.map(bucket => bucket.key)
-    return {
-      rows: buckets.map(bucket => ({ label: bucket.key, value: bucket.value, autkIds: bucket.autkIds })),
-      provenance: binnedProvenance({
-        rows, buckets, bins: indexedBins(keys, keys, 'initials'),
-        binLabel: 'initials', rowKeys: keys, reducer: 'count',
-      }),
-    }
-  },
-})
-
-new AutkPlot(container, {
-  type: 'barchart',
-  collection,
-  attributes: { axis: ['name', '@transform'] },
-  transform: { preset: 'registered', name: 'by-initial' },
-})
-```
+<ClientOnly>
+  <CodePlayground :code="registeredTransformCode" out="both" :auto-run="true" :render-canvas="false" :mounts="[{ name: 'plot', height: 360 }]" />
+</ClientOnly>
 
 The row shape decides which charts can read the output: `category-value`, `series`, `hierarchy`, `flows`, and the other eight shapes are shared by every plot that reads them. A registered transform is used as `{ preset: 'registered', name }`.
 

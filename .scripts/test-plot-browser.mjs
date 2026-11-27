@@ -51,6 +51,19 @@ try {
     assert.equal(await registered.locator('.code-playground__named-mount > svg').count(), 1)
   }
 
+  const transform = page.locator('.code-playground').nth(1)
+  await transform.locator('rect.autkMark').first().waitFor()
+  for (let run = 0; run < 2; run++) {
+    if (run > 0) {
+      await transform.getByRole('button', { name: 'Run', exact: true }).click()
+      await transform.locator('.playground-card__state').getByText(/Done in|Run failed/).waitFor()
+    }
+    assert.equal(await transform.locator('rect.autkMark').count(), 3, 'registered transform produces three initial buckets')
+    assert.equal(await transform.locator('.code-playground__named-mount > svg').count(), 1)
+    await transform.locator('rect.autkMark').first().click()
+    await transform.locator('.code-playground__console-lines').getByText('Chelsea, Chinatown', { exact: true }).waitFor()
+  }
+
   for (const id of ['p10', 'p11', 'p12']) {
     await page.goto(`${base}/gallery/examples/${id}.html`)
     await page.locator('.gallery-example-frame').scrollIntoViewIfNeeded()
@@ -100,7 +113,7 @@ try {
   }
   assert.deepEqual(errors, [], 'no browser exceptions')
   assert.deepEqual(missing, [], 'no missing resources')
-  console.log('Plot guide: grouped bars, domains, line gaps, annotations, and registered D3 imports/reruns passed')
+  console.log('Plot guide: grouped bars, domains, line gaps, annotations, and registered D3 imports, transforms, and reruns passed')
 } finally {
   await browser.close()
 }
