@@ -83,7 +83,7 @@ All Autark packages run in the browser without a backend. Data is fetched direct
 
 ## Coordinate systems
 
-Two names carry coordinates across Autark, and they never mean the same thing:
+In Autark’s APIs, `crs` is the notation used for the workspace’s coordinate system. The notation `sourceCrs` refers to the original coordinate system of a dataset and is provided to the data-loading functions when importing it.
 
 <div class="coordinate-table">
 
@@ -159,24 +159,26 @@ map.draw();
 Try removing `"buildings"` from the `layers` list, then click **Run** or press **⌘/Ctrl + Enter**. Edits are saved in this browser. Use **Copy** to copy the current file or **Reset** to restore the original.
 :::
 
+:::info The `canvas`
+The `canvas` argument used in the autk-map constructor must be a reference to a DOM node containing a HTML canvas. The second argument is an options object; `showUi: false` hides the built-in layer menu, and `crs` sets the workspace coordinate system.
+:::
+
+
 ## Where to go next
 
 <div class="learn-tracks">
   <a class="learn-track" href="/tutorial/">
     <span class="learn-track-kicker">Tutorial</span>
-    <span class="learn-track-title">Run a city end to end</span>
-    <span class="learn-track-text">Five chapters, from raw formats to a GPU analysis. Edit the cells and run them.</span>
+    <span class="learn-track-title"> Learn urban data analysis with Autark.</span>
+    <span class="learn-track-text">Urban data analysis tutorial covering from raw data to GPU-powered analysis.i Edit and run the cells as you go.</span>
     <span class="learn-track-link">Start the tutorial →</span>
   </a>
   <a class="learn-track" href="/autk-db/">
     <span class="learn-track-kicker">User Guide</span>
-    <span class="learn-track-title">Look up how a package works</span>
+    <span class="learn-track-title">Learn how to use Autark’s packages and APIs.</span>
     <span class="learn-track-text">Reference pages for autk-db, autk-map, autk-plot, and autk-compute, with runnable examples.</span>
     <span class="learn-track-link">Open the User Guide →</span>
   </a>
 </div>
 
-:::info The `canvas`
-The `canvas` argument used in the autk-map constructor must be a reference to a DOM node containing a HTML canvas. The second argument is an options object; `showUi: false` hides the built-in layer menu, and `crs` sets the workspace coordinate system.
-:::
 </div>
