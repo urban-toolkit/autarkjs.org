@@ -4,8 +4,9 @@
 Run, Reset, Copy, the keyboard shortcut, and browser-local edits. `card.css`
 shares the Tutorial’s card, scrollable output, and bottom status row with the
 User Guide. Text and console output grow when expanded, up to a scrollable
-limit. Notebook figures can set `data-output="visual"` for a fixed, taller
-viewport for maps and charts. An example can also supply
+limit. Notebook figures can set `data-output="visual"` for a taller visual
+output. SVG-only chart outputs fit their content instead of reserving a fixed
+map-sized viewport; outputs containing map canvases keep the fixed viewport. An example can also supply
 Run all above. `runtime.js` executes JavaScript with host-supplied
 bindings and captures console messages. `output.js` renders objects and arrays
 as collapsed trees. Expand one branch at a time; plain text stays plain. Syntax

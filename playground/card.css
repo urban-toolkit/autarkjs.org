@@ -58,6 +58,11 @@
   height: var(--playground-output-height, 35rem);
   max-height: none;
 }
+
+/* SVG charts already set their height; don't add a map-sized blank viewport. */
+.playground-card__output--tall:has(svg):not(:has(canvas)) {
+  height: auto;
+}
 .playground-card__output:focus-visible {
   outline: 2px solid var(--vp-c-brand-1, var(--accent));
   outline-offset: -2px;

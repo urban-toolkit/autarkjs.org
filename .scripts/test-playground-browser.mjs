@@ -92,11 +92,11 @@ try {
   const plot = page.locator('.tutorial-notebook figure.example').nth(1)
   const chartPanel = plot.locator('.out')
   await chartPanel.waitFor()
-  const chartHeight = await chartPanel.evaluate(el => el.clientHeight)
   await plot.getByRole('button', { name: 'Run all above' }).click()
   await chartPanel.locator('svg').first().waitFor({ timeout: 30000 })
   await plot.locator('.state.ok').waitFor()
-  assert.equal(await chartPanel.evaluate(el => el.clientHeight), chartHeight, 'chart output keeps its height')
+  const chartHeight = await chartPanel.locator('svg').first().evaluate(el => el.getBoundingClientRect().height)
+  assert.ok(await chartPanel.evaluate(el => el.clientHeight) <= chartHeight + 48, 'tutorial output fits the chart without a fixed-height blank area')
 
   // The standalone build (outside VitePress) uses the same library and storage key.
   await page.goto(`${base}/tutorial/apps/formats.html`)
