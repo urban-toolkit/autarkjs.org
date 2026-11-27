@@ -2,7 +2,7 @@
 
 > **FlowNodeRow** = `object`
 
-Defined in: [transforms/presets/flows.ts:33](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/flows.ts#L33)
+Defined in: [transforms/presets/flows.ts:33](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/flows.ts#L33)
 
 A category of one column.
 
@@ -12,7 +12,7 @@ A category of one column.
 
 > **autkIds**: `number`[]
 
-Defined in: [transforms/presets/flows.ts:47](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/flows.ts#L47)
+Defined in: [transforms/presets/flows.ts:47](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/flows.ts#L47)
 
 Merged source feature ids of the category, used for selection linking.
 
@@ -22,7 +22,7 @@ Merged source feature ids of the category, used for selection linking.
 
 > **column**: `number`
 
-Defined in: [transforms/presets/flows.ts:39](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/flows.ts#L39)
+Defined in: [transforms/presets/flows.ts:39](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/flows.ts#L39)
 
 Column index, `0` for the first column.
 
@@ -32,7 +32,7 @@ Column index, `0` for the first column.
 
 > **count**: `number`
 
-Defined in: [transforms/presets/flows.ts:45](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/flows.ts#L45)
+Defined in: [transforms/presets/flows.ts:45](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/flows.ts#L45)
 
 How many rows are in the category.
 
@@ -42,7 +42,7 @@ How many rows are in the category.
 
 > **key**: `string`
 
-Defined in: [transforms/presets/flows.ts:37](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/flows.ts#L37)
+Defined in: [transforms/presets/flows.ts:37](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/flows.ts#L37)
 
 Node key, `<column>:<category>`.
 
@@ -52,7 +52,7 @@ Node key, `<column>:<category>`.
 
 > **kind**: `"node"`
 
-Defined in: [transforms/presets/flows.ts:35](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/flows.ts#L35)
+Defined in: [transforms/presets/flows.ts:35](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/flows.ts#L35)
 
 Row kind discriminator.
 
@@ -62,7 +62,7 @@ Row kind discriminator.
 
 > **label**: `string`
 
-Defined in: [transforms/presets/flows.ts:41](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/flows.ts#L41)
+Defined in: [transforms/presets/flows.ts:41](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/flows.ts#L41)
 
 Category label.
 
@@ -72,6 +72,6 @@ Category label.
 
 > **value**: `number`
 
-Defined in: [transforms/presets/flows.ts:43](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/flows.ts#L43)
+Defined in: [transforms/presets/flows.ts:43](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/flows.ts#L43)
 
 Reduced numeric result over the rows in the category.

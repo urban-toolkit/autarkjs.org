@@ -1,6 +1,6 @@
 # Class: ProvenanceModel
 
-Defined in: [provenance/model.ts:45](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/provenance/model.ts#L45)
+Defined in: [provenance/model.ts:45](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/provenance/model.ts#L45)
 
 Provenance graph built by `PlotBaseData` on every draw.
 
@@ -10,7 +10,7 @@ Provenance graph built by `PlotBaseData` on every draw.
 
 > **new ProvenanceModel**(`stages`, `relations`, `contributions?`, `reducer?`): `ProvenanceModel`
 
-Defined in: [provenance/model.ts:79](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/provenance/model.ts#L79)
+Defined in: [provenance/model.ts:79](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/provenance/model.ts#L79)
 
 Creates a provenance graph from `D0` and the transform output.
 
@@ -52,7 +52,7 @@ Reducer of the rendered rows, or `undefined` for one-to-one rows.
 
 > **get** **cardinalities**(): `object`[]
 
-Defined in: [provenance/model.ts:135](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/provenance/model.ts#L135)
+Defined in: [provenance/model.ts:135](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/provenance/model.ts#L135)
 
 Cardinality of every relation, plus the composed source-to-mark relation.
 
@@ -72,7 +72,7 @@ One entry per relation and a final `D0 → M` entry when marks exist.
 
 > **get** **contributions**(): [`ProvenanceContribution`](../type-aliases/ProvenanceContribution.md)[]
 
-Defined in: [provenance/model.ts:119](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/provenance/model.ts#L119)
+Defined in: [provenance/model.ts:119](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/provenance/model.ts#L119)
 
 Unit-level contributions to rendered rows.
 
@@ -88,7 +88,7 @@ Unit-level contributions to rendered rows.
 
 > **get** **reducer**(): [`TransformReducer`](../type-aliases/TransformReducer.md) \| `undefined`
 
-Defined in: [provenance/model.ts:124](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/provenance/model.ts#L124)
+Defined in: [provenance/model.ts:124](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/provenance/model.ts#L124)
 
 Reducer of the rendered rows, or `undefined` when rows map one-to-one to features.
 
@@ -104,7 +104,7 @@ Reducer of the rendered rows, or `undefined` when rows map one-to-one to feature
 
 > **get** **relations**(): [`ProvenanceRelation`](../type-aliases/ProvenanceRelation.md)[]
 
-Defined in: [provenance/model.ts:114](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/provenance/model.ts#L114)
+Defined in: [provenance/model.ts:114](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/provenance/model.ts#L114)
 
 Relations between consecutive stages.
 
@@ -120,7 +120,7 @@ Relations between consecutive stages.
 
 > **get** **stages**(): [`ProvenanceStage`](../type-aliases/ProvenanceStage.md)[]
 
-Defined in: [provenance/model.ts:109](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/provenance/model.ts#L109)
+Defined in: [provenance/model.ts:109](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/provenance/model.ts#L109)
 
 Stages in pipeline order.
 
@@ -134,7 +134,7 @@ Stages in pipeline order.
 
 > **composed**(): [`ProvenancePair`](../type-aliases/ProvenancePair.md)[]
 
-Defined in: [provenance/model.ts:197](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/provenance/model.ts#L197)
+Defined in: [provenance/model.ts:197](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/provenance/model.ts#L197)
 
 Composes all relations into a single relation from `D0` to the last stage.
 
@@ -153,7 +153,7 @@ with the path to each of those stages and the results are merged.
 
 > **contribution**(`rowId`, `selected`): [`MarkContribution`](../type-aliases/MarkContribution.md)
 
-Defined in: [provenance/model.ts:286](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/provenance/model.ts#L286)
+Defined in: [provenance/model.ts:286](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/provenance/model.ts#L286)
 
 Computes the share of a rendered row produced by the selected features.
 
@@ -187,7 +187,7 @@ Selected and total units and values of the row.
 
 > **direct**(`features`): [`ProvenancePath`](../type-aliases/ProvenancePath.md)
 
-Defined in: [provenance/model.ts:220](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/provenance/model.ts#L220)
+Defined in: [provenance/model.ts:220](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/provenance/model.ts#L220)
 
 Direct query: follows source features through every stage.
 
@@ -211,7 +211,7 @@ Entities reached in each stage, from `D0` to the last stage.
 
 > **featureShares**(`rowIds`): [`FeatureShare`](../type-aliases/FeatureShare.md)[]
 
-Defined in: [provenance/model.ts:343](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/provenance/model.ts#L343)
+Defined in: [provenance/model.ts:343](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/provenance/model.ts#L343)
 
 Computes, for each source feature, the share of its units covered by the
 selected rendered rows (inverse direction of `contribution`).
@@ -242,7 +242,7 @@ Shares of the features with at least one unit in the selected rows.
 
 > **inverse**(`ids`): [`ProvenancePath`](../type-aliases/ProvenancePath.md)
 
-Defined in: [provenance/model.ts:250](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/provenance/model.ts#L250)
+Defined in: [provenance/model.ts:250](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/provenance/model.ts#L250)
 
 Inverse query: follows entities of the last stage back to `D0`.
 
@@ -266,7 +266,7 @@ Entities reached in each stage, from the last stage to `D0`.
 
 > **registerMarks**(`rowIds`): `void`
 
-Defined in: [provenance/model.ts:160](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/provenance/model.ts#L160)
+Defined in: [provenance/model.ts:160](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/provenance/model.ts#L160)
 
 Registers the rendered marks as stage `M` and the relation from the
 rendered rows to them.

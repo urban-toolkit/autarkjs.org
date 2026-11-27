@@ -1,6 +1,6 @@
 # Class: PlotStyle
 
-Defined in: [plot-style.ts:14](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-style.ts#L14)
+Defined in: [plot-style.ts:14](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-style.ts#L14)
 
 Global style helpers shared by every plot.
 
@@ -26,7 +26,7 @@ affects all plots that read style values after the update.
 
 > `protected` `static` **\_default**: `` `#${string}` `` = `'#bfbfbf'`
 
-Defined in: [plot-style.ts:18](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-style.ts#L18)
+Defined in: [plot-style.ts:18](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-style.ts#L18)
 
 Default fill/stroke color used for non-selected marks.
 
@@ -36,7 +36,7 @@ Default fill/stroke color used for non-selected marks.
 
 > `protected` `static` **\_highlight**: `` `#${string}` `` = `'#5dade2'`
 
-Defined in: [plot-style.ts:20](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-style.ts#L20)
+Defined in: [plot-style.ts:20](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-style.ts#L20)
 
 Highlight color used for selected marks.
 
@@ -46,7 +46,7 @@ Highlight color used for selected marks.
 
 > `protected` `static` **\_provenance**: `` `#${string}` `` = `PlotStyle._highlight`
 
-Defined in: [plot-style.ts:22](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-style.ts#L22)
+Defined in: [plot-style.ts:22](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-style.ts#L22)
 
 Highlight color used by provenance marks; defaults to the map selection color.
 
@@ -56,7 +56,7 @@ Highlight color used by provenance marks; defaults to the map selection color.
 
 > `protected` `static` **\_provenanceStroke**: `` `#${string}` `` = `'#4887b0'`
 
-Defined in: [plot-style.ts:24](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-style.ts#L24)
+Defined in: [plot-style.ts:24](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-style.ts#L24)
 
 Darker shade of the provenance color, used for outlines of provenance marks.
 
@@ -66,7 +66,7 @@ Darker shade of the provenance color, used for outlines of provenance marks.
 
 > `protected` `static` **\_provenanceText**: `` `#${string}` `` = `'#203b4e'`
 
-Defined in: [plot-style.ts:26](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-style.ts#L26)
+Defined in: [plot-style.ts:26](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-style.ts#L26)
 
 Text color drawn over the provenance highlight color.
 
@@ -76,7 +76,7 @@ Text color drawn over the provenance highlight color.
 
 > `readonly` `static` **hover**: `` `#${string}` `` = `'#f4a261'`
 
-Defined in: [plot-style.ts:16](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-style.ts#L16)
+Defined in: [plot-style.ts:16](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-style.ts#L16)
 
 Default hover color, matching the map.
 
@@ -88,7 +88,7 @@ Default hover color, matching the map.
 
 > **get** `static` **default**(): `` `#${string}` ``
 
-Defined in: [plot-style.ts:32](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-style.ts#L32)
+Defined in: [plot-style.ts:32](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-style.ts#L32)
 
 Gets the default mark color.
 
@@ -106,7 +106,7 @@ Hex color used for non-selected marks.
 
 > **get** `static` **grid**(): `` `#${string}` ``
 
-Defined in: [plot-style.ts:165](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-style.ts#L165)
+Defined in: [plot-style.ts:165](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-style.ts#L165)
 
 Gets the color of grid lines (axis ticks drawn across the plot).
 
@@ -124,7 +124,7 @@ Hex color of grid lines.
 
 > **get** `static` **highlight**(): `` `#${string}` ``
 
-Defined in: [plot-style.ts:40](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-style.ts#L40)
+Defined in: [plot-style.ts:40](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-style.ts#L40)
 
 Gets the highlight mark color.
 
@@ -142,7 +142,7 @@ Hex color used for selected marks.
 
 > **get** `static` **provenance**(): `` `#${string}` ``
 
-Defined in: [plot-style.ts:52](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-style.ts#L52)
+Defined in: [plot-style.ts:52](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-style.ts#L52)
 
 Gets the highlight color of plots with the segregated provenance view.
 
@@ -163,7 +163,7 @@ Hex color used for selected marks and mark parts.
 
 > **get** `static` **provenanceStroke**(): `` `#${string}` ``
 
-Defined in: [plot-style.ts:60](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-style.ts#L60)
+Defined in: [plot-style.ts:60](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-style.ts#L60)
 
 Gets the darker shade of the provenance color used for outlines.
 
@@ -181,7 +181,7 @@ Hex color for outlines of provenance marks.
 
 > **get** `static` **provenanceText**(): `` `#${string}` ``
 
-Defined in: [plot-style.ts:68](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-style.ts#L68)
+Defined in: [plot-style.ts:68](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-style.ts#L68)
 
 Gets the text color drawn over the provenance highlight color.
 
@@ -197,7 +197,7 @@ Hex color with readable contrast on `provenance`.
 
 > `static` **setDefaultColor**(`color`): `void`
 
-Defined in: [plot-style.ts:115](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-style.ts#L115)
+Defined in: [plot-style.ts:115](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-style.ts#L115)
 
 Updates the global default color used for non-selected marks.
 
@@ -229,7 +229,7 @@ PlotStyle.setDefaultColor('#cccccc');
 
 > `static` **setHighlightColor**(`color`): `void`
 
-Defined in: [plot-style.ts:102](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-style.ts#L102)
+Defined in: [plot-style.ts:102](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-style.ts#L102)
 
 Updates the global highlight color used by selection styling.
 
@@ -264,7 +264,7 @@ PlotStyle.setHighlightColor('#ff6600');
 
 > `static` **setProvenanceColor**(`color`): `void`
 
-Defined in: [plot-style.ts:80](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-style.ts#L80)
+Defined in: [plot-style.ts:80](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-style.ts#L80)
 
 Updates the highlight color of plots with the segregated provenance view.
 
@@ -296,7 +296,7 @@ PlotStyle.setProvenanceColor('#63d8c0');
 
 > `static` **shade**(`index`, `count`): `string`
 
-Defined in: [plot-style.ts:146](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-style.ts#L146)
+Defined in: [plot-style.ts:146](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-style.ts#L146)
 
 Gray shade of the `index`-th of `count` categories, from light to medium.
 
@@ -329,7 +329,7 @@ CSS color string.
 
 > `static` **shades**(`keys`): (`key`) => `string`
 
-Defined in: [plot-style.ts:157](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-style.ts#L157)
+Defined in: [plot-style.ts:157](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-style.ts#L157)
 
 Gray shades of a list of categories, in list order (see `shade`).
 
@@ -353,7 +353,7 @@ The shade of each category; an unknown one takes the first shade.
 
 > `static` **softSequentialDomain**(`domain`): \[`number`, `number`\]
 
-Defined in: [plot-style.ts:131](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-style.ts#L131)
+Defined in: [plot-style.ts:131](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-style.ts#L131)
 
 Widens a data-driven numeric color domain so a white-to-black sequential
 scheme stays between light and medium tones.

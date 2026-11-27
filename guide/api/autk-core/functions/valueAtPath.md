@@ -2,7 +2,7 @@
 
 > **valueAtPath**(`item`, `path`): `unknown`
 
-Defined in: [utils-data.ts:26](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/utils-data.ts#L26)
+Defined in: [utils-data.ts:26](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/utils-data.ts#L26)
 
 Resolves a dot-delimited property path, including literal dotted leaf keys.
 

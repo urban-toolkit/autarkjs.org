@@ -1,6 +1,6 @@
 # Class: ColorMap
 
-Defined in: [colormap.ts:77](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/colormap.ts#L77)
+Defined in: [colormap.ts:77](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/colormap.ts#L77)
 
 Color utility for resolving domains, sampling color scales, and building
 legend and texture representations.
@@ -26,7 +26,7 @@ RGBA textures for GPU upload.
 
 > `static` **computeLabels**(`domain`): `string`[]
 
-Defined in: [colormap.ts:420](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/colormap.ts#L420)
+Defined in: [colormap.ts:420](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/colormap.ts#L420)
 
 Derives human-readable legend labels from a domain.
 
@@ -65,7 +65,7 @@ ColorMap.computeLabels(['low', 'mid', 'high']); // ['low', 'mid', 'high']
 
 > `static` **computeMinMaxRange**(`values`): \[`number`, `number`\]
 
-Defined in: [colormap.ts:230](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/colormap.ts#L230)
+Defined in: [colormap.ts:230](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/colormap.ts#L230)
 
 Computes the numeric minimum and maximum of a value array.
 
@@ -99,7 +99,7 @@ ColorMap.computeMinMaxRange([3, 7, 2, 9, 4]); // [2, 9]
 
 > `static` **getCategoricalSchemeSize**(`scale`): `number` \| `null`
 
-Defined in: [colormap.ts:277](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/colormap.ts#L277)
+Defined in: [colormap.ts:277](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/colormap.ts#L277)
 
 Returns the number of colors in a categorical color scheme.
 
@@ -132,7 +132,7 @@ ColorMap.getCategoricalSchemeSize(ColorMapInterpolator.SEQ_VIRIDIS);  // null
 
 > `static` **getColor**(`value`, `color`, `domain?`): [`ColorRGB`](../type-aliases/ColorRGB.md)
 
-Defined in: [colormap.ts:90](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/colormap.ts#L90)
+Defined in: [colormap.ts:90](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/colormap.ts#L90)
 
 Samples a color interpolator at a normalized value, returning RGBA.
 
@@ -179,7 +179,7 @@ const c = ColorMap.getColor(0.5, ColorMapInterpolator.SEQ_VIRIDIS);
 
 > `static` **getColorArray**(`color`, `res?`, `domain?`): [`ColorRGB`](../type-aliases/ColorRGB.md)[]
 
-Defined in: [colormap.ts:173](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/colormap.ts#L173)
+Defined in: [colormap.ts:173](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/colormap.ts#L173)
 
 Builds an array of sampled RGBA color objects from a color scheme.
 
@@ -226,7 +226,7 @@ const colors = ColorMap.getColorArray(ColorMapInterpolator.CAT_SET1, 3);
 
 > `static` **getColorFunction**(`color`, `domain?`): (`value`) => [`ColorRGB`](../type-aliases/ColorRGB.md)
 
-Defined in: [colormap.ts:111](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/colormap.ts#L111)
+Defined in: [colormap.ts:111](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/colormap.ts#L111)
 
 Builds the color function of one scheme and domain, for coloring many
 values. Each call returns what `getColor(value, color, domain)` returns,
@@ -271,7 +271,7 @@ colorOf(0.5); // → { r: 33, g: 145, b: 140, alpha: 1 }
 
 > `static` **getColorMap**(`color`, `res?`, `domain?`): [`ColorTEX`](../type-aliases/ColorTEX.md)
 
-Defined in: [colormap.ts:141](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/colormap.ts#L141)
+Defined in: [colormap.ts:141](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/colormap.ts#L141)
 
 Builds a flat RGBA texture array for GPU upload from a color scheme.
 
@@ -318,7 +318,7 @@ const tex = ColorMap.getColorMap(ColorMapInterpolator.SEQ_VIRIDIS, 4);
 
 > `static` **getSamplingDomain**(`scale`, `domain?`): `SamplingDomain` \| `undefined`
 
-Defined in: [colormap.ts:283](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/colormap.ts#L283)
+Defined in: [colormap.ts:283](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/colormap.ts#L283)
 
 Normalizes the domain for sampling a texture or legend.
 
@@ -342,7 +342,7 @@ Normalizes the domain for sampling a texture or legend.
 
 > `static` **hexToRgb**(`color`): [`ColorRGB`](../type-aliases/ColorRGB.md)
 
-Defined in: [colormap.ts:216](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/colormap.ts#L216)
+Defined in: [colormap.ts:216](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/colormap.ts#L216)
 
 Converts a hex color string into an RGBA color object.
 
@@ -376,7 +376,7 @@ ColorMap.hexToRgb('#ff8000'); // { r: 255, g: 128, b: 0, alpha: 1 }
 
 > `static` **isCategorical**(`scale`): `boolean`
 
-Defined in: [colormap.ts:252](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/colormap.ts#L252)
+Defined in: [colormap.ts:252](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/colormap.ts#L252)
 
 Returns `true` when an interpolator uses a discrete categorical scheme.
 
@@ -409,7 +409,7 @@ ColorMap.isCategorical(ColorMapInterpolator.SEQ_VIRIDIS);  // false
 
 > `static` **resolveDomainFromData**(`values`, `config`): [`ResolvedDomain`](../type-aliases/ResolvedDomain.md)
 
-Defined in: [colormap.ts:457](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/colormap.ts#L457)
+Defined in: [colormap.ts:457](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/colormap.ts#L457)
 
 Resolves a color domain from data and configuration.
 
@@ -460,7 +460,7 @@ const domain = ColorMap.resolveDomainFromData(
 
 > `static` **rgbToHex**(`color`): `` `#${string}` ``
 
-Defined in: [colormap.ts:202](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/colormap.ts#L202)
+Defined in: [colormap.ts:202](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/colormap.ts#L202)
 
 Converts an RGBA color object into a hex color string.
 
@@ -494,7 +494,7 @@ ColorMap.rgbToHex({ r: 255, g: 128, b: 0, alpha: 1 }); // '#ff8000'
 
 > `static` **validatePalette**(`palette`): `void`
 
-Defined in: [colormap.ts:294](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/colormap.ts#L294)
+Defined in: [colormap.ts:294](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/colormap.ts#L294)
 
 Rejects malformed custom palettes before using them to style a layer.
 

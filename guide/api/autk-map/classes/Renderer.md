@@ -1,6 +1,6 @@
 # Class: Renderer
 
-Defined in: [autk-map/src/renderer.ts:25](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L25)
+Defined in: [autk-map/src/renderer.ts:25](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L25)
 
 WebGPU renderer responsible for canvas setup, render-target management, and
 frame-level GPU resource lifecycle.
@@ -16,7 +16,7 @@ size-dependent resources after resize events.
 
 > **new Renderer**(`canvas`, `_style`): `Renderer`
 
-Defined in: [autk-map/src/renderer.ts:125](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L125)
+Defined in: [autk-map/src/renderer.ts:125](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L125)
 
 Creates a renderer bound to a canvas.
 
@@ -46,7 +46,7 @@ Never throws.
 
 > **pickingPassVersion**: `number` = `0`
 
-Defined in: [autk-map/src/renderer.ts:53](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L53)
+Defined in: [autk-map/src/renderer.ts:53](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L53)
 
 Changes whenever commands write IDs into the shared picking texture.
 
@@ -58,7 +58,7 @@ Changes whenever commands write IDs into the shared picking texture.
 
 > **get** **canvas**(): `HTMLCanvasElement`
 
-Defined in: [autk-map/src/renderer.ts:136](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L136)
+Defined in: [autk-map/src/renderer.ts:136](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L136)
 
 Underlying render canvas.
 
@@ -74,7 +74,7 @@ Underlying render canvas.
 
 > **get** **canvasFormat**(): `GPUTextureFormat`
 
-Defined in: [autk-map/src/renderer.ts:184](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L184)
+Defined in: [autk-map/src/renderer.ts:184](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L184)
 
 Preferred canvas format negotiated with WebGPU.
 
@@ -90,7 +90,7 @@ Preferred canvas format negotiated with WebGPU.
 
 > **get** **commandEncoder**(): `GPUCommandEncoder`
 
-Defined in: [autk-map/src/renderer.ts:209](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L209)
+Defined in: [autk-map/src/renderer.ts:209](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L209)
 
 Active command encoder for the current frame.
 
@@ -106,7 +106,7 @@ Active command encoder for the current frame.
 
 > **get** **context**(): `GPUCanvasContext` \| `null`
 
-Defined in: [autk-map/src/renderer.ts:189](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L189)
+Defined in: [autk-map/src/renderer.ts:189](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L189)
 
 Active WebGPU canvas context, if configured.
 
@@ -122,7 +122,7 @@ Active WebGPU canvas context, if configured.
 
 > **get** **cssHeight**(): `number`
 
-Defined in: [autk-map/src/renderer.ts:146](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L146)
+Defined in: [autk-map/src/renderer.ts:146](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L146)
 
 Canvas layout height in CSS pixels.
 
@@ -138,7 +138,7 @@ Canvas layout height in CSS pixels.
 
 > **get** **cssWidth**(): `number`
 
-Defined in: [autk-map/src/renderer.ts:141](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L141)
+Defined in: [autk-map/src/renderer.ts:141](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L141)
 
 Canvas layout width in CSS pixels.
 
@@ -154,7 +154,7 @@ Canvas layout width in CSS pixels.
 
 > **get** **depthBuffer**(): `GPURenderPassDepthStencilAttachment`
 
-Defined in: [autk-map/src/renderer.ts:204](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L204)
+Defined in: [autk-map/src/renderer.ts:204](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L204)
 
 Depth attachment used by the primary render pass.
 
@@ -170,7 +170,7 @@ Depth attachment used by the primary render pass.
 
 > **get** **depthTextureView**(): `GPUTextureView`
 
-Defined in: [autk-map/src/renderer.ts:237](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L237)
+Defined in: [autk-map/src/renderer.ts:237](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L237)
 
 Main depth texture view used by render paths that need direct sampling.
 
@@ -186,7 +186,7 @@ Main depth texture view used by render paths that need direct sampling.
 
 > **get** **device**(): `GPUDevice`
 
-Defined in: [autk-map/src/renderer.ts:194](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L194)
+Defined in: [autk-map/src/renderer.ts:194](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L194)
 
 Logical GPU device.
 
@@ -202,7 +202,7 @@ Logical GPU device.
 
 > **get** **devicePixelRatio**(): `number`
 
-Defined in: [autk-map/src/renderer.ts:179](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L179)
+Defined in: [autk-map/src/renderer.ts:179](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L179)
 
 Device pixel ratio currently applied to the render surface.
 
@@ -218,7 +218,7 @@ Device pixel ratio currently applied to the render surface.
 
 > **get** **frameBuffer**(): `GPURenderPassColorAttachment`
 
-Defined in: [autk-map/src/renderer.ts:199](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L199)
+Defined in: [autk-map/src/renderer.ts:199](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L199)
 
 Main color attachment used by the primary render pass.
 
@@ -234,7 +234,7 @@ Main color attachment used by the primary render pass.
 
 > **get** **overlayHeight**(): `number`
 
-Defined in: [autk-map/src/renderer.ts:166](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L166)
+Defined in: [autk-map/src/renderer.ts:166](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L166)
 
 Terrain overlay texture height in pixels.
 
@@ -250,7 +250,7 @@ Terrain overlay texture height in pixels.
 
 > **get** **overlayPickingTextureView**(): `GPUTextureView`
 
-Defined in: [autk-map/src/renderer.ts:250](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L250)
+Defined in: [autk-map/src/renderer.ts:250](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L250)
 
 Terrain overlay picking texture view sampled by terrain picking.
 
@@ -266,7 +266,7 @@ Terrain overlay picking texture view sampled by terrain picking.
 
 > **get** **overlayTextureView**(): `GPUTextureView`
 
-Defined in: [autk-map/src/renderer.ts:242](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L242)
+Defined in: [autk-map/src/renderer.ts:242](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L242)
 
 Terrain overlay color texture view sampled by the terrain renderer.
 
@@ -282,7 +282,7 @@ Terrain overlay color texture view sampled by the terrain renderer.
 
 > **get** **overlayWidth**(): `number`
 
-Defined in: [autk-map/src/renderer.ts:161](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L161)
+Defined in: [autk-map/src/renderer.ts:161](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L161)
 
 Terrain overlay texture width in pixels.
 
@@ -298,7 +298,7 @@ Terrain overlay texture width in pixels.
 
 > **get** **pickingBuffer**(): `GPURenderPassColorAttachment`
 
-Defined in: [autk-map/src/renderer.ts:227](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L227)
+Defined in: [autk-map/src/renderer.ts:227](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L227)
 
 Picking color attachment descriptor.
 
@@ -314,7 +314,7 @@ Picking color attachment descriptor.
 
 > **get** **pickingDepthBuffer**(): `GPURenderPassDepthStencilAttachment`
 
-Defined in: [autk-map/src/renderer.ts:232](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L232)
+Defined in: [autk-map/src/renderer.ts:232](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L232)
 
 Picking depth attachment descriptor.
 
@@ -330,7 +330,7 @@ Picking depth attachment descriptor.
 
 > **get** **pickingTexture**(): `GPUTexture`
 
-Defined in: [autk-map/src/renderer.ts:222](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L222)
+Defined in: [autk-map/src/renderer.ts:222](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L222)
 
 Picking color texture used for object-id readback.
 
@@ -346,7 +346,7 @@ Picking color texture used for object-id readback.
 
 > **get** **pixelHeight**(): `number`
 
-Defined in: [autk-map/src/renderer.ts:156](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L156)
+Defined in: [autk-map/src/renderer.ts:156](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L156)
 
 Canvas backing-store height in device pixels.
 
@@ -362,7 +362,7 @@ Canvas backing-store height in device pixels.
 
 > **get** **pixelWidth**(): `number`
 
-Defined in: [autk-map/src/renderer.ts:151](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L151)
+Defined in: [autk-map/src/renderer.ts:151](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L151)
 
 Canvas backing-store width in device pixels.
 
@@ -378,7 +378,7 @@ Canvas backing-store width in device pixels.
 
 > **get** **sampleCount**(): `number`
 
-Defined in: [autk-map/src/renderer.ts:217](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L217)
+Defined in: [autk-map/src/renderer.ts:217](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L217)
 
 MSAA sample count used for the main pass.
 
@@ -394,7 +394,7 @@ MSAA sample count used for the main pass.
 
 > **get** **style**(): [`MapStyle`](MapStyle.md)
 
-Defined in: [autk-map/src/renderer.ts:131](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L131)
+Defined in: [autk-map/src/renderer.ts:131](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L131)
 
 Map style used by renderer-owned passes and pipelines.
 
@@ -410,7 +410,7 @@ Map style used by renderer-owned passes and pipelines.
 
 > **get** **terrainDepthTextureView**(): `GPUTextureView`
 
-Defined in: [autk-map/src/renderer.ts:171](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L171)
+Defined in: [autk-map/src/renderer.ts:171](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L171)
 
 Terrain depth texture view used by terrain-aware building compositing.
 
@@ -424,7 +424,7 @@ Terrain depth texture view used by terrain-aware building compositing.
 
 > **beginMainColorRenderPass**(`loadOp?`): `GPURenderPassEncoder`
 
-Defined in: [autk-map/src/renderer.ts:556](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L556)
+Defined in: [autk-map/src/renderer.ts:556](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L556)
 
 Begins a main color-only render pass.
 
@@ -458,7 +458,7 @@ const pass = renderer.beginMainColorRenderPass('load');
 
 > **beginMainRenderPass**(): `GPURenderPassEncoder`
 
-Defined in: [autk-map/src/renderer.ts:526](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L526)
+Defined in: [autk-map/src/renderer.ts:526](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L526)
 
 Opens the shared main render pass for the current frame.
 
@@ -478,7 +478,7 @@ If the renderer has not been initialized or GPU context is null.
 
 > **beginOverlayPickingRenderPass**(): `GPURenderPassEncoder`
 
-Defined in: [autk-map/src/renderer.ts:727](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L727)
+Defined in: [autk-map/src/renderer.ts:727](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L727)
 
 Begins the terrain overlay picking render pass.
 
@@ -504,7 +504,7 @@ const pass = renderer.beginOverlayPickingRenderPass();
 
 > **beginOverlayRenderPass**(`clearColor?`): `GPURenderPassEncoder`
 
-Defined in: [autk-map/src/renderer.ts:694](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L694)
+Defined in: [autk-map/src/renderer.ts:694](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L694)
 
 Begins the terrain overlay color render pass.
 
@@ -538,7 +538,7 @@ const pass = renderer.beginOverlayRenderPass();
 
 > **beginPickingDepthRenderPass**(): `GPURenderPassEncoder`
 
-Defined in: [autk-map/src/renderer.ts:820](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L820)
+Defined in: [autk-map/src/renderer.ts:820](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L820)
 
 Begins a depth-only pass using the picking depth attachment.
 
@@ -564,7 +564,7 @@ const pass = renderer.beginPickingDepthRenderPass();
 
 > **beginPickingRenderPass**(`depthLoadOp?`): `GPURenderPassEncoder`
 
-Defined in: [autk-map/src/renderer.ts:796](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L796)
+Defined in: [autk-map/src/renderer.ts:796](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L796)
 
 Begins a picking render pass and returns its encoder.
 
@@ -598,7 +598,7 @@ const pass = renderer.beginPickingRenderPass('clear');
 
 > **beginTerrainDepthRenderPass**(): `GPURenderPassEncoder`
 
-Defined in: [autk-map/src/renderer.ts:605](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L605)
+Defined in: [autk-map/src/renderer.ts:605](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L605)
 
 Begins a depth-only pass for terrain compositing.
 
@@ -624,7 +624,7 @@ const pass = renderer.beginTerrainDepthRenderPass();
 
 > **configureContext**(): `void`
 
-Defined in: [autk-map/src/renderer.ts:342](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L342)
+Defined in: [autk-map/src/renderer.ts:342](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L342)
 
 Configures the WebGPU canvas context.
 
@@ -641,7 +641,7 @@ canvas format and render-attachment usage.
 
 > **configureDepthBuffer**(): `void`
 
-Defined in: [autk-map/src/renderer.ts:461](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L461)
+Defined in: [autk-map/src/renderer.ts:461](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L461)
 
 Creates or recreates the main depth attachment.
 
@@ -658,7 +658,7 @@ the primary render pass.
 
 > **configureFrameBuffer**(): `void`
 
-Defined in: [autk-map/src/renderer.ts:416](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L416)
+Defined in: [autk-map/src/renderer.ts:416](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L416)
 
 Creates or recreates the main color attachment and multisample texture.
 
@@ -675,7 +675,7 @@ configured background color as its clear value.
 
 > **configureOverlayTexture**(`width`, `height`): `boolean`
 
-Defined in: [autk-map/src/renderer.ts:632](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L632)
+Defined in: [autk-map/src/renderer.ts:632](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L632)
 
 Creates or resizes terrain overlay color, depth, and picking textures.
 
@@ -715,7 +715,7 @@ renderer.configureOverlayTexture(4096, 4096);
 
 > **configurePickingBuffer**(): `void`
 
-Defined in: [autk-map/src/renderer.ts:368](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L368)
+Defined in: [autk-map/src/renderer.ts:368](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L368)
 
 Creates or recreates color and depth attachments for picking.
 
@@ -732,7 +732,7 @@ backing store so object ids can be read back at pixel precision.
 
 > **configureTerrainDepthTexture**(`width`, `height`): `boolean`
 
-Defined in: [autk-map/src/renderer.ts:579](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L579)
+Defined in: [autk-map/src/renderer.ts:579](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L579)
 
 Creates or resizes the terrain composite depth texture.
 
@@ -772,7 +772,7 @@ renderer.configureTerrainDepthTexture(width, height);
 
 > **destroy**(): `void`
 
-Defined in: [autk-map/src/renderer.ts:942](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L942)
+Defined in: [autk-map/src/renderer.ts:942](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L942)
 
 Releases GPU resources, unconfigures the canvas, and resets renderer state.
 
@@ -790,7 +790,7 @@ Never throws.
 
 > **enqueuePickingReadback**(`slotIndex`, `pickIndex`, `x`, `y`): `void`
 
-Defined in: [autk-map/src/renderer.ts:882](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L882)
+Defined in: [autk-map/src/renderer.ts:882](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L882)
 
 Queues a single-pixel picking texture readback into a reserved slot.
 
@@ -834,7 +834,7 @@ If the requested slot is not reserved.
 
 > **finish**(): `void`
 
-Defined in: [autk-map/src/renderer.ts:756](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L756)
+Defined in: [autk-map/src/renderer.ts:756](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L756)
 
 Submits the current command buffer and clears the active encoder.
 
@@ -852,7 +852,7 @@ Never throws. Silently returns when not initialized or no encoder exists.
 
 > **init**(): `Promise`\<`void`\>
 
-Defined in: [autk-map/src/renderer.ts:262](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L262)
+Defined in: [autk-map/src/renderer.ts:262](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L262)
 
 Initializes WebGPU and creates all core render targets.
 
@@ -870,7 +870,7 @@ Never throws. Failures log to console and leave the renderer uninitialized.
 
 > **initWebGPU**(): `Promise`\<`boolean`\>
 
-Defined in: [autk-map/src/renderer.ts:283](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L283)
+Defined in: [autk-map/src/renderer.ts:283](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L283)
 
 Initializes the WebGPU device and preferred canvas format.
 
@@ -890,7 +890,7 @@ Never throws. Errors are caught and return `false`.
 
 > **readPickingResults**(`slotIndex`, `pickCount`): `Promise`\<`number`[]\>
 
-Defined in: [autk-map/src/renderer.ts:913](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L913)
+Defined in: [autk-map/src/renderer.ts:913](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L913)
 
 Maps a reserved readback slot and decodes all picked ids.
 
@@ -924,7 +924,7 @@ If the buffer map operation times out or the device is lost.
 
 > **reservePickingReadbackSlot**(`pickCount`): `number` \| `null`
 
-Defined in: [autk-map/src/renderer.ts:844](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L844)
+Defined in: [autk-map/src/renderer.ts:844](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L844)
 
 Reserves a double-buffered picking readback slot for the current frame.
 
@@ -952,7 +952,7 @@ Never throws.
 
 > **resize**(`cssWidth`, `cssHeight`, `devicePixelRatio?`): `void`
 
-Defined in: [autk-map/src/renderer.ts:323](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L323)
+Defined in: [autk-map/src/renderer.ts:323](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L323)
 
 Resizes the canvas and recreates size-dependent render targets.
 
@@ -990,7 +990,7 @@ Never throws.
 
 > **start**(): `void`
 
-Defined in: [autk-map/src/renderer.ts:494](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L494)
+Defined in: [autk-map/src/renderer.ts:494](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L494)
 
 Starts the main render pass by clearing configured attachments.
 
@@ -1010,7 +1010,7 @@ renderer's destroy/recreate cycle in a multi-instance setup).
 
 > **startPickingRenderPass**(): `void`
 
-Defined in: [autk-map/src/renderer.ts:769](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L769)
+Defined in: [autk-map/src/renderer.ts:769](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L769)
 
 Starts the picking render pass by clearing picking attachments.
 
@@ -1028,7 +1028,7 @@ Never throws. Silently returns when not initialized.
 
 > **toPixelCoordinates**(`x`, `y`): \[`number`, `number`\]
 
-Defined in: [autk-map/src/renderer.ts:1000](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/renderer.ts#L1000)
+Defined in: [autk-map/src/renderer.ts:1000](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/renderer.ts#L1000)
 
 Converts CSS-relative coordinates into clamped backing-store pixel coordinates.
 

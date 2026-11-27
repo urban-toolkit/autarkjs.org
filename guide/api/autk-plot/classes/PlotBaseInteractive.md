@@ -1,6 +1,6 @@
 # Abstract Class: PlotBaseInteractive
 
-Defined in: [plot-base-interactive.ts:59](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L59)
+Defined in: [plot-base-interactive.ts:59](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L59)
 
 Interactive plot base class.
 
@@ -17,7 +17,7 @@ highlighting behavior shared by interactive plots.
 
 > **new PlotBaseInteractive**(`config`): `PlotBaseInteractive`
 
-Defined in: [plot-base-interactive.ts:109](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L109)
+Defined in: [plot-base-interactive.ts:109](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L109)
 
 Initializes interactive plot state on top of the shared data lifecycle.
 
@@ -47,7 +47,7 @@ If configured bindings are missing or invalid (delegated to `PlotBaseData`).
 
 > `protected` **\_autoWidth**: `boolean` = `false`
 
-Defined in: [plot-base-data.ts:91](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L91)
+Defined in: [plot-base-data.ts:91](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L91)
 
 Whether the width follows the host element (`width: 'auto'`).
 
@@ -61,7 +61,7 @@ Whether the width follows the host element (`width: 'auto'`).
 
 > `protected` **\_axisLabels**: `string`[]
 
-Defined in: [plot-base-data.ts:78](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L78)
+Defined in: [plot-base-data.ts:78](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L78)
 
 User-facing axis labels.
 
@@ -75,7 +75,7 @@ User-facing axis labels.
 
 > `protected` **\_colorProperty**: `"fill"` \| `"stroke"` = `'fill'`
 
-Defined in: [plot-base-interactive.ts:63](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L63)
+Defined in: [plot-base-interactive.ts:63](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L63)
 
 CSS property used when applying colors to marks.
 
@@ -85,7 +85,7 @@ CSS property used when applying colors to marks.
 
 > `protected` **\_colorScale**: `CustomColorPalette` \| `ColorMapInterpolator` = `ColorMapInterpolator.SEQ_REDS`
 
-Defined in: [plot-base-data.ts:121](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L121)
+Defined in: [plot-base-data.ts:121](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L121)
 
 Scale selected for the current rendered color domain.
 
@@ -99,7 +99,7 @@ Scale selected for the current rendered color domain.
 
 > `protected` **\_data**: (`object` & `object`)[]
 
-Defined in: [plot-base-data.ts:71](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L71)
+Defined in: [plot-base-data.ts:71](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L71)
 
 Normalized render rows bound to marks.
 
@@ -113,7 +113,7 @@ Normalized render rows bound to marks.
 
 > `protected` **\_defaultNumericInterpolator**: `ColorMapInterpolator` = `ColorMapInterpolator.SEQ_REDS`
 
-Defined in: [plot-base-data.ts:117](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L117)
+Defined in: [plot-base-data.ts:117](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L117)
 
 Default interpolator for numeric color encoding when the caller does not supply a scale.
 
@@ -127,7 +127,7 @@ Default interpolator for numeric color encoding when the caller does not supply 
 
 > `protected` **\_div**: `HTMLElement`
 
-Defined in: [plot-base-data.ts:66](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L66)
+Defined in: [plot-base-data.ts:66](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L66)
 
 Host element where the plot is rendered.
 
@@ -141,7 +141,7 @@ Host element where the plot is rendered.
 
 > `protected` **\_enabledEvents**: [`PlotEvent`](../enumerations/PlotEvent.md)[] = `[]`
 
-Defined in: [plot-base-interactive.ts:61](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L61)
+Defined in: [plot-base-interactive.ts:61](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L61)
 
 Interaction events explicitly enabled for the plot instance.
 
@@ -151,7 +151,7 @@ Interaction events explicitly enabled for the plot instance.
 
 > `protected` **\_filter**: [`FilterCondition`](../type-aliases/FilterCondition.md)[] = `[]`
 
-Defined in: [plot-base-data.ts:110](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L110)
+Defined in: [plot-base-data.ts:110](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L110)
 
 Conditions every source feature must pass before the transform, if any.
 
@@ -165,7 +165,7 @@ Conditions every source feature must pass before the transform, if any.
 
 > `protected` **\_height**: `number` = `500`
 
-Defined in: [plot-base-data.ts:93](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L93)
+Defined in: [plot-base-data.ts:93](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L93)
 
 Outer plot height in pixels.
 
@@ -179,7 +179,7 @@ Outer plot height in pixels.
 
 > `protected` **\_hoverFeatureIds**: `Set`\<`number`\>
 
-Defined in: [plot-base-interactive.ts:83](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L83)
+Defined in: [plot-base-interactive.ts:83](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L83)
 
 Source feature ids hovered from another view.
 
@@ -189,7 +189,7 @@ Source feature ids hovered from another view.
 
 > `protected` **\_margins**: [`PlotMargins`](../type-aliases/PlotMargins.md)
 
-Defined in: [plot-base-data.ts:95](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L95)
+Defined in: [plot-base-data.ts:95](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L95)
 
 Plot margins in pixels.
 
@@ -203,7 +203,7 @@ Plot margins in pixels.
 
 > `protected` **\_MODE**: `"and"` \| `"or"` = `'and'`
 
-Defined in: [plot-base-interactive.ts:101](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L101)
+Defined in: [plot-base-interactive.ts:101](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L101)
 
 Brush combine mode for multi-brush interactions.
 
@@ -216,7 +216,7 @@ brush to include it.
 
 > `protected` **\_provenance**: [`ProvenanceModel`](ProvenanceModel.md)
 
-Defined in: [plot-base-data.ts:104](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L104)
+Defined in: [plot-base-data.ts:104](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L104)
 
 Provenance graph of the current draw cycle, from source features to rendered rows.
 
@@ -230,7 +230,7 @@ Provenance graph of the current draw cycle, from source features to rendered row
 
 > `protected` **\_resolvedDomain**: `ResolvedDomain` \| `undefined` = `undefined`
 
-Defined in: [plot-base-data.ts:98](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L98)
+Defined in: [plot-base-data.ts:98](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L98)
 
 Resolved color domain, computed from data after each transform.
 
@@ -244,7 +244,7 @@ Resolved color domain, computed from data after each transform.
 
 > `protected` **\_rowIds**: `WeakMap`\<`object`, `string`\>
 
-Defined in: [plot-base-data.ts:106](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L106)
+Defined in: [plot-base-data.ts:106](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L106)
 
 Provenance id of each rendered row object in `_data`.
 
@@ -258,7 +258,7 @@ Provenance id of each rendered row object in `_data`.
 
 > `protected` **\_selectionOrigin**: `"local"` \| `"external"` \| `null` = `null`
 
-Defined in: [plot-base-interactive.ts:70](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L70)
+Defined in: [plot-base-interactive.ts:70](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L70)
 
 Tracks whether the current selection came from local or external input.
 
@@ -268,7 +268,7 @@ Tracks whether the current selection came from local or external input.
 
 > `protected` **\_sourceFeatures**: `Feature`\<`Geometry`, `GeoJsonProperties`\>[]
 
-Defined in: [plot-base-data.ts:69](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L69)
+Defined in: [plot-base-data.ts:69](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L69)
 
 Original source features from the input collection, indexed by source feature id.
 
@@ -282,7 +282,7 @@ Original source features from the input collection, indexed by source feature id
 
 > `protected` **\_style**: \{ `barPadding?`: `number`; `colorMap?`: `ColorMapOptions`; `columnFormats?`: `Record`\<`string`, `string`\>; `radius?`: `number`; \} \| `undefined`
 
-Defined in: [plot-base-data.ts:119](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L119)
+Defined in: [plot-base-data.ts:119](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L119)
 
 Appearance overrides from the plot configuration.
 
@@ -330,7 +330,7 @@ Fixed scatterplot point radius in pixels; defaults to 5.
 
 > `protected` **\_title**: `string`
 
-Defined in: [plot-base-data.ts:86](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L86)
+Defined in: [plot-base-data.ts:86](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L86)
 
 Plot title text.
 
@@ -344,7 +344,7 @@ Plot title text.
 
 > `protected` **\_topK**: [`TopKConfig`](../type-aliases/TopKConfig.md) \| `undefined` = `undefined`
 
-Defined in: [plot-base-data.ts:114](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L114)
+Defined in: [plot-base-data.ts:114](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L114)
 
 Top-k cut applied to rendered rows after the transform, if any.
 
@@ -358,7 +358,7 @@ Top-k cut applied to rendered rows after the transform, if any.
 
 > `protected` **\_transformAttributes**: `string`[] \| `undefined` = `undefined`
 
-Defined in: [plot-base-data.ts:76](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L76)
+Defined in: [plot-base-data.ts:76](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L76)
 
 Dot-path attributes used to read values from transformed rows, when applicable.
 
@@ -372,7 +372,7 @@ Dot-path attributes used to read values from transformed rows, when applicable.
 
 > `protected` **\_transformColorAttribute**: `string` \| `null` \| `undefined` = `undefined`
 
-Defined in: [plot-base-data.ts:83](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L83)
+Defined in: [plot-base-data.ts:83](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L83)
 
 Dot-path attribute used for color encoding on transformed rows, when applicable.
 
@@ -386,7 +386,7 @@ Dot-path attribute used for color encoding on transformed rows, when applicable.
 
 > `protected` `optional` **\_transformConfig?**: [`PlotTransformConfig`](../type-aliases/PlotTransformConfig.md)
 
-Defined in: [plot-base-data.ts:101](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L101)
+Defined in: [plot-base-data.ts:101](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L101)
 
 Transform configuration, if any.
 
@@ -400,7 +400,7 @@ Transform configuration, if any.
 
 > `protected` **\_width**: `number` = `DEFAULT_WIDTH`
 
-Defined in: [plot-base-data.ts:89](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L89)
+Defined in: [plot-base-data.ts:89](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L89)
 
 Outer plot width in pixels.
 
@@ -416,7 +416,7 @@ Outer plot width in pixels.
 
 > **get** `protected` **aggregatesRows**(): `boolean`
 
-Defined in: [plot-base-interactive.ts:325](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L325)
+Defined in: [plot-base-interactive.ts:325](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L325)
 
 Whether rendered rows aggregate features (`aggregated` projection) rather than being one per feature.
 
@@ -432,7 +432,7 @@ Whether rendered rows aggregate features (`aggregated` projection) rather than b
 
 > **get** **events**(): `EventEmitter`\<[`PlotEventRecord`](../type-aliases/PlotEventRecord.md)\>
 
-Defined in: [plot-base-interactive.ts:179](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L179)
+Defined in: [plot-base-interactive.ts:179](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L179)
 
 Returns the typed event emitter used by this plot instance.
 
@@ -448,7 +448,7 @@ Returns the typed event emitter used by this plot instance.
 
 > **get** `protected` **highlightColor**(): `string`
 
-Defined in: [plot-base-interactive.ts:341](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L341)
+Defined in: [plot-base-interactive.ts:341](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L341)
 
 Highlight color of the plot: the provenance color for plots with the
 segregated view, the plain highlight color for plots without it.
@@ -465,7 +465,7 @@ segregated view, the plain highlight color for plots without it.
 
 > **get** **provenance**(): [`ProvenanceModel`](ProvenanceModel.md)
 
-Defined in: [plot-base-data.ts:256](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L256)
+Defined in: [plot-base-data.ts:256](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L256)
 
 Provenance graph of the current draw cycle.
 
@@ -488,7 +488,7 @@ Stages run from `D0` (source features) through the transform stages to
 
 > **get** `protected` **renderAxisAttributes**(): `string`[]
 
-Defined in: [plot-base-data.ts:491](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L491)
+Defined in: [plot-base-data.ts:496](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L496)
 
 Returns the active axis bindings for rendered rows.
 
@@ -508,7 +508,7 @@ Returns the active axis bindings for rendered rows.
 
 > **get** `protected` **renderColorAttribute**(): `string` \| `undefined`
 
-Defined in: [plot-base-data.ts:498](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L498)
+Defined in: [plot-base-data.ts:503](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L503)
 
 Returns the active color binding for rendered rows.
 
@@ -528,7 +528,7 @@ Returns the active color binding for rendered rows.
 
 > **get** `protected` **segregatedActive**(): `boolean`
 
-Defined in: [plot-base-interactive.ts:354](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L354)
+Defined in: [plot-base-interactive.ts:354](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L354)
 
 Whether marks currently show only their selected part (segregated view).
 
@@ -550,7 +550,7 @@ selection picks whole marks, so it keeps the whole-mark highlight.
 
 > **get** `protected` **segregatedEnabled**(): `boolean`
 
-Defined in: [plot-base-interactive.ts:333](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L333)
+Defined in: [plot-base-interactive.ts:333](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L333)
 
 Whether the plot draws the segregated view, regardless of the current
 selection. Plots may use it to lay out scales that fit partial marks.
@@ -567,7 +567,7 @@ selection. Plots may use it to lay out scales that fit partial marks.
 
 > **get** **selection**(): `number`[]
 
-Defined in: [plot-base-interactive.ts:172](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L172)
+Defined in: [plot-base-interactive.ts:172](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L172)
 
 Returns the active selection as source feature ids.
 
@@ -583,7 +583,7 @@ Returns the active selection as source feature ids.
 
 > **get** **selectionPath**(): \{ `direction`: `"direct"` \| `"inverse"`; `path`: [`ProvenancePath`](../type-aliases/ProvenancePath.md); \} \| `null`
 
-Defined in: [plot-base-interactive.ts:258](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L258)
+Defined in: [plot-base-interactive.ts:258](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L258)
 
 Provenance path of the current selection.
 
@@ -603,7 +603,7 @@ Query direction and reached stages, or `null` without a selection.
 
 > `protected` **afterDataRefresh**(): `void`
 
-Defined in: [plot-base-interactive.ts:223](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L223)
+Defined in: [plot-base-interactive.ts:223](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L223)
 
 Rehydrates local aggregated mark selection after `_data` is rebuilt.
 
@@ -621,7 +621,7 @@ Rehydrates local aggregated mark selection after `_data` is rebuilt.
 
 > `protected` **afterRender**(): `void`
 
-Defined in: [plot-base-interactive.ts:231](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L231)
+Defined in: [plot-base-interactive.ts:231](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L231)
 
 Registers the rendered `.autkMark` nodes as provenance stage `M` and
 redraws segregated marks for the new geometry.
@@ -640,7 +640,7 @@ redraws segregated marks for the new geometry.
 
 > `protected` **applyMarkStyles**(`svgs`): `void`
 
-Defined in: [plot-base-interactive.ts:902](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L902)
+Defined in: [plot-base-interactive.ts:902](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L902)
 
 Applies interaction-aware styling to rendered marks.
 
@@ -662,7 +662,7 @@ Selection containing rendered mark nodes.
 
 > `protected` **brushEvent**(): `void`
 
-Defined in: [plot-base-interactive.ts:748](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L748)
+Defined in: [plot-base-interactive.ts:748](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L748)
 
 Enables 2D rectangular brushing interactions.
 
@@ -676,7 +676,7 @@ Enables 2D rectangular brushing interactions.
 
 > `protected` **brushExtent**(`pixels`, `dimension?`): [`BrushExtent`](../type-aliases/BrushExtent.md)
 
-Defined in: [plot-base-interactive.ts:741](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L741)
+Defined in: [plot-base-interactive.ts:741](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L741)
 
 Adds axis data bounds to brush-local SVG bounds when the renderer knows the scales.
 
@@ -700,7 +700,7 @@ Adds axis data bounds to brush-local SVG bounds when the renderer knows the scal
 
 > `protected` **brushXEvent**(): `void`
 
-Defined in: [plot-base-interactive.ts:783](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L783)
+Defined in: [plot-base-interactive.ts:783](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L783)
 
 Enables horizontal brushing interactions.
 
@@ -714,7 +714,7 @@ Enables horizontal brushing interactions.
 
 > `protected` **brushYEvent**(): `void`
 
-Defined in: [plot-base-interactive.ts:826](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L826)
+Defined in: [plot-base-interactive.ts:826](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L826)
 
 Enables vertical brushing interactions.
 
@@ -728,7 +728,7 @@ Enables vertical brushing interactions.
 
 > `protected` **clickEvent**(): `void`
 
-Defined in: [plot-base-interactive.ts:578](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L578)
+Defined in: [plot-base-interactive.ts:578](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L578)
 
 Enables click-based selection for `.autkMark` nodes and clear overlays.
 
@@ -742,7 +742,7 @@ Enables click-based selection for `.autkMark` nodes and clear overlays.
 
 > `protected` **computeColorDomain**(): `void`
 
-Defined in: [plot-base-data.ts:522](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L522)
+Defined in: [plot-base-data.ts:527](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L527)
 
 Computes and caches the active color domain from rendered rows.
 
@@ -760,7 +760,7 @@ Computes and caches the active color domain from rendered rows.
 
 > **configureSignalListeners**(): `void`
 
-Defined in: [plot-base-interactive.ts:464](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L464)
+Defined in: [plot-base-interactive.ts:464](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L464)
 
 Attaches interaction handlers requested by the plot configuration.
 
@@ -778,7 +778,7 @@ Never throws.
 
 > `protected` **configureTouchInteractionStyles**(): `void`
 
-Defined in: [plot-base-interactive.ts:485](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L485)
+Defined in: [plot-base-interactive.ts:485](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L485)
 
 Prevents browser touch gestures from stealing plot interactions.
 
@@ -792,7 +792,7 @@ Prevents browser touch gestures from stealing plot interactions.
 
 > **destroy**(): `void`
 
-Defined in: [plot-base-interactive.ts:124](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L124)
+Defined in: [plot-base-interactive.ts:124](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L124)
 
 Stops following the host size and removes the plot from its host.
 
@@ -810,7 +810,7 @@ Never throws.
 
 > **draw**(): `void`
 
-Defined in: [plot-base-interactive.ts:883](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L883)
+Defined in: [plot-base-interactive.ts:883](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L883)
 
 Refreshes rendered marks to reflect the current selection state.
 
@@ -824,11 +824,43 @@ Refreshes rendered marks to reflect the current selection state.
 
 ***
 
+### executeTransform()
+
+> `protected` **executeTransform**(`rows`, `config`, `columns`): [`ExecutedPlotTransform`](../type-aliases/ExecutedPlotTransform.md)
+
+Defined in: [plot-base-data.ts:385](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L385)
+
+Executes a transform on the filtered source rows.
+
+#### Parameters
+
+##### rows
+
+(`object` & `object`)[]
+
+##### config
+
+[`PlotTransformConfig`](../type-aliases/PlotTransformConfig.md)
+
+##### columns
+
+`string`[]
+
+#### Returns
+
+[`ExecutedPlotTransform`](../type-aliases/ExecutedPlotTransform.md)
+
+#### Inherited from
+
+[`PlotBaseData`](PlotBaseData.md).[`executeTransform`](PlotBaseData.md#executetransform)
+
+***
+
 ### getMarkColor()
 
 > `protected` **getMarkColor**(`d`): `string`
 
-Defined in: [plot-base-interactive.ts:500](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L500)
+Defined in: [plot-base-interactive.ts:500](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L500)
 
 Resolves the color for a rendered mark datum.
 
@@ -854,7 +886,7 @@ CSS color string for the mark.
 
 > `protected` **hostWidth**(): `number`
 
-Defined in: [plot-base-data.ts:243](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L243)
+Defined in: [plot-base-data.ts:243](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L243)
 
 Content width of the host element (without its padding), or the default
 width while it has no layout.
@@ -875,7 +907,7 @@ Width in pixels, at least `MIN_AUTO_WIDTH`.
 
 > `protected` **hoverParts**(): [`SegregatedPart`](../type-aliases/SegregatedPart.md)[]
 
-Defined in: [plot-base-interactive.ts:411](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L411)
+Defined in: [plot-base-interactive.ts:411](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L411)
 
 Parts of the marks produced by the hovered features, for an aggregated plot.
 
@@ -889,7 +921,7 @@ Parts of the marks produced by the hovered features, for an aggregated plot.
 
 > `protected` **isMarkHighlighted**(`d`): `boolean`
 
-Defined in: [plot-base-interactive.ts:548](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L548)
+Defined in: [plot-base-interactive.ts:548](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L548)
 
 Returns whether a rendered mark should be highlighted.
 
@@ -913,7 +945,7 @@ Bound datum for the mark.
 
 > `protected` **markIntersectsRect**(`node`, `x0`, `y0`, `x1`, `y1`): `boolean`
 
-Defined in: [plot-base-interactive.ts:952](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L952)
+Defined in: [plot-base-interactive.ts:952](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L952)
 
 Tests whether a rendered mark intersects the supplied brush rectangle.
 
@@ -961,7 +993,7 @@ Second rectangle y coordinate.
 
 > `protected` **nodeIntersectsRect**(`node`, `x0`, `y0`, `x1`, `y1`): `boolean`
 
-Defined in: [plot-base-interactive.ts:970](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L970)
+Defined in: [plot-base-interactive.ts:970](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L970)
 
 Tests a generic SVG geometry node against a brush rectangle.
 
@@ -1009,7 +1041,7 @@ Second rectangle y coordinate.
 
 > `protected` **onSelectionUpdated**(): `void`
 
-Defined in: [plot-base-interactive.ts:909](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L909)
+Defined in: [plot-base-interactive.ts:909](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L909)
 
 Hook invoked after mark selection styles have been refreshed.
 
@@ -1023,7 +1055,7 @@ Hook invoked after mark selection styles have been refreshed.
 
 > `abstract` **render**(): `void`
 
-Defined in: [plot-base-data.ts:470](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L470)
+Defined in: [plot-base-data.ts:475](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L475)
 
 Renders plot DOM, SVG, or HTML nodes for the current internal state.
 
@@ -1041,7 +1073,7 @@ Renders plot DOM, SVG, or HTML nodes for the current internal state.
 
 > `protected` **renderHoverParts**(): `void`
 
-Defined in: [plot-base-interactive.ts:399](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L399)
+Defined in: [plot-base-interactive.ts:399](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L399)
 
 Draws or clears the partial marks of a hover from another view.
 
@@ -1055,7 +1087,7 @@ Draws or clears the partial marks of a hover from another view.
 
 > `protected` **renderProvenancePath**(): `void`
 
-Defined in: [plot-base-interactive.ts:275](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L275)
+Defined in: [plot-base-interactive.ts:275](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L275)
 
 Draws, updates, or removes the provenance path widget under the plot.
 
@@ -1069,7 +1101,7 @@ Draws, updates, or removes the provenance path widget under the plot.
 
 > `protected` **renderSegregatedMarks**(): `void`
 
-Defined in: [plot-base-interactive.ts:396](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L396)
+Defined in: [plot-base-interactive.ts:396](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L396)
 
 Draws, updates, or clears the partial marks of the segregated view from
 `segregatedSelection` (`RegisteredPlot` overrides it).
@@ -1084,7 +1116,7 @@ Draws, updates, or clears the partial marks of the segregated view from
 
 > `protected` **renderSelection**(): `void`
 
-Defined in: [plot-base-interactive.ts:888](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L888)
+Defined in: [plot-base-interactive.ts:888](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L888)
 
 #### Returns
 
@@ -1096,7 +1128,7 @@ Defined in: [plot-base-interactive.ts:888](https://github.com/urban-toolkit/auta
 
 > `protected` **resolveSelectionFromRects**(`activeBrushes`): `number`[]
 
-Defined in: [plot-base-interactive.ts:917](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L917)
+Defined in: [plot-base-interactive.ts:917](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L917)
 
 Resolves selected source ids by testing rendered marks against brush rectangles.
 
@@ -1120,7 +1152,7 @@ Selected source feature ids.
 
 > `protected` **resolveSize**(): `void`
 
-Defined in: [plot-base-data.ts:233](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L233)
+Defined in: [plot-base-data.ts:233](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L233)
 
 Resolves the plot size before a draw. With `width: 'auto'` the width is
 the content width of the host element.
@@ -1139,7 +1171,7 @@ the content width of the host element.
 
 > `protected` **resolveTransformResult**(`result`): [`ResolvedPlotTransform`](../type-aliases/ResolvedPlotTransform.md)
 
-Defined in: [plot-base-data.ts:478](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L478)
+Defined in: [plot-base-data.ts:483](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L483)
 
 Maps an executed transform into the rendered row schema that the plot draws.
 
@@ -1167,7 +1199,7 @@ Normalized rendered rows plus any transformed binding metadata.
 
 > `protected` **rowIdOf**(`d`): `string` \| `undefined`
 
-Defined in: [plot-base-data.ts:356](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L356)
+Defined in: [plot-base-data.ts:356](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L356)
 
 Returns the provenance id of a rendered row.
 
@@ -1195,7 +1227,7 @@ Row id, or `undefined` when the datum is not a rendered row.
 
 > `protected` **segregatedParts**(): [`SegregatedPart`](../type-aliases/SegregatedPart.md)[]
 
-Defined in: [plot-base-interactive.ts:427](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L427)
+Defined in: [plot-base-interactive.ts:427](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L427)
 
 #### Returns
 
@@ -1207,7 +1239,7 @@ Defined in: [plot-base-interactive.ts:427](https://github.com/urban-toolkit/auta
 
 > `protected` **selectionEventData**(): [`PlotEventData`](../type-aliases/PlotEventData.md)
 
-Defined in: [plot-base-interactive.ts:368](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L368)
+Defined in: [plot-base-interactive.ts:368](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L368)
 
 Builds the event payload for the current selection.
 
@@ -1226,7 +1258,7 @@ Selected source ids, plus shares when rows are aggregated.
 
 > **setHover**(`selection`): `void`
 
-Defined in: [plot-base-interactive.ts:705](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L705)
+Defined in: [plot-base-interactive.ts:705](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L705)
 
 Highlights the marks of these source features with the hover color, without changing selection.
 
@@ -1248,7 +1280,7 @@ Source feature ids to hover; an empty list clears the external hover.
 
 > `protected` **setRenderColorAttribute**(`attribute`): `void`
 
-Defined in: [plot-base-data.ts:510](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L510)
+Defined in: [plot-base-data.ts:515](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L515)
 
 Updates the active render-time color binding.
 
@@ -1274,7 +1306,7 @@ Dot-path attribute to use for color, or `undefined` to clear it.
 
 > **setSelection**(`selection`, `shares?`): `void`
 
-Defined in: [plot-base-interactive.ts:209](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L209)
+Defined in: [plot-base-interactive.ts:209](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L209)
 
 Applies an externally authored selection to the plot.
 
@@ -1307,7 +1339,7 @@ Never throws.
 
 > `protected` **supportsSegregatedView**(): `boolean`
 
-Defined in: [plot-base-interactive.ts:388](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L388)
+Defined in: [plot-base-interactive.ts:388](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L388)
 
 Whether the plot draws segregated marks. An extension hook for subclasses;
 `RegisteredPlot` overrides it.
@@ -1324,7 +1356,7 @@ Whether the plot draws segregated marks. An extension hook for subclasses;
 
 > `protected` **supportsTopK**(): `boolean`
 
-Defined in: [plot-base-data.ts:201](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L201)
+Defined in: [plot-base-data.ts:201](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L201)
 
 Whether the plot can render a top-k cut of its rows. An extension hook for
 subclasses; `RegisteredPlot` overrides it.
@@ -1345,7 +1377,7 @@ subclasses; `RegisteredPlot` overrides it.
 
 > **updateCollection**(`collection`): `void`
 
-Defined in: [plot-base-interactive.ts:189](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-interactive.ts#L189)
+Defined in: [plot-base-interactive.ts:189](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-interactive.ts#L189)
 
 Replaces the source collection, clears interaction state, and redraws.
 

@@ -2,7 +2,7 @@
 
 > **HighlightRule** = \{ `mode`: `"boolean"`; \} \| \{ `anchor?`: `"start"` \| `"end"` \| `"center"`; `axis?`: `"x"` \| `"y"` \| `"radial"`; `baseline?`: `number`; `channel`: [`SubsetChannel`](SubsetChannel.md); `mode`: `"subset"`; `shape?`: `"flow"` \| `"ribbon"`; \} \| \{ `axis?`: `"x"` \| `"y"`; `mode`: `"custom"`; `preset`: [`CustomPreset`](CustomPreset.md); `scale?`: \{ `a`: `number`; `fields`: \[`string`, `string`\]; `k`: `number`; \}; \}
 
-Defined in: [plots/partial-design.ts:44](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/partial-design.ts#L44)
+Defined in: [plots/partial-design.ts:44](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/partial-design.ts#L44)
 
 Highlight of one mark family, as a plot declares it.
 

@@ -1,6 +1,6 @@
 # Interface: ElevationAssessment
 
-Defined in: [elevation-validation.ts:31](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/elevation-validation.ts#L31)
+Defined in: [elevation-validation.ts:31](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/elevation-validation.ts#L31)
 
 ## Properties
 
@@ -8,7 +8,7 @@ Defined in: [elevation-validation.ts:31](https://github.com/urban-toolkit/autark
 
 > **reference**: `number`
 
-Defined in: [elevation-validation.ts:33](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/elevation-validation.ts#L33)
+Defined in: [elevation-validation.ts:33](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/elevation-validation.ts#L33)
 
 ***
 
@@ -16,7 +16,7 @@ Defined in: [elevation-validation.ts:33](https://github.com/urban-toolkit/autark
 
 > **support**: `number`
 
-Defined in: [elevation-validation.ts:35](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/elevation-validation.ts#L35)
+Defined in: [elevation-validation.ts:35](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/elevation-validation.ts#L35)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [elevation-validation.ts:35](https://github.com/urban-toolkit/autark
 
 > **suspect**: `boolean`
 
-Defined in: [elevation-validation.ts:32](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/elevation-validation.ts#L32)
+Defined in: [elevation-validation.ts:32](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/elevation-validation.ts#L32)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [elevation-validation.ts:32](https://github.com/urban-toolkit/autark
 
 > **tolerance**: `number`
 
-Defined in: [elevation-validation.ts:34](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/elevation-validation.ts#L34)
+Defined in: [elevation-validation.ts:34](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/elevation-validation.ts#L34)

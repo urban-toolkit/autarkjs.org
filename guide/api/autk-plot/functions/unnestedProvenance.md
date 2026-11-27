@@ -2,7 +2,7 @@
 
 > **unnestedProvenance**(`options`): [`TransformProvenance`](../type-aliases/TransformProvenance.md)
 
-Defined in: [transforms/provenance.ts:132](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/provenance.ts#L132)
+Defined in: [transforms/provenance.ts:132](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/provenance.ts#L132)
 
 Builds `D0 features → D1 units → D2 buckets` for presets that unnest arrays.
 

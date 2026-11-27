@@ -2,7 +2,7 @@
 
 > **RowShape** = `"category-value"` \| `"series"` \| `"sort"` \| `"binning-2d"` \| `"binning-hex"` \| `"box-stats"` \| `"flows"` \| `"hierarchy"` \| `"cumulative"` \| `"fold"` \| `"density"`
 
-Defined in: [transforms/registry.ts:33](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/registry.ts#L33)
+Defined in: [transforms/registry.ts:33](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/registry.ts#L33)
 
 Output row families. Each built-in transform defines one, so a user
 transform that yields rows of the same family is read by the same plots.

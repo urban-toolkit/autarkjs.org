@@ -2,7 +2,7 @@
 
 > **BoxStatsRow** = `object`
 
-Defined in: [transforms/presets/box-stats.ts:35](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/box-stats.ts#L35)
+Defined in: [transforms/presets/box-stats.ts:35](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/box-stats.ts#L35)
 
 A single box summary ready for plot rendering.
 
@@ -12,7 +12,7 @@ A single box summary ready for plot rendering.
 
 > **autkIds**: `number`[]
 
-Defined in: [transforms/presets/box-stats.ts:57](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/box-stats.ts#L57)
+Defined in: [transforms/presets/box-stats.ts:57](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/box-stats.ts#L57)
 
 Merged source feature ids of the category, used for selection linking.
 
@@ -22,7 +22,7 @@ Merged source feature ids of the category, used for selection linking.
 
 > **category**: `string`
 
-Defined in: [transforms/presets/box-stats.ts:37](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/box-stats.ts#L37)
+Defined in: [transforms/presets/box-stats.ts:37](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/box-stats.ts#L37)
 
 Category of the box.
 
@@ -32,7 +32,7 @@ Category of the box.
 
 > **count**: `number`
 
-Defined in: [transforms/presets/box-stats.ts:39](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/box-stats.ts#L39)
+Defined in: [transforms/presets/box-stats.ts:39](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/box-stats.ts#L39)
 
 Number of rows with a finite value in the category.
 
@@ -42,7 +42,7 @@ Number of rows with a finite value in the category.
 
 > **median**: `number`
 
-Defined in: [transforms/presets/box-stats.ts:43](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/box-stats.ts#L43)
+Defined in: [transforms/presets/box-stats.ts:43](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/box-stats.ts#L43)
 
 Median.
 
@@ -52,7 +52,7 @@ Median.
 
 > **medianIds**: `number`[]
 
-Defined in: [transforms/presets/box-stats.ts:53](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/box-stats.ts#L53)
+Defined in: [transforms/presets/box-stats.ts:53](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/box-stats.ts#L53)
 
 Source feature ids whose value is the median (one or the two middle values).
 
@@ -62,7 +62,7 @@ Source feature ids whose value is the median (one or the two middle values).
 
 > **outlierIds**: `number`[]
 
-Defined in: [transforms/presets/box-stats.ts:55](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/box-stats.ts#L55)
+Defined in: [transforms/presets/box-stats.ts:55](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/box-stats.ts#L55)
 
 Source feature ids of the outliers.
 
@@ -72,7 +72,7 @@ Source feature ids of the outliers.
 
 > **outliers**: `number`[]
 
-Defined in: [transforms/presets/box-stats.ts:51](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/box-stats.ts#L51)
+Defined in: [transforms/presets/box-stats.ts:51](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/box-stats.ts#L51)
 
 Values outside the whiskers.
 
@@ -82,7 +82,7 @@ Values outside the whiskers.
 
 > **q1**: `number`
 
-Defined in: [transforms/presets/box-stats.ts:41](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/box-stats.ts#L41)
+Defined in: [transforms/presets/box-stats.ts:41](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/box-stats.ts#L41)
 
 First quartile.
 
@@ -92,7 +92,7 @@ First quartile.
 
 > **q3**: `number`
 
-Defined in: [transforms/presets/box-stats.ts:45](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/box-stats.ts#L45)
+Defined in: [transforms/presets/box-stats.ts:45](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/box-stats.ts#L45)
 
 Third quartile.
 
@@ -102,7 +102,7 @@ Third quartile.
 
 > **whiskerHigh**: `number`
 
-Defined in: [transforms/presets/box-stats.ts:49](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/box-stats.ts#L49)
+Defined in: [transforms/presets/box-stats.ts:49](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/box-stats.ts#L49)
 
 Highest value within `q3 + whisker × IQR`.
 
@@ -112,6 +112,6 @@ Highest value within `q3 + whisker × IQR`.
 
 > **whiskerLow**: `number`
 
-Defined in: [transforms/presets/box-stats.ts:47](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/box-stats.ts#L47)
+Defined in: [transforms/presets/box-stats.ts:47](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/box-stats.ts#L47)
 
 Lowest value within `q1 - whisker × IQR`.

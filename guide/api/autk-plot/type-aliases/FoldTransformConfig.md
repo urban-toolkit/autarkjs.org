@@ -2,7 +2,7 @@
 
 > **FoldTransformConfig** = `object`
 
-Defined in: [api.ts:393](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L393)
+Defined in: [api.ts:410](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L410)
 
 Fold preset config.
 
@@ -17,7 +17,7 @@ Use `'@transform'` after the measures to mark the output slot.
 
 > `optional` **options?**: `object`
 
-Defined in: [api.ts:395](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L395)
+Defined in: [api.ts:412](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L412)
 
 #### normalize?
 
@@ -37,4 +37,4 @@ Reducer applied within each category and measure. Defaults to `'avg'`.
 
 > **preset**: `"fold"`
 
-Defined in: [api.ts:394](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L394)
+Defined in: [api.ts:411](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L411)

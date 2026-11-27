@@ -2,7 +2,7 @@
 
 > **PlotDrawContext** = `object`
 
-Defined in: [plots/registered.ts:40](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L40)
+Defined in: [plots/registered.ts:56](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L56)
 
 What a registered plot's `draw` receives.
 
@@ -12,7 +12,7 @@ What a registered plot's `draw` receives.
 
 > **axisLabels**: `string`[]
 
-Defined in: [plots/registered.ts:111](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L111)
+Defined in: [plots/registered.ts:139](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L139)
 
 Axis labels of the configuration (`labels.axis`), one per field.
 
@@ -22,7 +22,7 @@ Axis labels of the configuration (`labels.axis`), one per field.
 
 > **axisX**: \<`Domain`\>(`axis`, `label?`) => `d3.Selection`\<`SVGGElement`, `unknown`, `null`, `undefined`\>
 
-Defined in: [plots/registered.ts:79](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L79)
+Defined in: [plots/registered.ts:107](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L107)
 
 Draws a bottom axis under the drawing area. Configure the D3 axis as usual; ticks drawn
 across the plot (a negative `tickSizeInner`) take the grid color. The returned group can
@@ -58,7 +58,7 @@ vertical chart; a horizontal bar chart passes 1, the field of its values.
 
 > **axisY**: \<`Domain`\>(`axis`, `label?`) => `d3.Selection`\<`SVGGElement`, `unknown`, `null`, `undefined`\>
 
-Defined in: [plots/registered.ts:81](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L81)
+Defined in: [plots/registered.ts:109](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L109)
 
 Draws a left axis beside the drawing area; `label` as in `axisX`, defaulting to the second field.
 
@@ -88,7 +88,7 @@ Draws a left axis beside the drawing area; `label` as in `axisX`, defaulting to 
 
 > **color**: (`row`) => `string`
 
-Defined in: [plots/registered.ts:66](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L66)
+Defined in: [plots/registered.ts:94](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L94)
 
 Current color of a row's mark.
 
@@ -108,7 +108,7 @@ Current color of a row's mark.
 
 > **colorAttribute**: `string` \| `undefined`
 
-Defined in: [plots/registered.ts:115](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L115)
+Defined in: [plots/registered.ts:143](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L143)
 
 Row field the marks are colored by, or `undefined`.
 
@@ -118,7 +118,7 @@ Row field the marks are colored by, or `undefined`.
 
 > **colorBy**: (`attribute`) => `void`
 
-Defined in: [plots/registered.ts:117](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L117)
+Defined in: [plots/registered.ts:145](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L145)
 
 Colors the marks by a row field (`undefined` for none), keeping the drawing (e.g. a clicked axis name).
 
@@ -138,7 +138,7 @@ Colors the marks by a row field (`undefined` for none), keeping the drawing (e.g
 
 > **fields**: `string`[]
 
-Defined in: [plots/registered.ts:50](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L50)
+Defined in: [plots/registered.ts:66](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L66)
 
 Row fields of the axes: the transform's (e.g. `label`, `value`) or `attributes.axis`.
 
@@ -148,7 +148,7 @@ Row fields of the axes: the transform's (e.g. `label`, `value`) or `attributes.a
 
 > **format**: (`index`, `fallback?`) => (`value`) => `string`
 
-Defined in: [plots/registered.ts:87](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L87)
+Defined in: [plots/registered.ts:115](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L115)
 
 Number format of axis `index`: the D3 format from `ticks`,
 or, when neither sets it, SI prefixes from one up ("1.5k") and decimals under one
@@ -174,7 +174,7 @@ or, when neither sets it, SI prefixes from one up ("1.5k") and decimals under on
 
 > **group**: `d3.Selection`\<`SVGGElement`, `unknown`, `null`, `undefined`\>
 
-Defined in: [plots/registered.ts:44](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L44)
+Defined in: [plots/registered.ts:60](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L60)
 
 Marks group, translated by the margins and empty when `draw` starts; draw every mark inside it.
 
@@ -184,7 +184,7 @@ Marks group, translated by the margins and empty when `draw` starts; draw every 
 
 > **hasFormat**: (`index`) => `boolean`
 
-Defined in: [plots/registered.ts:89](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L89)
+Defined in: [plots/registered.ts:117](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L117)
 
 Whether axis `index` has an explicit format, which can also format numeric categories and buckets.
 
@@ -204,7 +204,7 @@ Whether axis `index` has an explicit format, which can also format numeric categ
 
 > **height**: `number`
 
-Defined in: [plots/registered.ts:69](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L69)
+Defined in: [plots/registered.ts:97](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L97)
 
 ***
 
@@ -212,7 +212,7 @@ Defined in: [plots/registered.ts:69](https://github.com/urban-toolkit/autark/blo
 
 > **html**: `d3.Selection`\<`HTMLDivElement`, `unknown`, `null`, `undefined`\>
 
-Defined in: [plots/registered.ts:46](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L46)
+Defined in: [plots/registered.ts:62](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L62)
 
 Container under the SVG for marks drawn as HTML (click selection only).
 
@@ -222,7 +222,7 @@ Container under the SVG for marks drawn as HTML (click selection only).
 
 > **interactive**: `boolean`
 
-Defined in: [plots/registered.ts:56](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L56)
+Defined in: [plots/registered.ts:72](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L72)
 
 Whether the configuration asks for any interaction (`events`). A plot without one is
 static: its drawing adds no interaction of its own either, such as sorting a table by a
@@ -234,7 +234,7 @@ clicked column. Marks get the pointer cursor from the plot, only when clicks sel
 
 > **legend**: (`keys`, `color`, `direction`) => `void`
 
-Defined in: [plots/registered.ts:93](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L93)
+Defined in: [plots/registered.ts:121](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L121)
 
 Draws a legend of colored swatches: a row above the drawing area, or a column at its top left.
 
@@ -262,7 +262,7 @@ Draws a legend of colored swatches: a row above the drawing area, or a column at
 
 > **margins**: `object`
 
-Defined in: [plots/registered.ts:113](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L113)
+Defined in: [plots/registered.ts:141](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L141)
 
 Margins around the drawing area, for what is drawn in the SVG outside `group` (e.g. brush areas).
 
@@ -288,7 +288,7 @@ Margins around the drawing area, for what is drawn in the SVG outside `group` (e
 
 > **options**: `Record`\<`string`, `unknown`\>
 
-Defined in: [plots/registered.ts:109](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L109)
+Defined in: [plots/registered.ts:137](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L137)
 
 Options of the configured transform, as run (e.g. whether `fold` normalizes); empty without one.
 
@@ -298,7 +298,7 @@ Options of the configured transform, as run (e.g. whether `fold` normalizes); em
 
 > **partRange**: \{ `additive`: `true`; \} \| \{ `additive`: `false`; `extent`: \[`number`, `number`\]; \} \| `undefined`
 
-Defined in: [plots/registered.ts:102](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L102)
+Defined in: [plots/registered.ts:130](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L130)
 
 Values the selected parts can take, when the rows reduce features
 (`undefined` otherwise). With count and sum
@@ -313,9 +313,93 @@ these keeps the parts inside the plot.
 
 > **rows**: [`AutkDatum`](AutkDatum.md)[]
 
-Defined in: [plots/registered.ts:48](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L48)
+Defined in: [plots/registered.ts:64](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L64)
 
 Rendered rows; bind these objects (not copies) to the marks.
+
+***
+
+### scaleDomain?
+
+> `optional` **scaleDomain?**: `ResolvePlotDomain`
+
+Defined in: [plots/registered.ts:76](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L76)
+
+Resolves a configured display domain and clips marks for explicit numeric axes.
+
+***
+
+### seriesGroups?
+
+> `optional` **seriesGroups?**: readonly [`PlotSeriesGroup`](PlotSeriesGroup.md)[]
+
+Defined in: [plots/registered.ts:92](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L92)
+
+Input groups in stable source order, including empty groups after filtering.
+
+***
+
+### setAnnotationAxis?
+
+> `optional` **setAnnotationAxis?**: (`side`, `axis`) => `void`
+
+Defined in: [plots/registered.ts:82](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L82)
+
+Overrides the annotation mapping inferred from a standard axis.
+
+#### Parameters
+
+##### side
+
+`"x"` \| `"y"`
+
+##### axis
+
+[`PlotAnnotationAxis`](PlotAnnotationAxis.md)
+
+#### Returns
+
+`void`
+
+***
+
+### setAnnotationObservations?
+
+> `optional` **setAnnotationObservations?**: (`observations`) => `void`
+
+Defined in: [plots/registered.ts:86](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L86)
+
+Declares observations after transforms but before manual display windows.
+
+#### Parameters
+
+##### observations
+
+[`PlotAnnotationObservations`](PlotAnnotationObservations.md)
+
+#### Returns
+
+`void`
+
+***
+
+### setAnnotationSeriesPoint?
+
+> `optional` **setAnnotationSeriesPoint?**: (`lookup`) => `void`
+
+Defined in: [plots/registered.ts:84](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L84)
+
+Publishes a lookup for series-point annotations, including when there are no matching marks.
+
+#### Parameters
+
+##### lookup
+
+[`PlotAnnotationSeriesPoint`](PlotAnnotationSeriesPoint.md)
+
+#### Returns
+
+`void`
 
 ***
 
@@ -323,7 +407,7 @@ Rendered rows; bind these objects (not copies) to the marks.
 
 > `optional` **setBrushScale?**: \<`Domain`\>(`side`, `scale`, `dimension?`) => `void`
 
-Defined in: [plots/registered.ts:62](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L62)
+Defined in: [plots/registered.ts:88](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L88)
 
 Supplies a brush scale for an axis drawn manually or positioned by bucket rank.
 
@@ -357,7 +441,7 @@ Supplies a brush scale for an axis drawn manually or positioned by bucket rank.
 
 > **setOptions**: (`options`) => `void`
 
-Defined in: [plots/registered.ts:119](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L119)
+Defined in: [plots/registered.ts:147](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L147)
 
 Runs the transform again with these options and draws the plot again (e.g. a table sorted by a clicked column).
 
@@ -377,7 +461,7 @@ Runs the transform again with these options and draws the plot again (e.g. a tab
 
 > `optional` **style?**: [`PlotConfig`](PlotConfig.md)\[`"style"`\]
 
-Defined in: [plots/registered.ts:58](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L58)
+Defined in: [plots/registered.ts:74](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L74)
 
 Appearance overrides for this plot.
 
@@ -387,7 +471,7 @@ Appearance overrides for this plot.
 
 > **svg**: `d3.Selection`\<`SVGSVGElement`, `unknown`, `null`, `undefined`\>
 
-Defined in: [plots/registered.ts:42](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L42)
+Defined in: [plots/registered.ts:58](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L58)
 
 Root SVG of the plot, already sized; the title is drawn by the plot.
 
@@ -397,7 +481,7 @@ Root SVG of the plot, already sized; the title is drawn by the plot.
 
 > **tickCount**: (`top`, `values`, `count`) => `number`
 
-Defined in: [plots/registered.ts:91](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L91)
+Defined in: [plots/registered.ts:119](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L119)
 
 Tick count of a value axis up to `top`: `count`, or one tick per unit when the values are whole (counts) and `top` is smaller.
 
@@ -425,7 +509,7 @@ Tick count of a value axis up to `top`: `count`, or one tick per unit when the v
 
 > **transform**: [`ExecutedPlotTransform`](ExecutedPlotTransform.md) \| `undefined`
 
-Defined in: [plots/registered.ts:107](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L107)
+Defined in: [plots/registered.ts:135](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L135)
 
 Result of the configured transform, for what it computes besides rows
 (e.g. the data extent and hexagon radius of `binning-hex`), or `undefined`.
@@ -436,7 +520,7 @@ Result of the configured transform, for what it computes besides rows
 
 > **value**: (`row`, `index?`) => `unknown`
 
-Defined in: [plots/registered.ts:64](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L64)
+Defined in: [plots/registered.ts:90](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L90)
 
 Value of a row on axis `index` (default 0).
 
@@ -456,11 +540,31 @@ Value of a row on axis `index` (default 0).
 
 ***
 
+### visibleRows?
+
+> `optional` **visibleRows?**: (`includes`) => [`AutkDatum`](AutkDatum.md)[]
+
+Defined in: [plots/registered.ts:78](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L78)
+
+Keeps only the rows in the display domain without changing the transform or its provenance.
+
+#### Parameters
+
+##### includes
+
+(`row`) => `boolean`
+
+#### Returns
+
+[`AutkDatum`](AutkDatum.md)[]
+
+***
+
 ### width
 
 > **width**: `number`
 
-Defined in: [plots/registered.ts:68](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L68)
+Defined in: [plots/registered.ts:96](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L96)
 
 Inner width and height, without margins.
 
@@ -470,7 +574,7 @@ Inner width and height, without margins.
 
 > `optional` **xTickLabel?**: (`key`) => `string`
 
-Defined in: [plots/registered.ts:60](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L60)
+Defined in: [plots/registered.ts:80](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L80)
 
 Optional custom label for a category or bucket on the X axis.
 

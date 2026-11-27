@@ -1,10 +1,13 @@
 {
-  "source": "https://github.com/urban-toolkit/autark/tree/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/gallery",
-  "commit": "7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460",
-  "syncedAt": "2026-11-25",
+  "source": "https://github.com/urban-toolkit/autark/tree/8707a52c73dc32825e702f3a61de13def68d327e/gallery",
+  "commit": "8707a52c73dc32825e702f3a61de13def68d327e",
+  "syncedAt": "2026-11-27",
   "modified": [
     "vite.config.ts",
+    "src/example.ts",
+    "example.css",
     "manifest.json"
   ],
-  "filesSha256": "c85d03027ea403084feed5327616b0594bdabc130df782bc7f84eda965ae8b2c"
+  "filesSha256": "cb83c83f8246e10af1a48b75fd09c6bda260f6f17a71fe131f3a33d027649a67",
+  "filesSha256Algorithm": "SHA-256 of sorted upstream relative paths + NUL + file bytes + NUL, excluding modified files and package.json"
 }

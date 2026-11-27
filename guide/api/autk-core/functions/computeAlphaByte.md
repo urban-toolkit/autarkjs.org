@@ -2,7 +2,7 @@
 
 > **computeAlphaByte**(`value`, `context`): `number`
 
-Defined in: [transfer-function.ts:146](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/transfer-function.ts#L146)
+Defined in: [transfer-function.ts:146](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/transfer-function.ts#L146)
 
 Computes alpha as an 8-bit channel value for a scalar value.
 

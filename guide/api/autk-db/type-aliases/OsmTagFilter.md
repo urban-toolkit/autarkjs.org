@@ -2,7 +2,7 @@
 
 > **OsmTagFilter** = `object`
 
-Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:77](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L77)
+Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:77](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L77)
 
 Exact tag value, or key presence when value is omitted. Filters within a set use OR.
 
@@ -12,7 +12,7 @@ Exact tag value, or key presence when value is omitted. Filters within a set use
 
 > **key**: `string`
 
-Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:77](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L77)
+Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:77](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L77)
 
 ***
 
@@ -20,4 +20,4 @@ Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:77](https://g
 
 > `optional` **value?**: `string`
 
-Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:77](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L77)
+Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:77](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L77)

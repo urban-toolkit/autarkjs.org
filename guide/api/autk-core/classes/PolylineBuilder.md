@@ -1,6 +1,6 @@
 # Class: PolylineBuilder
 
-Defined in: [polyline-builder.ts:13](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/polyline-builder.ts#L13)
+Defined in: [polyline-builder.ts:13](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/polyline-builder.ts#L13)
 
 Builds centerline topology without buffering polygons or resolving visual widths.
 
@@ -20,7 +20,7 @@ Builds centerline topology without buffering polygons or resolving visual widths
 
 > `static` **build**(`geojson`, `origin`): [`PolylineData`](../interfaces/PolylineData.md)
 
-Defined in: [polyline-builder.ts:20](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/polyline-builder.ts#L20)
+Defined in: [polyline-builder.ts:20](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/polyline-builder.ts#L20)
 
 Builds local XY centerlines for LineString, MultiLineString and nested GeometryCollection.
 Consecutive duplicate vertices are removed after float32 conversion. Invalid paths and

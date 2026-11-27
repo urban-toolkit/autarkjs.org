@@ -2,7 +2,7 @@
 
 > **registerPlot**(`definition`): `void`
 
-Defined in: [plots/registered.ts:370](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L370)
+Defined in: [plots/registered.ts:402](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L402)
 
 Registers a plot so `{ type: 'registered', plot: name }` draws with it.
 

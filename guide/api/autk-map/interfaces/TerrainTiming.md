@@ -1,6 +1,6 @@
 # Interface: TerrainTiming
 
-Defined in: [autk-map/src/height-source-tiles.ts:107](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/height-source-tiles.ts#L107)
+Defined in: [autk-map/src/height-source-tiles.ts:107](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/height-source-tiles.ts#L107)
 
 CPU timings of the terrain work over the most recent frames, in milliseconds.
 
@@ -14,7 +14,7 @@ or uploaded a window, the cost of a frame that does the work. Upload is the time
 
 > **compose**: [`TimingSummary`](TimingSummary.md)
 
-Defined in: [autk-map/src/height-source-tiles.ts:111](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/height-source-tiles.ts#L111)
+Defined in: [autk-map/src/height-source-tiles.ts:111](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/height-source-tiles.ts#L111)
 
 Composition alone, frames that processed at least one row batch.
 
@@ -24,7 +24,7 @@ Composition alone, frames that processed at least one row batch.
 
 > **update**: [`TimingSummary`](TimingSummary.md)
 
-Defined in: [autk-map/src/height-source-tiles.ts:109](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/height-source-tiles.ts#L109)
+Defined in: [autk-map/src/height-source-tiles.ts:109](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/height-source-tiles.ts#L109)
 
 Whole `update` call, every frame.
 
@@ -34,7 +34,7 @@ Whole `update` call, every frame.
 
 > **upload**: [`TimingSummary`](TimingSummary.md)
 
-Defined in: [autk-map/src/height-source-tiles.ts:113](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/height-source-tiles.ts#L113)
+Defined in: [autk-map/src/height-source-tiles.ts:113](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/height-source-tiles.ts#L113)
 
 Submitting the changed levels to the GPU, frames that uploaded.
 
@@ -44,6 +44,6 @@ Submitting the changed levels to the GPU, frames that uploaded.
 
 > **windowsPerCompose**: [`TimingSummary`](TimingSummary.md)
 
-Defined in: [autk-map/src/height-source-tiles.ts:115](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/height-source-tiles.ts#L115)
+Defined in: [autk-map/src/height-source-tiles.ts:115](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/height-source-tiles.ts#L115)
 
 Completed windows per frame with composition work; partial batches may complete none.

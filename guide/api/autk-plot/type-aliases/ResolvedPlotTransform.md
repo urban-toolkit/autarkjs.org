@@ -2,7 +2,7 @@
 
 > **ResolvedPlotTransform** = `object`
 
-Defined in: [plot-base-data.ts:47](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L47)
+Defined in: [plot-base-data.ts:47](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L47)
 
 Rendered rows and bindings of an executed transform, returned by `resolveTransformResult()`.
 
@@ -12,7 +12,7 @@ Rendered rows and bindings of an executed transform, returned by `resolveTransfo
 
 > `optional` **axisAttributes?**: `string`[]
 
-Defined in: [plot-base-data.ts:51](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L51)
+Defined in: [plot-base-data.ts:51](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L51)
 
 Optional axis bindings exposed by the transformed row shape.
 
@@ -22,7 +22,7 @@ Optional axis bindings exposed by the transformed row shape.
 
 > `optional` **colorAttribute?**: `string`
 
-Defined in: [plot-base-data.ts:53](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L53)
+Defined in: [plot-base-data.ts:53](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L53)
 
 Optional color binding exposed by the transformed row shape.
 
@@ -32,7 +32,7 @@ Optional color binding exposed by the transformed row shape.
 
 > `optional` **rowIds?**: [`ProvenanceId`](ProvenanceId.md)[]
 
-Defined in: [plot-base-data.ts:55](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L55)
+Defined in: [plot-base-data.ts:55](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L55)
 
 Provenance id of each row in `rows`. Required when `rows` are rebuilt or reordered.
 
@@ -42,6 +42,6 @@ Provenance id of each row in `rows`. Required when `rows` are rebuilt or reorder
 
 > **rows**: [`AutkDatum`](AutkDatum.md)[]
 
-Defined in: [plot-base-data.ts:49](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L49)
+Defined in: [plot-base-data.ts:49](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L49)
 
 Render rows stored on `_data` for the current draw cycle.

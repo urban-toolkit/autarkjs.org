@@ -2,7 +2,7 @@
 
 > **RegisteredTransformConfig** = `object`
 
-Defined in: [api.ts:314](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L314)
+Defined in: [api.ts:331](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L331)
 
 Config of a user-defined transform added with `registerTransform`.
 
@@ -17,7 +17,7 @@ Use `'@transform'` after the source columns to mark the output slot.
 
 > **name**: `string`
 
-Defined in: [api.ts:317](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L317)
+Defined in: [api.ts:334](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L334)
 
 Name given to `registerTransform`.
 
@@ -27,7 +27,7 @@ Name given to `registerTransform`.
 
 > `optional` **options?**: `Record`\<`string`, `unknown`\>
 
-Defined in: [api.ts:319](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L319)
+Defined in: [api.ts:336](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L336)
 
 Options passed to the transform.
 
@@ -37,4 +37,4 @@ Options passed to the transform.
 
 > **preset**: `"registered"`
 
-Defined in: [api.ts:315](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L315)
+Defined in: [api.ts:332](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L332)

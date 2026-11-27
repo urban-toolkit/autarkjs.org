@@ -47,7 +47,7 @@ const chart = new AutkPlot(plot, {
 
 # Chart Types
 
-`AutkPlot` supports more than twenty chart types through a single `type` discriminator. This page shows the two types that work directly on the input GeoJSON without a transform; the remaining types are most useful with a pre-render transform and are covered in [Transformations](./transformations).
+`AutkPlot` supports more than twenty chart types through a single `type` discriminator. This page introduces scatterplots and parallel coordinates, which work directly on the input GeoJSON. Bar and bubble charts can also use raw rows; many other types are most useful with a pre-render transform and are covered in [Transformations](./transformations).
 
 | Family | Types |
 | --- | --- |
@@ -95,8 +95,33 @@ The following chart types are usually paired with a transform. Live examples for
 | `table` | `sort` | Inspect and sort raw values. |
 | `heatmatrix` | `binning-2d` | Show 2D density. |
 
+## Manual scale domains
+
+Plots infer domains by default. Override only the channels that need a fixed display window or a shared comparison scale:
+
+```ts
+scales: {
+  x: { domain: ['Low', 'Medium', 'High'] },
+  y: { domain: [0, 1] },
+}
+```
+
+Numeric domains require two finite, increasing bounds. Marks are clipped to the drawing area, not filtered before aggregation; statistics and provenance still use the underlying rows. Categorical domains are ordered lists of unique string keys: missing categories reserve empty slots, while omitted categories are not drawn. Use raw category/bucket keys, not formatted labels. Domains do not change scale types or pixel ranges.
+
+| Chart | Supported domains |
+| --- | --- |
+| Bar, stacked bar, box, violin | Categorical `x`, numeric `y` |
+| Scatter, bubble | Numeric `x` and `y`; bubble also supports numeric `size` |
+| Line, area | Categorical `x` (equally spaced buckets), numeric `y` |
+| Heat matrix | Categorical `x` and `y` |
+| Density, hexbin | Numeric `x` and `y`, without recomputing the density or bins |
+| Parallel coordinates | `scales.dimensions[field].domain`, numeric or categorical to match the field |
+
+For bubbles, `scales.size.domain` must be nonnegative; out-of-domain values use the nearest endpoint radius. Colors use `style.colorMap.domainSpec`, not `scales`. See [Series and annotations](./series-and-annotations) for a runnable example with fixed domains, grouped bars, and reference marks.
+
 ## Next steps
 
 - [Transformations](./transformations) — bar charts, line charts, tables, and heat matrices with transforms.
+- [Series and annotations](./series-and-annotations) — compare groups and add statistical references.
 - [Interactivity](./interactivity) — click, brush, hover, and programmatic selection.
 - [Extending](./extending) — write a chart in plain D3 and register it.

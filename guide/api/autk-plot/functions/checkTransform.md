@@ -2,7 +2,7 @@
 
 > **checkTransform**(`definition`, `collection`, `options?`, `columns?`): `string`[]
 
-Defined in: [provenance/validate.ts:238](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/provenance/validate.ts#L238)
+Defined in: [provenance/validate.ts:238](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/provenance/validate.ts#L238)
 
 Runs a registered transform on sample data and checks its provenance.
 

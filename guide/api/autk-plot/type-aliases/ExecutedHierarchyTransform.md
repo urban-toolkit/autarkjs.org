@@ -2,7 +2,7 @@
 
 > **ExecutedHierarchyTransform** = `object`
 
-Defined in: [transforms/presets/hierarchy.ts:23](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/hierarchy.ts#L23)
+Defined in: [transforms/presets/hierarchy.ts:23](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/hierarchy.ts#L23)
 
 Result produced by `runHierarchy`.
 
@@ -12,7 +12,7 @@ Result produced by `runHierarchy`.
 
 > **depth**: `number`
 
-Defined in: [transforms/presets/hierarchy.ts:29](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/hierarchy.ts#L29)
+Defined in: [transforms/presets/hierarchy.ts:29](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/hierarchy.ts#L29)
 
 Number of levels.
 
@@ -22,7 +22,7 @@ Number of levels.
 
 > **preset**: `"hierarchy"`
 
-Defined in: [transforms/presets/hierarchy.ts:25](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/hierarchy.ts#L25)
+Defined in: [transforms/presets/hierarchy.ts:25](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/hierarchy.ts#L25)
 
 Preset discriminator identifying the executed transform.
 
@@ -32,7 +32,7 @@ Preset discriminator identifying the executed transform.
 
 > **provenance**: [`TransformProvenance`](TransformProvenance.md)
 
-Defined in: [transforms/presets/hierarchy.ts:31](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/hierarchy.ts#L31)
+Defined in: [transforms/presets/hierarchy.ts:31](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/hierarchy.ts#L31)
 
 Provenance `D0 features → D1 leaves → … → Dn top level`, aligned with `rows`.
 
@@ -42,6 +42,6 @@ Provenance `D0 features → D1 leaves → … → Dn top level`, aligned with `r
 
 > **rows**: [`HierarchyNodeRow`](HierarchyNodeRow.md)[]
 
-Defined in: [transforms/presets/hierarchy.ts:27](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/hierarchy.ts#L27)
+Defined in: [transforms/presets/hierarchy.ts:27](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/hierarchy.ts#L27)
 
 Nodes of every level, top level first.

@@ -2,7 +2,7 @@
 
 > **BinningHexTransformConfig** = `object`
 
-Defined in: [api.ts:412](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L412)
+Defined in: [api.ts:429](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L429)
 
 Binning-hex preset config.
 
@@ -18,7 +18,7 @@ Use `'@transform'` in `PlotConfig.attributes.color` to mark the output slot.
 
 > `optional` **options?**: `object`
 
-Defined in: [api.ts:414](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L414)
+Defined in: [api.ts:431](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L431)
 
 #### height?
 
@@ -56,4 +56,4 @@ Width of the binned area in pixels. Defaults to `800`.
 
 > **preset**: `"binning-hex"`
 
-Defined in: [api.ts:413](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L413)
+Defined in: [api.ts:430](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L430)

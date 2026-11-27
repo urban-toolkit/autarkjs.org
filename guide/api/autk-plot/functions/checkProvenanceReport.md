@@ -2,7 +2,7 @@
 
 > **checkProvenanceReport**(`featureCount`, `rows`, `provenance`, `valueField?`): [`ContractReport`](../type-aliases/ContractReport.md)
 
-Defined in: [provenance/validate.ts:52](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/provenance/validate.ts#L52)
+Defined in: [provenance/validate.ts:52](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/provenance/validate.ts#L52)
 
 Checks the provenance of a transform output against the contract
 invariants, reporting which invariant each violation breaks.

@@ -61,6 +61,10 @@ try {
       await outputs.get('4.1 · Noise heatmap').locator('canvas').first().waitFor()
     }
     if (chapter === '04') {
+      const references = outputs.get('4.1 · Series, domains, and references')
+      await references.locator('.autk-series-legend').waitFor()
+      await references.locator('[data-annotation-id="centroid"] circle').waitFor()
+      assert.equal(await references.locator('circle.autkMark').count(), await value('1.3 · Load the neighborhoods', 'features'))
       const linked = outputs.get('3.2 · Two linked plots')
       assert.equal(await linked.locator('.plotgrid > div > svg').count(), 2)
       const overlay = linked.locator('rect.overlay').first()

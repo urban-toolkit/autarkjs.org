@@ -2,7 +2,7 @@
 
 > **BoxStatsTransformConfig** = `object`
 
-Defined in: [api.ts:456](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L456)
+Defined in: [api.ts:473](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L473)
 
 Box-stats preset config.
 
@@ -17,7 +17,7 @@ Use `'@transform'` in `axis[2]` to mark the output slot.
 
 > `optional` **options?**: `object`
 
-Defined in: [api.ts:458](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L458)
+Defined in: [api.ts:475](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L475)
 
 #### whisker?
 
@@ -31,4 +31,4 @@ Whisker length as a multiple of the interquartile range. Defaults to `1.5`.
 
 > **preset**: `"box-stats"`
 
-Defined in: [api.ts:457](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L457)
+Defined in: [api.ts:474](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L474)

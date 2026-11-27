@@ -2,7 +2,7 @@
 
 > **BinningHexRow** = `object`
 
-Defined in: [transforms/presets/binning-hex.ts:39](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/binning-hex.ts#L39)
+Defined in: [transforms/presets/binning-hex.ts:39](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/binning-hex.ts#L39)
 
 A single aggregated hexagon ready for plot rendering.
 
@@ -12,7 +12,7 @@ A single aggregated hexagon ready for plot rendering.
 
 > **autkIds**: `number`[]
 
-Defined in: [transforms/presets/binning-hex.ts:51](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/binning-hex.ts#L51)
+Defined in: [transforms/presets/binning-hex.ts:51](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/binning-hex.ts#L51)
 
 Merged source feature ids from all rows in this hexagon, used for selection linking.
 
@@ -22,7 +22,7 @@ Merged source feature ids from all rows in this hexagon, used for selection link
 
 > **count**: `number`
 
-Defined in: [transforms/presets/binning-hex.ts:49](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/binning-hex.ts#L49)
+Defined in: [transforms/presets/binning-hex.ts:49](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/binning-hex.ts#L49)
 
 How many rows fell into this hexagon.
 
@@ -32,7 +32,7 @@ How many rows fell into this hexagon.
 
 > **cx**: `number`
 
-Defined in: [transforms/presets/binning-hex.ts:43](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/binning-hex.ts#L43)
+Defined in: [transforms/presets/binning-hex.ts:43](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/binning-hex.ts#L43)
 
 Center x in pixels of the binned area.
 
@@ -42,7 +42,7 @@ Center x in pixels of the binned area.
 
 > **cy**: `number`
 
-Defined in: [transforms/presets/binning-hex.ts:45](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/binning-hex.ts#L45)
+Defined in: [transforms/presets/binning-hex.ts:45](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/binning-hex.ts#L45)
 
 Center y in pixels of the binned area, growing downward.
 
@@ -52,7 +52,7 @@ Center y in pixels of the binned area, growing downward.
 
 > **label**: `string`
 
-Defined in: [transforms/presets/binning-hex.ts:41](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/binning-hex.ts#L41)
+Defined in: [transforms/presets/binning-hex.ts:41](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/binning-hex.ts#L41)
 
 Readable hexagon label: its center in data units, e.g. `"12M · 20k"`.
 
@@ -62,6 +62,6 @@ Readable hexagon label: its center in data units, e.g. `"12M · 20k"`.
 
 > **value**: `number`
 
-Defined in: [transforms/presets/binning-hex.ts:47](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/presets/binning-hex.ts#L47)
+Defined in: [transforms/presets/binning-hex.ts:47](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/presets/binning-hex.ts#L47)
 
 The reduced numeric result (count, sum, avg, min, or max) for this hexagon.

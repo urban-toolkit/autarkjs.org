@@ -187,6 +187,12 @@ Axis labels use SI prefixes from one up and decimals under one, so `0.5` does no
 The original `collection` is not modified. The transform produces an internal derived table used only for rendering, plus the provenance relations that let a selection travel between aggregated and raw views. Call `updateCollection` if you need to change the source data.
 :::
 
+## Reducing several series independently
+
+For a line chart, add `attributes.series` alongside the array field, for example `attributes: { axis: ['monthly'], series: 'scenario' }`, and keep `transform: { preset: 'reduce-series', options: { reducer: 'avg' } }`. Each group is reduced separately on a shared bucket axis; missing buckets break paths rather than becoming zero. `scales.x.domain` can fix the bucket order or reserve absent buckets. Other transforms are not supported in series mode.
+
+See [Grouped line charts](./series-and-annotations#grouped-line-charts) for a runnable example with a missing month and a series-point annotation.
+
 ## Next steps
 
 - [Overview](./) — scatter plots and parallel coordinates, plus a linked map + plot example.

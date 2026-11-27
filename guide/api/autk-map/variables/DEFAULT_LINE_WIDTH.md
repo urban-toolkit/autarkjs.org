@@ -2,6 +2,6 @@
 
 > `const` **DEFAULT\_LINE\_WIDTH**: `12` = `12`
 
-Defined in: [autk-map/src/types-layers.ts:27](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/types-layers.ts#L27)
+Defined in: [autk-map/src/types-layers.ts:27](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/types-layers.ts#L27)
 
 Default full width of generic polylines in local planar units.

@@ -2,7 +2,7 @@
 
 > **PlotArrangeContext** = `object`
 
-Defined in: [plots/registered.ts:123](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L123)
+Defined in: [plots/registered.ts:151](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L151)
 
 What a registered plot's `arrange` receives.
 
@@ -12,7 +12,7 @@ What a registered plot's `arrange` receives.
 
 > **external**: `boolean`
 
-Defined in: [plots/registered.ts:135](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L135)
+Defined in: [plots/registered.ts:163](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L163)
 
 Whether the current selection came from another view (the map, a linked plot).
 
@@ -22,7 +22,7 @@ Whether the current selection came from another view (the map, a linked plot).
 
 > **group**: `d3.Selection`\<`SVGGElement`, `unknown`, `null`, `undefined`\>
 
-Defined in: [plots/registered.ts:125](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L125)
+Defined in: [plots/registered.ts:153](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L153)
 
 Marks group.
 
@@ -32,7 +32,7 @@ Marks group.
 
 > **highlighted**: (`row`) => `boolean`
 
-Defined in: [plots/registered.ts:131](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L131)
+Defined in: [plots/registered.ts:159](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L159)
 
 Whether a row's mark is highlighted (selected here, or fully by another view).
 
@@ -52,7 +52,7 @@ Whether a row's mark is highlighted (selected here, or fully by another view).
 
 > **html**: `d3.Selection`\<`HTMLDivElement`, `unknown`, `null`, `undefined`\>
 
-Defined in: [plots/registered.ts:127](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L127)
+Defined in: [plots/registered.ts:155](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L155)
 
 Container of HTML marks.
 
@@ -62,7 +62,7 @@ Container of HTML marks.
 
 > **parts**: [`SegregatedPart`](SegregatedPart.md)[]
 
-Defined in: [plots/registered.ts:133](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L133)
+Defined in: [plots/registered.ts:161](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L161)
 
 Rows with a selected part (a selection from another view).
 
@@ -72,6 +72,6 @@ Rows with a selected part (a selection from another view).
 
 > **rows**: [`AutkDatum`](AutkDatum.md)[]
 
-Defined in: [plots/registered.ts:129](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L129)
+Defined in: [plots/registered.ts:157](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L157)
 
 Rendered rows, in their order.

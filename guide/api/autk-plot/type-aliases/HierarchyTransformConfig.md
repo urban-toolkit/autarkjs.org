@@ -2,7 +2,7 @@
 
 > **HierarchyTransformConfig** = `object`
 
-Defined in: [api.ts:349](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L349)
+Defined in: [api.ts:366](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L366)
 
 Hierarchy preset config.
 
@@ -17,7 +17,7 @@ along the whole chain. Use `'@transform'` after the levels to mark the output sl
 
 > `optional` **options?**: `object`
 
-Defined in: [api.ts:351](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L351)
+Defined in: [api.ts:368](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L368)
 
 #### reducer?
 
@@ -37,4 +37,4 @@ Feature property to aggregate for non-count reducers. Required when `reducer` is
 
 > **preset**: `"hierarchy"`
 
-Defined in: [api.ts:350](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L350)
+Defined in: [api.ts:367](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L367)

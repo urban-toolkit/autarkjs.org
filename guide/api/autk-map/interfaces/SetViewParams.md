@@ -1,6 +1,6 @@
 # Interface: SetViewParams
 
-Defined in: [autk-map/src/api.ts:48](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/api.ts#L48)
+Defined in: [autk-map/src/api.ts:48](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/api.ts#L48)
 
 Geographic navigation independent of imagery, vectors, and elevation sources.
 
@@ -10,7 +10,7 @@ Geographic navigation independent of imagery, vectors, and elevation sources.
 
 > **center**: `object`
 
-Defined in: [autk-map/src/api.ts:50](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/api.ts#L50)
+Defined in: [autk-map/src/api.ts:50](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/api.ts#L50)
 
 WGS84 center in named latitude/longitude degrees, regardless of workspace CRS.
 
@@ -28,7 +28,7 @@ WGS84 center in named latitude/longitude degrees, regardless of workspace CRS.
 
 > `optional` **projection?**: `CameraProjection`
 
-Defined in: [autk-map/src/api.ts:54](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/api.ts#L54)
+Defined in: [autk-map/src/api.ts:54](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/api.ts#L54)
 
 Projection for the new view. Omit to keep the persistent projection.
 
@@ -38,6 +38,6 @@ Projection for the new view. Omit to keep the persistent projection.
 
 > `optional` **zoom?**: `number`
 
-Defined in: [autk-map/src/api.ts:52](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/api.ts#L52)
+Defined in: [autk-map/src/api.ts:52](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/api.ts#L52)
 
 Web Mercator zoom using a 256-pixel reference tile; defaults to 12.

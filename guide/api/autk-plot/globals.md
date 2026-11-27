@@ -16,6 +16,8 @@
 
 ## Type Aliases
 
+- [AnnotationCoordinate](type-aliases/AnnotationCoordinate.md)
+- [AnnotationStatistic](type-aliases/AnnotationStatistic.md)
 - [AutkDatum](type-aliases/AutkDatum.md)
 - [Binning1dBinRow](type-aliases/Binning1dBinRow.md)
 - [Binning1dTransformConfig](type-aliases/Binning1dTransformConfig.md)
@@ -66,6 +68,12 @@
 - [HighlightRule](type-aliases/HighlightRule.md)
 - [MarkContribution](type-aliases/MarkContribution.md)
 - [MarkKind](type-aliases/MarkKind.md)
+- [NumericPlotDomain](type-aliases/NumericPlotDomain.md)
+- [PlotAnnotation](type-aliases/PlotAnnotation.md)
+- [PlotAnnotationAxis](type-aliases/PlotAnnotationAxis.md)
+- [PlotAnnotationObservation](type-aliases/PlotAnnotationObservation.md)
+- [PlotAnnotationObservations](type-aliases/PlotAnnotationObservations.md)
+- [PlotAnnotationSeriesPoint](type-aliases/PlotAnnotationSeriesPoint.md)
 - [PlotArrangeContext](type-aliases/PlotArrangeContext.md)
 - [PlotConfig](type-aliases/PlotConfig.md)
 - [PlotDefinition](type-aliases/PlotDefinition.md)
@@ -77,7 +85,9 @@
 - [PlotHoverEventData](type-aliases/PlotHoverEventData.md)
 - [PlotMargins](type-aliases/PlotMargins.md)
 - [PlotProvenanceConfig](type-aliases/PlotProvenanceConfig.md)
+- [PlotScaleDomain](type-aliases/PlotScaleDomain.md)
 - [PlotSeries](type-aliases/PlotSeries.md)
+- [PlotSeriesGroup](type-aliases/PlotSeriesGroup.md)
 - [PlotTransformConfig](type-aliases/PlotTransformConfig.md)
 - [PlotType](type-aliases/PlotType.md)
 - [ProvenanceCardinality](type-aliases/ProvenanceCardinality.md)

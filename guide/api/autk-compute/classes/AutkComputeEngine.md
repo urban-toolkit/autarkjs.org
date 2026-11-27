@@ -1,6 +1,6 @@
 # Class: AutkComputeEngine
 
-Defined in: [compute.ts:41](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-compute/src/compute.ts#L41)
+Defined in: [compute.ts:41](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-compute/src/compute.ts#L41)
 
 Main compute engine for GPGPU analysis and render sampling.
 
@@ -31,7 +31,7 @@ await compute.gpgpuPipeline(params);
 
 > **gpgpuPipeline**\<`G`\>(`params`): `Promise`\<`FeatureCollection`\<`G`, `GeoJsonProperties`\>\>
 
-Defined in: [compute.ts:63](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-compute/src/compute.ts#L63)
+Defined in: [compute.ts:63](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-compute/src/compute.ts#L63)
 
 Runs the GPGPU pipeline and writes results to `feature.properties.compute`.
 
@@ -81,7 +81,7 @@ const result = await engine.gpgpuPipeline({
 
 > **renderPipeline**(`params`): `Promise`\<`FeatureCollection`\<`Geometry`, `GeoJsonProperties`\>\>
 
-Defined in: [compute.ts:81](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-compute/src/compute.ts#L81)
+Defined in: [compute.ts:81](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-compute/src/compute.ts#L81)
 
 Runs the render pipeline and writes metrics to `feature.properties.compute.render`.
 

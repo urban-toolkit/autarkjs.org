@@ -1,6 +1,6 @@
 # Interface: SelectionData
 
-Defined in: [event-emitter.ts:20](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/event-emitter.ts#L20)
+Defined in: [event-emitter.ts:20](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/event-emitter.ts#L20)
 
 Base payload shared by selection-driven visualization events.
 
@@ -13,6 +13,6 @@ selection interactions follow a consistent contract across the toolkit.
 
 > **selection**: `number`[]
 
-Defined in: [event-emitter.ts:22](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/event-emitter.ts#L22)
+Defined in: [event-emitter.ts:22](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/event-emitter.ts#L22)
 
 Source feature indices included in the current selection.

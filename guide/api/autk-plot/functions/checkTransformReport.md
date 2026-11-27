@@ -2,7 +2,7 @@
 
 > **checkTransformReport**(`definition`, `collection`, `options?`, `columns?`): [`ContractReport`](../type-aliases/ContractReport.md)
 
-Defined in: [provenance/validate.ts:189](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/provenance/validate.ts#L189)
+Defined in: [provenance/validate.ts:189](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/provenance/validate.ts#L189)
 
 Runs a transform (built-in or user) on sample data and checks the shape of
 its rows and its provenance, reporting which invariant each violation breaks.

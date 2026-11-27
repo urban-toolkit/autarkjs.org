@@ -1,6 +1,6 @@
 # Interface: CameraState
 
-Defined in: [camera.ts:58](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L58)
+Defined in: [camera.ts:58](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/camera.ts#L58)
 
 Serializable camera snapshot. Viewport dimensions and the map origin are not part of the snapshot.
 
@@ -14,7 +14,7 @@ Serializable camera snapshot. Viewport dimensions and the map origin are not par
 
 > **direction**: \[`number`, `number`, `number`\]
 
-Defined in: [camera.ts:62](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L62)
+Defined in: [camera.ts:62](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/camera.ts#L62)
 
 World-space forward vector, retained separately from the rounded look-at point.
 
@@ -24,7 +24,7 @@ World-space forward vector, retained separately from the rounded look-at point.
 
 > **eye**: `number`[]
 
-Defined in: [camera.ts:25](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L25)
+Defined in: [camera.ts:25](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/camera.ts#L25)
 
 Initial eye (camera) position in world space.
 
@@ -38,7 +38,7 @@ Initial eye (camera) position in world space.
 
 > **far**: `number`
 
-Defined in: [camera.ts:67](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L67)
+Defined in: [camera.ts:67](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/camera.ts#L67)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [camera.ts:67](https://github.com/urban-toolkit/autark/blob/7dc7dea6
 
 > **fovyRadians**: `number`
 
-Defined in: [camera.ts:65](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L65)
+Defined in: [camera.ts:65](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/camera.ts#L65)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [camera.ts:65](https://github.com/urban-toolkit/autark/blob/7dc7dea6
 
 > **framingDistance**: `number`
 
-Defined in: [camera.ts:64](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L64)
+Defined in: [camera.ts:64](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/camera.ts#L64)
 
 View scale as the framing distance, independent of the stored look-at point.
 
@@ -64,7 +64,7 @@ View scale as the framing distance, independent of the stored look-at point.
 
 > **lookAt**: `number`[]
 
-Defined in: [camera.ts:27](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L27)
+Defined in: [camera.ts:27](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/camera.ts#L27)
 
 Point the camera looks at in world space.
 
@@ -78,7 +78,7 @@ Point the camera looks at in world space.
 
 > **near**: `number`
 
-Defined in: [camera.ts:66](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L66)
+Defined in: [camera.ts:66](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/camera.ts#L66)
 
 ***
 
@@ -86,7 +86,7 @@ Defined in: [camera.ts:66](https://github.com/urban-toolkit/autark/blob/7dc7dea6
 
 > **orthographicBounds**: \{ `bottom`: `number`; `left`: `number`; `right`: `number`; `top`: `number`; \} \| `null`
 
-Defined in: [camera.ts:69](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L69)
+Defined in: [camera.ts:69](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/camera.ts#L69)
 
 Optional override for a fixed top-down orthographic view.
 
@@ -96,7 +96,7 @@ Optional override for a fixed top-down orthographic view.
 
 > **projection**: [`CameraProjection`](../type-aliases/CameraProjection.md)
 
-Defined in: [camera.ts:60](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L60)
+Defined in: [camera.ts:60](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/camera.ts#L60)
 
 Persistent projection; fixed bounds override it until the next reset.
 
@@ -106,7 +106,7 @@ Persistent projection; fixed bounds override it until the next reset.
 
 > **up**: `number`[]
 
-Defined in: [camera.ts:23](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/camera.ts#L23)
+Defined in: [camera.ts:23](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/camera.ts#L23)
 
 World-space up vector.
 

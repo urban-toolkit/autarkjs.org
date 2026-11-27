@@ -2,7 +2,7 @@
 
 > **CumulativeTransformConfig** = `object`
 
-Defined in: [api.ts:368](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L368)
+Defined in: [api.ts:385](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L385)
 
 Cumulative preset config.
 
@@ -18,7 +18,7 @@ Use `'@transform'` in `axis[1]` to mark the output slot.
 
 > `optional` **options?**: `object`
 
-Defined in: [api.ts:370](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L370)
+Defined in: [api.ts:387](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L387)
 
 #### bins?
 
@@ -51,4 +51,4 @@ Feature property to aggregate for `sum`.
 
 > **preset**: `"cumulative"`
 
-Defined in: [api.ts:369](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L369)
+Defined in: [api.ts:386](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L386)

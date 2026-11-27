@@ -182,13 +182,15 @@ The example below loads the same neighborhood layer into a map and a histogram. 
 | `collection` | `FeatureCollection` | Source GeoJSON. |
 | `attributes.axis` | `string[]` | Property names mapped to axes. |
 | `attributes.color` | `string` | Optional property mapped to the color channel. |
+| `attributes.series` | `string` | Groups scatter, bubble, bar, or reduced line rows on shared scales; mutually exclusive with `color`. |
 | `labels` | `object` | Human-readable axis labels, title, and color legend label. |
 | `margins` | `object` | Pixel margins around the drawing area. |
-| `width` / `height` | `number` | Canvas size in pixels. |
+| `width` / `height` | `number` (width also accepts `'auto'`) | Size in pixels; `width: 'auto'` follows the host width. |
 | `events` | `PlotEvent[]` | Events the plot should emit. |
 | `transform` | `object` | Optional pre-render transform such as sorting or binning. |
 | `style` | `object` | Per-plot appearance: `radius`, `barPadding`, `columnFormats`, and `colorMap` for both numeric and categorical values. |
 | `ticks` | `object` | Axis tick counts and D3 format strings: `ticks.x`, `ticks.y`, and `ticks.dimensions` for parallel coordinates. |
+| `scales` | `object` | Manual display domains for `x`, `y`, bubble `size`, or parallel-coordinate `dimensions`. |
 | `filter` | `object` | Keeps only rows meeting one or more conditions (`==`, `!=`, `>`, `>=`, `<`, `<=`, `in`, `not-in`). |
 | `topK` | `object` | Keeps the `k` largest rows, optionally gathering the rest in an “Others” row. |
 | `provenance` | `object` | `{ path: true }` shows how far a selection reaches at each stage; `{ highlight }` picks `boolean`, `subset`, or a custom preset. |
@@ -216,6 +218,12 @@ For a string property such as `category`, configure a categorical palette and an
 </ClientOnly>
 
 The named properties must exist in your collection. Reuse the same category domain in related views. See [`PlotConfig`](/api/autk-plot/type-aliases/PlotConfig) for all options.
+
+## Comparing groups and adding references
+
+Use `attributes.series` to color groups on shared scales, draw grouped bars, or reduce one line per group. Add fixed lines, bands, points, means, centroids, or fitted lines with `plot.setAnnotations(list)`; clear them with `plot.setAnnotations([])`. Reference marks do not change selection or automatic domains.
+
+See [Series and annotations](./series-and-annotations) for runnable examples and [Manual scale domains](./chart-types#manual-scale-domains) to keep comparison windows consistent.
 
 ## Filtering and top-K
 

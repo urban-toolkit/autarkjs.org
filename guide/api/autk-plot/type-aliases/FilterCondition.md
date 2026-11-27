@@ -2,7 +2,7 @@
 
 > **FilterCondition** = `object`
 
-Defined in: [api.ts:132](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L132)
+Defined in: [api.ts:149](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L149)
 
 A condition on a source feature property, used by `PlotConfig.filter`.
 
@@ -12,7 +12,7 @@ A condition on a source feature property, used by `PlotConfig.filter`.
 
 > **attribute**: `string`
 
-Defined in: [api.ts:134](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L134)
+Defined in: [api.ts:151](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L151)
 
 Dot-path feature property to test.
 
@@ -22,7 +22,7 @@ Dot-path feature property to test.
 
 > **op**: `"=="` \| `"!="` \| `">"` \| `">="` \| `"<"` \| `"<="` \| `"in"` \| `"not-in"`
 
-Defined in: [api.ts:136](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L136)
+Defined in: [api.ts:153](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L153)
 
 Comparison operator. Ordering operators compare numbers; equality and membership compare strings.
 
@@ -32,6 +32,6 @@ Comparison operator. Ordering operators compare numbers; equality and membership
 
 > **value**: `number` \| `string` \| (`number` \| `string`)[]
 
-Defined in: [api.ts:138](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L138)
+Defined in: [api.ts:155](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L155)
 
 Value to compare against; a list for `in` and `not-in`.

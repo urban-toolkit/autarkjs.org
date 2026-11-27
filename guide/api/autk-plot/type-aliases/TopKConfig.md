@@ -2,7 +2,7 @@
 
 > **TopKConfig** = `object`
 
-Defined in: [api.ts:144](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L144)
+Defined in: [api.ts:161](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L161)
 
 Top-k options, used by `PlotConfig.topK`.
 
@@ -12,7 +12,7 @@ Top-k options, used by `PlotConfig.topK`.
 
 > **k**: `number`
 
-Defined in: [api.ts:146](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L146)
+Defined in: [api.ts:163](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L163)
 
 Number of rows to keep, ranked by value.
 
@@ -22,7 +22,7 @@ Number of rows to keep, ranked by value.
 
 > `optional` **others?**: `boolean` \| `string`
 
-Defined in: [api.ts:151](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L151)
+Defined in: [api.ts:168](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L168)
 
 Gathers the remaining rows into one extra row instead of dropping them.
 `true` labels it `Others`; a string sets the label. Defaults to `false`.

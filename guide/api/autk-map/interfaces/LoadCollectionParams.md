@@ -1,6 +1,6 @@
 # Interface: LoadCollectionParams
 
-Defined in: [autk-map/src/api.ts:96](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/api.ts#L96)
+Defined in: [autk-map/src/api.ts:96](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/api.ts#L96)
 
 Parameter types for the main `AutkMap` loading and update APIs.
 
@@ -10,7 +10,7 @@ Parameter types for the main `AutkMap` loading and update APIs.
 
 > **collection**: `FeatureCollection`\<`Geometry` \| `null`\>
 
-Defined in: [autk-map/src/api.ts:104](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/api.ts#L104)
+Defined in: [autk-map/src/api.ts:104](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/api.ts#L104)
 
 Source feature collection to load.
 
@@ -24,7 +24,7 @@ per-cell vector geometries.
 
 > `optional` **loadConfig?**: [`LoadCollectionConfig`](LoadCollectionConfig.md)
 
-Defined in: [autk-map/src/api.ts:123](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/api.ts#L123)
+Defined in: [autk-map/src/api.ts:123](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/api.ts#L123)
 
 Optional geometry-building configuration applied while loading.
 
@@ -34,7 +34,7 @@ Optional geometry-building configuration applied while loading.
 
 > `optional` **property?**: `string` \| [`RasterRgbBands`](../type-aliases/RasterRgbBands.md)
 
-Defined in: [autk-map/src/api.ts:138](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/api.ts#L138)
+Defined in: [autk-map/src/api.ts:138](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/api.ts#L138)
 
 Property accessor used to derive layer values.
 
@@ -55,7 +55,7 @@ image instead. The color map does not apply to an RGB raster.
 
 > `optional` **sourceCrs?**: `string`
 
-Defined in: [autk-map/src/api.ts:111](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/api.ts#L111)
+Defined in: [autk-map/src/api.ts:111](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/api.ts#L111)
 
 CRS of input vector coordinates; defaults to the map's workspace CRS (no conversion).
 Accepts Proj4js names registered through autk-core's registerCrs(), PROJ strings, or WKT.
@@ -68,7 +68,7 @@ Normalized raster collections must already use the workspace CRS.
 
 > `optional` **type?**: `LayerType` \| `null`
 
-Defined in: [autk-map/src/api.ts:119](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/api.ts#L119)
+Defined in: [autk-map/src/api.ts:119](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/api.ts#L119)
 
 Optional explicit layer type override.
 

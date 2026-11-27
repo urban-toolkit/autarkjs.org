@@ -2,7 +2,7 @@
 
 > **ProvenancePair** = `object`
 
-Defined in: [types-provenance.ts:19](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/types-provenance.ts#L19)
+Defined in: [types-provenance.ts:19](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/types-provenance.ts#L19)
 
 One pair of a provenance relation.
 
@@ -17,7 +17,7 @@ for fractional coverage (e.g. the kernel weight of a feature at a density point)
 
 > **source**: [`ProvenanceId`](ProvenanceId.md)
 
-Defined in: [types-provenance.ts:21](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/types-provenance.ts#L21)
+Defined in: [types-provenance.ts:21](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/types-provenance.ts#L21)
 
 Contributing entity in the source stage.
 
@@ -27,7 +27,7 @@ Contributing entity in the source stage.
 
 > **target**: [`ProvenanceId`](ProvenanceId.md)
 
-Defined in: [types-provenance.ts:23](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/types-provenance.ts#L23)
+Defined in: [types-provenance.ts:23](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/types-provenance.ts#L23)
 
 Produced entity in the target stage.
 
@@ -37,6 +37,6 @@ Produced entity in the target stage.
 
 > **weight**: `number`
 
-Defined in: [types-provenance.ts:25](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/types-provenance.ts#L25)
+Defined in: [types-provenance.ts:25](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/types-provenance.ts#L25)
 
 Multiplicity of the contribution, or its real weight for fractional coverage.

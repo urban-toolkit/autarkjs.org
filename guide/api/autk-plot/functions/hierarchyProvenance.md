@@ -2,7 +2,7 @@
 
 > **hierarchyProvenance**(`options`): [`TransformProvenance`](../type-aliases/TransformProvenance.md)
 
-Defined in: [transforms/provenance.ts:293](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/provenance.ts#L293)
+Defined in: [transforms/provenance.ts:293](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/provenance.ts#L293)
 
 Builds a chain of partitions for hierarchy presets, from the deepest level up:
 `D0 features → D1 leaves → D2 parents → … → Dn top level`.

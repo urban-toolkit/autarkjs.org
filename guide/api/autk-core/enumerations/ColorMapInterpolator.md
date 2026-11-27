@@ -1,6 +1,6 @@
 # Enumeration: ColorMapInterpolator
 
-Defined in: [types-colormap.ts:57](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L57)
+Defined in: [types-colormap.ts:57](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L57)
 
 Identifiers for the supported color schemes and interpolators.
 
@@ -13,7 +13,7 @@ schemes used by the shared color-mapping engine.
 
 > **CAT\_ACCENT**: `"schemeAccent"`
 
-Defined in: [types-colormap.ts:59](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L59)
+Defined in: [types-colormap.ts:59](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L59)
 
 Accent categorical scheme.
 
@@ -23,7 +23,7 @@ Accent categorical scheme.
 
 > **CAT\_CATEGORY10**: `"schemeCategory10"`
 
-Defined in: [types-colormap.ts:63](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L63)
+Defined in: [types-colormap.ts:63](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L63)
 
 Category10 categorical scheme.
 
@@ -33,7 +33,7 @@ Category10 categorical scheme.
 
 > **CAT\_DARK2**: `"schemeDark2"`
 
-Defined in: [types-colormap.ts:61](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L61)
+Defined in: [types-colormap.ts:61](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L61)
 
 Dark2 categorical scheme.
 
@@ -43,7 +43,7 @@ Dark2 categorical scheme.
 
 > **CAT\_OBSERVABLE10**: `"schemeObservable10"`
 
-Defined in: [types-colormap.ts:65](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L65)
+Defined in: [types-colormap.ts:65](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L65)
 
 Observable10 categorical scheme.
 
@@ -53,7 +53,7 @@ Observable10 categorical scheme.
 
 > **CAT\_PAIRED**: `"schemePaired"`
 
-Defined in: [types-colormap.ts:67](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L67)
+Defined in: [types-colormap.ts:67](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L67)
 
 Paired categorical scheme.
 
@@ -63,7 +63,7 @@ Paired categorical scheme.
 
 > **CAT\_PASTEL1**: `"schemePastel1"`
 
-Defined in: [types-colormap.ts:69](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L69)
+Defined in: [types-colormap.ts:69](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L69)
 
 Pastel1 categorical scheme.
 
@@ -73,7 +73,7 @@ Pastel1 categorical scheme.
 
 > **CAT\_PASTEL2**: `"schemePastel2"`
 
-Defined in: [types-colormap.ts:71](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L71)
+Defined in: [types-colormap.ts:71](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L71)
 
 Pastel2 categorical scheme.
 
@@ -83,7 +83,7 @@ Pastel2 categorical scheme.
 
 > **CAT\_SET1**: `"schemeSet1"`
 
-Defined in: [types-colormap.ts:73](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L73)
+Defined in: [types-colormap.ts:73](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L73)
 
 Set1 categorical scheme.
 
@@ -93,7 +93,7 @@ Set1 categorical scheme.
 
 > **CAT\_SET2**: `"schemeSet2"`
 
-Defined in: [types-colormap.ts:75](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L75)
+Defined in: [types-colormap.ts:75](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L75)
 
 Set2 categorical scheme.
 
@@ -103,7 +103,7 @@ Set2 categorical scheme.
 
 > **CAT\_SET3**: `"schemeSet3"`
 
-Defined in: [types-colormap.ts:77](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L77)
+Defined in: [types-colormap.ts:77](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L77)
 
 Set3 categorical scheme.
 
@@ -113,7 +113,7 @@ Set3 categorical scheme.
 
 > **CAT\_TABLEAU10**: `"schemeTableau10"`
 
-Defined in: [types-colormap.ts:79](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L79)
+Defined in: [types-colormap.ts:79](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L79)
 
 Tableau10 categorical scheme.
 
@@ -123,7 +123,7 @@ Tableau10 categorical scheme.
 
 > **DIV\_BR\_BG**: `"interpolateBrBG"`
 
-Defined in: [types-colormap.ts:135](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L135)
+Defined in: [types-colormap.ts:135](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L135)
 
 Brown-Blue-Green diverging scheme.
 
@@ -133,7 +133,7 @@ Brown-Blue-Green diverging scheme.
 
 > **DIV\_PI\_YG**: `"interpolatePiYG"`
 
-Defined in: [types-colormap.ts:139](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L139)
+Defined in: [types-colormap.ts:139](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L139)
 
 Pink-Yellow-Green diverging scheme.
 
@@ -143,7 +143,7 @@ Pink-Yellow-Green diverging scheme.
 
 > **DIV\_PR\_GN**: `"interpolatePRGn"`
 
-Defined in: [types-colormap.ts:137](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L137)
+Defined in: [types-colormap.ts:137](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L137)
 
 Purple-Green diverging scheme.
 
@@ -153,7 +153,7 @@ Purple-Green diverging scheme.
 
 > **DIV\_PU\_OR**: `"interpolatePuOr"`
 
-Defined in: [types-colormap.ts:141](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L141)
+Defined in: [types-colormap.ts:141](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L141)
 
 Purple-Orange diverging scheme.
 
@@ -163,7 +163,7 @@ Purple-Orange diverging scheme.
 
 > **DIV\_RED\_BLUE**: `"interpolateRdBu"`
 
-Defined in: [types-colormap.ts:143](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L143)
+Defined in: [types-colormap.ts:143](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L143)
 
 Red-Blue diverging scheme.
 
@@ -173,7 +173,7 @@ Red-Blue diverging scheme.
 
 > **DIV\_RED\_GREY**: `"interpolateRdGy"`
 
-Defined in: [types-colormap.ts:145](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L145)
+Defined in: [types-colormap.ts:145](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L145)
 
 Red-Grey diverging scheme.
 
@@ -183,7 +183,7 @@ Red-Grey diverging scheme.
 
 > **DIV\_RED\_YELLOW\_BLUE**: `"interpolateRdYlBu"`
 
-Defined in: [types-colormap.ts:147](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L147)
+Defined in: [types-colormap.ts:147](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L147)
 
 Red-Yellow-Blue diverging scheme.
 
@@ -193,7 +193,7 @@ Red-Yellow-Blue diverging scheme.
 
 > **DIV\_RED\_YELLOW\_GREEN**: `"interpolateRdYlGn"`
 
-Defined in: [types-colormap.ts:149](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L149)
+Defined in: [types-colormap.ts:149](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L149)
 
 Red-Yellow-Green diverging scheme.
 
@@ -203,7 +203,7 @@ Red-Yellow-Green diverging scheme.
 
 > **DIV\_SPECTRAL**: `"interpolateSpectral"`
 
-Defined in: [types-colormap.ts:151](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L151)
+Defined in: [types-colormap.ts:151](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L151)
 
 Spectral diverging scheme.
 
@@ -213,7 +213,7 @@ Spectral diverging scheme.
 
 > **SEQ\_BLUES**: `"interpolateBlues"`
 
-Defined in: [types-colormap.ts:83](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L83)
+Defined in: [types-colormap.ts:83](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L83)
 
 Blues sequential scheme.
 
@@ -223,7 +223,7 @@ Blues sequential scheme.
 
 > **SEQ\_BU\_GN**: `"interpolateBuGn"`
 
-Defined in: [types-colormap.ts:111](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L111)
+Defined in: [types-colormap.ts:111](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L111)
 
 Blue-Green sequential scheme.
 
@@ -233,7 +233,7 @@ Blue-Green sequential scheme.
 
 > **SEQ\_BU\_PU**: `"interpolateBuPu"`
 
-Defined in: [types-colormap.ts:113](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L113)
+Defined in: [types-colormap.ts:113](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L113)
 
 Blue-Purple sequential scheme.
 
@@ -243,7 +243,7 @@ Blue-Purple sequential scheme.
 
 > **SEQ\_CIVIDIS**: `"interpolateCividis"`
 
-Defined in: [types-colormap.ts:103](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L103)
+Defined in: [types-colormap.ts:103](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L103)
 
 Cividis sequential scheme.
 
@@ -253,7 +253,7 @@ Cividis sequential scheme.
 
 > **SEQ\_COOL**: `"interpolateCool"`
 
-Defined in: [types-colormap.ts:107](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L107)
+Defined in: [types-colormap.ts:107](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L107)
 
 Cool sequential scheme.
 
@@ -263,7 +263,7 @@ Cool sequential scheme.
 
 > **SEQ\_CUBEHELIX\_DEFAULT**: `"interpolateCubehelixDefault"`
 
-Defined in: [types-colormap.ts:109](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L109)
+Defined in: [types-colormap.ts:109](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L109)
 
 Default cubehelix sequential scheme.
 
@@ -273,7 +273,7 @@ Default cubehelix sequential scheme.
 
 > **SEQ\_GN\_BU**: `"interpolateGnBu"`
 
-Defined in: [types-colormap.ts:115](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L115)
+Defined in: [types-colormap.ts:115](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L115)
 
 Green-Blue sequential scheme.
 
@@ -283,7 +283,7 @@ Green-Blue sequential scheme.
 
 > **SEQ\_GREENS**: `"interpolateGreens"`
 
-Defined in: [types-colormap.ts:85](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L85)
+Defined in: [types-colormap.ts:85](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L85)
 
 Greens sequential scheme.
 
@@ -293,7 +293,7 @@ Greens sequential scheme.
 
 > **SEQ\_GREYS**: `"interpolateGreys"`
 
-Defined in: [types-colormap.ts:87](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L87)
+Defined in: [types-colormap.ts:87](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L87)
 
 Greys sequential scheme.
 
@@ -303,7 +303,7 @@ Greys sequential scheme.
 
 > **SEQ\_INFERNO**: `"interpolateInferno"`
 
-Defined in: [types-colormap.ts:97](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L97)
+Defined in: [types-colormap.ts:97](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L97)
 
 Inferno sequential scheme.
 
@@ -313,7 +313,7 @@ Inferno sequential scheme.
 
 > **SEQ\_MAGMA**: `"interpolateMagma"`
 
-Defined in: [types-colormap.ts:99](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L99)
+Defined in: [types-colormap.ts:99](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L99)
 
 Magma sequential scheme.
 
@@ -323,7 +323,7 @@ Magma sequential scheme.
 
 > **SEQ\_OR\_RD**: `"interpolateOrRd"`
 
-Defined in: [types-colormap.ts:117](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L117)
+Defined in: [types-colormap.ts:117](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L117)
 
 Orange-Red sequential scheme.
 
@@ -333,7 +333,7 @@ Orange-Red sequential scheme.
 
 > **SEQ\_ORANGES**: `"interpolateOranges"`
 
-Defined in: [types-colormap.ts:89](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L89)
+Defined in: [types-colormap.ts:89](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L89)
 
 Oranges sequential scheme.
 
@@ -343,7 +343,7 @@ Oranges sequential scheme.
 
 > **SEQ\_PLASMA**: `"interpolatePlasma"`
 
-Defined in: [types-colormap.ts:101](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L101)
+Defined in: [types-colormap.ts:101](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L101)
 
 Plasma sequential scheme.
 
@@ -353,7 +353,7 @@ Plasma sequential scheme.
 
 > **SEQ\_PU\_BU**: `"interpolatePuBu"`
 
-Defined in: [types-colormap.ts:121](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L121)
+Defined in: [types-colormap.ts:121](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L121)
 
 Purple-Blue sequential scheme.
 
@@ -363,7 +363,7 @@ Purple-Blue sequential scheme.
 
 > **SEQ\_PU\_BU\_GN**: `"interpolatePuBuGn"`
 
-Defined in: [types-colormap.ts:119](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L119)
+Defined in: [types-colormap.ts:119](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L119)
 
 Purple-Blue-Green sequential scheme.
 
@@ -373,7 +373,7 @@ Purple-Blue-Green sequential scheme.
 
 > **SEQ\_PU\_RD**: `"interpolatePuRd"`
 
-Defined in: [types-colormap.ts:123](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L123)
+Defined in: [types-colormap.ts:123](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L123)
 
 Purple-Red sequential scheme.
 
@@ -383,7 +383,7 @@ Purple-Red sequential scheme.
 
 > **SEQ\_PURPLES**: `"interpolatePurples"`
 
-Defined in: [types-colormap.ts:91](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L91)
+Defined in: [types-colormap.ts:91](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L91)
 
 Purples sequential scheme.
 
@@ -393,7 +393,7 @@ Purples sequential scheme.
 
 > **SEQ\_RD\_PU**: `"interpolateRdPu"`
 
-Defined in: [types-colormap.ts:125](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L125)
+Defined in: [types-colormap.ts:125](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L125)
 
 Red-Purple sequential scheme.
 
@@ -403,7 +403,7 @@ Red-Purple sequential scheme.
 
 > **SEQ\_REDS**: `"interpolateReds"`
 
-Defined in: [types-colormap.ts:81](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L81)
+Defined in: [types-colormap.ts:81](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L81)
 
 Reds sequential scheme.
 
@@ -413,7 +413,7 @@ Reds sequential scheme.
 
 > **SEQ\_TURBO**: `"interpolateTurbo"`
 
-Defined in: [types-colormap.ts:93](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L93)
+Defined in: [types-colormap.ts:93](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L93)
 
 Turbo sequential scheme.
 
@@ -423,7 +423,7 @@ Turbo sequential scheme.
 
 > **SEQ\_VIRIDIS**: `"interpolateViridis"`
 
-Defined in: [types-colormap.ts:95](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L95)
+Defined in: [types-colormap.ts:95](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L95)
 
 Viridis sequential scheme.
 
@@ -433,7 +433,7 @@ Viridis sequential scheme.
 
 > **SEQ\_WARM**: `"interpolateWarm"`
 
-Defined in: [types-colormap.ts:105](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L105)
+Defined in: [types-colormap.ts:105](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L105)
 
 Warm sequential scheme.
 
@@ -443,7 +443,7 @@ Warm sequential scheme.
 
 > **SEQ\_YL\_GN**: `"interpolateYlGn"`
 
-Defined in: [types-colormap.ts:129](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L129)
+Defined in: [types-colormap.ts:129](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L129)
 
 Yellow-Green sequential scheme.
 
@@ -453,7 +453,7 @@ Yellow-Green sequential scheme.
 
 > **SEQ\_YL\_GN\_BU**: `"interpolateYlGnBu"`
 
-Defined in: [types-colormap.ts:127](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L127)
+Defined in: [types-colormap.ts:127](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L127)
 
 Yellow-Green-Blue sequential scheme.
 
@@ -463,7 +463,7 @@ Yellow-Green-Blue sequential scheme.
 
 > **SEQ\_YL\_OR\_BR**: `"interpolateYlOrBr"`
 
-Defined in: [types-colormap.ts:131](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L131)
+Defined in: [types-colormap.ts:131](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L131)
 
 Yellow-Orange-Brown sequential scheme.
 
@@ -473,6 +473,6 @@ Yellow-Orange-Brown sequential scheme.
 
 > **SEQ\_YL\_OR\_RD**: `"interpolateYlOrRd"`
 
-Defined in: [types-colormap.ts:133](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/types-colormap.ts#L133)
+Defined in: [types-colormap.ts:133](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/types-colormap.ts#L133)
 
 Yellow-Orange-Red sequential scheme.

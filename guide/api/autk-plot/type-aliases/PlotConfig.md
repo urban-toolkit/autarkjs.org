@@ -2,7 +2,7 @@
 
 > **PlotConfig** = `object`
 
-Defined in: [api.ts:51](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L51)
+Defined in: [api.ts:51](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L51)
 
 Base configuration accepted by every plot.
 
@@ -12,7 +12,7 @@ Base configuration accepted by every plot.
 
 > `optional` **attributes?**: `object`
 
-Defined in: [api.ts:83](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L83)
+Defined in: [api.ts:83](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L83)
 
 Feature property names to map to visual channels. With a transform that
 computes a value, `'@transform'` marks where that value goes: after the
@@ -31,13 +31,19 @@ Property names mapped to axes.
 
 Property name mapped to the color channel.
 
+#### series?
+
+> `optional` **series?**: `string`
+
+Source feature property grouping rows on shared scales. Mutually exclusive with color.
+
 ***
 
 ### collection
 
 > **collection**: `FeatureCollection`\<`Geometry`, `GeoJsonProperties`\>
 
-Defined in: [api.ts:55](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L55)
+Defined in: [api.ts:55](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L55)
 
 GeoJSON feature collection used as the plot data source.
 
@@ -47,7 +53,7 @@ GeoJSON feature collection used as the plot data source.
 
 > **div**: `HTMLElement`
 
-Defined in: [api.ts:53](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L53)
+Defined in: [api.ts:53](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L53)
 
 Host HTML element where the plot renders.
 
@@ -57,7 +63,7 @@ Host HTML element where the plot renders.
 
 > `optional` **events?**: [`PlotEvent`](../enumerations/PlotEvent.md)[]
 
-Defined in: [api.ts:57](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L57)
+Defined in: [api.ts:57](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L57)
 
 Interaction events the plot should emit (click, brush, etc).
 
@@ -67,7 +73,7 @@ Interaction events the plot should emit (click, brush, etc).
 
 > `optional` **filter?**: [`FilterCondition`](FilterCondition.md) \| [`FilterCondition`](FilterCondition.md)[]
 
-Defined in: [api.ts:120](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L120)
+Defined in: [api.ts:131](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L131)
 
 Keeps only source features matching every condition, before the
 transform runs. Excluded features have no image in the provenance graph.
@@ -78,7 +84,7 @@ transform runs. Excluded features have no image in the provenance graph.
 
 > `optional` **height?**: `number`
 
-Defined in: [api.ts:67](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L67)
+Defined in: [api.ts:67](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L67)
 
 Plot height in pixels. Defaults to `500`.
 
@@ -88,7 +94,7 @@ Plot height in pixels. Defaults to `500`.
 
 > `optional` **labels?**: `object`
 
-Defined in: [api.ts:69](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L69)
+Defined in: [api.ts:69](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L69)
 
 Display labels for axes, title, and color legend.
 
@@ -116,7 +122,7 @@ Plot title.
 
 > `optional` **margins?**: [`PlotMargins`](PlotMargins.md)
 
-Defined in: [api.ts:59](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L59)
+Defined in: [api.ts:59](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L59)
 
 Pixel margins around the plot drawing area.
 
@@ -126,7 +132,7 @@ Pixel margins around the plot drawing area.
 
 > `optional` **plot?**: `string`
 
-Defined in: [api.ts:90](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L90)
+Defined in: [api.ts:92](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L92)
 
 Name of a plot registered with `registerPlot`, used with `type: 'registered'`.
 
@@ -136,9 +142,51 @@ Name of a plot registered with `registerPlot`, used with `type: 'registered'`.
 
 > `optional` **provenance?**: [`PlotProvenanceConfig`](PlotProvenanceConfig.md)
 
-Defined in: [api.ts:115](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L115)
+Defined in: [api.ts:126](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L126)
 
 Provenance options.
+
+***
+
+### scales?
+
+> `optional` **scales?**: `object`
+
+Defined in: [api.ts:106](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L106)
+
+Optional display domains. Omitted channels keep the plot's automatic scales.
+
+#### dimensions?
+
+> `optional` **dimensions?**: `Record`\<`string`, \{ `domain`: [`PlotScaleDomain`](PlotScaleDomain.md); \}\>
+
+Axis domains keyed by field name for parallel coordinates.
+
+#### size?
+
+> `optional` **size?**: `object`
+
+Numeric domain for bubble sizes.
+
+##### size.domain
+
+> **domain**: [`NumericPlotDomain`](NumericPlotDomain.md)
+
+#### x?
+
+> `optional` **x?**: `object`
+
+##### x.domain
+
+> **domain**: [`PlotScaleDomain`](PlotScaleDomain.md)
+
+#### y?
+
+> `optional` **y?**: `object`
+
+##### y.domain
+
+> **domain**: [`PlotScaleDomain`](PlotScaleDomain.md)
 
 ***
 
@@ -146,7 +194,7 @@ Provenance options.
 
 > `optional` **style?**: `object`
 
-Defined in: [api.ts:104](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L104)
+Defined in: [api.ts:115](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L115)
 
 Appearance overrides for this plot.
 
@@ -180,7 +228,7 @@ Fixed scatterplot point radius in pixels; defaults to 5.
 
 > `optional` **ticks?**: `object`
 
-Defined in: [api.ts:94](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L94)
+Defined in: [api.ts:96](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L96)
 
 Tick options for Cartesian axes and parallel-coordinate dimensions.
 
@@ -222,7 +270,7 @@ Custom label for a bar, line, or area chart's raw category or bucket key. Return
 
 > `optional` **topK?**: [`TopKConfig`](TopKConfig.md)
 
-Defined in: [api.ts:126](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L126)
+Defined in: [api.ts:137](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L137)
 
 Keeps only the `k` rendered rows with the highest value (`attributes.axis[1]`),
 after the transform runs. Supported by the bar, pie, and donut charts and by user plots
@@ -234,7 +282,7 @@ whose rows have a label and a value (`attributes.axis[0]` and `[1]`).
 
 > `optional` **transform?**: [`PlotTransformConfig`](PlotTransformConfig.md)
 
-Defined in: [api.ts:92](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L92)
+Defined in: [api.ts:94](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L94)
 
 Optional data transform applied before rendering.
 
@@ -244,7 +292,7 @@ Optional data transform applied before rendering.
 
 > `optional` **width?**: `number` \| `"auto"`
 
-Defined in: [api.ts:65](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L65)
+Defined in: [api.ts:65](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L65)
 
 Plot width in pixels, or `'auto'` to fill the content width of `div` and
 redraw when it changes (the selection is kept). Defaults to `800`, which

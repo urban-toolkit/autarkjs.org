@@ -1,6 +1,6 @@
 # Class: MapStyle
 
-Defined in: [autk-map/src/map-style.ts:63](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/map-style.ts#L63)
+Defined in: [autk-map/src/map-style.ts:63](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/map-style.ts#L63)
 
 Instance-owned map style state and semantic color resolver.
 
@@ -22,7 +22,7 @@ const roads = style.getColor('roads');
 
 > **new MapStyle**(`style?`): `MapStyle`
 
-Defined in: [autk-map/src/map-style.ts:98](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/map-style.ts#L98)
+Defined in: [autk-map/src/map-style.ts:98](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/map-style.ts#L98)
 
 Creates a style state initialized from a built-in preset.
 
@@ -56,7 +56,7 @@ const style = new MapStyle('apple');
 
 > **get** **availableStyles**(): [`MapStylePresetId`](../type-aliases/MapStylePresetId.md)[]
 
-Defined in: [autk-map/src/map-style.ts:117](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/map-style.ts#L117)
+Defined in: [autk-map/src/map-style.ts:117](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/map-style.ts#L117)
 
 Returns the list of built-in preset ids.
 
@@ -72,7 +72,7 @@ Returns the list of built-in preset ids.
 
 > **get** **currentStyle**(): `string`
 
-Defined in: [autk-map/src/map-style.ts:112](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/map-style.ts#L112)
+Defined in: [autk-map/src/map-style.ts:112](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/map-style.ts#L112)
 
 Returns the identifier of the currently active style.
 
@@ -93,7 +93,7 @@ Active style identifier.
 
 > **get** `static` **availableStyles**(): [`MapStylePresetId`](../type-aliases/MapStylePresetId.md)[]
 
-Defined in: [autk-map/src/map-style.ts:122](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/map-style.ts#L122)
+Defined in: [autk-map/src/map-style.ts:122](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/map-style.ts#L122)
 
 Returns the list of built-in preset ids.
 
@@ -107,7 +107,7 @@ Returns the list of built-in preset ids.
 
 > **getColor**(`type`): `ColorRGB`
 
-Defined in: [autk-map/src/map-style.ts:135](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/map-style.ts#L135)
+Defined in: [autk-map/src/map-style.ts:135](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/map-style.ts#L135)
 
 Returns the feature color for a style key, falling back to polygons color.
 
@@ -141,7 +141,7 @@ const roadsColor = style.getColor('roads');
 
 > **getHighlightColor**(): `ColorRGB`
 
-Defined in: [autk-map/src/map-style.ts:204](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/map-style.ts#L204)
+Defined in: [autk-map/src/map-style.ts:204](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/map-style.ts#L204)
 
 Returns the current highlight color.
 
@@ -161,7 +161,7 @@ Never throws.
 
 > **getHoverColor**(): `ColorRGB`
 
-Defined in: [autk-map/src/map-style.ts:221](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/map-style.ts#L221)
+Defined in: [autk-map/src/map-style.ts:221](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/map-style.ts#L221)
 
 Returns the hovered-feature color as RGB.
 
@@ -175,7 +175,7 @@ Returns the hovered-feature color as RGB.
 
 > **getInvalidValueColor**(): `ColorRGB`
 
-Defined in: [autk-map/src/map-style.ts:149](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/map-style.ts#L149)
+Defined in: [autk-map/src/map-style.ts:149](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/map-style.ts#L149)
 
 Returns the color used for invalid thematic values.
 
@@ -195,7 +195,7 @@ Never throws.
 
 > **setChangeListener**(`listener`): `void`
 
-Defined in: [autk-map/src/map-style.ts:163](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/map-style.ts#L163)
+Defined in: [autk-map/src/map-style.ts:163](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/map-style.ts#L163)
 
 Registers the callback run after the style changes.
 
@@ -226,7 +226,7 @@ Never throws.
 
 > **setCustomStyle**(`style`): `void`
 
-Defined in: [autk-map/src/map-style.ts:192](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/map-style.ts#L192)
+Defined in: [autk-map/src/map-style.ts:192](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/map-style.ts#L192)
 
 Applies a runtime custom style after validation.
 
@@ -260,7 +260,7 @@ style.setCustomStyle({ background: '#fff', surface: '#eee', parks: '#cfc', water
 
 > **setHighlightColor**(`color`): `void`
 
-Defined in: [autk-map/src/map-style.ts:215](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/map-style.ts#L215)
+Defined in: [autk-map/src/map-style.ts:215](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/map-style.ts#L215)
 
 Sets the highlight color.
 
@@ -288,7 +288,7 @@ Never throws.
 
 > **setHoverColor**(`color`): `void`
 
-Defined in: [autk-map/src/map-style.ts:226](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/map-style.ts#L226)
+Defined in: [autk-map/src/map-style.ts:226](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/map-style.ts#L226)
 
 Sets the hovered-feature color independently of the selection highlight.
 
@@ -308,7 +308,7 @@ Sets the hovered-feature color independently of the selection highlight.
 
 > **setInvalidValueColor**(`color`): `void`
 
-Defined in: [autk-map/src/map-style.ts:238](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/map-style.ts#L238)
+Defined in: [autk-map/src/map-style.ts:238](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/map-style.ts#L238)
 
 Sets the color used for invalid thematic values.
 
@@ -336,7 +336,7 @@ Never throws.
 
 > **setPredefinedStyle**(`style`): `void`
 
-Defined in: [autk-map/src/map-style.ts:176](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/map-style.ts#L176)
+Defined in: [autk-map/src/map-style.ts:176](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/map-style.ts#L176)
 
 Applies one of the built-in map style presets.
 

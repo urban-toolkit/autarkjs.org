@@ -1,6 +1,6 @@
 # Interface: UpdateThematicParams
 
-Defined in: [autk-map/src/api.ts:295](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/api.ts#L295)
+Defined in: [autk-map/src/api.ts:295](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/api.ts#L295)
 
 Parameters for updating a layer's thematic (color-mapped) values.
 
@@ -15,7 +15,7 @@ preparing update collections.
 
 > **collection**: `FeatureCollection`
 
-Defined in: [autk-map/src/api.ts:303](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/api.ts#L303)
+Defined in: [autk-map/src/api.ts:303](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/api.ts#L303)
 
 Source feature collection used to derive thematic values.
 
@@ -29,6 +29,6 @@ rendered components.
 
 > **property**: `string`
 
-Defined in: [autk-map/src/api.ts:307](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/api.ts#L307)
+Defined in: [autk-map/src/api.ts:307](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/api.ts#L307)
 
 Dot-path accessor resolved from each item in the collection.

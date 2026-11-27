@@ -2,7 +2,7 @@
 
 > **PlotHighlightContext** = `object`
 
-Defined in: [plots/registered.ts:163](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L163)
+Defined in: [plots/registered.ts:191](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L191)
 
 What a plot's own custom highlight (`highlight` as a function) receives.
 
@@ -12,7 +12,7 @@ What a plot's own custom highlight (`highlight` as a function) receives.
 
 > **color**: `string`
 
-Defined in: [plots/registered.ts:171](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L171)
+Defined in: [plots/registered.ts:199](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L199)
 
 Color of the selected part.
 
@@ -22,7 +22,7 @@ Color of the selected part.
 
 > **drawAuto**: () => `void`
 
-Defined in: [plots/registered.ts:173](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L173)
+Defined in: [plots/registered.ts:201](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L201)
 
 Draws the parts with the inferred highlight (or the one `draw` returns), for a function that adds to them.
 
@@ -36,7 +36,7 @@ Draws the parts with the inferred highlight (or the one `draw` returns), for a f
 
 > **group**: `d3.Selection`\<`SVGGElement`, `unknown`, `null`, `undefined`\>
 
-Defined in: [plots/registered.ts:165](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L165)
+Defined in: [plots/registered.ts:193](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L193)
 
 Marks group; previous partial elements were already removed.
 
@@ -46,7 +46,7 @@ Marks group; previous partial elements were already removed.
 
 > **marksOf**: (`row`) => `SVGGraphicsElement`[]
 
-Defined in: [plots/registered.ts:169](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L169)
+Defined in: [plots/registered.ts:197](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L197)
 
 Mark elements of a row.
 
@@ -66,6 +66,6 @@ Mark elements of a row.
 
 > **parts**: [`SegregatedPart`](SegregatedPart.md)[]
 
-Defined in: [plots/registered.ts:167](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L167)
+Defined in: [plots/registered.ts:195](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L195)
 
 Selected part of each row: its datum, mark id, and fraction in `[0, 1]`.

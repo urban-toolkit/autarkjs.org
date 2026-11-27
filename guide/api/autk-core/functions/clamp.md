@@ -2,7 +2,7 @@
 
 > **clamp**(`value`, `min`, `max`): `number`
 
-Defined in: [utils-math.ts:30](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/utils-math.ts#L30)
+Defined in: [utils-math.ts:30](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/utils-math.ts#L30)
 
 Limits a value to a range.
 

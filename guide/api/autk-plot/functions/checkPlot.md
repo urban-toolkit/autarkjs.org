@@ -2,7 +2,7 @@
 
 > **checkPlot**(`definition`, `div`, `config`): [`ContractReport`](../type-aliases/ContractReport.md) & `object`
 
-Defined in: [plots/registered.ts:1492](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plots/registered.ts#L1492)
+Defined in: [plots/registered.ts:1658](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plots/registered.ts#L1658)
 
 Draws a plot definition on sample data and checks it against the drawing
 contract, reporting which invariant each violation breaks.

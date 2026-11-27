@@ -1,6 +1,6 @@
 # Class: LayerManager
 
-Defined in: [autk-map/src/layer-manager.ts:43](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/layer-manager.ts#L43)
+Defined in: [autk-map/src/layer-manager.ts:43](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/layer-manager.ts#L43)
 
 Manages all map layers as a single ordered list.
 
@@ -27,7 +27,7 @@ buildings still render in a separate 3D pass.
 
 > **get** **bounds**(): [`MapBounds`](../type-aliases/MapBounds.md) \| `undefined`
 
-Defined in: [autk-map/src/layer-manager.ts:75](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/layer-manager.ts#L75)
+Defined in: [autk-map/src/layer-manager.ts:75](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/layer-manager.ts#L75)
 
 World-space bounds `[minX, minY, maxX, maxY]` of the collection that set the origin, or `undefined` before one
 is loaded or when it had no coordinates.
@@ -44,7 +44,7 @@ is loaded or when it had no coordinates.
 
 > **get** **hasOrigin**(): `boolean`
 
-Defined in: [autk-map/src/layer-manager.ts:69](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/layer-manager.ts#L69)
+Defined in: [autk-map/src/layer-manager.ts:69](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/layer-manager.ts#L69)
 
 Indicates whether the shared scene origin has been initialized.
 
@@ -60,7 +60,7 @@ Indicates whether the shared scene origin has been initialized.
 
 > **get** **layers**(): [`Layer`](Layer.md)[]
 
-Defined in: [autk-map/src/layer-manager.ts:58](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/layer-manager.ts#L58)
+Defined in: [autk-map/src/layer-manager.ts:58](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/layer-manager.ts#L58)
 
 Registered layers in the order they are drawn, bottom first.
 
@@ -76,7 +76,7 @@ Registered layers in the order they are drawn, bottom first.
 
 > **get** **origin**(): `number`[]
 
-Defined in: [autk-map/src/layer-manager.ts:61](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/layer-manager.ts#L61)
+Defined in: [autk-map/src/layer-manager.ts:61](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/layer-manager.ts#L61)
 
 World-space origin derived from the current bounding box center.
 
@@ -90,7 +90,7 @@ World-space origin derived from the current bounding box center.
 
 > **addLayer**(`layerInfo`, `layerRender`, `layerData`): [`Layer`](Layer.md) \| `null`
 
-Defined in: [autk-map/src/layer-manager.ts:99](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/layer-manager.ts#L99)
+Defined in: [autk-map/src/layer-manager.ts:99](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/layer-manager.ts#L99)
 
 Creates, registers, and reorders a layer based on `layerInfo.typeLayer`.
 
@@ -130,7 +130,7 @@ Never throws. Duplicate ids log an error and return `null`.
 
 > **addTileLayer**(`layerInfo`, `layerRender`, `options`): `TileLayer` \| `null`
 
-Defined in: [autk-map/src/layer-manager.ts:126](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/layer-manager.ts#L126)
+Defined in: [autk-map/src/layer-manager.ts:126](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/layer-manager.ts#L126)
 
 Adds a tile layer.
 
@@ -172,7 +172,7 @@ If the tile source is invalid.
 
 > **initializeOrigin**(`collection`): `void`
 
-Defined in: [autk-map/src/layer-manager.ts:84](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/layer-manager.ts#L84)
+Defined in: [autk-map/src/layer-manager.ts:84](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/layer-manager.ts#L84)
 
 Computes the shared scene origin from the provided collection.
 
@@ -200,7 +200,7 @@ Never throws.
 
 > **removeLayerById**(`layerId`): `void`
 
-Defined in: [autk-map/src/layer-manager.ts:171](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/layer-manager.ts#L171)
+Defined in: [autk-map/src/layer-manager.ts:171](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/layer-manager.ts#L171)
 
 Removes the layer matching `layerId` and rebuilds the stack.
 
@@ -228,7 +228,7 @@ Never throws.
 
 > **searchByLayerId**(`layerId`): [`Layer`](Layer.md) \| `null`
 
-Defined in: [autk-map/src/layer-manager.ts:190](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/layer-manager.ts#L190)
+Defined in: [autk-map/src/layer-manager.ts:190](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/layer-manager.ts#L190)
 
 Returns the layer with the given `layerId`, or `null` if not found.
 
@@ -256,7 +256,7 @@ Never throws.
 
 > **setLayerOrder**(`ids`): `void`
 
-Defined in: [autk-map/src/layer-manager.ts:159](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/layer-manager.ts#L159)
+Defined in: [autk-map/src/layer-manager.ts:159](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/layer-manager.ts#L159)
 
 Sets the order the layers are drawn in, bottom first.
 
@@ -290,7 +290,7 @@ Never throws.
 
 > **visibleAttribution**(): [`TileCredit`](../interfaces/TileCredit.md)[]
 
-Defined in: [autk-map/src/layer-manager.ts:200](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/layer-manager.ts#L200)
+Defined in: [autk-map/src/layer-manager.ts:200](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/layer-manager.ts#L200)
 
 Credits of the tile layers that are drawn, without repeats. A hidden or
 removed layer is no longer credited.

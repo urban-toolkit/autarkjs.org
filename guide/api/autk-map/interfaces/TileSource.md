@@ -1,6 +1,6 @@
 # Interface: TileSource
 
-Defined in: [autk-map/src/tile-source.ts:18](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/tile-source.ts#L18)
+Defined in: [autk-map/src/tile-source.ts:18](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/tile-source.ts#L18)
 
 A web map tile source as written by an application.
 
@@ -14,7 +14,7 @@ A web map tile source as written by an application.
 
 > **attribution**: [`TileAttribution`](../type-aliases/TileAttribution.md)
 
-Defined in: [autk-map/src/tile-source.ts:31](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/tile-source.ts#L31)
+Defined in: [autk-map/src/tile-source.ts:31](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/tile-source.ts#L31)
 
 Credit shown on the map. Required: providers' terms ask for it. Give a
 string, a `{ text, url }` entry that links to the provider's page, or a
@@ -26,7 +26,7 @@ list of either. Links must be `http` or `https` URLs.
 
 > `optional` **maxZoom?**: `number`
 
-Defined in: [autk-map/src/tile-source.ts:35](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/tile-source.ts#L35)
+Defined in: [autk-map/src/tile-source.ts:35](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/tile-source.ts#L35)
 
 Largest zoom level the source serves. Defaults to 19.
 
@@ -36,7 +36,7 @@ Largest zoom level the source serves. Defaults to 19.
 
 > `optional` **minZoom?**: `number`
 
-Defined in: [autk-map/src/tile-source.ts:33](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/tile-source.ts#L33)
+Defined in: [autk-map/src/tile-source.ts:33](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/tile-source.ts#L33)
 
 Smallest zoom level the source serves. Defaults to 0.
 
@@ -46,7 +46,7 @@ Smallest zoom level the source serves. Defaults to 0.
 
 > `optional` **subdomains?**: `string` \| readonly `string`[]
 
-Defined in: [autk-map/src/tile-source.ts:42](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/tile-source.ts#L42)
+Defined in: [autk-map/src/tile-source.ts:42](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/tile-source.ts#L42)
 
 Subdomains substituted for `{s}`, as a string of one-letter names or an
 array. Required when the template uses `{s}`.
@@ -57,7 +57,7 @@ array. Required when the template uses `{s}`.
 
 > `optional` **theme?**: [`TileTheme`](../type-aliases/TileTheme.md)
 
-Defined in: [autk-map/src/tile-source.ts:25](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/tile-source.ts#L25)
+Defined in: [autk-map/src/tile-source.ts:25](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/tile-source.ts#L25)
 
 Client-side image treatment. Changes colors and contrast; retains baked-in labels and geometry.
 
@@ -67,7 +67,7 @@ Client-side image treatment. Changes colors and contrast; retains baked-in label
 
 > `optional` **tileSize?**: `number`
 
-Defined in: [autk-map/src/tile-source.ts:37](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/tile-source.ts#L37)
+Defined in: [autk-map/src/tile-source.ts:37](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/tile-source.ts#L37)
 
 Tile edge in pixels. Defaults to 256.
 
@@ -77,7 +77,7 @@ Tile edge in pixels. Defaults to 256.
 
 > **urlTemplate**: `string`
 
-Defined in: [autk-map/src/tile-source.ts:23](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/tile-source.ts#L23)
+Defined in: [autk-map/src/tile-source.ts:23](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/tile-source.ts#L23)
 
 URL with `{z}`, `{x}` and `{y}` (or `{reverseY}`) placeholders, and
 optionally `{s}` for a subdomain.

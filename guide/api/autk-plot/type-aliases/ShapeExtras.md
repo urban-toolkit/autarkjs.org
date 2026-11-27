@@ -2,7 +2,7 @@
 
 > **ShapeExtras** = `object`
 
-Defined in: [transforms/registry.ts:255](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/registry.ts#L255)
+Defined in: [transforms/registry.ts:255](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/registry.ts#L255)
 
 Extra outputs of the shapes that have them, as their plots read them.
 
@@ -12,7 +12,7 @@ Extra outputs of the shapes that have them, as their plots read them.
 
 > **binning-hex**: `object`
 
-Defined in: [transforms/registry.ts:256](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/registry.ts#L256)
+Defined in: [transforms/registry.ts:256](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/registry.ts#L256)
 
 #### extent
 
@@ -36,7 +36,7 @@ Defined in: [transforms/registry.ts:256](https://github.com/urban-toolkit/autark
 
 > **cumulative**: `object`
 
-Defined in: [transforms/registry.ts:258](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/registry.ts#L258)
+Defined in: [transforms/registry.ts:258](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/registry.ts#L258)
 
 #### numeric
 
@@ -52,7 +52,7 @@ Defined in: [transforms/registry.ts:258](https://github.com/urban-toolkit/autark
 
 > **density**: `object`
 
-Defined in: [transforms/registry.ts:260](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/registry.ts#L260)
+Defined in: [transforms/registry.ts:260](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/registry.ts#L260)
 
 #### bandwidth
 
@@ -68,7 +68,7 @@ Defined in: [transforms/registry.ts:260](https://github.com/urban-toolkit/autark
 
 > **fold**: `object`
 
-Defined in: [transforms/registry.ts:259](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/registry.ts#L259)
+Defined in: [transforms/registry.ts:259](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/registry.ts#L259)
 
 #### extents
 
@@ -84,7 +84,7 @@ Defined in: [transforms/registry.ts:259](https://github.com/urban-toolkit/autark
 
 > **hierarchy**: `object`
 
-Defined in: [transforms/registry.ts:257](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/registry.ts#L257)
+Defined in: [transforms/registry.ts:257](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/registry.ts#L257)
 
 #### depth
 

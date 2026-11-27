@@ -1,6 +1,6 @@
 # Interface: OsmLayerTable
 
-Defined in: [autk-db/src/interfaces.ts:81](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/interfaces.ts#L81)
+Defined in: [autk-db/src/interfaces.ts:81](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/interfaces.ts#L81)
 
 OSM-derived layer with an explicit geometry type for rendering and queries.
 
@@ -16,7 +16,7 @@ Used after OSM data has been classified into a concrete map layer.
 
 > `optional` **bands?**: [`RasterBandMetadata`](RasterBandMetadata.md)[]
 
-Defined in: [autk-db/src/interfaces.ts:61](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/interfaces.ts#L61)
+Defined in: [autk-db/src/interfaces.ts:61](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/interfaces.ts#L61)
 
 Optional raster band metadata when the table stores raster data.
 
@@ -30,7 +30,7 @@ Optional raster band metadata when the table stores raster data.
 
 > `optional` **boundingBox?**: `BoundingBox`
 
-Defined in: [autk-db/src/interfaces.ts:59](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/interfaces.ts#L59)
+Defined in: [autk-db/src/interfaces.ts:59](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/interfaces.ts#L59)
 
 Cached layer extent when the table contains geometry data.
 
@@ -44,7 +44,7 @@ Cached layer extent when the table contains geometry data.
 
 > **columns**: [`Column`](Column.md)[]
 
-Defined in: [autk-db/src/interfaces.ts:57](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/interfaces.ts#L57)
+Defined in: [autk-db/src/interfaces.ts:57](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/interfaces.ts#L57)
 
 Flat schema information returned by DuckDB.
 
@@ -58,7 +58,7 @@ Flat schema information returned by DuckDB.
 
 > **name**: `string`
 
-Defined in: [autk-db/src/interfaces.ts:55](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/interfaces.ts#L55)
+Defined in: [autk-db/src/interfaces.ts:55](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/interfaces.ts#L55)
 
 Unique table name within the active workspace.
 
@@ -72,7 +72,7 @@ Unique table name within the active workspace.
 
 > **source**: `"osm"`
 
-Defined in: [autk-db/src/interfaces.ts:83](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/interfaces.ts#L83)
+Defined in: [autk-db/src/interfaces.ts:83](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/interfaces.ts#L83)
 
 Marks the table as originating from the OSM loader.
 
@@ -86,6 +86,6 @@ Marks the table as originating from the OSM loader.
 
 > **type**: `LayerType`
 
-Defined in: [autk-db/src/interfaces.ts:85](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/interfaces.ts#L85)
+Defined in: [autk-db/src/interfaces.ts:85](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/interfaces.ts#L85)
 
 Geometry category used for rendering, styling, and spatial operations.

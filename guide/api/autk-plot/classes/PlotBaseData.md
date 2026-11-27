@@ -1,6 +1,6 @@
 # Abstract Class: PlotBaseData
 
-Defined in: [plot-base-data.ts:64](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L64)
+Defined in: [plot-base-data.ts:64](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L64)
 
 Base class of the plot data lifecycle.
 
@@ -17,7 +17,7 @@ schema that `RegisteredPlot` draws.
 
 > **new PlotBaseData**(`config`): `PlotBaseData`
 
-Defined in: [plot-base-data.ts:130](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L130)
+Defined in: [plot-base-data.ts:130](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L130)
 
 Initializes shared plot data state from a plot configuration.
 
@@ -47,7 +47,7 @@ If `@transform` placeholder is used without a transform config.
 
 > `protected` **\_autoWidth**: `boolean` = `false`
 
-Defined in: [plot-base-data.ts:91](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L91)
+Defined in: [plot-base-data.ts:91](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L91)
 
 Whether the width follows the host element (`width: 'auto'`).
 
@@ -57,7 +57,7 @@ Whether the width follows the host element (`width: 'auto'`).
 
 > `protected` **\_axisLabels**: `string`[]
 
-Defined in: [plot-base-data.ts:78](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L78)
+Defined in: [plot-base-data.ts:78](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L78)
 
 User-facing axis labels.
 
@@ -67,7 +67,7 @@ User-facing axis labels.
 
 > `protected` **\_colorScale**: `CustomColorPalette` \| `ColorMapInterpolator` = `ColorMapInterpolator.SEQ_REDS`
 
-Defined in: [plot-base-data.ts:121](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L121)
+Defined in: [plot-base-data.ts:121](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L121)
 
 Scale selected for the current rendered color domain.
 
@@ -77,7 +77,7 @@ Scale selected for the current rendered color domain.
 
 > `protected` **\_data**: (`object` & `object`)[]
 
-Defined in: [plot-base-data.ts:71](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L71)
+Defined in: [plot-base-data.ts:71](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L71)
 
 Normalized render rows bound to marks.
 
@@ -87,7 +87,7 @@ Normalized render rows bound to marks.
 
 > `protected` **\_defaultNumericInterpolator**: `ColorMapInterpolator` = `ColorMapInterpolator.SEQ_REDS`
 
-Defined in: [plot-base-data.ts:117](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L117)
+Defined in: [plot-base-data.ts:117](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L117)
 
 Default interpolator for numeric color encoding when the caller does not supply a scale.
 
@@ -97,7 +97,7 @@ Default interpolator for numeric color encoding when the caller does not supply 
 
 > `protected` **\_div**: `HTMLElement`
 
-Defined in: [plot-base-data.ts:66](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L66)
+Defined in: [plot-base-data.ts:66](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L66)
 
 Host element where the plot is rendered.
 
@@ -107,7 +107,7 @@ Host element where the plot is rendered.
 
 > `protected` **\_filter**: [`FilterCondition`](../type-aliases/FilterCondition.md)[] = `[]`
 
-Defined in: [plot-base-data.ts:110](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L110)
+Defined in: [plot-base-data.ts:110](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L110)
 
 Conditions every source feature must pass before the transform, if any.
 
@@ -117,7 +117,7 @@ Conditions every source feature must pass before the transform, if any.
 
 > `protected` **\_height**: `number` = `500`
 
-Defined in: [plot-base-data.ts:93](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L93)
+Defined in: [plot-base-data.ts:93](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L93)
 
 Outer plot height in pixels.
 
@@ -127,7 +127,7 @@ Outer plot height in pixels.
 
 > `protected` **\_margins**: [`PlotMargins`](../type-aliases/PlotMargins.md)
 
-Defined in: [plot-base-data.ts:95](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L95)
+Defined in: [plot-base-data.ts:95](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L95)
 
 Plot margins in pixels.
 
@@ -137,7 +137,7 @@ Plot margins in pixels.
 
 > `protected` **\_provenance**: [`ProvenanceModel`](ProvenanceModel.md)
 
-Defined in: [plot-base-data.ts:104](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L104)
+Defined in: [plot-base-data.ts:104](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L104)
 
 Provenance graph of the current draw cycle, from source features to rendered rows.
 
@@ -147,7 +147,7 @@ Provenance graph of the current draw cycle, from source features to rendered row
 
 > `protected` **\_resolvedDomain**: `ResolvedDomain` \| `undefined` = `undefined`
 
-Defined in: [plot-base-data.ts:98](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L98)
+Defined in: [plot-base-data.ts:98](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L98)
 
 Resolved color domain, computed from data after each transform.
 
@@ -157,7 +157,7 @@ Resolved color domain, computed from data after each transform.
 
 > `protected` **\_rowIds**: `WeakMap`\<`object`, `string`\>
 
-Defined in: [plot-base-data.ts:106](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L106)
+Defined in: [plot-base-data.ts:106](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L106)
 
 Provenance id of each rendered row object in `_data`.
 
@@ -167,7 +167,7 @@ Provenance id of each rendered row object in `_data`.
 
 > `protected` **\_sourceFeatures**: `Feature`\<`Geometry`, `GeoJsonProperties`\>[]
 
-Defined in: [plot-base-data.ts:69](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L69)
+Defined in: [plot-base-data.ts:69](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L69)
 
 Original source features from the input collection, indexed by source feature id.
 
@@ -177,7 +177,7 @@ Original source features from the input collection, indexed by source feature id
 
 > `protected` **\_style**: \{ `barPadding?`: `number`; `colorMap?`: `ColorMapOptions`; `columnFormats?`: `Record`\<`string`, `string`\>; `radius?`: `number`; \} \| `undefined`
 
-Defined in: [plot-base-data.ts:119](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L119)
+Defined in: [plot-base-data.ts:119](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L119)
 
 Appearance overrides from the plot configuration.
 
@@ -221,7 +221,7 @@ Fixed scatterplot point radius in pixels; defaults to 5.
 
 > `protected` **\_title**: `string`
 
-Defined in: [plot-base-data.ts:86](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L86)
+Defined in: [plot-base-data.ts:86](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L86)
 
 Plot title text.
 
@@ -231,7 +231,7 @@ Plot title text.
 
 > `protected` **\_topK**: [`TopKConfig`](../type-aliases/TopKConfig.md) \| `undefined` = `undefined`
 
-Defined in: [plot-base-data.ts:114](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L114)
+Defined in: [plot-base-data.ts:114](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L114)
 
 Top-k cut applied to rendered rows after the transform, if any.
 
@@ -241,7 +241,7 @@ Top-k cut applied to rendered rows after the transform, if any.
 
 > `protected` **\_transformAttributes**: `string`[] \| `undefined` = `undefined`
 
-Defined in: [plot-base-data.ts:76](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L76)
+Defined in: [plot-base-data.ts:76](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L76)
 
 Dot-path attributes used to read values from transformed rows, when applicable.
 
@@ -251,7 +251,7 @@ Dot-path attributes used to read values from transformed rows, when applicable.
 
 > `protected` **\_transformColorAttribute**: `string` \| `null` \| `undefined` = `undefined`
 
-Defined in: [plot-base-data.ts:83](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L83)
+Defined in: [plot-base-data.ts:83](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L83)
 
 Dot-path attribute used for color encoding on transformed rows, when applicable.
 
@@ -261,7 +261,7 @@ Dot-path attribute used for color encoding on transformed rows, when applicable.
 
 > `protected` `optional` **\_transformConfig?**: [`PlotTransformConfig`](../type-aliases/PlotTransformConfig.md)
 
-Defined in: [plot-base-data.ts:101](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L101)
+Defined in: [plot-base-data.ts:101](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L101)
 
 Transform configuration, if any.
 
@@ -271,7 +271,7 @@ Transform configuration, if any.
 
 > `protected` **\_width**: `number` = `DEFAULT_WIDTH`
 
-Defined in: [plot-base-data.ts:89](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L89)
+Defined in: [plot-base-data.ts:89](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L89)
 
 Outer plot width in pixels.
 
@@ -283,7 +283,7 @@ Outer plot width in pixels.
 
 > **get** **provenance**(): [`ProvenanceModel`](ProvenanceModel.md)
 
-Defined in: [plot-base-data.ts:256](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L256)
+Defined in: [plot-base-data.ts:256](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L256)
 
 Provenance graph of the current draw cycle.
 
@@ -302,7 +302,7 @@ Stages run from `D0` (source features) through the transform stages to
 
 > **get** `protected` **renderAxisAttributes**(): `string`[]
 
-Defined in: [plot-base-data.ts:491](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L491)
+Defined in: [plot-base-data.ts:496](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L496)
 
 Returns the active axis bindings for rendered rows.
 
@@ -318,7 +318,7 @@ Returns the active axis bindings for rendered rows.
 
 > **get** `protected` **renderColorAttribute**(): `string` \| `undefined`
 
-Defined in: [plot-base-data.ts:498](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L498)
+Defined in: [plot-base-data.ts:503](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L503)
 
 Returns the active color binding for rendered rows.
 
@@ -332,7 +332,7 @@ Returns the active color binding for rendered rows.
 
 > `protected` **afterDataRefresh**(): `void`
 
-Defined in: [plot-base-data.ts:465](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L465)
+Defined in: [plot-base-data.ts:470](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L470)
 
 Lifecycle hook invoked after `_data` has been refreshed but before render-time
 validation and color-domain computation.
@@ -347,7 +347,7 @@ validation and color-domain computation.
 
 > `protected` **afterRender**(): `void`
 
-Defined in: [plot-base-data.ts:363](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L363)
+Defined in: [plot-base-data.ts:363](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L363)
 
 Lifecycle hook invoked after `render()` completes a draw cycle.
 
@@ -361,7 +361,7 @@ Lifecycle hook invoked after `render()` completes a draw cycle.
 
 > `protected` **computeColorDomain**(): `void`
 
-Defined in: [plot-base-data.ts:522](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L522)
+Defined in: [plot-base-data.ts:527](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L527)
 
 Computes and caches the active color domain from rendered rows.
 
@@ -375,7 +375,7 @@ Computes and caches the active color domain from rendered rows.
 
 > **draw**(): `void`
 
-Defined in: [plot-base-data.ts:210](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L210)
+Defined in: [plot-base-data.ts:210](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L210)
 
 Rebuilds source rows, applies transforms, validates bindings, and delegates rendering.
 
@@ -389,11 +389,39 @@ If active render bindings do not resolve on the rendered data.
 
 ***
 
+### executeTransform()
+
+> `protected` **executeTransform**(`rows`, `config`, `columns`): [`ExecutedPlotTransform`](../type-aliases/ExecutedPlotTransform.md)
+
+Defined in: [plot-base-data.ts:385](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L385)
+
+Executes a transform on the filtered source rows.
+
+#### Parameters
+
+##### rows
+
+(`object` & `object`)[]
+
+##### config
+
+[`PlotTransformConfig`](../type-aliases/PlotTransformConfig.md)
+
+##### columns
+
+`string`[]
+
+#### Returns
+
+[`ExecutedPlotTransform`](../type-aliases/ExecutedPlotTransform.md)
+
+***
+
 ### hostWidth()
 
 > `protected` **hostWidth**(): `number`
 
-Defined in: [plot-base-data.ts:243](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L243)
+Defined in: [plot-base-data.ts:243](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L243)
 
 Content width of the host element (without its padding), or the default
 width while it has no layout.
@@ -410,7 +438,7 @@ Width in pixels, at least `MIN_AUTO_WIDTH`.
 
 > `abstract` **render**(): `void`
 
-Defined in: [plot-base-data.ts:470](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L470)
+Defined in: [plot-base-data.ts:475](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L475)
 
 Renders plot DOM, SVG, or HTML nodes for the current internal state.
 
@@ -424,7 +452,7 @@ Renders plot DOM, SVG, or HTML nodes for the current internal state.
 
 > `protected` **resolveSize**(): `void`
 
-Defined in: [plot-base-data.ts:233](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L233)
+Defined in: [plot-base-data.ts:233](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L233)
 
 Resolves the plot size before a draw. With `width: 'auto'` the width is
 the content width of the host element.
@@ -439,7 +467,7 @@ the content width of the host element.
 
 > `protected` **resolveTransformResult**(`result`): [`ResolvedPlotTransform`](../type-aliases/ResolvedPlotTransform.md)
 
-Defined in: [plot-base-data.ts:478](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L478)
+Defined in: [plot-base-data.ts:483](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L483)
 
 Maps an executed transform into the rendered row schema that the plot draws.
 
@@ -463,7 +491,7 @@ Normalized rendered rows plus any transformed binding metadata.
 
 > `protected` **rowIdOf**(`d`): `string` \| `undefined`
 
-Defined in: [plot-base-data.ts:356](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L356)
+Defined in: [plot-base-data.ts:356](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L356)
 
 Returns the provenance id of a rendered row.
 
@@ -487,7 +515,7 @@ Row id, or `undefined` when the datum is not a rendered row.
 
 > `protected` **setRenderColorAttribute**(`attribute`): `void`
 
-Defined in: [plot-base-data.ts:510](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L510)
+Defined in: [plot-base-data.ts:515](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L515)
 
 Updates the active render-time color binding.
 
@@ -509,7 +537,7 @@ Dot-path attribute to use for color, or `undefined` to clear it.
 
 > `protected` **supportsTopK**(): `boolean`
 
-Defined in: [plot-base-data.ts:201](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot-base-data.ts#L201)
+Defined in: [plot-base-data.ts:201](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot-base-data.ts#L201)
 
 Whether the plot can render a top-k cut of its rows. An extension hook for
 subclasses; `RegisteredPlot` overrides it.

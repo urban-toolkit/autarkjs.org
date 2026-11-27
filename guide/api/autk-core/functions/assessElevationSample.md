@@ -2,7 +2,7 @@
 
 > **assessElevationSample**(`value`, `ring`, `spacing`, `options`): [`ElevationAssessment`](../interfaces/ElevationAssessment.md) \| `undefined`
 
-Defined in: [elevation-validation.ts:49](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/elevation-validation.ts#L49)
+Defined in: [elevation-validation.ts:49](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/elevation-validation.ts#L49)
 
 Assesses a sample against the 16 positions on a radius-two square ring,
 ordered by row then column. Opposite supported positions preserve coherent

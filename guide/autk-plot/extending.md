@@ -78,6 +78,14 @@ Beyond `group` and `rows`, the drawing context provides:
 
 Only `name` and `draw` are required. Optional fields declare the transforms and reducers the chart reads (`transforms`, `requiresTransform`, `reducers`), the highlight (`highlight`: `'boolean'`, `'subset'`, `'glyph'`, `'trace'`, a rule per mark family, or a function that draws the parts), and `defaults` / `validate` for the configuration. `markStyle` styles anything that is not the mark's color.
 
+## Series and reference marks
+
+Registered Cartesian plots can opt in with `series: true` or `annotations: 'reference'` in their definition. In series mode, `draw` receives `seriesGroups` containing `{ key, color, rows }` for every source group, including empty groups; `color(row)` uses the series encoding. Bind the original draw-context rows to selectable marks. Use `visibleRows?.(includes)` with a row predicate when a categorical display domain omits rows so the legend can omit invisible groups too.
+
+The annotation preset uses the scales passed to `axisX` and `axisY`. When tick positions differ from mark positions, call `setAnnotationAxis?.(side, mapping)` with a plot-local position mapping; categorical bands also require category bounds. Use `setAnnotationSeriesPoint?.(lookup)` to resolve a grouped line callout by series and raw X key.
+
+To support statistics, call `setAnnotationObservations?.({ axes: ['x', 'y'], rows })` with observations containing optional numeric `x` and `y` coordinates. Omit missing values and declare supported axes even for empty data. An axis scale alone does not opt in to statistics. See [`PlotDrawContext`](/api/autk-plot/type-aliases/PlotDrawContext) for hook signatures.
+
 ## Registering a transform
 
 A transform turns one row per feature into the rows a chart draws, with their provenance. It returns `rows` plus the relation graph that lets selections travel in both directions.

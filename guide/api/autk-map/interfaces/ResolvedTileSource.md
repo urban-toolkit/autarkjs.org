@@ -1,6 +1,6 @@
 # Interface: ResolvedTileSource
 
-Defined in: [autk-map/src/tile-source.ts:46](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/tile-source.ts#L46)
+Defined in: [autk-map/src/tile-source.ts:46](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/tile-source.ts#L46)
 
 A [TileSource](TileSource.md) with defaults applied and validated.
 
@@ -10,7 +10,7 @@ A [TileSource](TileSource.md) with defaults applied and validated.
 
 > `readonly` **attribution**: readonly [`TileCredit`](TileCredit.md)[]
 
-Defined in: [autk-map/src/tile-source.ts:49](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/tile-source.ts#L49)
+Defined in: [autk-map/src/tile-source.ts:49](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/tile-source.ts#L49)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [autk-map/src/tile-source.ts:49](https://github.com/urban-toolkit/au
 
 > `readonly` **maxZoom**: `number`
 
-Defined in: [autk-map/src/tile-source.ts:51](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/tile-source.ts#L51)
+Defined in: [autk-map/src/tile-source.ts:51](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/tile-source.ts#L51)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [autk-map/src/tile-source.ts:51](https://github.com/urban-toolkit/au
 
 > `readonly` **minZoom**: `number`
 
-Defined in: [autk-map/src/tile-source.ts:50](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/tile-source.ts#L50)
+Defined in: [autk-map/src/tile-source.ts:50](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/tile-source.ts#L50)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [autk-map/src/tile-source.ts:50](https://github.com/urban-toolkit/au
 
 > `readonly` **subdomains**: readonly `string`[]
 
-Defined in: [autk-map/src/tile-source.ts:53](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/tile-source.ts#L53)
+Defined in: [autk-map/src/tile-source.ts:53](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/tile-source.ts#L53)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: [autk-map/src/tile-source.ts:53](https://github.com/urban-toolkit/au
 
 > `readonly` `optional` **theme?**: [`TileTheme`](../type-aliases/TileTheme.md)
 
-Defined in: [autk-map/src/tile-source.ts:48](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/tile-source.ts#L48)
+Defined in: [autk-map/src/tile-source.ts:48](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/tile-source.ts#L48)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [autk-map/src/tile-source.ts:48](https://github.com/urban-toolkit/au
 
 > `readonly` **tileSize**: `number`
 
-Defined in: [autk-map/src/tile-source.ts:52](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/tile-source.ts#L52)
+Defined in: [autk-map/src/tile-source.ts:52](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/tile-source.ts#L52)
 
 ***
 
@@ -58,4 +58,4 @@ Defined in: [autk-map/src/tile-source.ts:52](https://github.com/urban-toolkit/au
 
 > `readonly` **urlTemplate**: `string`
 
-Defined in: [autk-map/src/tile-source.ts:47](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/tile-source.ts#L47)
+Defined in: [autk-map/src/tile-source.ts:47](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/tile-source.ts#L47)

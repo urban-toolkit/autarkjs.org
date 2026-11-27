@@ -2,7 +2,7 @@
 
 > **DensityTransformConfig** = `object`
 
-Defined in: [api.ts:331](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L331)
+Defined in: [api.ts:348](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L348)
 
 Density preset config (kernel density estimate).
 
@@ -18,7 +18,7 @@ Use `'@transform'` after the columns to mark the output slot.
 
 > `optional` **options?**: `object`
 
-Defined in: [api.ts:333](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L333)
+Defined in: [api.ts:350](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L350)
 
 #### bandwidth?
 
@@ -38,4 +38,4 @@ Grid points per curve. Defaults to `48`.
 
 > **preset**: `"density"`
 
-Defined in: [api.ts:332](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/api.ts#L332)
+Defined in: [api.ts:349](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/api.ts#L349)

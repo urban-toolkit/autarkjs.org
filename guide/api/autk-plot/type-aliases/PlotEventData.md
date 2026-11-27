@@ -2,7 +2,7 @@
 
 > **PlotEventData** = `SelectionData` & `object`
 
-Defined in: [types-events.ts:39](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/types-events.ts#L39)
+Defined in: [types-events.ts:39](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/types-events.ts#L39)
 
 Payload emitted by all plot interaction events.
 

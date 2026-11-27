@@ -2,7 +2,7 @@
 
 > `const` **WATER\_NATURAL\_VALUES**: readonly \[`"water"`, `"wetland"`, `"strait"`, `"spring"`\]
 
-Defined in: [autk-db/src/consts.ts:64](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/consts.ts#L64)
+Defined in: [autk-db/src/consts.ts:64](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/consts.ts#L64)
 
 OSM `natural` tag values treated as water features.
 

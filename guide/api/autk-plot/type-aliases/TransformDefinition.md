@@ -2,7 +2,7 @@
 
 > **TransformDefinition** = `object`
 
-Defined in: [transforms/registry.ts:92](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/registry.ts#L92)
+Defined in: [transforms/registry.ts:92](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/registry.ts#L92)
 
 Contract of a transform, built-in or user-defined.
 
@@ -12,7 +12,7 @@ Contract of a transform, built-in or user-defined.
 
 > `optional` **label?**: `string`
 
-Defined in: [transforms/registry.ts:96](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/registry.ts#L96)
+Defined in: [transforms/registry.ts:96](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/registry.ts#L96)
 
 Name shown to people; defaults to `name`.
 
@@ -22,7 +22,7 @@ Name shown to people; defaults to `name`.
 
 > **name**: `string`
 
-Defined in: [transforms/registry.ts:94](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/registry.ts#L94)
+Defined in: [transforms/registry.ts:94](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/registry.ts#L94)
 
 Unique name: `transform: { preset: 'registered', name }` (built-in transforms: `{ preset: name }`).
 
@@ -32,7 +32,7 @@ Unique name: `transform: { preset: 'registered', name }` (built-in transforms: `
 
 > **shape**: [`RowShape`](RowShape.md)
 
-Defined in: [transforms/registry.ts:98](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/registry.ts#L98)
+Defined in: [transforms/registry.ts:98](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/registry.ts#L98)
 
 Family of the output rows.
 
@@ -42,7 +42,7 @@ Family of the output rows.
 
 > **run**(`rows`, `options`, `columns`): [`TransformOutput`](TransformOutput.md)
 
-Defined in: [transforms/registry.ts:107](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/transforms/registry.ts#L107)
+Defined in: [transforms/registry.ts:107](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/transforms/registry.ts#L107)
 
 Turns input rows into output rows and their provenance.
 

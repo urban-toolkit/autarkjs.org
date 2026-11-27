@@ -1,6 +1,6 @@
 # Interface: LoadJsonParams
 
-Defined in: [autk-db/src/use-cases/load-json/interfaces.ts:67](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-json/interfaces.ts#L67)
+Defined in: [autk-db/src/use-cases/load-json/interfaces.ts:67](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/use-cases/load-json/interfaces.ts#L67)
 
 Describes the inputs required to load JSON data into DuckDB.
 
@@ -19,7 +19,7 @@ const paramsGeo: LoadJsonParams = { jsonObject: data, outputTableName: 'geo_tabl
 
 > `optional` **geometryColumns?**: [`JsonGeometryColumns`](../type-aliases/JsonGeometryColumns.md)
 
-Defined in: [autk-db/src/use-cases/load-json/interfaces.ts:75](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-json/interfaces.ts#L75)
+Defined in: [autk-db/src/use-cases/load-json/interfaces.ts:75](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/use-cases/load-json/interfaces.ts#L75)
 
 Optional geometry strategy used to create a spatial column while loading.
 
@@ -29,7 +29,7 @@ Optional geometry strategy used to create a spatial column while loading.
 
 > `optional` **jsonFileUrl?**: `string`
 
-Defined in: [autk-db/src/use-cases/load-json/interfaces.ts:69](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-json/interfaces.ts#L69)
+Defined in: [autk-db/src/use-cases/load-json/interfaces.ts:69](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/use-cases/load-json/interfaces.ts#L69)
 
 URL of the JSON file to fetch and load into DuckDB.
 
@@ -39,7 +39,7 @@ URL of the JSON file to fetch and load into DuckDB.
 
 > `optional` **jsonObject?**: `unknown`[]
 
-Defined in: [autk-db/src/use-cases/load-json/interfaces.ts:71](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-json/interfaces.ts#L71)
+Defined in: [autk-db/src/use-cases/load-json/interfaces.ts:71](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/use-cases/load-json/interfaces.ts#L71)
 
 In-memory JSON array to serialize and load.
 
@@ -49,7 +49,7 @@ In-memory JSON array to serialize and load.
 
 > **outputTableName**: `string`
 
-Defined in: [autk-db/src/use-cases/load-json/interfaces.ts:73](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-json/interfaces.ts#L73)
+Defined in: [autk-db/src/use-cases/load-json/interfaces.ts:73](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/use-cases/load-json/interfaces.ts#L73)
 
 Name of the output table created inside the target workspace.
 
@@ -59,7 +59,7 @@ Name of the output table created inside the target workspace.
 
 > `optional` **sourceCrs?**: `string`
 
-Defined in: [autk-db/src/use-cases/load-json/interfaces.ts:77](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-json/interfaces.ts#L77)
+Defined in: [autk-db/src/use-cases/load-json/interfaces.ts:77](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/use-cases/load-json/interfaces.ts#L77)
 
 CRS of the source coordinates or WKT. Defaults to `EPSG:4326`.
 
@@ -69,6 +69,6 @@ CRS of the source coordinates or WKT. Defaults to `EPSG:4326`.
 
 > `optional` **workspace?**: `string`
 
-Defined in: [autk-db/src/use-cases/load-json/interfaces.ts:79](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-json/interfaces.ts#L79)
+Defined in: [autk-db/src/use-cases/load-json/interfaces.ts:79](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/use-cases/load-json/interfaces.ts#L79)
 
 Optional workspace override used by higher-level callers when qualifying the table name.

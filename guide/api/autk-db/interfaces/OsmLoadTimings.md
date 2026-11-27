@@ -1,6 +1,6 @@
 # Interface: OsmLoadTimings
 
-Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:38](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L38)
+Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:38](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L38)
 
 ## Properties
 
@@ -8,7 +8,7 @@ Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:38](https://g
 
 > **boundariesProcessingMs**: `number`
 
-Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:46](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L46)
+Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:46](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L46)
 
 Time in ms to insert boundary elements into DuckDB (excludes HTTP download).
 
@@ -18,7 +18,7 @@ Time in ms to insert boundary elements into DuckDB (excludes HTTP download).
 
 > **boundaryElementCount**: `number`
 
-Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:42](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L42)
+Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:42](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L42)
 
 Number of elements in the boundary dataset.
 
@@ -28,7 +28,7 @@ Number of elements in the boundary dataset.
 
 > **layers**: [`LayerLoadTimings`](LayerLoadTimings.md)[]
 
-Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:48](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L48)
+Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:48](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L48)
 
 Per-layer timing and feature count details (populated when autoLoadLayers is used).
 
@@ -38,7 +38,7 @@ Per-layer timing and feature count details (populated when autoLoadLayers is use
 
 > **osmDataProcessingMs**: `number`
 
-Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:44](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L44)
+Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:44](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L44)
 
 Time in ms to insert OSM elements into DuckDB (excludes HTTP download).
 
@@ -48,6 +48,6 @@ Time in ms to insert OSM elements into DuckDB (excludes HTTP download).
 
 > **osmElementCount**: `number`
 
-Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:40](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L40)
+Defined in: [autk-db/src/use-cases/load-osm-overpass/interfaces.ts:40](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-db/src/use-cases/load-osm-overpass/interfaces.ts#L40)
 
 Number of OSM elements (nodes + ways + relations) in the main dataset.

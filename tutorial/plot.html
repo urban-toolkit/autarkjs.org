@@ -223,6 +223,50 @@
     p02.events.on(PlotEvent.HOVER, ({selection}) => p01.setHover(selection));
   </script>
   </figure>
+</section>
+
+<section id="series-references">
+  <h2><span class="num">4</span>Compare groups and add references</h2>
+  <p>Use <code>attributes.series</code> to compare groups with categorical colors on shared scales. Here we split the neighborhoods around their median area without changing their source indices. A manual <code>scales</code> domain fixes the display window; it clips marks, rather than filtering the data before statistics or aggregation.</p>
+  <figure class="example" data-output="visual" data-title="4.1 · Series, domains, and references" data-needs="1.3">
+  <script type="text/plain">
+    if (!ctx.neighs) throw new Error("Run cell 1.3 first.");
+    const {AutkPlot, PlotEvent} = autk.plot;
+    const medianArea = d3.median(ctx.neighs.features, f => f.properties.shape_area);
+    const collection = {
+      ...ctx.neighs,
+      features: ctx.neighs.features.map(feature => ({
+        ...feature,
+        properties: {
+          ...feature.properties,
+          areaGroup: feature.properties.shape_area >= medianArea ? "Larger" : "Smaller",
+        },
+      })),
+    };
+    const container = document.createElement("div");
+    out.append(container);
+    const chart = new AutkPlot(container, {
+      type: "scatterplot", collection,
+      attributes: {axis: ["shape_leng", "shape_area"], series: "areaGroup"},
+      labels: {axis: ["Perimeter", "Area"], title: "Neighborhood size groups"},
+      width: "auto", height: 420,
+      scales: {
+        x: {domain: [0, d3.max(collection.features, f => f.properties.shape_leng) * 1.05]},
+        y: {domain: [0, d3.max(collection.features, f => f.properties.shape_area) * 1.05]},
+      },
+      ticks: {x: {format: "~s"}, y: {format: "~s"}},
+      margins: {left: 56, right: 20, top: 50, bottom: 64},
+      events: [PlotEvent.BRUSH],
+    });
+    chart.setAnnotations([
+      {id: "mean-area", type: "line", y: "mean", label: "Mean area"},
+      {id: "centroid", type: "point", x: "mean", y: "mean", label: "Centroid"},
+      {id: "fit", type: "line", fit: "linear"},
+    ]);
+  </script>
+  </figure>
+  <p>Annotations are reference marks, not selectable data. They do not expand domains or change provenance; <code>setAnnotations([])</code> clears them. Statistics pool finite observations across groups after filtering and transforms, before the manual window. Do not combine <code>series</code> with <code>attributes.color</code> or <code>topK</code>.</p>
+  <p>For grouped bars, provide one nonnegative value per category/series pair. For grouped lines, combine <code>series</code> with <code>reduce-series</code>; missing buckets break the path instead of becoming zero. Explore <a href="/autk-plot/series-and-annotations">Series and annotations</a> in the User Guide and the linked studies <a href="/gallery/examples/p10">Manhattan’s noise rhythms</a>, <a href="/gallery/examples/p11">Two airports, one destination</a>, and <a href="/gallery/examples/p12">Same route, different ride</a>.</p>
   <div class="next-page">Next: <a href="compute.html">06 · GPU computing with Autark Compute →</a></div>
 </section>
 

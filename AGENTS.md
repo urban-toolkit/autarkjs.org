@@ -121,8 +121,8 @@ embed rules in `tutorial.css`), update the manifest, rebuild, and rerun
 
 The gallery mirrors the upstream Autark gallery instead of maintaining a second
 catalog. `gallery/` is vendored from a recorded commit (`gallery/manifest.json`)
-and built by `gallery/vite.config.ts` into the ignored
-`guide/public/gallery/apps/`. Page entries come from `gallery/catalog.ts`, so a new
+and built by `gallery/vite.config.ts` into the committed
+`guide/public/gallery/apps/` (datasets and DuckDB runtime are copied at build time). Page entries come from `gallery/catalog.ts`, so a new
 upstream example requires no hand-written route.
 
 - `npm run gallery:build` builds the app; `predev`/`prebuild` run it too. Until the

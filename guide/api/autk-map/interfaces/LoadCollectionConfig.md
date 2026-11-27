@@ -1,6 +1,6 @@
 # Interface: LoadCollectionConfig
 
-Defined in: [autk-map/src/api.ts:82](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/api.ts#L82)
+Defined in: [autk-map/src/api.ts:82](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/api.ts#L82)
 
 Parameters for loading a feature collection as a map layer.
 
@@ -20,7 +20,7 @@ selects the band array stored on the raster feature properties (for example
 
 > `optional` **buildingsZeroHeight?**: `boolean`
 
-Defined in: [autk-map/src/api.ts:86](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/api.ts#L86)
+Defined in: [autk-map/src/api.ts:86](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/api.ts#L86)
 
 Optional flag to preserve buildings that lack valid height metadata.
 
@@ -30,7 +30,7 @@ Optional flag to preserve buildings that lack valid height metadata.
 
 > `optional` **rgbRange?**: [`RasterRgbRange`](../type-aliases/RasterRgbRange.md)
 
-Defined in: [autk-map/src/api.ts:93](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-map/src/api.ts#L93)
+Defined in: [autk-map/src/api.ts:93](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-map/src/api.ts#L93)
 
 Band values that map to 0 and 255 when a raster layer is drawn as an RGB
 image (`property` given as three bands). Defaults to `[0, 255]` for 8-bit

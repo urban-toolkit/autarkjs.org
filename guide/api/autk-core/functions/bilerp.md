@@ -2,7 +2,7 @@
 
 > **bilerp**(`a`, `b`, `c`, `d`, `u`, `v`): `number`
 
-Defined in: [utils-math.ts:50](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-core/src/utils-math.ts#L50)
+Defined in: [utils-math.ts:50](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-core/src/utils-math.ts#L50)
 
 Bilinear interpolation between four corner values.
 

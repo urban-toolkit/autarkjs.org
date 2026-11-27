@@ -2,7 +2,7 @@
 
 > **TransformProvenance** = `object`
 
-Defined in: [types-provenance.ts:92](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/types-provenance.ts#L92)
+Defined in: [types-provenance.ts:92](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/types-provenance.ts#L92)
 
 Provenance produced by a transform, from `D0` to the rendered rows.
 
@@ -12,7 +12,7 @@ Provenance produced by a transform, from `D0` to the rendered rows.
 
 > **contributions**: [`ProvenanceContribution`](ProvenanceContribution.md)[]
 
-Defined in: [types-provenance.ts:100](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/types-provenance.ts#L100)
+Defined in: [types-provenance.ts:100](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/types-provenance.ts#L100)
 
 Unit-level contributions to the rendered rows.
 
@@ -22,7 +22,7 @@ Unit-level contributions to the rendered rows.
 
 > `optional` **reducer?**: [`TransformReducer`](TransformReducer.md)
 
-Defined in: [types-provenance.ts:102](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/types-provenance.ts#L102)
+Defined in: [types-provenance.ts:102](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/types-provenance.ts#L102)
 
 Reducer applied to the contributions of each rendered row; absent when rows map one-to-one to features.
 
@@ -32,7 +32,7 @@ Reducer applied to the contributions of each rendered row; absent when rows map 
 
 > **relations**: [`ProvenanceRelation`](ProvenanceRelation.md)[]
 
-Defined in: [types-provenance.ts:96](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/types-provenance.ts#L96)
+Defined in: [types-provenance.ts:96](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/types-provenance.ts#L96)
 
 Relations between consecutive stages, starting at `D0`.
 
@@ -42,7 +42,7 @@ Relations between consecutive stages, starting at `D0`.
 
 > **rowIds**: [`ProvenanceId`](ProvenanceId.md)[]
 
-Defined in: [types-provenance.ts:98](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/types-provenance.ts#L98)
+Defined in: [types-provenance.ts:98](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/types-provenance.ts#L98)
 
 Provenance id of each output row, aligned with the transform `rows`.
 
@@ -52,6 +52,6 @@ Provenance id of each output row, aligned with the transform `rows`.
 
 > **stages**: [`ProvenanceStage`](ProvenanceStage.md)[]
 
-Defined in: [types-provenance.ts:94](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/types-provenance.ts#L94)
+Defined in: [types-provenance.ts:94](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/types-provenance.ts#L94)
 
 Stages after `D0`, in pipeline order. The last stage holds the rendered rows.

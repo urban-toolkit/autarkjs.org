@@ -1,6 +1,6 @@
 # Class: AutkPlot
 
-Defined in: [plot.ts:44](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot.ts#L44)
+Defined in: [plot.ts:45](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot.ts#L45)
 
 Unified public entrypoint for autk-plot plot creation and interaction.
 
@@ -36,7 +36,7 @@ plot.events.on(PlotEvent.CLICK, ({ selection }) => {
 
 > **new AutkPlot**(`div`, `config`): `AutkPlot`
 
-Defined in: [plot.ts:59](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot.ts#L59)
+Defined in: [plot.ts:60](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot.ts#L60)
 
 Creates a plot wrapper for the requested plot type.
 
@@ -76,7 +76,7 @@ const plot = new AutkPlot(plotDiv, { type: 'scatterplot', collection, attributes
 
 > **get** **events**(): `EventEmitter`\<[`PlotEventRecord`](../type-aliases/PlotEventRecord.md)\>
 
-Defined in: [plot.ts:108](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot.ts#L108)
+Defined in: [plot.ts:109](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot.ts#L109)
 
 Gets the plot event dispatcher.
 
@@ -94,7 +94,7 @@ Typed event dispatcher of the plot.
 
 > **get** **instance**(): [`PlotBaseInteractive`](PlotBaseInteractive.md)
 
-Defined in: [plot.ts:80](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot.ts#L80)
+Defined in: [plot.ts:81](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot.ts#L81)
 
 Gets the underlying plot instance.
 
@@ -115,7 +115,7 @@ The plot instance that draws the plot.
 
 > **get** **provenance**(): [`ProvenanceModel`](ProvenanceModel.md)
 
-Defined in: [plot.ts:100](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot.ts#L100)
+Defined in: [plot.ts:101](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot.ts#L101)
 
 Gets the provenance graph of the current draw, from source features to marks.
 
@@ -140,7 +140,7 @@ Provenance graph answering direct and inverse queries.
 
 > **get** **selection**(): `number`[]
 
-Defined in: [plot.ts:88](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot.ts#L88)
+Defined in: [plot.ts:89](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot.ts#L89)
 
 Gets the active selection as source feature ids.
 
@@ -158,7 +158,7 @@ Selected source feature ids.
 
 > **get** **type**(): [`PlotType`](../type-aliases/PlotType.md)
 
-Defined in: [plot.ts:68](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot.ts#L68)
+Defined in: [plot.ts:69](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot.ts#L69)
 
 Gets the active plot type handled by this wrapper.
 
@@ -174,7 +174,7 @@ Active plot type discriminator.
 
 > **destroy**(): `void`
 
-Defined in: [plot.ts:169](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot.ts#L169)
+Defined in: [plot.ts:180](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot.ts#L180)
 
 Stops following the host size (`width: 'auto'`) and removes the plot
 from its host element.
@@ -199,7 +199,7 @@ plot.destroy();
 
 > **draw**(): `void`
 
-Defined in: [plot.ts:157](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot.ts#L157)
+Defined in: [plot.ts:168](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot.ts#L168)
 
 Triggers a synchronous redraw of the plot.
 
@@ -219,11 +219,36 @@ plot.draw();
 
 ***
 
+### setAnnotations()
+
+> **setAnnotations**(`list`): `void`
+
+Defined in: [plot.ts:145](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot.ts#L145)
+
+Replaces reference marks without changing the data, domains, or selection.
+Pass an empty list to clear the overlay.
+
+#### Parameters
+
+##### list
+
+readonly [`PlotAnnotation`](../type-aliases/PlotAnnotation.md)[]
+
+#### Returns
+
+`void`
+
+#### Throws
+
+If any annotation is invalid or unsupported by the plot.
+
+***
+
 ### setHover()
 
 > **setHover**(`selection`): `void`
 
-Defined in: [plot.ts:134](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot.ts#L134)
+Defined in: [plot.ts:135](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot.ts#L135)
 
 Temporarily highlights marks for these source features without changing the selection.
 
@@ -251,7 +276,7 @@ map.events.on(MapEvent.HOVER, ({ selection }) => plot.setHover(selection));
 
 > **setSelection**(`selection`, `shares?`): `void`
 
-Defined in: [plot.ts:123](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot.ts#L123)
+Defined in: [plot.ts:124](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot.ts#L124)
 
 Applies a new selection to the plot as source feature ids.
 
@@ -291,7 +316,7 @@ other.events.on('click', ({ selection, shares }) => plot.setSelection(selection,
 
 > **updateCollection**(`collection`): `void`
 
-Defined in: [plot.ts:146](https://github.com/urban-toolkit/autark/blob/7dc7dea6cf860d8a9eb6c1ac2a5f64b450865460/autk-plot/src/plot.ts#L146)
+Defined in: [plot.ts:157](https://github.com/urban-toolkit/autark/blob/8707a52c73dc32825e702f3a61de13def68d327e/autk-plot/src/plot.ts#L157)
 
 Replaces the plot's data collection and redraws in place.
 

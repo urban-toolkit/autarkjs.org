@@ -16,7 +16,10 @@ Edit cell source and chapter prose in `tutorial/*.html`. Use
 `npm run build` also publishes the standalone notebooks. Run
 `npm run test:tutorial` for publication checks. With `npm run preview` running,
 `npm run test:tutorial:browser` executes every cell in Chrome with WebGPU and
-uses bundled Overpass recordings. Set `PLAYGROUND_URL` for a different server
+uses bundled Overpass recordings. The plot chapter includes a site-added series,
+manual-domain, and statistical-reference example. `npm run test:plot:browser`
+checks the corresponding User Guide examples and the P10–P12 gallery studies
+(including route controls, linked selections, and mobile dark layouts). Set `PLAYGROUND_URL` for a different server
 and `CHROME_BIN` for a nonstandard Chrome executable.
 
 ## Run in the upstream Autark checkout
