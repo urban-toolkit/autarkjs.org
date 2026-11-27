@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, nextTick, onMounted, onBeforeUnmount } from 'vue'
 import { useData } from 'vitepress'
 import { captureConsole, executeSource, formatValue } from '../../../../playground/runtime.js'
 import type { mountPlaygroundEditor } from '../../../../playground/editor.js'
@@ -54,7 +54,6 @@ const showCanvas = computed(() => props.renderCanvas)
 const out = computed(() => props.out ?? 'both')
 const canvasHeightStyle = computed(() => props.canvasHeight ? `${props.canvasHeight}px` : undefined)
 const namedMounts = computed(() => props.mounts ?? [])
-const tallOutput = computed(() => out.value !== 'console' && (showCanvas.value || namedMounts.value.length > 0 || arrangesViews.value))
 const { page } = useData()
 const editorEl = ref<HTMLElement | null>(null)
 let editor: ReturnType<typeof mountPlaygroundEditor> | undefined
@@ -280,6 +279,7 @@ async function runCode() {
   hasConsoleOutput.value = false
 
   try {
+    await nextTick()
     destroyGrammars()
     clearCanvas()
     clearViews()
@@ -400,43 +400,49 @@ onBeforeUnmount(() => {
 
     <div
       ref="outputEl"
-      class="code-playground__output playground-card__output"
-      :class="{ 'playground-card__output--tall': tallOutput }"
-      :style="tallOutput && canvasHeightStyle ? { '--playground-output-height': `max(35rem, calc(${canvasHeightStyle} + 32px))` } : undefined"
+      v-show="status || isRunning || hasConsoleOutput || hasDomOutput"
+      class="code-playground__output playground-card__output playground-card__output--stacked"
       tabindex="0"
       role="region"
       aria-label="Playground output"
       aria-live="polite"
     >
-      <span v-if="!status && !isRunning && !hasConsoleOutput && !hasDomOutput" class="playground-card__placeholder">
-        Run this example to see the result.
-      </span>
       <pre v-if="error && out === 'dom'" class="code-playground__error">{{ error }}</pre>
-      <div v-if="arrangesViews && out !== 'console'" ref="viewsEl" class="code-playground__views playground-card__visual" />
-      <div v-else-if="showCanvas && out !== 'console'" class="code-playground__canvas-wrap playground-card__visual" :style="canvasHeightStyle ? { height: canvasHeightStyle } : undefined">
-        <canvas ref="canvasEl" class="code-playground__canvas" :id="canvasId" />
-      </div>
+      <section v-if="arrangesViews && out !== 'console'" class="code-playground__views-area playground-card__area" aria-label="Views output">
+        <div class="playground-card__area-label">Views</div>
+        <div ref="viewsEl" class="code-playground__views playground-card__visual" />
+      </section>
+      <section v-else-if="showCanvas && out !== 'console'" class="playground-card__area" aria-label="Map output">
+        <div class="playground-card__area-label">Map</div>
+        <div class="code-playground__canvas-wrap playground-card__visual" :style="canvasHeightStyle ? { height: canvasHeightStyle } : undefined">
+          <canvas ref="canvasEl" class="code-playground__canvas" :id="canvasId" />
+        </div>
+      </section>
 
-      <div ref="mount" class="code-playground__dom-output playground-card__visual" />
-      <div v-if="namedMounts.length > 0" class="code-playground__named-mounts playground-card__visual">
+      <section class="code-playground__dom-area playground-card__area" aria-label="DOM output">
+        <div class="playground-card__area-label">Result</div>
+        <div ref="mount" class="code-playground__dom-output playground-card__visual" />
+      </section>
+      <section v-for="namedMount in namedMounts" :key="namedMount.name" class="playground-card__area" :aria-label="`${namedMount.kind === 'canvas' ? 'Map' : namedMount.name === 'plot' ? 'Plot' : namedMount.name} output`">
+        <div class="playground-card__area-label">{{ namedMount.kind === 'canvas' ? 'Map' : namedMount.name === 'plot' ? 'Plot' : namedMount.name }}</div>
         <component
           :is="namedMount.kind ?? 'div'"
-          v-for="namedMount in namedMounts"
-          :key="namedMount.name"
           :id="namedMount.id"
-          class="code-playground__named-mount"
+          class="code-playground__named-mount playground-card__visual"
           :class="{ 'code-playground__named-mount--canvas': namedMount.kind === 'canvas' }"
           :style="namedMount.height ? { height: `${namedMount.height}px` } : undefined"
           :ref="(el) => setNamedMountRef(namedMount.name, el as HTMLElement | null)"
         />
-      </div>
+      </section>
 
-      <div v-if="out !== 'dom'" class="code-playground__console-lines" :class="{ 'code-playground__console-lines--combined': out === 'both' }">
-        <div ref="consoleEl" class="code-playground__console-entries" />
-      </div>
+      <section v-if="out !== 'dom'" v-show="hasConsoleOutput" class="code-playground__console-lines playground-card__area" aria-label="Console output">
+        <div class="playground-card__area-label">Console</div>
+        <div ref="consoleEl" class="code-playground__console-entries playground-card__console" />
+      </section>
     </div>
     <div class="playground-card__state" :class="error ? 'error' : isRunning ? 'run' : 'ok'" role="status">
-      {{ status || (isRunning ? 'Running…' : '') }}
+      <span v-if="!status && !isRunning" class="playground-card__placeholder">Run this example to see the result.</span>
+      <template v-else>{{ status || (isRunning ? 'Running…' : '') }}</template>
     </div>
   </div>
 </template>
@@ -467,17 +473,14 @@ onBeforeUnmount(() => {
   min-height: 0;
 }
 
-.code-playground__dom-output:empty {
+.code-playground__views-area:has(.code-playground__views:empty),
+.code-playground__dom-area:has(.code-playground__dom-output:empty) {
   display: none;
 }
 
-.code-playground__named-mounts {
-  display: grid;
-  gap: 12px;
-}
-
-.code-playground__named-mounts:not(:first-child) {
-  margin-top: 12px;
+.code-playground__dom-output:not(:has(canvas, svg)) {
+  max-height: 18rem;
+  overflow: auto;
 }
 
 .code-playground__named-mount {
@@ -507,12 +510,6 @@ onBeforeUnmount(() => {
 /* autk-plot draws its axis titles inside the axis groups, whose fill is none, and leaves their color to the page. */
 .code-playground :deep(.axis-label) {
   fill: currentColor;
-}
-
-.code-playground__console-lines--combined:has(.code-playground__console-entries:not(:empty)) {
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid var(--vp-c-divider);
 }
 
 .code-playground__console-entries > :deep(*) {

@@ -32,7 +32,7 @@ try {
     }
 
     const value = async (title, ...path) => {
-      let branch = outputs.get(title).locator(':scope > details')
+      let branch = outputs.get(title).locator('.notebook-console-output > details')
       for (const [index, key] of path.entries()) {
         if (await branch.getAttribute('open') === null) await branch.locator(':scope > summary').click()
         const label = page.getByText(typeof key === 'number' ? String(key) : JSON.stringify(key), { exact: true })

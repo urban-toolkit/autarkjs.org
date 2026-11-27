@@ -21,9 +21,9 @@ try {
   const bars = examples.nth(0)
   await bars.locator('rect.autkMark').first().waitFor()
   assert.equal(await bars.locator('rect.autkMark').count(), 4)
-  const barsHeight = await bars.locator('.code-playground__output').evaluate(el => el.clientHeight)
+  const barsHeight = await bars.locator('[aria-label="Plot output"]').evaluate(el => el.clientHeight)
   const mountHeight = await bars.locator('.code-playground__named-mount').evaluate(el => el.clientHeight)
-  assert.ok(barsHeight <= mountHeight + 48, 'guide output fits the chart without a fixed-height blank area')
+  assert.ok(barsHeight <= mountHeight + 64, 'plot area fits the chart and its label without a fixed-height blank area')
   await bars.locator('[data-annotation-id="mean"] line').waitFor({ state: 'attached' })
   await bars.getByText('East', { exact: true }).waitFor()
   await bars.locator('rect.autkMark').first().click()
@@ -65,13 +65,13 @@ try {
   const registered = page.locator('.code-playground').first()
   await registered.locator('.cm-content').waitFor()
   const initialPosition = await registered.locator('.playground-card__placeholder').evaluate(element => {
-    const output = element.closest('.playground-card__output')
+    const output = element.closest('.playground-card__state')
     const message = element.getBoundingClientRect()
     const bounds = output.getBoundingClientRect()
     const style = getComputedStyle(output)
-    return [message.top - bounds.top - parseFloat(style.paddingTop), message.left - bounds.left - parseFloat(style.paddingLeft)]
+    return [message.top - bounds.top - parseFloat(style.borderTopWidth) - parseFloat(style.paddingTop), message.left - bounds.left - parseFloat(style.paddingLeft)]
   })
-  assert.ok(initialPosition.every(offset => Math.abs(offset) <= 1), 'initial message starts at the output padding, before empty chart mounts')
+  assert.ok(initialPosition.every(offset => Math.abs(offset) <= 1), 'initial message starts at the footer padding')
   for (let run = 0; run < 3; run++) {
     if (run === 2) {
       await registered.getByRole('button', { name: 'Copy', exact: true }).click()

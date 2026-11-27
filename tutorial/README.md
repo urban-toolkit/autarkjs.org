@@ -11,8 +11,10 @@ chapters use the same VitePress document layout as the Guide: sidebar, sticky
 outline, headings, and browser scrolling. The site chapter pages in
 `guide/tutorial/` reuse the notebook HTML and mount `notebook.js`, which adds
 chapter context and output helpers to the [shared playground](../playground/README.md).
-Edit cell source and chapter prose in `tutorial/*.html`. Use
-`dataUrl()` in cells to resolve paths relative to `tutorial/data/` in both builds.
+Edit cell source and chapter prose in `tutorial/*.html`. Nodes appended to `out`
+use the visual area; console messages, `show(value)`, returned values, and tables
+use a separate stacked console area. The idle prompt lives in the footer.
+Use `dataUrl()` in cells to resolve paths relative to `tutorial/data/` in both builds.
 `npm run build` also publishes the standalone notebooks. Run
 `npm run test:tutorial` for publication checks. With `npm run preview` running,
 `npm run test:tutorial:browser` executes every cell in Chrome with WebGPU and

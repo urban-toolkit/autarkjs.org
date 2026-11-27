@@ -171,7 +171,7 @@ The `collection` is a standard GeoJSON `FeatureCollection`. Each feature becomes
 The example below loads the same neighborhood layer into a map and a histogram. The bars are created with a `binning-1d` transform; clicking or brushing a bin highlights every neighborhood that falls inside that area range on the map.
 
 <ClientOnly>
-  <CodePlayground :code="linkedCode" out="dom" :auto-run="true" :canvas-height="500" :mounts="[{ name: 'plot', height: 420 }]" />
+  <CodePlayground :code="linkedCode" out="both" :auto-run="true" :canvas-height="500" :mounts="[{ name: 'plot', height: 420 }]" />
 </ClientOnly>
 
 ## Common configuration

@@ -13,18 +13,18 @@ try {
   page.on('pageerror', error => errors.push(error.message))
   for (const [route, index] of [['/autk-map/', 1], ['/autk-plot/extending.html', 0]]) {
     await page.goto(`${base}${route}`)
-    const output = page.locator('.code-playground').nth(index).locator('.playground-card__output')
+    const output = page.locator('.code-playground').nth(index).locator('.playground-card__state')
     await output.locator('.playground-card__placeholder').waitFor()
     for (const width of [1440, 390]) {
       await page.setViewportSize({ width, height: 960 })
       const offsets = await output.locator('.playground-card__placeholder').evaluate(element => {
-        const output = element.closest('.playground-card__output')
+        const output = element.closest('.playground-card__state')
         const message = element.getBoundingClientRect()
         const bounds = output.getBoundingClientRect()
         const style = getComputedStyle(output)
-        return [message.top - bounds.top - parseFloat(style.paddingTop), message.left - bounds.left - parseFloat(style.paddingLeft)]
+        return [message.top - bounds.top - parseFloat(style.borderTopWidth) - parseFloat(style.paddingTop), message.left - bounds.left - parseFloat(style.paddingLeft)]
       })
-      assert.ok(offsets.every(offset => Math.abs(offset) <= 1), `${route}: initial message is top-left at ${width}px`)
+      assert.ok(offsets.every(offset => Math.abs(offset) <= 1), `${route}: initial message is in the footer at ${width}px`)
     }
   }
   await page.setViewportSize({ width: 1440, height: 960 })
@@ -56,7 +56,8 @@ try {
   await editor.waitFor()
   assert.equal(await editor.innerText(), code)
   assert.ok(await guide.getByText('Run this example to see the result.').isVisible(), 'restored edits do not auto-run')
-  assert.equal(await guide.locator('.playground-card__placeholder').evaluate(el => el.getBoundingClientRect().top - el.parentElement.getBoundingClientRect().top), 16, 'console initial message uses the same top padding')
+  assert.equal(await guide.locator('.playground-card__output').isVisible(), false, 'no blank output before execution')
+  assert.equal(await guide.locator('.playground-card__state .playground-card__placeholder').count(), 1, 'console initial message uses the same footer')
   await guide.getByRole('button', { name: 'Reset', exact: true }).click()
   assert.notEqual(await editor.innerText(), code)
 
@@ -86,6 +87,32 @@ try {
   await result.getByText('Array(1)', { exact: true }).click()
   await result.getByText('"DOM-only result"', { exact: true }).waitFor()
 
+  await page.goto(`${base}/autk-plot/`)
+  const combined = page.locator('.code-playground').first()
+  await combined.locator('.code-playground__named-mount svg').waitFor()
+  await combined.getByRole('button', { name: 'Copy', exact: true }).click()
+  const combinedSource = await page.evaluate(() => navigator.clipboard.readText())
+  await combined.locator('.cm-content').fill(`${combinedSource}\nconsole.log('Stacked output'); console.log('Long output '.repeat(400));`)
+  await combined.getByRole('button', { name: 'Run', exact: true }).click()
+  await combined.locator('.code-playground__console-lines').getByText('Stacked output', { exact: true }).waitFor()
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 960 })
+    const layout = await combined.locator('.code-playground__output').evaluate(element => ({
+      height: element.clientHeight, content: element.scrollHeight, overflow: getComputedStyle(element).overflowY,
+      areas: [...element.querySelectorAll(':scope > section')].filter(area => getComputedStyle(area).display !== 'none').map(area => ({
+        label: area.querySelector('.playground-card__area-label').textContent,
+        top: area.getBoundingClientRect().top, bottom: area.getBoundingClientRect().bottom,
+      })),
+    }))
+    assert.deepEqual(layout.areas.map(area => area.label), ['Map', 'Plot', 'Console'])
+    assert.equal(layout.overflow, 'visible', 'the shared wrapper never clips console output')
+    assert.ok(layout.content <= layout.height + 1)
+    assert.ok(layout.areas[1].top >= layout.areas[0].bottom && layout.areas[2].top >= layout.areas[1].bottom, 'map, plot and console have separate stacked areas')
+  }
+  const consoleSize = await combined.locator('.playground-card__console').evaluate(element => ({ height: element.clientHeight, content: element.scrollHeight }))
+  assert.ok(consoleSize.content > consoleSize.height, 'long console messages scroll only inside the console area')
+  await page.setViewportSize({ width: 1440, height: 960 })
+
   await page.goto(`${base}/gallery/ex7.html`)
   const files = page.locator('.code-playground').first()
   const tabs = files.getByRole('tab')
@@ -109,12 +136,21 @@ try {
   await page.goto(`${base}/tutorial/chapter04.html`)
   const plot = page.locator('.tutorial-notebook figure.example').nth(1)
   const chartPanel = plot.locator('.out')
-  await chartPanel.waitFor()
+  await chartPanel.waitFor({ state: 'attached' })
   await plot.getByRole('button', { name: 'Run all above' }).click()
   await chartPanel.locator('svg').first().waitFor({ timeout: 30000 })
   await plot.locator('.state.ok').waitFor()
   const chartHeight = await chartPanel.locator('svg').first().evaluate(el => el.getBoundingClientRect().height)
-  assert.ok(await chartPanel.evaluate(el => el.clientHeight) <= chartHeight + 48, 'tutorial output fits the chart without a fixed-height blank area')
+  assert.ok(await chartPanel.locator('.notebook-visual-area').evaluate(el => el.clientHeight) <= chartHeight + 64, 'tutorial plot area fits the chart and its label')
+  await plot.getByRole('button', { name: 'Copy', exact: true }).click()
+  const plotSource = await page.evaluate(() => navigator.clipboard.readText())
+  await plot.locator('.cm-content').fill(`${plotSource}\nconsole.log('Plot result');`)
+  await plot.getByRole('button', { name: 'Run', exact: true }).click()
+  await plot.locator('.notebook-console-area').getByText('Plot result', { exact: true }).waitFor()
+  const visualBox = await plot.locator('.notebook-visual-area').boundingBox()
+  const consoleBox = await plot.locator('.notebook-console-area').boundingBox()
+  assert.ok(consoleBox.y >= visualBox.y + visualBox.height, 'tutorial console is stacked below its plot')
+  assert.equal(await chartPanel.evaluate(el => getComputedStyle(el).overflowY), 'visible')
 
   // The standalone build (outside VitePress) uses the same library and storage key.
   await page.goto(`${base}/tutorial/apps/formats.html`)
@@ -124,7 +160,7 @@ try {
   await page.goto(`${base}/tutorial/chapter01.html`)
   const formats = page.locator('.tutorial-notebook figure.example').first()
   assert.equal(await formats.locator('.cm-content').innerText(), notebookCode)
-  const notebookOutput = formats.locator('.out')
+  const notebookOutput = formats.locator('.notebook-console-output')
   await formats.getByRole('button', { name: 'Run', exact: true }).click()
   await notebookOutput.getByText('Shared across builds', { exact: true }).waitFor()
   await formats.locator('.playground-card__output + .playground-card__state').getByText(/Done in/).waitFor()

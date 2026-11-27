@@ -2,14 +2,15 @@
 
 `editor.js` mounts the site’s CodeMirror editor and toolbar. It handles file tabs,
 Run, Reset, Copy, the keyboard shortcut, and browser-local edits. `card.css`
-shares the Tutorial’s card, scrollable output, and bottom status row with the
-User Guide. Text and console output grow when expanded, up to a scrollable
-limit. Notebook figures can set `data-output="visual"` for a taller visual
-output. Initial messages always start at the output's top-left padding, before
-any reserved visualization mounts. SVG-only chart outputs fit their content instead of reserving a fixed
-map-sized viewport; outputs containing map canvases keep the fixed viewport. An example can also supply
-Run all above. `runtime.js` executes JavaScript with host-supplied
-bindings and captures console messages. User Guide interaction handlers can call
+shares the Tutorial’s card, output areas, and bottom status row with the
+User Guide. Maps, plots, and console results have separate labeled areas stacked
+vertically; the outer output never clips them into one shared scrolling viewport.
+Visual areas fit their content, preserving the configured map and plot sizes.
+Long console/text results scroll within their own area. Grammar views keep the
+layout declared by the spec. The initial “Run this example to see the result.”
+message lives in the footer, with no blank output before execution. An example
+can also supply Run all above. `runtime.js` executes JavaScript with host-supplied
+bindings and captures console messages. Interaction handlers can call
 `console.clear()` to replace the previous result without clearing the chart or map.
 `output.js` renders objects and arrays
 as collapsed trees. Expand one branch at a time; plain text stays plain. Syntax

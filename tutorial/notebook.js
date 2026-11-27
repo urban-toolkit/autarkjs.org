@@ -2,9 +2,9 @@
 // Unlike the isolated examples in d3-in-one-page, these cells share state, like cells in a notebook:
 // the code is the body of an async function that receives
 //   ctx    an object shared by every example on the page (keep the database, loaded layers, ... here)
-//   out    the <div> under the code, where output goes
-//   show   show(value) renders any value in `out`; so does `return value`
-//   table  table(rows) renders an array of objects as a table
+//   out    the visual-output <div>, for map and plot elements
+//   show   show(value) and `return value` render values in the separate console area (Nodes in `out`)
+//   table  table(rows) renders an array of objects as a table in the console area
 //   withFallback  withFallback(fn) runs fn; requests to the Overpass server that fail are answered from the
 //          recordings in data/osm/ (see overpass-fallback.js), so cells that load OpenStreetMap still work
 //   xmlView  xmlView(xmlDocument) renders an XML document as a collapsible tree
@@ -107,39 +107,53 @@ function setup(figure, index, notebook) {
   figure.innerHTML = `
     <figcaption class="playground-card__caption"><span>${title}</span><span class="playground-card__meta mode">JavaScript · ${needs || "standalone"}</span></figcaption>
     <div class="editor"></div>
-    <div class="playground-card__output playground-card__visual out" tabindex="0" role="region" aria-label="Playground output" aria-live="polite"></div>
-    <div class="playground-card__state state" role="status"></div>`;
+    <div class="playground-card__output playground-card__output--stacked out" tabindex="0" role="region" aria-label="Playground output" aria-live="polite" hidden>
+      <section class="notebook-visual-area playground-card__area" aria-label="Visual output">
+        <div class="playground-card__area-label notebook-visual-label">Result</div>
+        <div class="notebook-visual-output playground-card__visual"></div>
+      </section>
+      <section class="notebook-console-area playground-card__area" aria-label="Console output">
+        <div class="playground-card__area-label">Console</div>
+        <div class="notebook-console-output playground-card__console"></div>
+      </section>
+    </div>
+    <div class="playground-card__state state" role="status"><span class="playground-card__placeholder">Run this example to see the result.</span></div>`;
 
   const outEl = figure.querySelector(".out");
-  outEl.classList.toggle("playground-card__output--tall", figure.dataset.output === "visual");
+  const visualEl = figure.querySelector(".notebook-visual-output");
+  const consoleEl = figure.querySelector(".notebook-console-output");
+  const visualLabel = figure.querySelector(".notebook-visual-label");
   const state = figure.querySelector(".state");
   let disposed = false;
 
   const exec = async () => {
     if (disposed) return;
     editor.setBusy(true);
-    outEl.replaceChildren();
+    outEl.hidden = false;
+    visualEl.replaceChildren();
+    consoleEl.replaceChildren();
     outEl.scrollTo(0, 0);
     state.className = "playground-card__state state run"; state.textContent = "Running…";
-    const show = v => { const n = render(v); if (n) outEl.append(n); };
+    const show = v => { const n = render(v); if (n) (v instanceof Node ? visualEl : consoleEl).append(n); };
     const t0 = performance.now();
     try {
       const result = await executeSource(editor.getSources()[0], {
-        ctx, out: outEl, show, table: rows => outEl.append(table(rows)), xmlView,
+        ctx, out: visualEl, show, table: rows => consoleEl.append(table(rows)), xmlView,
         withFallback: fn => withOverpassFallback(fn, {
-          note: m => outEl.append(note(m)), recordings: dataUrl("osm/manifest.json"),
+          note: m => consoleEl.append(note(m)), recordings: dataUrl("osm/manifest.json"),
         }), d3, autk, GeoTIFF, dataUrl,
-        console: captureConsole(show),
+        console: captureConsole(show, () => consoleEl.replaceChildren()),
       });
       show(result);
       state.className = "playground-card__state state ok"; state.textContent = `Done in ${((performance.now() - t0) / 1000).toFixed(1)} s`;
       return true;
     } catch (e) {
-      outEl.append(pre("err", e && e.stack ? `${e.name}: ${e.message}` : String(e)));
+      consoleEl.append(pre("err", e && e.stack ? `${e.name}: ${e.message}` : String(e)));
       console.error(e);
       state.className = "playground-card__state state error"; state.textContent = "Run failed";
       return false;
     } finally {
+      visualLabel.textContent = visualEl.querySelector("canvas") ? "Map" : visualEl.querySelector("svg") ? "Plot" : "Result";
       if (!disposed) editor.setBusy(false);
     }
   };
