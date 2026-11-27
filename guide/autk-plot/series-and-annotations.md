@@ -36,7 +36,10 @@ chart.setAnnotations([
   { id: 'target', type: 'band', y: [110, 135], label: 'Target range' },
   { id: 'mean', type: 'line', y: 'mean', label: 'Mean trips' },
 ])
-chart.events.on(PlotEvent.CLICK, ({ selection }) => console.log(selection))
+chart.events.on(PlotEvent.CLICK, ({ selection }) => {
+  console.clear()
+  console.log(selection)
+})
 `
 const linesCode = `
 import { AutkPlot, PlotEvent } from '@urban-toolkit/autk-plot'

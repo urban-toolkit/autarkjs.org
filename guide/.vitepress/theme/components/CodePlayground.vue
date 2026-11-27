@@ -333,7 +333,10 @@ async function runCode() {
       __d3: await import('d3'),
       __canvas: canvasEl.value,
       __mount: mount.value,
-      __console: captureConsole(appendConsole),
+      __console: captureConsole(appendConsole, () => {
+        consoleEl.value?.replaceChildren()
+        hasConsoleOutput.value = false
+      }),
       __setMountHtml: setMountHtml,
       __setStatus: setPlaygroundStatus,
       __clearStatus: clearPlaygroundStatus,

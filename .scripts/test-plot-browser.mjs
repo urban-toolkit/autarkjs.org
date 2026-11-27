@@ -9,6 +9,7 @@ const browser = await chromium.launch({
 })
 try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 960 } })
+  await page.context().grantPermissions(['clipboard-read', 'clipboard-write'])
   const errors = []
   const missing = []
   page.on('pageerror', error => errors.push(error.message))
@@ -27,6 +28,12 @@ try {
   await bars.getByText('East', { exact: true }).waitFor()
   await bars.locator('rect.autkMark').first().click()
   await bars.locator('.code-playground__console-lines').getByText('Array(1)', { exact: true }).waitFor()
+  for (const [index, count] of [[1, 2], [0, 1], [1, 0]]) {
+    await bars.locator('rect.autkMark').nth(index).click()
+    await bars.locator('.code-playground__console-lines').getByText(`Array(${count})`, { exact: true }).waitFor()
+    assert.equal(await bars.locator('.code-playground__console-entries > *').count(), 1, 'only the latest interaction result remains')
+    assert.equal(await bars.locator('rect.autkMark').count(), 4, 'clearing interaction output preserves the chart')
+  }
 
   const lines = examples.nth(1)
   await lines.scrollIntoViewIfNeeded()
@@ -35,6 +42,24 @@ try {
   const proposalPath = await lines.locator('[data-series="Proposal"] > path').first().getAttribute('d')
   assert.equal((proposalPath.match(/M/g) ?? []).length, 2, 'the missing month breaks the path')
   await lines.locator('[data-annotation-id="proposal"] circle').waitFor()
+
+  await page.goto(`${base}/autk-plot/interactivity.html`)
+  const clickExample = page.locator('.code-playground').first()
+  await clickExample.locator('rect.autkMark').first().waitFor()
+  for (const index of [0, 1, 0]) {
+    await clickExample.locator('rect.autkMark').nth(index).click()
+    assert.equal(await clickExample.locator('.code-playground__console-entries > *').count(), 2, 'keep the label and selection from one interaction')
+    assert.equal(await clickExample.locator('.code-playground__console-lines').getByText('Clicked indices:', { exact: true }).count(), 1)
+  }
+  const brushExample = page.locator('.code-playground').nth(2)
+  const brushOverlay = brushExample.locator('rect.overlay').first()
+  await brushOverlay.scrollIntoViewIfNeeded()
+  const brushBox = await brushOverlay.boundingBox()
+  await page.mouse.move(brushBox.x + brushBox.width * 0.1, brushBox.y + brushBox.height * 0.1)
+  await page.mouse.down()
+  await page.mouse.move(brushBox.x + brushBox.width * 0.8, brushBox.y + brushBox.height * 0.8, { steps: 8 })
+  await page.mouse.up()
+  assert.equal(await brushExample.locator('.code-playground__console-entries > *').count(), 2, 'brush updates replace previous interaction results')
 
   await page.goto(`${base}/autk-plot/extending.html`)
   const registered = page.locator('.code-playground').first()
@@ -49,7 +74,8 @@ try {
   assert.ok(initialPosition.every(offset => Math.abs(offset) <= 1), 'initial message starts at the output padding, before empty chart mounts')
   for (let run = 0; run < 3; run++) {
     if (run === 2) {
-      const source = await registered.locator('.cm-content').innerText()
+      await registered.getByRole('button', { name: 'Copy', exact: true }).click()
+      const source = await page.evaluate(() => navigator.clipboard.readText())
       await registered.locator('.cm-content').fill(source.replace('import * as d3', 'import * as chartD3').replaceAll('d3.', 'chartD3.'))
     }
     await registered.getByRole('button', { name: 'Run', exact: true }).click()

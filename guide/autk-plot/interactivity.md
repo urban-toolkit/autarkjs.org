@@ -30,6 +30,7 @@ const chart = new AutkPlot(plot, {
 })
 
 chart.events.on(PlotEvent.CLICK, ({ selection }) => {
+  console.clear()
   console.log('Clicked indices:', selection)
 })
 `
@@ -53,6 +54,7 @@ const chart = new AutkPlot(plot, {
 })
 
 chart.events.on(PlotEvent.CLICK, ({ selection }) => {
+  console.clear()
   console.log('Clicked row indices:', selection)
 })
 `
@@ -77,6 +79,7 @@ const chart = new AutkPlot(plot, {
 })
 
 chart.events.on(PlotEvent.BRUSH, ({ selection }) => {
+  console.clear()
   console.log('Brushed indices:', selection)
 })
 `
@@ -102,6 +105,7 @@ const chart = new AutkPlot(plot, {
 })
 
 chart.events.on(PlotEvent.BRUSH, ({ selection }) => {
+  console.clear()
   console.log('Brushed cell indices:', selection)
 })
 `
@@ -126,6 +130,7 @@ const chart = new AutkPlot(plot, {
 })
 
 chart.events.on(PlotEvent.BRUSH_Y, ({ selection }) => {
+  console.clear()
   console.log('Filtered indices:', selection)
 })
 `
@@ -160,6 +165,8 @@ Because [`autk-map`](../autk-map/) also refers to features by their position in 
 | `PlotEvent.BRUSH` | Drag a 2D brush | Scatter plot, heat matrix |
 | `PlotEvent.BRUSH_X` | Brush horizontally | Bar chart (binned), parallel coordinates |
 | `PlotEvent.BRUSH_Y` | Brush vertically | Parallel coordinates |
+
+The examples call `console.clear()` before logging each interaction so the output shows only the latest result, without removing the chart.
 
 Every event payload contains a `selection` array with the source feature indices (positions in the input `collection.features`). Brush events also carry an `extent`, and aggregated marks include `shares` with the fraction of each feature they cover.
 
@@ -220,6 +227,7 @@ Where axis scales exist, `extent.data` gives numeric `range` values (low to high
 
 ```ts
 chart.events.on(PlotEvent.BRUSH, ({ selection, extent }) => {
+  console.clear()
   console.log(extent?.data?.range, selection.length)
 })
 ```

@@ -39,6 +39,7 @@ const chart = new AutkPlot(plot, {
 });
 
 chart.events.on(PlotEvent.BRUSH, ({ selection }) => {
+  console.clear();
   console.log(selection.length + ' neighborhoods brushed');
 });
 `
@@ -86,6 +87,7 @@ const chart = new AutkPlot(plot, {
   events: [PlotEvent.CLICK],
 })
 chart.events.on(PlotEvent.CLICK, ({ selection }) => {
+  console.clear()
   console.log(selection.map(index => names[index]).join(', '))
 })
 `

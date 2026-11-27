@@ -9,7 +9,9 @@ output. Initial messages always start at the output's top-left padding, before
 any reserved visualization mounts. SVG-only chart outputs fit their content instead of reserving a fixed
 map-sized viewport; outputs containing map canvases keep the fixed viewport. An example can also supply
 Run all above. `runtime.js` executes JavaScript with host-supplied
-bindings and captures console messages. `output.js` renders objects and arrays
+bindings and captures console messages. User Guide interaction handlers can call
+`console.clear()` to replace the previous result without clearing the chart or map.
+`output.js` renders objects and arrays
 as collapsed trees. Expand one branch at a time; plain text stays plain. Syntax
 highlighting recognizes TypeScript, but the runner does not compile it.
 

@@ -7,10 +7,10 @@ export function executeSource(source, scope) {
   return run(...bindings.map(([, value]) => value))
 }
 
-/** Route common console output to the playground without hiding other console methods. */
-export function captureConsole(emit) {
+/** Route console output and optional clearing to the playground without hiding other methods. */
+export function captureConsole(emit, clear) {
   const log = (...values) => values.forEach(value => emit(value))
-  return Object.assign(Object.create(globalThis.console), { log, info: log, warn: log, error: log, debug: log })
+  return Object.assign(Object.create(globalThis.console), { log, info: log, warn: log, error: log, debug: log, ...(clear && { clear }) })
 }
 
 /** Keep structured values readable in the console even when they are not plain JSON. */
