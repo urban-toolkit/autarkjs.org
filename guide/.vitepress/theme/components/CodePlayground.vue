@@ -119,6 +119,7 @@ function getSpecCode(source: string): string {
 
 function getUserCode(sources: string[]): string {
   return sources.join('\n\n')
+    .replace(/import\s+\*\s+as\s+([A-Za-z_$][\w$]*)\s+from\s*["']d3["']\s*;?/g, 'const $1 = __d3;')
     .replace(/import\s*{[^}]*}\s*from\s*["'][^"']*["']\s*;?/g, '')
     .trim()
 }
@@ -329,6 +330,7 @@ async function runCode() {
 
     const result = await executeSource(wrapped, {
       __modules: modules,
+      __d3: await import('d3'),
       __canvas: canvasEl.value,
       __mount: mount.value,
       __console: captureConsole(appendConsole),

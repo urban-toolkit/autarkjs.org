@@ -14,6 +14,8 @@ highlighting recognizes TypeScript, but the runner does not compile it.
 
 - `guide/.vitepress/theme/components/CodePlayground.vue` adds the User Guide and
   Grammar bindings, named mounts, canvas, console, and Grammar view layout.
+  Named Autark imports use the supplied package exports; `import * as d3 from
+  'd3'` (including a different namespace alias) uses the Vite-bundled D3 module.
 - `tutorial/notebook.js` adds per-chapter context, ordered execution, tables,
   XML, and Overpass fallback. It uses the same editor in the standalone build.
 

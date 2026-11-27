@@ -6,10 +6,12 @@ title: Extending
 <script setup>
 const registeredPlotCode = `
 import * as d3 from 'd3';
-import { AutkPlot, PlotEvent, registerPlot } from '@urban-toolkit/autk-plot';
+import { AutkPlot, PlotEvent, registerPlot, unregisterPlot } from '@urban-toolkit/autk-plot';
 
 const geojson = await fetch('/data/mnt_neighs_proj.geojson').then((res) => res.json());
 
+// Remove the previous definition when rerunning this editable example.
+unregisterPlot('dots-demo');
 registerPlot({
   name: 'dots-demo',
   draw({ group, rows, value, width, height, axisX, axisY }) {

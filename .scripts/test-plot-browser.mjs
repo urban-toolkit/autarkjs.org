@@ -36,6 +36,21 @@ try {
   assert.equal((proposalPath.match(/M/g) ?? []).length, 2, 'the missing month breaks the path')
   await lines.locator('[data-annotation-id="proposal"] circle').waitFor()
 
+  await page.goto(`${base}/autk-plot/extending.html`)
+  const registered = page.locator('.code-playground').first()
+  await registered.locator('.cm-content').waitFor()
+  for (let run = 0; run < 3; run++) {
+    if (run === 2) {
+      const source = await registered.locator('.cm-content').innerText()
+      await registered.locator('.cm-content').fill(source.replace('import * as d3', 'import * as chartD3').replaceAll('d3.', 'chartD3.'))
+    }
+    await registered.getByRole('button', { name: 'Run', exact: true }).click()
+    await registered.locator('.playground-card__state').getByText(/Done in|Run failed/).waitFor()
+    assert.equal(await registered.locator('.code-playground__error').count(), 0, 'registered D3 example runs and reruns')
+    assert.ok(await registered.locator('circle.autkMark').count() > 20)
+    assert.equal(await registered.locator('.code-playground__named-mount > svg').count(), 1)
+  }
+
   for (const id of ['p10', 'p11', 'p12']) {
     await page.goto(`${base}/gallery/examples/${id}.html`)
     await page.locator('.gallery-example-frame').scrollIntoViewIfNeeded()
@@ -85,7 +100,7 @@ try {
   }
   assert.deepEqual(errors, [], 'no browser exceptions')
   assert.deepEqual(missing, [], 'no missing resources')
-  console.log('Plot guide: grouped bars, manual categories, line gaps, and annotations passed')
+  console.log('Plot guide: grouped bars, domains, line gaps, annotations, and registered D3 imports/reruns passed')
 } finally {
   await browser.close()
 }
